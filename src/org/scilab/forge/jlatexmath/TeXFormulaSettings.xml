@@ -1,0 +1,130 @@
+<?xml version='1.0'?>
+<!--
+  TeXFormulaSettings.xml
+  =========================================================================
+  This file is originally part of the JMathTeX Library - http://jmathtex.sourceforge.net
+  
+  Copyright (C) 2004-2007 Universiteit Gent
+  Copyright (C) 2009 DENIZET Calixte
+  
+  This program is free software; you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation; either version 2 of the License, or (at
+  your option) any later version.
+  
+  This program is distributed in the hope that it will be useful, but
+  WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+  General Public License for more details.
+  
+  A copy of the GNU General Public License can be found in the file
+  LICENSE.txt provided with the source distribution of this program (see
+  the META-INF directory in the source jar). This license can also be
+  found on the GNU website at http://www.gnu.org/licenses/gpl.html.
+  
+  If you did not receive a copy of the GNU General Public License along
+  with this program, contact the lead developer, or write to the Free
+  Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+  02110-1301, USA.
+  
+-->
+
+<!-- all the symbolnames that appear here, must be defined in "TeXSymbols.xml"! -->
+
+<FormulaSettings>
+
+<!-- non-alphanumeric character-to-symbol-mappings -->
+
+	<CharacterToSymbolMappings>
+	  <Map char="+" symbol="plus"/>
+	  <Map char="-" symbol="minus"/>
+	  <Map char="/" symbol="slash"/>
+	  <Map char="*" symbol="ast"/>
+      	  <Map char="(" symbol="lbrack"/>
+      	  <Map char="." symbol="normaldot"/>
+      	  <Map char=";" symbol="semicolon"/>
+      	  <Map char="&gt;" symbol="gt"/>
+      	  <Map char="{" symbol="lbrace"/>
+      	  <Map char="!" symbol="faculty"/>
+      	  <Map char=")" symbol="rbrack"/>
+      	  <Map char="," symbol="comma"/>
+      	  <Map char="&lt;" symbol="lt"/>
+      	  <Map char="?" symbol="question"/>
+      	  <Map char="]" symbol="rsqbrack"/>
+      	  <Map char="|" symbol="vert"/>
+      	  <Map char=":" symbol="colon"/>
+      	  <Map char="=" symbol="equals"/>
+      	  <Map char="[" symbol="lsqbrack"/>
+      	  <Map char="}" symbol="rbrace"/>
+	  <Map char="&apos;" symbol="rq"/>
+	  <Map char="`" symbol="lq"/>
+	</CharacterToSymbolMappings>
+
+	<CharacterToFormulaMappings>
+ 	  <Map char="&#192;" formula="\`{\mbox{A}}"/>
+	  <Map char="&#193;" formula="\'{\mbox{A}}"/>
+	  <Map char="&#194;" formula="\^{\mbox{A}}"/>
+	  <Map char="&#195;" formula="\~{\mbox{A}}"/>
+	  <Map char="&#196;" formula="\&quot;{\mbox{A}}"/>
+	  <Map char="&#197;" formula="\!\mathring{\mbox{A}}\!"/>
+	  <Map char="&#198;" formula="\AE"/>
+	  <Map char="&#199;" formula="\c{\mbox{C}}"/>
+	  <Map char="&#200;" formula="\`{\mbox{E}}"/>
+	  <Map char="&#201;" formula="\'{\mbox{E}}"/>
+	  <Map char="&#202;" formula="\^{\mbox{E}}"/>
+	  <Map char="&#203;" formula="\&quot;{\mbox{E}}"/>
+	  <Map char="&#204;" formula="\`{\mbox{I}}"/>
+	  <Map char="&#205;" formula="\'{\mbox{I}}"/>
+	  <Map char="&#206;" formula="\^{\mbox{I}}"/>
+	  <Map char="&#207;" formula="\&quot;{\mbox{I}}"/>
+	  <!-- ETH Map char="&#208;" formula=""/-->
+	  <Map char="&#209;" formula="\~{\mbox{N}}"/>
+	  <Map char="&#210;" formula="\`{\mbox{O}}"/>
+	  <Map char="&#211;" formula="\'{\mbox{O}}"/>
+	  <Map char="&#212;" formula="\^{\mbox{O}}"/>
+	  <Map char="&#213;" formula="\~{\mbox{O}}"/>
+	  <Map char="&#214;" formula="\&quot;{\mbox{O}}"/>
+	  <Map char="&#216;" formula="\O"/>
+	  <Map char="&#217;" formula="\`{\mbox{U}}"/>
+	  <Map char="&#218;" formula="\'{\mbox{U}}"/>
+	  <Map char="&#219;" formula="\^{\mbox{U}}"/>
+	  <Map char="&#220;" formula="\&quot;{\mbox{O}}"/>
+	  <Map char="&#221;" formula="\'{\mbox{Y}}"/>
+	  <!-- THORN Map char="&#222;" formula=""/-->
+	  <Map char="&#223;" formula="\ss"/>
+	  <Map char="&#224;" formula="\`{\mbox{a}}"/>
+	  <Map char="&#225;" formula="\'{\mbox{a}}"/>
+	  <Map char="&#226;" formula="\^{\mbox{a}}"/>
+	  <Map char="&#227;" formula="\~{\mbox{a}}"/>
+	  <Map char="&#228;" formula="\&quot;{\mbox{a}}"/>
+	  <Map char="&#229;" formula="\!\mathring{\mbox{a}}\!"/>
+	  <Map char="&#230;" formula="\ae"/>
+	  <Map char="&#231;" formula="\c{\mbox{c}}"/>
+	  <Map char="&#232;" formula="\`{\mbox{e}}"/>
+	  <Map char="&#233;" formula="\'{\mbox{e}}"/>
+	  <Map char="&#234;" formula="\^{\mbox{e}}"/>
+	  <Map char="&#235;" formula="\&quot;{\mbox{e}}"/>
+	  <Map char="&#236;" formula="\`\i"/>
+	  <Map char="&#237;" formula="\'\i"/>
+	  <Map char="&#238;" formula="\^\i"/>
+	  <Map char="&#239;" formula="\&quot;\i"/>
+	  <Map char="&#240;" formula="\eth"/>
+	  <Map char="&#241;" formula="\~{\mbox{n}}"/>
+	  <Map char="&#242;" formula="\`{\mbox{o}}"/>
+	  <Map char="&#243;" formula="\'{\mbox{o}}"/>
+	  <Map char="&#244;" formula="\^{\mbox{o}}"/>
+	  <Map char="&#245;" formula="\~{\mbox{o}}"/>
+	  <Map char="&#246;" formula="\&quot;{\mbox{o}}"/>
+	  <Map char="&#248;" formula="\o"/>
+	  <Map char="&#249;" formula="\`{\mbox{u}}"/>
+	  <Map char="&#250;" formula="\'{\mbox{u}}"/>
+	  <Map char="&#251;" formula="\^{\mbox{u}}"/>
+	  <Map char="&#252;" formula="\&quot;{\mbox{u}}"/>
+	  <Map char="&#253;" formula="\'{\mbox{y}}"/>
+	  <!-- thorn Map char="&#254;" formula=""/-->
+	  <Map char="&#255;" formula="\&quot;{\mbox{y}}"/>
+	  <Map char="&#338;" formula="\OE"/>
+	  <Map char="&#339;" formula="\oe"/>
+	</CharacterToFormulaMappings>
+
+</FormulaSettings>

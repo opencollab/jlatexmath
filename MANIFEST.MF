@@ -1,0 +1,52 @@
+Manifest-Version: 1.0
+          
+Name: org/scilab/forge/jlatexmath/fonts/jlm_cmbsy10.ttf
+Content-Type: application/x-font
+
+Name: org/scilab/forge/jlatexmath/fonts/jlm_cmbx10.ttf
+Content-Type: application/x-font
+
+Name: org/scilab/forge/jlatexmath/fonts/jlm_cmbxti10.ttf
+Content-Type: application/x-font
+
+Name: org/scilab/forge/jlatexmath/fonts/jlm_cmex10.ttf
+Content-Type: application/x-font
+
+Name: org/scilab/forge/jlatexmath/fonts/jlm_cmmi10.ttf
+Content-Type: application/x-font
+
+Name: org/scilab/forge/jlatexmath/fonts/jlm_cmr10.ttf
+Content-Type: application/x-font
+
+Name: org/scilab/forge/jlatexmath/fonts/jlm_cmss10.ttf
+Content-Type: application/x-font
+
+Name: org/scilab/forge/jlatexmath/fonts/jlm_cmssbx10.ttf
+Content-Type: application/x-font
+
+Name: org/scilab/forge/jlatexmath/fonts/jlm_cmsy10.ttf
+Content-Type: application/x-font
+
+Name: org/scilab/forge/jlatexmath/fonts/jlm_cmtt10.ttf
+Content-Type: application/x-font
+
+Name: org/scilab/forge/jlatexmath/fonts/jlm_dsrom10.ttf
+Content-Type: application/x-font
+
+Name: org/scilab/forge/jlatexmath/fonts/jlm_eufb10.ttf
+Content-Type: application/x-font
+
+Name: org/scilab/forge/jlatexmath/fonts/jlm_eufm10.ttf
+Content-Type: application/x-font
+
+Name: org/scilab/forge/jlatexmath/fonts/jlm_msam10.ttf
+Content-Type: application/x-font
+
+Name: org/scilab/forge/jlatexmath/fonts/jlm_msbm10.ttf
+Content-Type: application/x-font
+
+Name: org/scilab/forge/jlatexmath/fonts/jlm_rsfs10.ttf
+Content-Type: application/x-font
+
+Name: org/scilab/forge/jlatexmath/fonts/jlm_stmary.ttf
+Content-Type: application/x-font

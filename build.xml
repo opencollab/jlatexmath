@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<project name="jlatexmath" basedir="." default="buildJar">
+
+	<!-- Init -->
+	<target name="init" description="Initialize build">
+		<property name="project.root.dir" value="." />
+		<property name="class.dir" value="/org/scilab/forge/jlatexmath" />
+		<property name="project.src.dir" value="${project.root.dir}/src/${class.dir}" />
+		<property name="project.bin.dir" value="${project.root.dir}/bin" />
+		<property name="package.dir" value="dist/" />
+		<property name="output.jar.dir" value="${package.dir}" />
+		<property name="version" value="0.6" />
+		<mkdir dir="${project.bin.dir}"/>
+		<mkdir dir="${package.dir}"/>
+	</target>
+
+	<!-- Info -->
+	<target name="info" depends="init" description="Display configuration">
+		<echo message="**********************" />
+		<echo message="*     JLaTeXMath     *" />
+		<echo message="**********************" />
+		<echo message="Author	                    : Calixte Denizet" />
+		<echo message="Script version             : 1.0.0" />
+		<echo message="Ant  version               : ${ant.version}" />
+		<echo message="Java version               : ${ant.java.version}" />
+		<echo message="Java home directory        : ${java.home}" />
+		<echo message="Java classpath             : ${java.class.path}" />
+	</target>
+
+	<!-- Remove all temp directories and/or files-->
+	<target name="clean" depends="info" description="Removes all generated files">
+		<delete dir="${project.bin.dir}"/>
+		<delete>
+			<fileset dir="${project.bin.dir}" includes="*.class" />
+		</delete>
+	</target>
+
+	<!-- Compile source files -->
+	<target name="compile" depends="init">
+	  <javac srcdir="${project.src.dir}" destdir="${project.bin.dir}" debug="on" source="5" target="5">
+	    <!--compilerarg value="-Xlint"/-->
+	  </javac>
+	</target>
+
+	<!-- Build JAR files-->
+	<target name="buildJar" depends="compile">
+	  <copy todir="${project.bin.dir}${class.dir}" >
+	    <fileset dir="${project.src.dir}">
+	      <exclude name="**/*.java"/>
+	    </fileset>
+	  </copy>
+	  <mkdir dir="${project.bin.dir}/META-INF" />
+	  <copy file="LICENSE" todir="${project.bin.dir}/META-INF" />
+	  <copy file="COPYING" todir="${project.bin.dir}/META-INF" />
+	  <jar jarfile="${output.jar.dir}/jlatexmath-${version}.jar" basedir="${project.bin.dir}" manifest="MANIFEST.MF"/>
+	</target>
+
+	<target name="source" depends="info" >
+	  <jar jarfile="${output.jar.dir}/jlatexmath-src-${version}.jar" basedir="${project.root.dir}" includes="COPYING LICENSE build.xml src/**/*.java src/**/*.xml src/**/*.ttf src/**/licences/* src/**/README"/>
+	</target>
+</project>
+
