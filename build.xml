@@ -56,7 +56,7 @@
 	</target>
 
 	<target name="source" depends="info" >
-	  <jar jarfile="${output.jar.dir}/jlatexmath-src-${version}.jar" basedir="${project.root.dir}" includes="COPYING LICENSE build.xml src/**/*.java src/**/*.xml src/**/*.ttf src/**/licences/* src/**/README"/>
+	  <jar jarfile="${output.jar.dir}/jlatexmath-src-${version}.jar" basedir="${project.root.dir}" includes="COPYING LICENSE build.xml MANIFEST.MF src/**/*.java src/**/*.xml src/**/*.ttf src/**/licences/* src/**/README"/>
 	</target>
 </project>
 
