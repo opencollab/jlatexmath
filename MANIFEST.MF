@@ -1,5 +1,4 @@
-Manifest-Version: 1.0
-          
+
 Name: org/scilab/forge/jlatexmath/fonts/jlm_cmbsy10.ttf
 Content-Type: application/x-font
 
