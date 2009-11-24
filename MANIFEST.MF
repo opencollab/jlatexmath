@@ -48,5 +48,5 @@ Content-Type: application/x-font
 Name: org/scilab/forge/jlatexmath/fonts/jlm_rsfs10.ttf
 Content-Type: application/x-font
 
-Name: org/scilab/forge/jlatexmath/fonts/jlm_stmary.ttf
+Name: org/scilab/forge/jlatexmath/fonts/jlm_stmary10.ttf
 Content-Type: application/x-font
