@@ -1,0 +1,13 @@
+jlatexmath (0.8)
+
+	 * Jlatexmath can now compile under Java 1.5 (registerFont is disabled
+	 in this case).
+
+ -- Sylvestre Ledru <Sylvestre.ledru@scilab.org>  Tue, 15 Dec 2009 17:46:18 +0100
+
+jlatexmath (0.7)
+
+	 * Bad name in MANIFEST for stmary
+
+ -- Calixte Denizet <Calixte.Denizet@ac-rennes.fr>  Thu, 12 Dec 2009 15:50:38 +0100
+
