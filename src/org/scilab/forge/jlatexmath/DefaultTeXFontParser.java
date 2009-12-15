@@ -31,6 +31,8 @@
 
 package org.scilab.forge.jlatexmath;
 
+import java.lang.reflect.Method;
+
 import java.awt.Font;
 import java.io.IOException;
 import java.io.InputStream;
@@ -55,6 +57,11 @@ import org.w3c.dom.Node;
  */
 public class DefaultTeXFontParser {
 
+    /** 
+	 * if the register font cannot be found, we display an error message
+	 * but we do it only once 
+	 */
+	private boolean registerFontExceptionDisplayed = false; 
     private static DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
     private static interface CharChildParser { // NOPMD
         public void parse(Element el, char ch, FontInfo info) throws XMLResourceParseException;
@@ -267,7 +274,21 @@ public class DefaultTeXFontParser {
         try {
             fontIn = DefaultTeXFontParser.class.getResourceAsStream("fonts/" + name);
             Font f = Font.createFont(java.awt.Font.TRUETYPE_FONT, fontIn);
-	    GraphicsEnvironment.getLocalGraphicsEnvironment().registerFont(f);
+			GraphicsEnvironment graphicEnv = GraphicsEnvironment.getLocalGraphicsEnvironment();
+/**
+ * The following fails under java 1.5
+ * graphicEnv.registerFont(f);
+ * dynamic load then
+*/
+       try {
+            Method registerFontMethod = graphicEnv.getClass().getDeclaredMethod("registerFont", new Class[] { boolean.class });
+            registerFontMethod.invoke(graphicEnv, new Object[] { f });
+        } catch (Exception ex) {
+		   if (!registerFontExceptionDisplayed) {
+			   System.err.println("Jlatexmath: Could not access to createFont. Please update to java 6");
+			   registerFontExceptionDisplayed=true;
+		   }
+        }
 	    return f;
         } catch (Exception e) {
             throw new XMLResourceParseException(RESOURCE_NAME
