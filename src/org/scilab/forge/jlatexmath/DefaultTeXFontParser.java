@@ -281,7 +281,7 @@ public class DefaultTeXFontParser {
  * dynamic load then
 */
        try {
-            Method registerFontMethod = graphicEnv.getClass().getDeclaredMethod("registerFont", new Class[] { boolean.class });
+            Method registerFontMethod = graphicEnv.getClass().getMethod("registerFont", new Class[] { Font.class });
             registerFontMethod.invoke(graphicEnv, new Object[] { f });
         } catch (Exception ex) {
 		   if (!registerFontExceptionDisplayed) {
