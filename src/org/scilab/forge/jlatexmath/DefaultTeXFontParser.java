@@ -285,7 +285,7 @@ public class DefaultTeXFontParser {
             registerFontMethod.invoke(graphicEnv, new Object[] { f });
         } catch (Exception ex) {
 		   if (!registerFontExceptionDisplayed) {
-			   System.err.println("Jlatexmath: Could not access to createFont. Please update to java 6");
+			   System.err.println("Jlatexmath: Could not access to registerFont. Please update to java 6");
 			   registerFontExceptionDisplayed=true;
 		   }
         }
