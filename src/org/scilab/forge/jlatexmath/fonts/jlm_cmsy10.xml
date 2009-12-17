@@ -198,7 +198,9 @@
      <NextLarger fontId="jlm_cmex10" code="178"/>
    </Char>
    <Char code="111" width="0.277779" height="0.694445" depth="0.194443" />
-   <Char code="112" width="0.833336" height="0.039999" depth="0.960001" />
+   <Char code="112" width="0.833336" height="0.039999" depth="0.960001">
+     <NextLarger fontId="jlm_cmex10" code="112"/>
+   </Char>
    <Char code="113" width="0.750002" height="0.683332" />
    <Char code="114" width="0.833336" height="0.683332" />
    <Char code="115" width="0.416669" height="0.694445" depth="0.194445" italic="0.111112" />

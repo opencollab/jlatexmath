@@ -61,11 +61,12 @@ public class NthRoot extends Atom {
 		.getXHeight(style, tf.getChar(sqrtSymbol, style).getFontCode());
 	else
 	    clr = drt;
-	clr = drt + Math.abs(clr) / 4;
+	clr = drt + Math.abs(clr) / 4 ;
 	
 	// cramped style for the formula under the root sign
-	Box b = base.createBox(env.crampStyle());
-	
+	Box bs = base.createBox(env.crampStyle());
+	HorizontalBox b = new HorizontalBox(bs);
+	b.add(new SpaceAtom(TeXConstants.UNIT_MU, 1, 0, 0).createBox(env.crampStyle())); 
 	// create root sign
 	float totalH = b.getHeight() + b.getDepth();
 	Box rootSign = DelimiterFactory.create(sqrtSymbol, env, totalH + clr

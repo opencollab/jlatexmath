@@ -10,7 +10,7 @@
 
 <!-- this symbol is not defined in "TeXSymbols.xml", because it's not meant to be used as a symbol. 
 Use "surd" instead. -->
-		<SymbolMapping name="sqrt" ch="112" fontId="jlm_cmex10"/>  
+		<SymbolMapping name="sqrt" ch="112" fontId="jlm_cmsy10"/>  
 
 		<SymbolMapping name="semicolon" ch="59" fontId="jlm_cmr10"/>  
 		<SymbolMapping name="faculty" ch="33" fontId="jlm_cmr10"/>  
