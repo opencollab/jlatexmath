@@ -1,3 +1,8 @@
+jlatexmath (0.8.2)
+	 * Fixes a bad sqrt symbol and adds a little space after an atom under a sqrt
+
+ -- Calixte Denizet <Calixte.Denizet@ac-rennes.fr>  Thu, 17 Dec 2009 21:27:38 +0100	   
+
 jlatexmath (0.8.1)
 
 	 * Fixes a regression in the version 0.9
