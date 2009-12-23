@@ -1,3 +1,9 @@
+jlatexmath (0.8.3)
+
+	 * Provides a target to build the doc "ant doc"
+
+ -- Sylvestre Ledru <Sylvestre.ledru@scilab.org>  Wed, 16 Dec 2009 14:33:26 +0100
+
 jlatexmath (0.8.2)
 	 * Fixes a bad sqrt symbol and adds a little space after an atom under a sqrt
 
@@ -5,7 +11,7 @@ jlatexmath (0.8.2)
 
 jlatexmath (0.8.1)
 
-	 * Fixes a regression in the version 0.9
+	 * Fixes a regression in the version 0.8
 
  -- Sylvestre Ledru <Sylvestre.ledru@scilab.org>  Wed, 16 Dec 2009 14:33:26 +0100
 

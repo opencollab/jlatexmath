@@ -4,6 +4,8 @@
 	<!-- Init -->
 	<target name="init" description="Initialize build">
 		<property name="project.root.dir" value="." />
+		<property name="doc.dir" value="${project.root.dir}/doc/" />
+		<property name="project.src.basedir" value="${project.root.dir}/src/" />
 		<property name="class.dir" value="/org/scilab/forge/jlatexmath" />
 		<property name="project.src.dir" value="${project.root.dir}/src/${class.dir}" />
 		<property name="project.bin.dir" value="${project.root.dir}/bin" />
@@ -30,6 +32,7 @@
 	<!-- Remove all temp directories and/or files-->
 	<target name="clean" depends="info" description="Removes all generated files">
 		<delete dir="${project.bin.dir}"/>
+		<delete dir="${doc.dir}"/>
 		<delete>
 			<fileset dir="${project.bin.dir}" includes="*.class" />
 		</delete>
@@ -58,5 +61,17 @@
 	<target name="source" depends="info" >
 	  <jar jarfile="${output.jar.dir}/jlatexmath-src-${version}.jar" basedir="${project.root.dir}" includes="COPYING LICENSE build.xml MANIFEST.MF src/**/*.java src/**/*.xml src/**/*.ttf src/**/licences/* src/**/README"/>
 	</target>
+     <target name="doc" depends="compile" description="Generates the API specification (javadoc)">
+  <javadoc packagenames="org.scilab.forge.jlatexmath.*"
+           sourcepath="${project.src.basedir}"
+           defaultexcludes="yes"
+           destdir="${doc.dir}"
+           author="true"
+           version="true"
+           use="true"
+           >
+                </javadoc>
+        </target>
+
 </project>
 
