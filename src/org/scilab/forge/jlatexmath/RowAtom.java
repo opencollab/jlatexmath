@@ -200,8 +200,8 @@ public class RowAtom extends Atom implements Row {
             env.setLastFontId(b.getLastFontId());
             
             // insert kern
-            if (kern > TeXFormula.PREC)
-                hBox.add(new StrutBox(0, kern, 0, 0));
+            if (Math.abs(kern) > TeXFormula.PREC)
+                hBox.add(new StrutBox(kern, 0, 0, 0));
             
             // kerns do not interfere with the normal glue-rules without kerns
             if (!atom.isKern())
