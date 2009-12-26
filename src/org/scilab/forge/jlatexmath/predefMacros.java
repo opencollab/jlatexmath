@@ -629,6 +629,22 @@ public class predefMacros {
 	return null;
     }
     
+    public Atom fgcolor_macro(TeXParser tp, String[] args) throws ParseException {
+	try {
+	    return new ColorAtom(new TeXFormula(args[2]).root, null, Color.decode("#" + args[1]));
+	} catch (NumberFormatException e) {
+	    throw new ParseException(e.toString());
+	}
+    }	
+
+    public Atom bgcolor_macro(TeXParser tp, String[] args) throws ParseException {
+	try {
+	    return new ColorAtom(new TeXFormula(args[2]).root, Color.decode("#" + args[1]), null);
+	} catch (NumberFormatException e) {
+	    throw new ParseException(e.toString());
+	}
+    }	
+
     public Atom textcolor_macro(TeXParser tp, String[] args) throws ParseException {
 	
 	return new ColorAtom(new TeXFormula(args[2]).root, null, ColorAtom.Colors.get(args[1]));
