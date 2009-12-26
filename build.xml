@@ -11,7 +11,7 @@
 		<property name="project.bin.dir" value="${project.root.dir}/bin" />
 		<property name="package.dir" value="dist/" />
 		<property name="output.jar.dir" value="${package.dir}" />
-		<property name="version" value="0.8.2" />
+		<property name="version" value="0.8.3" />
 		<mkdir dir="${project.bin.dir}"/>
 		<mkdir dir="${package.dir}"/>
 	</target>

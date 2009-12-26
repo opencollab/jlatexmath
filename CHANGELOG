@@ -1,5 +1,12 @@
 jlatexmath (0.8.3)
+	 * Adds \fgcolor and \bgcolor
 
+ -- Calixte Denizet <Calixte.Denizet@ac-rennes.fr>  Sat, 26 Dec 2009 21:05:38 +0100
+
+    	 * Fixes a bug with kerns pairs.
+
+ -- Calixte Denizet <Calixte.Denizet@ac-rennes.fr>  Fri, 25 Dec 2009 00:03:44 +0100
+    	 
 	 * Provides a target to build the doc "ant doc"
 
  -- Sylvestre Ledru <Sylvestre.ledru@scilab.org>  Wed, 16 Dec 2009 14:33:26 +0100
