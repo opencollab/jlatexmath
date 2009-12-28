@@ -75,6 +75,10 @@ public class TeXEnvironment {
     protected TeXEnvironment copy() {
         return new TeXEnvironment(style, tf, background, color);
     }
+
+    protected TeXEnvironment copy(TeXFont tf) {
+        return new TeXEnvironment(style, tf, background, color);
+    }
     
     /**
      *

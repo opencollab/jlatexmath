@@ -376,4 +376,8 @@ public class DefaultTeXFont implements TeXFont {
         else
             return generalSettings.get("scriptscriptfactor").floatValue();
     }
+
+    public TeXFont copy() {
+	return new DefaultTeXFont(size);
+    }
 }

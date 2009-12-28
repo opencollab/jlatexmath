@@ -40,6 +40,7 @@ public class BoldAtom extends Atom {
     }
     
     public Box createBox(TeXEnvironment env) {
+	env = env.copy(env.getTeXFont().copy());
 	env.getTeXFont().setBold(true);
 	Box box = base.createBox(env);
 	env.getTeXFont().setBold(false);

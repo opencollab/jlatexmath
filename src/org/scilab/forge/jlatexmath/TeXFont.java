@@ -219,4 +219,6 @@ public interface TeXFont {
      * 			an arbitrary large version of this character.
      */
     public boolean isExtensionChar(Char c);
+
+    public TeXFont copy();
 }
