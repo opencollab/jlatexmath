@@ -34,16 +34,24 @@
    <Char code="194" width="0.89444" height="0.585556" depth="0.085556" />
    <Char code="195" width="1.149994" height="0.391111" depth="-0.108889" />
    <Char code="33" width="1.149994" height="0.391111" depth="-0.108889" />
-   <Char code="34" width="0.574997" height="0.694445" depth="0.194443" />
-   <Char code="35" width="0.574997" height="0.694445" depth="0.194443" />
+   <Char code="34" width="0.574997" height="0.694445" depth="0.194443">
+     <NextLarger fontId="jlm_cmex10" code="120"/>
+   </Char>
+   <Char code="35" width="0.574997" height="0.694445" depth="0.194443">
+     <NextLarger fontId="jlm_cmex10" code="121"/>
+   </Char>
    <Char code="36" width="1.149994" height="0.391111" depth="-0.108889" />
    <Char code="37" width="1.149994" height="0.694445" depth="0.194443" />
    <Char code="38" width="1.149994" height="0.694445" depth="0.194443" />
    <Char code="39" width="0.89444" height="0.502223" depth="0.002223" />
    <Char code="40" width="1.149994" height="0.391111" depth="-0.108889" />
    <Char code="41" width="1.149994" height="0.391111" depth="-0.108889" />
-   <Char code="42" width="0.702774" height="0.694445" depth="0.194443" />
-   <Char code="43" width="0.702774" height="0.694445" depth="0.194443" />
+   <Char code="42" width="0.702774" height="0.694445" depth="0.194443">
+     <NextLarger fontId="jlm_cmex10" code="126"/>
+   </Char>
+   <Char code="43" width="0.702774" height="0.694445" depth="0.194443">
+     <NextLarger fontId="jlm_cmex10" code="196"/>
+   </Char>
    <Char code="44" width="1.149994" height="0.391111" depth="-0.108889" />
    <Char code="45" width="1.149994" height="0.694445" depth="0.194443" />
    <Char code="46" width="1.149994" height="0.694445" depth="0.194443" />
@@ -150,21 +158,49 @@
    <Char code="95" width="0.766663" height="0.555557" />
    <Char code="96" width="0.702774" height="0.694445" />
    <Char code="97" width="0.702774" height="0.694445" />
-   <Char code="98" width="0.511108" height="0.75" depth="0.25" />
-   <Char code="99" width="0.511108" height="0.75" depth="0.25" />
-   <Char code="100" width="0.511108" height="0.75" depth="0.25" />
-   <Char code="101" width="0.511108" height="0.75" depth="0.25" />
-   <Char code="102" width="0.574997" height="0.75" depth="0.25" />
-   <Char code="103" width="0.574997" height="0.75" depth="0.25" />
-   <Char code="104" width="0.44722" height="0.75" depth="0.25" />
-   <Char code="105" width="0.44722" height="0.75" depth="0.25" />
-   <Char code="106" width="0.319443" height="0.75" depth="0.25" />
-   <Char code="107" width="0.574997" height="0.75" depth="0.25" />
-   <Char code="108" width="0.574997" height="0.75" depth="0.25" />
-   <Char code="109" width="0.702774" height="0.75" depth="0.25" />
-   <Char code="110" width="0.574997" height="0.75" depth="0.25" />
+   <Char code="98" width="0.511108" height="0.75" depth="0.25">
+     <NextLarger fontId="jlm_cmex10" code="165"/>
+   </Char>
+   <Char code="99" width="0.511108" height="0.75" depth="0.25">
+     <NextLarger fontId="jlm_cmex10" code="166"/>
+   </Char>
+   <Char code="100" width="0.511108" height="0.75" depth="0.25">
+     <NextLarger fontId="jlm_cmex10" code="167"/>
+   </Char>
+   <Char code="101" width="0.511108" height="0.75" depth="0.25">
+     <NextLarger fontId="jlm_cmex10" code="168"/>
+   </Char>
+   <Char code="102" width="0.574997" height="0.75" depth="0.25">
+     <NextLarger fontId="jlm_cmex10" code="169"/>
+   </Char>
+   <Char code="103" width="0.574997" height="0.75" depth="0.25">
+     <NextLarger fontId="jlm_cmex10" code="170"/>
+   </Char>
+   <Char code="104" width="0.44722" height="0.75" depth="0.25">
+     <NextLarger fontId="jlm_cmex10" code="173"/>
+   </Char>
+   <Char code="105" width="0.44722" height="0.75" depth="0.25">
+     <NextLarger fontId="jlm_cmex10" code="174"/>
+   </Char>
+   <Char code="106" width="0.319443" height="0.75" depth="0.25">
+     <NextLarger fontId="jlm_cmex10" code="175"/>
+   </Char>
+   <Char code="107" width="0.574997" height="0.75" depth="0.25">
+     <NextLarger fontId="jlm_cmex10" code="176"/>
+   </Char>
+   <Char code="108" width="0.574997" height="0.75" depth="0.25">
+     <NextLarger fontId="jlm_cmex10" code="63"/>
+   </Char>
+   <Char code="109" width="0.702774" height="0.75" depth="0.25">
+     <NextLarger fontId="jlm_cmex10" code="119"/>
+   </Char>
+   <Char code="110" width="0.574997" height="0.75" depth="0.25">
+     <NextLarger fontId="jlm_cmex10" code="178"/>
+   </Char>
    <Char code="111" width="0.319443" height="0.694445" depth="0.194443" />
-   <Char code="112" width="0.958328" height="0.06" depth="0.94" />
+   <Char code="112" width="0.958328" height="0.06" depth="0.94">
+     <NextLarger fontId="jlm_cmex10" code="112"/>
+   </Char>
    <Char code="113" width="0.899996" height="0.686111" />
    <Char code="114" width="0.958328" height="0.686111" />
    <Char code="115" width="0.56875" height="0.694445" depth="0.194445" italic="0.127777" />

@@ -103,7 +103,7 @@
 			<MapRange code="capitals" fontId="jlm_dsrom10" start="65"/>		
 		</TextStyleMapping>
 
-		<TextStyleMapping name="cyr" bold="jlm_eufb10">
+		<TextStyleMapping name="cyr">
 			<MapRange code="numbers" fontId="jlm_wnr10" start="48"/>
 			<MapRange code="capitals" fontId="jlm_wnr10" start="65"/>
 			<MapRange code="small" fontId="jlm_wnr10" start="97"/>	
@@ -151,6 +151,8 @@ for a text style is not defined (e.g. "numbers" and "small" in "mathcal") -->
   <Metrics include="fonts/jlm_stmary10.xml" />
   <Metrics include="fonts/jlm_moustache.xml" />
   <Metrics include="fonts/jlm_wnr10.xml" />
+  <Metrics include="fonts/jlm_wnti10.xml" />
+  <Metrics include="fonts/jlm_wnbx10.xml" />
 </FontDescriptions>
 
 </TeXFont>
