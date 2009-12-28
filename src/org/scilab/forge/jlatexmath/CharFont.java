@@ -41,10 +41,12 @@ public class CharFont {
     public CharFont(char ch, int f) {
 	c = ch;
 	fontId = f;
+	boldFontId = f;
     }
     
     public CharFont(char ch, int f, int bf) {
-	this(ch, f);
+	c = ch;
+	fontId = f;
 	boldFontId = bf;
     }
 }

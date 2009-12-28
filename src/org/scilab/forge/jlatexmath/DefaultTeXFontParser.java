@@ -216,12 +216,16 @@ public class DefaultTeXFontParser {
 		
 		// get optional integer attribute
 		int skewChar = getOptionalInt("skewChar", font, -1);
+		String bold = null;
+		try {
+		    bold = getAttrValueAndCheckIfNotNull("boldVersion", font);
+		} catch (ResourceParseException e) {}
 		
 		// try reading the font
 		Font f = createFont(fontName);
 		
 		// create FontInfo-object
-		FontInfo info = new FontInfo(Font_ID.indexOf(fontId), f, xHeight, space, quad);
+		FontInfo info = new FontInfo(Font_ID.indexOf(fontId), f, xHeight, space, quad, bold);
 		if (skewChar != -1) // attribute set
 		    info.setSkewChar((char) skewChar);
 		
@@ -234,6 +238,11 @@ public class DefaultTeXFontParser {
 		res.add(info);
 	    }
 	}
+	for (int i = 0; i < res.size(); i++) {
+	    FontInfo fin = res.get(i);
+	    fin.setBoldId(Font_ID.indexOf(fin.boldVersion));
+	}
+	
 	parsedTextStyles = parseStyleMappings();
 	return res.toArray(fi);
     }
@@ -330,7 +339,17 @@ public class DefaultTeXFontParser {
 		    int ch = getIntAndCheck("ch", mapping);
 		    String fontId = getAttrValueAndCheckIfNotNull("fontId", mapping);
 		    // put mapping in table
-		    res.put(symbolName, new CharFont((char) ch, Font_ID.indexOf(fontId)));
+		    String boldFontId = null;
+		    try {
+			boldFontId = getAttrValueAndCheckIfNotNull("boldId", mapping);
+		    }
+		    catch (ResourceParseException e) {}
+
+		    if (boldFontId == null) {
+			res.put(symbolName, new CharFont((char) ch, Font_ID.indexOf(fontId)));
+		    } else {
+			res.put(symbolName, new CharFont((char) ch, Font_ID.indexOf(fontId), Font_ID.indexOf(boldFontId)));
+		    }
 		}
 	    }
 	    

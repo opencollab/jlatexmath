@@ -150,10 +150,10 @@ public class DefaultTeXFont implements TeXFont {
             return getDefaultChar(c, style);
         else if (!isBold)
             return getChar(new CharFont((char) (cf[kind].c + offset),
-                    cf[kind].fontId), style);
+					cf[kind].fontId), style);
 	else 
 	    return getChar(new CharFont((char) (cf[kind].c + offset),
-                    cf[kind].boldFontId), style);
+					cf[kind].boldFontId), style);
     }
     
     public Char getChar(char c, String textStyle, int style)
@@ -167,10 +167,15 @@ public class DefaultTeXFont implements TeXFont {
     
     public Char getChar(CharFont cf, int style) {
         float size = getSizeFactor(style);
-        FontInfo info = fontInfo[cf.fontId];
+	int id = isBold ? cf.boldFontId : cf.fontId;
+	FontInfo info = fontInfo[id];
+        if (isBold && cf.fontId == cf.boldFontId) {
+	    id = info.getBoldId();
+	    info = fontInfo[id];
+	    cf = new CharFont(cf.c, id, style);
+	}
         Font font = info.getFont();
-        return new Char(cf.c, font.deriveFont(size), cf.fontId, getMetrics(cf,
-                size));
+        return new Char(cf.c, font.deriveFont(size), id, getMetrics(cf, size));
     }
     
     public Char getChar(String symbolName, int style)

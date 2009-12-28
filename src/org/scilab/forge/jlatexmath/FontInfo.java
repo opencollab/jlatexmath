@@ -81,13 +81,16 @@ public class FontInfo {
     private final float xHeight; 
     private final float space;
     private final float quad;
+    private int boldId;
+    protected final String boldVersion;
     
-    public FontInfo(int fontId, Font font, float xHeight, float space, float quad) {
+    public FontInfo(int fontId, Font font, float xHeight, float space, float quad, String boldVersion) {
         this.fontId = fontId;
         this.font = font;
         this.xHeight = xHeight;
         this.space = space;
         this.quad = quad;
+	this.boldVersion = boldVersion;
     }
     
     /**
@@ -186,7 +189,15 @@ public class FontInfo {
     public int getId() {
         return fontId;
     }
-    
+
+    public int getBoldId() {
+        return boldId;
+    }
+
+    public void setBoldId(int id) {
+	boldId = id == -1 ? fontId : id;
+    }
+
     public Font getFont() {
         return font;
     }
