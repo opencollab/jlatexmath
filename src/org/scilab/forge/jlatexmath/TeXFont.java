@@ -212,6 +212,23 @@ public interface TeXFont {
     public void setBold(boolean bold);
     
     public boolean getBold();
+
+    public void setRoman(boolean rm);
+    
+    public boolean getRoman();
+    
+    public void setTt(boolean tt);
+    
+    public boolean getTt();
+
+    public void setIt(boolean it);
+    
+    public boolean getIt();
+
+    public void setSs(boolean ss);
+    
+    public boolean getSs();
+
     /**
      * 
      * @param c a character

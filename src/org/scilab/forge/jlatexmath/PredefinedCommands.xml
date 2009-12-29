@@ -109,7 +109,7 @@
 	<Command name="mathit" enabled="true">
 		<CreateCommand name="f">
 			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="textstyle_macros" />
+			<Argument type="String" value="mathit_macro" />
 			<Argument type="float" value="1" />			        	
 		</CreateCommand>
 		<Return name="f" />
@@ -118,7 +118,7 @@
 	<Command name="mathrm" enabled="true">
 		<CreateCommand name="f">
 			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="textstyle_macros" />
+			<Argument type="String" value="mathrm_macro" />
 			<Argument type="float" value="1" />			        	
 		</CreateCommand>
 		<Return name="f" />
@@ -136,7 +136,7 @@
 	<Command name="mathsf" enabled="true">
 		<CreateCommand name="f">
 			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="textstyle_macros" />
+			<Argument type="String" value="mathsf_macro" />
 			<Argument type="float" value="1" />			        	
 		</CreateCommand>
 		<Return name="f" />
@@ -145,7 +145,7 @@
 	<Command name="mathtt" enabled="true">
 		<CreateCommand name="f">
 			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="textstyle_macros" />
+			<Argument type="String" value="mathtt_macro" />
 			<Argument type="float" value="1" />			        	
 		</CreateCommand>
 		<Return name="f" />
@@ -169,7 +169,7 @@
 		<Return name="f" />
 	</Command>
 
-	<Command name="cyr" enabled="true">
+	<Command name="mathcyr" enabled="true">
 		<CreateCommand name="f">
 			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
 			<Argument type="String" value="textstyle_macros" />
@@ -287,6 +287,15 @@
 	</Command>
 
 	<Command name="H" enabled="true">
+		<CreateCommand name="f">
+			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+			<Argument type="String" value="accentbis_macros" />
+			<Argument type="float" value="1" />        	
+		</CreateCommand>
+		<Return name="f" />
+	</Command>
+
+	<Command name="U" enabled="true">
 		<CreateCommand name="f">
 			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
 			<Argument type="String" value="accentbis_macros" />

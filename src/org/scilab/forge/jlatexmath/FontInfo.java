@@ -82,15 +82,27 @@ public class FontInfo {
     private final float space;
     private final float quad;
     private int boldId;
+    private int romanId;
+    private int ssId;
+    private int ttId;
+    private int itId;
     protected final String boldVersion;
-    
-    public FontInfo(int fontId, Font font, float xHeight, float space, float quad, String boldVersion) {
+    protected final String romanVersion;
+    protected final String ssVersion;
+    protected final String ttVersion;
+    protected final String itVersion;
+
+    public FontInfo(int fontId, Font font, float xHeight, float space, float quad, String boldVersion, String romanVersion, String ssVersion, String ttVersion, String itVersion) {
         this.fontId = fontId;
         this.font = font;
         this.xHeight = xHeight;
         this.space = space;
         this.quad = quad;
 	this.boldVersion = boldVersion;
+	this.romanVersion = romanVersion;
+	this.ssVersion = ssVersion;
+	this.ttVersion = ttVersion;
+	this.itVersion = itVersion;
     }
     
     /**
@@ -192,6 +204,38 @@ public class FontInfo {
 
     public int getBoldId() {
         return boldId;
+    }
+
+    public int getRomanId() {
+        return romanId;
+    }
+
+    public int getTtId() {
+        return ttId;
+    }
+
+    public int getItId() {
+        return itId;
+    }
+
+    public int getSsId() {
+        return ssId;
+    }
+
+    public void setSsId(int id) {
+	ssId = id == -1 ? fontId : id;
+    }
+
+    public void setTtId(int id) {
+	ttId = id == -1 ? fontId : id;
+    }
+
+    public void setItId(int id) {
+	itId = id == -1 ? fontId : id;
+    }
+
+    public void setRomanId(int id) {
+	romanId = id == -1 ? fontId : id;
     }
 
     public void setBoldId(int id) {

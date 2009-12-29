@@ -50,7 +50,7 @@ public class DelimiterFactory {
 	    c = tf.getNextLarger(c, style);
 	
 	if (i <= size && !tf.hasNextLarger(c)) { 
-	    CharBox A = new CharBox(tf.getChar('A', "mathrm", style));
+	    CharBox A = new CharBox(tf.getChar('A', "mathnormal", style));
 	    Box b = create(symbol.getName(), env, size*(A.getHeight() + A.getDepth()));
 	    return b;
 	}

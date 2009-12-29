@@ -479,7 +479,7 @@ public class TeXParser {
      */
     public Atom convertCharacter(char c) throws ParseException {
         if (!((c >= '0' && c <= '9') || (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))) {
-            String symbolName = c <= 255 ? TeXFormula.symbolMappings[c] : null;
+            String symbolName = c <= 65536 ? TeXFormula.symbolMappings[c] : null;
             if (symbolName == null && (TeXFormula.symbolFormulaMappings == null || TeXFormula.symbolFormulaMappings[c] == null))
                 throw new ParseException("Unknown character : '"
 					 + Character.toString(c) + "'");

@@ -14,6 +14,9 @@ Content-Type: application/x-font
 Name: org/scilab/forge/jlatexmath/fonts/jlm_cmti10.ttf
 Content-Type: application/x-font
 
+Name: org/scilab/forge/jlatexmath/fonts/jlm_cmbxti10.ttf
+Content-Type: application/x-font
+
 Name: org/scilab/forge/jlatexmath/fonts/jlm_cmmib10.ttf
 Content-Type: application/x-font
 
@@ -21,6 +24,9 @@ Name: org/scilab/forge/jlatexmath/fonts/jlm_cmr10.ttf
 Content-Type: application/x-font
 
 Name: org/scilab/forge/jlatexmath/fonts/jlm_cmss10.ttf
+Content-Type: application/x-font
+
+Name: org/scilab/forge/jlatexmath/fonts/jlm_cmssi10.ttf
 Content-Type: application/x-font
 
 Name: org/scilab/forge/jlatexmath/fonts/jlm_cmssbx10.ttf
@@ -59,5 +65,20 @@ Content-Type: application/x-font
 Name: org/scilab/forge/jlatexmath/fonts/jlm_wnti10.ttf
 Content-Type: application/x-font
 
+Name: org/scilab/forge/jlatexmath/fonts/jlm_wntt10.ttf
+Content-Type: application/x-font
+
+Name: org/scilab/forge/jlatexmath/fonts/jlm_wnss10.ttf
+Content-Type: application/x-font
+
+Name: org/scilab/forge/jlatexmath/fonts/jlm_wnssbx10.ttf
+Content-Type: application/x-font
+
+Name: org/scilab/forge/jlatexmath/fonts/jlm_wnssi10.ttf
+Content-Type: application/x-font
+
 Name: org/scilab/forge/jlatexmath/fonts/jlm_wnbx10.ttf
+Content-Type: application/x-font
+
+Name: org/scilab/forge/jlatexmath/fonts/jlm_wnbxti10.ttf
 Content-Type: application/x-font

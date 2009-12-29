@@ -220,12 +220,27 @@ public class DefaultTeXFontParser {
 		try {
 		    bold = getAttrValueAndCheckIfNotNull("boldVersion", font);
 		} catch (ResourceParseException e) {}
-		
+		String roman = null;
+		try {
+		    roman = getAttrValueAndCheckIfNotNull("romanVersion", font);
+		} catch (ResourceParseException e) {}
+		String ss = null;
+		try {
+		    ss = getAttrValueAndCheckIfNotNull("ssVersion", font);
+		} catch (ResourceParseException e) {}
+		String tt = null;
+		try {
+		    tt = getAttrValueAndCheckIfNotNull("ttVersion", font);
+		} catch (ResourceParseException e) {}
+		String it = null;
+		try {
+		    it = getAttrValueAndCheckIfNotNull("itVersion", font);
+		} catch (ResourceParseException e) {}
 		// try reading the font
 		Font f = createFont(fontName);
 		
 		// create FontInfo-object
-		FontInfo info = new FontInfo(Font_ID.indexOf(fontId), f, xHeight, space, quad, bold);
+		FontInfo info = new FontInfo(Font_ID.indexOf(fontId), f, xHeight, space, quad, bold, roman, ss, tt, it);
 		if (skewChar != -1) // attribute set
 		    info.setSkewChar((char) skewChar);
 		
@@ -241,6 +256,10 @@ public class DefaultTeXFontParser {
 	for (int i = 0; i < res.size(); i++) {
 	    FontInfo fin = res.get(i);
 	    fin.setBoldId(Font_ID.indexOf(fin.boldVersion));
+	    fin.setRomanId(Font_ID.indexOf(fin.romanVersion));
+	    fin.setSsId(Font_ID.indexOf(fin.ssVersion));
+	    fin.setTtId(Font_ID.indexOf(fin.ttVersion));
+	    fin.setItId(Font_ID.indexOf(fin.itVersion));
 	}
 	
 	parsedTextStyles = parseStyleMappings();

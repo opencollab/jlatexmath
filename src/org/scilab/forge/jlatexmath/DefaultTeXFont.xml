@@ -45,12 +45,6 @@
 <!-- the mappings for the text styles defined in "FormulaSettings.xml" -->
 
 	<TextStyleMappings>
-		<TextStyleMapping name="mathrm">
-			<MapRange code="numbers" fontId="jlm_cmr10" start="48"/>
-			<MapRange code="capitals" fontId="jlm_cmr10" start="65"/>
-			<MapRange code="small" fontId="jlm_cmr10" start="97"/>		
-		</TextStyleMapping>
-
  		<TextStyleMapping name="mathbf">
 		  <MapRange code="numbers" fontId="jlm_cmbx10" start="48"/>
 		  <MapRange code="capitals" fontId="jlm_cmbx10" start="65"/>
@@ -58,12 +52,12 @@
 		</TextStyleMapping>
 
 		<TextStyleMapping name="mathnormal">
-			<MapRange code="numbers" fontId="jlm_cmmi10" start="48"/>
+			<MapRange code="numbers" fontId="jlm_cmr10" start="48"/>
 			<MapRange code="capitals" fontId="jlm_cmmi10" start="65"/>
 			<MapRange code="small" fontId="jlm_cmmi10" start="97"/>	
 		</TextStyleMapping>
 
-		<TextStyleMapping name="mathit">
+		<!--TextStyleMapping name="mathit">
 			<MapRange code="numbers" fontId="jlm_cmti10" start="48"/>
 			<MapRange code="capitals" fontId="jlm_cmti10" start="65"/>
 			<MapRange code="small" fontId="jlm_cmti10" start="97"/>	
@@ -79,7 +73,7 @@
 			<MapRange code="numbers" fontId="jlm_cmss10" start="48"/>
 			<MapRange code="capitals" fontId="jlm_cmss10" start="65"/>
 			<MapRange code="small" fontId="jlm_cmss10" start="97"/>	
-		</TextStyleMapping>
+		</TextStyleMapping-->
 
 		<TextStyleMapping name="mathfrak">
 			<MapRange code="numbers" fontId="jlm_eufm10" start="48"/>
@@ -103,7 +97,7 @@
 			<MapRange code="capitals" fontId="jlm_dsrom10" start="65"/>		
 		</TextStyleMapping>
 
-		<TextStyleMapping name="cyr">
+		<TextStyleMapping name="mathcyr">
 			<MapRange code="numbers" fontId="jlm_wnr10" start="48"/>
 			<MapRange code="capitals" fontId="jlm_wnr10" start="65"/>
 			<MapRange code="small" fontId="jlm_wnr10" start="97"/>	
@@ -114,7 +108,7 @@
 for a text style is not defined (e.g. "numbers" and "small" in "mathcal") -->
 
 	<DefaultTextStyleMapping>
-		<MapStyle code="numbers" textStyle="mathrm"/>
+		<MapStyle code="numbers" textStyle="mathnormal"/>
 		<MapStyle code="capitals" textStyle="mathnormal"/>
 		<MapStyle code="small" textStyle="mathnormal"/>
 	</DefaultTextStyleMapping>
@@ -126,6 +120,7 @@ for a text style is not defined (e.g. "numbers" and "small" in "mathcal") -->
   <Mapping include="fonts/jlm_amssymb.map.xml" />
   <Mapping include="fonts/jlm_amsfonts.map.xml" />
   <Mapping include="fonts/jlm_stmaryrd.map.xml" />
+  <Mapping include="fonts/jlm_cyrillic.map.xml" />
 </SymbolMappings>
 
 <!-- font descriptions -->
@@ -134,9 +129,11 @@ for a text style is not defined (e.g. "numbers" and "small" in "mathcal") -->
   <Metrics include="fonts/jlm_cmex10.xml" />
   <Metrics include="fonts/jlm_cmmi10.xml" />
   <Metrics include="fonts/jlm_cmti10.xml" />
+  <Metrics include="fonts/jlm_cmbxti10.xml" />
   <Metrics include="fonts/jlm_cmmib10.xml" />
   <Metrics include="fonts/jlm_cmr10.xml" />
   <Metrics include="fonts/jlm_cmss10.xml" />
+  <Metrics include="fonts/jlm_cmssi10.xml" />
   <Metrics include="fonts/jlm_cmtt10.xml" />
   <Metrics include="fonts/jlm_cmbx10.xml" />
   <Metrics include="fonts/jlm_cmsy10.xml" />
@@ -152,7 +149,12 @@ for a text style is not defined (e.g. "numbers" and "small" in "mathcal") -->
   <Metrics include="fonts/jlm_moustache.xml" />
   <Metrics include="fonts/jlm_wnr10.xml" />
   <Metrics include="fonts/jlm_wnti10.xml" />
+  <Metrics include="fonts/jlm_wntt10.xml" />
+  <Metrics include="fonts/jlm_wnss10.xml" />
+  <Metrics include="fonts/jlm_wnssi10.xml" />
+  <Metrics include="fonts/jlm_wnssbx10.xml" />
   <Metrics include="fonts/jlm_wnbx10.xml" />
+  <Metrics include="fonts/jlm_wnbxti10.xml" />
 </FontDescriptions>
 
 </TeXFont>

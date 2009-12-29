@@ -66,6 +66,10 @@ public class DefaultTeXFont implements TeXFont {
     protected static final int WIDTH = 0, HEIGHT = 1, DEPTH = 2, IT = 3;
     
     public boolean isBold = false;
+    public boolean isRoman = false;
+    public boolean isSs = false;
+    public boolean isTt = false;
+    public boolean isIt = false;
  
     static {
         DefaultTeXFontParser parser = new DefaultTeXFontParser();
@@ -97,9 +101,22 @@ public class DefaultTeXFont implements TeXFont {
     public DefaultTeXFont(float pointSize) {
         size = pointSize;
     }
-    
+
+    public DefaultTeXFont(float pointSize,boolean b, boolean rm, boolean ss, boolean tt, boolean it) {
+        size = pointSize;
+	isBold = b;
+	isRoman = rm;
+	isSs = ss;
+	isTt = tt;
+	isIt = it;
+    }
+
+    public TeXFont copy() {
+	return new DefaultTeXFont(size, isBold, isRoman, isSs, isTt, isIt);
+    }
+
     public TeXFont deriveFont(float size) {
-        return new DefaultTeXFont(size);
+        return new DefaultTeXFont(size, isBold, isRoman, isSs, isTt, isIt);
     }
     
     public float getAxisHeight(int style) {
@@ -148,12 +165,12 @@ public class DefaultTeXFont implements TeXFont {
         // if the mapping for the character's range, then use the default style
         if (cf[kind] == null)
             return getDefaultChar(c, style);
-        else if (!isBold)
+        else /*if (!isBold)*/
             return getChar(new CharFont((char) (cf[kind].c + offset),
 					cf[kind].fontId), style);
-	else 
+	/*else 
 	    return getChar(new CharFont((char) (cf[kind].c + offset),
-					cf[kind].boldFontId), style);
+	    cf[kind].boldFontId), style);*/
     }
     
     public Char getChar(char c, String textStyle, int style)
@@ -171,6 +188,26 @@ public class DefaultTeXFont implements TeXFont {
 	FontInfo info = fontInfo[id];
         if (isBold && cf.fontId == cf.boldFontId) {
 	    id = info.getBoldId();
+	    info = fontInfo[id];
+	    cf = new CharFont(cf.c, id, style);
+	}
+	if (isRoman) {
+	    id = info.getRomanId();
+	    info = fontInfo[id];
+	    cf = new CharFont(cf.c, id, style);
+	}
+	if (isSs) {
+	    id = info.getSsId();
+	    info = fontInfo[id];
+	    cf = new CharFont(cf.c, id, style);
+	}
+	if (isTt) {
+	    id = info.getTtId();
+	    info = fontInfo[id];
+	    cf = new CharFont(cf.c, id, style);
+	}
+	if (isIt) {
+	    id = info.getItId();
 	    info = fontInfo[id];
 	    cf = new CharFont(cf.c, id, style);
 	}
@@ -350,6 +387,38 @@ public class DefaultTeXFont implements TeXFont {
 	return isBold;
     }
     
+    public void setRoman(boolean rm) {
+	isRoman = rm;
+    }
+
+    public boolean getRoman() {
+	return isRoman;
+    }
+
+    public void setTt(boolean tt) {
+	isTt = tt;
+    }
+
+    public boolean getTt() {
+	return isTt;
+    }
+
+    public void setIt(boolean it) {
+	isIt = it;
+    }
+
+    public boolean getIt() {
+	return isIt;
+    }
+
+    public void setSs(boolean ss) {
+	isSs = ss;
+    }
+
+    public boolean getSs() {
+	return isSs;
+    }
+
     public boolean hasSpace(int font) {
         FontInfo info = fontInfo[font];
         return info.hasSpace();
@@ -375,9 +444,5 @@ public class DefaultTeXFont implements TeXFont {
             return generalSettings.get("scriptfactor").floatValue();
         else
             return generalSettings.get("scriptscriptfactor").floatValue();
-    }
-
-    public TeXFont copy() {
-	return new DefaultTeXFont(size);
     }
 }

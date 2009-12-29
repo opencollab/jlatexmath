@@ -117,7 +117,7 @@ public class predefMacros {
     public Atom mbox_macro(TeXParser tp, String[] args) throws ParseException {
 	String str = args[1].replaceAll("\\^\\{\\\\prime\\}", "\'");
 	str = str.replaceAll("\\^\\{\\\\prime\\\\prime\\}", "\'\'");
-	return new TeXFormula(str, "mathrm", false, false).root;
+	return new RomanAtom(new TeXFormula(str, "mathnormal", false, false).root);
     }
     
     public Atom accent_macros(TeXParser tp, String[] args) throws ParseException {
@@ -159,6 +159,9 @@ public class predefMacros {
 	    break;
 	case 't' : 
 	    acc = "tie";
+	    break;
+	case 'U' : 
+	    acc = "cyrbreve";
 	}
 
 	return new AccentedAtom(new TeXFormula(args[1], false).root, acc);
@@ -488,6 +491,22 @@ public class predefMacros {
 	return new BoldAtom(new TeXFormula(args[1], false).root);
     }
     
+    public Atom mathrm_macro(TeXParser tp, String[] args) throws ParseException {
+	return new RomanAtom(new TeXFormula(args[1], false).root);
+    }
+
+    public Atom mathtt_macro(TeXParser tp, String[] args) throws ParseException {
+	return new TtAtom(new TeXFormula(args[1], false).root);
+    }
+
+    public Atom mathit_macro(TeXParser tp, String[] args) throws ParseException {
+	return new ItAtom(new TeXFormula(args[1], false).root);
+    }
+
+    public Atom mathsf_macro(TeXParser tp, String[] args) throws ParseException {
+	return new SsAtom(new TeXFormula(args[1], false).root);
+    }
+   
     public Atom LaTeX_macro(TeXParser tp, String[] args) throws ParseException {
 	return new LaTeXAtom();
     }

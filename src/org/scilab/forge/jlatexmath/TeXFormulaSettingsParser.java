@@ -67,7 +67,7 @@ public class TeXFormulaSettingsParser {
     }
     
     public String[] parseSymbolMappings() throws ResourceParseException {
-        String[] mappings = new String[FontInfo.NUMBER_OF_CHAR_CODES];
+        String[] mappings = new String[65536];
         Element charToSymbol = (Element)root.getElementsByTagName("CharacterToSymbolMappings").item(0);
         if (charToSymbol != null) // element present
             addToMap(charToSymbol.getElementsByTagName("Map"), mappings);
