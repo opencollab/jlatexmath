@@ -153,7 +153,7 @@ public class DefaultTeXFontParser {
     public static final String MUFONTID_ATTR = "mufontid";
     public static final String SPACEFONTID_ATTR = "spacefontid";
     
-    private static ArrayList<String> Font_ID = new ArrayList<String>();
+    protected static ArrayList<String> Font_ID = new ArrayList<String>();
     private static Map<String,Integer> rangeTypeMappings = new HashMap<String,Integer>();
     private static Map<String,CharChildParser>
             charChildParsers = new HashMap<String,CharChildParser>();
@@ -216,6 +216,11 @@ public class DefaultTeXFontParser {
 		
 		// get optional integer attribute
 		int skewChar = getOptionalInt("skewChar", font, -1);
+		
+		// get optional boolean for unicode
+		int unicode = getOptionalInt("unicode", font, 0);
+		
+		// get different versions of a font
 		String bold = null;
 		try {
 		    bold = getAttrValueAndCheckIfNotNull("boldVersion", font);
@@ -240,7 +245,7 @@ public class DefaultTeXFontParser {
 		Font f = createFont(fontName);
 		
 		// create FontInfo-object
-		FontInfo info = new FontInfo(Font_ID.indexOf(fontId), f, xHeight, space, quad, bold, roman, ss, tt, it);
+		FontInfo info = new FontInfo(Font_ID.indexOf(fontId), f, unicode, xHeight, space, quad, bold, roman, ss, tt, it);
 		if (skewChar != -1) // attribute set
 		    info.setSkewChar((char) skewChar);
 		
@@ -345,7 +350,7 @@ public class DefaultTeXFontParser {
 		String include = getAttrValueAndCheckIfNotNull("include", (Element)list.item(i));
 		Element map;
 		try {
-		    map = factory.newDocumentBuilder().parse(DefaultTeXFontParser.class.getResourceAsStream(include)).getDocumentElement();//new SAXBuilder().build(DefaultTeXFontParser.class.getResourceAsStream(include)).getRootElement();
+		    map = factory.newDocumentBuilder().parse(DefaultTeXFontParser.class.getResourceAsStream(include)).getDocumentElement();
 		} catch (Exception e) {
 		    throw new XMLResourceParseException("Cannot find the file " + include + "!");
 		}
@@ -385,7 +390,7 @@ public class DefaultTeXFontParser {
     
     public String[] parseDefaultTextStyleMappings()
     throws ResourceParseException {
-        String[] res = new String[3];
+        String[] res = new String[4];
         Element defaultTextStyleMappings = (Element)root
 	    .getElementsByTagName("DefaultTextStyleMapping").item(0);
         if (defaultTextStyleMappings == null)
@@ -493,7 +498,7 @@ public class DefaultTeXFontParser {
 		    
                 NodeList mapRangeList = mapping.getElementsByTagName("MapRange");
                 // iterate all mapping ranges
-                CharFont[] charFonts = new CharFont[3];
+                CharFont[] charFonts = new CharFont[4];
                 for (int j = 0; j < mapRangeList.getLength(); j++) {
                     Element mapRange = (Element)mapRangeList.item(j);
                     // get required integer attributes
@@ -520,6 +525,7 @@ public class DefaultTeXFontParser {
         rangeTypeMappings.put("numbers", DefaultTeXFont.NUMBERS); // autoboxing
         rangeTypeMappings.put("capitals", DefaultTeXFont.CAPITALS); // autoboxing
         rangeTypeMappings.put("small", DefaultTeXFont.SMALL); // autoboxing
+        rangeTypeMappings.put("unicode", DefaultTeXFont.UNICODE); // autoboxing
     }
     
     private static String getAttrValueAndCheckIfNotNull(String attrName,

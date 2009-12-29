@@ -48,7 +48,8 @@ public class DefaultTeXFont implements TeXFont {
     protected final static int NUMBERS = 0;
     protected final static int CAPITALS = 1;
     protected final static int SMALL = 2;
-    
+    protected final static int UNICODE = 3;
+
     /**
      * Number of font ids in a single font description file.
      */
@@ -157,10 +158,13 @@ public class DefaultTeXFont implements TeXFont {
         } else if (c >= 'a' && c <= 'z') {
             kind = SMALL;
             offset = c - 'a';
-        } else {
+        } else if (c >= 'a' && c  <= 'Z') {
             kind = CAPITALS;
             offset = c - 'A';
-        }
+        } else {
+	    kind = UNICODE;
+	    offset = c;
+	}
         
         // if the mapping for the character's range, then use the default style
         if (cf[kind] == null)

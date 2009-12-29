@@ -33,8 +33,8 @@ package org.scilab.forge.jlatexmath;
  * Represents a specific character in a specific font (identified by its font ID).
  */
 public class CharFont {
+
     public char c;
-    
     public int fontId;
     public int boldFontId;
     

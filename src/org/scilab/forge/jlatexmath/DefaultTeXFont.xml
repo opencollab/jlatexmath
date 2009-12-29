@@ -54,7 +54,8 @@
 		<TextStyleMapping name="mathnormal">
 			<MapRange code="numbers" fontId="jlm_cmr10" start="48"/>
 			<MapRange code="capitals" fontId="jlm_cmmi10" start="65"/>
-			<MapRange code="small" fontId="jlm_cmmi10" start="97"/>	
+			<MapRange code="small" fontId="jlm_cmmi10" start="97"/>
+			<MapRange code="unicode" fontId="jlm_cmmi10" start="0"/>
 		</TextStyleMapping>
 
 		<!--TextStyleMapping name="mathit">
@@ -111,6 +112,7 @@ for a text style is not defined (e.g. "numbers" and "small" in "mathcal") -->
 		<MapStyle code="numbers" textStyle="mathnormal"/>
 		<MapStyle code="capitals" textStyle="mathnormal"/>
 		<MapStyle code="small" textStyle="mathnormal"/>
+		<MapStyle code="unicode" textStyle="mathnormal"/>
 	</DefaultTextStyleMapping>
 
 <!-- the mappings for the symbols defined in "TeXSymbols.xml" -->
