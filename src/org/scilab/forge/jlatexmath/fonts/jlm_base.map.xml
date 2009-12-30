@@ -20,33 +20,33 @@ Use "surd" instead. -->
 		<SymbolMapping name="jlatexmathpercent" ch="37" fontId="jlm_cmr10"/>
 		<SymbolMapping name="jlatexmathampersand" ch="38" fontId="jlm_cmr10"/>
 		<SymbolMapping name="jlatexmatharobase" ch="64" fontId="jlm_cmr10"/>
-		<SymbolMapping name="oe" ch="190" fontId="jlm_cmr10"/>
-		<SymbolMapping name="ae" ch="189" fontId="jlm_cmr10"/>
-		<SymbolMapping name="OE" ch="193" fontId="jlm_cmr10"/>
-		<SymbolMapping name="AE" ch="192" fontId="jlm_cmr10"/>
-		<SymbolMapping name="ss" ch="188" fontId="jlm_cmr10"/>
-		<SymbolMapping name="o" ch="191" fontId="jlm_cmr10"/>
-		<SymbolMapping name="O" ch="194" fontId="jlm_cmr10"/>
+		<SymbolMapping name="oe" ch="190" fontId="jlm_cmti10"/>
+		<SymbolMapping name="ae" ch="189" fontId="jlm_cmti10"/>
+		<SymbolMapping name="OE" ch="193" fontId="jlm_cmti10"/>
+		<SymbolMapping name="AE" ch="192" fontId="jlm_cmti10"/>
+		<SymbolMapping name="ss" ch="188" fontId="jlm_cmti10"/>
+		<SymbolMapping name="o" ch="191" fontId="jlm_cmti10"/>
+		<SymbolMapping name="O" ch="194" fontId="jlm_cmti10"/>
 		<SymbolMapping name="tie" ch="196" fontId="jlm_cmmi10"/>
-		<SymbolMapping name="i" ch="179" fontId="jlm_cmr10"/>
-		<SymbolMapping name="j" ch="180" fontId="jlm_cmr10"/>
-		<SymbolMapping name="jlatexmathcedilla" ch="187" fontId="jlm_cmr10"/>
-		<SymbolMapping name="lq" ch="96" fontId="jlm_cmr10"/>
-		<SymbolMapping name="rq" ch="39" fontId="jlm_cmr10"/>
+		<SymbolMapping name="i" ch="179" fontId="jlm_cmti10"/>
+		<SymbolMapping name="j" ch="180" fontId="jlm_cmti10"/>
+		<SymbolMapping name="jlatexmathcedilla" ch="187" fontId="jlm_cmti10"/>
+		<SymbolMapping name="lq" ch="96" fontId="jlm_cmti10"/>
+		<SymbolMapping name="rq" ch="39" fontId="jlm_cmti10"/>
 <!-- math accents -->
 
-		<SymbolMapping name="acute" ch="182" fontId="jlm_cmr10"/>  
-		<SymbolMapping name="grave" ch="181" fontId="jlm_cmr10"/>  
-		<SymbolMapping name="ddot" ch="196" fontId="jlm_cmr10"/> 
-		<SymbolMapping name="doubleacute" ch="125" fontId="jlm_cmr10"/>
-		<SymbolMapping name="tilde" ch="126" fontId="jlm_cmr10"/>
+		<SymbolMapping name="acute" ch="182" fontId="jlm_cmti10"/>  
+		<SymbolMapping name="grave" ch="181" fontId="jlm_cmti10"/>  
+		<SymbolMapping name="ddot" ch="196" fontId="jlm_cmti10"/> 
+		<SymbolMapping name="doubleacute" ch="125" fontId="jlm_cmti10"/>
+		<SymbolMapping name="tilde" ch="126" fontId="jlm_cmti10"/>
   		<SymbolMapping name="mathring" ch="186" fontId="jlm_cmr10"/>  
-		<SymbolMapping name="bar" ch="185" fontId="jlm_cmr10"/>  
-		<SymbolMapping name="breve" ch="184" fontId="jlm_cmr10"/> 
-		<SymbolMapping name="check" ch="183" fontId="jlm_cmr10"/>  
-		<SymbolMapping name="hat" ch="94" fontId="jlm_cmr10"/>  
+		<SymbolMapping name="bar" ch="185" fontId="jlm_cmti10"/>  
+		<SymbolMapping name="breve" ch="184" fontId="jlm_cmti10"/> 
+		<SymbolMapping name="check" ch="183" fontId="jlm_cmti10"/>  
+		<SymbolMapping name="hat" ch="94" fontId="jlm_cmti10"/>  
 		<SymbolMapping name="vec" ch="126" fontId="jlm_cmmi10"/>  
-		<SymbolMapping name="dot" ch="95" fontId="jlm_cmr10"/>  
+		<SymbolMapping name="dot" ch="95" fontId="jlm_cmti10"/>  
 		<SymbolMapping name="widehat" ch="98" fontId="jlm_cmex10"/>  
 		<SymbolMapping name="widetilde" ch="101" fontId="jlm_cmex10"/>  
 	

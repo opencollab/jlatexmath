@@ -58,6 +58,7 @@
       	  <Map char="}" symbol="rbrace"/>
 	  <Map char="&apos;" symbol="rq"/>
 	  <Map char="`" symbol="lq"/>
+	  <Map char="&#305;" symbol="dotlessi"/>
 	  <Map char="&#1040;" symbol="CYRA"/>
 	  <Map char="&#1041;" symbol="CYRB"/>
 	  <Map char="&#1042;" symbol="CYRV"/>
@@ -151,76 +152,83 @@
 	</CharacterToSymbolMappings>
 
 	<CharacterToFormulaMappings>
- 	  <Map char="&#192;" formula="\`{\mbox{A}}"/>
-	  <Map char="&#193;" formula="\'{\mbox{A}}"/>
-	  <Map char="&#194;" formula="\^{\mbox{A}}"/>
-	  <Map char="&#195;" formula="\~{\mbox{A}}"/>
-	  <Map char="&#196;" formula="\&quot;{\mbox{A}}"/>
-	  <Map char="&#197;" formula="\!\mathring{\mbox{A}}\!"/>
+ 	  <Map char="&#192;" formula="\`A"/>
+	  <Map char="&#193;" formula="\'A"/>
+	  <Map char="&#194;" formula="\^A"/>
+	  <Map char="&#195;" formula="\~A"/>
+	  <Map char="&#196;" formula="\&quot;A"/>
+	  <Map char="&#197;" formula="\mathring A"/>
 	  <Map char="&#198;" formula="\AE"/>
-	  <Map char="&#199;" formula="\c{\mbox{C}}"/>
-	  <Map char="&#200;" formula="\`{\mbox{E}}"/>
-	  <Map char="&#201;" formula="\'{\mbox{E}}"/>
-	  <Map char="&#202;" formula="\^{\mbox{E}}"/>
-	  <Map char="&#203;" formula="\&quot;{\mbox{E}}"/>
-	  <Map char="&#204;" formula="\`{\mbox{I}}"/>
-	  <Map char="&#205;" formula="\'{\mbox{I}}"/>
-	  <Map char="&#206;" formula="\^{\mbox{I}}"/>
-	  <Map char="&#207;" formula="\&quot;{\mbox{I}}"/>
+	  <Map char="&#199;" formula="\c C"/>
+	  <Map char="&#200;" formula="\`E"/>
+	  <Map char="&#201;" formula="\'E"/>
+	  <Map char="&#202;" formula="\^E"/>
+	  <Map char="&#203;" formula="\&quot;E"/>
+	  <Map char="&#204;" formula="\`I"/>
+	  <Map char="&#205;" formula="\'I"/>
+	  <Map char="&#206;" formula="\^I"/>
+	  <Map char="&#207;" formula="\&quot;I"/>
 	  <!-- ETH Map char="&#208;" formula=""/-->
-	  <Map char="&#209;" formula="\~{\mbox{N}}"/>
-	  <Map char="&#210;" formula="\`{\mbox{O}}"/>
-	  <Map char="&#211;" formula="\'{\mbox{O}}"/>
-	  <Map char="&#212;" formula="\^{\mbox{O}}"/>
-	  <Map char="&#213;" formula="\~{\mbox{O}}"/>
-	  <Map char="&#214;" formula="\&quot;{\mbox{O}}"/>
+	  <Map char="&#209;" formula="\~N"/>
+	  <Map char="&#210;" formula="\`O"/>
+	  <Map char="&#211;" formula="\'O"/>
+	  <Map char="&#212;" formula="\^O"/>
+	  <Map char="&#213;" formula="\~O"/>
+	  <Map char="&#214;" formula="\&quot;O"/>
 	  <Map char="&#216;" formula="\O"/>
-	  <Map char="&#217;" formula="\`{\mbox{U}}"/>
-	  <Map char="&#218;" formula="\'{\mbox{U}}"/>
-	  <Map char="&#219;" formula="\^{\mbox{U}}"/>
-	  <Map char="&#220;" formula="\&quot;{\mbox{O}}"/>
-	  <Map char="&#221;" formula="\'{\mbox{Y}}"/>
+	  <Map char="&#217;" formula="\`U"/>
+	  <Map char="&#218;" formula="\'U"/>
+	  <Map char="&#219;" formula="\^U"/>
+	  <Map char="&#220;" formula="\&quot;O"/>
+	  <Map char="&#221;" formula="\'Y"/>
 	  <!-- THORN Map char="&#222;" formula=""/-->
 	  <Map char="&#223;" formula="\ss"/>
-	  <Map char="&#224;" formula="\`{\mbox{a}}"/>
-	  <Map char="&#225;" formula="\'{\mbox{a}}"/>
-	  <Map char="&#226;" formula="\^{\mbox{a}}"/>
-	  <Map char="&#227;" formula="\~{\mbox{a}}"/>
-	  <Map char="&#228;" formula="\&quot;{\mbox{a}}"/>
-	  <Map char="&#229;" formula="\!\mathring{\mbox{a}}\!"/>
+	  <Map char="&#224;" formula="\`a"/>
+	  <Map char="&#225;" formula="\'a"/>
+	  <Map char="&#226;" formula="\^a"/>
+	  <Map char="&#227;" formula="\~a"/>
+	  <Map char="&#228;" formula="\&quot;a"/>
+	  <Map char="&#229;" formula="\aa"/>
 	  <Map char="&#230;" formula="\ae"/>
-	  <Map char="&#231;" formula="\c{\mbox{c}}"/>
-	  <Map char="&#232;" formula="\`{\mbox{e}}"/>
-	  <Map char="&#233;" formula="\'{\mbox{e}}"/>
-	  <Map char="&#234;" formula="\^{\mbox{e}}"/>
-	  <Map char="&#235;" formula="\&quot;{\mbox{e}}"/>
+	  <Map char="&#231;" formula="\c c"/>
+	  <Map char="&#232;" formula="\`e"/>
+	  <Map char="&#233;" formula="\'e"/>
+	  <Map char="&#234;" formula="\^e"/>
+	  <Map char="&#235;" formula="\&quot;e"/>
 	  <Map char="&#236;" formula="\`\i"/>
 	  <Map char="&#237;" formula="\'\i"/>
 	  <Map char="&#238;" formula="\^\i"/>
 	  <Map char="&#239;" formula="\&quot;\i"/>
 	  <Map char="&#240;" formula="\eth"/>
-	  <Map char="&#241;" formula="\~{\mbox{n}}"/>
-	  <Map char="&#242;" formula="\`{\mbox{o}}"/>
-	  <Map char="&#243;" formula="\'{\mbox{o}}"/>
-	  <Map char="&#244;" formula="\^{\mbox{o}}"/>
-	  <Map char="&#245;" formula="\~{\mbox{o}}"/>
-	  <Map char="&#246;" formula="\&quot;{\mbox{o}}"/>
+	  <Map char="&#241;" formula="\~n"/>
+	  <Map char="&#242;" formula="\`o"/>
+	  <Map char="&#243;" formula="\'o"/>
+	  <Map char="&#244;" formula="\^o"/>
+	  <Map char="&#245;" formula="\~o"/>
+	  <Map char="&#246;" formula="\&quot;o"/>
 	  <Map char="&#248;" formula="\o"/>
-	  <Map char="&#249;" formula="\`{\mbox{u}}"/>
-	  <Map char="&#250;" formula="\'{\mbox{u}}"/>
-	  <Map char="&#251;" formula="\^{\mbox{u}}"/>
-	  <Map char="&#252;" formula="\&quot;{\mbox{u}}"/>
-	  <Map char="&#253;" formula="\'{\mbox{y}}"/>
+	  <Map char="&#249;" formula="\`u"/>
+	  <Map char="&#250;" formula="\'u"/>
+	  <Map char="&#251;" formula="\^u"/>
+	  <Map char="&#252;" formula="\&quot;u"/>
+	  <Map char="&#253;" formula="\'y"/>
 	  <!-- thorn Map char="&#254;" formula=""/-->
-	  <Map char="&#255;" formula="\&quot;{\mbox{y}}"/>
+	  <Map char="&#255;" formula="\&quot;y"/>
 	  <Map char="&#338;" formula="\OE"/>
 	  <Map char="&#339;" formula="\oe"/>
 	  <!-- Cyrillic Alphabet -->
-	  <Map char="&#1031;" formula="\&quot;\CYRII"/>
-	  <Map char="&#1111;" formula="\&quot;\cyrii"/>
+	  <Map char="&#1024;" formula="\`\CYRE"/>
 	  <Map char="&#1027;" formula="\'\CYRG"/>
+	  <Map char="&#1031;" formula="\cyrddot\CYRII"/>
+	  <Map char="&#1111;" formula="\cyrddot\dotlessi"/>
+	  <Map char="&#1027;" formula="\'\CYRG"/>
+	  <Map char="&#1027;" formula="\'\CYRK"/>
+	  <Map char="&#1037;" formula="\`\CYRI"/>
 	  <Map char="&#1038;" formula="\U\CYRU"/>
+	  <Map char="&#1104;" formula="\`\cyre"/>
 	  <Map char="&#1107;" formula="\'\cyrg"/>
+	  <Map char="&#1116;" formula="\'\cyrk"/>
+	  <Map char="&#1117;" formula="\`\cyri"/>
 	  <Map char="&#1118;" formula="\U\cyru"/>
 	</CharacterToFormulaMappings>
 

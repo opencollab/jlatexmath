@@ -1,4 +1,4 @@
-<Font name="jlm_wntt10.ttf" id="jlm_wntt10" space="0.524996" xHeight="0.430555" quad="1.049991" unicode="94" romanVersion="jlm_wnr10" ssVersion="jlm_wnss10">
+<Font name="jlm_wntt10.ttf" id="jlm_wntt10" space="0.524996" xHeight="0.430555" quad="1.049991" unicode="95" romanVersion="jlm_wnr10" ssVersion="jlm_wnss10">
    <Char code="1034" width="0.524996" height="0.611112" />
    <Char code="1033" width="0.524996" height="0.611112" />
    <Char code="1039" width="0.524996" height="0.611112" depth="0.166667" />
@@ -36,6 +36,7 @@
    <Char code="774" width="0.524996" height="0.638838" />
    <Char code="1123" width="0.524996" height="0.638838" />
    <Char code="171" width="0.524996" height="0.438889" />
+   <Char code="305" width="0.524996" height="0.430555" />
    <Char code="187" width="0.524996" height="0.438889" />
    <Char code="1040" width="0.524996" height="0.611112" />
    <Char code="1041" width="0.524996" height="0.611112" />

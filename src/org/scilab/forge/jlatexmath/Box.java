@@ -179,6 +179,15 @@ public abstract class Box {
    }
 
    /**
+    * Set the width for this box.
+    * 
+    * @param w the width
+    */
+   public void setWidth(float w) {
+      width = w;
+   }
+
+   /**
     * Set the depth for this box.
     * 
     * @param d the depth

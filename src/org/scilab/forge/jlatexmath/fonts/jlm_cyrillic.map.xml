@@ -1,5 +1,6 @@
 <?xml version='1.0'?>
 <SymbolMappings>
+  <SymbolMapping name="dotlessi" ch="305" fontId="jlm_wnr10"/>
 <!-- Modern Russian -->
   <SymbolMapping name="CYRA" ch="1040" fontId="jlm_wnr10"/>
   <SymbolMapping name="CYRB" ch="1041" fontId="jlm_wnr10"/> 

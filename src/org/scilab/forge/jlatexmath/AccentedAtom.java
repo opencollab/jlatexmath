@@ -41,6 +41,7 @@ public class AccentedAtom extends Atom {
     // base atom
     protected Atom base = null;
     protected Atom underbase = null;
+    protected String name = "";
     
     public AccentedAtom(Atom base, Atom accent) throws InvalidSymbolTypeException {
 	this.base = base;
@@ -68,7 +69,7 @@ public class AccentedAtom extends Atom {
     public AccentedAtom(Atom base, String accentName)
     throws InvalidSymbolTypeException, SymbolNotFoundException {
         accent = SymbolAtom.get(accentName);
-        
+        name = accentName;
         if (accent.type == TeXConstants.TYPE_ACCENT) {
             this.base = base;
 	    if (base instanceof AccentedAtom)
@@ -130,7 +131,7 @@ public class AccentedAtom extends Atom {
         if (underbase instanceof CharSymbol)
             s = tf.getSkew(((CharSymbol) underbase).getCharFont(tf), style);
         
-        // retrieve best Char from the accent symbol
+	// retrieve best Char from the accent symbol
         Char ch = tf.getChar(accent.getName(), style);
         while (tf.hasNextLarger(ch)) {
             Char larger = tf.getNextLarger(ch, style);
@@ -154,7 +155,7 @@ public class AccentedAtom extends Atom {
 	if (acc) 
 	    cb = accent.createBox(env.subStyle());
 
-	if (italic > TeXFormula.PREC) {
+	if (Math.abs(italic) > TeXFormula.PREC) {
             y = new HorizontalBox(cb);
             y.add(new StrutBox(italic, 0, 0, 0));
         } else
@@ -176,6 +177,14 @@ public class AccentedAtom extends Atom {
         float total = vBox.getHeight() + vBox.getDepth(), d = b.getDepth();
         vBox.setDepth(d);
         vBox.setHeight(total - d);
+
+	if (diff < 0) {
+	    HorizontalBox hb = new HorizontalBox(new StrutBox(diff, 0, 0, 0));
+	    hb.add(vBox);
+	    hb.setWidth(u);
+	    return hb;
+	}
+
         return vBox;
     }
 }

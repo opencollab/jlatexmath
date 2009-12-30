@@ -644,8 +644,9 @@
   <Symbol name="leftharpoondown" type="rel"/>  
   <Symbol name="rightharpoonup" type="rel"/>  
   <Symbol name="rightharpoondown" type="rel"/>
-
+  <Symbol name="dotlessi" type="ord"/>
   <Symbol name="cyrbreve" type="acc"/>
+  <Symbol name="cyrddot" type="acc"/>
   <Symbol name="CYRA" type="ord"/>
   <Symbol name="CYRB" type="ord"/> 
   <Symbol name="CYRV" type="ord"/>

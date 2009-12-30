@@ -53,7 +53,8 @@ public class HorizontalBox extends Box {
         } else if (alignment == TeXConstants.ALIGN_RIGHT) {
             add(new StrutBox(rest, 0, 0, 0));
             add(b);
-        }
+        } else
+	    add(b);
     }
     
     public HorizontalBox(Box b) {

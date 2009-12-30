@@ -1,4 +1,4 @@
-<Font name="jlm_wnssbx10.ttf" id="jlm_wnssbx10" space="0.366669" xHeight="0.458333" quad="1.100006" unicode="94" romanVersion="jlm_wnbx10" ttVersion="jlm_wntt10">
+<Font name="jlm_wnssbx10.ttf" id="jlm_wnssbx10" space="0.366669" xHeight="0.458333" quad="1.100006" unicode="95" romanVersion="jlm_wnbx10" ttVersion="jlm_wntt10">
    <Char code="1034" width="1.115285" height="0.694445" >
       <Kern code="1046" val="-0.030556"/>
       <Kern code="1061" val="-0.030556"/>
@@ -236,6 +236,7 @@
       <Kern code="1108" val="-0.030556"/>
    </Char>
    <Char code="171" width="0.733337" height="0.5" />
+   <Char code="305" width="0.255557" height="0.458333" />
    <Char code="187" width="0.733337" height="0.5" />
    <Char code="1040" width="0.733337" height="0.694445" >
       <Kern code="1054" val="-0.030556"/>

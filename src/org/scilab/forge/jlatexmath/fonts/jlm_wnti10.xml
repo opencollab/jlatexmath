@@ -1,4 +1,4 @@
-<Font name="jlm_wnti10.ttf" id="jlm_wnti10" space="0.357776" xHeight="0.430555" quad="1.022217" unicode="94" romanVersion="jlm_wnr10" boldVersion="jlm_wnbxti10" ssVersion="jlm_wnssi10" ttVersion="jlm_wntt10">
+<Font name="jlm_wnti10.ttf" id="jlm_wnti10" space="0.357776" xHeight="0.430555" quad="1.022217" unicode="95" romanVersion="jlm_wnr10" boldVersion="jlm_wnbxti10" ssVersion="jlm_wnssi10" ttVersion="jlm_wntt10">
    <Char code="1034" width="1.048883" height="0.683332" italic="0.036629" >
       <Kern code="1046" val="-0.025556"/>
       <Kern code="1061" val="-0.025556"/>
@@ -291,7 +291,8 @@
       <Kern code="1092" val="-0.025556"/>
       <Kern code="1108" val="-0.025556"/>
    </Char>
-   <Char code="171" width="0.56222" height="0.483335" italic="0.022985" />
+   <Char code="171" width="0.56222" height="0.483335" italic="0.022985"  />
+   <Char code="305" width="0.306665" height="0.430555" italic="0.076714" />
    <Char code="187" width="0.56222" height="0.483335" />
    <Char code="1040" width="0.743329" height="0.683332" >
       <Kern code="1054" val="-0.025556"/>
