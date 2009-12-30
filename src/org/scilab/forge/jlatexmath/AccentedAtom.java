@@ -41,7 +41,6 @@ public class AccentedAtom extends Atom {
     // base atom
     protected Atom base = null;
     protected Atom underbase = null;
-    protected String name = "";
     
     public AccentedAtom(Atom base, Atom accent) throws InvalidSymbolTypeException {
 	this.base = base;
@@ -69,7 +68,6 @@ public class AccentedAtom extends Atom {
     public AccentedAtom(Atom base, String accentName)
     throws InvalidSymbolTypeException, SymbolNotFoundException {
         accent = SymbolAtom.get(accentName);
-        name = accentName;
         if (accent.type == TeXConstants.TYPE_ACCENT) {
             this.base = base;
 	    if (base instanceof AccentedAtom)

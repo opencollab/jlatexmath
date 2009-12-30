@@ -295,6 +295,15 @@
 		<Return name="f" />
 	</Command>
 
+	<Command name="r" enabled="true">
+		<CreateCommand name="f">
+			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+			<Argument type="String" value="accentbis_macros" />
+			<Argument type="float" value="1" />        	
+		</CreateCommand>
+		<Return name="f" />
+	</Command>
+
 	<Command name="U" enabled="true">
 		<CreateCommand name="f">
 			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
