@@ -128,17 +128,17 @@ Use "surd" instead. -->
 		<SymbolMapping name="Phi" ch="169" fontId="jlm_cmr10"/>
 		<SymbolMapping name="Psi" ch="170" fontId="jlm_cmr10"/>
 		<SymbolMapping name="Omega" ch="173" fontId="jlm_cmr10"/>
-		<SymbolMapping name="varGamma" ch="161" fontId="jlm_cmmi10_unchanged"/>
-		<SymbolMapping name="varDelta" ch="162" fontId="jlm_cmmi10_unchanged"/>
-		<SymbolMapping name="varTheta" ch="163" fontId="jlm_cmmi10_unchanged"/>
-		<SymbolMapping name="varLambda" ch="164" fontId="jlm_cmmi10_unchanged"/>
-		<SymbolMapping name="varXi" ch="165" fontId="jlm_cmmi10_unchanged"/>
-		<SymbolMapping name="varPi" ch="166" fontId="jlm_cmmi10_unchanged"/>
-		<SymbolMapping name="varSigma" ch="167" fontId="jlm_cmmi10_unchanged"/>
-		<SymbolMapping name="varUpsilon" ch="168" fontId="jlm_cmmi10_unchanged"/>
-		<SymbolMapping name="varPhi" ch="169" fontId="jlm_cmmi10_unchanged"/>
-		<SymbolMapping name="varPsi" ch="170" fontId="jlm_cmmi10_unchanged"/>
-		<SymbolMapping name="varOmega" ch="173" fontId="jlm_cmmi10_unchanged"/>
+		<SymbolMapping name="varGamma" ch="161" fontId="jlm_cmmi10"/>
+		<SymbolMapping name="varDelta" ch="162" fontId="jlm_cmmi10"/>
+		<SymbolMapping name="varTheta" ch="163" fontId="jlm_cmmi10"/>
+		<SymbolMapping name="varLambda" ch="164" fontId="jlm_cmmi10"/>
+		<SymbolMapping name="varXi" ch="165" fontId="jlm_cmmi10"/>
+		<SymbolMapping name="varPi" ch="166" fontId="jlm_cmmi10"/>
+		<SymbolMapping name="varSigma" ch="167" fontId="jlm_cmmi10"/>
+		<SymbolMapping name="varUpsilon" ch="168" fontId="jlm_cmmi10"/>
+		<SymbolMapping name="varPhi" ch="169" fontId="jlm_cmmi10"/>
+		<SymbolMapping name="varPsi" ch="170" fontId="jlm_cmmi10"/>
+		<SymbolMapping name="varOmega" ch="173" fontId="jlm_cmmi10"/>
 
 <!-- miscellaneous symbols of type "ord" -->
 
