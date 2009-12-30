@@ -1,4 +1,12 @@
 jlatexmath (0.8.3)
+	 * Cyrillic is now supported with unicode encoding (so we can search a cyrillic string in a pdf)
+	 
+	 * Fix several little bugs
+	 
+	 * Usage of commands such as \mathrm, \mathit, ... has been improved
+
+ -- Calixte Denizet <Calixte.Denizet@ac-rennes.fr>  Wed, 30 Dec 2009 17:33:47 +0100
+ 
 	 * Adds \fgcolor and \bgcolor
 
  -- Calixte Denizet <Calixte.Denizet@ac-rennes.fr>  Sat, 26 Dec 2009 21:05:38 +0100
