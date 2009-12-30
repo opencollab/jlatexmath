@@ -77,7 +77,9 @@ public class TeXEnvironment {
     }
 
     protected TeXEnvironment copy(TeXFont tf) {
-        return new TeXEnvironment(style, tf, background, color);
+        TeXEnvironment te = new TeXEnvironment(style, tf, background, color);
+	te.style = style;
+	return te;
     }
     
     /**

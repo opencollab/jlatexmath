@@ -160,6 +160,9 @@ public class predefMacros {
 	case 't' : 
 	    acc = "tie";
 	    break;
+	case 'r' : 
+	    acc = "mathring";
+	    break;
 	case 'U' : 
 	    acc = "cyrbreve";
 	}

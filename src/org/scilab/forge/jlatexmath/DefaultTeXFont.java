@@ -158,7 +158,7 @@ public class DefaultTeXFont implements TeXFont {
         } else if (c >= 'a' && c <= 'z') {
             kind = SMALL;
             offset = c - 'a';
-        } else if (c >= 'a' && c  <= 'Z') {
+        } else if (c >= 'A' && c  <= 'Z') {
             kind = CAPITALS;
             offset = c - 'A';
         } else {

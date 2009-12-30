@@ -224,12 +224,12 @@
 	  <Map char="&#1027;" formula="\'\CYRG"/>
 	  <Map char="&#1027;" formula="\'\CYRK"/>
 	  <Map char="&#1037;" formula="\`\CYRI"/>
-	  <Map char="&#1038;" formula="\U\CYRU"/>
+	  <Map char="&#1038;" formula="\cyrbreve\CYRU"/>
 	  <Map char="&#1104;" formula="\`\cyre"/>
 	  <Map char="&#1107;" formula="\'\cyrg"/>
 	  <Map char="&#1116;" formula="\'\cyrk"/>
 	  <Map char="&#1117;" formula="\`\cyri"/>
-	  <Map char="&#1118;" formula="\U\cyru"/>
+	  <Map char="&#1118;" formula="\cyrbreve\cyru"/>
 	</CharacterToFormulaMappings>
 
 </FormulaSettings>
