@@ -160,7 +160,7 @@ public class AccentedAtom extends Atom {
 
 	if (Math.abs(italic) > TeXFormula.PREC) {
             y = new HorizontalBox(cb);
-            y.add(new StrutBox(italic, 0, 0, 0));
+            y.add(new StrutBox(-italic, 0, 0, 0));
         } else
             y = cb;
         

@@ -1,5 +1,5 @@
 <?xml version='1.0'?>
-<Font name="jlm_fcsropg.ttf" id="jlm_fcsropg" space="0.239" xHeight="0.444" quad="1" unicode="204">
+<Font name="jlm_fcsropg.ttf" id="jlm_fcsropg" space="0.239" xHeight="0.444" quad="1" unicode="204" romanVersion="jlm_fcmripg" boldVersion="jlm_fcsbpg" ttVersion="jlm_fctrpg">
   <Char code="32" width="0.239" height="0.0" />
   <Char code="168" width="0.222" height="0.603" italic="0.17" />
   <Char code="884" width="0.194" height="0.695" italic="0.14" />
