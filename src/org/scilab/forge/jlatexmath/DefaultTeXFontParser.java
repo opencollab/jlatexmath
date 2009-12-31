@@ -242,7 +242,7 @@ public class DefaultTeXFontParser {
 		    it = getAttrValueAndCheckIfNotNull("itVersion", font);
 		} catch (ResourceParseException e) {}
 		// try reading the font
-		Font f = createFont(fontName);
+		Font f = createFont(include.substring(0, include.lastIndexOf("/") + 1) + fontName);
 		
 		// create FontInfo-object
 		FontInfo info = new FontInfo(Font_ID.indexOf(fontId), f, unicode, xHeight, space, quad, bold, roman, ss, tt, it);
@@ -305,7 +305,7 @@ public class DefaultTeXFontParser {
     private Font createFont(String name) throws ResourceParseException {
         InputStream fontIn = null;
         try {
-            fontIn = DefaultTeXFontParser.class.getResourceAsStream("fonts/" + name);
+            fontIn = DefaultTeXFontParser.class.getResourceAsStream(name);
             Font f = Font.createFont(java.awt.Font.TRUETYPE_FONT, fontIn);
 			GraphicsEnvironment graphicEnv = GraphicsEnvironment.getLocalGraphicsEnvironment();
 /**
