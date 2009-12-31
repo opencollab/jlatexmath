@@ -99,9 +99,10 @@
 		</TextStyleMapping>
 
 		<TextStyleMapping name="mathcyr">
-			<MapRange code="numbers" fontId="jlm_wnr10" start="48"/>
-			<MapRange code="capitals" fontId="jlm_wnr10" start="65"/>
-			<MapRange code="small" fontId="jlm_wnr10" start="97"/>	
+			<MapRange code="numbers" fontId="jlm_cmr10" start="48"/>
+			<MapRange code="capitals" fontId="jlm_cmr10" start="65"/>
+			<MapRange code="small" fontId="jlm_cmr10" start="97"/>
+			<MapRange code="unicode" fontId="jlm_fcmrpg" start="0"/>
 		</TextStyleMapping>
 	</TextStyleMappings>
 
@@ -118,46 +119,55 @@ for a text style is not defined (e.g. "numbers" and "small" in "mathcal") -->
 <!-- the mappings for the symbols defined in "TeXSymbols.xml" -->
 
 <SymbolMappings>
-  <Mapping include="fonts/jlm_base.map.xml" />
-  <Mapping include="fonts/jlm_amssymb.map.xml" />
-  <Mapping include="fonts/jlm_amsfonts.map.xml" />
-  <Mapping include="fonts/jlm_stmaryrd.map.xml" />
-  <Mapping include="fonts/jlm_cyrillic.map.xml" />
+  <Mapping include="fonts/base/jlm_base.map.xml" />
+  <Mapping include="fonts/base/jlm_amssymb.map.xml" />
+  <Mapping include="fonts/base/jlm_amsfonts.map.xml" />
+  <Mapping include="fonts/maths/jlm_stmaryrd.map.xml" />
+  <Mapping include="fonts/cyrillic/jlm_cyrillic.map.xml" />
+  <Mapping include="fonts/greek/jlm_greek.map.xml" />
 </SymbolMappings>
 
 <!-- font descriptions -->
 
 <FontDescriptions>
-  <Metrics include="fonts/jlm_cmex10.xml" />
-  <Metrics include="fonts/jlm_cmmi10.xml" />
-  <Metrics include="fonts/jlm_cmti10.xml" />
-  <Metrics include="fonts/jlm_cmbxti10.xml" />
-  <Metrics include="fonts/jlm_cmmib10.xml" />
-  <Metrics include="fonts/jlm_cmr10.xml" />
-  <Metrics include="fonts/jlm_cmss10.xml" />
-  <Metrics include="fonts/jlm_cmssi10.xml" />
-  <Metrics include="fonts/jlm_cmtt10.xml" />
-  <Metrics include="fonts/jlm_cmbx10.xml" />
-  <Metrics include="fonts/jlm_cmsy10.xml" />
-  <Metrics include="fonts/jlm_msbm10.xml" />
-  <Metrics include="fonts/jlm_msam10.xml" />
-  <Metrics include="fonts/jlm_rsfs10.xml" />
-  <Metrics include="fonts/jlm_eufm10.xml" />
-  <Metrics include="fonts/jlm_cmssbx10.xml" />
-  <Metrics include="fonts/jlm_eufb10.xml" />
-  <Metrics include="fonts/jlm_cmbsy10.xml" />
-  <Metrics include="fonts/jlm_dsrom10.xml" /> 
-  <Metrics include="fonts/jlm_stmary10.xml" />
-  <Metrics include="fonts/jlm_moustache.xml" />
-  <Metrics include="fonts/jlm_cmmi10_unchanged.xml" />
-  <Metrics include="fonts/jlm_wnr10.xml" />
-  <Metrics include="fonts/jlm_wnti10.xml" />
-  <Metrics include="fonts/jlm_wntt10.xml" />
-  <Metrics include="fonts/jlm_wnss10.xml" />
-  <Metrics include="fonts/jlm_wnssi10.xml" />
-  <Metrics include="fonts/jlm_wnssbx10.xml" />
-  <Metrics include="fonts/jlm_wnbx10.xml" />
-  <Metrics include="fonts/jlm_wnbxti10.xml" />
+  <Metrics include="fonts/base/jlm_cmex10.xml" />
+  <Metrics include="fonts/base/jlm_cmmi10.xml" />
+  <Metrics include="fonts/base/jlm_cmmib10.xml" />
+  <Metrics include="fonts/base/jlm_moustache.xml" />
+  <Metrics include="fonts/base/jlm_cmmi10_unchanged.xml" />
+  <Metrics include="fonts/maths/jlm_cmsy10.xml" />
+  <Metrics include="fonts/maths/jlm_msbm10.xml" />
+  <Metrics include="fonts/maths/jlm_msam10.xml" />
+  <Metrics include="fonts/maths/jlm_cmbsy10.xml" />
+  <Metrics include="fonts/maths/jlm_dsrom10.xml" /> 
+  <Metrics include="fonts/maths/jlm_stmary10.xml" />
+  <Metrics include="fonts/maths/jlm_rsfs10.xml" />
+  <Metrics include="fonts/euler/jlm_eufm10.xml" />  
+  <Metrics include="fonts/euler/jlm_eufb10.xml" />
+  <Metrics include="fonts/latin/jlm_cmti10.xml" />
+  <Metrics include="fonts/latin/jlm_cmbxti10.xml" />
+  <Metrics include="fonts/latin/jlm_cmr10.xml" />
+  <Metrics include="fonts/latin/jlm_cmss10.xml" />
+  <Metrics include="fonts/latin/jlm_cmssi10.xml" />
+  <Metrics include="fonts/latin/jlm_cmtt10.xml" />
+  <Metrics include="fonts/latin/jlm_cmbx10.xml" />
+  <Metrics include="fonts/latin/jlm_cmssbx10.xml" />
+  <Metrics include="fonts/cyrillic/jlm_wnr10.xml" />
+  <Metrics include="fonts/cyrillic/jlm_wnti10.xml" />
+  <Metrics include="fonts/cyrillic/jlm_wntt10.xml" />
+  <Metrics include="fonts/cyrillic/jlm_wnss10.xml" />
+  <Metrics include="fonts/cyrillic/jlm_wnssi10.xml" />
+  <Metrics include="fonts/cyrillic/jlm_wnssbx10.xml" />
+  <Metrics include="fonts/cyrillic/jlm_wnbx10.xml" />
+  <Metrics include="fonts/cyrillic/jlm_wnbxti10.xml" />
+  <Metrics include="fonts/greek/jlm_fcmbipg.xml" />
+  <Metrics include="fonts/greek/jlm_fcmbpg.xml" />
+  <Metrics include="fonts/greek/jlm_fcmripg.xml" />
+  <Metrics include="fonts/greek/jlm_fcmrpg.xml" />
+  <Metrics include="fonts/greek/jlm_fcsbpg.xml" />
+  <Metrics include="fonts/greek/jlm_fcsropg.xml" />
+  <Metrics include="fonts/greek/jlm_fcsrpg.xml" />
+  <Metrics include="fonts/greek/jlm_fctrpg.xml" />
 </FontDescriptions>
 
 </TeXFont>

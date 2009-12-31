@@ -124,6 +124,14 @@ public class predefMacros {
 	return new AccentedAtom(new TeXFormula(args[1], false).root, args[0]);
     }
 
+    public Atom grkaccent_macro(TeXParser tp, String[] args) throws ParseException {
+	return new AccentedAtom(new TeXFormula(args[2], false).root, new TeXFormula(args[1], false).root, false);
+    }
+
+    public Atom accent_macro(TeXParser tp, String[] args) throws ParseException {
+	return new AccentedAtom(new TeXFormula(args[2], false).root, new TeXFormula(args[1], false).root);
+    }
+
     public Atom accentbis_macros(TeXParser tp, String[] args) throws ParseException {
 	String acc = "";
 	switch (args[0].charAt(0)) {

@@ -1,3 +1,8 @@
+jlatexmath (0.8.4)
+	 * Greek support added
+
+ -- Calixte Denizet <Calixte.Denizet@ac-rennes.fr>  Thu, 31 Dec 2009 16:10:23 +0100
+
 jlatexmath (0.8.3)
 	 * Cyrillic is now supported with unicode encoding (so we can search a cyrillic string in a pdf)
 	 

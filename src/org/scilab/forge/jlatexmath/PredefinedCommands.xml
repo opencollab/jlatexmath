@@ -322,6 +322,24 @@
 		<Return name="f" />
 	</Command>
 
+	<Command name="accent" enabled="true">
+		<CreateCommand name="f">
+			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+			<Argument type="String" value="accent_macro" />
+			<Argument type="float" value="2" />			        	
+		</CreateCommand>
+		<Return name="f" />
+	</Command>
+
+	<Command name="grkaccent" enabled="true">
+		<CreateCommand name="f">
+			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+			<Argument type="String" value="grkaccent_macro" />
+			<Argument type="float" value="2" />			        	
+		</CreateCommand>
+		<Return name="f" />
+	</Command>
+
 	<Command name="hat" enabled="true">
 		<CreateCommand name="f">
 			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />

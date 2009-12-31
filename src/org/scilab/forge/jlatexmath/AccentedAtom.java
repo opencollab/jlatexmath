@@ -37,6 +37,7 @@ public class AccentedAtom extends Atom {
     // accent symbol
     private final SymbolAtom accent;
     private boolean acc = false;
+    private boolean changeSize = true;
     
     // base atom
     protected Atom base = null;
@@ -56,7 +57,11 @@ public class AccentedAtom extends Atom {
 	this.acc = true;
     }
 
-
+    public AccentedAtom(Atom base, Atom accent, boolean changeSize) throws InvalidSymbolTypeException {
+	this(base, accent);
+	this.changeSize = changeSize;
+    }
+	
     /**
      * Creates an AccentedAtom from a base atom and an accent symbol defined by its name
      *
@@ -151,7 +156,7 @@ public class AccentedAtom extends Atom {
         float italic = ch.getItalic();
 	Box cb = new CharBox(ch);
 	if (acc) 
-	    cb = accent.createBox(env.subStyle());
+	    cb = accent.createBox(changeSize ? env.subStyle() : env);
 
 	if (Math.abs(italic) > TeXFormula.PREC) {
             y = new HorizontalBox(cb);
@@ -167,7 +172,7 @@ public class AccentedAtom extends Atom {
         vBox.add(y);
         
         // kern
-	vBox.add(new StrutBox(0, -delta, 0, 0));
+	vBox.add(new StrutBox(0, changeSize ? -delta : -b.getHeight(), 0, 0));
         // base
         vBox.add(b);
         

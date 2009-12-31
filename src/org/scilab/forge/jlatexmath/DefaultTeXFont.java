@@ -151,7 +151,7 @@ public class DefaultTeXFont implements TeXFont {
     }
     
     private Char getChar(char c, CharFont[] cf, int style) {
-        int kind, offset;
+        int kind, offset;//System.out.println("kind="+cf[UNICODE]);
         if (c >= '0' && c <= '9') {
             kind = NUMBERS;
             offset = c - '0';
