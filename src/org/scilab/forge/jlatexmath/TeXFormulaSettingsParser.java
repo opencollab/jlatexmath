@@ -32,6 +32,7 @@ package org.scilab.forge.jlatexmath;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.io.InputStream;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 import org.w3c.dom.Element;
@@ -48,32 +49,44 @@ public class TeXFormulaSettingsParser {
     private Element root;
     
     public TeXFormulaSettingsParser() throws ResourceParseException {
-        try {
+	this(GlueSettingsParser.class.getResourceAsStream(RESOURCE_NAME), RESOURCE_NAME);
+    }
+
+    public TeXFormulaSettingsParser(InputStream file, String name) throws ResourceParseException {
+	try {
    	    DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 	    factory.setIgnoringElementContentWhitespace(true);
 	    factory.setIgnoringComments(true);
-	    root = factory.newDocumentBuilder().parse(GlueSettingsParser.class.getResourceAsStream(RESOURCE_NAME)).getDocumentElement();         
+	    root = factory.newDocumentBuilder().parse(file).getDocumentElement();         
 	} catch (Exception e) { // JDOMException or IOException
-            throw new XMLResourceParseException(RESOURCE_NAME, e);
+            throw new XMLResourceParseException(name, e);
         }
+    }
+
+    public void parseSymbolToFormulaMappings(Atom[] mappings) throws ResourceParseException {
+        Element charToSymbol = (Element)root.getElementsByTagName("CharacterToFormulaMappings").item(0);
+        if (charToSymbol != null) // element present
+            addFormulaToMap(charToSymbol.getElementsByTagName("Map"), mappings);
     }
 
     public Atom[] parseSymbolToFormulaMappings() throws ResourceParseException {
         Atom[] mappings = new Atom[65536];
-	Element charToSymbol = (Element)root.getElementsByTagName("CharacterToFormulaMappings").item(0);
-        if (charToSymbol != null) // element present
-            addFormulaToMap(charToSymbol.getElementsByTagName("Map"), mappings);
+	parseSymbolToFormulaMappings(mappings);
         return mappings;
+    }
+    
+    public void parseSymbolMappings(String[] mappings) throws ResourceParseException {
+        Element charToSymbol = (Element)root.getElementsByTagName("CharacterToSymbolMappings").item(0);
+        if (charToSymbol != null) // element present
+            addToMap(charToSymbol.getElementsByTagName("Map"), mappings);
     }
     
     public String[] parseSymbolMappings() throws ResourceParseException {
         String[] mappings = new String[65536];
-        Element charToSymbol = (Element)root.getElementsByTagName("CharacterToSymbolMappings").item(0);
-        if (charToSymbol != null) // element present
-            addToMap(charToSymbol.getElementsByTagName("Map"), mappings);
+	parseSymbolMappings(mappings);
         return mappings;
     }
-    
+
     public String[] parseDelimiterMappings() throws ResourceParseException {
         String[] mappings = new String[FontInfo.NUMBER_OF_CHAR_CODES];
         Element charToDelimiter = (Element)root.getElementsByTagName("CharacterToDelimiterMappings").item(0);

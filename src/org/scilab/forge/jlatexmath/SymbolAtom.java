@@ -33,6 +33,9 @@ package org.scilab.forge.jlatexmath;
 
 import java.util.BitSet;
 import java.util.Map;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 
 /**
  * A box representing a symbol (a non-alphanumeric character).
@@ -96,6 +99,21 @@ public class SymbolAtom extends CharSymbol {
         delimiter = del;
     }
     
+    public static void addSymbolAtom(String file) {
+	FileInputStream in;
+	try {
+	    in = new FileInputStream(file);
+	} catch (FileNotFoundException e) {
+	    throw new ResourceParseException(file, e);
+	}
+	addSymbolAtom(in, file);
+    }
+
+    public static void addSymbolAtom(InputStream in, String name) {
+	TeXSymbolParser tsp = new TeXSymbolParser(in, name);
+	symbols.putAll(tsp.readSymbols());
+    }
+
     public static void addSymbolAtom(SymbolAtom sym) {
 	symbols.put(sym.name, sym);
     }

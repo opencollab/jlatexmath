@@ -170,14 +170,16 @@ public class DefaultTeXFontParser {
     }
     
     public DefaultTeXFontParser() throws ResourceParseException {
+	this(DefaultTeXFontParser.class.getResourceAsStream(RESOURCE_NAME), RESOURCE_NAME);
+    }
+
+    public DefaultTeXFontParser(InputStream file, String name) throws ResourceParseException {
 	factory.setIgnoringElementContentWhitespace(true);
 	factory.setIgnoringComments(true);
 	try {
-	    root = factory.newDocumentBuilder().parse(DefaultTeXFontParser.class.getResourceAsStream(RESOURCE_NAME)).getDocumentElement();
-            // parse textstyles ahead of the rest, because it's used while
-            // parsing the default text style
+	    root = factory.newDocumentBuilder().parse(file).getDocumentElement();
         } catch (Exception e) { // JDOMException or IOException
-            throw new XMLResourceParseException(RESOURCE_NAME, e);
+            throw new XMLResourceParseException(name, e);
         }
     }
     
@@ -187,77 +189,70 @@ public class DefaultTeXFontParser {
         charChildParsers.put("NextLarger", new NextLargerParser());
         charChildParsers.put("Extension", new ExtensionParser());
     }
-    
-    public FontInfo[] parseFontDescriptions(FontInfo[] fi) throws ResourceParseException {
+
+    public FontInfo[] parseFontDescriptions(FontInfo[] fi, InputStream file, String name) throws ResourceParseException {
         ArrayList<FontInfo> res = new ArrayList<FontInfo>(Arrays.asList(fi));
-	Element fontDescriptions = (Element)root.getElementsByTagName("FontDescriptions").item(0);
-        if (fontDescriptions != null) { // element present
-	    NodeList list = fontDescriptions.getElementsByTagName("Metrics");
-            for (int i = 0; i < list.getLength(); i++) {
-		// get required string attribute
-		String  include = getAttrValueAndCheckIfNotNull("include", (Element)list.item(i));
-                Element font;
-		try {
-		    font = factory.newDocumentBuilder().parse(DefaultTeXFontParser.class.getResourceAsStream(include)).getDocumentElement();
-		} catch (Exception e) {
-		    throw new XMLResourceParseException("Cannot find the file " + include + "!");
-		}
-		
-		String fontName = getAttrValueAndCheckIfNotNull("name", font);
-		// get required integer attribute
-		String fontId = getAttrValueAndCheckIfNotNull("id", font);
-		if (Font_ID.indexOf(fontId) < 0)
-		    Font_ID.add(fontId);
-		else throw new XMLResourceParseException("Font " + fontId + " is already loaded !");
-		// get required real attributes
-		float space = getFloatAndCheck("space", font);
-		float xHeight = getFloatAndCheck("xHeight", font);
-		float quad = getFloatAndCheck("quad", font);
-		
-		// get optional integer attribute
-		int skewChar = getOptionalInt("skewChar", font, -1);
-		
-		// get optional boolean for unicode
-		int unicode = getOptionalInt("unicode", font, 0);
-		
-		// get different versions of a font
-		String bold = null;
-		try {
-		    bold = getAttrValueAndCheckIfNotNull("boldVersion", font);
-		} catch (ResourceParseException e) {}
-		String roman = null;
-		try {
-		    roman = getAttrValueAndCheckIfNotNull("romanVersion", font);
-		} catch (ResourceParseException e) {}
-		String ss = null;
-		try {
-		    ss = getAttrValueAndCheckIfNotNull("ssVersion", font);
-		} catch (ResourceParseException e) {}
-		String tt = null;
-		try {
-		    tt = getAttrValueAndCheckIfNotNull("ttVersion", font);
-		} catch (ResourceParseException e) {}
-		String it = null;
-		try {
-		    it = getAttrValueAndCheckIfNotNull("itVersion", font);
-		} catch (ResourceParseException e) {}
-		// try reading the font
-		Font f = createFont(include.substring(0, include.lastIndexOf("/") + 1) + fontName);
-		
-		// create FontInfo-object
-		FontInfo info = new FontInfo(Font_ID.indexOf(fontId), f, unicode, xHeight, space, quad, bold, roman, ss, tt, it);
-		if (skewChar != -1) // attribute set
-		    info.setSkewChar((char) skewChar);
-		
-		// process all "Char"-elements
-		NodeList listF = font.getElementsByTagName("Char");
-		for (int j = 0; j < listF.getLength(); j++)
-		    processCharElement((Element) listF.item(j), info);
-		
-		// parsing OK, add to table
-		res.add(info);
-	    }
+	Element font;
+	try {
+	    font = factory.newDocumentBuilder().parse(file).getDocumentElement();
+	} catch (Exception e) {
+	    throw new XMLResourceParseException("Cannot find the file " + name + "!" + e.toString());
 	}
+	
+	String fontName = getAttrValueAndCheckIfNotNull("name", font);
+	// get required integer attribute
+	String fontId = getAttrValueAndCheckIfNotNull("id", font);
+	if (Font_ID.indexOf(fontId) < 0)
+	    Font_ID.add(fontId);
+	else throw new XMLResourceParseException("Font " + fontId + " is already loaded !");
+	// get required real attributes
+	float space = getFloatAndCheck("space", font);
+	float xHeight = getFloatAndCheck("xHeight", font);
+	float quad = getFloatAndCheck("quad", font);
+	
+	// get optional integer attribute
+	int skewChar = getOptionalInt("skewChar", font, -1);
+	
+	// get optional boolean for unicode
+	int unicode = getOptionalInt("unicode", font, 0);
+	
+	// get different versions of a font
+	String bold = null;
+	try {
+	    bold = getAttrValueAndCheckIfNotNull("boldVersion", font);
+	} catch (ResourceParseException e) {}
+	String roman = null;
+	try {
+	    roman = getAttrValueAndCheckIfNotNull("romanVersion", font);
+	} catch (ResourceParseException e) {}
+	String ss = null;
+	try {
+	    ss = getAttrValueAndCheckIfNotNull("ssVersion", font);
+	} catch (ResourceParseException e) {}
+	String tt = null;
+	try {
+	    tt = getAttrValueAndCheckIfNotNull("ttVersion", font);
+	} catch (ResourceParseException e) {}
+	String it = null;
+	try {
+	    it = getAttrValueAndCheckIfNotNull("itVersion", font);
+	} catch (ResourceParseException e) {}
+	// try reading the font
+	Font f = createFont(name.substring(0, name.lastIndexOf("/") + 1) + fontName);
+	
+	// create FontInfo-object
+	FontInfo info = new FontInfo(Font_ID.indexOf(fontId), f, unicode, xHeight, space, quad, bold, roman, ss, tt, it);
+	if (skewChar != -1) // attribute set
+	    info.setSkewChar((char) skewChar);
+	
+	// process all "Char"-elements
+	NodeList listF = font.getElementsByTagName("Char");
+	for (int j = 0; j < listF.getLength(); j++)
+	    processCharElement((Element) listF.item(j), info);
+	
+	// parsing OK, add to table
+	res.add(info);
+
 	for (int i = 0; i < res.size(); i++) {
 	    FontInfo fin = res.get(i);
 	    fin.setBoldId(Font_ID.indexOf(fin.boldVersion));
@@ -271,6 +266,19 @@ public class DefaultTeXFontParser {
 	return res.toArray(fi);
     }
     
+    public FontInfo[] parseFontDescriptions(FontInfo[] fi) throws ResourceParseException {
+	Element fontDescriptions = (Element)root.getElementsByTagName("FontDescriptions").item(0);
+        if (fontDescriptions != null) { // element present
+	    NodeList list = fontDescriptions.getElementsByTagName("Metrics");
+            for (int i = 0; i < list.getLength(); i++) {
+		// get required string attribute
+		String  include = getAttrValueAndCheckIfNotNull("include", (Element)list.item(i));
+		fi = parseFontDescriptions(fi, DefaultTeXFontParser.class.getResourceAsStream(include), include);
+	    }
+	}
+	return fi;
+    }
+    
     private static void processCharElement(Element charElement, FontInfo info)
     throws ResourceParseException {
         // retrieve required integer attribute
@@ -278,8 +286,8 @@ public class DefaultTeXFontParser {
         // retrieve optional float attributes
         float[] metrics = new float[4];
         metrics[DefaultTeXFont.WIDTH] = getOptionalFloat("width", charElement, 0);
-        metrics[DefaultTeXFont.HEIGHT] = getOptionalFloat("height", charElement, 0);// + 0.012f;
-        metrics[DefaultTeXFont.DEPTH] = getOptionalFloat("depth", charElement, 0);// + 0.012f;
+        metrics[DefaultTeXFont.HEIGHT] = getOptionalFloat("height", charElement, 0);
+        metrics[DefaultTeXFont.DEPTH] = getOptionalFloat("depth", charElement, 0);
         metrics[DefaultTeXFont.IT] = getOptionalFloat("italic", charElement, 0);
         // set metrics
         info.setMetrics(ch, metrics);
@@ -377,14 +385,7 @@ public class DefaultTeXFontParser {
 		}
 	    }
 	    
-	    // "sqrt" must allways be present (used internally only!)
-	    if (res.get("sqrt") == null)
-		throw new XMLResourceParseException(
-						    RESOURCE_NAME
-						    + ": the required mapping <SymbolMap name=\"sqrt\" ... /> is not found!");
-	    else
-            // parsing OK
-            return res;
+	    return res;
 	}
     }
     
@@ -394,9 +395,7 @@ public class DefaultTeXFontParser {
         Element defaultTextStyleMappings = (Element)root
 	    .getElementsByTagName("DefaultTextStyleMapping").item(0);
         if (defaultTextStyleMappings == null)
-            // "DefaultTextStyleMappings" is required!
-            throw new XMLResourceParseException(RESOURCE_NAME,
-                    "DefaultTextStyleMapping");
+            return res;
         else { // element present
             // iterate all mappings
 	    NodeList list = defaultTextStyleMappings.getElementsByTagName("MapStyle");
@@ -480,8 +479,7 @@ public class DefaultTeXFontParser {
         Map<String,CharFont[]> res = new HashMap<String,CharFont[]>();
         Element textStyleMappings = (Element)root.getElementsByTagName("TextStyleMappings").item(0);
         if (textStyleMappings == null)
-            // "TextStyleMappings" is required!
-            throw new XMLResourceParseException(RESOURCE_NAME, "TextStyleMappings");
+	    return res;
         else { // element present
             // iterate all mappings
 	    NodeList list = textStyleMappings.getElementsByTagName(STYLE_MAPPING_EL);

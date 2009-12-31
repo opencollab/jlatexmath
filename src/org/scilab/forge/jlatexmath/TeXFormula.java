@@ -39,6 +39,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.Stack;
 import java.io.InputStream;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 
 /**
  * Represents a logical mathematical formula that will be displayed (by creating a
@@ -110,6 +112,22 @@ public class TeXFormula {
 	}
 
 	symbolFormulaMappings = parser.parseSymbolToFormulaMappings();
+    }
+
+    public static void addSymbolMappings(String file) throws ResourceParseException {
+	FileInputStream in;
+	try {
+	    in = new FileInputStream(file);
+	} catch (FileNotFoundException e) {
+	    throw new ResourceParseException(file, e);
+	}
+	addSymbolMappings(in, file);
+    }
+    
+    public static void addSymbolMappings(InputStream in, String name) throws ResourceParseException {
+	TeXFormulaSettingsParser tfsp = new TeXFormulaSettingsParser(in, name);
+	tfsp.parseSymbolMappings(symbolMappings);
+	tfsp.parseSymbolToFormulaMappings(symbolFormulaMappings);
     }
     
     // the root atom of the "atom tree" that represents the formula

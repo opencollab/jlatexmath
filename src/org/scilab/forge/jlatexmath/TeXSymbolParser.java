@@ -31,6 +31,7 @@ package org.scilab.forge.jlatexmath;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.io.InputStream;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 import org.w3c.dom.Element;
@@ -49,15 +50,19 @@ public class TeXSymbolParser {
    private Element root;
 
    public TeXSymbolParser() throws ResourceParseException {
+       this(TeXSymbolParser.class.getResourceAsStream(RESOURCE_NAME), RESOURCE_NAME);
+   }
+
+    public TeXSymbolParser(InputStream file, String name) throws ResourceParseException {
        try {
 	   DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 	   factory.setIgnoringElementContentWhitespace(true);
 	   factory.setIgnoringComments(true);
-	   root = factory.newDocumentBuilder().parse(TeXSymbolParser.class.getResourceAsStream(RESOURCE_NAME)).getDocumentElement();
+	   root = factory.newDocumentBuilder().parse(file).getDocumentElement();
 	   // set possible valid symbol type mappings
 	   setTypeMappings();
        } catch (Exception e) { // JDOMException or IOException
-	   throw new XMLResourceParseException(RESOURCE_NAME, e);
+	   throw new XMLResourceParseException(name, e);
        }
    }
     

@@ -31,6 +31,9 @@ package org.scilab.forge.jlatexmath;
 
 import java.awt.Font;
 import java.util.Map;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.io.FileNotFoundException;
 
 /**
  * The default implementation of the TeXFont-interface. All font information is read
@@ -110,6 +113,29 @@ public class DefaultTeXFont implements TeXFont {
 	isSs = ss;
 	isTt = tt;
 	isIt = it;
+    }
+
+    public static void addTeXFontDescription(String file) throws ResourceParseException {
+	FileInputStream in;
+	try {
+	    in = new FileInputStream(file);
+	} catch (FileNotFoundException e) {
+	    throw new ResourceParseException(file, e);
+	}
+	addTeXFontDescription(in, file);
+    }
+
+    public static void addTeXFontDescription(InputStream in, String name) throws ResourceParseException {
+	DefaultTeXFontParser dtfp = new DefaultTeXFontParser(in, name);
+	fontInfo = dtfp.parseFontDescriptions(fontInfo);
+	textStyleMappings.putAll(dtfp.parseTextStyleMappings());
+	symbolMappings.putAll(dtfp.parseSymbolMappings());
+    }
+
+    public static void addLanguage(InputStream inlanguage, String language, InputStream insymbols, String symbols, InputStream inmappings, String mappings) throws ResourceParseException {
+	addTeXFontDescription(inlanguage, language);
+	SymbolAtom.addSymbolAtom(insymbols, symbols);
+	TeXFormula.addSymbolMappings(inmappings, mappings);
     }
 
     public TeXFont copy() {

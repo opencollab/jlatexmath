@@ -72,6 +72,16 @@ public class predefMacros {
 	NewCommandMacro.addNewCommand("b", "\\underaccent{\\bar}{#1}", 1);
     }
 
+    public Atom addAlphabet_macro(TeXParser tp, String[] args) throws ParseException {
+	String lg = "fonts/" + args[1] + "/language_" + args[1]+ ".xml";
+	String sym = "fonts/" + args[1] + "/symbols_" + args[1]+ ".xml";
+	String map = "fonts/" + args[1] + "/mappings_" + args[1]+ ".xml";
+	
+	DefaultTeXFont.addLanguage(TeXFormula.class.getResourceAsStream(lg), lg,TeXFormula.class.getResourceAsStream(sym), sym, TeXFormula.class.getResourceAsStream(map), map);
+	
+	return null;
+    }
+
     public Atom spATbreve_macro(TeXParser tp, String[] args) throws ParseException {
 	VRowAtom vra = new VRowAtom(new TeXFormula("\\displaystyle\\!\\breve{}").root);
 	vra.setRaise(TeXConstants.UNIT_EX, 0.6f);
@@ -86,7 +96,6 @@ public class predefMacros {
 	return new SmashedAtom(vra, null);
     }
        
-
     public Atom frac_macro(TeXParser tp, String[] args) throws ParseException {
 	TeXFormula num = new TeXFormula(args[1], false);
 	TeXFormula denom = new TeXFormula(args[2], false);
