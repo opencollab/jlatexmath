@@ -41,7 +41,9 @@
   <Symbol name="O" type="ord" />
   <Symbol name="i" type="ord" />
   <Symbol name="j" type="ord" />
+  <Symbol name="jlatexmathapos" type="ord" />
   <Symbol name="jlatexmathcedilla" type="acc" />
+  <Symbol name="ogonek" type="acc" />
   <Symbol name="lq" type="ord" />
   <Symbol name="rq" type="ord" />
 
@@ -395,6 +397,7 @@
   <Symbol name="ddot" type="acc"/>
   <Symbol name="doubleacute" type="acc"/>
   <Symbol name="tilde" type="acc"/>
+  <Symbol name="jlatexmathring" type="acc"/>
   <Symbol name="mathring" type="acc"/> 
   <Symbol name="bar" type="acc"/>  
   <Symbol name="breve" type="acc"/>  

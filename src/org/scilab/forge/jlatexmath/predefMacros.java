@@ -190,6 +190,22 @@ public class predefMacros {
     public Atom cedilla_macro(TeXParser tp, String[] args) throws ParseException {
 	return new CedillaAtom(new TeXFormula(args[1]).root);
     }
+    
+    public Atom IJ_macro(TeXParser tp, String[] args) throws ParseException {
+	return new IJAtom(args[0].charAt(0) == 'I');
+    }
+
+    public Atom LCaron_macro(TeXParser tp, String[] args) throws ParseException {
+	return new LCaronAtom(args[0].charAt(0) == 'L');
+    }
+
+    public Atom tcaron_macro(TeXParser tp, String[] args) throws ParseException {
+	return new tcaronAtom();
+    }
+    
+    public Atom ogonek_macro(TeXParser tp, String[] args) throws ParseException {
+	return new OgonekAtom(new TeXFormula(args[1]).root);
+    }
 
     public Atom nbsp_macro(TeXParser tp, String[] args) throws ParseException {
 	return new SpaceAtom();

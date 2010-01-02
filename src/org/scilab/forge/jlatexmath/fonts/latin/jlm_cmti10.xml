@@ -350,5 +350,6 @@
    <Char code="125" width="0.511108" height="0.694445" italic="0.1225" />
    <Char code="126" width="0.511108" height="0.667859" italic="0.115854" />
    <Char code="196" width="0.511108" height="0.667859" italic="0.104744" />
+   <Char code="197" width="0.306592" height="0.022" depth="0.178" italic="0.178"/>
 </Font>
 

@@ -56,8 +56,7 @@
       	  <Map char="=" symbol="equals"/>
       	  <Map char="[" symbol="lsqbrack"/>
       	  <Map char="}" symbol="rbrace"/>
-	  <Map char="&apos;" symbol="rq"/>
-	  <Map char="`" symbol="lq"/>
+	  <Map char="&apos;" symbol="jlatexmathapos"/>
 	</CharacterToSymbolMappings>
 
 	<CharacterToFormulaMappings>
@@ -66,7 +65,7 @@
 	  <Map char="&#194;" formula="\^A"/>
 	  <Map char="&#195;" formula="\~A"/>
 	  <Map char="&#196;" formula="\&quot;A"/>
-	  <Map char="&#197;" formula="\mathring A"/>
+	  <Map char="&#197;" formula="\r A"/>
 	  <Map char="&#198;" formula="\AE"/>
 	  <Map char="&#199;" formula="\c C"/>
 	  <Map char="&#200;" formula="\`E"/>
@@ -84,6 +83,7 @@
 	  <Map char="&#212;" formula="\^O"/>
 	  <Map char="&#213;" formula="\~O"/>
 	  <Map char="&#214;" formula="\&quot;O"/>
+	  <Map char="&#215;" formula="\times"/>
 	  <Map char="&#216;" formula="\O"/>
 	  <Map char="&#217;" formula="\`U"/>
 	  <Map char="&#218;" formula="\'U"/>
@@ -115,6 +115,7 @@
 	  <Map char="&#244;" formula="\^o"/>
 	  <Map char="&#245;" formula="\~o"/>
 	  <Map char="&#246;" formula="\&quot;o"/>
+	  <Map char="&#247;" formula="\div"/>
 	  <Map char="&#248;" formula="\o"/>
 	  <Map char="&#249;" formula="\`u"/>
 	  <Map char="&#250;" formula="\'u"/>
@@ -123,8 +124,128 @@
 	  <Map char="&#253;" formula="\'y"/>
 	  <!-- thorn Map char="&#254;" formula=""/-->
 	  <Map char="&#255;" formula="\&quot;y"/>
+	  <Map char="&#256;" formula="\=A"/>
+	  <Map char="&#257;" formula="\=a"/>
+	  <Map char="&#258;" formula="\u A"/>
+	  <Map char="&#259;" formula="\u a"/>
+	  <Map char="&#260;" formula="\k A"/>
+	  <Map char="&#261;" formula="\k a"/>
+	  <Map char="&#262;" formula="\'C"/>
+	  <Map char="&#263;" formula="\'c"/>
+	  <Map char="&#264;" formula="\^C"/>
+	  <Map char="&#265;" formula="\^c"/>
+	  <Map char="&#266;" formula="\.C"/>
+	  <Map char="&#267;" formula="\.c"/>
+	  <Map char="&#268;" formula="\v C"/>
+	  <Map char="&#269;" formula="\v c"/>
+	  <Map char="&#270;" formula="\v D"/>
+	  <Map char="&#271;" formula="d\mbox{'}"/>
+	  <!-- D barre-->
+	  <Map char="&#274;" formula="\=E"/>
+	  <Map char="&#275;" formula="\=e"/>
+	  <Map char="&#276;" formula="\u E"/>
+	  <Map char="&#277;" formula="\u e"/>
+	  <Map char="&#278;" formula="\.E"/>
+	  <Map char="&#279;" formula="\.e"/>
+	  <Map char="&#280;" formula="\k E"/>
+	  <Map char="&#281;" formula="\k e"/>
+	  <Map char="&#282;" formula="\v E"/>
+	  <Map char="&#283;" formula="\v e"/>
+	  <Map char="&#284;" formula="\^G"/>
+	  <Map char="&#285;" formula="\^g"/>
+	  <Map char="&#286;" formula="\u G"/>
+	  <Map char="&#287;" formula="\u g"/>
+	  <Map char="&#288;" formula="\.G"/>
+	  <Map char="&#289;" formula="\.g"/>
+	  <Map char="&#290;" formula="\underaccent{,}G"/>
+	  <Map char="&#291;" formula="\'g"/>
+	  <Map char="&#292;" formula="\^H"/>
+	  <Map char="&#293;" formula="\^h"/>
+	  <!-- H barre-->
+	  <Map char="&#296;" formula="\~I"/>
+	  <Map char="&#297;" formula="\~\i"/>
+	  <Map char="&#298;" formula="\=I"/>
+	  <Map char="&#299;" formula="\=\i"/>
+	  <Map char="&#300;" formula="\u I"/>
+	  <Map char="&#301;" formula="\u \i"/>
+	  <Map char="&#302;" formula="\k I"/>
+	  <Map char="&#303;" formula="\k i"/>
+	  <Map char="&#304;" formula="\.I"/>
+	  <Map char="&#305;" formula="\i"/>
+	  <Map char="&#306;" formula="\IJ"/>
+	  <Map char="&#307;" formula="\ij"/>
+	  <Map char="&#308;" formula="\^J"/>
+	  <Map char="&#309;" formula="\^\j"/>
+	  <Map char="&#310;" formula="\underaccent{,}K"/>
+	  <Map char="&#311;" formula="\underaccent{,}k"/>
+	  <!-- kra groenland-->
+	  <Map char="&#313;" formula="\'L"/>
+	  <Map char="&#314;" formula="\'l"/>
+	  <Map char="&#315;" formula="\underaccent{,}L"/>
+	  <Map char="&#316;" formula="\underaccent{,}l"/>
+	  <Map char="&#317;" formula="\Lcaron"/>
+	  <Map char="&#318;" formula="\lcaron"/>
+	  <Map char="&#319;" formula="L\cdot"/>
+	  <Map char="&#320;" formula="l\cdot"/>
+	  <!-- L barre-->
+	  <Map char="&#323;" formula="\'N"/>
+	  <Map char="&#324;" formula="\'n"/>
+	  <Map char="&#325;" formula="\underaccent{,}N"/>
+	  <Map char="&#326;" formula="\underaccent{,}n"/>
+	  <Map char="&#327;" formula="\v N"/>
+	  <Map char="&#328;" formula="\v n"/>
+	  <Map char="&#329;" formula="\mbox{'}n"/>
+	  <!-- Nj-->
+	  <Map char="&#332;" formula="\=O"/>
+	  <Map char="&#333;" formula="\=o"/>
+	  <Map char="&#334;" formula="\u O"/>
+	  <Map char="&#335;" formula="\u o"/>
+	  <Map char="&#336;" formula="\H O"/>
+	  <Map char="&#337;" formula="\H o"/>
 	  <Map char="&#338;" formula="\OE"/>
 	  <Map char="&#339;" formula="\oe"/>
+	  <Map char="&#340;" formula="\'R"/>
+	  <Map char="&#341;" formula="\'r"/>
+	  <Map char="&#342;" formula="\underaccent{,}R"/>
+	  <Map char="&#343;" formula="\underaccent{,}r"/>
+	  <Map char="&#344;" formula="\v R"/>
+	  <Map char="&#345;" formula="\v r"/>
+	  <Map char="&#346;" formula="\'S"/>
+	  <Map char="&#347;" formula="\'s"/>
+	  <Map char="&#348;" formula="\^S"/>
+	  <Map char="&#349;" formula="\^s"/>
+	  <Map char="&#350;" formula="\c S"/>
+	  <Map char="&#351;" formula="\c s"/>
+	  <Map char="&#352;" formula="\v S"/>
+	  <Map char="&#353;" formula="\v s"/>
+	  <Map char="&#354;" formula="\c T"/>
+	  <Map char="&#355;" formula="\c t"/>
+	  <Map char="&#356;" formula="\v T"/>
+	  <Map char="&#357;" formula="\tcaron"/>
+	  <!-- T barre-->
+	  <Map char="&#360;" formula="\~U"/>
+	  <Map char="&#361;" formula="\~u"/>
+	  <Map char="&#362;" formula="\=U"/>
+	  <Map char="&#363;" formula="\=u"/>
+	  <Map char="&#364;" formula="\u U"/>
+	  <Map char="&#365;" formula="\u u"/>
+	  <Map char="&#366;" formula="\r U"/>
+	  <Map char="&#367;" formula="\r u"/>
+	  <Map char="&#368;" formula="\H U"/>
+	  <Map char="&#369;" formula="\H u"/>
+	  <Map char="&#370;" formula="\k U"/>
+	  <Map char="&#371;" formula="\k u"/>
+	  <Map char="&#372;" formula="\^W"/>
+	  <Map char="&#373;" formula="\^w"/>
+	  <Map char="&#374;" formula="\^Y"/>
+	  <Map char="&#375;" formula="\^y"/>
+	  <Map char="&#376;" formula="\&quot;Y"/>
+	  <Map char="&#377;" formula="\'Z"/>
+	  <Map char="&#378;" formula="\'z"/>
+	  <Map char="&#379;" formula="\.Z"/>
+	  <Map char="&#380;" formula="\.z"/>
+	  <Map char="&#379;" formula="\v Z"/>
+	  <Map char="&#380;" formula="\v z"/>
 	</CharacterToFormulaMappings>
 
 </FormulaSettings>
