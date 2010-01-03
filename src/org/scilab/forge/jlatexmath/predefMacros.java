@@ -118,7 +118,7 @@ public class predefMacros {
 	else if ("Bbb".equals(args[0]))
 	    args[0] = "mathbb";
 	else if ("bold".equals(args[0]))
-	    args[0] = "mathbf";
+	    return new BoldAtom(new TeXFormula(args[1], false).root);
 
 	return new TeXFormula(args[1], args[0]).root;
     }
@@ -193,6 +193,10 @@ public class predefMacros {
     
     public Atom IJ_macro(TeXParser tp, String[] args) throws ParseException {
 	return new IJAtom(args[0].charAt(0) == 'I');
+    }
+
+    public Atom TStroke_macro(TeXParser tp, String[] args) throws ParseException {
+	return new TStrokeAtom(args[0].charAt(0) == 'T');
     }
 
     public Atom LCaron_macro(TeXParser tp, String[] args) throws ParseException {
@@ -529,6 +533,10 @@ public class predefMacros {
     
     public Atom mathrm_macro(TeXParser tp, String[] args) throws ParseException {
 	return new RomanAtom(new TeXFormula(args[1], false).root);
+    }
+
+    public Atom mathbf_macro(TeXParser tp, String[] args) throws ParseException {
+	return new BoldAtom(new RomanAtom(new TeXFormula(args[1], false).root));
     }
 
     public Atom mathtt_macro(TeXParser tp, String[] args) throws ParseException {

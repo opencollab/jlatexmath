@@ -1,4 +1,4 @@
-/* CedillaAtom.java
+/* TStrokeAtom.java
  * =========================================================================
  * This file is part of the JLaTeXMath Library - http://forge.scilab.org/jlatexmath
  *
@@ -29,48 +29,64 @@
 package org.scilab.forge.jlatexmath;
 
 /**
- * An atom with a cedilla.
+ * An atom with a stroked T
  */
-public class CedillaAtom extends Atom {
+public class TStrokeAtom extends Atom {
     
-    private Atom base;
+    private boolean upper;
 
-    public CedillaAtom(Atom base) {
-	this.base = base;
+    public TStrokeAtom(boolean upper) {
+	this.upper = upper;
     }
     
-    /*public Box createBox(TeXEnvironment env) {
-	Box b = base.createBox(env);
+    public Box createBox(TeXEnvironment env) {
+	Char ch = env.getTeXFont().getChar("bar", env.getStyle());
+	float italic = ch.getItalic();
+	CharBox T = new CharBox(env.getTeXFont().getChar(upper ? 'T' : 't', "mathnormal", env.getStyle()));
+	CharBox B = new CharBox(ch);
+	Box y;
+	if (Math.abs(italic) > TeXFormula.PREC) {
+            y = new HorizontalBox(new StrutBox(-italic, 0, 0, 0));
+            y.add(B);
+        } else
+            y = B;
+	Box b = new HorizontalBox(y, T.getWidth(), TeXConstants.ALIGN_CENTER);
 	VerticalBox vb = new VerticalBox();
+	vb.add(T);
+	vb.add(new StrutBox(0, -0.5f * T.getHeight(), 0, 0));
 	vb.add(b);
-	vb.add(cedilla.createBox(env));
-	float f = vb.getHeight() + vb.getDepth();
-	vb.setHeight(b.getHeight());
-	vb.setDepth(f - b.getHeight());
 	return vb;
-	} */
+    }
+}
+	/*if (upper) 
+	    hb.add(new SpaceAtom(TeXConstants.UNIT_EM, -0.7f, 0, 0).createBox(env));
+	else
+	    hb.add(new SpaceAtom(TeXConstants.UNIT_EM, -0.3f, 0, 0).createBox(env));
+	    hb.add(A);
+	return hb;
+    }
 
     public Box createBox(TeXEnvironment env) {
 	Box b = base.createBox(env);
 	VerticalBox vb = new VerticalBox();
 	vb.add(b);
-	Char ch = env.getTeXFont().getChar("jlatexmathcedilla", env.getStyle());
+	Char ch = env.getTeXFont().getChar("ogonek", env.getStyle());
 	float italic = ch.getItalic();
-	Box cedilla = new CharBox(ch);
+	float x = new SpaceAtom(TeXConstants.UNIT_MU, 1f, 0, 0).createBox(env).getWidth();
+	Box ogonek = new CharBox(ch);
 	Box y;
 	if (Math.abs(italic) > TeXFormula.PREC) {
             y = new HorizontalBox(new StrutBox(-italic, 0, 0, 0));
-            y.add(cedilla);
+            y.add(ogonek);
         } else
-            y = cedilla;
+            y = ogonek;
 
-	Box ce = new HorizontalBox(y, b.getWidth(), TeXConstants.ALIGN_CENTER);
-	float x = new SpaceAtom(TeXConstants.UNIT_MU, 0.4f, 0, 0).createBox(env).getWidth();
-	vb.add(new StrutBox(0, -x, 0, 0));
-	vb.add(ce);
+	Box og = new HorizontalBox(y, b.getWidth(), TeXConstants.ALIGN_RIGHT);
+	vb.add(new StrutBox(0, -ogonek.getHeight(), 0, 0));
+	vb.add(og);
 	float f = vb.getHeight() + vb.getDepth();
 	vb.setHeight(b.getHeight());
 	vb.setDepth(f - b.getHeight());
 	return vb;
-    } 
-}
+	} 
+}*/

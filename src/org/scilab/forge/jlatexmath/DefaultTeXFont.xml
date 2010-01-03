@@ -45,11 +45,6 @@
 <!-- the mappings for the text styles defined in "FormulaSettings.xml" -->
 
 	<TextStyleMappings>
- 		<TextStyleMapping name="mathbf">
-		  <MapRange code="numbers" fontId="jlm_cmbx10" start="48"/>
-		  <MapRange code="capitals" fontId="jlm_cmbx10" start="65"/>
-		  <MapRange code="small" fontId="jlm_cmbx10" start="97"/>			</TextStyleMapping>
-
 		<TextStyleMapping name="mathnormal">
 			<MapRange code="numbers" fontId="jlm_cmr10" start="48"/>
 			<MapRange code="capitals" fontId="jlm_cmmi10" start="65"/>
@@ -79,12 +74,6 @@
 			<MapRange code="capitals" fontId="jlm_dsrom10" start="65"/>		
 		</TextStyleMapping>
 
-		<TextStyleMapping name="mathcyr">
-			<MapRange code="numbers" fontId="jlm_cmr10" start="48"/>
-			<MapRange code="capitals" fontId="jlm_cmr10" start="65"/>
-			<MapRange code="small" fontId="jlm_cmr10" start="97"/>
-			<MapRange code="unicode" fontId="jlm_fcmrpg" start="0"/>
-		</TextStyleMapping>
 	</TextStyleMappings>
 
 <!-- the default text style mappings, used when no text style is specified or when a specific mapping 

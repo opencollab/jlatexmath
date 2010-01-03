@@ -222,7 +222,8 @@
 	  <Map char="&#355;" formula="\c t"/>
 	  <Map char="&#356;" formula="\v T"/>
 	  <Map char="&#357;" formula="\tcaron"/>
-	  <!-- T barre-->
+	  <Map char="&#358;" formula="\TStroke"/>
+	  <!-- t barre-->
 	  <Map char="&#360;" formula="\~U"/>
 	  <Map char="&#361;" formula="\~u"/>
 	  <Map char="&#362;" formula="\=U"/>
@@ -244,8 +245,9 @@
 	  <Map char="&#378;" formula="\'z"/>
 	  <Map char="&#379;" formula="\.Z"/>
 	  <Map char="&#380;" formula="\.z"/>
-	  <Map char="&#379;" formula="\v Z"/>
-	  <Map char="&#380;" formula="\v z"/>
+	  <Map char="&#381;" formula="\v Z"/>
+	  <Map char="&#382;" formula="\v z"/>
+	  <!-- f avec demi-barre-->
 	</CharacterToFormulaMappings>
 
 </FormulaSettings>

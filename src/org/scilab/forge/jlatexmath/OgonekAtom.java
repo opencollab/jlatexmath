@@ -46,7 +46,6 @@ public class OgonekAtom extends Atom {
 	vb.add(b);
 	Char ch = env.getTeXFont().getChar("ogonek", env.getStyle());
 	float italic = ch.getItalic();
-	float x = new SpaceAtom(TeXConstants.UNIT_MU, 1f, 0, 0).createBox(env).getWidth();
 	Box ogonek = new CharBox(ch);
 	Box y;
 	if (Math.abs(italic) > TeXFormula.PREC) {

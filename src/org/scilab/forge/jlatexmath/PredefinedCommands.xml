@@ -91,7 +91,7 @@
 	<Command name="mathbf" enabled="true">
 		<CreateCommand name="f">
 			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="textstyle_macros" />
+			<Argument type="String" value="mathbf_macro" />
 			<Argument type="float" value="1" />			        	
 		</CreateCommand>
 		<Return name="f" />
@@ -170,15 +170,6 @@
 	</Command>
 
 	<Command name="mathds" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="textstyle_macros" />
-			<Argument type="float" value="1" />			        	
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="mathcyr" enabled="true">
 		<CreateCommand name="f">
 			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
 			<Argument type="String" value="textstyle_macros" />
@@ -1269,6 +1260,24 @@
 		<CreateCommand name="f">
 			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
 			<Argument type="String" value="IJ_macro" />
+			<Argument type="float" value="0" />
+		</CreateCommand>
+		<Return name="f" />
+	</Command>
+
+	<Command name="TStroke" enabled="true">
+		<CreateCommand name="f">
+			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+			<Argument type="String" value="TStroke_macro" />
+			<Argument type="float" value="0" />
+		</CreateCommand>
+		<Return name="f" />
+	</Command>
+
+	<Command name="tStroke" enabled="true">
+		<CreateCommand name="f">
+			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+			<Argument type="String" value="TStroke_macro" />
 			<Argument type="float" value="0" />
 		</CreateCommand>
 		<Return name="f" />

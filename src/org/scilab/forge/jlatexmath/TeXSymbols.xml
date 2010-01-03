@@ -42,7 +42,7 @@
   <Symbol name="i" type="ord" />
   <Symbol name="j" type="ord" />
   <Symbol name="jlatexmathapos" type="ord" />
-  <Symbol name="jlatexmathcedilla" type="acc" />
+  <Symbol name="jlatexmathcedilla" type="ord" />
   <Symbol name="ogonek" type="acc" />
   <Symbol name="lq" type="ord" />
   <Symbol name="rq" type="ord" />
