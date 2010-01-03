@@ -9,6 +9,7 @@
 		<property name="class.dir" value="/org/scilab/forge/jlatexmath" />
 		<property name="project.src.dir" value="${project.root.dir}/src/${class.dir}" />
 		<property name="project.bin.dir" value="${project.root.dir}/bin" />
+		<property name="project.ex.dir" value="${project.root.dir}/examples" />
 		<property name="package.dir" value="dist/" />
 		<property name="output.jar.dir" value="${package.dir}" />
 		<property name="version" value="0.8.5" />
@@ -33,6 +34,11 @@
 	<target name="clean" depends="info" description="Removes all generated files">
 		<delete dir="${project.bin.dir}"/>
 		<delete dir="${doc.dir}"/>
+	</target>
+
+	<target name="example" depends="info">
+	  <javac srcdir="${project.ex.dir}" destdir="${project.ex.dir}" debug="on" source="5" target="5" classpath="${output.jar.dir}/jlatexmath-${version}.jar">
+	  </javac>
 	</target>
 
 	<!-- Compile source files -->
