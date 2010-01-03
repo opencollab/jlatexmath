@@ -237,6 +237,13 @@
   </CharacterToSymbolMappings>
   
   <CharacterToFormulaMappings>
+    <Map char="&#902;" formula="\grkaccent{ʹ}{\phantom{ι}}\!\!A"/>
+    <Map char="&#904;" formula="\grkaccent{ʹ}{\phantom{ι}}Ε"/>
+    <Map char="&#905;" formula="\grkaccent{ʹ}{\phantom{ι}}H"/>
+    <Map char="&#906;" formula="\grkaccent{ʹ}{\phantom{ι}}Ι"/>
+    <Map char="&#908;" formula="\grkaccent{ʹ}{\phantom{ι}}\!Ο"/>
+    <Map char="&#910;" formula="\grkaccent{ʹ}{\phantom{ι}}Υ"/>
+    <Map char="&#911;" formula="\grkaccent{ʹ}{\phantom{ι}}\!Ω"/>
     <Map char="&#7944;" formula="’Α"/>
     <Map char="&#7945;" formula="῾Α"/>
     <Map char="&#7946;" formula="῍Α"/>
@@ -322,7 +329,7 @@
     <Map char="&#8120;" formula="\u Α"/>
     <Map char="&#8121;" formula="\= Α"/>
     <Map char="&#8122;" formula="\grkaccent{`}{\vphantom{ι}}Α"/>
-    <Map char="&#8123;" formula="\grkaccent{ʹ}{\vphantom{ι}}Α"/>
+    <Map char="&#8123;" formula="\grkaccent{ʹ}{\vphantom{ι}}\!\!Α"/>
     <Map char="&#8136;" formula="\grkaccent{`}{\vphantom{ι}}Ε"/>
     <Map char="&#8137;" formula="\grkaccent{ʹ}{\vphantom{ι}}Ε"/>
     <Map char="&#8138;" formula="\grkaccent{`}{\vphantom{ι}}Η"/>
@@ -342,8 +349,8 @@
     <Map char="&#8170;" formula="\grkaccent{`}{\phantom{ι}}Υ"/>
     <Map char="&#8171;" formula="\grkaccent{ʹ}{\phantom{ι}}Υ"/>
     <Map char="&#8184;" formula="\grkaccent{`}{\vphantom{ι}}Ο"/>
-    <Map char="&#8185;" formula="\grkaccent{ʹ}{\vphantom{ι}}Ο"/>
+    <Map char="&#8185;" formula="\grkaccent{ʹ}{\vphantom{ι}}\!Ο"/>
     <Map char="&#8186;" formula="\grkaccent{`}{\vphantom{ι}}Ω"/>
-    <Map char="&#8187;" formula="\grkaccent{ʹ}{\vphantom{ι}}Ω"/>
+    <Map char="&#8187;" formula="\grkaccent{ʹ}{\vphantom{ι}}\!Ω"/>
   </CharacterToFormulaMappings>
 </FormulaSettings>

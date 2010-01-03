@@ -29,12 +29,12 @@
 -->
 
 <TeXSymbols>
-  <Symbol name="ʹ" type="ord"/>
+  <Symbol name="ʹ" type="acc"/>
   <Symbol name="͵" type="acc"/>
-  <Symbol name="ͺ" type="ord"/>
-  <Symbol name="΄" type="ord"/>
-  <Symbol name="΅" type="ord"/>
-  <Symbol name="·" type="ord"/>
+  <Symbol name="ͺ" type="acc"/>
+  <Symbol name="΄" type="acc"/>
+  <Symbol name="΅" type="acc"/>
+  <Symbol name="·" type="acc"/>
   <Symbol name="ΐ" type="ord"/>
   <Symbol name="Α" type="ord"/>
   <Symbol name="Β" type="ord"/>
