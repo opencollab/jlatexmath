@@ -33,9 +33,6 @@
 	<target name="clean" depends="info" description="Removes all generated files">
 		<delete dir="${project.bin.dir}"/>
 		<delete dir="${doc.dir}"/>
-		<delete>
-			<fileset dir="${project.bin.dir}" includes="*.class" />
-		</delete>
 	</target>
 
 	<!-- Compile source files -->

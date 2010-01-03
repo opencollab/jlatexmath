@@ -1,4 +1,9 @@
 jlatexmath (0.8.5)
+  	 * add a stroke T
+
+	 * Fix few bugs of rendering : cedilla, mathbf
+
+ -- Calixte Denizet <Calixte.Denizet@ac-rennes.fr>  Sun, 03 Jan 2010 18:35:12 +0100
 	 * Complete unicode table for latin alphabets
 
 	 * Fix few bugs of rendering
