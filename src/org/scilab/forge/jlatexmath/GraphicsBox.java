@@ -31,10 +31,7 @@ package org.scilab.forge.jlatexmath;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
-import java.awt.Image;
-import java.awt.Graphics2D;
-import javax.imageio.ImageIO;
-import java.io.*;
+
 /**
  * A box representing a box containing a graphics.
  */
@@ -53,7 +50,7 @@ public class GraphicsBox extends Box {
     public void draw(Graphics2D g2, float x, float y) {
 	AffineTransform oldAt = g2.getTransform();
 	g2.translate(x, y - height);
-	g2.scale(1 / oldAt.getScaleX(), 1 / oldAt.getScaleY());
+	g2.scale(Math.abs(1 / oldAt.getScaleX()), Math.abs(1 / oldAt.getScaleY()));
 	g2.drawImage(image, 0, 0, null);
 	g2.setTransform(oldAt);
     }

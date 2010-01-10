@@ -35,8 +35,7 @@ import java.awt.MediaTracker;
 import java.awt.Label;
 import java.awt.Graphics2D;
 import java.awt.Toolkit;
-import java.io.*;
-import javax.imageio.*;
+import java.io.File;
 
 /**
  * An atom representing an atom containing a graphic.
@@ -74,10 +73,6 @@ public class GraphicsAtom extends Atom {
 	    Graphics2D g2d = bimage.createGraphics();
 	    g2d.drawImage(image, 0, 0, null);
 	    g2d.dispose();
-	    File file = new File("/tmp/jlatexmath.png");
-	    try {
-		ImageIO.write(bimage, "png", file.getAbsoluteFile());
-	    } catch (IOException ex) {}
 	}
     }
 
