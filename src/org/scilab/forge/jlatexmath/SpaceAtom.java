@@ -31,12 +31,30 @@
 
 package org.scilab.forge.jlatexmath;
 
+import java.util.HashMap;
+
 /**
  * An atom representing whitespace. The dimension values can be set using different
  * unit types.
  */
 public class SpaceAtom extends Atom {
     
+    private static HashMap units = new HashMap<String, Integer>();
+    static {
+	units.put("em", TeXConstants.UNIT_EM);
+	units.put("ex", TeXConstants.UNIT_EX);
+	units.put("px", TeXConstants.UNIT_PIXEL);
+	units.put("pix", TeXConstants.UNIT_PIXEL);
+	units.put("pixel", TeXConstants.UNIT_PIXEL);
+	units.put("pt", TeXConstants.UNIT_POINT);
+	units.put("point", TeXConstants.UNIT_POINT);
+	units.put("pica", TeXConstants.UNIT_PICA);
+	units.put("mu", TeXConstants.UNIT_MU);
+	units.put("cm", TeXConstants.UNIT_CM);
+	units.put("mm", TeXConstants.UNIT_MM);
+	units.put("in", TeXConstants.UNIT_IN);
+    }
+
     private static interface UnitConversion { // NOPMD
         public float getPixelConversion(TeXEnvironment env);
     }
@@ -79,6 +97,24 @@ public class SpaceAtom extends Atom {
             public float getPixelConversion(TeXEnvironment env) {
                 TeXFont tf = env.getTeXFont();
                 return tf.getQuad(env.getStyle(), tf.getMuFontId()) / 18;
+            }
+        },
+
+	new UnitConversion() {
+            public float getPixelConversion(TeXEnvironment env) {
+                return (28.346456693f * TeXFont.PIXELS_PER_POINT) / env.getSize();
+            }
+        },
+
+	new UnitConversion() {
+            public float getPixelConversion(TeXEnvironment env) {
+                return (2.8346456693f * TeXFont.PIXELS_PER_POINT) / env.getSize();
+            }
+        },
+
+	new UnitConversion() {
+            public float getPixelConversion(TeXEnvironment env) {
+                return (72 * TeXFont.PIXELS_PER_POINT) / env.getSize();
             }
         }
     };
@@ -148,6 +184,11 @@ public class SpaceAtom extends Atom {
         this.width = width;
         this.height = height;
         this.depth = depth;
+    }
+
+    public static int getUnit(String unit) {
+	Integer u = (Integer) units.get(unit);
+	return u == null ? -1 : u.intValue();
     }
     
     public Box createBox(TeXEnvironment env) {

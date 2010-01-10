@@ -271,5 +271,27 @@ public class TeXConstants {
     * <p>
     * 1 mu = 1/18 em (em taken from the "mufont")
     */
-   public static final int UNIT_MU = 5;   
+   public static final int UNIT_MU = 5;  
+
+   /**
+    * Unit constant: cm
+    * <p>
+    * 1 cm = 28.346456693 point
+    */
+   public static final int UNIT_CM = 6;
+
+   /**
+    * Unit constant: mm
+    * <p>
+    * 1 mm = 2.8346456693 point
+    */
+   public static final int UNIT_MM = 7;
+
+   /**
+    * Unit constant: in
+    * <p>
+    * 1 in = 72 point
+    */
+   public static final int UNIT_IN = 8;
+    
 }

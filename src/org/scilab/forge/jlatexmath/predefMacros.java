@@ -95,6 +95,27 @@ public class predefMacros {
 	
 	return new SmashedAtom(vra, null);
     }
+
+    public Atom hvspace_macro(TeXParser tp, String[] args) throws ParseException {
+	int i;
+	for (i = 0; i < args[1].length() && !Character.isLetter(args[1].charAt(i)); i++);
+	if (i == args[1].length()) {
+	    throw new ParseException("Bad argument !");
+	}
+	float f = 0;
+	try {
+	    f = Float.parseFloat(args[1].substring(0, i));
+	} catch (NumberFormatException e) {
+	    throw new ParseException(e.toString());
+	}
+ 
+	int unit = SpaceAtom.getUnit(args[1].substring(i).toLowerCase());
+	if (unit == -1) {
+	    throw new ParseException("Unknown unit \"" + args[1].substring(i) + "\" !");
+	}
+
+	return args[0].charAt(0) == 'h' ? new SpaceAtom(unit, f, 0, 0) : new SpaceAtom(unit, 0, f, 0);
+    }
        
     public Atom frac_macro(TeXParser tp, String[] args) throws ParseException {
 	TeXFormula num = new TeXFormula(args[1], false);
