@@ -104,6 +104,14 @@ public class predefMacros {
 	return new FractionAtom(num.root, denom.root, true);
     }
 
+    public Atom over_macro(TeXParser tp, String[] args) throws ParseException {
+	Atom num = tp.getLastAtom();
+	TeXFormula denom = new TeXFormula(args[1], false);
+	if (num == null || denom.root == null)
+	    throw new ParseException("Both numerator and denominator of a fraction can't be empty!");
+	return new FractionAtom(num, denom.root, true);
+    }
+
     public Atom binom_macro(TeXParser tp, String[] args) throws ParseException {
 	TeXFormula num = new TeXFormula(args[1], false);
 	TeXFormula denom = new TeXFormula(args[2], false);
