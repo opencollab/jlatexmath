@@ -116,6 +116,10 @@ public class predefMacros {
 
 	return args[0].charAt(0) == 'h' ? new SpaceAtom(unit, f, 0, 0) : new SpaceAtom(unit, 0, f, 0);
     }
+
+    public Atom includegraphics_macro(TeXParser tp, String[] args) throws ParseException {
+	return new GraphicsAtom(args[1]);
+    }
        
     public Atom frac_macro(TeXParser tp, String[] args) throws ParseException {
 	TeXFormula num = new TeXFormula(args[1], false);
