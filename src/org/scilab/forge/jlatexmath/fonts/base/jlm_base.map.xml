@@ -2,11 +2,11 @@
 <SymbolMappings>
 <!-- miscellaneous symbols -->
 
-		<SymbolMapping name="comma" ch="59" fontId="jlm_cmmi10"/>  
-		<SymbolMapping name="ldotp" ch="58" fontId="jlm_cmmi10"/>
+		<SymbolMapping name="comma" ch="59" fontId="jlm_cmmi10_unchanged"/>  
+		<SymbolMapping name="ldotp" ch="58" fontId="jlm_cmmi10_unchanged"/>
 		<SymbolMapping name="cdotp" ch="162" fontId="jlm_cmsy10"/>
-		<SymbolMapping name="normaldot" ch="58" fontId="jlm_cmmi10"/>  
-		<SymbolMapping name="slash" ch="61" fontId="jlm_cmmi10"/>
+		<SymbolMapping name="normaldot" ch="58" fontId="jlm_cmmi10_unchanged"/>  
+		<SymbolMapping name="slash" ch="61" fontId="jlm_cmmi10_unchanged"/>
 
 <!-- this symbol is not defined in "TeXSymbols.xml", because it's not meant to be used as a symbol. 
 Use "surd" instead. -->

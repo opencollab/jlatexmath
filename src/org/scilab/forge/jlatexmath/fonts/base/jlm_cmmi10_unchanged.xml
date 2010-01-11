@@ -1,5 +1,5 @@
 <?xml version='1.0'?>
-<Font name="jlm_cmmi10.ttf" id="jlm_cmmi10_unchanged" space="0.0" xHeight="0.430555" quad="1.000003" skewChar="196" >
+<Font name="jlm_cmmi10.ttf" id="jlm_cmmi10_unchanged" space="0.0" xHeight="0.430555" quad="1.000003" skewChar="196" boldVersion="jlm_cmmib10_unchanged" >
    <Char code="33" width="0.622455" height="0.430555" italic="0.035879" />
    <Char code="34" width="0.466318" height="0.430555" >
       <Kern code="196" val="0.083336"/>

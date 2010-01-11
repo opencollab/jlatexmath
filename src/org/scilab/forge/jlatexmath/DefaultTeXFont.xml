@@ -103,6 +103,7 @@ for a text style is not defined (e.g. "numbers" and "small" in "mathcal") -->
   <Metrics include="fonts/base/jlm_cmmib10.xml" />
   <Metrics include="fonts/base/jlm_moustache.xml" />
   <Metrics include="fonts/base/jlm_cmmi10_unchanged.xml" />
+  <Metrics include="fonts/base/jlm_cmmib10_unchanged.xml" />
   <Metrics include="fonts/maths/jlm_cmsy10.xml" />
   <Metrics include="fonts/maths/jlm_msbm10.xml" />
   <Metrics include="fonts/maths/jlm_msam10.xml" />

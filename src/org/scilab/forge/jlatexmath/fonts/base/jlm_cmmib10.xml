@@ -146,7 +146,9 @@
    <Char code="57" width="0.574997" height="0.444445" depth="0.194445" />
    <Char code="58" width="0.319443" height="0.155556" />
    <Char code="59" width="0.319443" height="0.155556" depth="0.194445" />
-   <Char code="60" width="0.89444" height="0.585556" depth="0.085556" />
+   <Char code="60" width="0.89444" height="0.585556" depth="0.085556" >
+     <NextLarger fontId="jlm_cmex10" code="173" />
+   </Char>
    <Char code="61" width="0.574997" height="0.75" depth="0.25" >
       <Kern code="162" val="-0.063889"/>
       <Kern code="65" val="-0.063889"/>
@@ -154,8 +156,11 @@
       <Kern code="78" val="-0.063889"/>
       <Kern code="89" val="0.063889"/>
       <Kern code="90" val="-0.063889"/>
+      <NextLarger fontId="jlm_cmex10" code="177" />
    </Char>
-   <Char code="62" width="0.89444" height="0.585556" depth="0.085556" />
+   <Char code="62" width="0.89444" height="0.585556" depth="0.085556" >
+     <NextLarger fontId="jlm_cmex10" code="174" />
+   </Char>
    <Char code="63" width="0.574997" height="0.472223" depth="-0.027777" />
    <Char code="64" width="0.6284685" height="0.694445" italic="0.063889" >
       <Kern code="196" val="0.095833"/>
