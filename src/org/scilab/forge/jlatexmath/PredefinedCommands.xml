@@ -1200,6 +1200,15 @@
 		<Return name="f" />
 	</Command>
 
+	<Command name="prescript" enabled="true">
+		<CreateCommand name="f">
+			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+			<Argument type="String" value="prescript_macro" />
+			<Argument type="float" value="3" />
+		</CreateCommand>
+		<Return name="f" />
+	</Command>
+
 	<Command name="rotatebox" enabled="true">
 		<CreateCommand name="f">
 			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />

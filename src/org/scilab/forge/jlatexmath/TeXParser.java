@@ -135,6 +135,12 @@ public class TeXParser {
 	formula.root = null;
 	return at;
     }
+
+    /** Put an atom in the current formula 
+     */
+    public void addAtom(Atom at) {
+	formula.add(at);
+    }
     
     /** Indicate if the character @ can be used in the command's name
      */

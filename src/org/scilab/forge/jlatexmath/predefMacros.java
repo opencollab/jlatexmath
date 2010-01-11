@@ -298,9 +298,16 @@ public class predefMacros {
 	TeXFormula tf = new TeXFormula();
 	tf.add(new PhantomAtom(new TeXFormula(args[3]).root, false, true, true));
 	tf.append(args[1]);
-	tf.add(new SpaceAtom(TeXConstants.UNIT_MU, -2, 0, 0));
+	tf.add(new SpaceAtom(TeXConstants.UNIT_MU, -0.3f, 0f, 0f));
 	tf.append(args[3] + "\\nolimits" + args[2]);
 	return new TypedAtom(TeXConstants.TYPE_ORDINARY, TeXConstants.TYPE_ORDINARY, tf.root);
+    }
+
+    public Atom prescript_macro(TeXParser tp, String[] args) throws ParseException {
+	Atom base = new TeXFormula(args[3]).root;
+	tp.addAtom(new ScriptsAtom(new PhantomAtom(base, false, true, true), new TeXFormula(args[2]).root, new TeXFormula(args[1]).root, false));
+	tp.addAtom(new SpaceAtom(TeXConstants.UNIT_MU, -0.3f, 0f, 0f));
+	return new TypedAtom(TeXConstants.TYPE_ORDINARY, TeXConstants.TYPE_ORDINARY, base);
     }
     
     public Atom underbrace_macro(TeXParser tp, String[] args) throws ParseException {
