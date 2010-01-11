@@ -99,9 +99,6 @@ public class predefMacros {
     public Atom hvspace_macro(TeXParser tp, String[] args) throws ParseException {
 	int i;
 	for (i = 0; i < args[1].length() && !Character.isLetter(args[1].charAt(i)); i++);
-	if (i == args[1].length()) {
-	    throw new ParseException("Bad argument !");
-	}
 	float f = 0;
 	try {
 	    f = Float.parseFloat(args[1].substring(0, i));
@@ -109,7 +106,13 @@ public class predefMacros {
 	    throw new ParseException(e.toString());
 	}
  
-	int unit = SpaceAtom.getUnit(args[1].substring(i).toLowerCase());
+	int unit;
+	if (i != args[1].length()) {
+	    unit = SpaceAtom.getUnit(args[1].substring(i).toLowerCase());
+	} else {
+	    unit = TeXConstants.UNIT_POINT;
+	}
+	
 	if (unit == -1) {
 	    throw new ParseException("Unknown unit \"" + args[1].substring(i) + "\" !");
 	}
