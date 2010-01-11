@@ -1,3 +1,16 @@
+jlatexmath (0.8.7)
+	 * Add the command \prescript
+
+ -- Calixte Denizet <Calixte.Denizet@ac-rennes.fr>  Mon, 11 Jan 2010 19:07:18 +0100
+
+	 * Add the commands \mathclap, \mathrlap, \mathllap, \clap, \rlap and \llap
+
+ -- Calixte Denizet <Calixte.Denizet@ac-rennes.fr>  Mon, 11 Jan 2010 16:29:51 +0100
+	   
+  	 * A basic (without options) \includegraphics command added
+
+ -- Calixte Denizet <Calixte.Denizet@ac-rennes.fr>  Sun, 10 Jan 2010 22:17:04 +0100
+
 jlatexmath (0.8.6)
   	 * \over, \hspace and \vspace are supported
 
