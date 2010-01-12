@@ -30,5 +30,6 @@ public class Main {
     public static void main(String[] args) {
         Example1.main(new String[0]);
         Example2.main(new String[0]);
+        Example3.main(new String[0]);
     }
 }
