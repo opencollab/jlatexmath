@@ -77,7 +77,9 @@ public class predefMacros {
 	String sym = "fonts/" + args[1] + "/symbols_" + args[1]+ ".xml";
 	String map = "fonts/" + args[1] + "/mappings_" + args[1]+ ".xml";
 	
-	DefaultTeXFont.addLanguage(TeXFormula.class.getResourceAsStream(lg), lg,TeXFormula.class.getResourceAsStream(sym), sym, TeXFormula.class.getResourceAsStream(map), map);
+	try {
+            DefaultTeXFont.addLanguage(TeXFormula.class.getResourceAsStream(lg), lg,TeXFormula.class.getResourceAsStream(sym), sym, TeXFormula.class.getResourceAsStream(map), map);
+        } catch (FontAlreadyLoadedException e) { }
 	
 	return null;
     }

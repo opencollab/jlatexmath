@@ -204,7 +204,7 @@ public class DefaultTeXFontParser {
 	String fontId = getAttrValueAndCheckIfNotNull("id", font);
 	if (Font_ID.indexOf(fontId) < 0)
 	    Font_ID.add(fontId);
-	else throw new XMLResourceParseException("Font " + fontId + " is already loaded !");
+	else throw new FontAlreadyLoadedException("Font " + fontId + " is already loaded !");
 	// get required real attributes
 	float space = getFloatAndCheck("space", font);
 	float xHeight = getFloatAndCheck("xHeight", font);
