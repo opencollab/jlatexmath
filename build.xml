@@ -34,12 +34,18 @@
 	<target name="clean" depends="info" description="Removes all generated files">
 		<delete dir="${project.bin.dir}"/>
 		<delete dir="${doc.dir}"/>
+		<delete>
+		  <fileset dir="${project.ex.dir}" includes="**/*.png **/*.class"/>
+		</delete>
 	</target>
 
 	<target name="example" depends="info">
 	  <javac srcdir="${project.ex.dir}" destdir="${project.ex.dir}" debug="on" source="5" target="5" classpath="${output.jar.dir}/jlatexmath-${version}.jar">
 	  </javac>
+	  <java fork="true" classpath="${project.ex.dir}:${output.jar.dir}/jlatexmath-${version}.jar" dir="${project.ex.dir}" className="Main"/>
 	</target>
+
+	<target name="examples" depends="example"/>
 
 	<!-- Compile source files -->
 	<target name="compile" depends="init">
@@ -62,7 +68,7 @@
 	</target>
 
 	<target name="source" depends="info" >
-	  <jar jarfile="${output.jar.dir}/jlatexmath-src-${version}.jar" basedir="${project.root.dir}" includes="COPYING LICENSE build.xml MANIFEST.MF src/**/*.java src/**/*.xml src/**/*.ttf src/**/licences/* src/**/README"/>
+	  <jar jarfile="${output.jar.dir}/jlatexmath-src-${version}.jar" basedir="${project.root.dir}" includes="COPYING LICENSE build.xml MANIFEST.MF src/**/*.java src/**/*.xml src/**/*.ttf src/**/licences/* src/**/README examples/**/*.java"/>
 	</target>
      <target name="doc" depends="compile" description="Generates the API specification (javadoc)">
   <javadoc packagenames="org.scilab.forge.jlatexmath.*"
@@ -73,7 +79,7 @@
            version="true"
            use="true"
            >
-                </javadoc>
+  </javadoc>
         </target>
 
 </project>
