@@ -39,7 +39,7 @@
 		</delete>
 	</target>
 
-	<target name="example" depends="info">
+	<target name="example" depends="compile">
 	  <javac srcdir="${project.ex.dir}" destdir="${project.ex.dir}" debug="on" source="5" target="5" classpath="${output.jar.dir}/jlatexmath-${version}.jar">
 	  </javac>
 	  <java fork="true" classpath="${project.ex.dir}:${output.jar.dir}/jlatexmath-${version}.jar" dir="${project.ex.dir}" className="Main"/>
