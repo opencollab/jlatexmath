@@ -35,7 +35,7 @@
 		<delete dir="${project.bin.dir}"/>
 		<delete dir="${doc.dir}"/>
 		<delete>
-		  <fileset dir="${project.ex.dir}" includes="**/*.png **/*.class"/>
+		  <fileset dir="${project.ex.dir}" includes="**/Example*.png **/*.class"/>
 		</delete>
 	</target>
 
@@ -68,7 +68,7 @@
 	</target>
 
 	<target name="source" depends="info" >
-	  <jar jarfile="${output.jar.dir}/jlatexmath-src-${version}.jar" basedir="${project.root.dir}" includes="COPYING LICENSE build.xml MANIFEST.MF src/**/*.java src/**/*.xml src/**/*.ttf src/**/licences/* src/**/README examples/**/*.java"/>
+	  <jar jarfile="${output.jar.dir}/jlatexmath-src-${version}.jar" basedir="${project.root.dir}" includes="COPYING LICENSE build.xml MANIFEST.MF src/**/*.java src/**/*.xml src/**/*.ttf src/**/licences/* src/**/README examples/**/*.java examples/**/lion.png"/>
 	</target>
      <target name="doc" depends="compile" description="Generates the API specification (javadoc)">
   <javadoc packagenames="org.scilab.forge.jlatexmath.*"
