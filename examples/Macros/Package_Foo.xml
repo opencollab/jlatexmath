@@ -1,0 +1,47 @@
+<PredefinedCommands enabled="true">
+
+	<Command name="fooA" enabled="true">
+		<CreateCommand name="f">
+			<Argument type="String" value="Foo.FooPackage" />
+			<Argument type="String" value="fooA_macro" />
+			<!-- the command fooA has 2 arguments -->
+			<Argument type="float" value="2" />
+		</CreateCommand>
+		<Return name="f" />
+	</Command>
+	
+	<Command name="fooB" enabled="true">
+		<CreateCommand name="f">
+			<Argument type="String" value="Foo.FooPackage" />
+			<Argument type="String" value="fooB_macro" />
+			<!-- the command fooB has 1 argument -->
+			<Argument type="float" value="1" />
+		</CreateCommand>
+		<Return name="f" />
+	</Command>
+
+	<Command name="fooC" enabled="true">
+		<CreateCommand name="f">
+			<Argument type="String" value="Foo.FooPackage" />
+			<Argument type="String" value="fooC_macro" />
+			<!-- the command fooC has 1 arguments -->
+			<Argument type="float" value="1" />
+			<!-- and an optional argument placed before the main argument (e.g. \fooC[abc]{Hello}) -->
+			<Argument type="float" value="1" />
+		</CreateCommand>
+		<Return name="f" />
+	</Command>
+
+	<Command name="fooD" enabled="true">
+		<CreateCommand name="f">
+			<Argument type="String" value="Foo.FooPackage" />
+			<Argument type="String" value="fooD_macro" />
+			<!-- the command fooC has 1 arguments -->
+			<Argument type="float" value="1" />
+			<!-- and an optional argument placed after the main argument (e.g. \fooD{Hello}[abc]) -->
+			<Argument type="float" value="2" />
+		</CreateCommand>
+		<Return name="f" />
+	</Command>
+
+</PredefinedCommands>

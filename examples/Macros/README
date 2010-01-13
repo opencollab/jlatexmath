@@ -1,0 +1,2 @@
+The files in this directory show how to write new macros in Java or how to add new predefined formulas.
+The commands \newcommand and \newenvironment are already handled by JLaTeXMath but I didn't implemented any TeX functions. So low-level macros can be added to JLaTeXMath but they must be wrote in Java (or in any language callable by Java). 

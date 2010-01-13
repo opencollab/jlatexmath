@@ -10,11 +10,14 @@
 		<property name="project.src.dir" value="${project.root.dir}/src/${class.dir}" />
 		<property name="project.bin.dir" value="${project.root.dir}/bin" />
 		<property name="project.ex.dir" value="${project.root.dir}/examples" />
+		<property name="ex.basic" value="${project.ex.dir}/Basic" />
+		<property name="ex.macros" value="${project.ex.dir}/Macros" />
 		<property name="package.dir" value="dist/" />
 		<property name="output.jar.dir" value="${package.dir}" />
 		<property name="version" value="0.8.6" />
 		<mkdir dir="${project.bin.dir}"/>
 		<mkdir dir="${package.dir}"/>
+		<mkdir dir="${ex.macros}/bin"/>
 	</target>
 
 	<!-- Info -->
@@ -35,14 +38,25 @@
 		<delete dir="${project.bin.dir}"/>
 		<delete dir="${doc.dir}"/>
 		<delete>
-		  <fileset dir="${project.ex.dir}" includes="**/Example*.png **/*.class"/>
+		  <fileset dir="${ex.basic}" includes="**/*.png **/*.class"/>
+		</delete>
+		<delete dir="${ex.macros}/bin">
+		  <fileset dir="${ex.macros}" includes="**/*.png **/*.class **/*.jar"/>
 		</delete>
 	</target>
 
-	<target name="example" depends="compile">
-	  <javac srcdir="${project.ex.dir}" destdir="${project.ex.dir}" debug="on" source="5" target="5" classpath="${output.jar.dir}/jlatexmath-${version}.jar">
+	<target name="example" depends="Macros">
+	  <javac srcdir="${ex.basic}" destdir="${ex.basic}" debug="on" source="5" target="5" classpath="${output.jar.dir}/jlatexmath-${version}.jar">
 	  </javac>
-	  <java fork="true" classpath="${project.ex.dir}:${output.jar.dir}/jlatexmath-${version}.jar" dir="${project.ex.dir}" className="Main"/>
+	  <java fork="true" classpath="${ex.basic}:${output.jar.dir}/jlatexmath-${version}.jar" dir="${ex.basic}" className="Main"/> 
+	</target>
+
+	<target name="Macros" depends="compile">
+	  <javac srcdir="${ex.macros}" destdir="${ex.macros}/bin" debug="on" source="5" target="5" classpath="${output.jar.dir}/jlatexmath-${version}.jar">
+	  </javac>
+	  <move file="${ex.macros}/bin/Main.class" todir="${ex.macros}"/>
+	  <jar jarfile="${ex.macros}/Foo.jar" basedir="${ex.macros}/bin"/>
+	  <java fork="true" classpath="${ex.macros}:${ex.macros}/Foo.jar:${output.jar.dir}/jlatexmath-${version}.jar" dir="${ex.macros}" className="Main"/> 
 	</target>
 
 	<target name="examples" depends="example"/>
@@ -68,7 +82,7 @@
 	</target>
 
 	<target name="source" depends="info" >
-	  <jar jarfile="${output.jar.dir}/jlatexmath-src-${version}.jar" basedir="${project.root.dir}" includes="COPYING LICENSE build.xml MANIFEST.MF src/**/*.java src/**/*.xml src/**/*.ttf src/**/licences/* src/**/README examples/**/*.java examples/**/lion.png"/>
+	  <jar jarfile="${output.jar.dir}/jlatexmath-src-${version}.jar" basedir="${project.root.dir}" includes="COPYING LICENSE build.xml MANIFEST.MF src/**/*.java src/**/*.xml src/**/*.ttf src/**/licences/* src/**/README examples/**/*.java examples/**/lion.png examples/**/*.xml examples/**/README"/>
 	</target>
      <target name="doc" depends="compile" description="Generates the API specification (javadoc)">
   <javadoc packagenames="org.scilab.forge.jlatexmath.*"
