@@ -61,6 +61,7 @@ public class ScriptsAtom extends Atom {
     
     public Box createBox(TeXEnvironment env) {
 	Box b = (base == null ? new StrutBox(0, 0, 0, 0) : base.createBox(env));
+        Box deltaSymbol = new StrutBox(0, 0, 0, 0);
 	if (subscript == null && superscript == null)
 	    return b;
 	else {
@@ -103,6 +104,7 @@ public class ScriptsAtom extends Atom {
 		
 		// include delta in width or not?
 		delta = c.getItalic();
+                deltaSymbol = new SpaceAtom(TeXConstants.MEDMUSKIP).createBox(env);
 		if (delta > TeXFormula.PREC && subscript == null)
 		    hor.add(new StrutBox(delta, 0, 0, 0));
 		
@@ -133,7 +135,8 @@ public class ScriptsAtom extends Atom {
 		hor.add(x);
 		// add scriptspace (constant value!)
 		hor.add(SCRIPT_SPACE.createBox(env));
-		return hor;
+		hor.add(deltaSymbol);
+                return hor;
 	    } else {
 		Box x = superscript.createBox(supStyle);
 		float msiz = x.getWidth();
@@ -196,6 +199,7 @@ public class ScriptsAtom extends Atom {
 		    vBox.setDepth(shiftDown + y.getDepth());
 		    hor.add(vBox);
 		}
+                hor.add(deltaSymbol);
 		return hor;
 	    }
 	}

@@ -31,6 +31,7 @@ package org.scilab.forge.jlatexmath;
 
 import java.awt.Font;
 import java.awt.Graphics2D;
+import java.awt.geom.AffineTransform;
 
 /**
  * A box representing a single character.
@@ -40,6 +41,7 @@ public class CharBox extends Box {
     private final CharFont cf;
     
     private final Font font;
+    private final float size;
     
     /**
      * Create a new CharBox that will represent the character defined by the given
@@ -50,6 +52,7 @@ public class CharBox extends Box {
     public CharBox(Char c) {
 	cf = c.getCharFont();
 	font = c.getFont();
+        size = font.getSize2D();
 	width = c.getWidth();
 	height = c.getHeight();
 	depth = c.getDepth();
@@ -58,11 +61,15 @@ public class CharBox extends Box {
     public void draw(Graphics2D g2, float x, float y) {
 	// copy
 	Font f = g2.getFont();
+	Font ff = font.deriveFont(1.0f);
+        AffineTransform at = g2.getTransform();
+        g2.translate(x, y);
+        g2.scale(size, size);
+        g2.setFont(ff);
+	g2.drawString(Character.toString(cf.c), 0, 0);
 	
-	g2.setFont(font);
-	g2.drawString(Character.toString(cf.c), x, y);
-	
-	// restore
+        //restore
+        g2.setTransform(at);
 	g2.setFont(f);
     }
     
