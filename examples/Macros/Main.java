@@ -73,6 +73,6 @@ public class Main {
 	File file = new File("Example.png");
 	try {
 	    ImageIO.write(image, "png", file.getAbsoluteFile());
-	} catch (IOException ex) {}
+	} catch (IOException ex) { }
     }    
 }
