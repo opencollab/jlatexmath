@@ -64,7 +64,7 @@ public class Example2 {
 	TeXFormula formula = new TeXFormula(latex);
 	TeXIcon icon = formula.createTeXIcon(TeXConstants.STYLE_DISPLAY, 20);
 	icon.setInsets(new Insets(5, 5, 5, 5));
-	
+
 	BufferedImage image = new BufferedImage(icon.getIconWidth(), icon.getIconHeight(), BufferedImage.TYPE_INT_ARGB);
 	Graphics2D g2 = image.createGraphics();
 	g2.setColor(Color.white);

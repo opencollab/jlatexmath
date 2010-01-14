@@ -50,7 +50,7 @@ import org.scilab.forge.jlatexmath.TeXIcon;
 public class Example3 {
     public static void main(String[] args) {
         
-        String latex = "\\addAlphabet{cyrillic}\\definecolor{gris}{gray}{0.9}";
+        String latex = "\\definecolor{gris}{gray}{0.9}";
         latex += "\\definecolor{bleu}{rgb}{0,0,1}\\newcommand{\\pa}{\\left|}";
         latex += "\\begin{array}{c}";
         latex += "\\JLaTeXMath\\\\";

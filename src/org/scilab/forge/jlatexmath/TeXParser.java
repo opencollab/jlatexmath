@@ -29,6 +29,7 @@
 package org.scilab.forge.jlatexmath;
 
 import java.util.Stack;
+import java.lang.Character.UnicodeBlock;
 
 /** 
  * This class implements a parser for LaTeX' formulas.
@@ -485,7 +486,13 @@ public class TeXParser {
      */
     public Atom convertCharacter(char c) throws ParseException {
         if (!((c >= '0' && c <= '9') || (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))) {
-            String symbolName = c <= 65535 ? TeXFormula.symbolMappings[c] : null;
+            if (Character.UnicodeBlock.CYRILLIC.equals(Character.UnicodeBlock.of(c)) && !DefaultTeXFont.loadedAlphabets.contains(Character.UnicodeBlock.CYRILLIC)) {
+                DefaultTeXFont.addAlphabet(Character.UnicodeBlock.CYRILLIC, "cyrillic");
+            } else if (Character.UnicodeBlock.GREEK.equals(Character.UnicodeBlock.of(c)) && !DefaultTeXFont.loadedAlphabets.contains(Character.UnicodeBlock.GREEK)) {
+                DefaultTeXFont.addAlphabet(Character.UnicodeBlock.GREEK, "greek");
+            }
+
+            String symbolName = TeXFormula.symbolMappings[c];
 	    if (symbolName == null && (TeXFormula.symbolFormulaMappings == null || TeXFormula.symbolFormulaMappings[c] == null))
                 throw new ParseException("Unknown character : '"
 					 + Character.toString(c) + "'");

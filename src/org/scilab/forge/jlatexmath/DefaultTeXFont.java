@@ -31,6 +31,9 @@ package org.scilab.forge.jlatexmath;
 
 import java.awt.Font;
 import java.util.Map;
+import java.util.List;
+import java.util.ArrayList;
+import java.lang.Character.UnicodeBlock;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.FileNotFoundException;
@@ -68,7 +71,9 @@ public class DefaultTeXFont implements TeXFont {
     protected static final int TOP = 0, MID = 1, REP = 2, BOT = 3;
     
     protected static final int WIDTH = 0, HEIGHT = 1, DEPTH = 2, IT = 3;
-    
+
+    public static List<Character.UnicodeBlock> loadedAlphabets = new ArrayList();
+
     public boolean isBold = false;
     public boolean isRoman = false;
     public boolean isSs = false;
@@ -132,10 +137,23 @@ public class DefaultTeXFont implements TeXFont {
 	symbolMappings.putAll(dtfp.parseSymbolMappings());
     }
 
-    public static void addLanguage(InputStream inlanguage, String language, InputStream insymbols, String symbols, InputStream inmappings, String mappings) throws ResourceParseException {
-	addTeXFontDescription(inlanguage, language);
-	SymbolAtom.addSymbolAtom(insymbols, symbols);
-	TeXFormula.addSymbolMappings(inmappings, mappings);
+    public static void addAlphabet(Character.UnicodeBlock alphabet, InputStream inlanguage, String language, InputStream insymbols, String symbols, InputStream inmappings, String mappings) throws ResourceParseException {
+	if (!loadedAlphabets.contains(alphabet)) {
+            addTeXFontDescription(inlanguage, language);
+            SymbolAtom.addSymbolAtom(insymbols, symbols);
+            TeXFormula.addSymbolMappings(inmappings, mappings);
+            loadedAlphabets.add(alphabet);
+        }
+    }
+
+    public static void addAlphabet(Character.UnicodeBlock alphabet, String name) {
+        String lg = "fonts/" + name + "/language_" + name+ ".xml";
+	String sym = "fonts/" + name + "/symbols_" + name+ ".xml";
+	String map = "fonts/" + name + "/mappings_" + name+ ".xml";
+	
+	try {
+            DefaultTeXFont.addAlphabet(alphabet, TeXFormula.class.getResourceAsStream(lg), lg,TeXFormula.class.getResourceAsStream(sym), sym, TeXFormula.class.getResourceAsStream(map), map);
+        } catch (FontAlreadyLoadedException e) { }
     }
 
     public TeXFont copy() {

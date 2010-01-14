@@ -50,8 +50,7 @@ import org.scilab.forge.jlatexmath.TeXIcon;
 public class Example1 {
     public static void main(String[] args) {
 	
-	String latex = "\\addAlphabet{cyrillic}\\addAlphabet{greek}";
-	latex += "\\begin{array}{lr}\\mbox{\\textcolor{Blue}{Russian}}&\\mbox{\\textcolor{Melon}{Greek}}\\\\";
+	String latex = "\\begin{array}{lr}\\mbox{\\textcolor{Blue}{Russian}}&\\mbox{\\textcolor{Melon}{Greek}}\\\\";
 	latex += "\\mbox{" + "привет мир".toUpperCase() + "}&\\mbox{" + "γειά κόσμο".toUpperCase() + "}\\\\";
 	latex += "\\mbox{привет мир}&\\mbox{γειά κόσμο}\\\\";
 	latex += "\\mathbf{\\mbox{привет мир}}&\\mathbf{\\mbox{γειά κόσμο}}\\\\";

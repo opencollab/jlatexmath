@@ -38,7 +38,7 @@
 		<delete dir="${project.bin.dir}"/>
 		<delete dir="${doc.dir}"/>
 		<delete>
-		  <fileset dir="${ex.basic}" includes="**/*.png **/*.class"/>
+		  <fileset dir="${ex.basic}" includes="**/Example*.png **/*.class"/>
 		</delete>
 		<delete dir="${ex.macros}/bin">
 		  <fileset dir="${ex.macros}" includes="**/*.png **/*.class **/*.jar"/>
