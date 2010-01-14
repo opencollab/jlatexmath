@@ -31,9 +31,11 @@
 	<!-- Compile source files -->
 	<target name="example" depends="info">
 	  <javac srcdir="${project.src.dir}" destdir="${project.src.dir}" classpath="${project.src.dir}/../../dist/jlatexmath-${version}.jar:${myclasspath}/fop.jar:${myclasspath}/avalon-framework.jar" debug="on" source="5" target="5">
-	    <!--compilerarg value="-Xlint"/-->
 	  </javac>
-	  <java fork="true" dir="${project.src.dir}" classpath=".:${project.src.dir}/../../dist/jlatexmath-${version}.jar:${myclasspath}/fop.jar:${myclasspath}/avalon-framework.jar:${myclasspath}/commons-io.jar:${myclasspath}/commons-logging.jar:${myclasspath}/xml-apis-ext.jar" className="Main"/>
+	  <echo message="Generating PDF, PS, EPS and SVG..."/>
+	  <java fork="true" dir="${project.src.dir}" classpath=".:${project.src.dir}/../../dist/jlatexmath-${version}.jar:${myclasspath}/fop.jar:${myclasspath}/avalon-framework.jar:${myclasspath}/commons-io.jar:${myclasspath}/commons-logging.jar:${myclasspath}/xml-apis-ext.jar" className="Main">
+	    <jvmarg value="-Djava.util.logging.config.file=${project.src.dir}/logging.properties"/>
+	  </java>
 	</target>
 
 </project>
