@@ -134,13 +134,13 @@ public class ScriptsAtom extends Atom {
 		
 		hor.add(x);
 		// add scriptspace (constant value!)
-		hor.add(SCRIPT_SPACE.createBox(env));
+		//hor.add(SCRIPT_SPACE.createBox(env));
 		hor.add(deltaSymbol);
                 return hor;
 	    } else {
 		Box x = superscript.createBox(supStyle);
 		float msiz = x.getWidth();
-		if (subscript != null) {
+		if (subscript != null && align == TeXConstants.ALIGN_RIGHT) {
 		    msiz = Math.max(msiz, subscript.createBox(subStyle).getWidth());
 		}
 		
