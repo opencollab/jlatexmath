@@ -264,14 +264,18 @@
    <Char code="99" width="1.000003" height="0.75" >
       <NextLarger fontId="jlm_cmex10" code="100"/>
    </Char>
-   <Char code="100" width="1.444448" height="0.75" />
+   <Char code="100" width="1.444448" height="0.75" >
+      <NextLarger fontId="jlm_msbm10" code="91"/>
+   </Char>
    <Char code="101" width="0.555557" height="0.722223" >
       <NextLarger fontId="jlm_cmex10" code="102"/>
    </Char>
    <Char code="102" width="1.000003" height="0.75" >
       <NextLarger fontId="jlm_cmex10" code="103"/>
    </Char>
-   <Char code="103" width="1.444448" height="0.75" />
+   <Char code="103" width="1.444448" height="0.75" >
+      <NextLarger fontId="jlm_msbm10" code="93"/>
+   </Char>
    <Char code="104" width="0.472224" height="0.039999" depth="1.760019" >
       <NextLarger fontId="jlm_cmex10" code="183"/>
    </Char>

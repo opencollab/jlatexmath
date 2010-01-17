@@ -67,7 +67,7 @@ public class Example1 {
 	latex += "\\mbox{\\textcolor{Turquoise}{Bielorussian}}&\\mbox{\\textcolor{LimeGreen}{Ukrainian}}\\\\";
 	latex += "\\mbox{прывітаньне Свет}&\\mbox{привіт світ}\\\\";
 	latex += "\\end{array}";
-	
+
 	TeXFormula formula = new TeXFormula(latex);
 	TeXIcon icon = formula.createTeXIcon(TeXConstants.STYLE_DISPLAY, 20);
 	icon.setInsets(new Insets(5, 5, 5, 5));
@@ -82,6 +82,6 @@ public class Example1 {
 	File file = new File("Example1.png");
 	try {
 	    ImageIO.write(image, "png", file.getAbsoluteFile());
-	} catch (IOException ex) {}
+	} catch (IOException ex) { }
     }    
 }

@@ -75,6 +75,6 @@ public class Example1 {
             Convert.SVGTo("Example1_shaped.svg", "Example1_shaped.pdf", Convert.PDF);
             Convert.SVGTo("Example1.svg", "Example1.ps", Convert.PS);
             Convert.SVGTo("Example1.svg", "Example1.eps", Convert.EPS);
-	} catch (IOException ex) {}
+        } catch (IOException ex) {}
     }    
 }
