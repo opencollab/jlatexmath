@@ -31,7 +31,6 @@
 
 package org.scilab.forge.jlatexmath;
 
-import java.awt.Color;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -39,8 +38,17 @@ import java.util.List;
 import java.util.Set;
 import java.util.Stack;
 import java.io.InputStream;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+
+import java.awt.Color;
+import java.awt.Graphics2D;
+import java.awt.Insets;
+import java.awt.image.BufferedImage;
+import javax.imageio.ImageIO;
+import javax.imageio.stream.FileImageOutputStream;
 
 /**
  * Represents a logical mathematical formula that will be displayed (by creating a
@@ -365,6 +373,43 @@ public class TeXFormula {
 	TeXIcon ti = new TeXIcon(box, size);
 	ti.isColored = te.isColored;
         return ti;
+    }
+
+    public void createImage(String format, int style, float size, String out, Color bg, Color fg, boolean transparency) {
+        TeXIcon icon = createTeXIcon(style, size);
+        icon.setInsets(new Insets(1, 1, 1, 1));
+        int w = icon.getIconWidth(), h = icon.getIconHeight();
+
+        BufferedImage image = new BufferedImage(w, h, transparency ? BufferedImage.TYPE_INT_ARGB : BufferedImage.TYPE_INT_RGB);
+        Graphics2D g2 = image.createGraphics();
+        if (bg != null) {
+            g2.setColor(bg);
+        }
+
+        g2.fillRect(0, 0, w, h);
+        icon.setForeground(fg);
+        icon.paintIcon(null, g2, 0, 0);
+        try {
+            FileImageOutputStream imout = new FileImageOutputStream(new File(out)); 
+            ImageIO.write(image, format, imout);
+            imout.flush();
+            imout.close();
+        } catch (IOException ex) {
+            System.err.println("I/O error : Cannot generate " + out);
+        }
+    }
+    
+    public void createPNG(int style, float size, String out, Color bg, Color fg) {
+        createImage("png", style, size, out, bg, fg, true);
+    }
+
+    public void createGIF(int style, float size, String out, Color bg, Color fg) {
+        createImage("gif", style, size, out, bg, fg, true);
+    }
+
+    public void createJPEG(int style, float size, String out, Color bg, Color fg) {
+        //There is a bug when a BufferedImage has a component alpha so we disabel it 
+        createImage("jpeg", style, size, out, bg, fg, false);
     }
 
     /**

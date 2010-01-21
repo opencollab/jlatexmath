@@ -871,7 +871,7 @@
 
 	<TeXFormula name="Arrowvert" enabled="true">
 	        <CreateTeXFormula name="f">
-			<Argument type="String" value="\vert" />
+			<Argument type="String" value="\Vert" />
 		</CreateTeXFormula>
 		<Return name="f" />
 	</TeXFormula>
