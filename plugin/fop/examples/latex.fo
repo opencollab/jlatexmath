@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format">
+  <fo:layout-master-set>
+    <fo:simple-page-master margin-right="1.5cm" margin-left="1.5cm" margin-bottom="2cm" margin-top="1cm" page-width="21cm" page-height="29.7cm" master-name="first">
+      <fo:region-body margin-top="1cm"/>
+      <fo:region-before extent="1cm"/>
+      <fo:region-after extent="1.5cm"/>
+    </fo:simple-page-master>
+  </fo:layout-master-set>
+  <fo:page-sequence master-reference="first">
+    <fo:static-content flow-name="xsl-region-before">
+      <fo:block line-height="14pt" font-size="10pt" text-align="end"><fo:instream-foreign-object><latex style="display" xmlns="http://forge.scilab.org/p/jlatexmath">\JLaTeXMath</latex></fo:instream-foreign-object> Extension</fo:block>
+    </fo:static-content>
+    <fo:static-content flow-name="xsl-region-after">
+      <fo:block line-height="14pt" font-size="10pt" text-align="end">Page <fo:page-number/></fo:block>
+    </fo:static-content>
+    <fo:flow flow-name="xsl-region-body">
+      <fo:block space-before.optimum="3pt" space-after.optimum="15pt">
+      The <fo:instream-foreign-object><latex style="display" xmlns="http://forge.scilab.org/p/jlatexmath">\JLaTeXMath</latex></fo:instream-foreign-object> Extension
+      </fo:block>
+      <fo:block space-before.optimum="3pt" space-after.optimum="15pt">
+The <fo:instream-foreign-object><latex style="display" xmlns="http://forge.scilab.org/p/jlatexmath">\JLaTeXMath</latex></fo:instream-foreign-object> extension is an addition to FOP that can be used to draw <fo:instream-foreign-object><latex style="display" xmlns="http://forge.scilab.org/p/jlatexmath">\LaTeX</latex></fo:instream-foreign-object> expressions.
+      </fo:block>
+      <fo:block space-before.optimum="3pt" space-after.optimum="15pt">
+      Examples
+      </fo:block>
+      <fo:block font-size="12pt">
+This is a 12pt block with a formula :
+<fo:block text-align="center">
+<fo:instream-foreign-object>
+<latex style="display" xmlns="http://forge.scilab.org/p/jlatexmath">
+\int_0^{+\infty} e^{-x^2}\mathrm{d}x=\frac{\sqrt\pi}{2}
+</latex>
+</fo:instream-foreign-object>
+</fo:block>
+But you can prefer a red block with a font set to 15pt:
+<fo:block text-align="center" font-size="15pt" color="red">
+<fo:instream-foreign-object>
+<latex style="display" xmlns="http://forge.scilab.org/p/jlatexmath">
+<![CDATA[
+\mathrm{det}\begin{bmatrix}
+\alpha&\beta\\
+\gamma&\delta
+\end{bmatrix}
+\overset{\mbox{def}}{=}\alpha\times\delta-\gamma\times\beta
+]]>
+</latex>
+</fo:instream-foreign-object>
+</fo:block>
+An other one:
+<fo:block text-align="center">
+<fo:instream-foreign-object>
+<latex style="display" xmlns="http://forge.scilab.org/p/jlatexmath">
+<![CDATA[
+\phi_n(\kappa) = \frac{1}{4\pi^2\kappa^2} \int_0^\infty \frac{\sin(\kappa R)}{\kappa R}  \frac{\partial}{\partial R}\left[ R^2\frac{\partial D_n(R)}{\partial R}\right]\,dR
+]]>
+</latex>
+</fo:instream-foreign-object>
+</fo:block>
+Another formula with a \mathfrak :
+<fo:block text-align="center">
+<fo:instream-foreign-object>
+<latex style="display" xmlns="http://forge.scilab.org/p/jlatexmath">
+<![CDATA[
+\det\begin{bmatrix}
+a_{11}&a_{12}&\cdots&a_{1n}\\
+a_{21}&\ddots&&\vdots\\
+\vdots&&\ddots&\vdots\\
+a_{n1}&\cdots&\cdots&a_{nn}
+\end{bmatrix}\overset{\mathrm{def}}{=}\sum_{\sigma\in\mathfrak{S}_n}\varepsilon(\sigma)\prod_{k=1}^n a_{k\sigma(k)}
+]]>
+</latex>
+</fo:instream-foreign-object>
+</fo:block>
+But you can prefer a formula in the text
+<fo:instream-foreign-object>
+<latex style="display" xmlns="http://forge.scilab.org/p/jlatexmath">
+<![CDATA[
+\sum_{n=1}^{+\infty}\frac1{n^2}=\frac{\pi^2}{6}
+]]>
+</latex>
+</fo:instream-foreign-object> 
+in \displaystyle or in \textstyle
+<fo:instream-foreign-object>
+<latex style="text" xmlns="http://forge.scilab.org/p/jlatexmath">
+<![CDATA[
+\sum_{n=1}^{+\infty}\frac1{n^2}=\frac{\pi^2}{6}
+]]>
+</latex>
+</fo:instream-foreign-object> 
+
+      </fo:block>
+
+    </fo:flow>
+  </fo:page-sequence>
+</fo:root>

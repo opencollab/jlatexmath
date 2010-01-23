@@ -1,0 +1,9 @@
+You should modify build.xml to have a good classpath. Put jlatexmath-fop.jar and jlatexmath.jar in your fop/lib.
+
+To see it in action, go to the directory examples and type :
+
+fop -c conf.xml -fo latex.fo -pdf latex.pdf
+
+The file conf.xml is needed to autodetect the embedded fonts in the jlatexmath.jar.
+
+Have fun ! 
