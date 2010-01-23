@@ -14,7 +14,7 @@
 		<property name="ex.macros" value="${project.ex.dir}/Macros" />
 		<property name="package.dir" value="dist/" />
 		<property name="output.jar.dir" value="${package.dir}" />
-		<property name="version" value="0.8.7" />
+		<property name="version" value="0.8.8" />
 		<mkdir dir="${project.bin.dir}"/>
 		<mkdir dir="${package.dir}"/>
 		<mkdir dir="${ex.macros}/bin"/>
