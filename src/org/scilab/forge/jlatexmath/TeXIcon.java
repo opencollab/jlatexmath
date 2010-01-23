@@ -157,6 +157,25 @@ public class TeXIcon implements Icon {
     public int getIconWidth() {
 	return (int) (box.getWidth() * size + 0.99 + insets.left + insets.right);
     }
+
+    public float getTrueIconHeight() {
+	return (box.getHeight() + box.getDepth()) * size;
+    }
+
+    /**
+     * Get the total height of the TeXIcon. This also includes the insets.
+     */
+    public float getTrueIconDepth() {
+	return box.getDepth() * size;
+    }
+    
+    /**
+     * Get the total width of the TeXIcon. This also includes the insets.
+     */
+    
+    public float getTrueIconWidth() {
+	return box.getWidth() * size;
+    }
     
     public float getBaseLine() {
 	return (float)( (box.getHeight() * size + 0.99 + insets.top) /
