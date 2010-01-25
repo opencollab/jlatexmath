@@ -50,7 +50,6 @@ import org.apache.fop.fo.properties.CommonFont;
 import org.apache.fop.fo.properties.FixedLength;
 import org.apache.fop.fo.properties.Property;
 
-import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.xml.sax.Attributes;
 import org.xml.sax.Locator;

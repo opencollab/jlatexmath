@@ -1,0 +1,7 @@
+To see the Docbook example (you should eventually modify the include in latex.xsl to include fo/docbook.xsl) :
+
+fop -c conf.xml -xml latex_docbook.xml -xsl latex.xsl -pdf latex_docbook.pdf
+
+to see the fo example :
+
+fop -c conf.xml -fo latex.fo -pdf latex.pdf

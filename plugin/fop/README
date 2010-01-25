@@ -1,9 +1,9 @@
-You should modify build.xml to have a good classpath. Put jlatexmath-fop.jar and jlatexmath.jar in your fop/lib.
+You should modify build.xml (line 5) to have a good classpath : jlatexmath-0.8.8, fop 0.95 and xmlgraphics-commons-1.3.1 are required to compile jlatexmath-fop. In fact the version 0.95 is essentially required to handle embedded fonts which are in jlatexmath.jar  
 
-To see it in action, go to the directory examples and type :
+Put jlatexmath-fop.jar and jlatexmath.jar in your fop/lib.
 
-fop -c conf.xml -fo latex.fo -pdf latex.pdf
-
-The file conf.xml is needed to autodetect the embedded fonts in the jlatexmath.jar.
+To see it in action, go to the directory examples and read the README.
 
 Have fun ! 
+
+Calixte (calixte.denizet@ac-rennes.fr) 

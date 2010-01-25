@@ -2,7 +2,6 @@
 <project name="jlatexmath-fop" basedir="." default="buildJar">
 
   <path id="libs-build-classpath">
-    <!--fileset dir="${basedir}/lib"-->
     <fileset dir="/usr/local/share/java">
       <include name="*.jar"/>
     </fileset>

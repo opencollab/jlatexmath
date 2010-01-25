@@ -37,12 +37,15 @@ import org.apache.fop.fo.FONode;
 import org.apache.fop.fo.XMLObj;
 
 public class JLaTeXMathObj extends XMLObj {
+
+    public static final String JLATEXMATH_NS = "http://forge.scilab.org/p/jlatexmath";
+
     public JLaTeXMathObj(FONode parent) {
         super(parent);
     }
     
     public String getNamespaceURI() {
-        return "http://forge.scilab.org/p/jlatexmath";
+        return JLATEXMATH_NS;
     }
     
     public String getNormalNamespacePrefix() {

@@ -45,7 +45,7 @@ import org.w3c.dom.DOMImplementation;
 public class JLaTeXMathElementMapping extends ElementMapping {
 
     public JLaTeXMathElementMapping() {
-        this.namespaceURI = "http://forge.scilab.org/p/jlatexmath";
+        this.namespaceURI = JLaTeXMathObj.JLATEXMATH_NS;
     }
     
     public DOMImplementation getDOMImplementation() {

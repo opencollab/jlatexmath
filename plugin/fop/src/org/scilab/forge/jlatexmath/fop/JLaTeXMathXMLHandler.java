@@ -33,10 +33,6 @@
 
 package org.scilab.forge.jlatexmath.fop;
 
-import org.scilab.forge.jlatexmath.TeXIcon;
-import org.scilab.forge.jlatexmath.TeXConstants;
-import org.scilab.forge.jlatexmath.TeXFormula;
-
 import org.apache.fop.render.Graphics2DAdapter;
 import org.apache.fop.render.Renderer;
 import org.apache.fop.render.RendererContext;
@@ -72,6 +68,6 @@ public class JLaTeXMathXMLHandler implements XMLHandler {
     }
 
     public String getNamespace() {
-        return "http://forge.scilab.org/p/jlatexmath";
+        return JLaTeXMathObj.JLATEXMATH_NS;
     }
 }
