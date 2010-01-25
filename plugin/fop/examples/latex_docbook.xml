@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <book xml:id="simple_book" xmlns="http://docbook.org/ns/docbook" version="5.0">
+   <title>Very simple book with mathematical formulas</title>
+   <chapter xml:id="chapter_1">
+     <title><latex xmlns="http://forge.scilab.org/p/jlatexmath">\JLaTeXMath</latex></title>
+     <para>
+       The Java package <latex xmlns="http://forge.scilab.org/p/jlatexmath">\JLaTeXMath</latex> combining with FOP gives the possibility to write <latex xmlns="http://forge.scilab.org/p/jlatexmath">\LaTeX</latex> commands in Docbook. 
+     </para>
+     <para>
+       For example :
+     </para> 
+     <para>
+       <latex xmlns="http://forge.scilab.org/p/jlatexmath">
+	 <![CDATA[
+\phi_n(\kappa) = \frac{1}{4\pi^2\kappa^2} \int_0^\infty \frac{\sin(\kappa R)}{\kappa R}  \frac{\partial}{\partial R}\left[ R^2\frac{\partial D_n(R)}{\partial R}\right]\,dR
+]]>
+       </latex>
+     </para>
+     <para>
+       We can use an example block :
+       <example>
+	 <latex xmlns="http://forge.scilab.org/p/jlatexmath">
+	   <![CDATA[
+\det\begin{bmatrix}
+a_{11}&a_{12}&\cdots&a_{1n}\\
+a_{21}&\ddots&&\vdots\\
+\vdots&&\ddots&\vdots\\
+a_{n1}&\cdots&\cdots&a_{nn}
+\end{bmatrix}\overset{\mathrm{def}}{=}\sum_{\sigma\in\mathfrak{S}_n}\varepsilon(\sigma)\prod_{k=1}^n a_{k\sigma(k)}
+]]>
+	 </latex>
+       </example>
+     </para>
+     <para>
+       The formulas can be in displaystyle <latex xmlns="http://forge.scilab.org/p/jlatexmath">\sum_{n=1}^{+\infty}\frac1{n^2}=\frac{\pi^2}{6}</latex> or in textstyle <latex style="text" xmlns="http://forge.scilab.org/p/jlatexmath">\sum_{n=1}^{+\infty}\frac1{n^2}=\frac{\pi^2}{6}</latex>.
+     </para>
+   </chapter>
+ </book>
