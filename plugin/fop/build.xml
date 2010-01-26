@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <project name="jlatexmath-fop" basedir="." default="buildJar">
-<import file="../../version.xml"/>
+  <import file="../../version.xml"/>
+  <property file="${basedir}/fop.properties"/>
 
   <path id="libs-build-classpath">
-    <fileset dir="/usr/local/share/java">
-      <include name="*.jar"/>
-    </fileset>
+    <pathelement location="${fop.jar}"/>
+    <pathelement location="${jlatexmath.path}/jlatexmath-${version}.jar"/>
+	<pathelement location="${xmlgraphics-commons.jar}"/>
   </path>
 
 	<!-- Init -->
