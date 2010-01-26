@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <project name="jlatexmath" basedir="." default="buildJar">
+<import file="version.xml"/>
 
 	<!-- Init -->
 	<target name="init" description="Initialize build">
@@ -86,7 +87,7 @@
 	</target>
 
 	<target name="src-all" depends="info" >
-	  <jar jarfile="${output.jar.dir}/jlatexmath-src-all-${version}.jar" basedir="${project.root.dir}" includes="COPYING LICENSE build.xml MANIFEST.MF src/**/*.java src/**/*.xml src/**/*.ttf src/**/licences/* src/**/README examples/**/*.java examples/**/lion.png examples/**/*.xml examples/**/README plugin/**/src/**/*.java plugin/**/src/META-INF/**/* plugin/**/build.xml plugin/**/COPYING plugin/**/LICENSE"/>
+	  <jar jarfile="${output.jar.dir}/jlatexmath-src-all-${version}.jar" basedir="${project.root.dir}" includes="COPYING LICENSE build.xml MANIFEST.MF src/**/*.java src/**/*.xml src/**/*.ttf src/**/licences/* src/**/README examples/**/*.java examples/**/lion.png examples/**/*.xml examples/**/README plugin/**/src/**/*.java plugin/**/src/META-INF/**/* plugin/**/build.xml plugin/**/COPYING plugin/**/LICENSE plugin/**/examples/*.*"/>
 	</target>
 
 

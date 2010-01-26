@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <project name="jlatexmath" basedir="." default="example">
+<import file="../../version.xml"/>
 
 	<!-- Init -->
 	<target name="init" description="Initialize build">
 	  <property name="project.src.dir" value="." />
-	  <property name="version" value="0.8.8" />
 	  <property name="myclasspath" value="/usr/local/share/java/" />
 	</target>
 

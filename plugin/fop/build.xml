@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <project name="jlatexmath-fop" basedir="." default="buildJar">
+<import file="../../version.xml"/>
 
   <path id="libs-build-classpath">
     <fileset dir="/usr/local/share/java">
@@ -16,7 +17,6 @@
 		<property name="project.bin.dir" value="${project.root.dir}/bin" />
 		<property name="package.dir" value="dist/" />
 		<property name="output.jar.dir" value="${package.dir}" />
-		<property name="version" value="0.1" />
 		<mkdir dir="${project.bin.dir}"/>
 		<mkdir dir="${package.dir}"/>
 	</target>
