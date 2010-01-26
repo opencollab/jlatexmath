@@ -84,6 +84,12 @@
 	<target name="source" depends="info" >
 	  <jar jarfile="${output.jar.dir}/jlatexmath-src-${version}.jar" basedir="${project.root.dir}" includes="COPYING LICENSE build.xml MANIFEST.MF src/**/*.java src/**/*.xml src/**/*.ttf src/**/licences/* src/**/README examples/**/*.java examples/**/lion.png examples/**/*.xml examples/**/README"/>
 	</target>
+
+	<target name="src-all" depends="info" >
+	  <jar jarfile="${output.jar.dir}/jlatexmath-src-all-${version}.jar" basedir="${project.root.dir}" includes="COPYING LICENSE build.xml MANIFEST.MF src/**/*.java src/**/*.xml src/**/*.ttf src/**/licences/* src/**/README examples/**/*.java examples/**/lion.png examples/**/*.xml examples/**/README plugin/**/src/**/*.java plugin/**/src/META-INF/**/* plugin/**/build.xml plugin/**/COPYING plugin/**/LICENSE"/>
+	</target>
+
+
      <target name="doc" depends="compile" description="Generates the API specification (javadoc)">
   <javadoc packagenames="org.scilab.forge.jlatexmath.*"
            sourcepath="${project.src.basedir}"
