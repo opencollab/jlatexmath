@@ -377,10 +377,10 @@ public class TeXFormula {
         return ti;
     }
 
-    public TeXIcon createTeXIcon(int style, float size, int widthUnit, float linewidth, int align) {
-	TeXEnvironment te = new TeXEnvironment(style, new DefaultTeXFont(size), widthUnit, linewidth);
+    public TeXIcon createTeXIcon(int style, float size, int widthUnit, float textwidth, int align) {
+	TeXEnvironment te = new TeXEnvironment(style, new DefaultTeXFont(size), widthUnit, textwidth);
 	Box box = createBox(te);
-	HorizontalBox hb = new HorizontalBox(box, te.getLinewidth(), align);
+	HorizontalBox hb = new HorizontalBox(box, te.getTextwidth(), align);
 	TeXIcon ti = new TeXIcon(hb, size);
 	ti.isColored = te.isColored;
         return ti;

@@ -185,7 +185,7 @@ public class MatrixAtom extends Atom {
 	    for (int j = 0; j < col; j++) {
 		matW += rowWidth[j];
 	    }
-	    float lw = env.getLinewidth();
+	    float lw = env.getTextwidth();
 	    if (lw != Float.POSITIVE_INFINITY && lw != Float.NaN) {
 		AlignSep = new StrutBox(Math.max((lw - matW - (col / 2) * Align.getWidth()) / (float)Math.floor((col + 3)/ 2), 0), 0.0f, 0.0f, 0.0f);
 	    }
