@@ -160,6 +160,12 @@ public class predefMacros {
     public Atom mbox_macro(TeXParser tp, String[] args) throws ParseException {
 	String str = args[1].replaceAll("\\^\\{\\\\prime\\}", "\'");
 	str = str.replaceAll("\\^\\{\\\\prime\\\\prime\\}", "\'\'");
+	return new RomanAtom(new TeXFormula("\\textstyle{" + str + "}", "mathnormal", false, false).root);
+    }
+
+    public Atom text_macro(TeXParser tp, String[] args) throws ParseException {
+	String str = args[1].replaceAll("\\^\\{\\\\prime\\}", "\'");
+	str = str.replaceAll("\\^\\{\\\\prime\\\\prime\\}", "\'\'");
 	return new RomanAtom(new TeXFormula(str, "mathnormal", false, false).root);
     }
     

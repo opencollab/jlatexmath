@@ -160,6 +160,15 @@
 		<Return name="f" />
 	</Command>
 
+	<Command name="text" enabled="true">
+		<CreateCommand name="f">
+			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+			<Argument type="String" value="text_macro" />
+			<Argument type="float" value="1" />        	
+		</CreateCommand>
+		<Return name="f" />
+	</Command>
+
 	<Command name="binom" enabled="true">
 		<CreateCommand name="f">
 			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />

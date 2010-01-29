@@ -83,6 +83,6 @@ public class GraphicsAtom extends Atom {
 	    float height = new SpaceAtom(TeXConstants.UNIT_PIXEL, h, 0, 0).createBox(env).getWidth();
 	    return new GraphicsBox(bimage, w, h, width, height);
 	}
-	return new TeXFormula("\\mbox{ No such image file ! }").root.createBox(env);
+	return new TeXFormula("\\text{ No such image file ! }").root.createBox(env);
     }
 }

@@ -139,7 +139,7 @@
 	  <Map char="&#268;" formula="\v C"/>
 	  <Map char="&#269;" formula="\v c"/>
 	  <Map char="&#270;" formula="\v D"/>
-	  <Map char="&#271;" formula="d\mbox{'}"/>
+	  <Map char="&#271;" formula="d\text{'}"/>
 	  <!-- D barre-->
 	  <Map char="&#274;" formula="\=E"/>
 	  <Map char="&#275;" formula="\=e"/>
@@ -194,7 +194,7 @@
 	  <Map char="&#326;" formula="\underaccent{,}n"/>
 	  <Map char="&#327;" formula="\v N"/>
 	  <Map char="&#328;" formula="\v n"/>
-	  <Map char="&#329;" formula="\mbox{'}n"/>
+	  <Map char="&#329;" formula="\text{'}n"/>
 	  <!-- Nj-->
 	  <Map char="&#332;" formula="\=O"/>
 	  <Map char="&#333;" formula="\=o"/>
