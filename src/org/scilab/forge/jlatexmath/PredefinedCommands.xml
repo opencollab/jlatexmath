@@ -891,6 +891,24 @@
 		</CreateCommand>
 		<Return name="f" />
 	</Command>
+
+	<Command name="align@@env" enabled="true">
+		<CreateCommand name="f">
+			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+			<Argument type="String" value="alignATATenv_macro" />
+			<Argument type="float" value="2" />
+		</CreateCommand>
+		<Return name="f" />
+	</Command>
+
+	<Command name="alignat@@env" enabled="true">
+		<CreateCommand name="f">
+			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+			<Argument type="String" value="alignatATATenv_macro" />
+			<Argument type="float" value="2" />
+		</CreateCommand>
+		<Return name="f" />
+	</Command>
 	
 	<Command name="\" enabled="true">
 		<CreateCommand name="f">

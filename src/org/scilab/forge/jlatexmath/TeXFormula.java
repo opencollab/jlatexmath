@@ -377,6 +377,15 @@ public class TeXFormula {
         return ti;
     }
 
+    public TeXIcon createTeXIcon(int style, float size, int widthUnit, float linewidth, int align) {
+	TeXEnvironment te = new TeXEnvironment(style, new DefaultTeXFont(size), widthUnit, linewidth);
+	Box box = createBox(te);
+	HorizontalBox hb = new HorizontalBox(box, te.getLinewidth(), align);
+	TeXIcon ti = new TeXIcon(hb, size);
+	ti.isColored = te.isColored;
+        return ti;
+    }
+
     public void createImage(String format, int style, float size, String out, Color bg, Color fg, boolean transparency) {
         TeXIcon icon = createTeXIcon(style, size);
         icon.setInsets(new Insets(1, 1, 1, 1));

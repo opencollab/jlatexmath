@@ -46,6 +46,8 @@ public class predefMacros {
 	NewEnvironmentMacro.addNewEnvironment("vmatrix", "\\left|\\begin{array}{}", "\\end{array}\\right|", 0);
 	NewEnvironmentMacro.addNewEnvironment("Vmatrix", "\\left\\|\\begin{array}{}", "\\end{array}\\right\\|", 0);
 	NewEnvironmentMacro.addNewEnvironment("eqnarray", "\\begin{array}{rcl}", "\\end{array}", 0);
+	NewEnvironmentMacro.addNewEnvironment("align", "\\align@@env{#1}{", "}", 0);
+	NewEnvironmentMacro.addNewEnvironment("alignat", "\\alignat@@env{#1}{", "}", 1);
 	NewEnvironmentMacro.addNewEnvironment("cases", "\\left\\{\\begin{array}{l@{\\!}l}", "\\end{array}\\right.", 0);
 	NewEnvironmentMacro.addNewEnvironment("split", "\\begin{array}{rl}", "\\end{array}", 0);
 	NewEnvironmentMacro.addNewEnvironment("gather", "\\begin{array}{c}", "\\end{array}", 0);
@@ -451,7 +453,28 @@ public class predefMacros {
 	parser.parse();
 	array.checkDimensions();
 	return new MatrixAtom(array, args[1]);
-    }    
+    }
+
+    public Atom alignATATenv_macro(TeXParser tp, String[] args) throws ParseException {
+	ArrayOfAtoms array = new ArrayOfAtoms();
+	TeXParser parser = new TeXParser(args[2], array, false);
+	parser.parse();
+	array.checkDimensions();
+	return new MatrixAtom(array);
+    }
+
+    public Atom alignatATATenv_macro(TeXParser tp, String[] args) throws ParseException {
+	ArrayOfAtoms array = new ArrayOfAtoms();
+	TeXParser parser = new TeXParser(args[2], array, false);
+	parser.parse();
+	array.checkDimensions();
+	int n = Integer.parseInt(args[1]);
+	if (array.col != 2 * n) {
+	    throw new ParseException("Bad number of equations in alignat environment !");
+	}
+
+	return new MatrixAtom(array, true);
+    }
 
     public Atom newcommand_macro(TeXParser tp, String[] args) throws ParseException {
 	String newcom = args[1];

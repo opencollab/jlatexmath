@@ -42,10 +42,13 @@ public class MatrixAtom extends Atom {
     public static SpaceAtom vsep_ext = new SpaceAtom(TeXConstants.UNIT_MU, 0.0f, 3.0f, 0.0f);
 
     private ArrayOfAtoms matrix;
-    private float[] lineDepth, lineHeight, rowWidth;
     private float plus = 0;
     private int[] position;
     private Atom[] insertAtom;
+    private boolean isAlign = false;
+    private boolean isAlignat = false;
+    
+    private static SpaceAtom align = new SpaceAtom(TeXConstants.MEDMUSKIP);
 
     /**
      * Creates an empty matrix
@@ -55,6 +58,28 @@ public class MatrixAtom extends Atom {
 	this.matrix = array;
 	parsePositions(new StringBuffer(options));
 	//getPositions(options);
+    }
+
+    public MatrixAtom(ArrayOfAtoms array) {
+	this.matrix = array;
+	isAlign = true;
+	position = new int[matrix.col];
+	for (int i = 0; i < matrix.col; i += 2) {
+	    position[i] = TeXConstants.ALIGN_RIGHT;
+	    if (i + 1 < matrix.col) {
+		position[i + 1] = TeXConstants.ALIGN_LEFT;
+	    }
+	}
+    }
+
+    public MatrixAtom(ArrayOfAtoms array, boolean isAlignat) {
+	this.matrix = array;
+	this.isAlignat = isAlignat;
+	position = new int[matrix.col];
+	for (int i = 0; i < matrix.col; i += 2) {
+	    position[i] = TeXConstants.ALIGN_RIGHT;
+	    position[i + 1] = TeXConstants.ALIGN_LEFT;
+	}
     }
 
     private void parsePositions(StringBuffer opt) {
@@ -133,10 +158,11 @@ public class MatrixAtom extends Atom {
 	int row = matrix.row;
 	int col = matrix.col;
 	Box[][] boxarr = new Box[row][col];
-	lineDepth = new float[row];
-	lineHeight = new float[row];
-	rowWidth = new float[col];
-	
+	float[] lineDepth = new float[row];
+	float[] lineHeight = new float[row];
+	float[] rowWidth = new float[col];
+	float matW = 0;
+
 	if (plus == 0) {
 	    plus = new TeXFormula("+").root.createBox(env).getHeight();
 	}
@@ -152,6 +178,18 @@ public class MatrixAtom extends Atom {
 		rowWidth[j] = Math.max(boxarr[i][j].getWidth(), rowWidth[j]);
 	    }
 	}
+
+	Box Align = align.createBox(env);
+	Box AlignSep = null;
+	if (isAlign) {
+	    for (int j = 0; j < col; j++) {
+		matW += rowWidth[j];
+	    }
+	    float lw = env.getLinewidth();
+	    if (lw != Float.POSITIVE_INFINITY && lw != Float.NaN) {
+		AlignSep = new StrutBox(Math.max((lw - matW - (col / 2) * Align.getWidth()) / (float)Math.floor((col + 3)/ 2), 0), 0.0f, 0.0f, 0.0f);
+	    }
+	}
 	
 	VerticalBox vb = new VerticalBox();
 	Box Vsep = vsep_in.createBox(env);
@@ -159,12 +197,28 @@ public class MatrixAtom extends Atom {
 	vb.add(Vsep2);
 	float vsepH = Vsep.getHeight();
 	float totalHeight = 0;
+
+	Box Hsep = hsep.createBox(env);
+
 	for (int i = 0; i < row; i++) {
 	    HorizontalBox hb = new HorizontalBox();
 	    for (int j = 0; j < col; j++) {
 		hb.add(new HorizontalBox(boxarr[i][j], rowWidth[j], position[j]));
-		if (j < col - 1)
-		    hb.add(hsep.createBox(env));
+		if (j < col - 1) {
+		    if (isAlign || isAlignat) {
+			if (position[j] == TeXConstants.ALIGN_RIGHT) {
+			    hb.add(Align);
+			} else if (!isAlignat) {
+			    if (AlignSep != null) {
+				hb.add(AlignSep);
+			    } else {
+				hb.add(Hsep);
+			    }
+			}
+		    } else {
+			hb.add(Hsep);
+		    }
+		}
 	    }
 	    
 	    hb.setHeight(lineHeight[i]);

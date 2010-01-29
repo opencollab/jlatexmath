@@ -51,11 +51,18 @@ public class TeXEnvironment {
     
     // last used font
     private int lastFontId = TeXFont.NO_FONT;
+    
+    private float linewidth = Float.POSITIVE_INFINITY;
 
     public boolean isColored = false;
         
     public TeXEnvironment(int style, TeXFont tf) {
         this(style, tf, null, null);
+    }
+
+    public TeXEnvironment(int style, TeXFont tf, int widthUnit, float linewidth) {
+        this(style, tf, null, null);
+	this.linewidth = new SpaceAtom(widthUnit, linewidth, 0.0f, 0.0f).createBox(this).getWidth();
     }
 
     private TeXEnvironment(int style, TeXFont tf, Color bg, Color c) {
@@ -72,6 +79,14 @@ public class TeXEnvironment {
         color = c;
     }
     
+    public void setLinewidth(int widthUnit, float linewidth) {
+	this.linewidth = new SpaceAtom(widthUnit, linewidth, 0.0f, 0.0f).createBox(this).getWidth();
+    }
+    
+    public float getLinewidth() {
+	return linewidth;
+    }
+
     protected TeXEnvironment copy() {
         return new TeXEnvironment(style, tf, background, color);
     }
@@ -79,6 +94,7 @@ public class TeXEnvironment {
     protected TeXEnvironment copy(TeXFont tf) {
         TeXEnvironment te = new TeXEnvironment(style, tf, background, color);
 	te.style = style;
+	te.linewidth = linewidth;
 	return te;
     }
     
