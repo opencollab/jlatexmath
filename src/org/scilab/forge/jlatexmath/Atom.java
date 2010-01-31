@@ -55,6 +55,8 @@ public abstract class Atom implements Cloneable {
     public int type = TeXConstants.TYPE_ORDINARY;
     
     public int type_limits = TeXConstants.SCRIPT_NOLIMITS;
+
+    public int alignment = -1;
     
     /**
      * Convert this atom into a {@link Box}, using properties set by "parent"

@@ -37,9 +37,17 @@ import java.util.LinkedList;
  */
 public class MatrixAtom extends Atom {
     
-    public static SpaceAtom hsep = new SpaceAtom(TeXConstants.UNIT_MU, 9.0f, 0.0f, 0.0f);
-    public static SpaceAtom vsep_in = new SpaceAtom(TeXConstants.UNIT_MU, 0.0f, 5.0f, 0.0f);
-    public static SpaceAtom vsep_ext = new SpaceAtom(TeXConstants.UNIT_MU, 0.0f, 3.0f, 0.0f);
+    public static SpaceAtom hsep = new SpaceAtom(TeXConstants.UNIT_EM, 2.0f, 0.0f, 0.0f);
+    public static SpaceAtom vsep_in = new SpaceAtom(TeXConstants.UNIT_EX, 0.0f, 1f, 0.0f);
+    public static SpaceAtom vsep_ext = new SpaceAtom(TeXConstants.UNIT_EX, 0.0f, 0.4f, 0.0f);
+
+    public static final int MATRIX = 0;
+    public static final int ALIGN = 1;
+    public static final int ALIGNAT = 2;
+    public static final int FLALIGN = 3;
+    public static final int SMALLMATRIX = 4;
+    public static final int ALIGNED = 5;
+    public static final int ALIGNEDAT = 6;
 
     private ArrayOfAtoms matrix;
     private float plus = 0;
@@ -47,6 +55,8 @@ public class MatrixAtom extends Atom {
     private Atom[] insertAtom;
     private boolean isAlign = false;
     private boolean isAlignat = false;
+    private boolean isFl = false;
+    private int type;
     
     private static SpaceAtom align = new SpaceAtom(TeXConstants.MEDMUSKIP);
 
@@ -56,29 +66,23 @@ public class MatrixAtom extends Atom {
      */
     public MatrixAtom(ArrayOfAtoms array, String options) {
 	this.matrix = array;
+	this.type = MATRIX;
 	parsePositions(new StringBuffer(options));
 	//getPositions(options);
     }
 
-    public MatrixAtom(ArrayOfAtoms array) {
+    public MatrixAtom(ArrayOfAtoms array, int type) {
 	this.matrix = array;
-	isAlign = true;
-	position = new int[matrix.col];
-	for (int i = 0; i < matrix.col; i += 2) {
-	    position[i] = TeXConstants.ALIGN_RIGHT;
-	    if (i + 1 < matrix.col) {
-		position[i + 1] = TeXConstants.ALIGN_LEFT;
+	this.type = type;
+	
+	if (type != MATRIX) {
+	    position = new int[matrix.col];
+	    for (int i = 0; i < matrix.col; i += 2) {
+		position[i] = TeXConstants.ALIGN_RIGHT;
+		if (i + 1 < matrix.col) {
+		    position[i + 1] = TeXConstants.ALIGN_LEFT;
+		}
 	    }
-	}
-    }
-
-    public MatrixAtom(ArrayOfAtoms array, boolean isAlignat) {
-	this.matrix = array;
-	this.isAlignat = isAlignat;
-	position = new int[matrix.col];
-	for (int i = 0; i < matrix.col; i += 2) {
-	    position[i] = TeXConstants.ALIGN_RIGHT;
-	    position[i + 1] = TeXConstants.ALIGN_LEFT;
 	}
     }
 
@@ -153,6 +157,102 @@ public class MatrixAtom extends Atom {
 	    position[i] = TeXConstants.ALIGN_CENTER;
 	}
     }
+
+    public Box[] getColumnSep(TeXEnvironment env, float width) {
+	int row = matrix.row;
+	int col = matrix.col;
+	Box[] arr = new Box[col + 1];
+	Box Align, AlignSep;
+	float h, w = env.getTextwidth();
+
+	if (type == ALIGNED || type == ALIGNEDAT) {
+	    w = Float.POSITIVE_INFINITY;
+	}
+
+	switch (type) {
+	case MATRIX :
+	case SMALLMATRIX :
+	    //Simple matrix : 0 elem hsep_col elem hsep_col ... hsep_col elem 0
+	    arr[0] = new StrutBox(0, 0, 0, 0);
+	    arr[col] = arr[0];
+	    Box Hsep = hsep.createBox(env);
+	    for (int i = 1; i < col; i++) {
+		arr[i] = Hsep;
+	    }
+	    
+	    return arr;
+	case ALIGN :
+	    //Align env. : hsep=(textwidth-matWidth)/(2n+1) and hsep eq_lft \medskip el_rgt hsep ... hsep elem hsep
+	    Align = align.createBox(env);
+	    if (w != Float.POSITIVE_INFINITY) {
+		h = Math.max((w - width - (col / 2) * Align.getWidth()) / (float)Math.floor((col + 3)/ 2), 0);
+		AlignSep = new StrutBox(h, 0.0f, 0.0f, 0.0f);
+	    } else {
+		AlignSep = hsep.createBox(env);
+	    }
+	    
+	    arr[col] = AlignSep;
+	    for (int i = 0; i < col; i++) {
+		if (i % 2 == 0) {
+		    arr[i] = AlignSep;
+		} else {
+		    arr[i] = Align;
+		}
+	    }
+	    
+	    break;
+	case ALIGNAT :
+	    //Alignat env. : hsep=(textwidth-matWidth)/2 and hsep elem ... elem hsep
+	    if (w != Float.POSITIVE_INFINITY) {
+		h = Math.max((w - width) / 2, 0);
+	    } else {
+		h = 0;
+	    }
+	    
+	    Align = align.createBox(env);
+	    Box empty = new StrutBox(0, 0, 0, 0);
+	    arr[0] = new StrutBox(h, 0.0f, 0.0f, 0.0f);
+	    arr[col] = arr[0];
+	    for (int i = 1; i < col; i++) {
+		if (i % 2 == 0) {
+		    arr[i] = empty;
+		} else {
+		    arr[i] = Align;
+		}
+	    }
+
+	    break;
+	case FLALIGN : 
+	    //flalign env. : hsep=(textwidth-matWidth)/(2n+1) and hsep eq_lft \medskip el_rgt hsep ... hsep elem hsep
+	    Align = align.createBox(env);
+	    if (w != Float.POSITIVE_INFINITY) {
+		h = Math.max((w - width - (col / 2) * Align.getWidth()) / (float)Math.floor((col - 1)/ 2), 0);
+		AlignSep = new StrutBox(h, 0.0f, 0.0f, 0.0f);
+	    } else {
+		AlignSep = hsep.createBox(env);
+	    }
+	    
+	    arr[0] = new StrutBox(0, 0, 0, 0);
+	    arr[col] = arr[0];
+	    for (int i = 1; i < col; i++) {
+		if (i % 2 == 0) {
+		    arr[i] = AlignSep;
+		} else {
+		    arr[i] = Align;
+		}
+	    }
+	    
+	    break;
+	}
+
+	if (w == Float.POSITIVE_INFINITY) {
+	    arr[0] = new StrutBox(0, 0, 0, 0);
+	    arr[col] = arr[0];
+	}
+
+	return arr;
+
+    }
     
     public Box createBox(TeXEnvironment env) {
 	int row = matrix.row;
@@ -166,12 +266,26 @@ public class MatrixAtom extends Atom {
 	if (plus == 0) {
 	    plus = new TeXFormula("+").root.createBox(env).getHeight();
 	}
+	
+	if (type == SMALLMATRIX) {
+	    env = env.copy();
+	    env.setStyle(TeXConstants.STYLE_SCRIPT);
+	}
 
 	for (int i = 0; i < row; i++) {
 	    lineDepth[i] = 0;
 	    lineHeight[i] = 0;
 	    for (int j = 0; j < col; j++) {
-		Atom at = matrix.array.get(i).get(j);
+		Atom at = null;
+		try {
+		    at = matrix.array.get(i).get(j);
+		} catch (Exception e) {
+		    //The previous atom was an intertext atom
+		    //position[j - 1] = -1;
+		    boxarr[i][j - 1].isIntertext = true;
+		    j = col - 1;
+		}
+
 		boxarr[i][j] = (at == null) ? new StrutBox(0, 0, 0, 0) : at.createBox(env); 
 		lineDepth[i] = Math.max(boxarr[i][j].getDepth(), lineDepth[i]);
 		lineHeight[i] = Math.max(boxarr[i][j].getHeight(), lineHeight[i]);
@@ -179,18 +293,11 @@ public class MatrixAtom extends Atom {
 	    }
 	}
 
-	Box Align = align.createBox(env);
-	Box AlignSep = null;
-	if (isAlign) {
-	    for (int j = 0; j < col; j++) {
-		matW += rowWidth[j];
-	    }
-	    float lw = env.getTextwidth();
-	    if (lw != Float.POSITIVE_INFINITY && lw != Float.NaN) {
-		AlignSep = new StrutBox(Math.max((lw - matW - (col / 2) * Align.getWidth()) / (float)Math.floor((col + 3)/ 2), 0), 0.0f, 0.0f, 0.0f);
-	    }
+	for (int j = 0; j < col; j++) {
+	    matW += rowWidth[j];
 	}
-	
+	Box[] Hsep = getColumnSep(env, matW);
+
 	VerticalBox vb = new VerticalBox();
 	Box Vsep = vsep_in.createBox(env);
 	Box Vsep2 = vsep_ext.createBox(env);
@@ -198,26 +305,15 @@ public class MatrixAtom extends Atom {
 	float vsepH = Vsep.getHeight();
 	float totalHeight = 0;
 
-	Box Hsep = hsep.createBox(env);
-
 	for (int i = 0; i < row; i++) {
-	    HorizontalBox hb = new HorizontalBox();
+	    HorizontalBox hb = new HorizontalBox(Hsep[0]);
 	    for (int j = 0; j < col; j++) {
-		hb.add(new HorizontalBox(boxarr[i][j], rowWidth[j], position[j]));
-		if (j < col - 1) {
-		    if (isAlign || isAlignat) {
-			if (position[j] == TeXConstants.ALIGN_RIGHT) {
-			    hb.add(Align);
-			} else if (!isAlignat) {
-			    if (AlignSep != null) {
-				hb.add(AlignSep);
-			    } else {
-				hb.add(Hsep);
-			    }
-			}
-		    } else {
-			hb.add(Hsep);
-		    }
+		if (!boxarr[i][j].isIntertext) {
+		    hb.add(new HorizontalBox(boxarr[i][j], rowWidth[j], position[j]));
+		    hb.add(Hsep[j + 1]);
+		} else {
+		    hb = new HorizontalBox(boxarr[i][j], env.getTextwidth(), TeXConstants.ALIGN_LEFT);
+		    j = col - 1;
 		}
 	    }
 	    
@@ -225,14 +321,12 @@ public class MatrixAtom extends Atom {
 	    hb.setDepth(lineDepth[i]);
 	    vb.add(hb);
 
-	    if (i < row -1) 
+	    if (i < row - 1) 
 		vb.add(Vsep);
-	    
-	    totalHeight += lineHeight[i] + lineDepth[i] + vsepH; 
 	}
 	
-	totalHeight = totalHeight - vsepH + 2 * Vsep2.getHeight();
 	vb.add(Vsep2);
+	totalHeight = vb.getHeight() + vb.getDepth();
 	
 	vb.setHeight((totalHeight + plus)/ 2);
 	vb.setDepth((totalHeight - plus) / 2);

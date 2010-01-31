@@ -41,20 +41,24 @@ public class HorizontalBox extends Box {
     private float curPos = 0; // NOPMD
     
     public HorizontalBox(Box b, float w, int alignment) {
-        float rest = w - b.getWidth();
-        if (alignment == TeXConstants.ALIGN_CENTER) {
-            StrutBox s = new StrutBox(rest / 2, 0, 0, 0);
-            add(s);
-            add(b);
-            add(s);
-        } else if (alignment == TeXConstants.ALIGN_LEFT) {
-            add(b);
-            add(new StrutBox(rest, 0, 0, 0));
-        } else if (alignment == TeXConstants.ALIGN_RIGHT) {
-            add(new StrutBox(rest, 0, 0, 0));
-            add(b);
-        } else
+	if (w != Float.POSITIVE_INFINITY) {
+	    float rest = w - b.getWidth();
+	    if (alignment == TeXConstants.ALIGN_CENTER) {
+		StrutBox s = new StrutBox(rest / 2, 0, 0, 0);
+		add(s);
+		add(b);
+		add(s);
+	    } else if (alignment == TeXConstants.ALIGN_LEFT) {
+		add(b);
+		add(new StrutBox(rest, 0, 0, 0));
+	    } else if (alignment == TeXConstants.ALIGN_RIGHT) {
+		add(new StrutBox(rest, 0, 0, 0));
+		add(b);
+	    } else
+		add(b);
+	} else {
 	    add(b);
+	}
     }
     
     public HorizontalBox(Box b) {
@@ -71,7 +75,7 @@ public class HorizontalBox extends Box {
     
     public void draw(Graphics2D g2, float x, float y) {
         startDraw(g2, x, y);
-        float xPos = x;
+	float xPos = x;
         for (Box box: children) {
             box.draw(g2, xPos, y + box.shift);
             xPos += box.getWidth();

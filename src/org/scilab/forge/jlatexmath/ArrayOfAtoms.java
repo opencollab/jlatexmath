@@ -64,7 +64,7 @@ public class ArrayOfAtoms extends TeXFormula {
 	row = array.size() - 1;
 	col = array.get(0).size();
 	for (int i = 1; i < row; i++) {
-	    if (array.get(i).size() != col)
+	    if (array.get(i).size() != col && array.get(i).get(0) != null && array.get(i).get(0).type != TeXConstants.TYPE_INTERTEXT)
 		throw new InvalidMatrixException("Bad number of columns at row " + i);
 	}
     }

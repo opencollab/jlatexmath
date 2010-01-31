@@ -129,6 +129,8 @@ public class TeXConstants {
     */
    public static final int TYPE_ACCENT = 10;
 
+    public static final int TYPE_INTERTEXT = 11;
+
    // ***************************************
    // OVER AND UNDER DELIMITER TYPE CONSTANTS
    // ***************************************

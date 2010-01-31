@@ -43,7 +43,7 @@ import java.io.FileNotFoundException;
  * from an xml-file.
  */
 public class DefaultTeXFont implements TeXFont {
-    
+
     private static String[] defaultTextStyleMappings;
     
     /**

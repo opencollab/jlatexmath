@@ -40,17 +40,23 @@ public class predefMacros {
     static {
 	NewEnvironmentMacro.addNewEnvironment("array", "\\array@@env{#1}{", "}", 1);
 	NewEnvironmentMacro.addNewEnvironment("matrix", "\\begin{array}{}", "\\end{array}", 0);
+	NewEnvironmentMacro.addNewEnvironment("smallmatrix", "\\smallmatrix@@env{", "}", 0);
 	NewEnvironmentMacro.addNewEnvironment("pmatrix", "\\left(\\begin{array}{}", "\\end{array}\\right)", 0);
 	NewEnvironmentMacro.addNewEnvironment("bmatrix", "\\left[\\begin{array}{}", "\\end{array}\\right]", 0);
 	NewEnvironmentMacro.addNewEnvironment("Bmatrix", "\\left\\{\\begin{array}{}", "\\end{array}\\right\\}", 0);
 	NewEnvironmentMacro.addNewEnvironment("vmatrix", "\\left|\\begin{array}{}", "\\end{array}\\right|", 0);
 	NewEnvironmentMacro.addNewEnvironment("Vmatrix", "\\left\\|\\begin{array}{}", "\\end{array}\\right\\|", 0);
 	NewEnvironmentMacro.addNewEnvironment("eqnarray", "\\begin{array}{rcl}", "\\end{array}", 0);
-	NewEnvironmentMacro.addNewEnvironment("align", "\\align@@env{#1}{", "}", 0);
+	NewEnvironmentMacro.addNewEnvironment("align", "\\align@@env{", "}", 0);
+	NewEnvironmentMacro.addNewEnvironment("flalign", "\\flalign@@env{", "}", 0);
 	NewEnvironmentMacro.addNewEnvironment("alignat", "\\alignat@@env{#1}{", "}", 1);
+	NewEnvironmentMacro.addNewEnvironment("aligned", "\\aligned@@env{", "}", 0);
+	NewEnvironmentMacro.addNewEnvironment("alignedat", "\\alignedat@@env{#1}{", "}", 1);
+	NewEnvironmentMacro.addNewEnvironment("multline", "\\multline@@env{", "}", 0);
 	NewEnvironmentMacro.addNewEnvironment("cases", "\\left\\{\\begin{array}{l@{\\!}l}", "\\end{array}\\right.", 0);
 	NewEnvironmentMacro.addNewEnvironment("split", "\\begin{array}{rl}", "\\end{array}", 0);
-	NewEnvironmentMacro.addNewEnvironment("gather", "\\begin{array}{c}", "\\end{array}", 0);
+	NewEnvironmentMacro.addNewEnvironment("gather", "\\gather@@env{", "}", 0);
+	NewEnvironmentMacro.addNewEnvironment("gathered", "\\gathered@@env{", "}", 0);
 	NewCommandMacro.addNewCommand("operatorname", "\\mathop{\\mathrm{#1}}\\nolimits", 1);
 	NewCommandMacro.addNewCommand("DeclareMathOperator", "\\newcommand{#1}{\\mathop{\\mathrm{#2}}\\nolimits}", 2);
 	NewCommandMacro.addNewCommand("substack", "\\begin{array}{l}#1\\end{array}", 1);
@@ -447,6 +453,23 @@ public class predefMacros {
 	return null;
     }
 
+    public Atom intertext_macro(TeXParser tp, String[] args) throws ParseException {
+	String str = args[1].replaceAll("\\^\\{\\\\prime\\}", "\'");
+	str = str.replaceAll("\\^\\{\\\\prime\\\\prime\\}", "\'\'");
+	Atom at = new RomanAtom(new TeXFormula(str, "mathnormal", false, false).root);
+	at.type = TeXConstants.TYPE_INTERTEXT;
+	//backslashcr_macro(tp, new String[0]);
+	return at;
+    }
+
+    public Atom smallmatrixATATenv_macro(TeXParser tp, String[] args) throws ParseException {
+	ArrayOfAtoms array = new ArrayOfAtoms();
+	TeXParser parser = new TeXParser(args[1], array, false);
+	parser.parse();
+	array.checkDimensions();
+	return new MatrixAtom(array, MatrixAtom.SMALLMATRIX);
+    }
+
     public Atom arrayATATenv_macro(TeXParser tp, String[] args) throws ParseException {
 	ArrayOfAtoms array = new ArrayOfAtoms();
 	TeXParser parser = new TeXParser(args[2], array, false);
@@ -457,10 +480,18 @@ public class predefMacros {
 
     public Atom alignATATenv_macro(TeXParser tp, String[] args) throws ParseException {
 	ArrayOfAtoms array = new ArrayOfAtoms();
-	TeXParser parser = new TeXParser(args[2], array, false);
+	TeXParser parser = new TeXParser(args[1], array, false);
 	parser.parse();
 	array.checkDimensions();
-	return new MatrixAtom(array);
+	return new MatrixAtom(array, MatrixAtom.ALIGN);
+    }
+
+    public Atom flalignATATenv_macro(TeXParser tp, String[] args) throws ParseException {
+	ArrayOfAtoms array = new ArrayOfAtoms();
+	TeXParser parser = new TeXParser(args[1], array, false);
+	parser.parse();
+	array.checkDimensions();
+	return new MatrixAtom(array, MatrixAtom.FLALIGN);
     }
 
     public Atom alignatATATenv_macro(TeXParser tp, String[] args) throws ParseException {
@@ -473,7 +504,85 @@ public class predefMacros {
 	    throw new ParseException("Bad number of equations in alignat environment !");
 	}
 
-	return new MatrixAtom(array, true);
+	return new MatrixAtom(array, MatrixAtom.ALIGNAT);
+    }
+
+    public Atom alignedATATenv_macro(TeXParser tp, String[] args) throws ParseException {
+	ArrayOfAtoms array = new ArrayOfAtoms();
+	TeXParser parser = new TeXParser(args[1], array, false);
+	parser.parse();
+	array.checkDimensions();
+	return new MatrixAtom(array, MatrixAtom.ALIGNED);
+    }
+
+    public Atom alignedatATATenv_macro(TeXParser tp, String[] args) throws ParseException {
+	ArrayOfAtoms array = new ArrayOfAtoms();
+	TeXParser parser = new TeXParser(args[2], array, false);
+	parser.parse();
+	array.checkDimensions();
+	int n = Integer.parseInt(args[1]);
+	if (array.col != 2 * n) {
+	    throw new ParseException("Bad number of equations in alignedat environment !");
+	}
+
+	return new MatrixAtom(array, MatrixAtom.ALIGNEDAT);
+    }
+
+    public Atom multlineATATenv_macro(TeXParser tp, String[] args) throws ParseException {
+	ArrayOfAtoms array = new ArrayOfAtoms();
+	TeXParser parser = new TeXParser(args[1], array, false);
+	parser.parse();
+	array.checkDimensions();
+	if (array.col > 1) {
+	    throw new ParseException("Character '&' is only available in array mode !");
+	}
+	if (array.col == 0) {
+	    return null;
+	}
+	
+	return new MultlineAtom(array, MultlineAtom.MULTLINE);
+    }
+
+    public Atom gatherATATenv_macro(TeXParser tp, String[] args) throws ParseException {
+	ArrayOfAtoms array = new ArrayOfAtoms();
+	TeXParser parser = new TeXParser(args[1], array, false);
+	parser.parse();
+	array.checkDimensions();
+	if (array.col > 1) {
+	    throw new ParseException("Character '&' is only available in array mode !");
+	}
+	if (array.col == 0) {
+	    return null;
+	}
+	
+	return new MultlineAtom(array, MultlineAtom.GATHER);
+    }
+
+    public Atom gatheredATATenv_macro(TeXParser tp, String[] args) throws ParseException {
+	ArrayOfAtoms array = new ArrayOfAtoms();
+	TeXParser parser = new TeXParser(args[1], array, false);
+	parser.parse();
+	array.checkDimensions();
+	if (array.col > 1) {
+	    throw new ParseException("Character '&' is only available in array mode !");
+	}
+	if (array.col == 0) {
+	    return null;
+	}
+	
+	return new MultlineAtom(array, MultlineAtom.GATHERED);
+    }
+
+    public Atom shoveright_macro(TeXParser tp, String[] args) throws ParseException {
+	Atom at = new TeXFormula(args[1]).root;
+	at.alignment = TeXConstants.ALIGN_RIGHT;
+	return at;
+    }
+
+    public Atom shoveleft_macro(TeXParser tp, String[] args) throws ParseException {
+	Atom at = new TeXFormula(args[1]).root;
+	at.alignment = TeXConstants.ALIGN_LEFT;
+	return at;
     }
 
     public Atom newcommand_macro(TeXParser tp, String[] args) throws ParseException {
