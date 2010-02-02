@@ -36,6 +36,7 @@ package org.scilab.forge.jlatexmath.fop;
 import org.scilab.forge.jlatexmath.TeXIcon;
 import org.scilab.forge.jlatexmath.TeXConstants;
 import org.scilab.forge.jlatexmath.TeXFormula;
+import org.scilab.forge.jlatexmath.SpaceAtom;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -67,7 +68,15 @@ public class Graphics2DImagePainterJLaTeXMath implements Graphics2DImagePainter 
             st = TeXConstants.STYLE_SCRIPT_SCRIPT;
         }
         
-        icon = new TeXFormula(e.getTextContent()).createTeXIcon(st, size);
+	String fwidth = e.getAttribute("fwidth");
+	float[] f = SpaceAtom.getLength(fwidth);
+	
+        if (f.length == 2) {
+	    icon = new TeXFormula(e.getTextContent()).createTeXIcon(st, size, (int) f[0], f[1], TeXConstants.ALIGN_CENTER);
+	} else {
+	    icon = new TeXFormula(e.getTextContent()).createTeXIcon(st, size);
+	}   
+
         icon.setForeground(fg);
 
         dim = new Dimension((int) (icon.getTrueIconWidth() * 1000), (int) (icon.getTrueIconHeight() * 1000));

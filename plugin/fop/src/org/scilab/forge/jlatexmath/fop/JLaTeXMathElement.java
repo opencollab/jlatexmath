@@ -36,15 +36,19 @@ package org.scilab.forge.jlatexmath.fop;
 import org.scilab.forge.jlatexmath.TeXIcon;
 import org.scilab.forge.jlatexmath.TeXConstants;
 import org.scilab.forge.jlatexmath.TeXFormula;
+import org.scilab.forge.jlatexmath.SpaceAtom;
 
 import java.awt.Color;
 import java.awt.geom.Point2D;
+import java.util.Map;
+import java.util.HashMap;
 
 import org.apache.fop.apps.FOPException;
 import org.apache.fop.apps.FOUserAgent;
 import org.apache.fop.datatypes.Length;
 import org.apache.fop.fo.FOEventHandler;
 import org.apache.fop.fo.FONode;
+import org.apache.fop.fo.XMLObj;
 import org.apache.fop.fo.PropertyList;
 import org.apache.fop.fo.properties.CommonFont;
 import org.apache.fop.fo.properties.FixedLength;
@@ -55,8 +59,9 @@ import org.xml.sax.Attributes;
 import org.xml.sax.Locator;
 
 public class JLaTeXMathElement extends JLaTeXMathObj {
-        
+    
     private float size;
+    private String fwidth;
     private Color fg;
     private TeXIcon icon = null;
     
@@ -100,7 +105,15 @@ public class JLaTeXMathElement extends JLaTeXMathObj {
             st = TeXConstants.STYLE_SCRIPT_SCRIPT;
         }
         
-        icon = new TeXFormula(code).createTeXIcon(st, size);
+	fwidth = e.getAttribute("fwidth");
+	float[] f = SpaceAtom.getLength(fwidth);
+	
+	if (f.length == 2) {
+	    icon = new TeXFormula(code).createTeXIcon(st, size, (int) f[0], f[1], TeXConstants.ALIGN_CENTER);
+	} else {
+	    fwidth = "";
+	    icon = new TeXFormula(code).createTeXIcon(st, size);
+	}
     }    
     
     protected PropertyList createPropertyList(final PropertyList pList,
