@@ -69,7 +69,7 @@ public class DelimiterFactory {
     public static Box create(String symbol, TeXEnvironment env, float minHeight) {
         TeXFont tf = env.getTeXFont();
         int style = env.getStyle();
-        Char c = tf.getChar(symbol, style);
+	Char c = tf.getChar(symbol, style);
         
         // start with smallest character
         Metrics m = c.getMetrics();

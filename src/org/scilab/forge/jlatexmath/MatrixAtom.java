@@ -39,7 +39,8 @@ public class MatrixAtom extends Atom {
     
     public static SpaceAtom hsep = new SpaceAtom(TeXConstants.UNIT_EM, 2.0f, 0.0f, 0.0f);
     public static SpaceAtom vsep_in = new SpaceAtom(TeXConstants.UNIT_EX, 0.0f, 1f, 0.0f);
-    public static SpaceAtom vsep_ext = new SpaceAtom(TeXConstants.UNIT_EX, 0.0f, 0.4f, 0.0f);
+    public static SpaceAtom vsep_ext_top = new SpaceAtom(TeXConstants.UNIT_EX, 0.0f, 0.0f, 0.0f);
+    public static SpaceAtom vsep_ext_bot = new SpaceAtom(TeXConstants.UNIT_EX, 0.0f, 0.0f, 0.0f);
 
     public static final int MATRIX = 0;
     public static final int ALIGN = 1;
@@ -50,7 +51,6 @@ public class MatrixAtom extends Atom {
     public static final int ALIGNEDAT = 6;
 
     private ArrayOfAtoms matrix;
-    private float plus = 0;
     private int[] position;
     private Atom[] insertAtom;
     private boolean isAlign = false;
@@ -262,10 +262,6 @@ public class MatrixAtom extends Atom {
 	float[] lineHeight = new float[row];
 	float[] rowWidth = new float[col];
 	float matW = 0;
-
-	if (plus == 0) {
-	    plus = new TeXFormula("+").root.createBox(env).getHeight();
-	}
 	
 	if (type == SMALLMATRIX) {
 	    env = env.copy();
@@ -300,8 +296,7 @@ public class MatrixAtom extends Atom {
 
 	VerticalBox vb = new VerticalBox();
 	Box Vsep = vsep_in.createBox(env);
-	Box Vsep2 = vsep_ext.createBox(env);
-	vb.add(Vsep2);
+	vb.add(vsep_ext_top.createBox(env));
 	float vsepH = Vsep.getHeight();
 	float totalHeight = 0;
 
@@ -312,7 +307,9 @@ public class MatrixAtom extends Atom {
 		    hb.add(new HorizontalBox(boxarr[i][j], rowWidth[j], position[j]));
 		    hb.add(Hsep[j + 1]);
 		} else {
-		    hb = new HorizontalBox(boxarr[i][j], env.getTextwidth(), TeXConstants.ALIGN_LEFT);
+		    float f = env.getTextwidth();
+		    f = f == Float.POSITIVE_INFINITY ? rowWidth[j] : f;
+		    hb = new HorizontalBox(boxarr[i][j], f, TeXConstants.ALIGN_LEFT);
 		    j = col - 1;
 		}
 	    }
@@ -325,11 +322,13 @@ public class MatrixAtom extends Atom {
 		vb.add(Vsep);
 	}
 	
-	vb.add(Vsep2);
+	vb.add(vsep_ext_bot.createBox(env));
 	totalHeight = vb.getHeight() + vb.getDepth();
 	
-	vb.setHeight((totalHeight + plus)/ 2);
-	vb.setDepth((totalHeight - plus) / 2);
+	float axis = env.getTeXFont().getAxisHeight(env.getStyle());
+	vb.setHeight(totalHeight / 2 + axis);
+	vb.setDepth(totalHeight / 2 - axis);
+
 	return vb;
     }
 }

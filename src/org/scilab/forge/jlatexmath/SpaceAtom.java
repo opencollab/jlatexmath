@@ -191,6 +191,26 @@ public class SpaceAtom extends Atom {
 	return u == null ? -1 : u.intValue();
     }
     
+    public static float[] getLength(String lgth) {
+	int i;
+	for (i = 0; i < lgth.length() && !Character.isLetter(lgth.charAt(i)); i++);
+	float f = 0;
+	try {
+	    f = Float.parseFloat(lgth.substring(0, i));
+	} catch (NumberFormatException e) {
+	    return new float[]{Float.NaN};
+	}
+ 
+	int unit;
+	if (i != lgth.length()) {
+	    unit = getUnit(lgth.substring(i).toLowerCase());
+	} else {
+	    unit = TeXConstants.UNIT_PIXEL;
+	}
+	
+	return new float[]{(float) unit, f};
+    }
+
     public Box createBox(TeXEnvironment env) {
         if (blankSpace) {
             if (blankType == 0)

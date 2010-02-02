@@ -40,7 +40,7 @@ public class FencedAtom extends Atom {
     // parameters used in the TeX algorithm
     private static final int DELIMITER_FACTOR = 901;
     
-    private static final float DELIMITER_SHORTFALL = 0.5f;
+    private static final float DELIMITER_SHORTFALL = 0.005f;
     
     // base atom
     private final Atom base;
@@ -95,7 +95,7 @@ public class FencedAtom extends Atom {
 	TeXFont tf = env.getTeXFont();
 	
 	Box content = base.createBox(env);
-	float axis = axis = tf.getAxisHeight(env.getStyle()), delta = Math.max(
+	float axis = tf.getAxisHeight(env.getStyle()), delta = Math.max(
 									       content.getHeight() - axis, content.getDepth() + axis), minHeight = Math
             .max((delta / 500) * DELIMITER_FACTOR, 2 * delta
 		 - DELIMITER_SHORTFALL);

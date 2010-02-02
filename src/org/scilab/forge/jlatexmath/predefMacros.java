@@ -454,12 +454,17 @@ public class predefMacros {
     }
 
     public Atom intertext_macro(TeXParser tp, String[] args) throws ParseException {
+	if (!tp.isArrayMode()) {
+	    throw new ParseException("Bad environment for \\intertext command !");
+	}
+
 	String str = args[1].replaceAll("\\^\\{\\\\prime\\}", "\'");
 	str = str.replaceAll("\\^\\{\\\\prime\\\\prime\\}", "\'\'");
 	Atom at = new RomanAtom(new TeXFormula(str, "mathnormal", false, false).root);
 	at.type = TeXConstants.TYPE_INTERTEXT;
-	//backslashcr_macro(tp, new String[0]);
-	return at;
+	tp.addAtom(at);
+	tp.addRow();
+	return null;
     }
 
     public Atom smallmatrixATATenv_macro(TeXParser tp, String[] args) throws ParseException {
