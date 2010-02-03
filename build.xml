@@ -1,107 +1,121 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <project name="jlatexmath" basedir="." default="buildJar">
-<import file="version.xml"/>
+  <import file="version.xml"/>
+  
+  <!-- Init -->
+  <target name="init" description="Initialize build">
+    <property name="project.root.dir" value="." />
+    <property name="fop.base.dir" value="${project.root.dir}/plugin/fop" />
+    <property name="doc.dir" value="${project.root.dir}/doc/" />
+    <property name="project.src.basedir" value="${project.root.dir}/src/" />
+    <property name="class.dir" value="/org/scilab/forge/jlatexmath" />
+    <property name="project.src.dir" value="${project.root.dir}/src/${class.dir}" />
+    <property name="project.bin.dir" value="${project.root.dir}/bin" />
+    <property name="project.ex.dir" value="${project.root.dir}/examples" />
+    <property name="ex.basic" value="${project.ex.dir}/Basic" />
+    <property name="ex.macros" value="${project.ex.dir}/Macros" />
+    <property name="package.dir" value="dist/" />
+    <property name="output.jar.dir" value="${package.dir}" />
+    <property name="jarfile" value="${package.dir}/jlatexmath-${version}.jar" />
+    <mkdir dir="${project.bin.dir}"/>
+    <mkdir dir="${package.dir}"/>
+    <mkdir dir="${ex.macros}/bin"/>
+  </target>
+  
+  <!-- Info -->
+  <target name="info" depends="init" description="Display configuration">
+    <echo message="**********************" />
+    <echo message="*     JLaTeXMath     *" />
+    <echo message="**********************" />
+    <echo message="Author	                    : Calixte Denizet" />
+    <echo message="Script version             : 1.0.0" />
+    <echo message="Ant  version               : ${ant.version}" />
+    <echo message="Java version               : ${ant.java.version}" />
+    <echo message="Java home directory        : ${java.home}" />
+    <echo message="Java classpath             : ${java.class.path}" />
+  </target>
+  
+  <!-- Remove all temp directories and/or files-->
+  <target name="clean" depends="info" description="Removes all generated files">
+    <delete dir="${project.bin.dir}"/>
+    <delete dir="${doc.dir}"/>
+    <delete>
+      <fileset dir="${ex.basic}" includes="**/Example*.png **/*.class"/>
+    </delete>
+    <delete dir="${ex.macros}/bin">
+      <fileset dir="${ex.macros}" includes="**/*.png **/*.class **/*.jar"/>
+    </delete>
+  </target>
+  
+  <target name="example" depends="Macros">
+    <javac srcdir="${ex.basic}" destdir="${ex.basic}" debug="on" source="5" target="5" classpath="${output.jar.dir}/jlatexmath-${version}.jar">
+    </javac>
+    <java fork="true" classpath="${ex.basic}:${output.jar.dir}/jlatexmath-${version}.jar" dir="${ex.basic}" className="Main"/> 
+  </target>
+  
+  <target name="Macros" depends="compile">
+    <javac srcdir="${ex.macros}" destdir="${ex.macros}/bin" debug="on" source="5" target="5" classpath="${output.jar.dir}/jlatexmath-${version}.jar">
+    </javac>
+    <move file="${ex.macros}/bin/Main.class" todir="${ex.macros}"/>
+    <jar jarfile="${ex.macros}/Foo.jar" basedir="${ex.macros}/bin"/>
+    <java fork="true" classpath="${ex.macros}:${ex.macros}/Foo.jar:${output.jar.dir}/jlatexmath-${version}.jar" dir="${ex.macros}" className="Main"/> 
+  </target>
+  
+  <target name="examples" depends="example"/>
+  
+  <!-- Compile source files -->
+  <target name="compile" depends="init">
+    <javac srcdir="${project.src.dir}" destdir="${project.bin.dir}" debug="on" source="5" target="5">
+      <!--compilerarg value="-Xlint"/-->
+    </javac>
+  </target>
+  
+  <!-- Build JAR files-->
+  <target name="buildJar" depends="compile">
+    <copy todir="${project.bin.dir}${class.dir}" >
+      <fileset dir="${project.src.dir}">
+	<exclude name="**/*.java"/>
+      </fileset>
+    </copy>
+    <mkdir dir="${project.bin.dir}/META-INF" />
+    <copy file="LICENSE" todir="${project.bin.dir}/META-INF" />
+    <copy file="COPYING" todir="${project.bin.dir}/META-INF" />
+    <jar jarfile="${jarfile}" basedir="${project.bin.dir}" manifest="MANIFEST.MF"/>
+  </target>
 
-	<!-- Init -->
-	<target name="init" description="Initialize build">
-		<property name="project.root.dir" value="." />
-		<property name="doc.dir" value="${project.root.dir}/doc/" />
-		<property name="project.src.basedir" value="${project.root.dir}/src/" />
-		<property name="class.dir" value="/org/scilab/forge/jlatexmath" />
-		<property name="project.src.dir" value="${project.root.dir}/src/${class.dir}" />
-		<property name="project.bin.dir" value="${project.root.dir}/bin" />
-		<property name="project.ex.dir" value="${project.root.dir}/examples" />
-		<property name="ex.basic" value="${project.ex.dir}/Basic" />
-		<property name="ex.macros" value="${project.ex.dir}/Macros" />
-		<property name="package.dir" value="dist/" />
-		<property name="output.jar.dir" value="${package.dir}" />
-		<property name="version" value="0.8.8" />
-		<mkdir dir="${project.bin.dir}"/>
-		<mkdir dir="${package.dir}"/>
-		<mkdir dir="${ex.macros}/bin"/>
-	</target>
+  <target name="plugin" depends="init">
+    <ant antfile="build.xml" dir="${fop.base.dir}" inheritAll="false"/>
+    <copy file="${fop.base.dir}/dist/jlatexmath-plugin-fop-${version}.jar" todir="${package.dir}"/>
+  </target>
 
-	<!-- Info -->
-	<target name="info" depends="init" description="Display configuration">
-		<echo message="**********************" />
-		<echo message="*     JLaTeXMath     *" />
-		<echo message="**********************" />
-		<echo message="Author	                    : Calixte Denizet" />
-		<echo message="Script version             : 1.0.0" />
-		<echo message="Ant  version               : ${ant.version}" />
-		<echo message="Java version               : ${ant.java.version}" />
-		<echo message="Java home directory        : ${java.home}" />
-		<echo message="Java classpath             : ${java.class.path}" />
-	</target>
-
-	<!-- Remove all temp directories and/or files-->
-	<target name="clean" depends="info" description="Removes all generated files">
-		<delete dir="${project.bin.dir}"/>
-		<delete dir="${doc.dir}"/>
-		<delete>
-		  <fileset dir="${ex.basic}" includes="**/Example*.png **/*.class"/>
-		</delete>
-		<delete dir="${ex.macros}/bin">
-		  <fileset dir="${ex.macros}" includes="**/*.png **/*.class **/*.jar"/>
-		</delete>
-	</target>
-
-	<target name="example" depends="Macros">
-	  <javac srcdir="${ex.basic}" destdir="${ex.basic}" debug="on" source="5" target="5" classpath="${output.jar.dir}/jlatexmath-${version}.jar">
-	  </javac>
-	  <java fork="true" classpath="${ex.basic}:${output.jar.dir}/jlatexmath-${version}.jar" dir="${ex.basic}" className="Main"/> 
-	</target>
-
-	<target name="Macros" depends="compile">
-	  <javac srcdir="${ex.macros}" destdir="${ex.macros}/bin" debug="on" source="5" target="5" classpath="${output.jar.dir}/jlatexmath-${version}.jar">
-	  </javac>
-	  <move file="${ex.macros}/bin/Main.class" todir="${ex.macros}"/>
-	  <jar jarfile="${ex.macros}/Foo.jar" basedir="${ex.macros}/bin"/>
-	  <java fork="true" classpath="${ex.macros}:${ex.macros}/Foo.jar:${output.jar.dir}/jlatexmath-${version}.jar" dir="${ex.macros}" className="Main"/> 
-	</target>
-
-	<target name="examples" depends="example"/>
-
-	<!-- Compile source files -->
-	<target name="compile" depends="init">
-	  <javac srcdir="${project.src.dir}" destdir="${project.bin.dir}" debug="on" source="5" target="5">
-	    <!--compilerarg value="-Xlint"/-->
-	  </javac>
-	</target>
-
-	<!-- Build JAR files-->
-	<target name="buildJar" depends="compile">
-	  <copy todir="${project.bin.dir}${class.dir}" >
-	    <fileset dir="${project.src.dir}">
-	      <exclude name="**/*.java"/>
-	    </fileset>
-	  </copy>
-	  <mkdir dir="${project.bin.dir}/META-INF" />
-	  <copy file="LICENSE" todir="${project.bin.dir}/META-INF" />
-	  <copy file="COPYING" todir="${project.bin.dir}/META-INF" />
-	  <jar jarfile="${output.jar.dir}/jlatexmath-${version}.jar" basedir="${project.bin.dir}" manifest="MANIFEST.MF"/>
-	</target>
-
-	<target name="source" depends="info" >
-	  <jar jarfile="${output.jar.dir}/jlatexmath-src-${version}.jar" basedir="${project.root.dir}" includes="COPYING LICENSE build.xml MANIFEST.MF src/**/*.java src/**/*.xml src/**/*.ttf src/**/licences/* src/**/README examples/**/*.java examples/**/lion.png examples/**/*.xml examples/**/README"/>
-	</target>
-
-	<target name="src-all" depends="info" >
-	  <jar jarfile="${output.jar.dir}/jlatexmath-src-all-${version}.jar" basedir="${project.root.dir}" includes="COPYING LICENSE build.xml MANIFEST.MF src/**/*.java src/**/*.xml src/**/*.ttf src/**/licences/* src/**/README examples/**/*.java examples/**/lion.png examples/**/*.xml examples/**/README plugin/**/src/**/*.java plugin/**/src/META-INF/**/* plugin/**/build.xml plugin/**/COPYING plugin/**/LICENSE plugin/**/examples/*.*"/>
-	</target>
-
-
-     <target name="doc" depends="compile" description="Generates the API specification (javadoc)">
-  <javadoc packagenames="org.scilab.forge.jlatexmath.*"
-           sourcepath="${project.src.basedir}"
-           defaultexcludes="yes"
-           destdir="${doc.dir}"
-           author="true"
-           version="true"
-           use="true"
-           >
-  </javadoc>
-        </target>
-
+  <target name="embedded" depends="compile">
+   <ant antfile="build.xml" dir="${fop.base.dir}" inheritAll="false" target="embedded"/>
+   <antcall target="buildJar">  
+     <param name="jarfile" value="${package.dir}/jlatexmath-embedded-fop-${version}.jar"/>
+   </antcall>
+   <ant antfile="build.xml" dir="${fop.base.dir}" inheritAll="false" target="clean_embedded"/>
+  </target>
+  
+  <target name="source" depends="info" >
+    <jar jarfile="${output.jar.dir}/jlatexmath-src-${version}.jar" basedir="${project.root.dir}" includes="COPYING LICENSE build.xml version.xml MANIFEST.MF src/**/*.java src/**/*.xml src/**/*.ttf src/**/licences/* src/**/README examples/**/*.java examples/**/lion.png examples/**/*.xml examples/**/README"/>
+  </target>
+  
+  <target name="src-all" depends="info" >
+    <jar jarfile="${output.jar.dir}/jlatexmath-src-all-${version}.jar" basedir="${project.root.dir}" includes="COPYING LICENSE build.xml version.xml MANIFEST.MF src/**/*.java src/**/*.xml src/**/*.ttf src/**/licences/* src/**/README examples/**/*.java examples/**/lion.png examples/**/*.xml examples/**/README plugin/**/src/**/*.java plugin/**/src/META-INF/**/* plugin/**/build.xml plugin/**/COPYING plugin/**/LICENSE plugin/**/examples/*.*"/>
+  </target>
+  
+  
+  <target name="doc" depends="compile" description="Generates the API specification (javadoc)">
+    <javadoc packagenames="org.scilab.forge.jlatexmath.*"
+             sourcepath="${project.src.basedir}"
+             defaultexcludes="yes"
+             destdir="${doc.dir}"
+             author="true"
+             version="true"
+             use="true"
+             >
+    </javadoc>
+  </target>
+  
 </project>
 
