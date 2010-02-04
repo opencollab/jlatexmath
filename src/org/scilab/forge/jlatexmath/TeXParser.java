@@ -37,7 +37,8 @@ import java.lang.Character.UnicodeBlock;
  */
 public class TeXParser {
 
-    private TeXFormula formula;
+    public TeXFormula formula;
+    
     private StringBuffer parseString;
     private int pos;
     private int spos;

@@ -94,7 +94,7 @@ public abstract class Box {
      */
     protected float shift = 0;
     
-    protected boolean isIntertext = false;
+    protected int type = -1;
     
     /**
      * List of child boxes

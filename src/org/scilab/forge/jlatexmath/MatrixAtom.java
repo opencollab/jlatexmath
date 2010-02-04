@@ -278,14 +278,17 @@ public class MatrixAtom extends Atom {
 		} catch (Exception e) {
 		    //The previous atom was an intertext atom
 		    //position[j - 1] = -1;
-		    boxarr[i][j - 1].isIntertext = true;
+		    boxarr[i][j - 1].type = TeXConstants.TYPE_INTERTEXT;
 		    j = col - 1;
 		}
 
-		boxarr[i][j] = (at == null) ? new StrutBox(0, 0, 0, 0) : at.createBox(env); 
-		lineDepth[i] = Math.max(boxarr[i][j].getDepth(), lineDepth[i]);
-		lineHeight[i] = Math.max(boxarr[i][j].getHeight(), lineHeight[i]);
-		rowWidth[j] = Math.max(boxarr[i][j].getWidth(), rowWidth[j]);
+		boxarr[i][j] = (at == null) ? new StrutBox(0, 0, 0, 0) : at.createBox(env);
+		
+		if (boxarr[i][j].type != TeXConstants.TYPE_MULTICOLUMN) {
+		    lineDepth[i] = Math.max(boxarr[i][j].getDepth(), lineDepth[i]);
+		    lineHeight[i] = Math.max(boxarr[i][j].getHeight(), lineHeight[i]);
+		    rowWidth[j] = Math.max(boxarr[i][j].getWidth(), rowWidth[j]);
+		}
 	    }
 	}
 
@@ -303,14 +306,38 @@ public class MatrixAtom extends Atom {
 	for (int i = 0; i < row; i++) {
 	    HorizontalBox hb = new HorizontalBox(Hsep[0]);
 	    for (int j = 0; j < col; j++) {
-		if (!boxarr[i][j].isIntertext) {
+		switch (boxarr[i][j].type) {
+		case -1 :
 		    hb.add(new HorizontalBox(boxarr[i][j], rowWidth[j], position[j]));
 		    hb.add(Hsep[j + 1]);
-		} else {
+		    break;
+		case TeXConstants.TYPE_INTERTEXT :
 		    float f = env.getTextwidth();
 		    f = f == Float.POSITIVE_INFINITY ? rowWidth[j] : f;
 		    hb = new HorizontalBox(boxarr[i][j], f, TeXConstants.ALIGN_LEFT);
 		    j = col - 1;
+		    break;
+		case TeXConstants.TYPE_MULTICOLUMN :
+		    float w = 0;
+		    MulticolumnAtom mca = (MulticolumnAtom) matrix.array.get(i).get(j);
+		    int k, n = mca.getSkipped();
+		    for (k = j; k < j + n - 1; k++) {
+			w += rowWidth[k] + Hsep[k + 1].getWidth();
+		    }
+		    w += rowWidth[k];
+		    Box b = mca.createBox(env);
+		    float bw = b.getWidth();
+		    if (bw > w) {
+			// It isn't a good idea but for the moment I have no other solution ! 
+			w = 0;
+		    }
+		    
+		    mca.setWidth(w);
+		    b = mca.createBox(env);
+		    hb.add(b);
+		    hb.add(Hsep[k + 1]);
+		    j = k;
+		    break;
 		}
 	    }
 	    

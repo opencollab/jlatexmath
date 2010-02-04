@@ -49,6 +49,14 @@ public class ArrayOfAtoms extends TeXFormula {
 	root = null;
     }
 
+    public void addCol(int n) {
+	array.get(row).add(root);
+	for (int i = 1; i < n - 1; i++) {
+	    array.get(row).add(null);
+	}
+	root = null;
+    }
+
     public void addRow() {
 	addCol();
 	array.add(new LinkedList<Atom>());
@@ -65,7 +73,7 @@ public class ArrayOfAtoms extends TeXFormula {
 	col = array.get(0).size();
 	for (int i = 1; i < row; i++) {
 	    if (array.get(i).size() != col && array.get(i).get(0) != null && array.get(i).get(0).type != TeXConstants.TYPE_INTERTEXT)
-		throw new InvalidMatrixException("Bad number of columns at row " + i);
+		throw new InvalidMatrixException("Bad number of columns at row " + i + " : " + array.get(i).size() + " found !");
 	}
     }
 }

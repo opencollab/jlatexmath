@@ -389,6 +389,7 @@
   <Symbol name="jlatexmathpercent" type="ord"/>
   <Symbol name="jlatexmathampersand" type="ord"/>
   <Symbol name="jlatexmatharobase" type="ord"/>
+  <Symbol name="underscore" type="ord"/>
   
   <!-- math accents -->
   

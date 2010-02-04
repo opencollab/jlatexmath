@@ -168,13 +168,19 @@ public class predefMacros {
     public Atom mbox_macro(TeXParser tp, String[] args) throws ParseException {
 	String str = args[1].replaceAll("\\^\\{\\\\prime\\}", "\'");
 	str = str.replaceAll("\\^\\{\\\\prime\\\\prime\\}", "\'\'");
+	str = str.replaceAll("_", "\\\\_");
 	return new RomanAtom(new TeXFormula("\\textstyle{" + str + "}", "mathnormal", false, false).root);
     }
 
     public Atom text_macro(TeXParser tp, String[] args) throws ParseException {
 	String str = args[1].replaceAll("\\^\\{\\\\prime\\}", "\'");
 	str = str.replaceAll("\\^\\{\\\\prime\\\\prime\\}", "\'\'");
+	str = str.replaceAll("_", "\\\\_");
 	return new RomanAtom(new TeXFormula(str, "mathnormal", false, false).root);
+    }
+    
+    public Atom underscore_macro(TeXParser tp, String[] args) throws ParseException {
+	return new UnderscoreAtom();
     }
     
     public Atom accent_macros(TeXParser tp, String[] args) throws ParseException {
@@ -473,6 +479,20 @@ public class predefMacros {
 	parser.parse();
 	array.checkDimensions();
 	return new MatrixAtom(array, MatrixAtom.SMALLMATRIX);
+    }
+
+    public Atom multicolumn_macro(TeXParser tp, String[] args) throws ParseException {
+	int n = Integer.parseInt(args[1]);
+	tp.addAtom(new MulticolumnAtom(n, args[2], new TeXFormula(args[3]).root));
+	((ArrayOfAtoms)tp.formula).addCol(n);
+	return null;
+    }
+
+    public Atom hdotsfor_macro(TeXParser tp, String[] args) throws ParseException {
+	int n = Integer.parseInt(args[1]);
+	tp.addAtom(new HdotsforAtom(n));
+	((ArrayOfAtoms)tp.formula).addCol(n);
+	return null;
     }
 
     public Atom arrayATATenv_macro(TeXParser tp, String[] args) throws ParseException {

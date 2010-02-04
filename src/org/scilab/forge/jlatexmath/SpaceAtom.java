@@ -234,7 +234,7 @@ public class SpaceAtom extends Atom {
                     * getFactor(hUnit, env), depth * getFactor(dUnit, env), 0);
     }
     
-    private float getFactor(int unit, TeXEnvironment env) {
+    public float getFactor(int unit, TeXEnvironment env) {
         return unitConversions[unit].getPixelConversion(env);
     }
 }

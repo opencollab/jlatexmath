@@ -151,6 +151,15 @@
 		<Return name="f" />
 	</Command>
 
+	<Command name="underscore" enabled="true">
+		<CreateCommand name="f">
+			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+			<Argument type="String" value="underscore_macro" />
+			<Argument type="float" value="0" />        	
+		</CreateCommand>
+		<Return name="f" />
+	</Command>
+
 	<Command name="mbox" enabled="true">
 		<CreateCommand name="f">
 			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
@@ -897,6 +906,25 @@
 			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
 			<Argument type="String" value="cr_macro" />
 			<Argument type="float" value="0" />
+		</CreateCommand>
+		<Return name="f" />
+	</Command>
+
+	<Command name="multicolumn" enabled="true">
+		<CreateCommand name="f">
+			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+			<Argument type="String" value="multicolumn_macro" />
+			<Argument type="float" value="3" />
+		</CreateCommand>
+		<Return name="f" />
+	</Command>
+
+	<Command name="hdotsfor" enabled="true">
+		<CreateCommand name="f">
+			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+			<Argument type="String" value="hdotsfor_macro" />
+			<Argument type="float" value="1" />
+			<Argument type="float" value="1" />
 		</CreateCommand>
 		<Return name="f" />
 	</Command>
