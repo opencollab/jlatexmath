@@ -60,13 +60,16 @@ public class FBoxAtom extends Atom {
     public Box createBox(TeXEnvironment env) {
 	Box Hsep = hsep.createBox(env);
 	Box Vsep = vsep.createBox(env);
+	Box bbase = base.createBox(env);
 	HorizontalBox hb = new HorizontalBox(Hsep);
-	hb.add(base.createBox(env));
+	hb.add(bbase);
 	hb.add(Hsep);
 	VerticalBox vb = new VerticalBox();
 	vb.add(Vsep);
 	vb.add(hb);
 	vb.add(Vsep);
+	vb.setHeight(bbase.getHeight() + Vsep.getHeight());
+	vb.setDepth(bbase.getDepth() + Vsep.getHeight());
 	float drt = env.getTeXFont().getDefaultRuleThickness(env.getStyle());
 	if (bg == null) {
 	    return new FramedBox(vb, drt);

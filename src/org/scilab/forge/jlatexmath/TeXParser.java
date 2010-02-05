@@ -496,7 +496,7 @@ public class TeXParser {
             String symbolName = TeXFormula.symbolMappings[c];
 	    if (symbolName == null && (TeXFormula.symbolFormulaMappings == null || TeXFormula.symbolFormulaMappings[c] == null))
                 throw new ParseException("Unknown character : '"
-					 + Character.toString(c) + "'");
+					 + Character.toString(c) + "' (or " + ((int) c) + ")");
             else {
 		if (TeXFormula.symbolFormulaMappings != null && TeXFormula.symbolFormulaMappings[c] != null)
 		    return TeXFormula.symbolFormulaMappings[c];

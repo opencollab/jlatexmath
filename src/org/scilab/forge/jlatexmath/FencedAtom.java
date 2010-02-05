@@ -104,19 +104,20 @@ public class FencedAtom extends Atom {
 	
 	// construct box
 	HorizontalBox hBox = new HorizontalBox();
-	
-	for (int i = 0; i < middle.size(); i++) {
-	    MiddleAtom at = middle.get(i);
-	    if (at.base instanceof SymbolAtom) {
-		Box b = DelimiterFactory.create(((SymbolAtom)at.base).getName(), env, minHeight);
-		center(b, axis);
-		at.box = b;
+
+	if (middle != null) {
+	    for (int i = 0; i < middle.size(); i++) {
+		MiddleAtom at = middle.get(i);
+		if (at.base instanceof SymbolAtom) {
+		    Box b = DelimiterFactory.create(((SymbolAtom)at.base).getName(), env, minHeight);
+		    center(b, axis);
+		    at.box = b;
+		}
+	    }
+	    if (middle.size() != 0) {
+		content = base.createBox(env);
 	    }
 	}
-	
-	if (middle.size() != 0) {
-	    content = base.createBox(env);
-	}    
 	
 	// left delimiter
 	if (left != null) {

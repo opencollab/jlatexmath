@@ -943,8 +943,8 @@ public class predefMacros {
     }
     
     public Atom colorbox_macro(TeXParser tp, String[] args) throws ParseException {
-	
-	return new ColorAtom(new TeXFormula(args[2]).root, ColorAtom.Colors.get(args[1]), null);
+	Color c = ColorAtom.Colors.get(args[1]);
+	return new FBoxAtom(new TeXFormula(args[2]).root, c, c);
     }
 
     public Atom fcolorbox_macro(TeXParser tp, String[] args) throws ParseException {
