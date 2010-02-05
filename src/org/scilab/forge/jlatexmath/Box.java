@@ -34,6 +34,8 @@ package org.scilab.forge.jlatexmath;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
+import java.awt.Stroke;
+import java.awt.BasicStroke;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -54,6 +56,8 @@ import java.util.List;
  */
 public abstract class Box {
     
+    public static boolean DEBUG = false;
+
     /**
      * The foreground color of the whole box. Child boxes can override this color.
      * If it's null and it has a parent box, the foreground color of the parent will 
@@ -252,6 +256,13 @@ public abstract class Box {
 	    g2.setColor(prevColor); // old foreground color
 	else
 	    g2.setColor(foreground); // overriding foreground color
+	
+	if (DEBUG) {
+	    Stroke st = g2.getStroke();
+	    g2.setStroke(new BasicStroke((float) (1 / g2.getTransform().getScaleX()), BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER));
+	    g2.draw(new Rectangle2D.Float(x, y - height, width, height + depth));
+	    g2.setStroke(st);
+	}
     }
     
     /**

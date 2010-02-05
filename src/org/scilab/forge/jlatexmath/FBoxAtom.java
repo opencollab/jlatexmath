@@ -28,55 +28,53 @@
 
 package org.scilab.forge.jlatexmath;
 
+import java.awt.Color;
+
 /**
  * An atom representing a boxed base atom. 
  */
 public class FBoxAtom extends Atom {
 
-   // base atom
-   private final Atom base;
+    public static SpaceAtom hsep = new SpaceAtom(TeXConstants.UNIT_EM, 0.5f, 0.0f, 0.0f);
+    public static SpaceAtom vsep = new SpaceAtom(TeXConstants.UNIT_EX, 0.0f, 0.5f, 0.0f);
 
-   public FBoxAtom(Atom base) {
-      if (base == null)
-         this.base = new RowAtom(); // empty base
-      else {
-	  this.base = base;
-	  this.type = base.type;
-      }
-   }
+    // base atom
+    private final Atom base;
+    private Color bg = null, line = null;
+	
+    public FBoxAtom(Atom base) {
+	if (base == null)
+	    this.base = new RowAtom(); // empty base
+	else {
+	    this.base = base;
+	    this.type = base.type;
+	}
+    }
+    
+    public FBoxAtom(Atom base, Color bg, Color line) {
+	this(base);
+	this.bg = bg;
+	this.line = line;
+    }
 
-   public Box createBox(TeXEnvironment env) {
-       Box bbase = base.createBox(env);
-       float height = bbase.getHeight();
-       float width = bbase.getWidth();
-       float depth = bbase.getDepth();
-       float drt = env.getTeXFont().getDefaultRuleThickness(env.getStyle());
-       Box space = new SpaceAtom(TeXConstants.UNIT_MU, 0, 3, 0).createBox(env);
-       float mu3 = space.getHeight();
-       HorizontalBox hb = new HorizontalBox();
-       HorizontalBox hbb = new HorizontalBox();
-       HorizontalRule vert = new HorizontalRule(height + depth + 2 * (mu3 + drt), drt, height + depth + 2 * mu3 + drt);
-       HorizontalRule hor = new HorizontalRule(drt, width + 2 * mu3, 0);
-       VerticalBox vb = new VerticalBox();
-       StrutBox s = new StrutBox(0, mu3, 0, 0);
-       StrutBox ss = new StrutBox(mu3, 0, 0, -drt);
-       hbb.add(ss);
-       hbb.add(bbase);
-       hbb.add(ss);
-       vb.add(hor);
-       vb.add(s);
-       vb.add(hbb);
-       vb.add(s);
-       vb.add(hor);
-       hb.add(vert);
-       hb.add(vb);
-       hb.add(vert);
-       float totalheight = hb.getHeight() + hb.getDepth();
-       VerticalBox Vbox = new VerticalBox();
-       Vbox.add(hb);
-       Vbox.setHeight(height + mu3 + drt);
-       Vbox.setDepth(totalheight - Vbox.getHeight());
-       return Vbox; 
-   }
-
+    public Box createBox(TeXEnvironment env) {
+	Box Hsep = hsep.createBox(env);
+	Box Vsep = vsep.createBox(env);
+	HorizontalBox hb = new HorizontalBox(Hsep);
+	hb.add(base.createBox(env));
+	hb.add(Hsep);
+	VerticalBox vb = new VerticalBox();
+	vb.add(Vsep);
+	vb.add(hb);
+	vb.add(Vsep);
+	float drt = env.getTeXFont().getDefaultRuleThickness(env.getStyle());
+	if (bg == null) {
+	    return new FramedBox(vb, drt);
+	} else {
+	    env.isColored = true;
+	    HorizontalBox hbb = new HorizontalBox(env.getColor(), bg);
+	    hbb.add(vb);
+	    return new FramedBox(hbb, drt, line);
+	}
+    }
 }

@@ -39,8 +39,8 @@ public class MatrixAtom extends Atom {
     
     public static SpaceAtom hsep = new SpaceAtom(TeXConstants.UNIT_EM, 2.0f, 0.0f, 0.0f);
     public static SpaceAtom vsep_in = new SpaceAtom(TeXConstants.UNIT_EX, 0.0f, 1f, 0.0f);
-    public static SpaceAtom vsep_ext_top = new SpaceAtom(TeXConstants.UNIT_EX, 0.0f, 0.0f, 0.0f);
-    public static SpaceAtom vsep_ext_bot = new SpaceAtom(TeXConstants.UNIT_EX, 0.0f, 0.0f, 0.0f);
+    public static SpaceAtom vsep_ext_top = new SpaceAtom(TeXConstants.UNIT_EX, 0.0f, 0.4f, 0.0f);
+    public static SpaceAtom vsep_ext_bot = new SpaceAtom(TeXConstants.UNIT_EX, 0.0f, 0.4f, 0.0f);
 
     public static final int MATRIX = 0;
     public static final int ALIGN = 1;

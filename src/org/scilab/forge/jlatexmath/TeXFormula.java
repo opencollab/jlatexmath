@@ -35,6 +35,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.List;
+import java.util.LinkedList;
 import java.util.Set;
 import java.util.Stack;
 import java.io.InputStream;
@@ -106,7 +107,7 @@ public class TeXFormula {
     // character-to-symbol and character-to-delimiter mappings
     public static String[] symbolMappings;
     public static Atom[] symbolFormulaMappings;
-    public MiddleAtom middle = null;
+    public List<MiddleAtom> middle = new LinkedList();
     
     static {
         // character-to-symbol and character-to-delimiter mappings
@@ -209,7 +210,7 @@ public class TeXFormula {
     public TeXFormula add(Atom el) {
         if (el != null) {
 	    if (el instanceof MiddleAtom)
-		middle = (MiddleAtom)el;
+		middle.add((MiddleAtom)el);
             if (root == null)
                 root = el;
             else {
@@ -421,6 +422,10 @@ public class TeXFormula {
     public void createJPEG(int style, float size, String out, Color bg, Color fg) {
         //There is a bug when a BufferedImage has a component alpha so we disabel it 
         createImage("jpeg", style, size, out, bg, fg, false);
+    }
+
+    public void setDEBUG(boolean b) {
+	Box.DEBUG = b;
     }
 
     /**

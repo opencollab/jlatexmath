@@ -31,6 +31,8 @@
 
 package org.scilab.forge.jlatexmath;
 
+import java.util.List;
+
 /**
  * An atom representing a base atom surrounded with delimiters that change their size
  * according to the height of the base.
@@ -40,15 +42,16 @@ public class FencedAtom extends Atom {
     // parameters used in the TeX algorithm
     private static final int DELIMITER_FACTOR = 901;
     
-    private static final float DELIMITER_SHORTFALL = 0.005f;
-    
+    //private static final float DELIMITER_SHORTFALL = 0.5f;
+    private static final SpaceAtom DS = new SpaceAtom(TeXConstants.UNIT_POINT,5f,0f,0f);
+
     // base atom
     private final Atom base;
     
     // delimiters
     private final SymbolAtom left; 
     private final SymbolAtom right;
-    private final MiddleAtom middle;
+    private final List<MiddleAtom> middle;
     
     /**
      * Creates a new FencedAtom from the given base and delimiters
@@ -61,7 +64,7 @@ public class FencedAtom extends Atom {
 	this(base, l, null, r);
     }
     
-    public FencedAtom(Atom base, SymbolAtom l, MiddleAtom m, SymbolAtom r) {
+    public FencedAtom(Atom base, SymbolAtom l, List m, SymbolAtom r) {
 	if (base == null)
 	    this.base = new RowAtom(); // empty base
 	else
@@ -95,21 +98,26 @@ public class FencedAtom extends Atom {
 	TeXFont tf = env.getTeXFont();
 	
 	Box content = base.createBox(env);
-	float axis = tf.getAxisHeight(env.getStyle()), delta = Math.max(
-									       content.getHeight() - axis, content.getDepth() + axis), minHeight = Math
-            .max((delta / 500) * DELIMITER_FACTOR, 2 * delta
-		 - DELIMITER_SHORTFALL);
+	float DELIMITER_SHORTFALL = DS.createBox(env).getWidth();
+	float axis = tf.getAxisHeight(env.getStyle()), delta = Math.max(content.getHeight() - axis, content.getDepth() + axis);
+	float minHeight = Math.max((delta / 500) * DELIMITER_FACTOR, 2 * delta - DELIMITER_SHORTFALL);
 	
 	// construct box
 	HorizontalBox hBox = new HorizontalBox();
 	
-	if (middle != null && middle.base instanceof SymbolAtom) {
-	    Box b = DelimiterFactory.create(((SymbolAtom)middle.base).getName(), env, minHeight);
-	    center(b, axis);
-	    middle.box = b;
-	    content = base.createBox(env);
+	for (int i = 0; i < middle.size(); i++) {
+	    MiddleAtom at = middle.get(i);
+	    if (at.base instanceof SymbolAtom) {
+		Box b = DelimiterFactory.create(((SymbolAtom)at.base).getName(), env, minHeight);
+		center(b, axis);
+		at.box = b;
+	    }
 	}
-
+	
+	if (middle.size() != 0) {
+	    content = base.createBox(env);
+	}    
+	
 	// left delimiter
 	if (left != null) {
 	    Box b = DelimiterFactory.create(left.getName(), env, minHeight);

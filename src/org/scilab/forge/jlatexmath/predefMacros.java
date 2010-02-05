@@ -78,6 +78,18 @@ public class predefMacros {
 	NewCommandMacro.addNewCommand("spdot", "^{\\displaystyle.}", 0);
 	NewCommandMacro.addNewCommand("d", "\\underaccent{\\dot}{#1}", 1);
 	NewCommandMacro.addNewCommand("b", "\\underaccent{\\bar}{#1}", 1);
+	NewCommandMacro.addNewCommand("Bra", "\\left\\langle{#1}\\right\\vert", 1);
+	NewCommandMacro.addNewCommand("Ket", "\\left\\vert{#1}\\right\\rangle", 1);
+    }
+
+    public Atom Braket_macro(TeXParser tp, String[] args) throws ParseException {
+	String str = args[1].replaceAll("\\|", "\\\\middle\\\\vert ");
+	return new TeXFormula("\\left\\langle " + str + "\\right\\rangle").root;
+    }
+
+    public Atom Set_macro(TeXParser tp, String[] args) throws ParseException {
+	String str = args[1].replaceFirst("\\|", "\\\\middle\\\\vert ");
+	return new TeXFormula("\\left\\{" + str + "\\right\\}").root;
     }
 
     public Atom spATbreve_macro(TeXParser tp, String[] args) throws ParseException {
@@ -144,6 +156,22 @@ public class predefMacros {
 	if (num == null || denom.root == null)
 	    throw new ParseException("Both numerator and denominator of a fraction can't be empty!");
 	return new FractionAtom(num, denom.root, true);
+    }
+
+    public Atom atop_macro(TeXParser tp, String[] args) throws ParseException {
+	Atom num = tp.getLastAtom();
+	TeXFormula denom = new TeXFormula(args[1], false);
+	if (num == null || denom.root == null)
+	    throw new ParseException("Both numerator and denominator of atop can't be empty!");
+	return new FractionAtom(num, denom.root, false);
+    }
+
+    public Atom choose_macro(TeXParser tp, String[] args) throws ParseException {
+	Atom num = tp.getLastAtom();
+	TeXFormula denom = new TeXFormula(args[1], false);
+	if (num == null || denom.root == null)
+	    throw new ParseException("Both numerator and denominator of choose can't be empty!");
+	return new FencedAtom(new FractionAtom(num, denom.root, false), new SymbolAtom("lbrack", TeXConstants.TYPE_OPENING, true), new SymbolAtom("rbrack", TeXConstants.TYPE_CLOSING, true));
     }
 
     public Atom binom_macro(TeXParser tp, String[] args) throws ParseException {
@@ -429,9 +457,6 @@ public class predefMacros {
 	    right = ((BigDelimiterAtom)right).delim;
 	if (left instanceof SymbolAtom && right instanceof SymbolAtom) {
 	    TeXFormula tf = new TeXFormula(grp, false);
-	    if (tf.middle != null && !(tf.middle.base instanceof SymbolAtom))
-		tf.middle = null;
-
 	    return new FencedAtom(tf.root, (SymbolAtom)left, tf.middle, (SymbolAtom)right);
 	}
 
@@ -924,7 +949,7 @@ public class predefMacros {
 
     public Atom fcolorbox_macro(TeXParser tp, String[] args) throws ParseException {
 	
-	return new FColorBoxAtom(new TeXFormula(args[3]).root, ColorAtom.Colors.get(args[2]), ColorAtom.Colors.get(args[1]));
+	return new FBoxAtom(new TeXFormula(args[3]).root, ColorAtom.Colors.get(args[2]), ColorAtom.Colors.get(args[1]));
     }
     
     public Atom cong_macro(TeXParser tp, String[] args) throws ParseException {

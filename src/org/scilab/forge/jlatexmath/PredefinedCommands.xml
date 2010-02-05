@@ -151,6 +151,24 @@
 		<Return name="f" />
 	</Command>
 
+	<Command name="atop" enabled="true">
+		<CreateCommand name="f">
+			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+			<Argument type="String" value="atop_macro" />
+			<Argument type="float" value="1" />
+		</CreateCommand>
+		<Return name="f" />
+	</Command>
+
+	<Command name="choose" enabled="true">
+		<CreateCommand name="f">
+			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+			<Argument type="String" value="choose_macro" />
+			<Argument type="float" value="1" />
+		</CreateCommand>
+		<Return name="f" />
+	</Command>
+
 	<Command name="underscore" enabled="true">
 		<CreateCommand name="f">
 			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
@@ -1153,6 +1171,24 @@
 			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
 			<Argument type="String" value="overset_macro" />
 			<Argument type="float" value="2" />
+		</CreateCommand>
+		<Return name="f" />
+	</Command>
+
+	<Command name="Braket" enabled="true">
+		<CreateCommand name="f">
+			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+			<Argument type="String" value="Braket_macro" />
+			<Argument type="float" value="1" />
+		</CreateCommand>
+		<Return name="f" />
+	</Command>
+
+	<Command name="Set" enabled="true">
+		<CreateCommand name="f">
+			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+			<Argument type="String" value="Set_macro" />
+			<Argument type="float" value="1" />
 		</CreateCommand>
 		<Return name="f" />
 	</Command>
