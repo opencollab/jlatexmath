@@ -49,8 +49,8 @@ public class FencedAtom extends Atom {
     private final Atom base;
     
     // delimiters
-    private final SymbolAtom left; 
-    private final SymbolAtom right;
+    private SymbolAtom left = null; 
+    private SymbolAtom right = null;
     private final List<MiddleAtom> middle;
     
     /**
@@ -69,8 +69,12 @@ public class FencedAtom extends Atom {
 	    this.base = new RowAtom(); // empty base
 	else
 	    this.base = base;
-	left = l.getName().equals("normaldot") ? null : l;
-	right = r.getName().equals("normaldot") ? null : r;
+	if (l == null || !l.getName().equals("normaldot")) {
+	    left = l;
+	}
+	if (r == null || !r.getName().equals("normaldot")) {
+	    right = r;
+	}
 	middle =  m;
     }
     

@@ -152,6 +152,15 @@
 		<Return name="f" />
 	</Command>
 
+	<Command name="genfrac" enabled="true">
+		<CreateCommand name="f">
+			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+			<Argument type="String" value="genfrac_macro" />
+			<Argument type="float" value="6" />
+		</CreateCommand>
+		<Return name="f" />
+	</Command>
+
 	<Command name="over" enabled="true">
 		<CreateCommand name="f">
 			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />

@@ -60,10 +60,10 @@ public class predefMacros {
 	NewCommandMacro.addNewCommand("operatorname", "\\mathop{\\mathrm{#1}}\\nolimits", 1);
 	NewCommandMacro.addNewCommand("DeclareMathOperator", "\\newcommand{#1}{\\mathop{\\mathrm{#2}}\\nolimits}", 2);
 	NewCommandMacro.addNewCommand("substack", "\\begin{array}{l}#1\\end{array}", 1);
-	NewCommandMacro.addNewCommand("dfrac", "{\\displaystyle\\frac{#1}{#2}}", 2);
-	NewCommandMacro.addNewCommand("tfrac", "{\\textstyle\\frac{#1}{#2}}", 2);
-	NewCommandMacro.addNewCommand("dbinom", "{\\displaystyle\\binom{#1}{#2}}", 2);
-	NewCommandMacro.addNewCommand("tbinom", "{\\textstyle\\binom{#1}{#2}}", 2);
+	NewCommandMacro.addNewCommand("dfrac", "\\genfrac{}{}{}{}{#1}{#2}", 2);
+	NewCommandMacro.addNewCommand("tfrac", "\\genfrac{}{}{}{1}{#1}{#2}", 2);
+	NewCommandMacro.addNewCommand("dbinom", "\\genfrac{(}{)}{0pt}{}{#1}{#2}", 2);
+	NewCommandMacro.addNewCommand("tbinom", "\\genfrac{(}{)}{0pt}{1}{#1}{#2}", 2);
 	NewCommandMacro.addNewCommand("pmod", "\\qquad\\mathbin{(\\mathrm{mod}\\ #1)}", 1);
 	NewCommandMacro.addNewCommand("mod", "\\qquad\\mathbin{\\mathrm{mod}\\ #1}", 1);
 	NewCommandMacro.addNewCommand("pod", "\\qquad\\mathbin{(#1)}", 1);
@@ -166,6 +166,42 @@ public class predefMacros {
 	if (num.root == null || denom.root == null)
 	    throw new ParseException("Both numerator and denominator of a fraction can't be empty!");
 	return new FractionAtom(num.root, denom.root, true);
+    }
+
+    public Atom genfrac_macro(TeXParser tp, String[] args) throws ParseException {
+	TeXFormula left = new TeXFormula(args[1], false);
+	SymbolAtom L = null, R = null;
+	if (left != null && left.root instanceof SymbolAtom) {
+	    L = (SymbolAtom) left.root;
+	}
+	    
+	TeXFormula right = new TeXFormula(args[2], false);
+	if (right != null && right.root instanceof SymbolAtom) {
+	    R = (SymbolAtom) right.root;
+	}
+	
+	boolean rule = true;
+	float[] ths = SpaceAtom.getLength(args[3]);
+	if (args[3] == null || args[3].length() == 0 || ths.length == 1) {
+	    ths = new float[]{0.0f, 0.0f};
+	    rule = false;
+	}
+	
+	int style = 0;
+	if (args[4].length() != 0) {
+	    style = Integer.parseInt(args[4]);
+	}
+	TeXFormula num = new TeXFormula(args[5], false);
+	TeXFormula denom = new TeXFormula(args[6], false);
+	if (num.root == null || denom.root == null)
+	    throw new ParseException("Both numerator and denominator of a fraction can't be empty!");
+	Atom at = new FractionAtom(num.root, denom.root, rule, (int) ths[0], ths[1]);
+	RowAtom rat = new RowAtom();
+	rat.add(new StyleAtom(style * 2));
+	rat.add(new FencedAtom(at, L, R));
+	rat.add(new StyleAtom());
+	
+	return rat;
     }
 
     public Atom over_macro(TeXParser tp, String[] args) throws ParseException {
