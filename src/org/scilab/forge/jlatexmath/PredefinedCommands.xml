@@ -52,6 +52,16 @@
 		<Return name="f" />
 	</Command>
 
+	<Command name="rule" enabled="true">
+		<CreateCommand name="f">
+			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+			<Argument type="String" value="rule_macro" />
+			<Argument type="float" value="2" />
+			<Argument type="float" value="1" />
+		</CreateCommand>
+		<Return name="f" />
+	</Command>
+
 	<Command name="hspace" enabled="true">
 		<CreateCommand name="f">
 			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />

@@ -192,8 +192,12 @@ public class SpaceAtom extends Atom {
     }
     
     public static float[] getLength(String lgth) {
-	int i;
-	for (i = 0; i < lgth.length() && !Character.isLetter(lgth.charAt(i)); i++);
+	if (lgth == null) {
+	    return new float[]{0f, 0f};
+	}
+
+	int i = 0;
+	for (; i < lgth.length() && !Character.isLetter(lgth.charAt(i)); i++);
 	float f = 0;
 	try {
 	    f = Float.parseFloat(lgth.substring(0, i));

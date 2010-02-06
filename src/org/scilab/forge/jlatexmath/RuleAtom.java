@@ -1,8 +1,7 @@
-/* HorizontalRule.java
+/* RuleAtom.java
  * =========================================================================
- * This file is originally part of the JMathTeX Library - http://jmathtex.sourceforge.net
+ * This file is part of the JLaTeXMath Library - http://forge.scilab.org/jlatexmath
  * 
- * Copyright (C) 2004-2007 Universiteit Gent
  * Copyright (C) 2009 DENIZET Calixte
  * 
  * This program is free software; you can redistribute it and/or modify
@@ -29,47 +28,20 @@
 
 package org.scilab.forge.jlatexmath;
 
-import java.awt.Graphics2D;
-import java.awt.geom.Rectangle2D;
-import java.awt.geom.Line2D;
-import java.awt.Stroke;
-import java.awt.BasicStroke;
-import java.awt.geom.AffineTransform;
-import java.awt.Color;
-
 /**
- * A box representing a horizontal line.
+ * An atom representing a rule. 
  */
-public class HorizontalRule extends Box {
+public class RuleAtom extends Atom {
     
-    Color color = null;
-    
-    public HorizontalRule(float thickness, float width, float s) {
-	height = thickness;
-	this.width = width;
-	shift = s;
-    }
-
-    public HorizontalRule(float thickness, float width, float s, Color c) {
-	height = thickness;
-	this.width = width;
-	color = c;
-	shift = s;
+    private SpaceAtom width, height, raise;
+ 
+    public RuleAtom(int wunit, float width, int hunit, float height, int runit, float raise) {
+	this.width = new SpaceAtom(wunit, width, 0.0f, 0.0f);
+	this.height = new SpaceAtom(hunit, height, 0.0f, 0.0f);
+	this.raise = new SpaceAtom(runit, raise, 0.0f, 0.0f);
     }
     
-    public void draw(Graphics2D g2, float x, float y) {
-	Color old = g2.getColor();
-	if (color != null)
-	    g2.setColor(color);
-	
-	Stroke st = g2.getStroke();
-	g2.setStroke(new BasicStroke(height, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER));
-	g2.draw(new Line2D.Float(x, y - (height - shift) / 2, x + width, y - (height - shift) / 2));
-	g2.setStroke(st);
-	g2.setColor(old);
-    }
-    
-    public int getLastFontId() {
-	return TeXFont.NO_FONT;
-    }
+    public Box createBox(TeXEnvironment env) {
+	return new HorizontalRule(height.createBox(env).getWidth(), width.createBox(env).getWidth(), raise.createBox(env).getWidth()); 
+    }    
 }

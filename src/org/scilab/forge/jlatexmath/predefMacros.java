@@ -141,7 +141,25 @@ public class predefMacros {
     public Atom includegraphics_macro(TeXParser tp, String[] args) throws ParseException {
 	return new GraphicsAtom(args[1]);
     }
-       
+     
+    public Atom rule_macro(TeXParser tp, String[] args) throws ParseException {
+	float[] winfo = SpaceAtom.getLength(args[1]);
+	if (winfo.length == 1) {
+	    throw new ParseException("Error in getting width in \\rule command !");
+	}
+	float[] hinfo = SpaceAtom.getLength(args[2]);
+	if (hinfo.length == 1) {
+	    throw new ParseException("Error in getting height in \\rule command !");
+	}
+	
+	float[] rinfo = SpaceAtom.getLength(args[3]);
+	if (rinfo.length == 1) {
+	    throw new ParseException("Error in getting raise in \\rule command !");
+	}
+	
+	return new RuleAtom((int) winfo[0], winfo[1], (int) hinfo[0], hinfo[1], (int) rinfo[0], -rinfo[1]);	
+    }
+
     public Atom frac_macro(TeXParser tp, String[] args) throws ParseException {
 	TeXFormula num = new TeXFormula(args[1], false);
 	TeXFormula denom = new TeXFormula(args[2], false);

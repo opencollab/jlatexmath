@@ -1,8 +1,7 @@
-/* HorizontalRule.java
+/* FramedBox.java
  * =========================================================================
- * This file is originally part of the JMathTeX Library - http://jmathtex.sourceforge.net
+ * This file is part of the JLaTeXMath Library - http://forge.scilab.org/jlatexmath
  * 
- * Copyright (C) 2004-2007 Universiteit Gent
  * Copyright (C) 2009 DENIZET Calixte
  * 
  * This program is free software; you can redistribute it and/or modify
@@ -30,46 +29,53 @@
 package org.scilab.forge.jlatexmath;
 
 import java.awt.Graphics2D;
-import java.awt.geom.Rectangle2D;
-import java.awt.geom.Line2D;
 import java.awt.Stroke;
 import java.awt.BasicStroke;
+import java.awt.geom.Rectangle2D;
 import java.awt.geom.AffineTransform;
 import java.awt.Color;
 
 /**
- * A box representing a horizontal line.
+ * A box representing a rotated box.
  */
-public class HorizontalRule extends Box {
+public class FramedBox extends Box {
     
-    Color color = null;
-    
-    public HorizontalRule(float thickness, float width, float s) {
-	height = thickness;
-	this.width = width;
-	shift = s;
+    private Box box;
+    private float thickness;
+    private Color line = null;
+
+    public FramedBox(Box box, float thickness) {
+	this.box = box;thickness += 0.00f;
+	this.width = box.width + 2 * thickness;
+	this.height = box.height + thickness;
+	this.depth = box.depth + thickness;
+	this.shift = box.shift;
+	this.thickness = thickness;
     }
 
-    public HorizontalRule(float thickness, float width, float s, Color c) {
-	height = thickness;
-	this.width = width;
-	color = c;
-	shift = s;
+    public FramedBox(Box box, float thickness, Color line) {
+	this(box, thickness);
+	this.line = line;
     }
-    
+
     public void draw(Graphics2D g2, float x, float y) {
-	Color old = g2.getColor();
-	if (color != null)
-	    g2.setColor(color);
-	
+	box.draw(g2, x, y);
 	Stroke st = g2.getStroke();
-	g2.setStroke(new BasicStroke(height, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER));
-	g2.draw(new Line2D.Float(x, y - (height - shift) / 2, x + width, y - (height - shift) / 2));
+	AffineTransform oldAt = g2.getTransform();
+	g2.setStroke(new BasicStroke(thickness, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER));
+	if (line != null) {
+	    Color prev = g2.getColor();
+	    g2.setColor(line);
+	    g2.draw(new Rectangle2D.Float(x, y - box.getHeight(), box.getWidth(), box.getHeight() + box.getDepth()));
+	    g2.setColor(prev);
+	} else {
+	    g2.draw(new Rectangle2D.Float(x, y - box.getHeight(), box.getWidth(), box.getHeight() + box.getDepth()));
+	}
+
 	g2.setStroke(st);
-	g2.setColor(old);
     }
-    
+
     public int getLastFontId() {
-	return TeXFont.NO_FONT;
+	return box.getLastFontId();
     }
 }
