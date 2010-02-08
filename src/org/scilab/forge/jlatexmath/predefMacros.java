@@ -80,6 +80,8 @@ public class predefMacros {
 	NewCommandMacro.addNewCommand("b", "\\underaccent{\\bar}{#1}", 1);
 	NewCommandMacro.addNewCommand("Bra", "\\left\\langle{#1}\\right\\vert", 1);
 	NewCommandMacro.addNewCommand("Ket", "\\left\\vert{#1}\\right\\rangle", 1);
+	NewCommandMacro.addNewCommand("textsuperscript", "{}^{\\text{#1}}", 1);
+	NewCommandMacro.addNewCommand("textsubscript", "{}_{\\text{#1}}", 1);
     }
 
     public Atom Braket_macro(TeXParser tp, String[] args) throws ParseException {

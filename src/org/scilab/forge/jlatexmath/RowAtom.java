@@ -109,7 +109,11 @@ public class RowAtom extends Atom implements Row {
     }
 
     public Atom getLastAtom() {
-	return elements.removeLast();
+	if (elements.size() != 0) {
+	    return elements.removeLast();
+	}
+	
+	return new SpaceAtom(TeXConstants.UNIT_POINT, 0.0f, 0.0f, 0.0f);
     }
 	
     public final void add(Atom el) {
