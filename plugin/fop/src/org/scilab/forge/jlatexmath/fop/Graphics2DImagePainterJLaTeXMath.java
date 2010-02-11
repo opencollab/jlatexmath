@@ -58,24 +58,33 @@ public class Graphics2DImagePainterJLaTeXMath implements Graphics2DImagePainter 
         float size = Float.parseFloat(e.getAttribute("size"));
         Color fg = new Color(Integer.parseInt(e.getAttribute("fg")));
         
-        String style = e.getAttribute("style");
-        int st = TeXConstants.STYLE_DISPLAY;
-        if ("text".equals(style)) {
-            st = TeXConstants.STYLE_TEXT;
-        } else if ("script".equals(style)) {
-            st = TeXConstants.STYLE_SCRIPT;
-        } else if ("script_script".equals(style)) {
-            st = TeXConstants.STYLE_SCRIPT_SCRIPT;
-        }
-        
-	String fwidth = e.getAttribute("fwidth");
-	float[] f = SpaceAtom.getLength(fwidth);
+	int fopid = -1;
+	try {
+	    fopid = Integer.parseInt(e.getAttribute("fopid"));
+	} catch (NumberFormatException ex) {};
 	
-        if (f.length == 2) {
-	    icon = new TeXFormula(e.getTextContent()).createTeXIcon(st, size, (int) f[0], f[1], TeXConstants.ALIGN_CENTER);
+	if (fopid != -1) {
+	    icon = JLaTeXMathElement.list.get(fopid);
 	} else {
-	    icon = new TeXFormula(e.getTextContent()).createTeXIcon(st, size);
-	}   
+	    String style = e.getAttribute("style");
+	    int st = TeXConstants.STYLE_DISPLAY;
+	    if ("text".equals(style)) {
+		st = TeXConstants.STYLE_TEXT;
+	    } else if ("script".equals(style)) {
+		st = TeXConstants.STYLE_SCRIPT;
+	    } else if ("script_script".equals(style)) {
+		st = TeXConstants.STYLE_SCRIPT_SCRIPT;
+	    }
+	    
+	    String fwidth = e.getAttribute("fwidth");
+	    float[] f = SpaceAtom.getLength(fwidth);
+	    
+	    if (f.length == 2) {
+		icon = new TeXFormula(e.getTextContent()).createTeXIcon(st, size, (int) f[0], f[1], TeXConstants.ALIGN_CENTER);
+	    } else {
+		icon = new TeXFormula(e.getTextContent()).createTeXIcon(st, size);
+	    }   
+	}
 
         icon.setForeground(fg);
 

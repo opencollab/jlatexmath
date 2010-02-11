@@ -40,8 +40,8 @@ import org.scilab.forge.jlatexmath.SpaceAtom;
 
 import java.awt.Color;
 import java.awt.geom.Point2D;
-import java.util.Map;
-import java.util.HashMap;
+import java.util.List;
+import java.util.LinkedList;
 
 import org.apache.fop.apps.FOPException;
 import org.apache.fop.apps.FOUserAgent;
@@ -64,6 +64,9 @@ public class JLaTeXMathElement extends JLaTeXMathObj {
     private String fwidth;
     private Color fg;
     private TeXIcon icon = null;
+
+    private int fopid = -1;
+    protected static List<TeXIcon> list = new LinkedList();
     
     public JLaTeXMathElement(FONode parent) {
         super(parent);
@@ -76,6 +79,9 @@ public class JLaTeXMathElement extends JLaTeXMathObj {
         Element e = createBasicDocument().getDocumentElement();
         e.setAttribute("size", "" + size);
         e.setAttribute("fg", "" + fg.getRGB());
+	if (fopid != -1) {
+	    e.setAttribute("fopid", "" + fopid);
+	}
     }
     
     public Point2D getDimension(Point2D p) {
@@ -92,7 +98,7 @@ public class JLaTeXMathElement extends JLaTeXMathObj {
         if (icon != null) {
             return;
         }
-        
+  
         Element e = doc.getDocumentElement();
         String code = e.getTextContent();
         String style = e.getAttribute("style");
@@ -114,6 +120,9 @@ public class JLaTeXMathElement extends JLaTeXMathObj {
 	    fwidth = "";
 	    icon = new TeXFormula(code).createTeXIcon(st, size);
 	}
+	
+	list.add(icon);
+	fopid = list.size() - 1;
     }    
     
     protected PropertyList createPropertyList(final PropertyList pList,
