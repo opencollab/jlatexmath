@@ -1,3 +1,17 @@
+jlatexmath (0.9) 
+	 * Avoid two generations of labels with fop.
+	 
+ -- Calixte Denizet <Calixte.Denizet@ac-rennes.fr>  Fri, 12 Feb 2010 18:23:56 +0100
+
+jlatexmath (0.8.9) 
+	 * Add new environments of amsmath : gather, flalign, alignat...
+	 
+	 * Add commands genfrac, rule, underscore, hdotsfor, multicolumn, ...
+	 
+	 * Add commands \textsuperscript et \textsubscript
+	 
+ -- Calixte Denizet <Calixte.Denizet@ac-rennes.fr>  Thu, 11 Feb 2010 15:32:27 +0100
+
 jlatexmath (0.8.7)
 	 * Add the command \prescript
 
