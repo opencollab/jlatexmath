@@ -85,7 +85,7 @@
 
   <target name="plugin" depends="init">
     <ant antfile="build.xml" dir="${fop.base.dir}" inheritAll="false"/>
-    <copy file="${fop.base.dir}/dist/jlatexmath-plugin-fop-${version}.jar" todir="${package.dir}"/>
+    <copy file="${fop.base.dir}/dist/jlatexmath-fop-${version}.jar" todir="${package.dir}"/>
   </target>
 
   <target name="embedded" depends="compile">
