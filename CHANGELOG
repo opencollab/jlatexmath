@@ -1,3 +1,12 @@
+jlatexmath (0.9.1)
+
+	* Moved fop.properties at the root directory (this is only needed to
+	build and run fop plugin)
+
+	* examples/Export/build.xml uses fop.properties
+
+ -- Sylvestre Ledru <sylvestre.ledru@scilab.org> Tue, 16 Feb 2010 10:51:04 +0100
+
 jlatexmath (0.9) 
 	 * Avoid two generations of labels with fop.
 	 
