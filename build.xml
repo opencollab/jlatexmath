@@ -54,7 +54,7 @@
   </target>
   
   <target name="Macros" depends="compile">
-    <javac srcdir="${ex.macros}" destdir="${ex.macros}/bin" debug="on" source="5" target="5" classpath="${output.jar.dir}/jlatexmath-${version}.jar">
+    <javac srcdir="${ex.macros}" destdir="${ex.macros}/bin" debug="on" source="6" target="6" classpath="${output.jar.dir}/jlatexmath-${version}.jar">
     </javac>
     <move file="${ex.macros}/bin/Main.class" todir="${ex.macros}"/>
     <jar jarfile="${ex.macros}/Foo.jar" basedir="${ex.macros}/bin"/>

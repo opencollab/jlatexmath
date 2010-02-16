@@ -323,11 +323,13 @@ public class DefaultTeXFontParser {
 */
        try {
             Method registerFontMethod = graphicEnv.getClass().getMethod("registerFont", new Class[] { Font.class });
-            registerFontMethod.invoke(graphicEnv, new Object[] { f });
+            if ((Boolean)registerFontMethod.invoke(graphicEnv, new Object[] { f }) == Boolean.FALSE) {
+		System.err.println("Cannot register the font " + f.getFontName());
+	    }
         } catch (Exception ex) {
 		   if (!registerFontExceptionDisplayed) {
 			   System.err.println("Jlatexmath: Could not access to registerFont. Please update to java 6");
-			   registerFontExceptionDisplayed=true;
+			   registerFontExceptionDisplayed = true;
 		   }
         }
 	    return f;
