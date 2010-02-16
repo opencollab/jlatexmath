@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <project name="jlatexmath-fop" basedir="." default="buildJar">
   <import file="${basedir}/../../version.xml"/>
-  <property file="${basedir}/fop.properties"/>
+  <property file="../../fop.properties"/>
 
   <path id="libs-build-classpath">
     <pathelement location="${fop.jar}"/>
