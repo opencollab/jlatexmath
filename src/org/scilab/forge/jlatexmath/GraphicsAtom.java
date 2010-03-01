@@ -36,6 +36,8 @@ import java.awt.Label;
 import java.awt.Graphics2D;
 import java.awt.Toolkit;
 import java.io.File;
+import java.net.URL;
+import java.net.MalformedURLException;
 
 /**
  * An atom representing an atom containing a graphic.
@@ -49,8 +51,18 @@ public class GraphicsAtom extends Atom {
 
     public GraphicsAtom(String path) {
 	File f = new File(path);
-	if (f.exists()) {
+	if (!f.exists()) {
+	    try {
+		URL url = new URL(path);
+		image = Toolkit.getDefaultToolkit().getImage(url);
+	    } catch (MalformedURLException e) {
+		image = null;
+	    }
+	} else {
 	    image = Toolkit.getDefaultToolkit().getImage(path);
+	}
+	
+	if (image != null) {
 	    c = new Label();
 	    MediaTracker tracker = new MediaTracker(c);
 	    tracker.addImage(image, 0);
@@ -59,10 +71,8 @@ public class GraphicsAtom extends Atom {
 	    } catch (InterruptedException e) {
 		image = null;
 	    }
-	    draw();
-	} else {
-	    image = null;
 	}
+	draw();
     }
     
     public void draw() {
