@@ -128,7 +128,7 @@ public class JLaTeXMathElement extends JLaTeXMathObj {
         TeXIcon icon;
 	Element e = doc.getDocumentElement();
         String code = e.getTextContent();
-        String style = e.getAttribute("style");System.out.println("bizarre="+style);
+        String style = e.getAttribute("style");
         int st = TeXConstants.STYLE_DISPLAY;
         if ("text".equals(style)) {
             st = TeXConstants.STYLE_TEXT;
