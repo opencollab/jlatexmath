@@ -98,7 +98,7 @@
   </target>
   
   <target name="source" depends="info" >
-    <jar jarfile="${output.jar.dir}/jlatexmath-fop-src-${version}.jar" basedir="${project.root.dir}" includes="COPYING LICENSE README build.xml src/**/* examples/**/*"/>
+    <jar jarfile="${output.jar.dir}/jlatexmath-fop-src-${version}.zip" basedir="${project.root.dir}" includes="COPYING LICENSE README build.xml src/**/* examples/**/*"/>
   </target>
   
 </project>

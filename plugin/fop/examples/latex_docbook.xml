@@ -7,15 +7,18 @@
        The Java package <latex xmlns="http://forge.scilab.org/p/jlatexmath">\JLaTeXMath</latex> combining with FOP gives the possibility to write <latex xmlns="http://forge.scilab.org/p/jlatexmath">\LaTeX</latex> commands in Docbook. 
      </para>
      <para>
+       This example has been written in using the CM Unicode fonts available at http://sourceforge.net/projects/cm-unicode/ .
+     </para>
+     <para>
        For example :
      </para> 
-     <para>
-       <latex xmlns="http://forge.scilab.org/p/jlatexmath">
+     <equation>
+       <latex align="center" xmlns="http://forge.scilab.org/p/jlatexmath">
 	 <![CDATA[
 \phi_n(\kappa) = \frac{1}{4\pi^2\kappa^2} \int_0^\infty \frac{\sin(\kappa R)}{\kappa R}  \frac{\partial}{\partial R}\left[ R^2\frac{\partial D_n(R)}{\partial R}\right]\,dR
 ]]>
        </latex>
-     </para>
+     </equation>
      <para>
        We can use an example block :
        <example>
@@ -34,5 +37,62 @@ a_{n1}&\cdots&\cdots&a_{nn}
      <para>
        The formulas can be in displaystyle <latex xmlns="http://forge.scilab.org/p/jlatexmath">\sum_{n=1}^{+\infty}\frac1{n^2}=\frac{\pi^2}{6}</latex> or in textstyle <latex style="text" xmlns="http://forge.scilab.org/p/jlatexmath">\sum_{n=1}^{+\infty}\frac1{n^2}=\frac{\pi^2}{6}</latex>.
      </para>
+
+     <para>
+       Several centered formulas with gather environment :
+     </para>
+     <equation>
+       <latex align="center" xmlns="http://forge.scilab.org/p/jlatexmath">
+	 <![CDATA[     
+\begin{gather}
+a x + b = 0 \\
+a x^2 + b x + c = 0 \\
+a x^3 + b x^2 + c x + d = 0
+\end{gather}
+]]>
+       </latex>
+     </equation>
+     <para>
+       Several formulas with flalign environment :
+     </para>
+     <equation>
+       <latex align="center" xmlns="http://forge.scilab.org/p/jlatexmath">
+	 <![CDATA[
+\begin{flalign}
+10xy^2+15x^2y-5xy & =  5\left(2xy^2+3x^2y-xy\right) = \\
+   & = 5x\left(2y^2+3xy-y\right) = \\
+   & = 5xy\left(2y+3x-1\right)
+\end{flalign}
+]]>
+       </latex>
+     </equation>
+     <para>
+       Several formulas with split environment :
+     </para>
+     <equation>
+       <latex align="center" xmlns="http://forge.scilab.org/p/jlatexmath">
+	 <![CDATA[
+\begin{split}
+10xy^2+15x^2y-5xy & =  5\left(2xy^2+3x^2y-xy\right) = \\
+   & = 5x\left(2y^2+3xy-y\right) = \\
+   & = 5xy\left(2y+3x-1\right)
+\end{split}
+]]>
+       </latex>
+     </equation>
+     <para>
+       Splitting a long formula on several lines with multline environment :
+     </para>
+     <equation>
+       <latex align="center" xmlns="http://forge.scilab.org/p/jlatexmath">
+	 <![CDATA[
+\begin{multline}
+\left(1+x\right)^n  = 1 + nx + \frac{n\left(n-1\right)}{2!}x^2 +\\
++ \frac{n\left(n-1\right)\left(n-2\right)}{3!}x^3 +\\
++ \frac{n\left(n-1\right)\left(n-2\right)\left(n-3\right)}{4!}x^4 + \dots
+\end{multline}
+]]>
+       </latex>
+     </equation>
    </chapter>
  </book>

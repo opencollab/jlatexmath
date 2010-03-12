@@ -90,7 +90,14 @@
 
   <target name="plugin-src" depends="init">
     <ant antfile="build.xml" target="source" dir="${fop.base.dir}" inheritAll="false"/>
-    <copy file="${fop.base.dir}/dist/jlatexmath-fop-src-${version}.jar" tofile="${package.dir}/jlatexmath-fop-src-${version}.zip"/>
+    <copy file="${fop.base.dir}/dist/jlatexmath-fop-src-${version}.zip" tofile="${package.dir}/jlatexmath-fop-src-${version}.zip"/>
+  </target>
+
+  <target name="zip" depends="embedded">
+    <zip destfile="${package.dir}/jlatexmath-embedded-fop-${version}.zip">
+      <fileset dir="${package.dir}" includes="jlatexmath-embedded-fop-${version}.jar"/>
+      <fileset dir="${fop.base.dir}" includes="examples/*"/>
+    </zip>
   </target>
 
   <target name="embedded" depends="compile">

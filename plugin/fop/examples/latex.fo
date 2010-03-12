@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format">
   <fo:layout-master-set>
-    <fo:simple-page-master margin-right="1.5cm" margin-left="1.5cm" margin-bottom="2cm" margin-top="1cm" page-width="21cm" page-height="29.7cm" master-name="first">
+    <fo:simple-page-master margin-right="1in" margin-left="1in" margin-bottom="2cm" margin-top="1cm" page-width="8.5in" page-height="29.7cm" master-name="first">
       <fo:region-body margin-top="1cm"/>
       <fo:region-before extent="1cm"/>
       <fo:region-after extent="1.5cm"/>
     </fo:simple-page-master>
   </fo:layout-master-set>
-  <fo:page-sequence master-reference="first">
+  <fo:page-sequence master-reference="first" font-family="CMUSerif-Roman">
     <fo:static-content flow-name="xsl-region-before">
       <fo:block line-height="14pt" font-size="10pt" text-align="end"><fo:instream-foreign-object><latex style="display" xmlns="http://forge.scilab.org/p/jlatexmath">\JLaTeXMath</latex></fo:instream-foreign-object> Extension</fo:block>
     </fo:static-content>
@@ -42,7 +42,7 @@ But you can prefer a red block with a font set to 15pt:
 \alpha&\beta\\
 \gamma&\delta
 \end{bmatrix}
-\overset{\mbox{def}}{=}\alpha\times\delta-\gamma\times\beta
+\overset{\text{def}}{=}\alpha\times\delta-\gamma\times\beta
 ]]>
 </latex>
 </fo:instream-foreign-object>
@@ -50,7 +50,7 @@ But you can prefer a red block with a font set to 15pt:
 An other one:
 <fo:block text-align="center">
 <fo:instream-foreign-object>
-<latex style="display" xmlns="http://forge.scilab.org/p/jlatexmath">
+<latex style="display" fwidth="8.5in" flwidth="1in" frwidth="1in" xmlns="http://forge.scilab.org/p/jlatexmath">
 <![CDATA[
 \phi_n(\kappa) = \frac{1}{4\pi^2\kappa^2} \int_0^\infty \frac{\sin(\kappa R)}{\kappa R}  \frac{\partial}{\partial R}\left[ R^2\frac{\partial D_n(R)}{\partial R}\right]\,dR
 ]]>

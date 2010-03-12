@@ -1,4 +1,6 @@
-To see the Docbook example (you should eventually modify the include in latex.xsl to include fo/docbook.xsl) :
+Put the archive jlatexmath-embedded-fop-...jar in a directory accesible by FOP. 
+
+To see the Docbook example (you should eventually modify the include in latex.xsl to include fo/docbook.xsl) you need the CM Unicode fonts available at http://sourceforge.net/projects/cm-unicode/ (if you don't want to use it, you must modify latex.xsl) :
 
 fop -c conf.xml -xml latex_docbook.xml -xsl latex.xsl -pdf latex_docbook.pdf
 
