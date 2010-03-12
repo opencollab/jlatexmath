@@ -48,7 +48,7 @@
   </target>
   
   <target name="example" depends="Macros">
-    <javac srcdir="${ex.basic}" destdir="${ex.basic}" debug="on" source="5" target="5" classpath="${output.jar.dir}/jlatexmath-${version}.jar">
+    <javac srcdir="${ex.basic}" destdir="${ex.basic}" debug="on" source="6" target="6" classpath="${output.jar.dir}/jlatexmath-${version}.jar">
     </javac>
     <java fork="true" classpath="${ex.basic}:${output.jar.dir}/jlatexmath-${version}.jar" dir="${ex.basic}" className="Main"/> 
   </target>
@@ -88,6 +88,11 @@
     <copy file="${fop.base.dir}/dist/jlatexmath-fop-${version}.jar" todir="${package.dir}"/>
   </target>
 
+  <target name="plugin-src" depends="init">
+    <ant antfile="build.xml" target="source" dir="${fop.base.dir}" inheritAll="false"/>
+    <copy file="${fop.base.dir}/dist/jlatexmath-fop-src-${version}.jar" tofile="${package.dir}/jlatexmath-fop-src-${version}.zip"/>
+  </target>
+
   <target name="embedded" depends="compile">
    <ant antfile="build.xml" dir="${fop.base.dir}" inheritAll="false" target="embedded"/>
    <antcall target="buildJar">  
@@ -97,11 +102,11 @@
   </target>
   
   <target name="source" depends="info" >
-    <jar jarfile="${output.jar.dir}/jlatexmath-src-${version}.jar" basedir="${project.root.dir}" includes="COPYING LICENSE build.xml version.xml MANIFEST.MF src/**/*.java src/**/*.xml src/**/*.ttf src/**/licences/* src/**/README examples/**/*.java examples/**/lion.png examples/**/*.xml examples/**/README"/>
+    <jar jarfile="${output.jar.dir}/jlatexmath-src-${version}.zip" basedir="${project.root.dir}" includes="COPYING LICENSE README build.xml version.xml MANIFEST.MF src/**/*.java src/**/*.xml src/**/*.ttf src/**/licences/* src/**/README examples/**/*.java examples/**/lion.png examples/**/*.xml examples/**/README"/>
   </target>
   
   <target name="src-all" depends="info" >
-    <jar jarfile="${output.jar.dir}/jlatexmath-src-all-${version}.jar" basedir="${project.root.dir}" includes="COPYING LICENSE build.xml version.xml MANIFEST.MF src/**/*.java src/**/*.xml src/**/*.ttf src/**/licences/* src/**/README examples/**/*.java examples/**/lion.png examples/**/*.xml examples/**/README plugin/**/src/**/*.java plugin/**/src/META-INF/**/* plugin/**/build.xml plugin/**/COPYING plugin/**/LICENSE plugin/**/examples/*.*"/>
+    <jar jarfile="${output.jar.dir}/jlatexmath-src-all-${version}.zip" basedir="${project.root.dir}" includes="COPYING LICENSE README build.xml version.xml MANIFEST.MF src/**/*.java src/**/*.xml src/**/*.ttf src/**/licences/* src/**/README examples/**/*.java examples/**/lion.png examples/**/*.xml examples/**/README plugin/**/src/**/*.java plugin/**/src/META-INF/**/* plugin/**/build.xml plugin/**/COPYING plugin/**/LICENSE plugin/**/examples/*.*"/>
   </target>
   
   

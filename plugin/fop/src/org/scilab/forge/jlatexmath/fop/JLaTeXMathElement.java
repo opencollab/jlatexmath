@@ -42,6 +42,7 @@ import java.awt.Color;
 import java.awt.geom.Point2D;
 import java.util.List;
 import java.util.LinkedList;
+import java.util.StringTokenizer;
 
 import org.apache.fop.apps.FOPException;
 import org.apache.fop.apps.FOUserAgent;
@@ -53,7 +54,13 @@ import org.apache.fop.fo.PropertyList;
 import org.apache.fop.fo.properties.CommonFont;
 import org.apache.fop.fo.properties.FixedLength;
 import org.apache.fop.fo.properties.Property;
+import org.apache.fop.fo.properties.PercentLength;
+import org.apache.fop.datatypes.LengthBase;
+import org.apache.fop.fo.properties.LengthProperty;
+import org.apache.fop.fo.flow.BlockContainer;
+import org.apache.fop.fo.FONode;
 
+import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.xml.sax.Attributes;
 import org.xml.sax.Locator;
@@ -61,13 +68,10 @@ import org.xml.sax.Locator;
 public class JLaTeXMathElement extends JLaTeXMathObj {
     
     private float size;
-    private String fwidth;
     private Color fg;
     private TeXIcon icon = null;
+    private boolean bool = true;
 
-    private int fopid = -1;
-    protected static List<TeXIcon> list = new LinkedList();
-    
     public JLaTeXMathElement(FONode parent) {
         super(parent);
     }
@@ -79,29 +83,52 @@ public class JLaTeXMathElement extends JLaTeXMathObj {
         Element e = createBasicDocument().getDocumentElement();
         e.setAttribute("size", "" + size);
         e.setAttribute("fg", "" + fg.getRGB());
-	if (fopid != -1) {
-	    e.setAttribute("fopid", "" + fopid);
-	}
     }
     
     public Point2D getDimension(Point2D p) {
-        calculate();
-        return new Point2D.Float(icon.getTrueIconWidth(), icon.getTrueIconHeight());
+        if (icon == null) {
+	    icon = calculate(doc, size);
+        }
+	return new Point2D.Float(icon.getTrueIconWidth(), icon.getTrueIconHeight());
     }
     
     public Length getIntrinsicAlignmentAdjust() {
-        calculate();
-        return FixedLength.getInstance(-icon.getTrueIconDepth(), "px");
+        if (icon == null) {
+	    icon = calculate(doc, size);
+        }
+	return FixedLength.getInstance(-icon.getTrueIconDepth(), "px");
+    }
+
+    public static float getFWidth(String str) {
+	StringTokenizer tok = new StringTokenizer(str, ",");
+	int sum = 0;
+	while (tok.hasMoreTokens()) {
+	    int i = 0;
+	    String s = tok.nextToken();
+	    for (; i < s.length() && !Character.isLetter(s.charAt(i)); i++);
+	    double w = 0;
+	    try {
+		w = Double.parseDouble(s.substring(0, i));
+	    } catch (NumberFormatException e) {
+		return 0.0f;
+	    }
+	    
+	    String unit = "px";
+	    if (i != s.length()) {
+		unit = s.substring(i).toLowerCase();
+	    }
+	    
+	    sum += FixedLength.getInstance(w, unit).getValue();
+	}
+
+	return (float) (sum / 1000f);
     }
     
-    private void calculate() {
-        if (icon != null) {
-            return;
-        }
-  
-        Element e = doc.getDocumentElement();
+    public static TeXIcon calculate(Document doc, float size) {
+        TeXIcon icon;
+	Element e = doc.getDocumentElement();
         String code = e.getTextContent();
-        String style = e.getAttribute("style");
+        String style = e.getAttribute("style");System.out.println("bizarre="+style);
         int st = TeXConstants.STYLE_DISPLAY;
         if ("text".equals(style)) {
             st = TeXConstants.STYLE_TEXT;
@@ -111,18 +138,15 @@ public class JLaTeXMathElement extends JLaTeXMathObj {
             st = TeXConstants.STYLE_SCRIPT_SCRIPT;
         }
         
-	fwidth = e.getAttribute("fwidth");
-	float[] f = SpaceAtom.getLength(fwidth);
+	String stfw = e.getAttribute("fwidth");
 	
-	if (f.length == 2) {
-	    icon = new TeXFormula(code).createTeXIcon(st, size, (int) f[0], f[1], TeXConstants.ALIGN_CENTER);
+	if (stfw.length() != 0) {
+	    icon = new TeXFormula(code).createTeXIcon(st, size, TeXConstants.UNIT_PIXEL, getFWidth(stfw), TeXConstants.ALIGN_CENTER);
 	} else {
-	    fwidth = "";
 	    icon = new TeXFormula(code).createTeXIcon(st, size);
 	}
 	
-	list.add(icon);
-	fopid = list.size() - 1;
+	return icon;
     }    
     
     protected PropertyList createPropertyList(final PropertyList pList,
@@ -130,7 +154,7 @@ public class JLaTeXMathElement extends JLaTeXMathObj {
         FOUserAgent userAgent = this.getUserAgent();
         CommonFont commonFont = pList.getFontProps();
         this.size = (float) commonFont.fontSize.getNumericValue() / 1000;
-        
+
         Property colorProp = pList.get(org.apache.fop.fo.Constants.PR_COLOR);
         this.fg = colorProp != null ? colorProp.getColor(userAgent) : null;
         

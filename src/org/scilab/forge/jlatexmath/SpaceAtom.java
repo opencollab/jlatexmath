@@ -49,6 +49,7 @@ public class SpaceAtom extends Atom {
 	units.put("pt", TeXConstants.UNIT_POINT);
 	units.put("point", TeXConstants.UNIT_POINT);
 	units.put("pica", TeXConstants.UNIT_PICA);
+	units.put("pc", TeXConstants.UNIT_PICA);
 	units.put("mu", TeXConstants.UNIT_MU);
 	units.put("cm", TeXConstants.UNIT_CM);
 	units.put("mm", TeXConstants.UNIT_MM);
@@ -190,7 +191,7 @@ public class SpaceAtom extends Atom {
 	Integer u = (Integer) units.get(unit);
 	return u == null ? -1 : u.intValue();
     }
-    
+
     public static float[] getLength(String lgth) {
 	if (lgth == null) {
 	    return new float[]{0f, 0f};
