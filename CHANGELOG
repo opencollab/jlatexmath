@@ -1,4 +1,7 @@
 jlatexmath (0.9.1)
+	* Few modifications in fop-plugin and improve \includegraphics
+	 
+ -- Calixte Denizet <Calixte.Denizet@ac-rennes.fr>
 
 	* Moved fop.properties at the root directory (this is only needed to
 	build and run fop plugin)
