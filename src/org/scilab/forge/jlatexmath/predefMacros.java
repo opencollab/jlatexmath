@@ -57,7 +57,7 @@ public class predefMacros {
 	NewEnvironmentMacro.addNewEnvironment("split", "\\begin{array}{rl}", "\\end{array}", 0);
 	NewEnvironmentMacro.addNewEnvironment("gather", "\\gather@@env{", "}", 0);
 	NewEnvironmentMacro.addNewEnvironment("gathered", "\\gathered@@env{", "}", 0);
-	NewCommandMacro.addNewCommand("operatorname", "\\mathop{\\mathrm{#1}}\\nolimits", 1);
+	NewCommandMacro.addNewCommand("operatorname", "\\mathop{\\mathrm{#1}}\\nolimits ", 1);
 	NewCommandMacro.addNewCommand("DeclareMathOperator", "\\newcommand{#1}{\\mathop{\\mathrm{#2}}\\nolimits}", 2);
 	NewCommandMacro.addNewCommand("substack", "\\begin{array}{l}#1\\end{array}", 1);
 	NewCommandMacro.addNewCommand("dfrac", "\\genfrac{}{}{}{}{#1}{#2}", 2);

@@ -204,6 +204,18 @@ public class TeXFormula {
             addImpl(f);
     }
     
+    /**
+     * Change the text of the TeXFormula and regenerate the root
+     *
+     * @param ltx the latex formula
+     */ 
+    public void setLaTeX(String ltx) throws ParseException {
+	this.root = null;
+	TeXParser tp = new TeXParser(ltx, this);
+        if (ltx != null && ltx.length() != 0)
+            tp.parse();
+    }
+
    /*
     * Inserts an atom at the end of the current formula
     */

@@ -70,8 +70,8 @@ public class MacroInfo {
 	    this.macro = pack.getClass().getDeclaredMethod(methodName, args);
 	    this.nbArgs = nba;
 	} catch (Exception e) {
-	    System.out.println("Cannot load package " + className + ":");
-	    System.out.println(e.toString());
+	    System.err.println("Cannot load package " + className + ":");
+	    System.err.println(e.toString());
 	}
     }
 
