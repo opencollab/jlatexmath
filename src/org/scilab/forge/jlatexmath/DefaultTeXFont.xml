@@ -98,6 +98,7 @@ for a text style is not defined (e.g. "numbers" and "small" in "mathcal") -->
 <!-- font descriptions -->
 
 <FontDescriptions>
+  <Metrics include="fonts/maths/jlm_msbm10.xml" />
   <Metrics include="fonts/base/jlm_cmex10.xml" />
   <Metrics include="fonts/base/jlm_cmmi10.xml" />
   <Metrics include="fonts/base/jlm_cmmib10.xml" />
@@ -105,7 +106,6 @@ for a text style is not defined (e.g. "numbers" and "small" in "mathcal") -->
   <Metrics include="fonts/base/jlm_cmmi10_unchanged.xml" />
   <Metrics include="fonts/base/jlm_cmmib10_unchanged.xml" />
   <Metrics include="fonts/maths/jlm_cmsy10.xml" />
-  <Metrics include="fonts/maths/jlm_msbm10.xml" />
   <Metrics include="fonts/maths/jlm_msam10.xml" />
   <Metrics include="fonts/maths/jlm_cmbsy10.xml" />
   <Metrics include="fonts/maths/jlm_dsrom10.xml" /> 
