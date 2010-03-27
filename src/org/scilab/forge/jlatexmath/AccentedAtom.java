@@ -159,8 +159,8 @@ public class AccentedAtom extends Atom {
 	    cb = accent.createBox(changeSize ? env.subStyle() : env);
 
 	if (Math.abs(italic) > TeXFormula.PREC) {
-            y = new HorizontalBox(cb);
-            y.add(new StrutBox(-italic, 0, 0, 0));
+            y = new HorizontalBox(new StrutBox(-italic, 0, 0, 0));
+            y.add(cb);
         } else
             y = cb;
         
