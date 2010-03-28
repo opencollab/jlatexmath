@@ -12,6 +12,10 @@ import javax.swing.JLabel;
 import org.scilab.forge.jlatexmath.TeXConstants; 
 import org.scilab.forge.jlatexmath.TeXFormula;
 import org.scilab.forge.jlatexmath.TeXIcon;
+import org.scilab.forge.jlatexmath.DefaultTeXFont;
+
+import org.scilab.forge.jlatexmath.cyrillic.CyrillicRegistration;
+import org.scilab.forge.jlatexmath.greek.GreekRegistration;
 
 import org.apache.batik.transcoder.TranscoderOutput;
 import org.apache.batik.transcoder.TranscoderInput;
@@ -41,6 +45,9 @@ public class Convert {
         SVGGeneratorContext ctx = SVGGeneratorContext.createDefault(document);
 	
         SVGGraphics2D g2 = new SVGGraphics2D(ctx, fontAsShapes);
+
+	DefaultTeXFont.registerAlphabet(new CyrillicRegistration());
+	DefaultTeXFont.registerAlphabet(new GreekRegistration());
 
       	TeXFormula formula = new TeXFormula(latex);
 	TeXIcon icon = formula.createTeXIcon(TeXConstants.STYLE_DISPLAY, 20);

@@ -30,10 +30,10 @@
 
 	<!-- Compile source files -->
 	<target name="example" depends="info">
-	  <javac srcdir="${project.src.dir}" destdir="${project.src.dir}" classpath="${project.src.dir}/../../dist/jlatexmath-${version}.jar:${fop.jar}:${xmlgraphics-commons.jar}:${batik.jar}:${avalon-framework.jar}:${commons-io.jar}:${commons-logging.jar}:${xml-apis-ext.jar}" debug="on" source="5" target="5">
+	  <javac srcdir="${project.src.dir}" destdir="${project.src.dir}" classpath="${project.src.dir}/../../dist/jlatexmath-${version}.jar:${fop.jar}:${xmlgraphics-commons.jar}:${batik.jar}:${avalon-framework.jar}:${commons-io.jar}:${commons-logging.jar}:${xml-apis-ext.jar}:${project.src.dir}/../../dist/jlm_cyrillic.jar:${project.src.dir}/../../dist/jlm_greek.jar" debug="on" source="5" target="5">
 	  </javac>
 	  <echo message="Generating PDF, PS, EPS and SVG..."/>
-	  <java fork="true" dir="${project.src.dir}" classpath=".:${project.src.dir}/../../dist/jlatexmath-${version}.jar:${fop.jar}:${xmlgraphics-commons.jar}:${batik.jar}:${avalon-framework.jar}:${commons-io.jar}:${commons-logging.jar}:${xml-apis-ext.jar}" className="Main">
+	  <java fork="true" dir="${project.src.dir}" classpath=".:${project.src.dir}/../../dist/jlatexmath-${version}.jar:${fop.jar}:${xmlgraphics-commons.jar}:${batik.jar}:${avalon-framework.jar}:${commons-io.jar}:${commons-logging.jar}:${xml-apis-ext.jar}:${project.src.dir}/../../dist/jlm_cyrillic.jar:${project.src.dir}/../../dist/jlm_greek.jar" className="Main">
 	    <jvmarg value="-Djava.util.logging.config.file=${project.src.dir}/logging.properties"/>
 	  </java>
 	</target>
