@@ -92,8 +92,8 @@ public class MacroInfo {
 	    this.hasOptions = true;
 	    this.posOpts = (int)posOpts;
 	} catch (Exception e) {
-	    System.out.println("Cannot load package " + className + ":");
-	    System.out.println(e.toString());
+	    System.err.println("Cannot load package " + className + ":");
+	    System.err.println(e.toString());
 	}
     }
 
@@ -102,14 +102,12 @@ public class MacroInfo {
 	try {
 	    return macro.invoke(pack, Args);
 	} catch (IllegalAccessException e) {
-	    throw new ParseException("Problem with command " + args[0] + ": " + e.toString());
-	}
-	catch (IllegalArgumentException e) {
-	    throw new ParseException("Problem with command " + args[0] + ": " + e.toString());
-	}
-	catch (InvocationTargetException e) {
+	    throw new ParseException("Problem with command " + args[0] + " at position " + tp.getLine() + ":" + tp.getCol() + "\n", e);
+	} catch (IllegalArgumentException e) {
+	    throw new ParseException("Problem with command " + args[0] + " at position " + tp.getLine() + ":" + tp.getCol() + "\n", e);
+	} catch (InvocationTargetException e) {
 	    Throwable th = e.getCause();
-	    throw new ParseException("Problem with command " + args[0] + ": " + th.toString() + "\n");
+	    throw new ParseException("Problem with command " + args[0] + " at position " + tp.getLine() + ":" + tp.getCol() + "\n" + th.getMessage());
 	}
     }
 }

@@ -1,6 +1,6 @@
 /* TeXParser.java
  * =========================================================================
- * This file is part of the JLaTeXMath Library - http://forge.scilab.org/jlatexmath
+ * This file is part of the JLaTeXMath Library - http://forge.scilab.org/p/jlatexmath
  * 
  * Copyright (C) 2009 DENIZET Calixte
  * 
@@ -42,6 +42,8 @@ public class TeXParser {
     private StringBuffer parseString;
     private int pos;
     private int spos;
+    private int line = 0;
+    private int col = 0;
     private int len;
     private int group = 0;
     private boolean insertion = false;
@@ -126,6 +128,18 @@ public class TeXParser {
     public TeXParser(String parseString, TeXFormula formula, boolean firstpass, boolean space) {
 	this(parseString, formula, firstpass);
 	this.ignoreWhiteSpace = space;
+    }
+
+    /** Get the number of the current line 
+     */
+    public int getLine() {
+	return line;
+    }
+
+    /** Get the number of the current column 
+     */
+    public int getCol() {
+	return pos - col - 1;
     }
 
     /** Get the last atom of the current formula 
@@ -246,9 +260,13 @@ public class TeXParser {
 	    char ch;
             while (pos < len) {
                 ch = parseString.charAt(pos);
-                if (ch == '\t' || ch == '\n' || ch == '\r')
+                if (ch == '\t' || ch == '\n' || ch == '\r') {
                     pos++; // ignore white space
-                else if (ch == ' ') {
+		    if (ch == '\n') { 
+			line++;
+			col = pos;
+		    }
+		} else if (ch == ' ') {
 		    if (ignoreWhiteSpace)
 			pos++;
 		    else {// We are in a mbox
@@ -487,11 +505,15 @@ public class TeXParser {
      */
     public Atom convertCharacter(char c) throws ParseException {
         if (!((c >= '0' && c <= '9') || (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))) {
-            if (Character.UnicodeBlock.CYRILLIC.equals(Character.UnicodeBlock.of(c)) && !DefaultTeXFont.loadedAlphabets.contains(Character.UnicodeBlock.CYRILLIC)) {
+            /*if (Character.UnicodeBlock.CYRILLIC.equals(Character.UnicodeBlock.of(c)) && !DefaultTeXFont.loadedAlphabets.contains(Character.UnicodeBlock.CYRILLIC)) {
                 DefaultTeXFont.addAlphabet(Character.UnicodeBlock.CYRILLIC, "cyrillic");
             } else if (Character.UnicodeBlock.GREEK.equals(Character.UnicodeBlock.of(c)) && !DefaultTeXFont.loadedAlphabets.contains(Character.UnicodeBlock.GREEK)) {
                 DefaultTeXFont.addAlphabet(Character.UnicodeBlock.GREEK, "greek");
-            }
+		}*/
+	    Character.UnicodeBlock block = Character.UnicodeBlock.of(c);
+	    if (!DefaultTeXFont.loadedAlphabets.contains(block)) {
+		DefaultTeXFont.addAlphabet(DefaultTeXFont.registeredAlphabets.get(block));
+	    }
 
             String symbolName = TeXFormula.symbolMappings[c];
 	    if (symbolName == null && (TeXFormula.symbolFormulaMappings == null || TeXFormula.symbolFormulaMappings[c] == null))
@@ -688,6 +710,10 @@ public class TeXParser {
 	    c = parseString.charAt(pos);
 	    if (c != ' ' && c != '\t' && c != '\n' && c != '\r')
 		break;
+	    if (c == '\n') {
+		line++;
+		col = pos;
+	    }
 	    pos++;
 	}
     }
