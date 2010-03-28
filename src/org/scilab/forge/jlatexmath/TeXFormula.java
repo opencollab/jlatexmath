@@ -119,7 +119,7 @@ public class TeXFormula {
 	    new PredefinedTeXFormulaParser("PredefinedCommands.xml", "Command").parse(MacroInfo.Commands);
 	    new PredefinedTeXFormulaParser("PredefinedTeXFormulas.xml", "TeXFormula").parse(predefinedTeXFormulas);
 	} catch (Exception e) {
-	    System.out.println(e.toString());
+	    System.err.println(e.toString());
 	}
 
 	symbolFormulaMappings = parser.parseSymbolToFormulaMappings();

@@ -1,4 +1,4 @@
-/* CyrillicRegistration.java
+/* LaTeXAtom.java
  * =========================================================================
  * This file is part of the JLaTeXMath Library - http://forge.scilab.org/jlatexmath
  *
@@ -29,7 +29,6 @@
 package org.scilab.forge.jlatexmath.cyrillic;
 
 import java.lang.Character.UnicodeBlock;
-import java.io.InputStream;
 
 import org.scilab.forge.jlatexmath.AlphabetRegistration;
 
@@ -38,8 +37,8 @@ public class CyrillicRegistration implements AlphabetRegistration {
     public CyrillicRegistration() {
     }
 
-    public Character.UnicodeBlock getUnicodeBlock() {
-	return Character.UnicodeBlock.CYRILLIC;
+    public Character.UnicodeBlock[] getUnicodeBlock() {
+	return new Character.UnicodeBlock[]{Character.UnicodeBlock.CYRILLIC};
     }
 
     public Object getPackage() {

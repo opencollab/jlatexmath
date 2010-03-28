@@ -5,9 +5,9 @@ import java.io.InputStream;
 
 public interface AlphabetRegistration {
     
-    public Character.UnicodeBlock getUnicodeBlock();
+    public Character.UnicodeBlock[] getUnicodeBlock();
 
-    public Object getPackage();
+    public Object getPackage() throws AlphabetRegistrationException;
 
     public String getTeXFontFileName();
 }

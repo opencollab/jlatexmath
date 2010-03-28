@@ -69,6 +69,8 @@ public class TeXParser {
     private static final char SUB_SCRIPT = '_';
     private static final char SUPER_SCRIPT = '^';
     private static final char PRIME = '\'';
+
+    protected static boolean isLoading = false;
     
     /**
      * Create a new TeXParser
@@ -505,16 +507,11 @@ public class TeXParser {
      */
     public Atom convertCharacter(char c) throws ParseException {
         if (!((c >= '0' && c <= '9') || (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))) {
-            /*if (Character.UnicodeBlock.CYRILLIC.equals(Character.UnicodeBlock.of(c)) && !DefaultTeXFont.loadedAlphabets.contains(Character.UnicodeBlock.CYRILLIC)) {
-                DefaultTeXFont.addAlphabet(Character.UnicodeBlock.CYRILLIC, "cyrillic");
-            } else if (Character.UnicodeBlock.GREEK.equals(Character.UnicodeBlock.of(c)) && !DefaultTeXFont.loadedAlphabets.contains(Character.UnicodeBlock.GREEK)) {
-                DefaultTeXFont.addAlphabet(Character.UnicodeBlock.GREEK, "greek");
-		}*/
-	    Character.UnicodeBlock block = Character.UnicodeBlock.of(c);
-	    if (!DefaultTeXFont.loadedAlphabets.contains(block)) {
+            Character.UnicodeBlock block = Character.UnicodeBlock.of(c);
+	    if (!isLoading && !DefaultTeXFont.loadedAlphabets.contains(block)) {
 		DefaultTeXFont.addAlphabet(DefaultTeXFont.registeredAlphabets.get(block));
 	    }
-
+	    
             String symbolName = TeXFormula.symbolMappings[c];
 	    if (symbolName == null && (TeXFormula.symbolFormulaMappings == null || TeXFormula.symbolFormulaMappings[c] == null))
                 throw new ParseException("Unknown character : '"

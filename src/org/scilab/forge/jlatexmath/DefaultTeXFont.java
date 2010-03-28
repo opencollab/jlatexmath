@@ -156,10 +156,18 @@ public class DefaultTeXFont implements TeXFont {
         }
     }
     
-    public static void addAlphabet(Object base, Character.UnicodeBlock alphabet, String language) throws ResourceParseException {
-	if (!loadedAlphabets.contains(alphabet)) {
+    public static void addAlphabet(Object base, Character.UnicodeBlock[] alphabet, String language) throws ResourceParseException {
+	boolean b = false;
+	for (int i = 0; !b && i < alphabet.length; i++) {
+	    b = loadedAlphabets.contains(alphabet[i]) || b;
+	}
+	if (!b) {
+	    TeXParser.isLoading = true;
             addTeXFontDescription(base, base.getClass().getResourceAsStream(language), language);
-            loadedAlphabets.add(alphabet);
+            for (int i = 0; i < alphabet.length; i++) {
+		loadedAlphabets.add(alphabet[i]);
+	    }
+	    TeXParser.isLoading = false;
         }
     }
 
@@ -178,11 +186,17 @@ public class DefaultTeXFont implements TeXFont {
             if (reg != null) {
 		DefaultTeXFont.addAlphabet(reg.getPackage(), reg.getUnicodeBlock(), reg.getTeXFontFileName());
 	    }
-        } catch (FontAlreadyLoadedException e) { }
+        } catch (FontAlreadyLoadedException e) {
+	} catch (AlphabetRegistrationException e) {
+	    System.err.println(e.toString());
+	}   
     }
 
     public static void registerAlphabet(AlphabetRegistration reg) {
-	registeredAlphabets.put(reg.getUnicodeBlock(), reg);
+	Character.UnicodeBlock[] blocks = reg.getUnicodeBlock();
+	for (int i = 0; i < blocks.length; i++) {
+	    registeredAlphabets.put(blocks[i], reg);
+	}
     }	
 
     public TeXFont copy() {

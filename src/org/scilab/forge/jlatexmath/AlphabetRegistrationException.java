@@ -1,6 +1,6 @@
-/* GreekRegistration.java
+/* AlphabetRegistrationException.java
  * =========================================================================
- * This file is part of the JLaTeXMath Library - http://forge.scilab.org/jlatexmath
+ * This file is originally of the JLaTeXMath Library - http://forge.scilab.org/jlatexmath
  *
  * Copyright (C) 2009 DENIZET Calixte
  *
@@ -26,26 +26,14 @@
  *
  */
 
-package org.scilab.forge.jlatexmath.greek;
+package org.scilab.forge.jlatexmath;
 
-import java.lang.Character.UnicodeBlock;
-
-import org.scilab.forge.jlatexmath.AlphabetRegistration;
-
-public class GreekRegistration implements AlphabetRegistration {
-
-    public GreekRegistration() {
-    }
-
-    public Character.UnicodeBlock[] getUnicodeBlock() {
-	return new Character.UnicodeBlock[]{Character.UnicodeBlock.GREEK, Character.UnicodeBlock.GREEK_EXTENDED};
-    }
-
-    public Object getPackage() {
-	return this;
-    }
-
-    public String getTeXFontFileName() {
-	return "fonts/language_greek.xml";
+/**
+ * Signals that an error occured while registering an alphabet
+ */
+public class AlphabetRegistrationException extends Exception {
+    
+    protected AlphabetRegistrationException(String str) {
+        super(str);
     }
 }

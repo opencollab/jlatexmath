@@ -285,7 +285,7 @@ public class DefaultTeXFontParser {
 	    NodeList list = fontDescriptions.getElementsByTagName("Metrics");
             for (int i = 0; i < list.getLength(); i++) {
 		// get required string attribute
-		String  include = getAttrValueAndCheckIfNotNull("include", (Element)list.item(i));
+		String include = getAttrValueAndCheckIfNotNull("include", (Element)list.item(i));
 		if (base == null) {
 		    fi = parseFontDescriptions(fi, DefaultTeXFontParser.class.getResourceAsStream(include), include);
 		} else {
@@ -300,13 +300,13 @@ public class DefaultTeXFontParser {
 	Element syms = (Element)root.getElementsByTagName("TeXSymbols").item(0);
         if (syms != null) { // element present
 	    // get required string attribute
-	    String  include = getAttrValueAndCheckIfNotNull("include", syms);
+	    String include = getAttrValueAndCheckIfNotNull("include", syms);
 	    SymbolAtom.addSymbolAtom(base.getClass().getResourceAsStream(include), include);
 	}
 	Element settings = (Element)root.getElementsByTagName("FormulaSettings").item(0);
         if (settings != null) { // element present
 	    // get required string attribute
-	    String  include = getAttrValueAndCheckIfNotNull("include", settings);
+	    String include = getAttrValueAndCheckIfNotNull("include", settings);
 	    TeXFormula.addSymbolMappings(base.getClass().getResourceAsStream(include), include);
 	}
     }
