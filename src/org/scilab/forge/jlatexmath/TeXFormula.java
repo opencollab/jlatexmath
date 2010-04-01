@@ -421,6 +421,8 @@ public class TeXFormula {
         } catch (IOException ex) {
             System.err.println("I/O error : Cannot generate " + out);
         }
+
+	g2.dispose();
     }
     
     public void createPNG(int style, float size, String out, Color bg, Color fg) {

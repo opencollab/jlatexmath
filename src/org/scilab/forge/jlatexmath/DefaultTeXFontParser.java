@@ -348,7 +348,7 @@ public class DefaultTeXFontParser {
 
     private static Font createFont(InputStream fontIn, String name) throws ResourceParseException {
         try {
-            Font f = Font.createFont(java.awt.Font.TRUETYPE_FONT, fontIn);
+            Font f = Font.createFont(Font.TRUETYPE_FONT, fontIn);
 	    GraphicsEnvironment graphicEnv = GraphicsEnvironment.getLocalGraphicsEnvironment();
 	    /**
 	     * The following fails under java 1.5
