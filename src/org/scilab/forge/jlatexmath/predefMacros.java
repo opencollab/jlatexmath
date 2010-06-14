@@ -162,6 +162,7 @@ public class predefMacros {
 	return new RuleAtom((int) winfo[0], winfo[1], (int) hinfo[0], hinfo[1], (int) rinfo[0], -rinfo[1]);	
     }
 
+    /* Thanks to Juan Enrique Escobar Robles for this macro */
     public Atom cfrac_macro(TeXParser tp, String[] args) throws ParseException {
     	int alig = TeXConstants.ALIGN_CENTER;
 	if ("r".equals(args[3])) {
