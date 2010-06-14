@@ -162,6 +162,26 @@ public class predefMacros {
 	return new RuleAtom((int) winfo[0], winfo[1], (int) hinfo[0], hinfo[1], (int) rinfo[0], -rinfo[1]);	
     }
 
+    public Atom cfrac_macro(TeXParser tp, String[] args) throws ParseException {
+    	int alig = TeXConstants.ALIGN_CENTER;
+	if ("r".equals(args[3])) {
+	    alig = TeXConstants.ALIGN_RIGHT;
+	} else if ("l".equals(args[3])) {
+	    alig = TeXConstants.ALIGN_LEFT;
+	}    		
+	TeXFormula num = new TeXFormula(args[1], false);
+	TeXFormula denom = new TeXFormula(args[2], false);
+	if (num.root == null || denom.root == null) {
+	    throw new ParseException("Both numerator and denominator of a fraction can't be empty!");
+	}
+	Atom f = new FractionAtom(num.root, denom.root, true, alig, TeXConstants.ALIGN_CENTER);
+	RowAtom rat = new RowAtom();
+	rat.add(new StyleAtom(TeXConstants.STYLE_DISPLAY));
+	rat.add(f);
+	rat.add(new StyleAtom());
+	return rat;
+    }
+
     public Atom frac_macro(TeXParser tp, String[] args) throws ParseException {
 	TeXFormula num = new TeXFormula(args[1], false);
 	TeXFormula denom = new TeXFormula(args[2], false);

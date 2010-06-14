@@ -651,6 +651,20 @@
 		</CreateTeXFormula>
 		<Return name="f" />
 	</TeXFormula>
+
+	<TeXFormula name="cot" enabled="true">
+		<CreateTeXFormula name="f">
+			<Argument type="String" value="\mathop{\mathrm{cos}}\nolimits" />
+		</CreateTeXFormula>
+		<Return name="f" />
+	</TeXFormula>
+	
+	<TeXFormula name="arccot" enabled="true">
+		<CreateTeXFormula name="f">
+			<Argument type="String" value="\mathop{\mathrm{arccot}}\nolimits" />
+		</CreateTeXFormula>
+		<Return name="f" />
+	</TeXFormula>
 	
 	<TeXFormula name="cosh" enabled="true">
 		<CreateTeXFormula name="f">
@@ -680,13 +694,6 @@
 		<Return name="f" />
 	</TeXFormula>
 	
-	<TeXFormula name="cot" enabled="true">
-		<CreateTeXFormula name="f">
-			<Argument type="String" value="\mathop{\mathrm{cot}}\nolimits" />
-		</CreateTeXFormula>
-		<Return name="f" />
-	</TeXFormula>
-	
 	<TeXFormula name="coth" enabled="true">
 		<CreateTeXFormula name="f">
 			<Argument type="String" value="\mathop{\mathrm{coth}}\nolimits" />
@@ -700,10 +707,38 @@
 		</CreateTeXFormula>
 		<Return name="f" />
 	</TeXFormula>
+
+	<TeXFormula name="arcsec" enabled="true">
+		<CreateTeXFormula name="f">
+			<Argument type="String" value="\mathop{\mathrm{arcsec}}\nolimits" />
+		</CreateTeXFormula>
+		<Return name="f" />
+	</TeXFormula>
+
+	<TeXFormula name="arccsc" enabled="true">
+		<CreateTeXFormula name="f">
+			<Argument type="String" value="\mathop{\mathrm{arccsc}}\nolimits" />
+		</CreateTeXFormula>
+		<Return name="f" />
+	</TeXFormula>
+
+	<TeXFormula name="sech" enabled="true">
+		<CreateTeXFormula name="f">
+			<Argument type="String" value="\mathop{\mathrm{sech}}\nolimits" />
+		</CreateTeXFormula>
+		<Return name="f" />
+	</TeXFormula>
 	
 	<TeXFormula name="csc" enabled="true">
 		<CreateTeXFormula name="f">
 			<Argument type="String" value="\mathop{\mathrm{csc}}\nolimits" />
+		</CreateTeXFormula>
+		<Return name="f" />
+	</TeXFormula>
+
+	<TeXFormula name="csch" enabled="true">
+		<CreateTeXFormula name="f">
+			<Argument type="String" value="\mathop{\mathrm{csch}}\nolimits" />
 		</CreateTeXFormula>
 		<Return name="f" />
 	</TeXFormula>
