@@ -2,7 +2,7 @@
  * =========================================================================
  * This file is part of the JLaTeXMath Library - http://forge.scilab.org/jlatexmath
  *
- * Copyright (C) 2009 DENIZET Calixte
+ * Copyright (C) 2009-2010 DENIZET Calixte
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -63,7 +63,7 @@ public class ArrayOfAtoms extends TeXFormula {
 	row++;
     }
     
-    public void checkDimensions() throws InvalidMatrixException {
+    public void checkDimensions() {
 	if (array.getLast().size() != 0)
 	    addRow();
 	else if (root != null)
@@ -71,9 +71,23 @@ public class ArrayOfAtoms extends TeXFormula {
 	
 	row = array.size() - 1;
 	col = array.get(0).size();
+
 	for (int i = 1; i < row; i++) {
-	    if (array.get(i).size() != col && array.get(i).get(0) != null && array.get(i).get(0).type != TeXConstants.TYPE_INTERTEXT)
-		throw new InvalidMatrixException("Bad number of columns at row " + i + " : " + array.get(i).size() + " found !");
+	    if (array.get(i).size() > col) {
+		col = array.get(i).size();
+	    }
+	}
+
+	/* Thanks to Juan Enrique Escobar Robles for this patch
+	   which let the user have empty columns */
+	for (int i = 0; i < row; i++) {
+	    int  j = array.get(i).size();
+	    if (j != col && array.get(i).get(0) != null && array.get(i).get(0).type != TeXConstants.TYPE_INTERTEXT) {
+		LinkedList<Atom> r = array.get(i);
+		for(; j < col; j++) {
+		    r.add(new TeXFormula("").root);	
+		}
+	    }
 	}
     }
 }

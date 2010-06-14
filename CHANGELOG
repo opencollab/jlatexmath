@@ -1,3 +1,8 @@
+jlatexmath (0.9.2)
+	* Possibility to have empty columns in array
+	 
+ -- Calixte Denizet <Calixte.Denizet@ac-rennes.fr>
+
 jlatexmath (0.9.1)
 	* Few modifications in fop-plugin and improve \includegraphics
 	 
