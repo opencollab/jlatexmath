@@ -1,4 +1,6 @@
 jlatexmath (0.9.2)
+        * Improve the render of a cfrac (thanks to Juan Enrique)
+
 	* Improve the way to get the arguments of a macro (thanks to Juan Enrique)
  -- Calixte Denizet <Calixte.Denizet@ac-rennes.fr>
 

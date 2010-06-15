@@ -115,7 +115,7 @@ public class Dummy {
     }
     
     public boolean isKern() {
-	return el instanceof SpaceAtom;
+	return el instanceof SpaceAtom || el instanceof StyleAtom;
     }
     
     // only for Row-elements
