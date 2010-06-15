@@ -1,4 +1,7 @@
 jlatexmath (0.9.2)
+	* Improve the way to get the arguments of a macro (thanks to Juan Enrique)
+ -- Calixte Denizet <Calixte.Denizet@ac-rennes.fr>
+
         * Add cfrac macro
 
 	* Possibility to have empty columns in array

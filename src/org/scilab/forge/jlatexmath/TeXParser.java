@@ -604,7 +604,7 @@ public class TeXParser {
 		    pos++;
 		}
 		else 
-		    args[1] = "\\" + getCommand();
+		    args[1] = getCommandWithArgs(getCommand());
 	    }
 	    
 	    //We get the options after the first argument
@@ -632,7 +632,7 @@ public class TeXParser {
 			pos++;
 		    }
 		    else 
-			args[i] = "\\" + getCommand();
+			args[i] = getCommandWithArgs(getCommand());
 		}
 	    }
 	    
@@ -640,11 +640,48 @@ public class TeXParser {
 	}
 	return args;
     }
+    
+    /**
+     * return a string with command and options and args
+     * @param command name of command
+     * @return
+     * @author Juan Enrique Escobar Robles
+     */
+    private String getCommandWithArgs(String command){
+	MacroInfo mac = MacroInfo.Commands.get(command);
+	if (mac != null) {
+	    int mac_opts = 0;
+	    if (mac.hasOptions) {
+		mac_opts = mac.posOpts;
+	    }
 
-    /*
-    * Processes the given TeX command (by parsing following command arguments
-    * in the parse string).
-    */
+	    String[] mac_args = getOptsArgs(mac.nbArgs, mac_opts);
+	    StringBuffer mac_arg = new StringBuffer("\\");
+	    mac_arg.append(command);
+	    for (int j = 0; j < mac.posOpts; j++) {
+		String arg_t=mac_args[mac.nbArgs + j+1];
+		if(arg_t!=null) {
+		    mac_arg.append("[").append(arg_t).append("]");
+		}
+	    }
+
+	    for (int j = 0; j < mac.nbArgs; j++) {
+		String arg_t=mac_args[j+1];
+		if (arg_t != null) {
+		    mac_arg.append("{").append(arg_t).append("}");
+		}
+	    }
+
+	    return mac_arg.toString();
+	}
+
+	return "\\" + command;
+    }
+
+    /**
+     * Processes the given TeX command (by parsing following command arguments
+     * in the parse string).
+     */
     private Atom processCommands(String command) throws ParseException {
 	MacroInfo mac = MacroInfo.Commands.get(command);
 	int opts = 0;
