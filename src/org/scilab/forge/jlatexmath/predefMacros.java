@@ -864,6 +864,13 @@ public class predefMacros {
 	return new LaTeXAtom();
     }
     
+    public Atom GeoGebra_macro(TeXParser tp, String[] args) throws ParseException {
+	TeXFormula tf = new TeXFormula("\\mathbb{G}\\mathsf{e}");
+	tf.add(new GeoGebraLogoAtom());
+	tf.add("\\mathsf{Gebra}");
+	return new ColorAtom(tf.root, null, new Color(102, 102, 102));
+    }
+
     public Atom hphantom_macro(TeXParser tp, String[] args) throws ParseException {
 	return new PhantomAtom(new TeXFormula(args[1], false).root, true, false, false);
     }

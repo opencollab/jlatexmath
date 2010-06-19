@@ -43,6 +43,9 @@ import javax.swing.JLabel;
 import org.scilab.forge.jlatexmath.TeXConstants; 
 import org.scilab.forge.jlatexmath.TeXFormula;
 import org.scilab.forge.jlatexmath.TeXIcon;
+import org.scilab.forge.jlatexmath.DefaultTeXFont;
+
+import org.scilab.forge.jlatexmath.cyrillic.CyrillicRegistration;
 
 /**
  * A class to test LaTeX rendering.
@@ -69,6 +72,8 @@ public class Example3 {
         latex += "\\end{split}\\\\";
         latex += "\\rotatebox{30}{\\sum_{n=1}^{+\\infty}}\\quad\\mbox{Mirror rorriM}\\reflectbox{\\mbox{Mirror rorriM}}";
         latex += "\\end{array}";
+
+	DefaultTeXFont.registerAlphabet(new CyrillicRegistration());
         
         TeXFormula formula = new TeXFormula(latex);
         TeXIcon icon = formula.createTeXIcon(TeXConstants.STYLE_DISPLAY, 20);

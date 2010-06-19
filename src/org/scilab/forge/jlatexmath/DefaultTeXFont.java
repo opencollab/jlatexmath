@@ -31,6 +31,7 @@ package org.scilab.forge.jlatexmath;
 
 import java.awt.Font;
 import java.util.Map;
+import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
 import java.lang.Character.UnicodeBlock;
@@ -73,6 +74,7 @@ public class DefaultTeXFont implements TeXFont {
     protected static final int WIDTH = 0, HEIGHT = 1, DEPTH = 2, IT = 3;
 
     public static List<Character.UnicodeBlock> loadedAlphabets = new ArrayList();
+    public static Map<Character.UnicodeBlock, AlphabetRegistration> registeredAlphabets = new HashMap();
 
     public boolean isBold = false;
     public boolean isRoman = false;
@@ -137,12 +139,35 @@ public class DefaultTeXFont implements TeXFont {
 	symbolMappings.putAll(dtfp.parseSymbolMappings());
     }
 
+    public static void addTeXFontDescription(Object base, InputStream in, String name) throws ResourceParseException {
+	DefaultTeXFontParser dtfp = new DefaultTeXFontParser(base, in, name);
+	fontInfo = dtfp.parseFontDescriptions(fontInfo);
+	dtfp.parseExtraPath();
+	textStyleMappings.putAll(dtfp.parseTextStyleMappings());
+	symbolMappings.putAll(dtfp.parseSymbolMappings());
+    }
+
     public static void addAlphabet(Character.UnicodeBlock alphabet, InputStream inlanguage, String language, InputStream insymbols, String symbols, InputStream inmappings, String mappings) throws ResourceParseException {
 	if (!loadedAlphabets.contains(alphabet)) {
             addTeXFontDescription(inlanguage, language);
             SymbolAtom.addSymbolAtom(insymbols, symbols);
             TeXFormula.addSymbolMappings(inmappings, mappings);
             loadedAlphabets.add(alphabet);
+        }
+    }
+    
+    public static void addAlphabet(Object base, Character.UnicodeBlock[] alphabet, String language) throws ResourceParseException {
+	boolean b = false;
+	for (int i = 0; !b && i < alphabet.length; i++) {
+	    b = loadedAlphabets.contains(alphabet[i]) || b;
+	}
+	if (!b) {
+	    TeXParser.isLoading = true;
+            addTeXFontDescription(base, base.getClass().getResourceAsStream(language), language);
+            for (int i = 0; i < alphabet.length; i++) {
+		loadedAlphabets.add(alphabet[i]);
+	    }
+	    TeXParser.isLoading = false;
         }
     }
 
@@ -152,9 +177,27 @@ public class DefaultTeXFont implements TeXFont {
 	String map = "fonts/" + name + "/mappings_" + name+ ".xml";
 	
 	try {
-            DefaultTeXFont.addAlphabet(alphabet, TeXFormula.class.getResourceAsStream(lg), lg,TeXFormula.class.getResourceAsStream(sym), sym, TeXFormula.class.getResourceAsStream(map), map);
+            DefaultTeXFont.addAlphabet(alphabet, TeXFormula.class.getResourceAsStream(lg), lg, TeXFormula.class.getResourceAsStream(sym), sym, TeXFormula.class.getResourceAsStream(map), map);
         } catch (FontAlreadyLoadedException e) { }
     }
+
+    public static void addAlphabet(AlphabetRegistration reg) {
+	try {
+            if (reg != null) {
+		DefaultTeXFont.addAlphabet(reg.getPackage(), reg.getUnicodeBlock(), reg.getTeXFontFileName());
+	    }
+        } catch (FontAlreadyLoadedException e) {
+	} catch (AlphabetRegistrationException e) {
+	    System.err.println(e.toString());
+	}   
+    }
+
+    public static void registerAlphabet(AlphabetRegistration reg) {
+	Character.UnicodeBlock[] blocks = reg.getUnicodeBlock();
+	for (int i = 0; i < blocks.length; i++) {
+	    registeredAlphabets.put(blocks[i], reg);
+	}
+    }	
 
     public TeXFont copy() {
 	return new DefaultTeXFont(size, isBold, isRoman, isSs, isTt, isIt);
@@ -195,7 +238,7 @@ public class DefaultTeXFont implements TeXFont {
     }
     
     private Char getChar(char c, CharFont[] cf, int style) {
-        int kind, offset;//System.out.println("kind="+cf[UNICODE]);
+        int kind, offset;
         if (c >= '0' && c <= '9') {
             kind = NUMBERS;
             offset = c - '0';
@@ -213,12 +256,9 @@ public class DefaultTeXFont implements TeXFont {
         // if the mapping for the character's range, then use the default style
         if (cf[kind] == null)
             return getDefaultChar(c, style);
-        else /*if (!isBold)*/
+        else 
             return getChar(new CharFont((char) (cf[kind].c + offset),
 					cf[kind].fontId), style);
-	/*else 
-	    return getChar(new CharFont((char) (cf[kind].c + offset),
-	    cf[kind].boldFontId), style);*/
     }
     
     public Char getChar(char c, String textStyle, int style)

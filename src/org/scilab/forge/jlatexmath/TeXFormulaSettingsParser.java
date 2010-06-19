@@ -130,8 +130,9 @@ public class TeXFormulaSettingsParser {
             else if (formula.equals(""))
                 throw new XMLResourceParseException(RESOURCE_NAME, map.getTagName(),
                         "formula", null);
-            if (ch.length() == 1) // valid element found
-                table[ch.charAt(0)] =  new TeXFormula(formula).root;
+            if (ch.length() == 1) {// valid element found
+		table[ch.charAt(0)] = new TeXFormula(formula).root;
+	    }
             else
                 // only single-character mappings allowed, ignore others
                 throw new XMLResourceParseException(RESOURCE_NAME, map.getTagName(),

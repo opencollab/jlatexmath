@@ -119,7 +119,7 @@ public class TeXFormula {
 	    new PredefinedTeXFormulaParser("PredefinedCommands.xml", "Command").parse(MacroInfo.Commands);
 	    new PredefinedTeXFormulaParser("PredefinedTeXFormulas.xml", "TeXFormula").parse(predefinedTeXFormulas);
 	} catch (Exception e) {
-	    System.out.println(e.toString());
+	    System.err.println(e.toString());
 	}
 
 	symbolFormulaMappings = parser.parseSymbolToFormulaMappings();
@@ -421,6 +421,8 @@ public class TeXFormula {
         } catch (IOException ex) {
             System.err.println("I/O error : Cannot generate " + out);
         }
+
+	g2.dispose();
     }
     
     public void createPNG(int style, float size, String out, Color bg, Color fg) {

@@ -1,8 +1,8 @@
 <?xml version='1.0'?>
 <!--
-  language_greek.xml
+  language_cyrillic.xml
   =========================================================================
-  This file is originally part of the JMathTeX Library - http://jmathtex.sourceforge.net
+  This file is part of the JLaTeXMath Library - http://forge.scilab.org/p/jlatexmath
   
   Copyright (C) 2009 DENIZET Calixte
   
@@ -31,18 +31,22 @@
 <TeXFont>
 
 <SymbolMappings>
-  <Mapping include="fonts/greek/jlm_greek.map.xml" />
+  <Mapping include="fonts/jlm_cyrillic.map.xml" />
 </SymbolMappings>
 
 <FontDescriptions>
-  <Metrics include="fonts/greek/jlm_fcmbipg.xml" />
-  <Metrics include="fonts/greek/jlm_fcmbpg.xml" />
-  <Metrics include="fonts/greek/jlm_fcmripg.xml" />
-  <Metrics include="fonts/greek/jlm_fcmrpg.xml" />
-  <Metrics include="fonts/greek/jlm_fcsbpg.xml" />
-  <Metrics include="fonts/greek/jlm_fcsropg.xml" />
-  <Metrics include="fonts/greek/jlm_fcsrpg.xml" />
-  <Metrics include="fonts/greek/jlm_fctrpg.xml" />
+  <Metrics include="fonts/jlm_wnr10.xml" />
+  <Metrics include="fonts/jlm_wnti10.xml" />
+  <Metrics include="fonts/jlm_wntt10.xml" />
+  <Metrics include="fonts/jlm_wnss10.xml" />
+  <Metrics include="fonts/jlm_wnssi10.xml" />
+  <Metrics include="fonts/jlm_wnssbx10.xml" />
+  <Metrics include="fonts/jlm_wnbx10.xml" />
+  <Metrics include="fonts/jlm_wnbxti10.xml" />
 </FontDescriptions>
+
+<TeXSymbols include="fonts/symbols_cyrillic.xml" />
+
+<FormulaSettings include="fonts/mappings_cyrillic.xml" />
 
 </TeXFont>

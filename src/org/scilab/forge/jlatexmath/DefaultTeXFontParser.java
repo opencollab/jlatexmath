@@ -58,10 +58,10 @@ import org.w3c.dom.Node;
 public class DefaultTeXFontParser {
 
     /** 
-	 * if the register font cannot be found, we display an error message
-	 * but we do it only once 
-	 */
-	private boolean registerFontExceptionDisplayed = false; 
+     * if the register font cannot be found, we display an error message
+     * but we do it only once 
+     */
+    private static boolean registerFontExceptionDisplayed = false; 
     private static DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
     private static interface CharChildParser { // NOPMD
         public void parse(Element el, char ch, FontInfo info) throws XMLResourceParseException;
@@ -69,24 +69,23 @@ public class DefaultTeXFontParser {
     
     private static class ExtensionParser implements CharChildParser {
 	
-        
+	
         ExtensionParser() {
             // avoid generation of access class
         }
         
-        public void parse(Element el, char ch, FontInfo info)
-        throws ResourceParseException {
+        public void parse(Element el, char ch, FontInfo info) throws ResourceParseException {
             int[] extensionChars = new int[4];
             // get required integer attributes
             extensionChars[DefaultTeXFont.REP] = DefaultTeXFontParser
-                    .getIntAndCheck("rep", el);
+		.getIntAndCheck("rep", el);
             // get optional integer attributes
             extensionChars[DefaultTeXFont.TOP] = DefaultTeXFontParser
-                    .getOptionalInt("top", el, DefaultTeXFont.NONE);
+		.getOptionalInt("top", el, DefaultTeXFont.NONE);
             extensionChars[DefaultTeXFont.MID] = DefaultTeXFontParser
-                    .getOptionalInt("mid", el, DefaultTeXFont.NONE);
+		.getOptionalInt("mid", el, DefaultTeXFont.NONE);
             extensionChars[DefaultTeXFont.BOT] = DefaultTeXFontParser
-                    .getOptionalInt("bot", el, DefaultTeXFont.NONE);
+		.getOptionalInt("bot", el, DefaultTeXFont.NONE);
             
             // parsing OK, add extension info
             info.setExtension(ch, extensionChars);
@@ -94,13 +93,12 @@ public class DefaultTeXFontParser {
     }
     
     private static class KernParser implements CharChildParser {
-        
+	
         KernParser() {
             // avoid generation of access class
         }
         
-        public void parse(Element el, char ch, FontInfo info)
-        throws ResourceParseException {
+        public void parse(Element el, char ch, FontInfo info) throws ResourceParseException {
             // get required integer attribute
             int code = DefaultTeXFontParser.getIntAndCheck("code", el);
             // get required float attribute
@@ -112,13 +110,12 @@ public class DefaultTeXFontParser {
     }
     
     private static class LigParser implements CharChildParser {
-        
+	
         LigParser() {
             // avoid generation of access class
         }
         
-        public void parse(Element el, char ch, FontInfo info)
-        throws ResourceParseException {
+        public void parse(Element el, char ch, FontInfo info) throws ResourceParseException {
             // get required integer attributes
             int code = DefaultTeXFontParser.getIntAndCheck("code", el);
             int ligCode = DefaultTeXFontParser.getIntAndCheck("ligCode", el);
@@ -129,13 +126,12 @@ public class DefaultTeXFontParser {
     }
     
     private static class NextLargerParser implements CharChildParser {
-        
+	
         NextLargerParser() {
             // avoid generation of access class
         }
         
-        public void parse(Element el, char ch, FontInfo info)
-        throws ResourceParseException {
+        public void parse(Element el, char ch, FontInfo info) throws ResourceParseException {
             // get required integer attributes
             String fontId = DefaultTeXFontParser.getAttrValueAndCheckIfNotNull("fontId", el);
             int code = DefaultTeXFontParser.getIntAndCheck("code", el);
@@ -155,12 +151,12 @@ public class DefaultTeXFontParser {
     
     protected static ArrayList<String> Font_ID = new ArrayList<String>();
     private static Map<String,Integer> rangeTypeMappings = new HashMap<String,Integer>();
-    private static Map<String,CharChildParser>
-            charChildParsers = new HashMap<String,CharChildParser>();
+    private static Map<String,CharChildParser> charChildParsers = new HashMap<String,CharChildParser>();
     
     private Map<String,CharFont[]> parsedTextStyles;
     
     private Element root;
+    private Object base = null;
     
     static {
         // string-to-constant mappings
@@ -172,7 +168,7 @@ public class DefaultTeXFontParser {
     public DefaultTeXFontParser() throws ResourceParseException {
 	this(DefaultTeXFontParser.class.getResourceAsStream(RESOURCE_NAME), RESOURCE_NAME);
     }
-
+    
     public DefaultTeXFontParser(InputStream file, String name) throws ResourceParseException {
 	factory.setIgnoringElementContentWhitespace(true);
 	factory.setIgnoringComments(true);
@@ -182,6 +178,17 @@ public class DefaultTeXFontParser {
             throw new XMLResourceParseException(name, e);
         }
     }
+
+    public DefaultTeXFontParser(Object base , InputStream file, String name) throws ResourceParseException {
+	this.base = base;
+	factory.setIgnoringElementContentWhitespace(true);
+	factory.setIgnoringComments(true);
+	try {
+	    root = factory.newDocumentBuilder().parse(file).getDocumentElement();
+        } catch (Exception e) { // JDOMException or IOException
+	    throw new XMLResourceParseException(name, e);
+        }
+    }
     
     private static void setCharChildParsers() {
         charChildParsers.put("Kern", new KernParser());
@@ -189,7 +196,7 @@ public class DefaultTeXFontParser {
         charChildParsers.put("NextLarger", new NextLargerParser());
         charChildParsers.put("Extension", new ExtensionParser());
     }
-
+    
     public FontInfo[] parseFontDescriptions(FontInfo[] fi, InputStream file, String name) throws ResourceParseException {
         ArrayList<FontInfo> res = new ArrayList<FontInfo>(Arrays.asList(fi));
 	Element font;
@@ -238,7 +245,13 @@ public class DefaultTeXFontParser {
 	    it = getAttrValueAndCheckIfNotNull("itVersion", font);
 	} catch (ResourceParseException e) {}
 	// try reading the font
-	Font f = createFont(name.substring(0, name.lastIndexOf("/") + 1) + fontName);
+	Font f;
+	if (base == null) {
+	    f = createFont(name.substring(0, name.lastIndexOf("/") + 1) + fontName);
+	} else {
+	    String path = name.substring(0, name.lastIndexOf("/") + 1) + fontName;
+	    f = createFont(base.getClass().getResourceAsStream(path), fontName);
+	}
 	
 	// create FontInfo-object
 	FontInfo info = new FontInfo(Font_ID.indexOf(fontId), f, unicode, xHeight, space, quad, bold, roman, ss, tt, it);
@@ -272,11 +285,30 @@ public class DefaultTeXFontParser {
 	    NodeList list = fontDescriptions.getElementsByTagName("Metrics");
             for (int i = 0; i < list.getLength(); i++) {
 		// get required string attribute
-		String  include = getAttrValueAndCheckIfNotNull("include", (Element)list.item(i));
-		fi = parseFontDescriptions(fi, DefaultTeXFontParser.class.getResourceAsStream(include), include);
+		String include = getAttrValueAndCheckIfNotNull("include", (Element)list.item(i));
+		if (base == null) {
+		    fi = parseFontDescriptions(fi, DefaultTeXFontParser.class.getResourceAsStream(include), include);
+		} else {
+		    fi = parseFontDescriptions(fi, base.getClass().getResourceAsStream(include), include);
+		}
 	    }
 	}
 	return fi;
+    }
+
+    protected void parseExtraPath() throws ResourceParseException {
+	Element syms = (Element)root.getElementsByTagName("TeXSymbols").item(0);
+        if (syms != null) { // element present
+	    // get required string attribute
+	    String include = getAttrValueAndCheckIfNotNull("include", syms);
+	    SymbolAtom.addSymbolAtom(base.getClass().getResourceAsStream(include), include);
+	}
+	Element settings = (Element)root.getElementsByTagName("FormulaSettings").item(0);
+        if (settings != null) { // element present
+	    // get required string attribute
+	    String include = getAttrValueAndCheckIfNotNull("include", settings);
+	    TeXFormula.addSymbolMappings(base.getClass().getResourceAsStream(include), include);
+	}
     }
     
     private static void processCharElement(Element charElement, FontInfo info)
@@ -311,32 +343,34 @@ public class DefaultTeXFontParser {
     }
     
     private Font createFont(String name) throws ResourceParseException {
-        InputStream fontIn = null;
+	return createFont(DefaultTeXFontParser.class.getResourceAsStream(name), name);
+    }
+
+    private static Font createFont(InputStream fontIn, String name) throws ResourceParseException {
         try {
-            fontIn = DefaultTeXFontParser.class.getResourceAsStream(name);
-            Font f = Font.createFont(java.awt.Font.TRUETYPE_FONT, fontIn);
-			GraphicsEnvironment graphicEnv = GraphicsEnvironment.getLocalGraphicsEnvironment();
-/**
- * The following fails under java 1.5
- * graphicEnv.registerFont(f);
- * dynamic load then
-*/
-       try {
-            Method registerFontMethod = graphicEnv.getClass().getMethod("registerFont", new Class[] { Font.class });
-            if ((Boolean)registerFontMethod.invoke(graphicEnv, new Object[] { f }) == Boolean.FALSE) {
-		System.err.println("Cannot register the font " + f.getFontName());
+            Font f = Font.createFont(Font.TRUETYPE_FONT, fontIn);
+	    GraphicsEnvironment graphicEnv = GraphicsEnvironment.getLocalGraphicsEnvironment();
+	    /**
+	     * The following fails under java 1.5
+	     * graphicEnv.registerFont(f);
+	     * dynamic load then
+	     */
+	    try {
+		Method registerFontMethod = graphicEnv.getClass().getMethod("registerFont", new Class[] { Font.class });
+		if ((Boolean)registerFontMethod.invoke(graphicEnv, new Object[] { f }) == Boolean.FALSE) {
+		    System.err.println("Cannot register the font " + f.getFontName());
+		}
+	    } catch (Exception ex) {
+		if (!registerFontExceptionDisplayed) {
+		    System.err.println("Warning: Jlatexmath: Could not access to registerFont. Please update to java 6");
+		    registerFontExceptionDisplayed = true;
+		}
 	    }
-        } catch (Exception ex) {
-		   if (!registerFontExceptionDisplayed) {
-			   System.err.println("Jlatexmath: Could not access to registerFont. Please update to java 6");
-			   registerFontExceptionDisplayed = true;
-		   }
-        }
 	    return f;
         } catch (Exception e) {
             throw new XMLResourceParseException(RESOURCE_NAME
-                    + ": error reading font '" + name + "'. Error message: "
-                    + e.getMessage());
+						+ ": error reading font '" + name + "'. Error message: "
+						+ e.getMessage());
         } finally {
             try {
                 if (fontIn != null)
@@ -360,7 +394,11 @@ public class DefaultTeXFontParser {
 		String include = getAttrValueAndCheckIfNotNull("include", (Element)list.item(i));
 		Element map;
 		try {
-		    map = factory.newDocumentBuilder().parse(DefaultTeXFontParser.class.getResourceAsStream(include)).getDocumentElement();
+		    if (base == null) {
+			map = factory.newDocumentBuilder().parse(DefaultTeXFontParser.class.getResourceAsStream(include)).getDocumentElement();
+		    } else {
+			map = factory.newDocumentBuilder().parse(base.getClass().getResourceAsStream(include)).getDocumentElement();
+		    }
 		} catch (Exception e) {
 		    throw new XMLResourceParseException("Cannot find the file " + include + "!");
 		}
