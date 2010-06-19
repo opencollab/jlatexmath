@@ -66,14 +66,27 @@
   <target name="examples" depends="example"/>
   
   <!-- Compile source files -->
-  <target name="compile" depends="init">
-    <javac srcdir="${project.src.dir}" destdir="${project.bin.dir}" debug="on" source="5" target="5" excludes="cyrillic/** greek/**">
+  <target name="compileWithoutAlph" depends="init">
+    <javac srcdir="${project.src.dir}" destdir="${project.bin.dir}" debug="on" source="5" target="5" excludes="cyrillic/** greek/** **/WebStartAlphabetRegistration.java">
       <!--compilerarg value="-Xlint"/-->
     </javac>
   </target>
 
+  <!-- Compile source files -->
+  <target name="compile" depends="init">
+    <javac srcdir="${project.src.dir}" destdir="${project.bin.dir}" debug="on" source="5" target="5" excludes="**/WebStartAlphabetRegistration.java">
+      <!--compilerarg value="-Xlint"/-->
+    </javac>
+  </target>
+
+  <target name="compileMinimal" depends="compileWithoutAlph, cyrillic, greek">
+    <javac srcdir="${project.src.dir}" destdir="${project.bin.dir}" debug="on" source="5" target="5" classpath="${project.bin.dir}/cyrillic:${project.bin.dir}/greek">
+      <include name="**/WebStartAlphabetRegistration.java"/>
+    </javac>
+  </target>
+
   <target name="cyrillic" depends="init">
-    <javac srcdir="${project.src.dir}/cyrillic" destdir="${project.bin.dir}/cyrillic" debug="on" source="5" target="5" classpath="${jarfile}">
+    <javac srcdir="${project.src.dir}/cyrillic" destdir="${project.bin.dir}/cyrillic" debug="on" source="5" target="5" classpath="${project.bin.dir}">
       <!--compilerarg value="-Xlint"/-->
     </javac>
     <copy todir="${project.bin.dir}/cyrillic/${class.dir}/cyrillic" >
@@ -91,7 +104,7 @@
   </target>
 
   <target name="greek" depends="init">
-    <javac srcdir="${project.src.dir}/greek" destdir="${project.bin.dir}/greek" debug="on" source="5" target="5" classpath="${jarfile}">
+    <javac srcdir="${project.src.dir}/greek" destdir="${project.bin.dir}/greek" debug="on" source="5" target="5" classpath="${project.bin.dir}">
       <!--compilerarg value="-Xlint"/-->
     </javac>
     <copy todir="${project.bin.dir}/greek/${class.dir}/greek" >
@@ -110,7 +123,8 @@
 
   
   <!-- Build JAR files-->
-  <target name="buildJar" depends="compile">
+  <target name="minimal" depends="buildJarMinimal"/>
+  <target name="buildJarMinimal" depends="compileMinimal">
     <copy todir="${project.bin.dir}${class.dir}" >
       <fileset dir="${project.src.dir}">
 	<exclude name="**/*.java"/>
@@ -121,9 +135,28 @@
     <mkdir dir="${project.bin.dir}/META-INF" />
     <copy file="LICENSE" todir="${project.bin.dir}/META-INF" />
     <copy file="COPYING" todir="${project.bin.dir}/META-INF" />
-    <jar jarfile="${jarfile}" basedir="${project.bin.dir}" manifest="MANIFEST.MF" excludes="cyrillic/** greek/**"/>
+    <jar jarfile="${package.dir}/jlatexmath-minimal-${version}.jar" basedir="${project.bin.dir}" manifest="MANIFEST.MF" excludes="cyrillic/** greek/** **/greek/** **/cyrillic/**"/>
+    <zip destfile="${package.dir}/jlatexmath-minimal.zip">
+      <fileset dir="${package.dir}" includes="jlm_greek.jar"/>
+      <fileset dir="${package.dir}" includes="jlm_cyrillic.jar"/>
+      <fileset dir="${package.dir}" includes="jlatexmath-minimal-${version}.jar"/>
+      <fileset dir="." includes="README_MINIMAL"/>
+    </zip>
   </target>
 
+  <target name="buildJar" depends="compile">
+    <copy todir="${project.bin.dir}${class.dir}" >
+      <fileset dir="${project.src.dir}">
+	<exclude name="**/*.java"/>
+      </fileset>
+    </copy>
+    <mkdir dir="${project.bin.dir}/META-INF" />
+    <copy file="LICENSE" todir="${project.bin.dir}/META-INF" />
+    <copy file="COPYING" todir="${project.bin.dir}/META-INF" />
+    <jar jarfile="${package.dir}/jlatexmath-${version}.jar" basedir="${project.bin.dir}" manifest="MANIFEST.MF" excludes="cyrillic/** greek/**"/>
+  </target>
+
+  <target name="fop" depends="plugin"/>
   <target name="plugin" depends="init">
     <ant antfile="build.xml" dir="${fop.base.dir}" inheritAll="false"/>
     <copy file="${fop.base.dir}/dist/jlatexmath-fop-${version}.jar" todir="${package.dir}"/>
@@ -143,9 +176,15 @@
 
   <target name="embedded" depends="compile">
    <ant antfile="build.xml" dir="${fop.base.dir}" inheritAll="false" target="embedded"/>
-   <antcall target="buildJar">  
-     <param name="jarfile" value="${package.dir}/jlatexmath-embedded-fop-${version}.jar"/>
-   </antcall>
+   <copy todir="${project.bin.dir}${class.dir}" >
+      <fileset dir="${project.src.dir}">
+	<exclude name="**/*.java"/>
+      </fileset>
+    </copy>
+    <mkdir dir="${project.bin.dir}/META-INF" />
+    <copy file="LICENSE" todir="${project.bin.dir}/META-INF" />
+    <copy file="COPYING" todir="${project.bin.dir}/META-INF" />
+    <jar jarfile="${package.dir}/jlatexmath-embedded-fop-${version}.jar" basedir="${project.bin.dir}" manifest="MANIFEST.MF" excludes="cyrillic/** greek/**"/>
    <ant antfile="build.xml" dir="${fop.base.dir}" inheritAll="false" target="clean_embedded"/>
   </target>
   
@@ -154,10 +193,11 @@
   </target>
   
   <target name="src-all" depends="info" >
-    <jar jarfile="${output.jar.dir}/jlatexmath-src-all-${version}.zip" basedir="${project.root.dir}" includes="COPYING LICENSE README build.xml version.xml MANIFEST.MF src/**/*.java src/**/*.xml src/**/*.ttf src/**/licences/* src/**/README examples/**/*.java examples/**/lion.png examples/**/*.xml examples/**/README plugin/**/src/**/*.java plugin/**/src/META-INF/**/* plugin/**/build.xml plugin/**/COPYING plugin/**/LICENSE plugin/**/examples/*.*"/>
+    <jar jarfile="${output.jar.dir}/jlatexmath-src-all-${version}.zip" basedir="${project.root.dir}" includes="COPYING LICENSE README fop.properties build.xml version.xml MANIFEST.MF src/**/*.java src/**/*.xml src/**/*.ttf src/**/licences/* src/**/greek/* src/**/cyrillic/* src/**/README examples/**/*.java examples/**/lion.png examples/**/*.xml examples/**/README plugin/**/src/**/*.java plugin/**/src/META-INF/**/* plugin/**/build.xml plugin/**/COPYING plugin/**/LICENSE plugin/**/examples/*.*"/>
   </target>
   
-  
+  <target name="all" depends="init, buildJar, buildJarMinimal, source, src-all, embedded, plugin, plugin-src"/>
+
   <target name="doc" depends="compile" description="Generates the API specification (javadoc)">
     <javadoc packagenames="org.scilab.forge.jlatexmath.*"
              sourcepath="${project.src.basedir}"

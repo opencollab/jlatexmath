@@ -123,6 +123,11 @@ public class TeXFormula {
 	}
 
 	symbolFormulaMappings = parser.parseSymbolToFormulaMappings();
+	
+	try {
+	    DefaultTeXFont.registerAlphabet((AlphabetRegistration) Class.forName("org.scilab.forge.jlatexmath.cyrillic.CyrillicRegistration").newInstance());
+	    DefaultTeXFont.registerAlphabet((AlphabetRegistration) Class.forName("org.scilab.forge.jlatexmath.greek.GreekRegistration").newInstance());
+	} catch (Exception e) { }
     }
 
     public static void addSymbolMappings(String file) throws ResourceParseException {

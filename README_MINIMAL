@@ -1,0 +1,8 @@
+The minimal JLaTeXMath distribution doesn't contain the fonts, they're in separate jars. This kind of distribution is useful for web applications and I wrote it for GeoGebra team, if you want register a new alphabet just use for example :
+
+    WebStartAlphabetRegistration.register(AlphabetRegistration.JLM_GREEK);
+
+the package jlm_greek.jar will be load if and only if greek language is present the text.
+
+
+                                                            Calixte.
