@@ -655,7 +655,11 @@ public class TeXParser {
      * @return
      * @author Juan Enrique Escobar Robles
      */
-    private String getCommandWithArgs(String command){
+    private String getCommandWithArgs(String command) {
+	if(command.equals("left")){
+	    return getGroup("\\left", "\\right");
+	}
+	
 	MacroInfo mac = MacroInfo.Commands.get(command);
 	if (mac != null) {
 	    int mac_opts = 0;
@@ -667,14 +671,14 @@ public class TeXParser {
 	    StringBuffer mac_arg = new StringBuffer("\\");
 	    mac_arg.append(command);
 	    for (int j = 0; j < mac.posOpts; j++) {
-		String arg_t=mac_args[mac.nbArgs + j+1];
-		if(arg_t!=null) {
+		String arg_t = mac_args[mac.nbArgs + j + 1];
+		if (arg_t != null) {
 		    mac_arg.append("[").append(arg_t).append("]");
 		}
 	    }
 
 	    for (int j = 0; j < mac.nbArgs; j++) {
-		String arg_t=mac_args[j+1];
+		String arg_t = mac_args[j + 1];
 		if (arg_t != null) {
 		    mac_arg.append("{").append(arg_t).append("}");
 		}

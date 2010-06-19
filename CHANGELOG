@@ -1,4 +1,6 @@
 jlatexmath (0.9.2)
+	* An argument beginning with \left must be closed by \right (thanks to Juan Enrique)
+
 	* Fix bug with \over (http://bugzilla.scilab.org/show_bug.cgi?id=7226)
 	
         * Improve the render of a cfrac (thanks to Juan Enrique)
