@@ -175,7 +175,7 @@
 		<CreateCommand name="f">
 			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
 			<Argument type="String" value="over_macro" />
-			<Argument type="float" value="1" />
+			<Argument type="float" value="0" />
 		</CreateCommand>
 		<Return name="f" />
 	</Command>
@@ -184,7 +184,7 @@
 		<CreateCommand name="f">
 			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
 			<Argument type="String" value="atop_macro" />
-			<Argument type="float" value="1" />
+			<Argument type="float" value="0" />
 		</CreateCommand>
 		<Return name="f" />
 	</Command>
@@ -193,7 +193,7 @@
 		<CreateCommand name="f">
 			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
 			<Argument type="String" value="choose_macro" />
-			<Argument type="float" value="1" />
+			<Argument type="float" value="0" />
 		</CreateCommand>
 		<Return name="f" />
 	</Command>

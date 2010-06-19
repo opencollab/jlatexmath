@@ -138,6 +138,14 @@ public class TeXParser {
 	return at;
     }
 
+    /** Get the atom represented byt the current formula
+     */
+    public Atom getFormulaAtom() {
+	Atom at = formula.root;
+	formula.root = null;
+	return at;
+    }
+
     /** Put an atom in the current formula 
      */
     public void addAtom(Atom at) {

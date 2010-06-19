@@ -228,27 +228,30 @@ public class predefMacros {
     }
 
     public Atom over_macro(TeXParser tp, String[] args) throws ParseException {
-	Atom num = tp.getLastAtom();
-	TeXFormula denom = new TeXFormula(args[1], false);
-	if (num == null || denom.root == null)
+	Atom num = tp.getFormulaAtom();
+	tp.parse();
+	Atom denom = tp.getFormulaAtom();
+	if (num == null || denom == null)
 	    throw new ParseException("Both numerator and denominator of a fraction can't be empty!");
-	return new FractionAtom(num, denom.root, true);
+	return new FractionAtom(num, denom, true);
     }
 
     public Atom atop_macro(TeXParser tp, String[] args) throws ParseException {
-	Atom num = tp.getLastAtom();
-	TeXFormula denom = new TeXFormula(args[1], false);
-	if (num == null || denom.root == null)
-	    throw new ParseException("Both numerator and denominator of atop can't be empty!");
-	return new FractionAtom(num, denom.root, false);
+	Atom num = tp.getFormulaAtom();
+	tp.parse();
+	Atom denom = tp.getFormulaAtom();
+	if (num == null || denom == null)
+	    throw new ParseException("Both numerator and denominator of a fraction can't be empty!");
+	return new FractionAtom(num, denom, false);
     }
 
     public Atom choose_macro(TeXParser tp, String[] args) throws ParseException {
-	Atom num = tp.getLastAtom();
-	TeXFormula denom = new TeXFormula(args[1], false);
-	if (num == null || denom.root == null)
+	Atom num = tp.getFormulaAtom();
+	tp.parse();
+	Atom denom = tp.getFormulaAtom();
+	if (num == null || denom == null)
 	    throw new ParseException("Both numerator and denominator of choose can't be empty!");
-	return new FencedAtom(new FractionAtom(num, denom.root, false), new SymbolAtom("lbrack", TeXConstants.TYPE_OPENING, true), new SymbolAtom("rbrack", TeXConstants.TYPE_CLOSING, true));
+	return new FencedAtom(new FractionAtom(num, denom, false), new SymbolAtom("lbrack", TeXConstants.TYPE_OPENING, true), new SymbolAtom("rbrack", TeXConstants.TYPE_CLOSING, true));
     }
 
     public Atom binom_macro(TeXParser tp, String[] args) throws ParseException {
