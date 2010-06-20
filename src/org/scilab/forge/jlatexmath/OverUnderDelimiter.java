@@ -3,7 +3,7 @@
  * This file is originally part of the JMathTeX Library - http://jmathtex.sourceforge.net
  * 
  * Copyright (C) 2004-2007 Universiteit Gent
- * Copyright (C) 2009 DENIZET Calixte
+ * Copyright (C) 2009-2010 DENIZET Calixte
  * 
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -78,8 +78,8 @@ public class OverUnderDelimiter extends Atom {
 	float max = getMaxWidth(b, del, scriptBox);
 	if (Math.abs(max - b.getWidth()) > TeXFormula.PREC)
 	    b = new HorizontalBox(b, max, TeXConstants.ALIGN_CENTER);
-	if (Math.abs(max - del.getHeight() - del.getDepth()) > TeXFormula.PREC)
-	    del = new VerticalBox(del, max, TeXConstants.ALIGN_CENTER);
+	
+	del = new VerticalBox(del, max, TeXConstants.ALIGN_CENTER);
 	if (scriptBox != null
             && Math.abs(max - scriptBox.getWidth()) > TeXFormula.PREC)
 	    scriptBox = new HorizontalBox(scriptBox, max,

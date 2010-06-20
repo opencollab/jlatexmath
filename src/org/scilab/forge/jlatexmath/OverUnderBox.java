@@ -3,7 +3,7 @@
  * This file is originally part of the JMathTeX Library - http://jmathtex.sourceforge.net
  * 
  * Copyright (C) 2004-2007 Universiteit Gent
- * Copyright (C) 2009 DENIZET Calixte
+ * Copyright (C) 2009-2010 DENIZET Calixte
  * 
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -82,17 +82,15 @@ public class OverUnderBox extends Box {
    public void draw(Graphics2D g2, float x, float y) {
       base.draw(g2, x, y);
 
-      float yVar = y - base.height;
+      float yVar = y - base.height - del.getWidth();
       if (over) { // draw delimiter and script above base box
-         double transX = x + del.getWidth() / 2, transY = yVar - del.getWidth()
-               / 2;
+         double transX = x + (del.getHeight() + del.depth) / 2, transY = yVar;
          AffineTransform oldAt = g2.getTransform();
          g2.translate(transX, transY);
          g2.rotate(Math.PI / 2);
-         del.draw(g2, -del.getWidth() / 2, -del.depth + del.getWidth() / 2);
+         del.draw(g2, 0, 0);
          g2.setTransform(oldAt);
-         yVar -= del.getWidth();
-
+         
          // draw superscript
          if (script != null)
             script.draw(g2, x, yVar - kern - script.depth);
@@ -100,18 +98,17 @@ public class OverUnderBox extends Box {
 
       yVar = y + base.depth;
       if (!over) { // draw delimiter and script under base box
-         yVar += del.getWidth();
-         double transX = x + del.getWidth() / 2, transY = yVar - del.getWidth()
-               / 2;
-         AffineTransform oldAt = g2.getTransform();
-         g2.translate(transX, transY);
-         g2.rotate(Math.PI / 2);
-         del.draw(g2, -del.getWidth() / 2, -del.depth + del.getWidth() / 2);
-         g2.setTransform(oldAt);
-
-         // draw subscript
-         if (script != null)
-            script.draw(g2, x, yVar + kern + script.height);
+	  double transX = x + (del.getHeight() + del.depth) / 2, transY = yVar;
+	  AffineTransform oldAt = g2.getTransform();
+	  g2.translate(transX, transY);
+	  g2.rotate(Math.PI / 2);
+	  del.draw(g2, 0, 0);
+	  g2.setTransform(oldAt);
+	  yVar += del.getWidth();
+	  
+	  // draw subscript
+	  if (script != null)
+	      script.draw(g2, x, yVar + kern + script.height);
       }
 
    }
