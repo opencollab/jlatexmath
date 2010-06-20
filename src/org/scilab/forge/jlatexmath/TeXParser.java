@@ -153,7 +153,7 @@ public class TeXParser {
 	return at;
     }
 
-    /** Get the atom represented byt the current formula
+    /** Get the atom represented by the current formula
      */
     public Atom getFormulaAtom() {
 	Atom at = formula.root;
@@ -274,6 +274,7 @@ public class TeXParser {
 	    char ch;
             while (pos < len) {
                 ch = parseString.charAt(pos);
+
 		switch (ch) {
 		case '\n' :
 		    line++;
@@ -524,31 +525,39 @@ public class TeXParser {
 	if (pos == len)
 	    return null;
 
-	int group = 1, spos;
-	char ch;
+	int ogroup = 1, spos;
+	char ch = '\0';
 	
-        group = 1;
-	spos = pos;
-	while (pos < len - 1 && group != 0) {
-	    pos++;
+        spos = pos;
+	while (pos < len && ogroup != 0) {
 	    ch = parseString.charAt(pos);
 	    switch (ch) {
 	    case L_GROUP :
-		group++;
+		ogroup++;
 		break;
+	    case '&' :
 	    case R_GROUP :
-		group--;
+		ogroup--;
 		break;
-	    default :
-		pos++;
 	    }
+	    pos++;
 	}
-	    
-	if (group >= 2)
+
+	if (ogroup >= 2)
 	    // end of string reached, but not processed properly
 	    throw new ParseException("Illegal end,  missing '}' !");
-	pos++;
-	return parseString.substring(spos, pos - 1);
+
+	String str;
+	if (ogroup == 0) {
+	    str = parseString.substring(spos, pos - 1);
+	} else {
+	    str = parseString.substring(spos, pos);
+	}
+	
+	if (ch == '&' || ch == R_GROUP) 
+	    pos--;
+	
+	return str;
     }
 
     /** Convert a character in the corresponding atom in using the file TeXFormulaSettings.xml for non-alphanumeric characters
