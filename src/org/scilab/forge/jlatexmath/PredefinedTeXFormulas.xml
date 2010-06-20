@@ -1091,4 +1091,28 @@
 		</CreateTeXFormula>
 		<Return name="f" />
 	</TeXFormula>
+
+<!-- Juan Enrique -->
+
+        <TeXFormula name="notin" enabled="true">
+	  <CreateTeXFormula name="f">
+	    <Argument type="String" value="\not\in"/>
+	  </CreateTeXFormula>
+	  <Return name="f" />
+	</TeXFormula>
+
+	<TeXFormula name="rVert" enabled="true">
+	  <CreateTeXFormula name="f">
+	    <Argument type="String" value="\Vert" />
+	  </CreateTeXFormula>
+	  <Return name="f" />
+	</TeXFormula>
+
+	<TeXFormula name="lVert" enabled="true">
+	  <CreateTeXFormula name="f">
+	    <Argument type="String" value="\Vert" />
+	  </CreateTeXFormula>
+	  <Return name="f" />
+	</TeXFormula>
+
 </PredefinedTeXFormulas>
