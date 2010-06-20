@@ -225,7 +225,8 @@ public class TeXParser {
 	    MacroInfo mac;
 	    while (pos < len) {
 		ch = parseString.charAt(pos);
-		if (ch == ESCAPE) {
+		switch (ch) {
+		case ESCAPE :
 		    spos = pos;
 		    com = getCommand();
 		    if ("newcommand".equals(com) || "renewcommand".equals(com)) {
@@ -246,7 +247,8 @@ public class TeXParser {
 			atIsLetter++;
 		    else if ("makeatother".equals(com))
 			atIsLetter--;
-		} else if (ch == PRIME) {
+		    break;
+		case PRIME :
 		    String pr = "^{";
 		    spos = pos;
 		    while (pos < len && parseString.charAt(pos) == PRIME) {
@@ -255,7 +257,10 @@ public class TeXParser {
 		    }
 		    parseString.replace(spos, pos, pr + "}");
 		    len = parseString.length();
-		} else pos++;
+		    break;
+		default :
+		    pos++;
+		}
 	    }
 	    pos = 0;
 	    len = parseString.length();
@@ -270,18 +275,18 @@ public class TeXParser {
 	    char ch;
             while (pos < len) {
                 ch = parseString.charAt(pos);
-                if (ch == '\t' || ch == '\n' || ch == '\r') {
-                    pos++; // ignore white space
-		    if (ch == '\n') { 
-			line++;
-			col = pos;
-		    }
-		} else if (ch == ' ') {
-		    if (ignoreWhiteSpace)
-			pos++;
-		    else {// We are in a mbox
+		switch (ch) {
+		case '\n' :
+		    line++;
+		    col = pos;
+		case '\t' :
+		case '\r' :
+		    pos++;
+		    break;
+		case ' ' :
+		    pos++;
+		    if (!ignoreWhiteSpace) {// We are in a mbox
 			formula.add(new SpaceAtom());
-			pos++;
 			while (pos < len) {
 			    ch = parseString.charAt(pos);
 			    if (ch != ' ')
@@ -289,13 +294,16 @@ public class TeXParser {
 			    pos++;
 			}
 		    }
-		} else if (ch == ESCAPE) {
+		    break;
+		case ESCAPE :
 		    formula.add(processEscape());
 		    if (insertion) 
-			insertion = false;		       
-                } else if (ch == L_GROUP) 
+			insertion = false;
+		    break;
+		case L_GROUP : 
                     formula.add(getArgument());
-                else if (ch == R_GROUP) {
+		    break;
+                case R_GROUP :
 		    group--;
 		    pos++;
 		    if (group == -1)
@@ -308,16 +316,17 @@ public class TeXParser {
 			}
 			return;
 		    }
-		}
-                else if (ch == SUPER_SCRIPT || ch == SUB_SCRIPT) 
+		case SUPER_SCRIPT :
+		case SUB_SCRIPT :
                     formula.add(getScripts(ch));
-		else if (ch == '&') {
+		    break;
+		case '&' :
 		    if (!arrayMode)
 			throw new ParseException("Character '&' is only available in array mode !");
 		    ((ArrayOfAtoms)formula).addCol();
 		    pos++;
-		}
-                else {
+		    break;
+		default :
                     formula.add(convertCharacter(ch));
 		    pos++;
 		}
@@ -559,7 +568,8 @@ public class TeXParser {
 	while (pos < len) {
 	    ch = parseString.charAt(pos);
 
-	    if ((ch < 'a' || ch > 'z') && (ch < 'A' || ch > 'Z') && (atIsLetter == 0 || ch != '@')) break;
+	    if ((ch < 'a' || ch > 'z') && (ch < 'A' || ch > 'Z') && (atIsLetter == 0 || ch != '@'))
+		break;
 	    
 	    pos++;
 	}
