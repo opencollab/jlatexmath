@@ -1007,6 +1007,90 @@
 		</CreateTeXFormula>
 		<Return name="f" />
 	</TeXFormula>
+
+	<TeXFormula name="Alpha" enabled="true">
+		<CreateTeXFormula name="f">
+			<Argument type="String" value="\mathord{\mathrm{A}}" />
+		</CreateTeXFormula>
+		<Return name="f" />
+	</TeXFormula>
+
+	<TeXFormula name="Beta" enabled="true">
+		<CreateTeXFormula name="f">
+			<Argument type="String" value="\mathord{\mathrm{B}}" />
+		</CreateTeXFormula>
+		<Return name="f" />
+	</TeXFormula>
+
+	<TeXFormula name="Epsilon" enabled="true">
+		<CreateTeXFormula name="f">
+			<Argument type="String" value="\mathord{\mathrm{E}}" />
+		</CreateTeXFormula>
+		<Return name="f" />
+	</TeXFormula>
+
+	<TeXFormula name="Zeta" enabled="true">
+		<CreateTeXFormula name="f">
+			<Argument type="String" value="\mathord{\mathrm{Z}}" />
+		</CreateTeXFormula>
+		<Return name="f" />
+	</TeXFormula>
+
+	<TeXFormula name="Eta" enabled="true">
+		<CreateTeXFormula name="f">
+			<Argument type="String" value="\mathord{\mathrm{H}}" />
+		</CreateTeXFormula>
+		<Return name="f" />
+	</TeXFormula>
+
+	<TeXFormula name="Iota" enabled="true">
+		<CreateTeXFormula name="f">
+			<Argument type="String" value="\mathord{\mathrm{I}}" />
+		</CreateTeXFormula>
+		<Return name="f" />
+	</TeXFormula>
+
+	<TeXFormula name="Kappa" enabled="true">
+		<CreateTeXFormula name="f">
+			<Argument type="String" value="\mathord{\mathrm{K}}" />
+		</CreateTeXFormula>
+		<Return name="f" />
+	</TeXFormula>
+
+	<TeXFormula name="Mu" enabled="true">
+		<CreateTeXFormula name="f">
+			<Argument type="String" value="\mathord{\mathrm{M}}" />
+		</CreateTeXFormula>
+		<Return name="f" />
+	</TeXFormula>
+
+	<TeXFormula name="Nu" enabled="true">
+		<CreateTeXFormula name="f">
+			<Argument type="String" value="\mathord{\mathrm{N}}" />
+		</CreateTeXFormula>
+		<Return name="f" />
+	</TeXFormula>
+
+	<TeXFormula name="Rho" enabled="true">
+		<CreateTeXFormula name="f">
+			<Argument type="String" value="\mathord{\mathrm{P}}" />
+		</CreateTeXFormula>
+		<Return name="f" />
+	</TeXFormula>
+
+	<TeXFormula name="Tau" enabled="true">
+		<CreateTeXFormula name="f">
+			<Argument type="String" value="\mathord{\mathrm{T}}" />
+		</CreateTeXFormula>
+		<Return name="f" />
+	</TeXFormula>
+
+	<TeXFormula name="Chi" enabled="true">
+		<CreateTeXFormula name="f">
+			<Argument type="String" value="\mathord{\mathrm{X}}" />
+		</CreateTeXFormula>
+		<Return name="f" />
+	</TeXFormula>
 </PredefinedTeXFormulas>
 
 
