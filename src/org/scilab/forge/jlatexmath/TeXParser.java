@@ -296,7 +296,8 @@ public class TeXParser {
 		    }
 		    break;
 		case ESCAPE :
-		    formula.add(processEscape());
+		    Atom at = processEscape();
+		    formula.add(at);
 		    if (insertion) 
 			insertion = false;
 		    break;
@@ -552,6 +553,7 @@ public class TeXParser {
 	    str = parseString.substring(spos, pos - 1);
 	} else {
 	    str = parseString.substring(spos, pos);
+	    ch = '\0';
 	}
 	
 	if (ch == '&' || ch == R_GROUP) 

@@ -270,7 +270,8 @@ public class predefMacros {
 	String str = args[1].replaceAll("\\^\\{\\\\prime\\}", "\'");
 	str = str.replaceAll("\\^\\{\\\\prime\\\\prime\\}", "\'\'");
 	str = str.replaceAll("_", "\\\\_");
-	return new RomanAtom(new TeXFormula("\\textstyle{" + str + "}", "mathnormal", false, false).root);
+	Atom group = new RomanAtom(new TeXFormula(str, "mathnormal", false, false).root);
+	return new StyleAtom(TeXConstants.STYLE_TEXT, group);
     }
 
     public Atom text_macro(TeXParser tp, String[] args) throws ParseException {
@@ -369,7 +370,7 @@ public class predefMacros {
     public Atom nbsp_macro(TeXParser tp, String[] args) throws ParseException {
 	return new SpaceAtom();
     }
-    
+
     public Atom sqrt_macro(TeXParser tp, String[] args) throws ParseException {
 	if (args[2] == null)
 	    return new NthRoot(new TeXFormula(args[1], false).root, null);
