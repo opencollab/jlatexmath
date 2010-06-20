@@ -31,6 +31,7 @@ package org.scilab.forge.jlatexmath;
 import java.util.BitSet;
 import java.util.Map;
 import java.util.LinkedList;
+import java.util.ArrayList;
 
 /**
  * A box representing a matrix.
@@ -52,7 +53,6 @@ public class MatrixAtom extends Atom {
 
     private ArrayOfAtoms matrix;
     private int[] position;
-    private Atom[] insertAtom;
     private boolean isAlign = false;
     private boolean isAlignat = false;
     private boolean isFl = false;
@@ -68,7 +68,6 @@ public class MatrixAtom extends Atom {
 	this.matrix = array;
 	this.type = MATRIX;
 	parsePositions(new StringBuffer(options));
-	//getPositions(options);
     }
 
     public MatrixAtom(ArrayOfAtoms array, int type) {
@@ -86,55 +85,71 @@ public class MatrixAtom extends Atom {
 	}
     }
 
+
     private void parsePositions(StringBuffer opt) {
 	int len = opt.length();
 	int pos = 0;
-	int i = 0;
 	char ch;
-	position = new int[Math.max(len, matrix.col)];
-	insertAtom = new Atom[position.length];
+	TeXFormula tf;
+	TeXParser tp;
+	ArrayList<Integer> lposition = new ArrayList();
 	while (pos < len) {
 	    ch = opt.charAt(pos);
-	    if (ch == 'l') 
-		position[i++] = TeXConstants.ALIGN_LEFT;
-	    else if (ch == 'r') 
-		position[i++] = TeXConstants.ALIGN_RIGHT;
-	    else if (ch == 'c')
-		position[i++] = TeXConstants.ALIGN_CENTER;
-	    else if (ch == '@') {
+	    switch (ch) {
+	    case 'l' : 
+		lposition.add(TeXConstants.ALIGN_LEFT);
+		break;
+	    case 'r' : 
+		lposition.add(TeXConstants.ALIGN_RIGHT);
+		break;
+	    case 'c' :
+		lposition.add(TeXConstants.ALIGN_CENTER);
+		break;
+	    case '@' : 
 		pos++;
-		TeXFormula tf = new TeXFormula();
-		TeXParser tp = new TeXParser(opt.substring(pos), tf, false);
+		tf = new TeXFormula();
+		tp = new TeXParser(opt.substring(pos), tf, false);
 		Atom at = tp.getArgument();
 		matrix.col++;
-		for (int j = 0; j < matrix.row; j++) 
-		    matrix.array.get(j).add(i, at);
+		for (int j = 0; j < matrix.row; j++) {
+		    matrix.array.get(j).add(lposition.size(), at);
+		}
 
-		position[i++] = TeXConstants.ALIGN_CENTER;
+		lposition.add(TeXConstants.ALIGN_CENTER);
 		pos += tp.getPos();
 		pos--;
-	    } else if (ch == '*') {
+		break;
+	    case '*' :
 		pos++;
-		TeXFormula tf = new TeXFormula();
-		TeXParser tp = new TeXParser(opt.substring(pos), tf, false);
+		tf = new TeXFormula();
+		tp = new TeXParser(opt.substring(pos), tf, false);
 		String[] args = tp.getOptsArgs(2, 0);
 		pos += tp.getPos();
 		int nrep =  Integer.parseInt(args[1]);
 		String str = "";
-		for (int j = 0; j < nrep; j++)
+		for (int j = 0; j < nrep; j++) {
 		    str += args[2];
+		}
 		opt.insert(pos, str);
 		len = opt.length();
 		pos--;
-	    } else 
-		position[i++] = TeXConstants.ALIGN_CENTER;
+		break;
+	    default : 
+		lposition.add(TeXConstants.ALIGN_CENTER);
+	    }
 	    pos++;
 	}
-	for (int j = len; j < matrix.col; j++) {
-	    position[j] = TeXConstants.ALIGN_CENTER;
+
+	for (int j = lposition.size(); j < matrix.col; j++) {
+	    lposition.add(TeXConstants.ALIGN_CENTER);
+	}
+
+	Integer[] tab = lposition.toArray(new Integer[0]);
+	position = new int[tab.length];
+	for (int i = 0; i < tab.length; i++) {
+	    position[i] = tab[i];
 	}
     }
-		    
 
     private void getPositions(String pos) {
 	int len = pos.length();
