@@ -31,78 +31,6 @@
 
 <PredefinedTeXFormulas enabled="true">
 
-<!-- Composed TeX symbols -->
-	<TeXFormula name=" " enabled="true">
-		<CreateTeXFormula name="f">
-			<Argument type="String" value="\nbsp" />
-		</CreateTeXFormula>
-		<Return name="f" />
-	</TeXFormula>
-
-	<TeXFormula name="ne" enabled="true">
-		<CreateTeXFormula name="f">
-			<Argument type="String" value="\not\equals" />
-		</CreateTeXFormula>
-		<Return name="f" />
-	</TeXFormula>
-
-	<TeXFormula name="neq" enabled="true">
-		<CreateTeXFormula name="f">
-			<Argument type="String" value="\not\equals" />
-		</CreateTeXFormula>
-		<Return name="f" />
-	</TeXFormula>
-
-	<TeXFormula name="surd" enabled="true">
-		<CreateTeXFormula name="f">
-			<Argument type="String" value="\surdsign" />		
-		</CreateTeXFormula>
-		<MethodInvocation name="centerOnAxis" formula="f" />
-		<Return name="f" />
-	</TeXFormula>
-
-	<TeXFormula name="ldots" enabled="true">
-		<CreateTeXFormula name="f">
-			<Argument type="String" value="\mathinner{\ldotp\ldotp\ldotp}" />
-		</CreateTeXFormula>
-		<Return name="f" />
-	</TeXFormula>
-
-	<TeXFormula name="dots" enabled="true">
-		<CreateTeXFormula name="f">
-			<Argument type="String" value="\ldots" />
-		</CreateTeXFormula>
-		<Return name="f" />
-	</TeXFormula>
-
-	<TeXFormula name="cdots" enabled="true">
-		<CreateTeXFormula name="f">
-			<Argument type="String" value="\mathinner{\cdotp\cdotp\cdotp}" />
-		</CreateTeXFormula>
-		<Return name="f" />
-	</TeXFormula>
-
-	<TeXFormula name="bowtie" enabled="true">
-		<CreateTeXFormula name="f">
-			<Argument type="String" value="\mathrel\triangleright\joinrel\mathrel\triangleleft" />
-		</CreateTeXFormula>
-		<Return name="f" />
-	</TeXFormula>
-
-	<TeXFormula name="models" enabled="true">
-		<CreateTeXFormula name="f">
-			<Argument type="String" value="\mathrel|\joinrel\equals" />
-		</CreateTeXFormula>
-		<Return name="f" />
-	</TeXFormula>
-
-	<TeXFormula name="Doteq" enabled="true">
-		<CreateTeXFormula name="f">
-			<Argument type="String" value="\doteqdot" />		
-		</CreateTeXFormula>
-		<Return name="f" />
-	</TeXFormula>
-
 	<TeXFormula name="quad" enabled="true">
 		<CreateTeXFormula name="f">
 			<Argument type="String" value="" />
@@ -220,6 +148,105 @@
 		<MethodInvocation name="addStrut" formula="f">
 			<Argument type="TeXConstants" value="NEGTHICKMUSKIP" />
 		</MethodInvocation>
+		<Return name="f" />
+	</TeXFormula>
+
+	<TeXFormula name=" " enabled="true">
+		<CreateTeXFormula name="f">
+			<Argument type="String" value="\nbsp" />
+		</CreateTeXFormula>
+		<Return name="f" />
+	</TeXFormula>
+
+	<TeXFormula name="ne" enabled="true">
+		<CreateTeXFormula name="f">
+			<Argument type="String" value="\not\equals" />
+		</CreateTeXFormula>
+		<Return name="f" />
+	</TeXFormula>
+
+	<TeXFormula name="neq" enabled="true">
+		<CreateTeXFormula name="f">
+			<Argument type="String" value="\not\equals" />
+		</CreateTeXFormula>
+		<Return name="f" />
+	</TeXFormula>
+
+	<TeXFormula name="surd" enabled="true">
+		<CreateTeXFormula name="f">
+			<Argument type="String" value="\surdsign" />		
+		</CreateTeXFormula>
+		<MethodInvocation name="centerOnAxis" formula="f" />
+		<Return name="f" />
+	</TeXFormula>
+
+	<TeXFormula name="ldots" enabled="true">
+		<CreateTeXFormula name="f">
+			<Argument type="String" value="\mathinner{\ldotp\ldotp\ldotp}" />
+		</CreateTeXFormula>
+		<Return name="f" />
+	</TeXFormula>
+
+	<TeXFormula name="dotsc" enabled="true">
+		<CreateTeXFormula name="f">
+			<Argument type="String" value="\ldots" />
+		</CreateTeXFormula>
+		<Return name="f" />
+	</TeXFormula>
+
+	<TeXFormula name="dots" enabled="true">
+		<CreateTeXFormula name="f">
+			<Argument type="String" value="\ldots" />
+		</CreateTeXFormula>
+		<Return name="f" />
+	</TeXFormula>
+
+	<TeXFormula name="cdots" enabled="true">
+		<CreateTeXFormula name="f">
+			<Argument type="String" value="\mathinner{\cdotp\cdotp\cdotp}" />
+		</CreateTeXFormula>
+		<Return name="f" />
+	</TeXFormula>
+
+	<TeXFormula name="dotsb" enabled="true">
+		<CreateTeXFormula name="f">
+			<Argument type="String" value="\cdots" />
+		</CreateTeXFormula>
+		<Return name="f" />
+	</TeXFormula>
+
+	<TeXFormula name="dotso" enabled="true">
+		<CreateTeXFormula name="f">
+			<Argument type="String" value="\ldots" />
+		</CreateTeXFormula>
+		<Return name="f" />
+	</TeXFormula>
+
+	<TeXFormula name="dotsi" enabled="true">
+		<CreateTeXFormula name="f">
+			<Argument type="String" value="\!\cdots" />
+		</CreateTeXFormula>
+		<Return name="f" />
+	</TeXFormula>
+
+	<TeXFormula name="bowtie" enabled="true">
+		<CreateTeXFormula name="f">
+			<Argument type="String" value="\mathrel\triangleright\joinrel\mathrel\triangleleft" />
+		</CreateTeXFormula>
+		<Return name="f" />
+	</TeXFormula>
+
+	<TeXFormula name="models" enabled="true">
+		<CreateTeXFormula name="f">
+			<Argument type="String" value="\mathrel|\joinrel\equals" />
+		</CreateTeXFormula>
+		<Return name="f" />
+	</TeXFormula>
+
+	<TeXFormula name="Doteq" enabled="true">
+		<CreateTeXFormula name="f">
+			<Argument type="String" value="\doteqdot" />		
+		</CreateTeXFormula>
 		<Return name="f" />
 	</TeXFormula>
 
