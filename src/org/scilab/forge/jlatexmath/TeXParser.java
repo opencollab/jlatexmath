@@ -197,7 +197,7 @@ public class TeXParser {
     public int getPos() {
 	return pos;
     }
-    
+
     /** Rewind the current parsed string
      * @param n the number of character to be rewinded
      * @return the new position in the parsed string
@@ -436,27 +436,37 @@ public class TeXParser {
 	    char c1;
 	    if (c == open.charAt(oc))
 		oc++;
-	    else oc = 0;
+	    else
+		oc = 0;
+	    
 	    if (c == close.charAt(cc))
 		cc++;
-	    else cc = 0;
+	    else
+		cc = 0;
+	    
 	    if (pos + 1 < len) {
 		c1 = parseString.charAt(pos + 1);
 		
-		if (oc >= ol && !Character.isLetter(c1)) {
-		    group++;
+		if (oc == ol) {
+		    if (!Character.isLetter(c1)) {
+			group++;
+		    }
 		    oc = 0;
 		}
-		if (cc >= cl && !Character.isLetter(c1)) {
-		    group--;
+		    
+		if (cc == cl) {
+		    if (!Character.isLetter(c1)) {
+			group--;
+		    }
 		    cc = 0;
 		}
+
 	    } else {
-		if (oc >= ol) {
+		if (oc == ol) {
 		    group++;
 		    oc = 0;
 		}
-		if (cc >= cl) {
+		if (cc == cl) {
 		    group--;
 		    cc = 0;
 		}
