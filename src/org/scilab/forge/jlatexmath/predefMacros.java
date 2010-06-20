@@ -177,9 +177,7 @@ public class predefMacros {
 	}
 	Atom f = new FractionAtom(num.root, denom.root, true, alig, TeXConstants.ALIGN_CENTER);
 	RowAtom rat = new RowAtom();
-	rat.add(new StyleAtom(TeXConstants.STYLE_DISPLAY));
-	rat.add(f);
-	rat.add(new StyleAtom());
+	rat.add(new StyleAtom(TeXConstants.STYLE_DISPLAY, f));
 	return rat;
     }
 
@@ -220,17 +218,14 @@ public class predefMacros {
 	    throw new ParseException("Both numerator and denominator of a fraction can't be empty!");
 	Atom at = new FractionAtom(num.root, denom.root, rule, (int) ths[0], ths[1]);
 	RowAtom rat = new RowAtom();
-	rat.add(new StyleAtom(style * 2));
-	rat.add(new FencedAtom(at, L, R));
-	rat.add(new StyleAtom());
+	rat.add(new StyleAtom(style * 2, new FencedAtom(at, L, R)));
 	
 	return rat;
     }
 
     public Atom over_macro(TeXParser tp, String[] args) throws ParseException {
 	Atom num = tp.getFormulaAtom();
-	tp.parse();
-	Atom denom = tp.getFormulaAtom();
+	Atom denom = new TeXFormula(tp.getOverArgument(), false).root;
 	if (num == null || denom == null)
 	    throw new ParseException("Both numerator and denominator of a fraction can't be empty!");
 	return new FractionAtom(num, denom, true);
@@ -238,8 +233,7 @@ public class predefMacros {
 
     public Atom atop_macro(TeXParser tp, String[] args) throws ParseException {
 	Atom num = tp.getFormulaAtom();
-	tp.parse();
-	Atom denom = tp.getFormulaAtom();
+	Atom denom = new TeXFormula(tp.getOverArgument(), false).root;
 	if (num == null || denom == null)
 	    throw new ParseException("Both numerator and denominator of a fraction can't be empty!");
 	return new FractionAtom(num, denom, false);
@@ -247,8 +241,7 @@ public class predefMacros {
 
     public Atom choose_macro(TeXParser tp, String[] args) throws ParseException {
 	Atom num = tp.getFormulaAtom();
-	tp.parse();
-	Atom denom = tp.getFormulaAtom();
+	Atom denom = new TeXFormula(tp.getOverArgument(), false).root;
 	if (num == null || denom == null)
 	    throw new ParseException("Both numerator and denominator of choose can't be empty!");
 	return new FencedAtom(new FractionAtom(num, denom, false), new SymbolAtom("lbrack", TeXConstants.TYPE_OPENING, true), new SymbolAtom("rbrack", TeXConstants.TYPE_CLOSING, true));
@@ -948,23 +941,23 @@ public class predefMacros {
     }
 
     public Atom displaystyle_macro(TeXParser tp, String[] args) throws ParseException {
-	tp.hasStyleChanged = true;
-	return new StyleAtom(TeXConstants.STYLE_DISPLAY);
+	Atom group = new TeXFormula(tp.getOverArgument(), false).root;
+	return new StyleAtom(TeXConstants.STYLE_DISPLAY, group);
     }
 
     public Atom scriptstyle_macro(TeXParser tp, String[] args) throws ParseException {
-	tp.hasStyleChanged = true;
-	return new StyleAtom(TeXConstants.STYLE_SCRIPT);
+	Atom group = new TeXFormula(tp.getOverArgument(), false).root;
+	return new StyleAtom(TeXConstants.STYLE_SCRIPT, group);
     }
     
     public Atom textstyle_macro(TeXParser tp, String[] args) throws ParseException {
-	tp.hasStyleChanged = true;
-	return new StyleAtom(TeXConstants.STYLE_TEXT);
+	Atom group = new TeXFormula(tp.getOverArgument(), false).root;
+	return new StyleAtom(TeXConstants.STYLE_TEXT, group);
     }
     
     public Atom scriptscriptstyle_macro(TeXParser tp, String[] args) throws ParseException {
-	tp.hasStyleChanged = true;
-	return new StyleAtom(TeXConstants.STYLE_SCRIPT_SCRIPT);
+	Atom group = new TeXFormula(tp.getOverArgument(), false).root;
+	return new StyleAtom(TeXConstants.STYLE_SCRIPT_SCRIPT, group);
     }
 
     public Atom rotatebox_macro(TeXParser tp, String[] args) throws ParseException {

@@ -49,7 +49,6 @@ public class TeXParser {
     private boolean insertion = false;
     private int atIsLetter = 0;
     private boolean arrayMode = false;
-    protected boolean hasStyleChanged = false;
     private boolean ignoreWhiteSpace = true;
 
     // the escape character
@@ -309,13 +308,7 @@ public class TeXParser {
 		    if (group == -1)
 			throw new ParseException("Found a closing '" + R_GROUP
 						 + "' without an opening '" + L_GROUP + "'!");
-		    else {
-			if (hasStyleChanged) {
-			    formula.add(new StyleAtom());
-			    hasStyleChanged = false;
-			}
-			return;
-		    }
+		    return;
 		case SUPER_SCRIPT :
 		case SUB_SCRIPT :
                     formula.add(getScripts(ch));
@@ -525,6 +518,37 @@ public class TeXParser {
 	pos++;
 
 	return convertCharacter(ch);
+    }
+
+    public String getOverArgument() throws ParseException {
+	if (pos == len)
+	    return null;
+
+	int group = 1, spos;
+	char ch;
+	
+        group = 1;
+	spos = pos;
+	while (pos < len - 1 && group != 0) {
+	    pos++;
+	    ch = parseString.charAt(pos);
+	    switch (ch) {
+	    case L_GROUP :
+		group++;
+		break;
+	    case R_GROUP :
+		group--;
+		break;
+	    default :
+		pos++;
+	    }
+	}
+	    
+	if (group >= 2)
+	    // end of string reached, but not processed properly
+	    throw new ParseException("Illegal end,  missing '}' !");
+	pos++;
+	return parseString.substring(spos, pos - 1);
     }
 
     /** Convert a character in the corresponding atom in using the file TeXFormulaSettings.xml for non-alphanumeric characters

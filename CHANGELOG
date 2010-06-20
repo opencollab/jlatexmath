@@ -1,4 +1,5 @@
 jlatexmath (0.9.2)
+	* Fix bug with A{\scriptstyle BCD}E
 
 	* Fix bug with \left(A\leftarrow B\right)
 

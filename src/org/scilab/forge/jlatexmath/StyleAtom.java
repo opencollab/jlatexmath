@@ -33,27 +33,19 @@ package org.scilab.forge.jlatexmath;
  */
 public class StyleAtom extends Atom {
     
-    private int style = -1;
-    private static int sstyle = -1;
+    private int style;
+    private Atom at;
     
-    public StyleAtom(int style) {
+    public StyleAtom(int style, Atom at) {
 	this.style = style;
+	this.at = at;
     }
-   
-    public StyleAtom() {
-    }
- 
-    public Box createBox(TeXEnvironment env) {
-	if (style != -1) {
-	    if (sstyle == -1)
-		sstyle = env.getStyle();
-	    env.setStyle(style);
-	}
-	else {
-	    env.setStyle(sstyle);
-	    sstyle = -1;
-	}
 
-	return new StrutBox(0, 0, 0, 0);
+    public Box createBox(TeXEnvironment env) {
+	int sstyle = env.getStyle();
+	env.setStyle(style);
+	Box box = at.createBox(env);
+	env.setStyle(sstyle);
+	return box;
     } 
 }
