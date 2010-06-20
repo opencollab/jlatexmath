@@ -322,14 +322,14 @@
 
 	<TeXFormula name="hookrightarrow" enabled="true">
 		<CreateTeXFormula name="f">
-			<Argument type="String" value="\lhook\joinrel\rightarrow" />
+			<Argument type="String" value="\lhook\joinrel\joinrel\joinrel\rightarrow" />
 		</CreateTeXFormula>
 		<Return name="f" />
 	</TeXFormula>
 
 	<TeXFormula name="hookleftarrow" enabled="true">
 		<CreateTeXFormula name="f">
-			<Argument type="String" value="\leftarrow\joinrel\rhook" />
+			<Argument type="String" value="\leftarrow\joinrel\joinrel\joinrel\rhook" />
 		</CreateTeXFormula>
 		<Return name="f" />
 	</TeXFormula>

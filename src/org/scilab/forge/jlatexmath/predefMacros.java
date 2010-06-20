@@ -488,7 +488,7 @@ public class predefMacros {
     }
     
     public Atom joinrel_macro(TeXParser tp, String[] args) throws ParseException {
-	return new SpaceAtom(TeXConstants.UNIT_MU, -3.0f, 0, 0);
+	return new TypedAtom(TeXConstants.TYPE_RELATION, TeXConstants.TYPE_RELATION, new SpaceAtom(TeXConstants.UNIT_MU, -2.6f, 0, 0));
     }
     
     public Atom smash_macro(TeXParser tp, String[] args) throws ParseException {
