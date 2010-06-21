@@ -411,11 +411,11 @@ public class TeXFormula {
 
         BufferedImage image = new BufferedImage(w, h, transparency ? BufferedImage.TYPE_INT_ARGB : BufferedImage.TYPE_INT_RGB);
         Graphics2D g2 = image.createGraphics();
-        if (bg != null) {
+        if (bg != null && !transparency) {
             g2.setColor(bg);
+	    g2.fillRect(0, 0, w, h);
         }
 
-        g2.fillRect(0, 0, w, h);
         icon.setForeground(fg);
         icon.paintIcon(null, g2, 0, 0);
         try {

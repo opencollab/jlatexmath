@@ -74,10 +74,10 @@ public class TeXIcon implements Icon {
 	this.size = size;
 	
 	/* I add this little value because it seems that tftopl calculates badly
-	   the height and the depth of certains characters
+	   the height and the depth of certains characters.
 	*/
-	insets.top += (int)(0.012f * size);
-	insets.bottom += (int)(0.012f * size);
+	insets.top += (int)(0.18f * size);
+	insets.bottom += (int)(0.18f * size);
     }
 
     public void setForeground(Color fg) {
@@ -100,8 +100,8 @@ public class TeXIcon implements Icon {
      */
     public void setInsets(Insets insets) {
 	this.insets = insets;
-	this.insets.top += (int)(0.012f * size);
-	this.insets.bottom += (int)(0.012f * size);
+	this.insets.top += (int)(0.18f * size);
+	this.insets.bottom += (int)(0.18f * size);
     }
     
     /**
