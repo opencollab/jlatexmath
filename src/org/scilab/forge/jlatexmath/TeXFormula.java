@@ -109,6 +109,8 @@ public class TeXFormula {
     public static Atom[] symbolFormulaMappings;
     public List<MiddleAtom> middle = new LinkedList();
     
+    private TeXParser parser;
+    
     static {
         // character-to-symbol and character-to-delimiter mappings
         TeXFormulaSettingsParser parser = new TeXFormulaSettingsParser();
@@ -159,7 +161,7 @@ public class TeXFormula {
      *
      */
     public TeXFormula() {
-        // do nothing
+	parser = new TeXParser("", this, false);
     }
 
     /**
@@ -174,9 +176,9 @@ public class TeXFormula {
 
     public TeXFormula(String s, boolean firstpass) throws ParseException {
 	this.textStyle = null;
-	TeXParser tp = new TeXParser(s, this, firstpass);
+	parser = new TeXParser(s, this, firstpass);
         if (s != null && s.length() != 0)
-            tp.parse();
+            parser.parse();
     }
     
    /*
@@ -185,16 +187,16 @@ public class TeXFormula {
     */
     public TeXFormula(String s, String textStyle) throws ParseException {
         this.textStyle = textStyle;
-	TeXParser tp = new TeXParser(s, this);
+	parser = new TeXParser(s, this);
         if (s != null && s.length() != 0)
-            tp.parse();
+            parser.parse();
     }
 
     public TeXFormula(String s, String textStyle, boolean firstpass, boolean space) throws ParseException {
         this.textStyle = textStyle;
-	TeXParser tp = new TeXParser(s, this, firstpass, space);
+	parser = new TeXParser(s, this, firstpass, space);
         if (s != null && s.length() != 0)
-            tp.parse();
+            parser.parse();
     }
     
     /**
@@ -215,15 +217,14 @@ public class TeXFormula {
      * @param ltx the latex formula
      */ 
     public void setLaTeX(String ltx) throws ParseException {
-	this.root = null;
-	TeXParser tp = new TeXParser(ltx, this);
+	parser.reset(ltx);
         if (ltx != null && ltx.length() != 0)
-            tp.parse();
+            parser.parse();
     }
 
-   /*
-    * Inserts an atom at the end of the current formula
-    */
+    /**
+     * Inserts an atom at the end of the current formula
+     */
     public TeXFormula add(Atom el) {
         if (el != null) {
 	    if (el instanceof MiddleAtom)
