@@ -68,6 +68,8 @@ public class DefaultTeXFont implements TeXFont {
     private static FontInfo[] fontInfo = new FontInfo[0];
     private static Map<String,Float> parameters;
     private static Map<String,Number> generalSettings;
+
+    private static boolean magnificationEnable = true;
     
     protected static final int TOP = 0, MID = 1, REP = 2, BOT = 3;
     
@@ -96,7 +98,8 @@ public class DefaultTeXFont implements TeXFont {
         symbolMappings = parser.parseSymbolMappings();
         // general settings
         generalSettings = parser.parseGeneralSettings();
-        
+    	generalSettings.put("textfactor", 1);
+    
         // check if mufontid exists
         int muFontId = generalSettings.get(DefaultTeXFontParser.MUFONTID_ATTR).intValue();
         if (muFontId < 0 || muFontId >= fontInfo.length || fontInfo[muFontId] == null)
@@ -516,6 +519,25 @@ public class DefaultTeXFont implements TeXFont {
         FontInfo info = fontInfo[c.getFontCode()];
         return info.getExtension(c.getChar()) != null;
     }
+
+    public static void setMathSizes(float ds, float ts, float ss, float sss) {
+	if (magnificationEnable) {
+	    generalSettings.put("scriptfactor", Math.abs(ss / ds));
+	    generalSettings.put("scriptscriptfactor", Math.abs(sss / ds));
+	    generalSettings.put("textfactor", Math.abs(ts / ds));
+	    TeXIcon.defaultSize = Math.abs(ds);
+	}
+    }
+
+    public static void setMagnification(float mag) {
+	if (magnificationEnable) {
+	    TeXIcon.magFactor = mag / 1000f;
+	}
+    }
+
+    public static void enableMagnification(boolean b) {
+	magnificationEnable = b;
+    }
     
     private static float getParameter(String parameterName) {
         Object param = parameters.get(parameterName);
@@ -524,10 +546,12 @@ public class DefaultTeXFont implements TeXFont {
         else
             return ((Float) param).floatValue();
     }
-    
+ 
     private static float getSizeFactor(int style) {
-        if (style < TeXConstants.STYLE_SCRIPT)
-            return 1;
+	if (style < TeXConstants.STYLE_TEXT) 
+	    return 1;
+        else if (style < TeXConstants.STYLE_SCRIPT)
+            return generalSettings.get("textfactor").floatValue();
         else if (style < TeXConstants.STYLE_SCRIPT_SCRIPT)
             return generalSettings.get("scriptfactor").floatValue();
         else

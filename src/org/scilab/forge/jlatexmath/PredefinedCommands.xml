@@ -1654,4 +1654,22 @@
 		</CreateCommand>
 		<Return name="f" />
 	</Command>
+
+	<Command name="DeclareMathSizes" enabled="true">
+		<CreateCommand name="f">
+			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+			<Argument type="String" value="DeclareMathSizes_macro" />
+			<Argument type="float" value="4" />
+		</CreateCommand>
+		<Return name="f" />
+	</Command>
+
+	<Command name="magnification" enabled="true">
+		<CreateCommand name="f">
+			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+			<Argument type="String" value="magnification_macro" />
+			<Argument type="float" value="1" />
+		</CreateCommand>
+		<Return name="f" />
+	</Command>
 </PredefinedCommands>

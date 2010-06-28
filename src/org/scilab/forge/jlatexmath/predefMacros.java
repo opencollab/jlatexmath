@@ -1051,4 +1051,14 @@ public class predefMacros {
     public Atom jlmDynamic_macro(TeXParser tp, String[] args) throws ParseException {
 	return new DynamicAtom(args[1]);
     }
+
+    public Atom DeclareMathSizes_macro(TeXParser tp, String[] args) throws ParseException {
+	DefaultTeXFont.setMathSizes(Float.parseFloat(args[1]), Float.parseFloat(args[2]), Float.parseFloat(args[3]), Float.parseFloat(args[4]));
+	return null;
+    }
+    
+    public Atom magnification_macro(TeXParser tp, String[] args) throws ParseException {
+	DefaultTeXFont.setMagnification(Float.parseFloat(args[1]));
+	return null;
+    }
 }
