@@ -31,6 +31,8 @@ package org.scilab.forge.jlatexmath;
 import java.awt.Color;
 import java.util.StringTokenizer;
 
+import org.scilab.forge.jlatexmath.dynamic.DynamicAtom;
+
 /**
  * This class contains the most of basic commands of LaTeX, they're activated in
  * the file PredefinedCommands.xml.
@@ -1044,5 +1046,9 @@ public class predefMacros {
     public Atom doteq_macro(TeXParser tp, String[] args) throws ParseException {
 	Atom at = new UnderOverAtom(new TeXFormula("\\equals", false).root, new TeXFormula("\\ldotp", false).root, TeXConstants.UNIT_MU, 3.7f, false, true);
 	return new TypedAtom(TeXConstants.TYPE_RELATION, TeXConstants.TYPE_RELATION, at);
+    }
+
+    public Atom jlmDynamic_macro(TeXParser tp, String[] args) throws ParseException {
+	return new DynamicAtom(args[1]);
     }
 }

@@ -131,6 +131,25 @@ public class TeXParser {
 	this.ignoreWhiteSpace = space;
     }
 
+    /**
+     * Reset the parser with a new latex expression
+     */
+    public void reset(String latex) {
+	parseString = new StringBuffer(latex);
+	len = parseString.length();
+	formula.root = null;
+	pos = 0;
+	spos = 0;
+	line = 0;
+	col = 0;
+	group = 0;
+	insertion = false;
+	atIsLetter = 0;
+	arrayMode = false;
+	ignoreWhiteSpace = true;
+	firstpass();
+    }
+
     /** Get the number of the current line 
      */
     public int getLine() {
@@ -452,14 +471,14 @@ public class TeXParser {
 		c1 = parseString.charAt(pos + 1);
 		
 		if (oc == ol) {
-		    if (!Character.isLetter(c1)) {
+		    if ((c1 < 'a' || c1 > 'z') && (c1 < 'A' || c1 > 'Z')) {
 			group++;
 		    }
 		    oc = 0;
 		}
 		    
 		if (cc == cl) {
-		    if (!Character.isLetter(c1)) {
+		    if ((c1 < 'a' || c1 > 'z') && (c1 < 'A' || c1 > 'Z')) {
 			group--;
 		    }
 		    cc = 0;
@@ -643,7 +662,6 @@ public class TeXParser {
 	throw new ParseException("Unknown symbol or command or predefined TeXFormula: '" + command + "'");
     }
 
-    
     private void insert(int beg, int end, String formula) {
         parseString.replace(beg, end, formula);
 	len = parseString.length();
