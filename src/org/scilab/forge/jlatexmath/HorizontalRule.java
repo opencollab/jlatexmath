@@ -42,12 +42,24 @@ import java.awt.Color;
  */
 public class HorizontalRule extends Box {
     
-    Color color = null;
+    private Color color = null;
+    private float speShift = 0;;
     
     public HorizontalRule(float thickness, float width, float s) {
 	height = thickness;
 	this.width = width;
 	shift = s;
+    }
+
+    public HorizontalRule(float thickness, float width, float s, boolean trueShift) {
+	height = thickness;
+	this.width = width;
+	if (trueShift) {
+	    shift = s;
+	} else {
+	    shift = 0;
+	    speShift = s;
+	}	
     }
 
     public HorizontalRule(float thickness, float width, float s, Color c) {
@@ -56,15 +68,28 @@ public class HorizontalRule extends Box {
 	color = c;
 	shift = s;
     }
-    
+
     public void draw(Graphics2D g2, float x, float y) {
 	Color old = g2.getColor();
 	if (color != null)
 	    g2.setColor(color);
 	
 	Stroke st = g2.getStroke();
-	g2.setStroke(new BasicStroke(height, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER));
-	g2.draw(new Line2D.Float(x, y - (height - shift) / 2, x + width, y - (height - shift) / 2));
+	if (height <= width) {
+	    g2.setStroke(new BasicStroke(height, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER));
+	    if (speShift == 0) {
+		g2.draw(new Line2D.Float(x, y - height / 2, x + width, y - height / 2));
+	    } else {
+		g2.draw(new Line2D.Float(x, y - height / 2 + speShift, x + width, y - height / 2 + speShift));
+	    }
+	} else {
+	    g2.setStroke(new BasicStroke(width, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER));
+	    if (speShift == 0) {
+		g2.draw(new Line2D.Float(x + width / 2, y - height, x + width / 2, y));
+	    } else {
+		g2.draw(new Line2D.Float(x + width / 2, y - height + speShift, x + width / 2, y + speShift));
+	    }
+	}
 	g2.setStroke(st);
 	g2.setColor(old);
     }

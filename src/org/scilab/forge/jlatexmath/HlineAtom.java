@@ -1,8 +1,8 @@
-/* HdotsforAtom.java
+/* HlineAtom.java
  * =========================================================================
  * This file is part of the JLaTeXMath Library - http://forge.scilab.org/jlatexmath
  *
- * Copyright (C) 2010 DENIZET Calixte
+ * Copyright (C) 2009 DENIZET Calixte
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -29,37 +29,30 @@
 package org.scilab.forge.jlatexmath;
 
 /**
- * An atom used in array mode to write on several columns.
+ * An atom representing a hline in array environment
  */
-public class HdotsforAtom extends MulticolumnAtom {
+public class HlineAtom extends Atom {
+    
+    private float width;
+    private float shift;
+    
+    public HlineAtom() {
+    }
+    
+    public void setWidth(float width) {
+	this.width = width;
+    }
 
-    private static final Atom ldotp = new TeXFormula("\\ldotp").root;
-    private static final Atom thin = new TeXFormula("\\,").root;
-    private float coeff;
-
-    public HdotsforAtom(int n, float coeff) {
-	super(n, "c", ldotp);
-	this.coeff = coeff;
+    public void setShift(float shift) {
+	this.shift = shift;
     }
 
     public Box createBox(TeXEnvironment env) {
-	Box sp = new StrutBox(coeff * thin.createBox(env).getWidth(), 0, 0, 0);
-	HorizontalBox db = new HorizontalBox(sp);
-	db.add(ldotp.createBox(env));
-	db.add(sp);
-	Box b;
-	if (w != 0) {
-	    float dw = db.getWidth();
-	    b = new HorizontalBox(db);
-	    while (b.getWidth() < w) {
-		b.add(db);
-	    }
-	    b = new HorizontalBox(b, w, TeXConstants.ALIGN_CENTER); 
-	} else {
-	    b = db;
-	}
-	
-	b.type = TeXConstants.TYPE_MULTICOLUMN;
-	return b;
+	float drt = env.getTeXFont().getDefaultRuleThickness(env.getStyle());
+	Box b = new HorizontalRule(drt, width, shift, false);
+	VerticalBox vb = new VerticalBox();
+	vb.add(b);
+	vb.type = TeXConstants.TYPE_HLINE;
+	return vb;
     } 
 }

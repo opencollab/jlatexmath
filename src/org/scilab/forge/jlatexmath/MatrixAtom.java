@@ -30,8 +30,9 @@ package org.scilab.forge.jlatexmath;
 
 import java.util.BitSet;
 import java.util.Map;
-import java.util.LinkedList;
+import java.util.HashMap;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A box representing a matrix.
@@ -39,20 +40,25 @@ import java.util.ArrayList;
 public class MatrixAtom extends Atom {
     
     public static SpaceAtom hsep = new SpaceAtom(TeXConstants.UNIT_EM, 2.0f, 0.0f, 0.0f);
+    public static SpaceAtom semihsep = new SpaceAtom(TeXConstants.UNIT_EM, 1.0f, 0.0f, 0.0f);
     public static SpaceAtom vsep_in = new SpaceAtom(TeXConstants.UNIT_EX, 0.0f, 1f, 0.0f);
     public static SpaceAtom vsep_ext_top = new SpaceAtom(TeXConstants.UNIT_EX, 0.0f, 0.4f, 0.0f);
     public static SpaceAtom vsep_ext_bot = new SpaceAtom(TeXConstants.UNIT_EX, 0.0f, 0.4f, 0.0f);
 
-    public static final int MATRIX = 0;
-    public static final int ALIGN = 1;
-    public static final int ALIGNAT = 2;
-    public static final int FLALIGN = 3;
-    public static final int SMALLMATRIX = 4;
-    public static final int ALIGNED = 5;
-    public static final int ALIGNEDAT = 6;
+    public static final int ARRAY = 0;
+    public static final int MATRIX = 1;
+    public static final int ALIGN = 2;
+    public static final int ALIGNAT = 3;
+    public static final int FLALIGN = 4;
+    public static final int SMALLMATRIX = 5;
+    public static final int ALIGNED = 6;
+    public static final int ALIGNEDAT = 7;
+
+    private static final Box nullBox = new StrutBox(0, 0, 0, 0);
 
     private ArrayOfAtoms matrix;
     private int[] position;
+    private Map<Integer, VlineAtom> vlines = new HashMap();
     private boolean isAlign = false;
     private boolean isAlignat = false;
     private boolean isFl = false;
@@ -66,7 +72,7 @@ public class MatrixAtom extends Atom {
      */
     public MatrixAtom(ArrayOfAtoms array, String options) {
 	this.matrix = array;
-	this.type = MATRIX;
+	this.type = ARRAY;
 	parsePositions(new StringBuffer(options));
     }
 
@@ -74,7 +80,7 @@ public class MatrixAtom extends Atom {
 	this.matrix = array;
 	this.type = type;
 	
-	if (type != MATRIX) {
+	if (type != MATRIX && type != SMALLMATRIX) {
 	    position = new int[matrix.col];
 	    for (int i = 0; i < matrix.col; i += 2) {
 		position[i] = TeXConstants.ALIGN_RIGHT;
@@ -82,9 +88,13 @@ public class MatrixAtom extends Atom {
 		    position[i + 1] = TeXConstants.ALIGN_LEFT;
 		}
 	    }
+	} else {
+	    position = new int[matrix.col];
+	    for (int i = 0; i < matrix.col; i += 2) {
+		position[i] = TeXConstants.ALIGN_CENTER;
+	    }
 	}
     }
-
 
     private void parsePositions(StringBuffer opt) {
 	int len = opt.length();
@@ -92,7 +102,7 @@ public class MatrixAtom extends Atom {
 	char ch;
 	TeXFormula tf;
 	TeXParser tp;
-	ArrayList<Integer> lposition = new ArrayList();
+	List<Integer> lposition = new ArrayList();
 	while (pos < len) {
 	    ch = opt.charAt(pos);
 	    switch (ch) {
@@ -104,6 +114,19 @@ public class MatrixAtom extends Atom {
 		break;
 	    case 'c' :
 		lposition.add(TeXConstants.ALIGN_CENTER);
+		break;
+	    case '|' :
+		int nb = 1;
+		while (++pos < len) {
+		    ch = opt.charAt(pos);
+		    if (ch != '|') {
+			pos--;
+			break;
+		    } else {
+			nb++;
+		    }
+		}
+		vlines.put(lposition.size(), new VlineAtom(nb));
 		break;
 	    case '@' : 
 		pos++;
@@ -151,33 +174,11 @@ public class MatrixAtom extends Atom {
 	}
     }
 
-    private void getPositions(String pos) {
-	int len = pos.length();
-	position = new int[Math.max(len, matrix.col)];
-	for (int i = 0; i < len; i++) {
-	    char c = pos.charAt(i);
-	    switch (c) {
-	    case 'l' :
-		position[i] = TeXConstants.ALIGN_LEFT;
-		break;
-	    case 'r':
-		position[i] = TeXConstants.ALIGN_RIGHT;
-		break;
-	    default :
-		position[i] = TeXConstants.ALIGN_CENTER;
-		break;
-	    }
-	}
-	for (int i = len; i < matrix.col; i++) {
-	    position[i] = TeXConstants.ALIGN_CENTER;
-	}
-    }
-
     public Box[] getColumnSep(TeXEnvironment env, float width) {
 	int row = matrix.row;
 	int col = matrix.col;
 	Box[] arr = new Box[col + 1];
-	Box Align, AlignSep;
+	Box Align, AlignSep, Hsep;
 	float h, w = env.getTextwidth();
 
 	if (type == ALIGNED || type == ALIGNEDAT) {
@@ -185,12 +186,22 @@ public class MatrixAtom extends Atom {
 	}
 
 	switch (type) {
+	case ARRAY :
+	    //Array : hsep_col/2 elem hsep_col elem hsep_col ... hsep_col elem hsep_col/2
+	    arr[0] = semihsep.createBox(env);
+	    arr[col] = arr[0];
+	    Hsep = hsep.createBox(env);
+	    for (int i = 1; i < col; i++) {
+		arr[i] = Hsep;
+	    }
+	    
+	    return arr;
 	case MATRIX :
 	case SMALLMATRIX :
-	    //Simple matrix : 0 elem hsep_col elem hsep_col ... hsep_col elem 0
-	    arr[0] = new StrutBox(0, 0, 0, 0);
+	    //Simple matrix : (hsep_col/2 or 0) elem hsep_col elem hsep_col ... hsep_col elem (hsep_col/2 or 0)
+	    arr[0] = nullBox;
 	    arr[col] = arr[0];
-	    Box Hsep = hsep.createBox(env);
+	    Hsep = hsep.createBox(env);
 	    for (int i = 1; i < col; i++) {
 		arr[i] = Hsep;
 	    }
@@ -225,7 +236,7 @@ public class MatrixAtom extends Atom {
 	    }
 	    
 	    Align = align.createBox(env);
-	    Box empty = new StrutBox(0, 0, 0, 0);
+	    Box empty = nullBox;
 	    arr[0] = new StrutBox(h, 0.0f, 0.0f, 0.0f);
 	    arr[col] = arr[0];
 	    for (int i = 1; i < col; i++) {
@@ -247,7 +258,7 @@ public class MatrixAtom extends Atom {
 		AlignSep = hsep.createBox(env);
 	    }
 	    
-	    arr[0] = new StrutBox(0, 0, 0, 0);
+	    arr[0] = nullBox;
 	    arr[col] = arr[0];
 	    for (int i = 1; i < col; i++) {
 		if (i % 2 == 0) {
@@ -261,7 +272,7 @@ public class MatrixAtom extends Atom {
 	}
 
 	if (w == Float.POSITIVE_INFINITY) {
-	    arr[0] = new StrutBox(0, 0, 0, 0);
+	    arr[0] = nullBox;
 	    arr[col] = arr[0];
 	}
 
@@ -277,11 +288,14 @@ public class MatrixAtom extends Atom {
 	float[] lineHeight = new float[row];
 	float[] rowWidth = new float[col];
 	float matW = 0;
-	
+	float drt = env.getTeXFont().getDefaultRuleThickness(env.getStyle());
+
 	if (type == SMALLMATRIX) {
 	    env = env.copy();
 	    env.setStyle(TeXConstants.STYLE_SCRIPT);
 	}
+
+	List<MulticolumnAtom> listMulti = new ArrayList();
 
 	for (int i = 0; i < row; i++) {
 	    lineDepth[i] = 0;
@@ -297,12 +311,33 @@ public class MatrixAtom extends Atom {
 		    j = col - 1;
 		}
 
-		boxarr[i][j] = (at == null) ? new StrutBox(0, 0, 0, 0) : at.createBox(env);
+		boxarr[i][j] = (at == null) ? nullBox : at.createBox(env);
+		
+		lineDepth[i] = Math.max(boxarr[i][j].getDepth(), lineDepth[i]);
+		lineHeight[i] = Math.max(boxarr[i][j].getHeight(), lineHeight[i]);
 		
 		if (boxarr[i][j].type != TeXConstants.TYPE_MULTICOLUMN) {
-		    lineDepth[i] = Math.max(boxarr[i][j].getDepth(), lineDepth[i]);
-		    lineHeight[i] = Math.max(boxarr[i][j].getHeight(), lineHeight[i]);
 		    rowWidth[j] = Math.max(boxarr[i][j].getWidth(), rowWidth[j]);
+		} else {
+		    ((MulticolumnAtom) at).setRowColumn(i, j);
+		    listMulti.add((MulticolumnAtom) at);
+		}
+	    }
+	}
+
+	for (int i = 0; i < listMulti.size(); i++) {
+	    MulticolumnAtom multi = listMulti.get(i);
+	    int c = multi.getCol();
+	    int r = multi.getRow();
+	    int n = multi.getSkipped();
+	    float w = 0;
+	    for (int j = c; j < c + n; j++) {
+		w += rowWidth[j];
+	    }
+	    if (boxarr[r][c].getWidth() > w) {
+		float extraW = (boxarr[r][c].getWidth() - w) / n;
+		for (int j = c; j < c + n; j++) {
+		    rowWidth[j] += extraW;
 		}
 	    }
 	}
@@ -311,6 +346,13 @@ public class MatrixAtom extends Atom {
 	    matW += rowWidth[j];
 	}
 	Box[] Hsep = getColumnSep(env, matW);
+	
+	for (int j = 0; j < col + 1; j++) {
+	    matW += Hsep[j].getWidth();
+	    if (vlines.get(j) != null) {
+		matW += vlines.get(j).getWidth(env);
+	    }
+	}
 
 	VerticalBox vb = new VerticalBox();
 	Box Vsep = vsep_in.createBox(env);
@@ -319,12 +361,48 @@ public class MatrixAtom extends Atom {
 	float totalHeight = 0;
 
 	for (int i = 0; i < row; i++) {
-	    HorizontalBox hb = new HorizontalBox(Hsep[0]);
+	    HorizontalBox hb = new HorizontalBox();
 	    for (int j = 0; j < col; j++) {
 		switch (boxarr[i][j].type) {
 		case -1 :
-		    hb.add(new HorizontalBox(boxarr[i][j], rowWidth[j], position[j]));
-		    hb.add(Hsep[j + 1]);
+		case  TeXConstants.TYPE_MULTICOLUMN :
+		    if (j == 0) {
+			if (vlines.get(0) != null) {
+			    VlineAtom vat = vlines.get(0);
+			    vat.setHeight(lineHeight[i] + lineDepth[i] + Vsep.getHeight());
+			    vat.setShift(lineDepth[i] + Vsep.getHeight() / 2);
+			    Box vatBox = vat.createBox(env);
+			    hb.add(new HorizontalBox(vatBox, Hsep[0].getWidth() + vatBox.getWidth(), TeXConstants.ALIGN_LEFT));
+			} else {
+			    hb.add(Hsep[0]);
+			}
+		    }
+		    
+		    boolean lastVline = true;
+		    
+		    if (boxarr[i][j].type == -1) {
+			hb.add(new HorizontalBox(boxarr[i][j], rowWidth[j], position[j]));
+		    } else {
+			Box b = generateMulticolumn(env, Hsep, rowWidth, i, j);
+			MulticolumnAtom matom = (MulticolumnAtom) matrix.array.get(i).get(j);
+			j += matom.getSkipped() - 1;
+			hb.add(b);
+			lastVline = matom.hasRightVline();
+		    }
+		    
+		    if (lastVline && vlines.get(j + 1) != null) {
+			VlineAtom vat = vlines.get(j + 1);
+			vat.setHeight(lineHeight[i] + lineDepth[i] + Vsep.getHeight());
+			vat.setShift(lineDepth[i] + Vsep.getHeight() / 2);
+			Box vatBox = vat.createBox(env);
+			if (j < col - 1) {
+			    hb.add(new HorizontalBox(vatBox, Hsep[j + 1].getWidth() + vatBox.getWidth(), TeXConstants.ALIGN_CENTER));
+			} else {
+			    hb.add(new HorizontalBox(vatBox, Hsep[j + 1].getWidth() + vatBox.getWidth(), TeXConstants.ALIGN_RIGHT));
+			}
+		    } else {
+			hb.add(Hsep[j + 1]);
+		    }
 		    break;
 		case TeXConstants.TYPE_INTERTEXT :
 		    float f = env.getTextwidth();
@@ -332,45 +410,65 @@ public class MatrixAtom extends Atom {
 		    hb = new HorizontalBox(boxarr[i][j], f, TeXConstants.ALIGN_LEFT);
 		    j = col - 1;
 		    break;
-		case TeXConstants.TYPE_MULTICOLUMN :
-		    float w = 0;
-		    MulticolumnAtom mca = (MulticolumnAtom) matrix.array.get(i).get(j);
-		    int k, n = mca.getSkipped();
-		    for (k = j; k < j + n - 1; k++) {
-			w += rowWidth[k] + Hsep[k + 1].getWidth();
+		case TeXConstants.TYPE_HLINE :
+		    HlineAtom at = (HlineAtom) matrix.array.get(i).get(j);
+		    at.setWidth(matW);
+		    if (i >= 1 && matrix.array.get(i - 1).get(j) instanceof HlineAtom) {
+			hb.add(new StrutBox(0, 2 * drt, 0, 0));
+			at.setShift(-Vsep.getHeight() / 2 + drt);
+		    } else {
+			at.setShift(-Vsep.getHeight() / 2);
 		    }
-		    w += rowWidth[k];
-		    Box b = mca.createBox(env);
-		    float bw = b.getWidth();
-		    if (bw > w) {
-			// It isn't a good idea but for the moment I have no other solution ! 
-			w = 0;
-		    }
-		    
-		    mca.setWidth(w);
-		    b = mca.createBox(env);
-		    hb.add(b);
-		    hb.add(Hsep[k + 1]);
-		    j = k;
+
+		    hb.add(at.createBox(env));
+		    j = col;
 		    break;
 		}
 	    }
 	    
-	    hb.setHeight(lineHeight[i]);
-	    hb.setDepth(lineDepth[i]);
-	    vb.add(hb);
-
-	    if (i < row - 1) 
-		vb.add(Vsep);
+	    if (boxarr[i][0].type != TeXConstants.TYPE_HLINE) {
+		hb.setHeight(lineHeight[i]);
+		hb.setDepth(lineDepth[i]);
+		vb.add(hb);
+		
+		if (i < row - 1) 
+		    vb.add(Vsep);
+	    } else {
+		vb.add(hb);
+	    }
 	}
 	
 	vb.add(vsep_ext_bot.createBox(env));
 	totalHeight = vb.getHeight() + vb.getDepth();
-	
+
 	float axis = env.getTeXFont().getAxisHeight(env.getStyle());
 	vb.setHeight(totalHeight / 2 + axis);
 	vb.setDepth(totalHeight / 2 - axis);
 
 	return vb;
+    }
+
+    private Box generateMulticolumn(TeXEnvironment env, Box[] Hsep, float[] rowWidth, int i, int j) {
+	float w = 0;
+	MulticolumnAtom mca = (MulticolumnAtom) matrix.array.get(i).get(j);
+	int k, n = mca.getSkipped();
+	for (k = j; k < j + n - 1; k++) {
+	    w += rowWidth[k] + Hsep[k + 1].getWidth();
+	    if (vlines.get(k + 1) != null) {
+		w += vlines.get(k + 1).getWidth(env);
+	    }
+	}
+	w += rowWidth[k];
+	
+	Box b = mca.createBox(env);
+	float bw = b.getWidth();
+	if (bw > w) {
+	    // It isn't a good idea but for the moment I have no other solution ! 
+	    w = 0;
+	}
+	
+	mca.setWidth(w);
+	b = mca.createBox(env);
+	return b;
     }
 }

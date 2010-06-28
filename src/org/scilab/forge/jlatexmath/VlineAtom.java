@@ -1,8 +1,8 @@
-/* HdotsforAtom.java
+/* VlineAtom.java
  * =========================================================================
  * This file is part of the JLaTeXMath Library - http://forge.scilab.org/jlatexmath
  *
- * Copyright (C) 2010 DENIZET Calixte
+ * Copyright (C) 2009 DENIZET Calixte
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -29,37 +29,52 @@
 package org.scilab.forge.jlatexmath;
 
 /**
- * An atom used in array mode to write on several columns.
+ * An atom representing a hline in array environment
  */
-public class HdotsforAtom extends MulticolumnAtom {
+public class VlineAtom extends Atom {
+    
+    private float height;
+    private float shift;
+    private int n;
+    
+    public VlineAtom(int n) {
+	this.n = n;
+    }
+    
+    public void setHeight(float height) {
+	this.height = height;
+    }
 
-    private static final Atom ldotp = new TeXFormula("\\ldotp").root;
-    private static final Atom thin = new TeXFormula("\\,").root;
-    private float coeff;
+    public void setShift(float shift) {
+	this.shift = shift;
+    }
 
-    public HdotsforAtom(int n, float coeff) {
-	super(n, "c", ldotp);
-	this.coeff = coeff;
+    public float getWidth(TeXEnvironment env) {
+	if (n != 0) {
+	    float drt = env.getTeXFont().getDefaultRuleThickness(env.getStyle());
+	    return drt * (3 * n - 2);
+	} else
+	    return 0;
     }
 
     public Box createBox(TeXEnvironment env) {
-	Box sp = new StrutBox(coeff * thin.createBox(env).getWidth(), 0, 0, 0);
-	HorizontalBox db = new HorizontalBox(sp);
-	db.add(ldotp.createBox(env));
-	db.add(sp);
-	Box b;
-	if (w != 0) {
-	    float dw = db.getWidth();
-	    b = new HorizontalBox(db);
-	    while (b.getWidth() < w) {
-		b.add(db);
+	if (n != 0) {
+	    float drt = env.getTeXFont().getDefaultRuleThickness(env.getStyle());
+	    Box b = new HorizontalRule(height, drt, shift);
+	    Box sep = new StrutBox(2 * drt, 0, 0, 0);
+	    HorizontalBox hb = new HorizontalBox();
+	    for (int i = 0; i < n - 1; i++) {
+		hb.add(b);
+		hb.add(sep);
 	    }
-	    b = new HorizontalBox(b, w, TeXConstants.ALIGN_CENTER); 
-	} else {
-	    b = db;
+	    
+	    if (n > 0) {
+		hb.add(b);
+	    }
+	    
+	    return hb;
 	}
 	
-	b.type = TeXConstants.TYPE_MULTICOLUMN;
-	return b;
-    } 
+	return new StrutBox(0, 0, 0, 0);
+    }
 }

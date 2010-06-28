@@ -44,6 +44,10 @@ public class ArrayOfAtoms extends TeXFormula {
 	row = 0;
     }
     
+    public Atom getLastAtom() {
+	return array.peekLast().pollLast();
+    }
+
     public void addCol() {
 	array.get(row).add(root);
 	root = null;

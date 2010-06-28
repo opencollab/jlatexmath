@@ -132,6 +132,8 @@ public class TeXConstants {
     public static final int TYPE_INTERTEXT = 11;
 
     public static final int TYPE_MULTICOLUMN = 12;
+
+    public static final int TYPE_HLINE = 13;
     
     // ***************************************
     // OVER AND UNDER DELIMITER TYPE CONSTANTS

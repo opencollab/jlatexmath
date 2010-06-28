@@ -317,6 +317,9 @@ public class TeXParser {
 		case ESCAPE :
 		    Atom at = processEscape();
 		    formula.add(at);
+		    if (arrayMode && at instanceof HlineAtom) {
+			((ArrayOfAtoms)formula).addRow();
+		    }
 		    if (insertion) 
 			insertion = false;
 		    break;
@@ -337,7 +340,7 @@ public class TeXParser {
 		case '&' :
 		    if (!arrayMode)
 			throw new ParseException("Character '&' is only available in array mode !");
-		    ((ArrayOfAtoms)formula).addCol();
+		    ((ArrayOfAtoms) formula).addCol();
 		    pos++;
 		    break;
 		default :

@@ -41,13 +41,14 @@ public class predefMacros {
     
     static {
 	NewEnvironmentMacro.addNewEnvironment("array", "\\array@@env{#1}{", "}", 1);
-	NewEnvironmentMacro.addNewEnvironment("matrix", "\\begin{array}{}", "\\end{array}", 0);
+	NewEnvironmentMacro.addNewEnvironment("tabular", "\\array@@env{#1}{", "}", 1);
+	NewEnvironmentMacro.addNewEnvironment("matrix", "\\matrix@@env{", "}", 0);
 	NewEnvironmentMacro.addNewEnvironment("smallmatrix", "\\smallmatrix@@env{", "}", 0);
-	NewEnvironmentMacro.addNewEnvironment("pmatrix", "\\left(\\begin{array}{}", "\\end{array}\\right)", 0);
-	NewEnvironmentMacro.addNewEnvironment("bmatrix", "\\left[\\begin{array}{}", "\\end{array}\\right]", 0);
-	NewEnvironmentMacro.addNewEnvironment("Bmatrix", "\\left\\{\\begin{array}{}", "\\end{array}\\right\\}", 0);
-	NewEnvironmentMacro.addNewEnvironment("vmatrix", "\\left|\\begin{array}{}", "\\end{array}\\right|", 0);
-	NewEnvironmentMacro.addNewEnvironment("Vmatrix", "\\left\\|\\begin{array}{}", "\\end{array}\\right\\|", 0);
+	NewEnvironmentMacro.addNewEnvironment("pmatrix", "\\left(\\begin{matrix}", "\\end{matrix}\\right)", 0);
+	NewEnvironmentMacro.addNewEnvironment("bmatrix", "\\left[\\begin{matrix}", "\\end{matrix}\\right]", 0);
+	NewEnvironmentMacro.addNewEnvironment("Bmatrix", "\\left\\{\\begin{matrix}", "\\end{matrix}\\right\\}", 0);
+	NewEnvironmentMacro.addNewEnvironment("vmatrix", "\\left|\\begin{matrix}", "\\end{matrix}\\right|", 0);
+	NewEnvironmentMacro.addNewEnvironment("Vmatrix", "\\left\\|\\begin{matrix}", "\\end{matrix}\\right\\|", 0);
 	NewEnvironmentMacro.addNewEnvironment("eqnarray", "\\begin{array}{rcl}", "\\end{array}", 0);
 	NewEnvironmentMacro.addNewEnvironment("align", "\\align@@env{", "}", 0);
 	NewEnvironmentMacro.addNewEnvironment("flalign", "\\flalign@@env{", "}", 0);
@@ -582,6 +583,14 @@ public class predefMacros {
 	return new MatrixAtom(array, MatrixAtom.SMALLMATRIX);
     }
 
+    public Atom matrixATATenv_macro(TeXParser tp, String[] args) throws ParseException {
+	ArrayOfAtoms array = new ArrayOfAtoms();
+	TeXParser parser = new TeXParser(args[1], array, false);
+	parser.parse();
+	array.checkDimensions();
+	return new MatrixAtom(array, MatrixAtom.MATRIX);
+    }
+
     public Atom multicolumn_macro(TeXParser tp, String[] args) throws ParseException {
 	int n = Integer.parseInt(args[1]);
 	tp.addAtom(new MulticolumnAtom(n, args[2], new TeXFormula(args[3]).root));
@@ -591,7 +600,7 @@ public class predefMacros {
 
     public Atom hdotsfor_macro(TeXParser tp, String[] args) throws ParseException {
 	int n = Integer.parseInt(args[1]);
-	tp.addAtom(new HdotsforAtom(n));
+	tp.addAtom(new HdotsforAtom(n, Float.parseFloat(args[2])));
 	((ArrayOfAtoms)tp.formula).addCol(n);
 	return null;
     }
@@ -800,7 +809,6 @@ public class predefMacros {
     
     public Atom stackrel_macro(TeXParser tp, String[] args) throws ParseException {
 	Atom at = new UnderOverAtom(new TeXFormula(args[2], false).root,new TeXFormula(args[3], false).root, TeXConstants.UNIT_MU, 0.5f, true, new TeXFormula(args[1], false).root, TeXConstants.UNIT_MU, 2.5f, true);
-	//at.type = TeXConstants.TYPE_RELATION;
 	return new TypedAtom(TeXConstants.TYPE_RELATION, TeXConstants.TYPE_RELATION, at);
     }
 
@@ -1060,5 +1068,11 @@ public class predefMacros {
     public Atom magnification_macro(TeXParser tp, String[] args) throws ParseException {
 	DefaultTeXFont.setMagnification(Float.parseFloat(args[1]));
 	return null;
+    }
+
+    public Atom hline_macro(TeXParser tp, String[] args) throws ParseException {
+	if (!tp.isArrayMode())
+	    throw new ParseException("The macro \\hline is only available in array mode !");
+	return new HlineAtom();
     }
 }

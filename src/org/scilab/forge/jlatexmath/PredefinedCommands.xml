@@ -634,7 +634,16 @@
 	        <CreateCommand name="f">
 			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
 			<Argument type="String" value="smallmatrixATATenv_macro" />
-			<Argument type="float" value="2" />
+			<Argument type="float" value="1" />
+		</CreateCommand>
+		<Return name="f" />
+	</Command>
+
+	<Command name="matrix@@env" enabled="true">
+	        <CreateCommand name="f">
+			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+			<Argument type="String" value="matrixATATenv_macro" />
+			<Argument type="float" value="1" />
 		</CreateCommand>
 		<Return name="f" />
 	</Command>
@@ -1669,6 +1678,15 @@
 			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
 			<Argument type="String" value="magnification_macro" />
 			<Argument type="float" value="1" />
+		</CreateCommand>
+		<Return name="f" />
+	</Command>
+
+	<Command name="hline" enabled="true">
+		<CreateCommand name="f">
+			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+			<Argument type="String" value="hline_macro" />
+			<Argument type="float" value="0" />
 		</CreateCommand>
 		<Return name="f" />
 	</Command>
