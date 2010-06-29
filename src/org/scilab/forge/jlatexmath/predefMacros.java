@@ -62,7 +62,7 @@ public class predefMacros {
 	NewEnvironmentMacro.addNewEnvironment("gathered", "\\gathered@@env{", "}", 0);
 	NewCommandMacro.addNewCommand("operatorname", "\\mathop{\\mathrm{#1}}\\nolimits ", 1);
 	NewCommandMacro.addNewCommand("DeclareMathOperator", "\\newcommand{#1}{\\mathop{\\mathrm{#2}}\\nolimits}", 2);
-	NewCommandMacro.addNewCommand("substack", "\\begin{array}{l}#1\\end{array}", 1);
+	NewCommandMacro.addNewCommand("substack", "{\\scriptstyle\\begin{array}{c}#1\\end{array}}", 1);
 	NewCommandMacro.addNewCommand("dfrac", "\\genfrac{}{}{}{}{#1}{#2}", 2);
 	NewCommandMacro.addNewCommand("tfrac", "\\genfrac{}{}{}{1}{#1}{#2}", 2);
 	NewCommandMacro.addNewCommand("dbinom", "\\genfrac{(}{)}{0pt}{}{#1}{#2}", 2);
@@ -85,6 +85,11 @@ public class predefMacros {
 	NewCommandMacro.addNewCommand("Ket", "\\left\\vert{#1}\\right\\rangle", 1);
 	NewCommandMacro.addNewCommand("textsuperscript", "{}^{\\text{#1}}", 1);
 	NewCommandMacro.addNewCommand("textsubscript", "{}_{\\text{#1}}", 1);
+	NewCommandMacro.addNewCommand("textit", "\\mathit{\\text{#1}}", 1);
+	NewCommandMacro.addNewCommand("textbf", "\\mathbf{\\text{#1}}", 1);
+	NewCommandMacro.addNewCommand("textsf", "\\mathsf{\\text{#1}}", 1);
+	NewCommandMacro.addNewCommand("texttt", "\\mathtt{\\text{#1}}", 1);
+	NewCommandMacro.addNewCommand("textrm", "\\text{#1}", 1);
     }
 
     public Atom Braket_macro(TeXParser tp, String[] args) throws ParseException {
@@ -234,12 +239,60 @@ public class predefMacros {
 	return new FractionAtom(num, denom, true);
     }
 
+    public Atom overwithdelims_macro(TeXParser tp, String[] args) throws ParseException {
+	Atom num = tp.getFormulaAtom();
+	Atom denom = new TeXFormula(tp.getOverArgument(), false).root;
+	
+	if (num == null || denom == null)
+	    throw new ParseException("Both numerator and denominator of a fraction can't be empty!");
+	
+	Atom left = new TeXFormula(args[1], false).root;
+	if (left instanceof BigDelimiterAtom) 
+	    left = ((BigDelimiterAtom)left).delim;
+	Atom right = new TeXFormula(args[2], false).root;
+	if (right instanceof BigDelimiterAtom) 
+	    right = ((BigDelimiterAtom)right).delim;
+	if (left instanceof SymbolAtom && right instanceof SymbolAtom) {
+	    return new FencedAtom(new FractionAtom(num, denom, true), (SymbolAtom) left, (SymbolAtom) right);
+	}
+
+	RowAtom ra = new RowAtom();
+	ra.add(left);
+	ra.add(new FractionAtom(num, denom, true));
+	ra.add(right);
+	return ra;
+    }
+
     public Atom atop_macro(TeXParser tp, String[] args) throws ParseException {
 	Atom num = tp.getFormulaAtom();
 	Atom denom = new TeXFormula(tp.getOverArgument(), false).root;
 	if (num == null || denom == null)
 	    throw new ParseException("Both numerator and denominator of a fraction can't be empty!");
 	return new FractionAtom(num, denom, false);
+    }
+
+    public Atom atopwithdelims_macro(TeXParser tp, String[] args) throws ParseException {
+	Atom num = tp.getFormulaAtom();
+	Atom denom = new TeXFormula(tp.getOverArgument(), false).root;
+	
+	if (num == null || denom == null)
+	    throw new ParseException("Both numerator and denominator of a fraction can't be empty!");
+	
+	Atom left = new TeXFormula(args[1], false).root;
+	if (left instanceof BigDelimiterAtom) 
+	    left = ((BigDelimiterAtom)left).delim;
+	Atom right = new TeXFormula(args[2], false).root;
+	if (right instanceof BigDelimiterAtom) 
+	    right = ((BigDelimiterAtom)right).delim;
+	if (left instanceof SymbolAtom && right instanceof SymbolAtom) {
+	    return new FencedAtom(new FractionAtom(num, denom, false), (SymbolAtom) left, (SymbolAtom) right);
+	}
+
+	RowAtom ra = new RowAtom();
+	ra.add(left);
+	ra.add(new FractionAtom(num, denom, false));
+	ra.add(right);
+	return ra;
     }
 
     public Atom choose_macro(TeXParser tp, String[] args) throws ParseException {
@@ -504,6 +557,10 @@ public class predefMacros {
 
     public Atom ddots_macro(TeXParser tp, String[] args) throws ParseException {
 	return new TypedAtom(TeXConstants.TYPE_INNER, TeXConstants.TYPE_INNER, new DdotsAtom());
+    }
+
+    public Atom iddots_macro(TeXParser tp, String[] args) throws ParseException {
+	return new TypedAtom(TeXConstants.TYPE_INNER, TeXConstants.TYPE_INNER, new IddotsAtom());
     }
     
     public Atom nolimits_macro(TeXParser tp, String[] args) throws ParseException {
@@ -1057,7 +1114,10 @@ public class predefMacros {
     }
 
     public Atom jlmDynamic_macro(TeXParser tp, String[] args) throws ParseException {
-	return new DynamicAtom(args[1]);
+	if (DynamicAtom.hasAnExternalConverterFactory()) {
+	    return new DynamicAtom(args[1]);
+	} else 
+	    throw new ParseException("No ExternalConverterFactory set !");	
     }
 
     public Atom DeclareMathSizes_macro(TeXParser tp, String[] args) throws ParseException {
@@ -1074,5 +1134,32 @@ public class predefMacros {
 	if (!tp.isArrayMode())
 	    throw new ParseException("The macro \\hline is only available in array mode !");
 	return new HlineAtom();
+    }
+
+    public Atom size_macros(TeXParser tp, String[] args) throws ParseException {
+	double f = 1;
+	if ("tiny".equals(args[0])) {
+	    f = 0.5;
+	} else if ("scriptsize".equals(args[0])) {
+	    f = 0.7;
+	} else if ("footnotesize".equals(args[0])) {
+	    f = 0.8;
+	} else if ("small".equals(args[0])) {
+	    f = 0.9;
+	} else if ("normalsize".equals(args[0])) {
+	    f = 1;
+	} else if ("large".equals(args[0])) {
+	    f = 1.2;
+	} else if ("Large".equals(args[0])) {
+	    f = 1.4;
+	} else if ("LARGE".equals(args[0])) {
+	    f = 1.8;
+	} else if ("huge".equals(args[0])) {
+	    f = 2;
+	} else if ("Huge".equals(args[0])) {
+	    f = 2.5;
+	}
+
+	return new ScaleAtom(new TeXFormula(tp.getOverArgument(), false).root, f, f);
     }
 }

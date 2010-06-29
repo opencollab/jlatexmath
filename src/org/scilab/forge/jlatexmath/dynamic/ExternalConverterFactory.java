@@ -1,4 +1,4 @@
-/* DynamicAtom.java
+/* ExternalConverterFactory.java
  * =========================================================================
  * This file is part of the JLaTeXMath Library - http://forge.scilab.org/jlatexmath
  * 
@@ -28,45 +28,7 @@
 
 package org.scilab.forge.jlatexmath.dynamic;
 
-import org.scilab.forge.jlatexmath.Atom;
-import org.scilab.forge.jlatexmath.Box;
-import org.scilab.forge.jlatexmath.StrutBox;
-import org.scilab.forge.jlatexmath.TeXEnvironment;
-import org.scilab.forge.jlatexmath.TeXFormula;
-
-/**
- * This kind of atom is used to have a dynamic content
- * which comes from an other soft such as ggb.
- * The goal is to avoid the reparsing (and the reatomization)
- * of the expression. 
- */
-public class DynamicAtom extends Atom {
+public interface ExternalConverterFactory {
     
-    private static ExternalConverterFactory ecFactory;
-    private ExternalConverter converter;
-    private TeXFormula formula = new TeXFormula();
-    private String externalCode;
-    
-    public DynamicAtom(String externalCode) {
-	this.externalCode = externalCode;
-	if (ecFactory != null) {
-	    this.converter = ecFactory.getExternalConverter();
-	}
-    }
-
-    public static boolean hasAnExternalConverterFactory() {
-	return ecFactory != null;
-    }
-
-    public static void setExternalConverterFactory(ExternalConverterFactory factory) {
-	ecFactory = factory;
-    }
-
-    public Box createBox(TeXEnvironment env) {
-	if (converter != null) {
-	    formula.setLaTeX(converter.getLaTeXString(externalCode));
-	    return formula.root.createBox(env);
-	}
-	return new StrutBox(0, 0, 0, 0);
-    }
+    public ExternalConverter getExternalConverter();
 }
