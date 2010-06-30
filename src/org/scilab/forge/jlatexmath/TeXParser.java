@@ -261,6 +261,18 @@ public class TeXParser {
 			parseString.replace(spos, pos, (String)mac.invoke(this, args));
 			len = parseString.length();
 			pos = spos;
+		    } else if ("begin".equals(com)) {
+			args = getOptsArgs(1, 0);
+			mac = MacroInfo.Commands.get(args[1] + "@env");
+			String[] optarg = getOptsArgs(mac.nbArgs - 1, 0);
+			String grp = getGroup("\\begin{" + args[1] + "}", "\\end{" + args[1] + "}");
+			String expr = "\\makeatletter \\" + args[1] + "@env";
+			for (int i = 1; i <= mac.nbArgs - 1; i++)
+			    expr += "{" + optarg[i] + "}";
+			expr += "{" + grp  + "}\\makeatother";
+			parseString.replace(spos, pos, expr);
+			len = parseString.length();
+			pos = spos;
 		    } else if ("makeatletter".equals(com)) 
 			atIsLetter++;
 		    else if ("makeatother".equals(com))
@@ -558,9 +570,27 @@ public class TeXParser {
 	    case L_GROUP :
 		ogroup++;
 		break;
-	    case '&' :
+	    case '&' : 
+		/* if a & is encountered at the same level as \over
+		   we must break the argument */
+		if (ogroup == 1) {
+		    ogroup--;
+		}
+		break;
 	    case R_GROUP :
 		ogroup--;
+		break;
+	    case ESCAPE :
+		pos++;
+		/* if a \\ or a \cr is encountered at the same level as \over
+		   we must break the argument */
+		if (pos < len && parseString.charAt(pos) == '\\' && ogroup == 1) {
+		    ogroup--;
+		    pos--;
+		} else if (pos < len - 1 && parseString.charAt(pos) == 'c' && parseString.charAt(pos + 1) == 'r' && ogroup == 1) {
+		    ogroup--;
+		    pos--;
+		}
 		break;
 	    }
 	    pos++;
@@ -578,7 +608,7 @@ public class TeXParser {
 	    ch = '\0';
 	}
 	
-	if (ch == '&' || ch == R_GROUP) 
+	if (ch == '&' || ch == '\\' || ch == R_GROUP) 
 	    pos--;
 	
 	return str;

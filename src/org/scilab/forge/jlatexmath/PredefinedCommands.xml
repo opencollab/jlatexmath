@@ -1138,16 +1138,6 @@
 		<Return name="f" />
 	</Command>
 
-	<Command name="begin" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="begin_macro" />
-			<Argument type="float" value="1" />
-			<!--Argument type="float" value="2" /-->
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
 	<Command name="makeatletter" enabled="true">
 		<CreateCommand name="f">
 			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />

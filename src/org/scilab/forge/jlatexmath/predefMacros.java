@@ -846,20 +846,6 @@ public class predefMacros {
 	return null;
     }
     
-    public Atom begin_macro(TeXParser tp, String[] args) throws ParseException {
-	MacroInfo mac = MacroInfo.Commands.get(args[1] + "@env");
-	int nbArgs = mac.nbArgs - 1;
-	String[] optarg = tp.getOptsArgs(nbArgs, 0);
-	String grp = tp.getGroup("\\begin{" + args[1] + "}", "\\end{" + args[1] + "}");
-	String expr = "\\makeatletter \\" + args[1] + "@env";
-	for (int i = 1; i <= nbArgs; i++)
-	    expr += "{" + optarg[i] + "}";
-	expr += "{" + grp  + "}\\makeatother";
-	
-	TeXFormula tf = new TeXFormula(expr);
-	return tf.root;
-    }
-    
     public Atom fbox_macro(TeXParser tp, String[] args) throws ParseException {
 	return new FBoxAtom(new TeXFormula(args[1], false).root);
     }
