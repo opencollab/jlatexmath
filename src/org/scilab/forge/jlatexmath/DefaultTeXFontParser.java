@@ -62,6 +62,7 @@ public class DefaultTeXFontParser {
      * but we do it only once 
      */
     private static boolean registerFontExceptionDisplayed = false; 
+    private static boolean shouldRegisterFonts = true;
     private static DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
     private static interface CharChildParser { // NOPMD
         public void parse(Element el, char ch, FontInfo info) throws XMLResourceParseException;
@@ -346,6 +347,10 @@ public class DefaultTeXFontParser {
 	return createFont(DefaultTeXFontParser.class.getResourceAsStream(name), name);
     }
 
+    public static void registerFonts(boolean b) {
+	shouldRegisterFonts =b;
+    }
+
     private static Font createFont(InputStream fontIn, String name) throws ResourceParseException {
         try {
             Font f = Font.createFont(Font.TRUETYPE_FONT, fontIn);
@@ -355,15 +360,17 @@ public class DefaultTeXFontParser {
 	     * graphicEnv.registerFont(f);
 	     * dynamic load then
 	     */
-	    try {
-		Method registerFontMethod = graphicEnv.getClass().getMethod("registerFont", new Class[] { Font.class });
-		if ((Boolean)registerFontMethod.invoke(graphicEnv, new Object[] { f }) == Boolean.FALSE) {
-		    System.err.println("Cannot register the font " + f.getFontName());
-		}
-	    } catch (Exception ex) {
-		if (!registerFontExceptionDisplayed) {
-		    System.err.println("Warning: Jlatexmath: Could not access to registerFont. Please update to java 6");
-		    registerFontExceptionDisplayed = true;
+	    if (shouldRegisterFonts) {
+		try {
+		    Method registerFontMethod = graphicEnv.getClass().getMethod("registerFont", new Class[] { Font.class });
+		    if ((Boolean)registerFontMethod.invoke(graphicEnv, new Object[] { f }) == Boolean.FALSE) {
+			System.err.println("Cannot register the font " + f.getFontName());
+		    }
+		} catch (Exception ex) {
+		    if (!registerFontExceptionDisplayed) {
+			System.err.println("Warning: Jlatexmath: Could not access to registerFont. Please update to java 6");
+			registerFontExceptionDisplayed = true;
+		    }
 		}
 	    }
 	    return f;
