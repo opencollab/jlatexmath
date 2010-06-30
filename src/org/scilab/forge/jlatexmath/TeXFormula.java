@@ -448,11 +448,11 @@ public class TeXFormula {
     }
     
     public void createPNG(int style, float size, String out, Color bg, Color fg) {
-        createImage("png", style, size, out, bg, fg, true);
+        createImage("png", style, size, out, bg, fg, bg == null);
     }
 
     public void createGIF(int style, float size, String out, Color bg, Color fg) {
-        createImage("gif", style, size, out, bg, fg, true);
+        createImage("gif", style, size, out, bg, fg, bg == null);
     }
 
     public void createJPEG(int style, float size, String out, Color bg, Color fg) {
