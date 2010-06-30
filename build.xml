@@ -167,7 +167,7 @@
     <copy file="${fop.base.dir}/dist/jlatexmath-fop-src-${version}.zip" tofile="${package.dir}/jlatexmath-fop-src-${version}.zip"/>
   </target>
 
-  <target name="zip" depends="embedded">
+  <target name="embedded-zip" depends="embedded">
     <zip destfile="${package.dir}/jlatexmath-embedded-fop-${version}.zip">
       <fileset dir="${package.dir}" includes="jlatexmath-embedded-fop-${version}.jar"/>
       <fileset dir="${fop.base.dir}" includes="examples/*"/>
@@ -196,7 +196,7 @@
     <jar jarfile="${output.jar.dir}/jlatexmath-src-all-${version}.zip" basedir="${project.root.dir}" includes="COPYING LICENSE README fop.properties build.xml version.xml MANIFEST.MF src/**/*.java src/**/*.xml src/**/*.ttf src/**/licences/* src/**/greek/* src/**/cyrillic/* src/**/README examples/**/*.java examples/**/lion.png examples/**/*.xml examples/**/README plugin/**/src/**/*.java plugin/**/src/META-INF/**/* plugin/**/build.xml plugin/**/COPYING plugin/**/LICENSE plugin/**/examples/*.*"/>
   </target>
   
-  <target name="all" depends="init, buildJar, buildJarMinimal, source, src-all, embedded, plugin, plugin-src"/>
+  <target name="all" depends="init, buildJar, buildJarMinimal, source, src-all, embedded, plugin, plugin-src, embedded-zip"/>
 
   <target name="doc" depends="compile" description="Generates the API specification (javadoc)">
     <javadoc packagenames="org.scilab.forge.jlatexmath.*"
