@@ -43,10 +43,6 @@ import javax.swing.JLabel;
 import org.scilab.forge.jlatexmath.TeXConstants; 
 import org.scilab.forge.jlatexmath.TeXFormula;
 import org.scilab.forge.jlatexmath.TeXIcon;
-import org.scilab.forge.jlatexmath.DefaultTeXFont;
-
-import org.scilab.forge.jlatexmath.cyrillic.CyrillicRegistration;
-import org.scilab.forge.jlatexmath.greek.GreekRegistration;
 
 /**
  * A class to test LaTeX rendering.
@@ -72,9 +68,6 @@ public class Example1 {
 	latex += "\\mbox{прывітаньне Свет}&\\mbox{привіт світ}\\\\";
 	latex += "\\end{array}";
 	
-	DefaultTeXFont.registerAlphabet(new CyrillicRegistration());
-	DefaultTeXFont.registerAlphabet(new GreekRegistration());
-
 	TeXFormula formula = new TeXFormula(latex);
 	TeXIcon icon = formula.createTeXIcon(TeXConstants.STYLE_DISPLAY, 20);
 	icon.setInsets(new Insets(5, 5, 5, 5));

@@ -32,5 +32,6 @@ public class Main {
         Example2.main(new String[0]);
         Example3.main(new String[0]);
         Example4.main(new String[0]);
+        Example5.main(new String[0]);
     }
 }
