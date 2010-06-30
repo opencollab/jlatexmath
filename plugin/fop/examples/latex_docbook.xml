@@ -94,5 +94,23 @@ a x^3 + b x^2 + c x + d = 0
 ]]>
        </latex>
      </equation>
+     <para>
+       An array with vertical and horizontal lines and different sizes of font :
+     </para>
+     <equation>
+       <latex align="center" xmlns="http://forge.scilab.org/p/jlatexmath">
+	 <![CDATA[
+\begin{array}{|c|l|||r|c|}
+\hline
+\text{Matrix}&\multicolumn{2}{|c|}{\text{Multicolumns}}&\text{Font sizes commands}\cr
+\hline
+\begin{pmatrix}\alpha_{11}&\cdots&\alpha_{1n}\cr\hdotsfor{3}\cr\alpha_{n1}&\cdots&\alpha_{nn}\end{pmatrix}&\Large \text{Large Right}&\small \text{small Left}&\tiny \text{tiny Tiny}\cr
+\hline
+\multicolumn{4}{|c|}{\Huge \text{Huge Multicolumns}}\cr
+\hline
+\end{array}
+]]>
+       </latex>
+     </equation>
    </chapter>
  </book>
