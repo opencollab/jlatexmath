@@ -657,7 +657,11 @@ public class predefMacros {
 
     public Atom hdotsfor_macro(TeXParser tp, String[] args) throws ParseException {
 	int n = Integer.parseInt(args[1]);
-	tp.addAtom(new HdotsforAtom(n, Float.parseFloat(args[2])));
+	float f = 1;
+	if (args[2] != null) {
+	    f = Float.parseFloat(args[2]);
+	}
+	tp.addAtom(new HdotsforAtom(n, f));
 	((ArrayOfAtoms)tp.formula).addCol(n);
 	return null;
     }
