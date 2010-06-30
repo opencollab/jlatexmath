@@ -143,7 +143,7 @@ public class JLaTeXMathElement extends JLaTeXMathObj {
 	if (stfw.length() != 0) {
 	    icon = new TeXFormula(code).createTeXIcon(st, size, TeXConstants.UNIT_PIXEL, getFWidth(stfw), TeXConstants.ALIGN_CENTER);
 	} else {
-	    icon = new TeXFormula(code).createTeXIcon(st, size);
+	    icon = new TeXFormula(code).createTeXIcon(st, size, true);
 	}
 	
 	return icon;

@@ -210,6 +210,14 @@ public class TeXFormula {
         if (f != null)
             addImpl(f);
     }
+
+    /**
+     * @param b true if the fonts should be registered (Java 1.6 only) to be used
+     * with FOP.
+     */
+    public static void registerFonts(boolean b) {
+	DefaultTeXFontParser.registerFonts(b);
+    }
     
     /**
      * Change the text of the TeXFormula and regenerate the root
@@ -396,11 +404,19 @@ public class TeXFormula {
         return ti;
     }
 
+    public TeXIcon createTeXIcon(int style, float size, boolean trueValues) {
+	TeXEnvironment te = new TeXEnvironment(style, new DefaultTeXFont(size));
+	Box box = createBox(te);
+	TeXIcon ti = new TeXIcon(box, size, trueValues);
+	ti.isColored = te.isColored;
+        return ti;
+    }
+
     public TeXIcon createTeXIcon(int style, float size, int widthUnit, float textwidth, int align) {
 	TeXEnvironment te = new TeXEnvironment(style, new DefaultTeXFont(size), widthUnit, textwidth);
 	Box box = createBox(te);
 	HorizontalBox hb = new HorizontalBox(box, te.getTextwidth(), align);
-	TeXIcon ti = new TeXIcon(hb, size);
+	TeXIcon ti = new TeXIcon(hb, size, true);
 	ti.isColored = te.isColored;
         return ti;
     }

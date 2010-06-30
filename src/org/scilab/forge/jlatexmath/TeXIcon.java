@@ -73,6 +73,10 @@ public class TeXIcon implements Icon {
      * @param size the point size
      */
     protected TeXIcon(Box b, float size) {
+	this(b, size, false);
+    }
+
+    protected TeXIcon(Box b, float size, boolean trueValues) {
 	box = b;
 	
 	if (defaultSize != -1) {
@@ -88,8 +92,10 @@ public class TeXIcon implements Icon {
 	/* I add this little value because it seems that tftopl calculates badly
 	   the height and the depth of certains characters.
 	*/
-	insets.top += (int)(0.18f * size);
-	insets.bottom += (int)(0.18f * size);
+	if (!trueValues) {
+	    insets.top += (int)(0.18f * size);
+	    insets.bottom += (int)(0.18f * size);
+	}
     }
 
     public void setForeground(Color fg) {
@@ -109,11 +115,23 @@ public class TeXIcon implements Icon {
      * Set the insets of the TeXIcon.
      * 
      * @param insets the insets
+     * @param trueValues true to force the true values
+     */
+    public void setInsets(Insets insets, boolean trueValues) {
+	this.insets = insets;
+	if (!trueValues) {
+	    this.insets.top += (int)(0.18f * size);
+	    this.insets.bottom += (int)(0.18f * size);
+	}
+    }
+
+    /**
+     * Set the insets of the TeXIcon.
+     * 
+     * @param insets the insets
      */
     public void setInsets(Insets insets) {
-	this.insets = insets;
-	this.insets.top += (int)(0.18f * size);
-	this.insets.bottom += (int)(0.18f * size);
+	setInsets(insets, false);
     }
     
     /**
