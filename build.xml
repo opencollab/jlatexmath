@@ -167,6 +167,17 @@
     <copy file="${fop.base.dir}/dist/jlatexmath-fop-src-${version}.zip" tofile="${package.dir}/jlatexmath-fop-src-${version}.zip"/>
   </target>
 
+  <target name="font-alone" depends="init">
+    <zip destfile="${package.dir}/jlatexmath-fonts.zip">
+      <fileset dir="${project.src.dir}/greek/fonts" includes="*.ttf"/>
+      <fileset dir="${project.src.dir}/cyrillic/fonts" includes="*.ttf"/>
+      <fileset dir="${project.src.dir}/fonts/maths" includes="*.ttf"/>
+      <fileset dir="${project.src.dir}/fonts/latin" includes="*.ttf"/>
+      <fileset dir="${project.src.dir}/fonts/euler" includes="*.ttf"/>
+      <fileset dir="${project.src.dir}/fonts/base" includes="*.ttf"/>
+    </zip>
+  </target>
+
   <target name="embedded-zip" depends="embedded">
     <zip destfile="${package.dir}/jlatexmath-embedded-fop-${version}.zip">
       <fileset dir="${package.dir}" includes="jlatexmath-embedded-fop-${version}.jar"/>
