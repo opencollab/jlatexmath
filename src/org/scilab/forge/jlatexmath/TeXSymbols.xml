@@ -169,7 +169,12 @@
   <Symbol name="trianglerighteq" type="rel" />
   <Symbol name="trianglelefteq" type="rel" />
   <Symbol name="rightsquigarrow" type="rel" />
-  
+  <Symbol name="lhd" type="rel" />
+  <Symbol name="unlhd" type="rel" />
+  <Symbol name="rhd" type="rel" />
+  <Symbol name="unrhd" type="rel" />
+  <Symbol name="Box" type="ord" />
+
   <Symbol name="boxdot" type="bin" />
   <Symbol name="boxplus" type="bin" />
   <Symbol name="boxtimes" type="bin" />
@@ -374,6 +379,8 @@
   <Symbol name="Bbbk" type="ord" />
   <Symbol name="hslash" type="ord" />
   <Symbol name="backepsilon" type="rel" />
+  <Symbol name="Diamond" type="rel" />
+  <Symbol name="leadsto" type="rel" />
   <!-- miscellaneous symbols -->
 
   <Symbol name="comma" type="punct"/>
