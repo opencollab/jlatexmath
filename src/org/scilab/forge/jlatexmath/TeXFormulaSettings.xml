@@ -664,6 +664,7 @@
 	  <Map char="&#0775;" formula="\dot"/>  
 	  <Map char="&#0770;" formula="\widehat"/>  
 	  <Map char="&#0771;" formula="\widetilde"/>
+	  <Map char="&#8799;" formula="\stackrel{?}{=}"/>
 	</CharacterToFormulaMappings>
 
 </FormulaSettings>
