@@ -1,3 +1,4 @@
+        * problem with @{blah} in array env.
 jlatexmath (0.9.2)
         * add new commands \tiny, \footnotesize,... and \overwithdelims,...
 

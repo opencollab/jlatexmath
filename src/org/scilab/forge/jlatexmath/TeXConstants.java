@@ -66,6 +66,11 @@ public class TeXConstants {
      * Alignment constant: extra space will be added above the formula
      */
     public static final int ALIGN_BOTTOM = 4;
+
+    /**
+     * Alignment constant: none
+     */
+    public static final int ALIGN_NONE = 5;
     
     public static final int THINMUSKIP = 1;
     public static final int MEDMUSKIP = 2; 

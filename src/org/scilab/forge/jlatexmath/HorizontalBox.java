@@ -43,7 +43,7 @@ public class HorizontalBox extends Box {
     public HorizontalBox(Box b, float w, int alignment) {
 	if (w != Float.POSITIVE_INFINITY) {
 	    float rest = w - b.getWidth();
-	    if (alignment == TeXConstants.ALIGN_CENTER) {
+	    if (alignment == TeXConstants.ALIGN_CENTER || alignment == TeXConstants.ALIGN_NONE) {
 		StrutBox s = new StrutBox(rest / 2, 0, 0, 0);
 		add(s);
 		add(b);

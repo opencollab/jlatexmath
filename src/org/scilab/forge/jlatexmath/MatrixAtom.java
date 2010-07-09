@@ -138,7 +138,7 @@ public class MatrixAtom extends Atom {
 		    matrix.array.get(j).add(lposition.size(), at);
 		}
 
-		lposition.add(TeXConstants.ALIGN_CENTER);
+		lposition.add(TeXConstants.ALIGN_NONE);
 		pos += tp.getPos();
 		pos--;
 		break;
@@ -180,7 +180,8 @@ public class MatrixAtom extends Atom {
 	Box[] arr = new Box[col + 1];
 	Box Align, AlignSep, Hsep;
 	float h, w = env.getTextwidth();
-
+	int i;
+	
 	if (type == ALIGNED || type == ALIGNEDAT) {
 	    w = Float.POSITIVE_INFINITY;
 	}
@@ -188,11 +189,22 @@ public class MatrixAtom extends Atom {
 	switch (type) {
 	case ARRAY :
 	    //Array : hsep_col/2 elem hsep_col elem hsep_col ... hsep_col elem hsep_col/2
+	    i = 1;
+	    if (position[0] == TeXConstants.ALIGN_NONE) {
+		arr[1] = new StrutBox(0.0f, 0.0f, 0.0f, 0.0f);
+		i = 2;
+	    }
 	    arr[0] = semihsep.createBox(env);
 	    arr[col] = arr[0];
 	    Hsep = hsep.createBox(env);
-	    for (int i = 1; i < col; i++) {
-		arr[i] = Hsep;
+	    for (; i < col; i++) {
+		if (position[i] == TeXConstants.ALIGN_NONE) {
+		    arr[i] = new StrutBox(0.0f, 0.0f, 0.0f, 0.0f);
+		    arr[i + 1] = arr[i];
+		    i++;
+		} else {
+		    arr[i] = Hsep;
+		}
 	    }
 	    
 	    return arr;
@@ -202,7 +214,7 @@ public class MatrixAtom extends Atom {
 	    arr[0] = nullBox;
 	    arr[col] = arr[0];
 	    Hsep = hsep.createBox(env);
-	    for (int i = 1; i < col; i++) {
+	    for (i = 1; i < col; i++) {
 		arr[i] = Hsep;
 	    }
 	    
@@ -218,7 +230,7 @@ public class MatrixAtom extends Atom {
 	    }
 	    
 	    arr[col] = AlignSep;
-	    for (int i = 0; i < col; i++) {
+	    for (i = 0; i < col; i++) {
 		if (i % 2 == 0) {
 		    arr[i] = AlignSep;
 		} else {
@@ -239,7 +251,7 @@ public class MatrixAtom extends Atom {
 	    Box empty = nullBox;
 	    arr[0] = new StrutBox(h, 0.0f, 0.0f, 0.0f);
 	    arr[col] = arr[0];
-	    for (int i = 1; i < col; i++) {
+	    for (i = 1; i < col; i++) {
 		if (i % 2 == 0) {
 		    arr[i] = empty;
 		} else {
@@ -260,7 +272,7 @@ public class MatrixAtom extends Atom {
 	    
 	    arr[0] = nullBox;
 	    arr[col] = arr[0];
-	    for (int i = 1; i < col; i++) {
+	    for (i = 1; i < col; i++) {
 		if (i % 2 == 0) {
 		    arr[i] = AlignSep;
 		} else {
@@ -365,7 +377,7 @@ public class MatrixAtom extends Atom {
 	    for (int j = 0; j < col; j++) {
 		switch (boxarr[i][j].type) {
 		case -1 :
-		case  TeXConstants.TYPE_MULTICOLUMN :
+		case TeXConstants.TYPE_MULTICOLUMN :
 		    if (j == 0) {
 			if (vlines.get(0) != null) {
 			    VlineAtom vat = vlines.get(0);
