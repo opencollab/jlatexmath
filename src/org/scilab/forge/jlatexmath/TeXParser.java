@@ -258,12 +258,15 @@ public class TeXParser {
 			mac = MacroInfo.Commands.get(com);
 			args = getOptsArgs(mac.nbArgs, mac.hasOptions ? 1 : 0);
 			args[0] = com;
-			parseString.replace(spos, pos, (String)mac.invoke(this, args));
+			parseString.replace(spos, pos, (String) mac.invoke(this, args));
 			len = parseString.length();
 			pos = spos;
 		    } else if ("begin".equals(com)) {
 			args = getOptsArgs(1, 0);
 			mac = MacroInfo.Commands.get(args[1] + "@env");
+			if (mac == null) {
+			    throw new ParseException("Unknown environment: " + args[1] + " at position " + getLine() + ":" + getCol());
+			}
 			String[] optarg = getOptsArgs(mac.nbArgs - 1, 0);
 			String grp = getGroup("\\begin{" + args[1] + "}", "\\end{" + args[1] + "}");
 			String expr = "\\makeatletter \\" + args[1] + "@env";
