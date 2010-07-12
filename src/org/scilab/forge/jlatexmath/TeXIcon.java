@@ -229,6 +229,7 @@ public class TeXIcon implements Icon {
 			    RenderingHints.VALUE_RENDER_QUALITY);
 	g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,
 			    RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+	
 	g2.scale(size, size); // the point size 
 	g2.setColor(c != null ? c.getForeground() : fg); // foreground will be used as default painting color 
 	

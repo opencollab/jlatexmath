@@ -88,11 +88,11 @@ class VerticalBox extends Box {
             depth += b.height + b.depth;
         recalculateWidth(b);
     }
-    
+
     public void draw(Graphics2D g2, float x, float y) {
         float yPos = y - height;
         for (Box b : children) {
-            yPos += b.getHeight();
+	    yPos += b.getHeight();
             b.draw(g2, x + b.getShift() - leftMostPos, yPos);
             yPos += b.getDepth();
         }

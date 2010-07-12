@@ -43,6 +43,8 @@ public class CharBox extends Box {
     private final Font font;
     private final float size;
     
+    private final static char[] arr = new char[1]; 
+
     /**
      * Create a new CharBox that will represent the character defined by the given
      * Char-object.
@@ -59,18 +61,14 @@ public class CharBox extends Box {
     }
     
     public void draw(Graphics2D g2, float x, float y) {
-	// copy
-	Font f = g2.getFont();
 	Font ff = font.deriveFont(1.0f);
         AffineTransform at = g2.getTransform();
         g2.translate(x, y);
         g2.scale(size, size);
         g2.setFont(ff);
-	g2.drawString(Character.toString(cf.c), 0, 0);
-	
-        //restore
-        g2.setTransform(at);
-	g2.setFont(f);
+	arr[0] = cf.c;
+	g2.drawChars(arr, 0, 1, 0, 0);
+	g2.setTransform(at);
     }
     
     public int getLastFontId() {

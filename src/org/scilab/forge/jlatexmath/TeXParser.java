@@ -784,7 +784,7 @@ public class TeXParser {
      * @author Juan Enrique Escobar Robles
      */
     private String getCommandWithArgs(String command) {
-	if(command.equals("left")){
+	if (command.equals("left")){
 	    return getGroup("\\left", "\\right");
 	}
 	

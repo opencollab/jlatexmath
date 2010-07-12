@@ -108,7 +108,7 @@ public class DelimiterFactory {
             // insert repeatable part until tall enough
             c = ext.getRepeat();
             CharBox rep = new CharBox(c);
-            while (vBox.getHeight() + vBox.getDepth() < minHeight) {
+            while (vBox.getHeight() + vBox.getDepth() <= minHeight) {
                 if (ext.hasTop() && ext.hasBottom()) {
                     vBox.add(1, rep);
                     if (middle)
