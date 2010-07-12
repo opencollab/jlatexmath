@@ -31,10 +31,6 @@ package org.scilab.forge.jlatexmath;
 
 import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
-import java.awt.geom.Line2D;
-import java.awt.Stroke;
-import java.awt.BasicStroke;
-import java.awt.geom.AffineTransform;
 import java.awt.Color;
 
 /**
@@ -74,23 +70,11 @@ public class HorizontalRule extends Box {
 	if (color != null)
 	    g2.setColor(color);
 	
-	Stroke st = g2.getStroke();
-	if (height <= width) {
-	    g2.setStroke(new BasicStroke(height, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER));
-	    if (speShift == 0) {
-		g2.draw(new Line2D.Float(x, y - height / 2, x + width, y - height / 2));
-	    } else {
-		g2.draw(new Line2D.Float(x, y - height / 2 + speShift, x + width, y - height / 2 + speShift));
-	    }
+	if (speShift == 0) {
+	    g2.fill(new Rectangle2D.Float(x, y - height, width, height));
 	} else {
-	    g2.setStroke(new BasicStroke(width, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER));
-	    if (speShift == 0) {
-		g2.draw(new Line2D.Float(x + width / 2, y - height, x + width / 2, y));
-	    } else {
-		g2.draw(new Line2D.Float(x + width / 2, y - height + speShift, x + width / 2, y + speShift));
-	    }
+	    g2.fill(new Rectangle2D.Float(x, y - height + speShift, width, height));
 	}
-	g2.setStroke(st);
 	g2.setColor(old);
     }
     
