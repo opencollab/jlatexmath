@@ -68,6 +68,10 @@ public class TeXParser {
     private static final char SUB_SCRIPT = '_';
     private static final char SUPER_SCRIPT = '^';
     private static final char PRIME = '\'';
+    private static final char DEGRE = '\u00B0';
+    private static final char SQUARE = '\u00B2';
+    private static final char CUBE = '\u00B3';
+    private static final char ONE = '\u00B9';
 
     protected static boolean isLoading = false;
     
@@ -210,6 +214,12 @@ public class TeXParser {
 	return arrayMode;
     }
 
+    /** Return a boolean indicating if the parser is used to parse an array or not
+     */
+    public boolean isIgnoreWhiteSpace() {
+	return ignoreWhiteSpace;
+    }
+
     /** Return the current position in the parsed string
      */
     public int getPos() {
@@ -290,6 +300,26 @@ public class TeXParser {
 		    }
 		    parseString.replace(spos, pos, pr + "}");
 		    len = parseString.length();
+		    break;
+		case DEGRE :
+		    parseString.replace(pos, pos + 1, "^\\circ");
+		    len = parseString.length();
+		    pos++;
+		    break;
+		case SQUARE :
+		    parseString.replace(pos, pos + 1, "^2");
+		    len = parseString.length();
+		    pos++;
+		    break;
+		case CUBE :
+		    parseString.replace(pos, pos + 1, "^3");
+		    len = parseString.length();
+		    pos++;
+		    break;
+		case ONE :
+		    parseString.replace(pos, pos + 1, "^1");
+		    len = parseString.length();
+		    pos++;
 		    break;
 		default :
 		    pos++;
@@ -400,7 +430,7 @@ public class TeXParser {
 	if (formula.root instanceof RowAtom) {
 	    at = ((RowAtom)formula.root).getLastAtom();
 	} else if (formula.root == null) {
-	    at = new PhantomAtom(new CharAtom('M', "mathrm"), false, true, true);
+	    at = new PhantomAtom(new CharAtom('M', "mathnormal"), false, true, true);
 	} else {
 	    at = formula.root;
 	    formula.root = null;

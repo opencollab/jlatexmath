@@ -58,3 +58,51 @@ Content-Type: application/x-font
 
 Name: org/scilab/forge/jlatexmath/fonts/maths/jlm_stmary10.ttf
 Content-Type: application/x-font
+
+Name: org/scilab/forge/jlatexmath/cyrillic/fonts/jlm_wnr10.ttf
+Content-Type: application/x-font
+
+Name: org/scilab/forge/jlatexmath/cyrillic/fonts/jlm_wnti10.ttf
+Content-Type: application/x-font
+
+Name: org/scilab/forge/jlatexmath/cyrillic/fonts/jlm_wntt10.ttf
+Content-Type: application/x-font
+
+Name: org/scilab/forge/jlatexmath/cyrillic/fonts/jlm_wnss10.ttf
+Content-Type: application/x-font
+
+Name: org/scilab/forge/jlatexmath/cyrillic/fonts/jlm_wnssbx10.ttf
+Content-Type: application/x-font
+
+Name: org/scilab/forge/jlatexmath/cyrillic/fonts/jlm_wnssi10.ttf
+Content-Type: application/x-font
+
+Name: org/scilab/forge/jlatexmath/cyrillic/fonts/jlm_wnbx10.ttf
+Content-Type: application/x-font
+
+Name: org/scilab/forge/jlatexmath/cyrillic/fonts/jlm_wnbxti10.ttf
+Content-Type: application/x-font
+
+Name: org/scilab/forge/jlatexmath/greek/fonts/jlm_fcmbipg.ttf
+Content-Type: application/x-font
+
+Name: org/scilab/forge/jlatexmath/greek/fonts/jlm_fcmbpg.ttf
+Content-Type: application/x-font
+
+Name: org/scilab/forge/jlatexmath/greek/fonts/jlm_fcmripg.ttf
+Content-Type: application/x-font
+
+Name: org/scilab/forge/jlatexmath/greek/fonts/jlm_fcmrpg.ttf
+Content-Type: application/x-font
+
+Name: org/scilab/forge/jlatexmath/greek/fonts/jlm_fcsbpg.ttf
+Content-Type: application/x-font
+
+Name: org/scilab/forge/jlatexmath/greek/fonts/jlm_fcsropg.ttf
+Content-Type: application/x-font
+
+Name: org/scilab/forge/jlatexmath/greek/fonts/jlm_fcsrpg.ttf
+Content-Type: application/x-font
+
+Name: org/scilab/forge/jlatexmath/greek/fonts/jlm_fctrpg.ttf
+Content-Type: application/x-font
