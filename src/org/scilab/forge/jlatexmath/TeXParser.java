@@ -28,12 +28,10 @@
 
 package org.scilab.forge.jlatexmath;
 
-import java.util.Stack;
 import java.lang.Character.UnicodeBlock;
 
 /** 
  * This class implements a parser for LaTeX' formulas.
- * 
  */
 public class TeXParser {
 
@@ -353,7 +351,7 @@ public class TeXParser {
 			formula.add(new SpaceAtom());
 			while (pos < len) {
 			    ch = parseString.charAt(pos);
-			    if (ch != ' ')
+			    if (ch != ' ' || ch != '\t' || ch != '\r')
 				break;
 			    pos++;
 			}
@@ -863,7 +861,7 @@ public class TeXParser {
 	args[0] = command;
 
 	if (NewCommandMacro.isMacro(command)) {
-	    String ret = (String)mac.invoke(this, args);
+	    String ret = (String) mac.invoke(this, args);
 	    insert(spos, pos, ret);
 	    return null;
 	}

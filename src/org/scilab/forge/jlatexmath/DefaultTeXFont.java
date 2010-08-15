@@ -65,7 +65,7 @@ public class DefaultTeXFont implements TeXFont {
     
     private static Map<String,CharFont[]> textStyleMappings;
     private static Map<String,CharFont> symbolMappings;
-    private static FontInfo[] fontInfo = new FontInfo[0];
+    private static FontInfo[] fontInfo;
     private static Map<String,Float> parameters;
     private static Map<String,Number> generalSettings;
 
