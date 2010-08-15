@@ -70,7 +70,6 @@ public class DefaultTeXFontParser {
     
     private static class ExtensionParser implements CharChildParser {
 	
-	
         ExtensionParser() {
             // avoid generation of access class
         }
@@ -245,17 +244,12 @@ public class DefaultTeXFontParser {
 	try {
 	    it = getAttrValueAndCheckIfNotNull("itVersion", font);
 	} catch (ResourceParseException e) {}
-	// try reading the font
-	Font f;
-	if (base == null) {
-	    f = createFont(name.substring(0, name.lastIndexOf("/") + 1) + fontName);
-	} else {
-	    String path = name.substring(0, name.lastIndexOf("/") + 1) + fontName;
-	    f = createFont(base.getClass().getResourceAsStream(path), fontName);
-	}
+	
+	String path = name.substring(0, name.lastIndexOf("/") + 1) + fontName;
 	
 	// create FontInfo-object
-	FontInfo info = new FontInfo(Font_ID.indexOf(fontId), f, unicode, xHeight, space, quad, bold, roman, ss, tt, it);
+	FontInfo info = new FontInfo(Font_ID.indexOf(fontId), base, path, fontName, unicode, xHeight, space, quad, bold, roman, ss, tt, it);
+	
 	if (skewChar != -1) // attribute set
 	    info.setSkewChar((char) skewChar);
 	
@@ -342,16 +336,16 @@ public class DefaultTeXFontParser {
 		}
 	}
     }
+
+    public static void registerFonts(boolean b) {
+	shouldRegisterFonts = b;
+    }
     
-    private Font createFont(String name) throws ResourceParseException {
+    public static Font createFont(String name) throws ResourceParseException {
 	return createFont(DefaultTeXFontParser.class.getResourceAsStream(name), name);
     }
 
-    public static void registerFonts(boolean b) {
-	shouldRegisterFonts =b;
-    }
-
-    private static Font createFont(InputStream fontIn, String name) throws ResourceParseException {
+    public static Font createFont(InputStream fontIn, String name) throws ResourceParseException {
         try {
             Font f = Font.createFont(Font.TRUETYPE_FONT, fontIn);
 	    GraphicsEnvironment graphicEnv = GraphicsEnvironment.getLocalGraphicsEnvironment();

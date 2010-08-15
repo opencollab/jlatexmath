@@ -93,6 +93,7 @@ for a text style is not defined (e.g. "numbers" and "small" in "mathcal") -->
   <Mapping include="fonts/base/jlm_amssymb.map.xml" />
   <Mapping include="fonts/base/jlm_amsfonts.map.xml" />
   <Mapping include="fonts/maths/jlm_stmaryrd.map.xml" />
+  <Mapping include="fonts/maths/jlm_special.map.xml" />
 </SymbolMappings>
 
 <!-- font descriptions -->
@@ -121,6 +122,7 @@ for a text style is not defined (e.g. "numbers" and "small" in "mathcal") -->
   <Metrics include="fonts/latin/jlm_cmtt10.xml" />
   <Metrics include="fonts/latin/jlm_cmbx10.xml" />
   <Metrics include="fonts/latin/jlm_cmssbx10.xml" />
+  <Metrics include="fonts/maths/jlm_special.xml" />
 </FontDescriptions>
 
 </TeXFont>

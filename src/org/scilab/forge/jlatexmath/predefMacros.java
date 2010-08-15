@@ -90,6 +90,7 @@ public class predefMacros {
 	NewCommandMacro.addNewCommand("textsf", "\\mathsf{\\text{#1}}", 1);
 	NewCommandMacro.addNewCommand("texttt", "\\mathtt{\\text{#1}}", 1);
 	NewCommandMacro.addNewCommand("textrm", "\\text{#1}", 1);
+	NewCommandMacro.addNewCommand("degree", "^\\circ", 0);
     }
 
     public Atom Braket_macro(TeXParser tp, String[] args) throws ParseException {

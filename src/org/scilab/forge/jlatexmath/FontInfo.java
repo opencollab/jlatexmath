@@ -42,6 +42,8 @@ public class FontInfo {
      * Maximum number of character codes in a TeX font.
      */
     public static final int NUMBER_OF_CHAR_CODES = 256;
+
+    private static Map<Integer, FontInfo> fonts = new HashMap();
     
     private class CharCouple {
         
@@ -66,8 +68,11 @@ public class FontInfo {
     private final int fontId;
     
     // font
-    private final Font font;
-    
+    private Font font;
+    private final Object base;
+    private final String path;
+    private final String fontName;
+
     private final Map<CharCouple,Character> lig = new HashMap<CharCouple,Character> ();
     private final Map<CharCouple,Float> kern = new HashMap<CharCouple,Float>();
     private float[][] metrics;
@@ -93,9 +98,11 @@ public class FontInfo {
     protected final String ttVersion;
     protected final String itVersion;
 
-    public FontInfo(int fontId, Font font, int unicode, float xHeight, float space, float quad, String boldVersion, String romanVersion, String ssVersion, String ttVersion, String itVersion) {
+    public FontInfo(int fontId, Object base, String path, String fontName, int unicode, float xHeight, float space, float quad, String boldVersion, String romanVersion, String ssVersion, String ttVersion, String itVersion) {
         this.fontId = fontId;
-        this.font = font;
+	this.base = base;
+	this.path = path;
+	this.fontName = fontName;
         this.xHeight = xHeight;
         this.space = space;
         this.quad = quad;
@@ -112,6 +119,7 @@ public class FontInfo {
 	metrics = new float[num][];
 	nextLarger = new CharFont[num];
 	extensions = new int[num][];
+	fonts.put(fontId, this);
     }
     
     /**
@@ -279,6 +287,18 @@ public class FontInfo {
     }
 
     public Font getFont() {
+	if (font == null) {
+	    if (base == null) {
+		font = DefaultTeXFontParser.createFont(path);
+	    } else {
+		font = DefaultTeXFontParser.createFont(base.getClass().getResourceAsStream(path), fontName);
+	    }
+	}
         return font;
     }
+
+    public static Font getFont(int id) {
+	return fonts.get(id).getFont();
+    }
 }
+

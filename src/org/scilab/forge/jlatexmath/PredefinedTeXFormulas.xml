@@ -1106,6 +1106,20 @@
 		<Return name="f" />
 	</TeXFormula>
 
+	<TeXFormula name="celsius" enabled="true">
+		<CreateTeXFormula name="f">
+			<Argument type="String" value="\mathord{{}^\circ\mathrm{C}}" />
+		</CreateTeXFormula>
+		<Return name="f" />
+	</TeXFormula>
+
+	<TeXFormula name="micro" enabled="true">
+		<CreateTeXFormula name="f">
+			<Argument type="String" value="\textmu" />
+		</CreateTeXFormula>
+		<Return name="f" />
+	</TeXFormula>
+
 <!-- Juan Enrique -->
 
         <TeXFormula name="notin" enabled="true">

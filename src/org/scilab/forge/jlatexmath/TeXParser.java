@@ -110,7 +110,7 @@ public class TeXParser {
     }
 
     /**
-     * Create a new TeXParser in the context of an array. When the parser meet a & a new atom is added in the current line and when a \\ is met, a new line is created.
+     * Create a new TeXParser in the context of an array. When the parser meets a & a new atom is added in the current line and when a \\ is met, a new line is created.
      *
      * @param parseString the string to be parsed
      * @param aoa an ArrayOfAtoms where to put the elements
@@ -653,7 +653,7 @@ public class TeXParser {
      * @throws ParseException if the character is unknown 
      */
     public Atom convertCharacter(char c) throws ParseException {
-        if (!((c >= '0' && c <= '9') || (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))) {
+        if (((c < '0' || c > '9') && (c < 'a' || c > 'z') && (c < 'A' || c > 'Z'))) {
             Character.UnicodeBlock block = Character.UnicodeBlock.of(c);
 	    if (!isLoading && !DefaultTeXFont.loadedAlphabets.contains(block)) {
 		DefaultTeXFont.addAlphabet(DefaultTeXFont.registeredAlphabets.get(block));
@@ -664,8 +664,9 @@ public class TeXParser {
                 throw new ParseException("Unknown character : '"
 					 + Character.toString(c) + "' (or " + ((int) c) + ")");
             else {
-		if (TeXFormula.symbolFormulaMappings != null && TeXFormula.symbolFormulaMappings[c] != null)
+		if (TeXFormula.symbolFormulaMappings != null && TeXFormula.symbolFormulaMappings[c] != null) {
 		    return TeXFormula.symbolFormulaMappings[c];
+		}
 		
 		try {
                     return SymbolAtom.get(symbolName);
@@ -867,7 +868,7 @@ public class TeXParser {
 	    return null;
 	}
 	
-	return (Atom)mac.invoke(this, args);
+	return (Atom) mac.invoke(this, args);
     }
 
     /** Test the validity of the name of a command. It must contains only alpha characters and eventually a @ if makeAtletter activated

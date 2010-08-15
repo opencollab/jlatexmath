@@ -64,7 +64,7 @@ public class DefaultTeXFont implements TeXFont {
     
     
     private static Map<String,CharFont[]> textStyleMappings;
-    private static Map<String,CharFont>  symbolMappings;
+    private static Map<String,CharFont> symbolMappings;
     private static FontInfo[] fontInfo = new FontInfo[0];
     private static Map<String,Float> parameters;
     private static Map<String,Number> generalSettings;
@@ -86,6 +86,8 @@ public class DefaultTeXFont implements TeXFont {
  
     static {
         DefaultTeXFontParser parser = new DefaultTeXFontParser();
+	//load LATIN block 
+	loadedAlphabets.add(Character.UnicodeBlock.of('a'));
         // fonts + font descriptions
         fontInfo = parser.parseFontDescriptions(fontInfo);
 	// general font parameters
@@ -303,7 +305,7 @@ public class DefaultTeXFont implements TeXFont {
 	    cf = new CharFont(cf.c, id, style);
 	}
         Font font = info.getFont();
-        return new Char(cf.c, font.deriveFont(size), id, getMetrics(cf, size));
+        return new Char(cf.c, font, id, getMetrics(cf, size));
     }
     
     public Char getChar(String symbolName, int style)
@@ -327,8 +329,7 @@ public class DefaultTeXFont implements TeXFont {
     }
     
     public float getDefaultRuleThickness(int style) {
-        return getParameter("defaultrulethickness") * getSizeFactor(style)
-        * PIXELS_PER_POINT;
+        return getParameter("defaultrulethickness") * getSizeFactor(style) * PIXELS_PER_POINT;
     }
     
     public float getDenom1(int style) {
@@ -379,8 +380,7 @@ public class DefaultTeXFont implements TeXFont {
     private Metrics getMetrics(CharFont cf, float size) {
 	FontInfo info = fontInfo[cf.fontId];
         float[] m = info.getMetrics(cf.c);
-        return new Metrics(m[WIDTH], m[HEIGHT], m[DEPTH], m[IT], size
-                * PIXELS_PER_POINT);
+        return new Metrics(m[WIDTH], m[HEIGHT], m[DEPTH], m[IT], size * PIXELS_PER_POINT, size);
     }
     
     public int getMuFontId() {
@@ -391,8 +391,7 @@ public class DefaultTeXFont implements TeXFont {
         FontInfo info = fontInfo[c.getFontCode()];
         CharFont ch = info.getNextLarger(c.getChar());
         FontInfo newInfo = fontInfo[ch.fontId];
-        return new Char(ch.c, newInfo.getFont().deriveFont(getSizeFactor(style)),
-                ch.fontId, getMetrics(ch, getSizeFactor(style)));
+        return new Char(ch.c, newInfo.getFont(), ch.fontId, getMetrics(ch, getSizeFactor(style)));
     }
     
     public float getNum1(int style) {
@@ -426,8 +425,7 @@ public class DefaultTeXFont implements TeXFont {
     }
     
     public float getSpace(int style) {
-        int spaceFontId = generalSettings
-                .get(DefaultTeXFontParser.SPACEFONTID_ATTR).intValue();
+        int spaceFontId = generalSettings.get(DefaultTeXFontParser.SPACEFONTID_ATTR).intValue();
         FontInfo info = fontInfo[spaceFontId];
         return info.getSpace(getSizeFactor(style) * PIXELS_PER_POINT);
     }

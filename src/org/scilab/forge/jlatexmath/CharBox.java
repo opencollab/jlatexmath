@@ -39,8 +39,6 @@ import java.awt.geom.AffineTransform;
 public class CharBox extends Box {
 
     private final CharFont cf;
-    
-    private final Font font;
     private final float size;
     
     private final static char[] arr = new char[1]; 
@@ -53,19 +51,22 @@ public class CharBox extends Box {
      */
     public CharBox(Char c) {
 	cf = c.getCharFont();
-	font = c.getFont();
-        size = font.getSize2D();
+	size = c.getMetrics().getSize();
 	width = c.getWidth();
 	height = c.getHeight();
 	depth = c.getDepth();
     }
     
     public void draw(Graphics2D g2, float x, float y) {
-	Font ff = font.deriveFont(1.0f);
-        AffineTransform at = g2.getTransform();
+	AffineTransform at = g2.getTransform();
         g2.translate(x, y);
-        g2.scale(size, size);
-        g2.setFont(ff);
+	Font font = FontInfo.getFont(cf.fontId);        
+        if (size != 1) {
+	    g2.scale(size, size);
+	}
+        if (g2.getFont() != font) {
+	    g2.setFont(font);
+	}
 	arr[0] = cf.c;
 	g2.drawChars(arr, 0, 1, 0, 0);
 	g2.setTransform(at);

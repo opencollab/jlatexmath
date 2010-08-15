@@ -37,11 +37,8 @@ import java.awt.Font;
 public class Char {
 
     private final char c;
-    
     private final Font font;
-    
     private final Metrics m;
-    
     private final int fontCode;
     
     public Char(char c, Font f, int fc, Metrics m) {
