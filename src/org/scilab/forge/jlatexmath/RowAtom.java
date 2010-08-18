@@ -145,8 +145,7 @@ public class RowAtom extends Atom implements Row {
     
     public Box createBox(TeXEnvironment env) {
         TeXFont tf = env.getTeXFont();
-        HorizontalBox hBox = new HorizontalBox(env.getColor(), env
-                .getBackground());
+        HorizontalBox hBox = new HorizontalBox(env.getColor(), env.getBackground());
         env.reset();
         
         // convert atoms to boxes and add to the horizontal box

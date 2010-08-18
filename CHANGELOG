@@ -1,3 +1,5 @@
+        * Fix bug of size with colored box
+
         * Add a map between Unicode (math) and LaTeX symbols
           (e.g. &#8734; => \infty)
 

@@ -66,14 +66,7 @@ public class TeXEnvironment {
     }
 
     private TeXEnvironment(int style, TeXFont tf, Color bg, Color c) {
-        // check if style is valid
-        // if not : DISPLAY = default value
-        if (style == TeXConstants.STYLE_DISPLAY || style == TeXConstants.STYLE_TEXT
-                || style == TeXConstants.STYLE_SCRIPT || style == TeXConstants.STYLE_SCRIPT_SCRIPT)
-            this.style = style;
-        else
-            this.style = TeXConstants.STYLE_DISPLAY;
-        
+        this.style = style;
         this.tf = tf;
         background = bg;
         color = c;
@@ -93,7 +86,6 @@ public class TeXEnvironment {
 
     protected TeXEnvironment copy(TeXFont tf) {
         TeXEnvironment te = new TeXEnvironment(style, tf, background, color);
-	te.style = style;
 	te.textwidth = textwidth;
 	return te;
     }
