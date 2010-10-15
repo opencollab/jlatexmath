@@ -169,8 +169,7 @@ public class TeXIcon implements Icon {
      * Get the total height of the TeXIcon. This also includes the insets.
      */
     public int getIconHeight() {
-	return (int) ((box.getHeight() + box.getDepth()) * size + 0.99
-		      + insets.top + insets.bottom);
+	return ((int) ((box.getHeight()) * size + 0.99 + insets.top)) +  ((int) ((box.getDepth()) * size + 0.99 + insets.bottom));
     }
 
     /**
@@ -234,8 +233,7 @@ public class TeXIcon implements Icon {
 	g2.setColor(c != null ? c.getForeground() : fg); // foreground will be used as default painting color 
 	
 	// draw formula box
-	box.draw(g2, (x + insets.left) / size, (y + insets.top) / size
-		 + box.getHeight());
+	box.draw(g2, (x + insets.left) / size, (y + insets.top) / size+ box.getHeight());
 	
 	// restore graphics settings
 	g2.setRenderingHints(oldHints);
