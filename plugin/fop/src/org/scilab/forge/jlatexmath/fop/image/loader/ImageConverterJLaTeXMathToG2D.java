@@ -1,4 +1,4 @@
-/* JLaTeXMathObj.java
+/* ImageConverterJLaTeXMathToG2D.java
  * =========================================================================
  * This file is part of the JLaTeXMath Library - http://forge.scilab.org/jlatexmath
  *
@@ -27,29 +27,45 @@
  */
 
 /* This file is largely inspired by files wrote by Jeremias Maerki,
- * for the fop plugin of barcode4j available at 
+ * for the fop plugin of barcode4j available at
  * http://barcode4j.sourceforge.net/
  */
 
-package org.scilab.forge.jlatexmath.fop;
+package org.scilab.forge.jlatexmath.fop.image.loader;
 
-import org.apache.fop.fo.FONode;
-import org.apache.fop.fo.XMLObj;
+import java.util.Map;
 
-public class JLaTeXMathObj extends XMLObj {
+import org.scilab.forge.jlatexmath.fop.image.ImageJLaTeXMath;
 
-    public static final String JLATEXMATH_NS = "http://forge.scilab.org/p/jlatexmath";
-    public static final String MIME_TYPE = "image/latex";
+import org.apache.xmlgraphics.image.loader.Image;
+import org.apache.xmlgraphics.image.loader.ImageException;
+import org.apache.xmlgraphics.image.loader.ImageFlavor;
+import org.apache.xmlgraphics.image.loader.impl.AbstractImageConverter;
+import org.apache.xmlgraphics.image.loader.impl.ImageGraphics2D;
 
-    public JLaTeXMathObj(FONode parent) {
-        super(parent);
+/**
+ * Convert a MathML Image given as DOM to a Graphics2d Painter.
+ * @author Calixte DENIZET
+ */
+public class ImageConverterJLaTeXMathToG2D extends AbstractImageConverter {
+
+    /**
+     * Default Constructor.
+     */
+    public ImageConverterJLaTeXMathToG2D() { }
+
+    /** {@inheritDoc} */
+    public Image convert(Image src, Map hints) throws ImageException {
+        return new ImageGraphics2D(src.getInfo(), new Graphics2DImagePainterJLaTeXMath(((ImageJLaTeXMath) src).getIcon()));
     }
-    
-    public String getNamespaceURI() {
-        return JLATEXMATH_NS;
+
+    /** {@inheritDoc} */
+    public ImageFlavor getSourceFlavor() {
+        return ImageJLaTeXMath.FLAVOR;
     }
-    
-    public String getNormalNamespacePrefix() {
-        return "latex";
+
+    /** {@inheritDoc} */
+    public ImageFlavor getTargetFlavor() {
+        return ImageFlavor.GRAPHICS2D;
     }
 }

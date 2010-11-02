@@ -38,6 +38,8 @@ import org.apache.fop.render.Renderer;
 import org.apache.fop.render.RendererContext;
 import org.apache.fop.render.XMLHandler;
 
+import org.scilab.forge.jlatexmath.fop.image.loader.Graphics2DImagePainterJLaTeXMath;
+
 import org.w3c.dom.Document;
 
 /**
@@ -64,7 +66,7 @@ public class JLaTeXMathXMLHandler implements XMLHandler {
     }
     
     public String getMimeType() {
-        return XMLHandler.HANDLE_ALL;
+        return JLaTeXMathObj.MIME_TYPE;
     }
 
     public String getNamespace() {

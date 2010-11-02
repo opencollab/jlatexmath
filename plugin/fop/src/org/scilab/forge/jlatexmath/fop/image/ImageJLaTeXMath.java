@@ -1,4 +1,4 @@
-/* JLaTeXMathObj.java
+/* ImageJLaTeXMath.java
  * =========================================================================
  * This file is part of the JLaTeXMath Library - http://forge.scilab.org/jlatexmath
  *
@@ -31,25 +31,40 @@
  * http://barcode4j.sourceforge.net/
  */
 
-package org.scilab.forge.jlatexmath.fop;
+package org.scilab.forge.jlatexmath.fop.image;
 
-import org.apache.fop.fo.FONode;
-import org.apache.fop.fo.XMLObj;
+import org.scilab.forge.jlatexmath.TeXIcon;
+import org.scilab.forge.jlatexmath.fop.JLaTeXMathObj;
 
-public class JLaTeXMathObj extends XMLObj {
+import org.apache.xmlgraphics.image.loader.Image;
+import org.apache.xmlgraphics.image.loader.ImageFlavor;
+import org.apache.xmlgraphics.image.loader.ImageInfo;
+import org.apache.xmlgraphics.image.loader.impl.AbstractImage;
 
-    public static final String JLATEXMATH_NS = "http://forge.scilab.org/p/jlatexmath";
-    public static final String MIME_TYPE = "image/latex";
+/**
+ * Image implementation
+ * @author Calixte DENIZET
+ */
+public class ImageJLaTeXMath extends AbstractImage {
 
-    public JLaTeXMathObj(FONode parent) {
-        super(parent);
-    }
+    public static final ImageFlavor FLAVOR = new ImageFlavor(JLaTeXMathObj.MIME_TYPE);
     
-    public String getNamespaceURI() {
-        return JLATEXMATH_NS;
+    private TeXIcon icon;
+
+    public ImageJLaTeXMath(ImageInfo info, TeXIcon icon) {
+	super(info);
+	this.icon = icon;
     }
-    
-    public String getNormalNamespacePrefix() {
-        return "latex";
+
+    public TeXIcon getIcon() {
+	return icon;
+    }
+
+    public boolean isCacheable() {
+	return true;
+    }
+
+    public ImageFlavor getFlavor() {
+	return FLAVOR;
     }
 }

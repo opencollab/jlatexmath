@@ -31,12 +31,10 @@
  * http://barcode4j.sourceforge.net/
  */
 
-package org.scilab.forge.jlatexmath.fop;
+package org.scilab.forge.jlatexmath.fop.image.loader;
 
 import org.scilab.forge.jlatexmath.TeXIcon;
-import org.scilab.forge.jlatexmath.TeXConstants;
-import org.scilab.forge.jlatexmath.TeXFormula;
-import org.scilab.forge.jlatexmath.SpaceAtom;
+import org.scilab.forge.jlatexmath.fop.JLaTeXMathElement;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -48,6 +46,9 @@ import java.awt.geom.Rectangle2D;
 
 import org.apache.xmlgraphics.java2d.Graphics2DImagePainter;
 
+/**
+ * @author Calixte DENIZET
+ */
 public class Graphics2DImagePainterJLaTeXMath implements Graphics2DImagePainter {
 
     private Dimension dim;
@@ -59,9 +60,13 @@ public class Graphics2DImagePainterJLaTeXMath implements Graphics2DImagePainter 
         Color fg = new Color(Integer.parseInt(e.getAttribute("fg")));
         icon = JLaTeXMathElement.calculate(doc, size);
 	icon.setForeground(fg);
-
         dim = new Dimension((int) (icon.getTrueIconWidth() * 1000), (int) (icon.getTrueIconHeight() * 1000));
     }
+
+    public Graphics2DImagePainterJLaTeXMath(TeXIcon icon) {
+	this.icon = icon;
+        dim = new Dimension((int) (icon.getTrueIconWidth() * 1000), (int) (icon.getTrueIconHeight() * 1000));
+    }	
 
     public int getDepth() {
         return (int) (icon.getTrueIconDepth() * 1000);
