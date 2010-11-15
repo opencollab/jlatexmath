@@ -1,4 +1,6 @@
 jlatexmath (0.9.4)
+	
+	* JLM is now ready for support FOP 1.0 :)
 
 	* Fix a bug in jlmDynamic where the contents where preprocessed	
 

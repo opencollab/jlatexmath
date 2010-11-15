@@ -61,11 +61,15 @@ public class PreloaderJLaTeXMath extends AbstractImagePreloader {
     
     /** {@inheritDoc} */
     public ImageInfo preloadImage(String uri, Source src, ImageContext context) {
+	Document doc = (Document) ((DOMSource) src).getNode();
+	Element e = doc.getDocumentElement();
+	if (e.getTagName() != "latex") {
+	    return null;
+	}
+	
 	ImageInfo info = new ImageInfo(uri, JLaTeXMathObj.MIME_TYPE);
 	ImageSize size = new ImageSize();
 
-	Document doc = (Document) ((DOMSource) src).getNode();
-	Element e = doc.getDocumentElement();
         float s = Float.parseFloat(e.getAttribute("size"));
         Color fg = new Color(Integer.parseInt(e.getAttribute("fg")));
 	TeXIcon icon = JLaTeXMathElement.calculate(doc, s);

@@ -44,7 +44,7 @@ import org.apache.xmlgraphics.image.loader.impl.AbstractImageConverter;
 import org.apache.xmlgraphics.image.loader.impl.ImageGraphics2D;
 
 /**
- * Convert a MathML Image given as DOM to a Graphics2d Painter.
+ * Convert a LaTeX label to a Graphics2d Painter.
  * @author Calixte DENIZET
  */
 public class ImageConverterJLaTeXMathToG2D extends AbstractImageConverter {

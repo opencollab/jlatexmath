@@ -77,6 +77,7 @@ public class Graphics2DImagePainterJLaTeXMath implements Graphics2DImagePainter 
     }
 
     public void paint(Graphics2D g2d, Rectangle2D rect2d) {
+	g2d.scale(rect2d.getWidth() / dim.width * 1000, rect2d.getHeight() / dim.height * 1000);
 	icon.paintIcon(null, g2d, (int) rect2d.getX(), (int) rect2d.getY());
     }
 }
