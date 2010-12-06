@@ -1,4 +1,8 @@
 jlatexmath (0.9.4)
+
+	* Add a static method TeXFormula.getPartialTeXFormula(String) which
+	  ignores errors and returns a partial TeXFormula (with no errors).
+	  Useful to display LaTeX on typing.
 	
 	* JLM is now ready for support FOP 1.0 :)
 

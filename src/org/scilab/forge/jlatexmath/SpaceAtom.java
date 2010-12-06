@@ -38,7 +38,7 @@ import java.util.HashMap;
  * unit types.
  */
 public class SpaceAtom extends Atom {
-    
+
     private static HashMap units = new HashMap<String, Integer>();
     static {
 	units.put("em", TeXConstants.UNIT_EM);

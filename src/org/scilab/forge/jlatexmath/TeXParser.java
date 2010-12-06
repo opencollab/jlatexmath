@@ -98,7 +98,7 @@ public class TeXParser {
             this.len = parseString.length();
             this.pos = 0;
             if (firstpass)
-                firstpass();
+		firstpass();
         }
         else {
             this.parseString = null;
@@ -395,7 +395,9 @@ public class TeXParser {
                     pos++;
                 }
             }
-        }
+        } else {
+	    formula.add(EmptyAtom.getInstance());
+	}
     }
 
     private Atom getScripts(char f) throws ParseException {
@@ -415,15 +417,11 @@ public class TeXParser {
         if (f == SUB_SCRIPT && s == SUPER_SCRIPT) {
             pos++;
             second = getArgument();
-        }
-
-        if (f == SUPER_SCRIPT && s == SUB_SCRIPT) {
+        } else if (f == SUPER_SCRIPT && s == SUB_SCRIPT) {
             pos++;
             second = first;
             first = getArgument();
-        }
-
-        if (f == SUPER_SCRIPT && s != SUB_SCRIPT) {
+        } else if (f == SUPER_SCRIPT && s != SUB_SCRIPT) {
             second = first;
             first = (Atom)null;
         }
@@ -561,7 +559,12 @@ public class TeXParser {
      */
     public Atom getArgument() throws ParseException {
         skipWhiteSpace();
-        char ch = parseString.charAt(pos);
+        char ch;
+	if (pos < len) {
+	    ch = parseString.charAt(pos);
+	} else {
+	    return EmptyAtom.getInstance();
+	}
         if (ch == L_GROUP) {
             TeXFormula tf = new TeXFormula();
             TeXFormula sformula = this.formula;
@@ -698,7 +701,7 @@ public class TeXParser {
         }
 
         if (ch == '\0')
-            throw new ParseException("An expression cannot be finished by a \\ !");
+            return "";
 
         if (pos == spos)
             pos++;
@@ -710,6 +713,10 @@ public class TeXParser {
     private Atom processEscape() throws ParseException {
         spos = pos;
         String command = getCommand();
+	
+	if (command.length() == 0) {
+	    return EmptyAtom.getInstance();
+	}
 
         SymbolAtom s = null;
         TeXFormula predef = null;
@@ -724,7 +731,7 @@ public class TeXParser {
             try {
                 s = SymbolAtom.get(command);
                 return s;
-            } catch (SymbolNotFoundException e1) {}
+            } catch (SymbolNotFoundException e1) { }
         }
 
         // not a valid command or symbol or predefined TeXFormula found

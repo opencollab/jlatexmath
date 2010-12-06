@@ -177,8 +177,7 @@ public class TeXFormula {
     public TeXFormula(String s, boolean firstpass) throws ParseException {
 	this.textStyle = null;
 	parser = new TeXParser(s, this, firstpass);
-        if (s != null && s.length() != 0)
-            parser.parse();
+        parser.parse();
     }
     
    /*
@@ -188,15 +187,13 @@ public class TeXFormula {
     public TeXFormula(String s, String textStyle) throws ParseException {
         this.textStyle = textStyle;
 	parser = new TeXParser(s, this);
-        if (s != null && s.length() != 0)
-            parser.parse();
+        parser.parse();
     }
 
     public TeXFormula(String s, String textStyle, boolean firstpass, boolean space) throws ParseException {
         this.textStyle = textStyle;
 	parser = new TeXParser(s, this, firstpass, space);
-        if (s != null && s.length() != 0)
-            parser.parse();
+        parser.parse();
     }
     
     /**
@@ -209,6 +206,23 @@ public class TeXFormula {
     public TeXFormula(TeXFormula f) {
         if (f != null)
             addImpl(f);
+    }
+
+    /**
+     * @param a formula
+     * @return a partial TeXFormula containing the valid part of formula
+     */
+    public static TeXFormula getPartialTeXFormula(String formula) {
+	TeXFormula f = new TeXFormula();
+	if (formula == null) {
+	    return f;
+	}
+	TeXParser parser = new TeXParser(formula, f);
+	try {
+	    parser.parse();
+	} catch (Exception e) { }
+
+	return f;
     }
 
     /**
