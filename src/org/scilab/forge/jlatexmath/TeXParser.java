@@ -396,7 +396,7 @@ public class TeXParser {
                 }
             }
         } else {
-	    formula.add(EmptyAtom.getInstance());
+	    formula.add(new EmptyAtom());
 	}
     }
 
@@ -563,7 +563,7 @@ public class TeXParser {
 	if (pos < len) {
 	    ch = parseString.charAt(pos);
 	} else {
-	    return EmptyAtom.getInstance();
+	    return new EmptyAtom();
 	}
         if (ch == L_GROUP) {
             TeXFormula tf = new TeXFormula();
@@ -715,7 +715,7 @@ public class TeXParser {
         String command = getCommand();
 	
 	if (command.length() == 0) {
-	    return EmptyAtom.getInstance();
+	    return new EmptyAtom();
 	}
 
         SymbolAtom s = null;

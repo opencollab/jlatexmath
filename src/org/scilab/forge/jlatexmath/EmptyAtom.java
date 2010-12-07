@@ -33,16 +33,9 @@ package org.scilab.forge.jlatexmath;
  */
 public class EmptyAtom extends Atom {
 
-    private static EmptyAtom at = new EmptyAtom();
-    private static Box box = new StrutBox(0, 0, 0, 0);
-
     public EmptyAtom() { }
  
-    public static Atom getInstance() {
-	return at;
-    }
-   
     public Box createBox(TeXEnvironment env) {
-	return box;
+	return new StrutBox(0, 0, 0, 0);
     } 
 }

@@ -91,23 +91,6 @@ public class RowAtom extends Atom implements Row {
         }
     }
     
-    /**
-     * Only used while parsing MathML. An empty Mrow is not allowed, otherwise
-     * it's possible to create fractions with an empty numerator or denominator.
-     *
-     * @param l
-     *           list of objects of the type Formula
-     * @throws EmptyFormulaException
-     */
-    public RowAtom(List<TeXFormula> l) throws EmptyFormulaException {
-        for (TeXFormula f : l) {
-            if (f.root != null)
-                elements.add(f.root);
-        }
-        if (elements.equals(""))
-            throw new EmptyFormulaException();
-    }
-
     public Atom getLastAtom() {
 	if (elements.size() != 0) {
 	    return elements.removeLast();

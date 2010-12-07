@@ -126,8 +126,7 @@ public class AccentedAtom extends Atom {
         int style = env.getStyle();
         
 	// set base in cramped style
-        Box b = (base == null ? new StrutBox(0, 0, 0, 0) : base.createBox(env
-                .crampStyle()));
+        Box b = (base == null ? new StrutBox(0, 0, 0, 0) : base.createBox(env.crampStyle()));
         
         float u = b.getWidth();
         float s = 0;
