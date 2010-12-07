@@ -480,11 +480,12 @@ public class TeXParser {
                     pos++;
             }
 
-            if (group != 0)
-                // end of string reached, but not processed properly
-                throw new ParseException("Illegal end,  missing '" + close
-                                         + "'!");
-            pos++;
+	    pos++;
+
+            if (group != 0) {
+		return parseString.substring(spos + 1, pos);
+	    }
+
             return parseString.substring(spos + 1, pos - 1);
         } else
             throw new ParseException("missing '" + open + "'!");
