@@ -57,6 +57,7 @@ public class TeXParser {
     private static final char R_GROUP = '}';
     private static final char L_BRACK = '[';
     private static final char R_BRACK = ']';
+    private static final char DOLLAR = '$';
 
     // used as second index in "delimiterNames" table (over or under)
     private static final int OVER_DEL = 0;
@@ -98,7 +99,7 @@ public class TeXParser {
             this.len = parseString.length();
             this.pos = 0;
             if (firstpass)
-		firstpass();
+                firstpass();
         }
         else {
             this.parseString = null;
@@ -361,6 +362,11 @@ public class TeXParser {
                         }
                     }
                     break;
+                case DOLLAR :
+                    if (!ignoreWhiteSpace) {// We are in a mbox
+                        formula.add(new TeXFormula(getDollarGroup(DOLLAR), false).root);
+                    }
+                    break;
                 case ESCAPE :
                     Atom at = processEscape();
                     formula.add(at);
@@ -396,8 +402,8 @@ public class TeXParser {
                 }
             }
         } else {
-	    formula.add(new EmptyAtom());
-	}
+            formula.add(new EmptyAtom());
+        }
     }
 
     private Atom getScripts(char f) throws ParseException {
@@ -454,6 +460,27 @@ public class TeXParser {
     }
 
     /** Get the contents between two delimiters
+     * @param openclose the opening and closing character (such $)
+     * @return the enclosed contents
+     * @throws ParseException if the contents are badly enclosed
+     */
+    public String getDollarGroup(char openclose) throws ParseException {
+        pos++;
+        int spos = pos;
+        char ch;
+
+        do {
+            ch = parseString.charAt(pos++);
+        } while (pos < len && ch != openclose);
+
+        if (ch == openclose) {
+            return parseString.substring(spos, pos - 1);
+        } else {
+            return parseString.substring(spos, pos);
+        }
+    }
+
+    /** Get the contents between two delimiters
      * @param open the opening character
      * @param close the closing character
      * @return the enclosed contents
@@ -480,11 +507,11 @@ public class TeXParser {
                     pos++;
             }
 
-	    pos++;
+            pos++;
 
             if (group != 0) {
-		return parseString.substring(spos + 1, pos);
-	    }
+                return parseString.substring(spos + 1, pos);
+            }
 
             return parseString.substring(spos + 1, pos - 1);
         } else
@@ -561,11 +588,11 @@ public class TeXParser {
     public Atom getArgument() throws ParseException {
         skipWhiteSpace();
         char ch;
-	if (pos < len) {
-	    ch = parseString.charAt(pos);
-	} else {
-	    return new EmptyAtom();
-	}
+        if (pos < len) {
+            ch = parseString.charAt(pos);
+        } else {
+            return new EmptyAtom();
+        }
         if (ch == L_GROUP) {
             TeXFormula tf = new TeXFormula();
             TeXFormula sformula = this.formula;
@@ -714,10 +741,10 @@ public class TeXParser {
     private Atom processEscape() throws ParseException {
         spos = pos;
         String command = getCommand();
-	
-	if (command.length() == 0) {
-	    return new EmptyAtom();
-	}
+
+        if (command.length() == 0) {
+            return new EmptyAtom();
+        }
 
         SymbolAtom s = null;
         TeXFormula predef = null;

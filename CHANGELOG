@@ -1,4 +1,6 @@
 jlatexmath (0.9.4)
+	   
+        * Can use dollar in \text or \mbow to switch into math mode 
 
 	* Add a static method TeXFormula.getPartialTeXFormula(String) which
 	  ignores errors and returns a partial TeXFormula (with no errors).
