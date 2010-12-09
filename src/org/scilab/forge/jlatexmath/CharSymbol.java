@@ -69,7 +69,7 @@ public abstract class CharSymbol extends Atom {
      * by this atom.
      * 
      * @param tf the TeXFont containing all font related information
-     * @return
+     * @return a CharFont
      */
     public abstract CharFont getCharFont(TeXFont tf);
 }
