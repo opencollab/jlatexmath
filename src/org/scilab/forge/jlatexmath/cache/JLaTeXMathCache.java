@@ -59,14 +59,43 @@ public final class JLaTeXMathCache {
      * @param inset the inset to add on the top, bottom, left and right
      * @return an array of length 3 containing width, height and depth
      */
-    public static float[] getCachedTeXFormulaDimensions(String f, int style, int size, int inset) throws ParseException  {
-        CachedTeXFormula cached = new CachedTeXFormula(f, style, size, inset);
+    public static int[] getCachedTeXFormulaDimensions(String f, int style, int size, int inset) throws ParseException  {
+        return getCachedTeXFormulaDimensions(new CachedTeXFormula(f, style, size, inset));
+    }
+
+    /**
+     * @param o an Object to identify the image in the cache
+     * @return an array of length 3 containing width, height and depth
+     */
+    public static int[] getCachedTeXFormulaDimensions(Object o) throws ParseException  {
+        if (o == null || !(o instanceof CachedTeXFormula)) {
+            return new int[]{0, 0, 0};
+        }
+        CachedTeXFormula cached = (CachedTeXFormula) o;
         SoftReference<Image> img = cache.get(cached);
-        if (img == null) {
+        if (img == null || img.get() == null) {
             img = makeImage(cached);
         }
 
-        return new float[]{cached.width, cached.height, cached.depth};
+        return new int[]{cached.width, cached.height, cached.depth};
+    }
+
+    /**
+     * Get a cached formula
+     * @param f a formula
+     * @param style a style like TeXConstants.STYLE_DISPLAY
+     * @param size the size of font
+     * @param inset the inset to add on the top, bottom, left and right
+     * @return the key in the map
+     */
+    public static Object getCachedTeXFormula(String f, int style, int size, int inset) throws ParseException  {
+        CachedTeXFormula cached = new CachedTeXFormula(f, style, size, inset);
+        SoftReference<Image> img = cache.get(cached);
+        if (img == null || img.get() == null) {
+            img = makeImage(cached);
+        }
+
+        return cached;
     }
 
     /**
@@ -84,8 +113,17 @@ public final class JLaTeXMathCache {
      * @param inset the inset to add on the top, bottom, left and right
      */
     public static void removeCachedTeXFormula(String f, int style, int size, int inset) throws ParseException  {
-        CachedTeXFormula cached = new CachedTeXFormula(f, style, size, inset);
-        cache.remove(cached);
+        cache.remove(new CachedTeXFormula(f, style, size, inset));
+    }
+
+    /**
+     * Remove a formula from the cache. Take care, remove the Object o, invalidate it !
+     * @param o an Object to identify the image in the cache
+     */
+    public static void removeCachedTeXFormula(Object o) throws ParseException  {
+        if (o == null || o instanceof CachedTeXFormula) {
+            cache.remove((CachedTeXFormula) o);
+        }
     }
 
     /**
@@ -94,15 +132,30 @@ public final class JLaTeXMathCache {
      * @param style a style like TeXConstants.STYLE_DISPLAY
      * @param size the size of font
      * @param inset the inset to add on the top, bottom, left and right
+     * @return the key in the map
      */
-    public static void paintCachedTeXFormula(String f, int style, int size, int inset, Graphics2D g) throws ParseException  {
-        CachedTeXFormula cached = new CachedTeXFormula(f, style, size, inset);
+    public static Object paintCachedTeXFormula(String f, int style, int size, int inset, Graphics2D g) throws ParseException  {
+        return paintCachedTeXFormula(new CachedTeXFormula(f, style, size, inset), g);
+    }
+
+    /**
+     * Paint a cached formula
+     * @param o an Object to identify the image in the cache
+     * @param g the graphics where to paint the image
+     * @return the key in the map
+     */
+    public static Object paintCachedTeXFormula(Object o, Graphics2D g) throws ParseException  {
+        if (o == null || !(o instanceof CachedTeXFormula)) {
+            return null;
+        }
+        CachedTeXFormula cached = (CachedTeXFormula) o;
         SoftReference<Image> img = cache.get(cached);
-        if (img == null) {
+        if (img == null || img.get() == null) {
             img = makeImage(cached);
         }
-
         g.drawImage(img.get(), identity, null);
+
+        return cached;
     }
 
     /**
@@ -113,10 +166,22 @@ public final class JLaTeXMathCache {
      * @param inset the inset to add on the top, bottom, left and right
      * @return the cached image
      */
-    public static Image getCachedTeXFormula(String f, int style, int size, int inset, Graphics2D g) throws ParseException {
-        CachedTeXFormula cached = new CachedTeXFormula(f, style, size, inset);
+    public static Image getCachedTeXFormulaImage(String f, int style, int size, int inset) throws ParseException {
+        return getCachedTeXFormulaImage(new CachedTeXFormula(f, style, size, inset));
+    }
+
+    /**
+     * Get a cached formula
+     * @param o an Object to identify the image in the cache
+     * @return the cached image
+     */
+    public static Image getCachedTeXFormulaImage(Object o) throws ParseException {
+        if (o == null || !(o instanceof CachedTeXFormula)) {
+            return null;
+        }
+        CachedTeXFormula cached = (CachedTeXFormula) o;
         SoftReference<Image> img = cache.get(cached);
-        if (img == null) {
+        if (img == null || img.get() == null) {
             img = makeImage(cached);
         }
 
@@ -144,9 +209,9 @@ public final class JLaTeXMathCache {
         int style;
         int size;
         int inset;
-        float width;
-        float height;
-        float depth;
+        int width = -1;
+        int height;
+        int depth;
 
         CachedTeXFormula(String f, int style, int size, int inset) {
             this.f = f;
@@ -155,7 +220,7 @@ public final class JLaTeXMathCache {
             this.inset = inset;
         }
 
-        void setDimensions(float width, float height, float depth) {
+        void setDimensions(int width, int height, int depth) {
             this.width = width;
             this.height = height;
             this.depth = depth;
@@ -167,7 +232,20 @@ public final class JLaTeXMathCache {
         public boolean equals(Object o) {
             if (o != null && o instanceof CachedTeXFormula) {
                 CachedTeXFormula c = (CachedTeXFormula) o;
-                return (c.f.equals(f) && c.style == style && c.size == size && c.inset == inset);
+                boolean b = (c.f.equals(f) && c.style == style && c.size == size && c.inset == inset);
+                if (b) {
+                    if (c.width == -1) {
+                        c.width = width;
+                        c.height = height;
+                        c.depth = depth;
+                    } else if (width == -1) {
+                        width = c.width;
+                        height = c.height;
+                        depth = c.depth;
+                    }
+                }
+
+                return b;
             }
 
             return false;
