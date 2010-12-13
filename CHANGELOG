@@ -1,4 +1,6 @@
 jlatexmath (0.9.4)
+
+	* Add a thread-safe cache to cache the images generated from a formula
 	   
         * Can use dollar in \text or \mbow to switch into math mode 
 
