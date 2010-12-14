@@ -33,7 +33,10 @@ import java.awt.Image;
 import java.awt.Insets;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
+import java.lang.ref.ReferenceQueue;
+import java.lang.ref.Reference;
 import java.lang.ref.SoftReference;
+import java.util.Iterator;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -48,9 +51,21 @@ import org.scilab.forge.jlatexmath.TeXIcon;
 public final class JLaTeXMathCache {
 
     private static final AffineTransform identity = new AffineTransform();
-    private static ConcurrentMap<CachedTeXFormula, SoftReference<Image>> cache = new ConcurrentHashMap(128);
+    private static ConcurrentMap<CachedTeXFormula, SoftReference<CachedImage>> cache = new ConcurrentHashMap(128);
+    private static int max = Integer.MAX_VALUE;
+    private static ReferenceQueue queue = new ReferenceQueue();
 
     private JLaTeXMathCache() { }
+
+    /**
+     * Set max size. Take care the cache will be reinitialized
+     * @param max the max size
+     */
+    public static void setMaxCachedObjects(int max) {
+        JLaTeXMathCache.max = Math.max(max, 1);
+        cache.clear();
+        cache = new ConcurrentHashMap(JLaTeXMathCache.max);
+    }
 
     /**
      * @param f a formula
@@ -72,7 +87,7 @@ public final class JLaTeXMathCache {
             return new int[]{0, 0, 0};
         }
         CachedTeXFormula cached = (CachedTeXFormula) o;
-        SoftReference<Image> img = cache.get(cached);
+        SoftReference<CachedImage> img = cache.get(cached);
         if (img == null || img.get() == null) {
             img = makeImage(cached);
         }
@@ -90,7 +105,7 @@ public final class JLaTeXMathCache {
      */
     public static Object getCachedTeXFormula(String f, int style, int size, int inset) throws ParseException  {
         CachedTeXFormula cached = new CachedTeXFormula(f, style, size, inset);
-        SoftReference<Image> img = cache.get(cached);
+        SoftReference<CachedImage> img = cache.get(cached);
         if (img == null || img.get() == null) {
             img = makeImage(cached);
         }
@@ -149,11 +164,11 @@ public final class JLaTeXMathCache {
             return null;
         }
         CachedTeXFormula cached = (CachedTeXFormula) o;
-        SoftReference<Image> img = cache.get(cached);
+        SoftReference<CachedImage> img = cache.get(cached);
         if (img == null || img.get() == null) {
             img = makeImage(cached);
         }
-        g.drawImage(img.get(), identity, null);
+        g.drawImage(img.get().image, identity, null);
 
         return cached;
     }
@@ -180,15 +195,15 @@ public final class JLaTeXMathCache {
             return null;
         }
         CachedTeXFormula cached = (CachedTeXFormula) o;
-        SoftReference<Image> img = cache.get(cached);
+        SoftReference<CachedImage> img = cache.get(cached);
         if (img == null || img.get() == null) {
             img = makeImage(cached);
         }
 
-        return img.get();
+        return img.get().image;
     }
 
-    private static SoftReference<Image> makeImage(CachedTeXFormula cached) throws ParseException {
+    private static SoftReference<CachedImage> makeImage(CachedTeXFormula cached) throws ParseException {
         TeXFormula formula = new TeXFormula(cached.f);
         TeXIcon icon = formula.createTeXIcon(cached.style, cached.size);
         icon.setInsets(new Insets(cached.inset, cached.inset, cached.inset, cached.inset));
@@ -197,10 +212,37 @@ public final class JLaTeXMathCache {
         icon.paintIcon(null, g2, 0, 0);
         g2.dispose();
         cached.setDimensions(icon.getIconWidth(), icon.getIconHeight(), icon.getIconDepth());
-        SoftReference<Image> img = new SoftReference(image);
+        SoftReference<CachedImage> img = new SoftReference(new CachedImage(image, cached), queue);
+
+        if (cache.size() >= max) {
+            Reference soft;
+            while ((soft = queue.poll()) != null) {
+                CachedImage ci = (CachedImage) soft.get();
+                if (ci != null) {
+                    cache.remove(ci.cachedTf);
+                }
+            }
+            Iterator<CachedTeXFormula> iter = cache.keySet().iterator();
+            if (iter.hasNext()) {
+                CachedTeXFormula c = iter.next();
+                cache.get(c).clear();
+                cache.remove(c);
+            }
+        }
         cache.put(cached, img);
 
         return img;
+    }
+
+    private static class CachedImage {
+
+        Image image;
+        CachedTeXFormula cachedTf;
+
+        CachedImage(Image image, CachedTeXFormula cachedTf) {
+            this.image = image;
+            this.cachedTf = cachedTf;
+        }
     }
 
     private static class CachedTeXFormula {
