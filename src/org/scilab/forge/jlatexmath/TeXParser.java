@@ -363,6 +363,7 @@ public class TeXParser {
                     }
                     break;
                 case DOLLAR :
+		    pos++;
                     if (!ignoreWhiteSpace) {// We are in a mbox
                         formula.add(new TeXFormula(getDollarGroup(DOLLAR), false).root);
                     }
@@ -465,7 +466,6 @@ public class TeXParser {
      * @throws ParseException if the contents are badly enclosed
      */
     public String getDollarGroup(char openclose) throws ParseException {
-        pos++;
         int spos = pos;
         char ch;
 
