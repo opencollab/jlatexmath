@@ -611,6 +611,7 @@
 	  <Map char="&#8943;" formula="\cdots"/>
 	  <Map char="&#8666;" formula="\Lleftarrow"/>
 	  <Map char="&#10933;" formula="\precneqq"/>
+	  <Map char="&#8495;" formula="e"/>
 	  <Map char="&#8498;" formula="\Finv"/>
 	  <Map char="&#8890;" formula="\intercal"/>
 	  <Map char="&#8730;" formula="\surd"/>

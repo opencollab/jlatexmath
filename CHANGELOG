@@ -1,5 +1,7 @@
 jlatexmath (0.9.4)
 
+	* HTML entity &#8495; forgotten
+
 	* Fix bug in aligned & alignedat env. (thanks to Graeme Kidd)
 
 	* Add a thread-safe cache to cache the images generated from a formula
