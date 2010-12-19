@@ -48,6 +48,7 @@ public class TeXParser {
     private int atIsLetter = 0;
     private boolean arrayMode = false;
     private boolean ignoreWhiteSpace = true;
+    private boolean isPartial = false;
 
     // the escape character
     private static final char ESCAPE = '\\';
@@ -83,6 +84,20 @@ public class TeXParser {
      */
     public TeXParser(String parseString, TeXFormula formula) {
         this(parseString, formula, true);
+    }
+
+    /**
+     * Create a new TeXParser
+     *
+     * @param isPartial if true certains exceptions are not thrown
+     * @param parseString the string to be parsed
+     * @param formula the formula where to put the atoms
+     * @throws ParseException if the string could not be parsed correctly
+     */
+    public TeXParser(boolean isPartial, String parseString, TeXFormula formula) {
+        this(parseString, formula, false);
+	this.isPartial = isPartial;
+	firstpass();
     }
 
     /**
@@ -267,7 +282,15 @@ public class TeXParser {
                         mac = MacroInfo.Commands.get(com);
                         args = getOptsArgs(mac.nbArgs, mac.hasOptions ? 1 : 0);
                         args[0] = com;
-                        parseString.replace(spos, pos, (String) mac.invoke(this, args));
+                        try {
+			    parseString.replace(spos, pos, (String) mac.invoke(this, args));
+			} catch (ParseException e) {
+			    if (!isPartial) {
+				throw e;
+			    } else {
+				spos += com.length() + 1;
+			    }
+			}
                         len = parseString.length();
                         pos = spos;
                     } else if ("begin".equals(com)) {

@@ -45,8 +45,8 @@ public class NthRoot extends Atom {
     private final Atom root;
     
     public NthRoot(Atom base, Atom root) {
-	this.base = base;
-	this.root = root;
+	this.base = base == null ? new EmptyAtom() : base;
+	this.root = root == null ? new EmptyAtom() : root;
     }
     
     public Box createBox(TeXEnvironment env) {

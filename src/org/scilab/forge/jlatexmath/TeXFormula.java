@@ -217,7 +217,7 @@ public class TeXFormula {
 	if (formula == null) {
 	    return f;
 	}
-	TeXParser parser = new TeXParser(formula, f);
+	TeXParser parser = new TeXParser(true, formula, f);
 	try {
 	    parser.parse();
 	} catch (Exception e) { }
