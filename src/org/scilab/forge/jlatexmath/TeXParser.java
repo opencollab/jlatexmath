@@ -297,17 +297,26 @@ public class TeXParser {
                         args = getOptsArgs(1, 0);
                         mac = MacroInfo.Commands.get(args[1] + "@env");
                         if (mac == null) {
-                            throw new ParseException("Unknown environment: " + args[1] + " at position " + getLine() + ":" + getCol());
-                        }
-                        String[] optarg = getOptsArgs(mac.nbArgs - 1, 0);
-                        String grp = getGroup("\\begin{" + args[1] + "}", "\\end{" + args[1] + "}");
-                        String expr = "\\makeatletter \\" + args[1] + "@env";
-                        for (int i = 1; i <= mac.nbArgs - 1; i++)
-                            expr += "{" + optarg[i] + "}";
-                        expr += "{" + grp  + "}\\makeatother";
-                        parseString.replace(spos, pos, expr);
-                        len = parseString.length();
-                        pos = spos;
+                            if (!isPartial) {
+				throw new ParseException("Unknown environment: " + args[1] + " at position " + getLine() + ":" + getCol());
+			    }
+                        } else {
+			    try {
+				String[] optarg = getOptsArgs(mac.nbArgs - 1, 0);
+				String grp = getGroup("\\begin{" + args[1] + "}", "\\end{" + args[1] + "}");
+				String expr = "\\makeatletter \\" + args[1] + "@env";
+				for (int i = 1; i <= mac.nbArgs - 1; i++)
+				    expr += "{" + optarg[i] + "}";
+				expr += "{" + grp  + "}\\makeatother";
+				parseString.replace(spos, pos, expr);
+				len = parseString.length();
+				pos = spos;
+			    } catch (ParseException e) {
+				if (!isPartial) {
+				    throw e;
+				}
+			    }
+			}
                     } else if ("makeatletter".equals(com))
                         atIsLetter++;
                     else if ("makeatother".equals(com))
