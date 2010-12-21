@@ -60,6 +60,9 @@ public class TeXParser {
     private static final char R_BRACK = ']';
     private static final char DOLLAR = '$';
 
+    // Percent char for comments
+    private static final char PERCENT = '%';
+
     // used as second index in "delimiterNames" table (over or under)
     private static final int OVER_DEL = 0;
     private static final int UNDER_DEL = 1;
@@ -96,8 +99,8 @@ public class TeXParser {
      */
     public TeXParser(boolean isPartial, String parseString, TeXFormula formula) {
         this(parseString, formula, false);
-	this.isPartial = isPartial;
-	firstpass();
+        this.isPartial = isPartial;
+        firstpass();
     }
 
     /**
@@ -283,14 +286,14 @@ public class TeXParser {
                         args = getOptsArgs(mac.nbArgs, mac.hasOptions ? 1 : 0);
                         args[0] = com;
                         try {
-			    parseString.replace(spos, pos, (String) mac.invoke(this, args));
-			} catch (ParseException e) {
-			    if (!isPartial) {
-				throw e;
-			    } else {
-				spos += com.length() + 1;
-			    }
-			}
+                            parseString.replace(spos, pos, (String) mac.invoke(this, args));
+                        } catch (ParseException e) {
+                            if (!isPartial) {
+                                throw e;
+                            } else {
+                                spos += com.length() + 1;
+                            }
+                        }
                         len = parseString.length();
                         pos = spos;
                     } else if ("begin".equals(com)) {
@@ -298,25 +301,25 @@ public class TeXParser {
                         mac = MacroInfo.Commands.get(args[1] + "@env");
                         if (mac == null) {
                             if (!isPartial) {
-				throw new ParseException("Unknown environment: " + args[1] + " at position " + getLine() + ":" + getCol());
-			    }
+                                throw new ParseException("Unknown environment: " + args[1] + " at position " + getLine() + ":" + getCol());
+                            }
                         } else {
-			    try {
-				String[] optarg = getOptsArgs(mac.nbArgs - 1, 0);
-				String grp = getGroup("\\begin{" + args[1] + "}", "\\end{" + args[1] + "}");
-				String expr = "\\makeatletter \\" + args[1] + "@env";
-				for (int i = 1; i <= mac.nbArgs - 1; i++)
-				    expr += "{" + optarg[i] + "}";
-				expr += "{" + grp  + "}\\makeatother";
-				parseString.replace(spos, pos, expr);
-				len = parseString.length();
-				pos = spos;
-			    } catch (ParseException e) {
-				if (!isPartial) {
-				    throw e;
-				}
-			    }
-			}
+                            try {
+                                String[] optarg = getOptsArgs(mac.nbArgs - 1, 0);
+                                String grp = getGroup("\\begin{" + args[1] + "}", "\\end{" + args[1] + "}");
+                                String expr = "\\makeatletter \\" + args[1] + "@env";
+                                for (int i = 1; i <= mac.nbArgs - 1; i++)
+                                    expr += "{" + optarg[i] + "}";
+                                expr += "{" + grp  + "}\\makeatother";
+                                parseString.replace(spos, pos, expr);
+                                len = parseString.length();
+                                pos = spos;
+                            } catch (ParseException e) {
+                                if (!isPartial) {
+                                    throw e;
+                                }
+                            }
+                        }
                     } else if ("makeatletter".equals(com))
                         atIsLetter++;
                     else if ("makeatother".equals(com))
@@ -325,6 +328,22 @@ public class TeXParser {
                         //the argument of jlmDynamic is skipped
                         getOptsArgs(1, 0);
                     }
+                    break;
+                case PERCENT :
+                    spos = pos++;
+                    char chr;
+                    while (pos < len) {
+                        chr = parseString.charAt(pos++);
+                        if (chr == '\r' || chr == '\n') {
+                            break;
+                        }
+                    }
+                    if (pos < len) {
+                        pos--;
+                    }
+                    parseString.replace(spos, pos, "");
+                    len = parseString.length();
+                    pos = spos;
                     break;
                 case PRIME :
                     String pr = "^{";
@@ -395,7 +414,7 @@ public class TeXParser {
                     }
                     break;
                 case DOLLAR :
-		    pos++;
+                    pos++;
                     if (!ignoreWhiteSpace) {// We are in a mbox
                         formula.add(new TeXFormula(getDollarGroup(DOLLAR), false).root);
                     }
@@ -503,6 +522,9 @@ public class TeXParser {
 
         do {
             ch = parseString.charAt(pos++);
+            if (ch == ESCAPE) {
+                pos++;
+            }
         } while (pos < len && ch != openclose);
 
         if (ch == openclose) {

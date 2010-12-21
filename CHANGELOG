@@ -1,5 +1,7 @@
 jlatexmath (0.9.4)
 
+        * The percent for comments was not handled
+
 	* HTML entity &#8495; forgotten
 
 	* Fix bug in aligned & alignedat env. (thanks to Graeme Kidd)
