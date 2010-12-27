@@ -48,6 +48,7 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Insets;
 import java.awt.image.BufferedImage;
+import java.awt.Image;
 import javax.imageio.ImageIO;
 import javax.imageio.stream.FileImageOutputStream;
 
@@ -472,6 +473,33 @@ public class TeXFormula {
     public void createJPEG(int style, float size, String out, Color bg, Color fg) {
         //There is a bug when a BufferedImage has a component alpha so we disabel it 
         createImage("jpeg", style, size, out, bg, fg, false);
+    }
+
+    /**
+     * @param formula the formula
+     * @param style the style
+     * @param size the size
+     * @param transparency, if true the background is transparent
+     * @return the generated image
+     */ 
+    public static Image createBufferedImage(String formula, int style, float size, Color fg, Color bg) throws ParseException {
+	TeXFormula f = new TeXFormula(formula);
+        TeXIcon icon = f.createTeXIcon(style, size);
+        icon.setInsets(new Insets(2, 2, 2, 2));
+        int w = icon.getIconWidth(), h = icon.getIconHeight();
+
+        BufferedImage image = new BufferedImage(w, h, bg == null ? BufferedImage.TYPE_INT_ARGB : BufferedImage.TYPE_INT_RGB);
+        Graphics2D g2 = image.createGraphics();
+        if (bg != null) {
+            g2.setColor(bg);
+	    g2.fillRect(0, 0, w, h);
+        }
+
+	icon.setForeground(fg == null ? Color.BLACK : fg);
+        icon.paintIcon(null, g2, 0, 0);
+	g2.dispose();
+	
+	return image;
     }
 
     public void setDEBUG(boolean b) {

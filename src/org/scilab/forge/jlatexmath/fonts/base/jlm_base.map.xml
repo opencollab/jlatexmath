@@ -21,6 +21,7 @@ Use "surd" instead. -->
 		<SymbolMapping name="jlatexmathampersand" ch="38" fontId="jlm_cmr10"/>
 		<SymbolMapping name="jlatexmatharobase" ch="64" fontId="jlm_cmr10"/>
 		<SymbolMapping name="jlatexmathapos" ch="39" fontId="jlm_cmr10"/>
+		<SymbolMapping name="jlatexmathlapos" ch="96" fontId="jlm_cmr10"/>
 
 		<SymbolMapping name="oe" ch="190" fontId="jlm_cmti10"/>
 		<SymbolMapping name="ae" ch="189" fontId="jlm_cmti10"/>

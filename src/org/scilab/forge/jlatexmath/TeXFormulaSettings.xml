@@ -57,6 +57,7 @@
       	  <Map char="[" symbol="lsqbrack"/>
       	  <Map char="}" symbol="rbrace"/>
 	  <Map char="&apos;" symbol="jlatexmathapos"/>
+	  <Map char="`" symbol="jlatexmathlapos"/>
 	</CharacterToSymbolMappings>
 
 	<CharacterToFormulaMappings>

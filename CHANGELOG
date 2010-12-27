@@ -1,4 +1,6 @@
 jlatexmath (0.9.4)
+   
+        * Add the left quote and reduce slightly the space under for underarrows
 
         * The percent for comments was not handled
 
