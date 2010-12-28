@@ -28,6 +28,7 @@
 
 package org.scilab.forge.jlatexmath;
 
+import java.awt.Color;
 import java.lang.Character.UnicodeBlock;
 
 /**
@@ -106,12 +107,14 @@ public class TeXParser {
     /**
      * Create a new TeXParser with or without a first pass
      *
+     * @param isPartial if true certains exceptions are not thrown
      * @param parseString the string to be parsed
      * @param firstpass a boolean to indicate if the parser must replace the user-defined macros by their content
      * @throws ParseException if the string could not be parsed correctly
      */
-    public TeXParser(String parseString, TeXFormula formula, boolean firstpass) {
+    public TeXParser(boolean isPartial, String parseString, TeXFormula formula, boolean firstpass) {
         this.formula = formula;
+        this.isPartial = isPartial;
         if (parseString != null) {
             this.parseString = new StringBuffer(parseString);
             this.len = parseString.length();
@@ -127,6 +130,31 @@ public class TeXParser {
     }
 
     /**
+     * Create a new TeXParser with or without a first pass
+     *
+     * @param parseString the string to be parsed
+     * @param firstpass a boolean to indicate if the parser must replace the user-defined macros by their content
+     * @throws ParseException if the string could not be parsed correctly
+     */
+    public TeXParser(String parseString, TeXFormula formula, boolean firstpass) {
+        this(false, parseString, formula, firstpass);
+    }
+
+    /**
+     * Create a new TeXParser in the context of an array. When the parser meets a & a new atom is added in the current line and when a \\ is met, a new line is created.
+     *
+     * @param isPartial if true certains exceptions are not thrown
+     * @param parseString the string to be parsed
+     * @param aoa an ArrayOfAtoms where to put the elements
+     * @param firstpass a boolean to indicate if the parser must replace the user-defined macros by their content
+     * @throws ParseException if the string could not be parsed correctly
+     */
+    public TeXParser(boolean isPartial, String parseString, ArrayOfAtoms aoa, boolean firstpass) {
+        this(isPartial, parseString, (TeXFormula)aoa, firstpass);
+        arrayMode = true;
+    }
+
+    /**
      * Create a new TeXParser in the context of an array. When the parser meets a & a new atom is added in the current line and when a \\ is met, a new line is created.
      *
      * @param parseString the string to be parsed
@@ -135,8 +163,21 @@ public class TeXParser {
      * @throws ParseException if the string could not be parsed correctly
      */
     public TeXParser(String parseString, ArrayOfAtoms aoa, boolean firstpass) {
-        this(parseString, (TeXFormula)aoa, firstpass);
-        arrayMode = true;
+        this(false, parseString, (TeXFormula)aoa, firstpass);
+    }
+
+    /**
+     * Create a new TeXParser which ignores or not the white spaces, it's useful for mbox command
+     *
+     * @param isPartial if true certains exceptions are not thrown
+     * @param parseString the string to be parsed
+     * @param firstpass a boolean to indicate if the parser must replace the user-defined macros by their content
+     * @param space a boolean to indicate if the parser must ignore or not the white space
+     * @throws ParseException if the string could not be parsed correctly
+     */
+    public TeXParser(boolean isPartial, String parseString, TeXFormula formula, boolean firstpass, boolean space) {
+        this(isPartial, parseString, formula, firstpass);
+        this.ignoreWhiteSpace = space;
     }
 
     /**
@@ -148,8 +189,7 @@ public class TeXParser {
      * @throws ParseException if the string could not be parsed correctly
      */
     public TeXParser(String parseString, TeXFormula formula, boolean firstpass, boolean space) {
-        this(parseString, formula, firstpass);
-        this.ignoreWhiteSpace = space;
+        this(false, parseString, formula, firstpass);
     }
 
     /**
@@ -169,6 +209,12 @@ public class TeXParser {
         arrayMode = false;
         ignoreWhiteSpace = true;
         firstpass();
+    }
+
+    /** Return true if we get a partial formula
+     */
+    public boolean getIsPartial() {
+        return isPartial;
     }
 
     /** Get the number of the current line
@@ -385,7 +431,7 @@ public class TeXParser {
     }
 
     /** Parse the input string
-     * @throws ParseException if ann error is encountered during parsing
+     * @throws ParseException if an error is encountered during parsing
      */
     public void parse() throws ParseException {
         if (len != 0) {
@@ -416,7 +462,7 @@ public class TeXParser {
                 case DOLLAR :
                     pos++;
                     if (!ignoreWhiteSpace) {// We are in a mbox
-                        formula.add(new TeXFormula(getDollarGroup(DOLLAR), false).root);
+                        formula.add(new TeXFormula(isPartial, getDollarGroup(DOLLAR), false).root);
                     }
                     break;
                 case ESCAPE :
@@ -453,7 +499,9 @@ public class TeXParser {
                     pos++;
                 }
             }
-        } else {
+        }
+
+        if (formula.root == null && !arrayMode) {
             formula.add(new EmptyAtom());
         }
     }
@@ -747,10 +795,14 @@ public class TeXParser {
             }
 
             String symbolName = TeXFormula.symbolMappings[c];
-            if (symbolName == null && (TeXFormula.symbolFormulaMappings == null || TeXFormula.symbolFormulaMappings[c] == null))
-                throw new ParseException("Unknown character : '"
-                                         + Character.toString(c) + "' (or " + ((int) c) + ")");
-            else {
+            if (symbolName == null && (TeXFormula.symbolFormulaMappings == null || TeXFormula.symbolFormulaMappings[c] == null)) {
+                if (!isPartial) {
+                    throw new ParseException("Unknown character : '"
+                                             + Character.toString(c) + "' (or " + ((int) c) + ")");
+                } else {
+                    return new ColorAtom(new RomanAtom(new TeXFormula("\\text{(Unknown char " + ((int) c) + ")}").root), null, Color.RED);
+                }
+            } else {
                 if (TeXFormula.symbolFormulaMappings != null && TeXFormula.symbolFormulaMappings[c] != null) {
                     return TeXFormula.symbolFormulaMappings[c];
                 }
@@ -817,7 +869,11 @@ public class TeXParser {
         }
 
         // not a valid command or symbol or predefined TeXFormula found
-        throw new ParseException("Unknown symbol or command or predefined TeXFormula: '" + command + "'");
+        if (!isPartial) {
+            throw new ParseException("Unknown symbol or command or predefined TeXFormula: '" + command + "'");
+        } else {
+            return new ColorAtom(new RomanAtom(new TeXFormula("\\backslash " + command).root), null, Color.RED);
+        }
     }
 
     private void insert(int beg, int end, String formula) {
@@ -832,7 +888,7 @@ public class TeXParser {
      * @param opts must be 1 if the options are found before the first argument and must be 2 if they must be found before the second argument
      * @return an array containing arguments and at the end the options are put
      */
-    /* Should be ameliorated */
+    /* Should be improved */
     public String[] getOptsArgs(int nbArgs, int opts) {
         //A maximum of 10 options can be passed to a command
         String[] args = new String[nbArgs + 10 + 1];

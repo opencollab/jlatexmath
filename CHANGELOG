@@ -1,4 +1,6 @@
 jlatexmath (0.9.4)
+
+        * Add a preview of an error in partial mode
    
         * Add the left quote and reduce slightly the space under for underarrows
 

@@ -59,10 +59,11 @@ public class MatrixAtom extends Atom {
     private ArrayOfAtoms matrix;
     private int[] position;
     private Map<Integer, VlineAtom> vlines = new HashMap();
-    private boolean isAlign = false;
-    private boolean isAlignat = false;
-    private boolean isFl = false;
+    private boolean isAlign;
+    private boolean isAlignat;
+    private boolean isFl;
     private int type;
+    private boolean isPartial;
 
     private static SpaceAtom align = new SpaceAtom(TeXConstants.MEDMUSKIP);
 
@@ -70,14 +71,24 @@ public class MatrixAtom extends Atom {
      * Creates an empty matrix
      *
      */
-    public MatrixAtom(ArrayOfAtoms array, String options) {
-        this.matrix = array;
+    public MatrixAtom(boolean isPartial, ArrayOfAtoms array, String options) {
+        this.isPartial = isPartial;
+	this.matrix = array;
         this.type = ARRAY;
         parsePositions(new StringBuffer(options));
     }
 
-    public MatrixAtom(ArrayOfAtoms array, int type) {
-        this.matrix = array;
+    /**
+     * Creates an empty matrix
+     *
+     */
+    public MatrixAtom(ArrayOfAtoms array, String options) {
+        this(false, array, options);
+    }
+
+    public MatrixAtom(boolean isPartial, ArrayOfAtoms array, int type) {
+        this.isPartial = isPartial;
+	this.matrix = array;
         this.type = type;
 
         if (type != MATRIX && type != SMALLMATRIX) {
@@ -94,6 +105,10 @@ public class MatrixAtom extends Atom {
                 position[i] = TeXConstants.ALIGN_CENTER;
             }
         }
+    }
+
+    public MatrixAtom(ArrayOfAtoms array, int type) {
+	this(false, array, type);
     }
 
     private void parsePositions(StringBuffer opt) {
@@ -131,7 +146,7 @@ public class MatrixAtom extends Atom {
             case '@' :
                 pos++;
                 tf = new TeXFormula();
-                tp = new TeXParser(opt.substring(pos), tf, false);
+                tp = new TeXParser(isPartial, opt.substring(pos), tf, false);
                 Atom at = tp.getArgument();
                 matrix.col++;
                 for (int j = 0; j < matrix.row; j++) {
@@ -145,7 +160,7 @@ public class MatrixAtom extends Atom {
             case '*' :
                 pos++;
                 tf = new TeXFormula();
-                tp = new TeXParser(opt.substring(pos), tf, false);
+                tp = new TeXParser(isPartial, opt.substring(pos), tf, false);
                 String[] args = tp.getOptsArgs(2, 0);
                 pos += tp.getPos();
                 int nrep =  Integer.parseInt(args[1]);
@@ -167,11 +182,15 @@ public class MatrixAtom extends Atom {
             lposition.add(TeXConstants.ALIGN_CENTER);
         }
 
-        Integer[] tab = lposition.toArray(new Integer[0]);
-        position = new int[tab.length];
-        for (int i = 0; i < tab.length; i++) {
-            position[i] = tab[i];
-        }
+        if (lposition.size() != 0) {
+	    Integer[] tab = lposition.toArray(new Integer[0]);
+	    position = new int[tab.length];
+	    for (int i = 0; i < tab.length; i++) {
+		position[i] = tab[i];
+	    }
+	} else {
+	    position = new int[]{TeXConstants.ALIGN_CENTER};
+	}
     }
 
     public Box[] getColumnSep(TeXEnvironment env, float width) {

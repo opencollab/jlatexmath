@@ -209,6 +209,47 @@ public class TeXFormula {
             addImpl(f);
     }
 
+
+    /**
+     * Creates an empty TeXFormula.
+     *
+     */
+    public TeXFormula(boolean isPartial) {
+	parser = new TeXParser(isPartial, "", this, false);
+    }
+
+    /**
+     * Creates a new TeXFormula by parsing the given string (using a primitive TeX parser).
+     *
+     * @param s the string to be parsed
+     * @throws ParseException if the string could not be parsed correctly
+     */
+    public TeXFormula(boolean isPartial, String s) throws ParseException {
+        this(isPartial, s, null);
+    }
+
+    public TeXFormula(boolean isPartial, String s, boolean firstpass) throws ParseException {
+	this.textStyle = null;
+	parser = new TeXParser(isPartial, s, this, firstpass);
+        parser.parse();
+    }
+    
+   /*
+    * Creates a TeXFormula by parsing the given string in the given text style.
+    * Used when a text style command was found in the parse string.
+    */
+    public TeXFormula(boolean isPartial, String s, String textStyle) throws ParseException {
+        this.textStyle = textStyle;
+	parser = new TeXParser(isPartial, s, this);
+        parser.parse();
+    }
+
+    public TeXFormula(boolean isPartial, String s, String textStyle, boolean firstpass, boolean space) throws ParseException {
+        this.textStyle = textStyle;
+	parser = new TeXParser(isPartial, s, this, firstpass, space);
+        parser.parse();
+    }
+
     /**
      * @param a formula
      * @return a partial TeXFormula containing the valid part of formula
@@ -216,6 +257,7 @@ public class TeXFormula {
     public static TeXFormula getPartialTeXFormula(String formula) {
 	TeXFormula f = new TeXFormula();
 	if (formula == null) {
+	    f.add(new EmptyAtom());
 	    return f;
 	}
 	TeXParser parser = new TeXParser(true, formula, f);
@@ -282,8 +324,12 @@ public class TeXFormula {
     }
     
     public TeXFormula append(String s) throws ParseException {
+	return append(false, s);
+    }
+
+    public TeXFormula append(boolean isPartial, String s) throws ParseException {
 	if (s != null && s.length() != 0) {
-            TeXParser tp = new TeXParser(s, this);
+            TeXParser tp = new TeXParser(isPartial, s, this);
 	    tp.parse();
         }
         return this;
@@ -300,7 +346,7 @@ public class TeXFormula {
         return this;
     }
     
-    private void addImpl (TeXFormula f) {
+    private void addImpl(TeXFormula f) {
         if (f.root != null) {
             // special copy-treatment for Mrow as a root!!
             if (f.root instanceof RowAtom)
@@ -485,6 +531,32 @@ public class TeXFormula {
     public static Image createBufferedImage(String formula, int style, float size, Color fg, Color bg) throws ParseException {
 	TeXFormula f = new TeXFormula(formula);
         TeXIcon icon = f.createTeXIcon(style, size);
+        icon.setInsets(new Insets(2, 2, 2, 2));
+        int w = icon.getIconWidth(), h = icon.getIconHeight();
+
+        BufferedImage image = new BufferedImage(w, h, bg == null ? BufferedImage.TYPE_INT_ARGB : BufferedImage.TYPE_INT_RGB);
+        Graphics2D g2 = image.createGraphics();
+        if (bg != null) {
+            g2.setColor(bg);
+	    g2.fillRect(0, 0, w, h);
+        }
+
+	icon.setForeground(fg == null ? Color.BLACK : fg);
+        icon.paintIcon(null, g2, 0, 0);
+	g2.dispose();
+	
+	return image;
+    }
+
+    /**
+     * @param formula the formula
+     * @param style the style
+     * @param size the size
+     * @param transparency, if true the background is transparent
+     * @return the generated image
+     */ 
+    public Image createBufferedImage(int style, float size, Color fg, Color bg) throws ParseException {
+	TeXIcon icon = createTeXIcon(style, size);
         icon.setInsets(new Insets(2, 2, 2, 2));
         int w = icon.getIconWidth(), h = icon.getIconHeight();
 
