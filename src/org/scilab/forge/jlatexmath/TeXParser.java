@@ -788,6 +788,7 @@ public class TeXParser {
      * @throws ParseException if the character is unknown
      */
     public Atom convertCharacter(char c) throws ParseException {
+        c = convertToRomanNumber(c);
         if (((c < '0' || c > '9') && (c < 'a' || c > 'z') && (c < 'A' || c > 'Z'))) {
             Character.UnicodeBlock block = Character.UnicodeBlock.of(c);
             if (!isLoading && !DefaultTeXFont.loadedAlphabets.contains(block)) {
@@ -1049,5 +1050,56 @@ public class TeXParser {
             }
             pos++;
         }
+    }
+
+    /**
+     * The aim of this method is to convert foreign number into roman ones !
+     */
+    private static char convertToRomanNumber(char c) {
+        if (c == 0x66b) {//Arabic dot
+            return '.';
+        } else if (0x660 <= c && c <= 0x669) {//Arabic
+            return (char) (c - (char) 0x630);
+        } else if (0x6f0 <= c && c <= 0x6f9) {//Arabic
+            return (char) (c - (char) 0x6c0);
+        } else if (0x966 <= c && c <= 0x96f) {//Devanagari
+            return (char) (c - (char) 0x936);
+        } else if (0x9e6 <= c && c <= 0x9ef) {//Bengali
+            return (char) (c - (char) 0x9b6);
+        } else if (0xa66 <= c && c <= 0xa6f) {//Gurmukhi
+            return (char) (c - (char) 0xa36);
+        } else if (0xae6 <= c && c <= 0xaef) {//Gujarati
+            return (char) (c - (char) 0xab6);
+        } else if (0xb66 <= c && c <= 0xb6f) {//Oriya
+            return (char) (c - (char) 0xb36);
+        } else if (0xc66 <= c && c <= 0xc6f) {//Telugu
+            return (char) (c - (char) 0xc36);
+        } else if (0xd66 <= c && c <= 0xd6f) {//Malayalam
+            return (char) (c - (char) 0xd36);
+        } else if (0xe50 <= c && c <= 0xe59) {//Thai
+            return (char) (c - (char) 0xe20);
+        } else if (0xed0 <= c && c <= 0xed9) {//Lao
+            return (char) (c - (char) 0xea0);
+        } else if (0xf20 <= c && c <= 0xf29) {//Tibetan
+            return (char) (c - (char) 0xe90);
+        } else if (0x1040 <= c && c <= 0x1049) {//Myanmar
+            return (char) (c - (char) 0x1010);
+        } else if (0x17e0 <= c && c <= 0x17e9) {//Khmer
+            return (char) (c - (char) 0x17b0);
+        } else if (0x1810 <= c && c <= 0x1819) {//Mongolian
+            return (char) (c - (char) 0x17e0);
+        } else if (0x1b50 <= c && c <= 0x1b59) {//Balinese
+            return (char) (c - (char) 0x1b20);
+        } else if (0x1bb0 <= c && c <= 0x1bb9) {//Sundanese
+            return (char) (c - (char) 0x1b80);
+        } else if (0x1c40 <= c && c <= 0x1c49) {//Lepcha
+            return (char) (c - (char) 0x1c10);
+        } else if (0x1c50 <= c && c <= 0x1c59) {//Ol Chiki
+            return (char) (c - (char) 0x1c20);
+        } else if (0xa8d0 <= c && c <= 0xa8d9) {//Saurashtra
+            return (char) (c - (char) 0xa8a0);
+        }
+
+        return c;
     }
 }
