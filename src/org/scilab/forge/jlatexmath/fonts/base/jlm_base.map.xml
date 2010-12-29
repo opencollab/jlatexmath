@@ -224,8 +224,8 @@ Use "surd" instead. -->
 		<SymbolMapping name="triangleright" ch="46" fontId="jlm_cmmi10_unchanged"/>
 		<SymbolMapping name="wr" ch="111" fontId="jlm_cmsy10"/>
 		<SymbolMapping name="bigcirc" ch="176" fontId="jlm_cmsy10"/>
-		<SymbolMapping name="bigtriangleup" ch="52" fontId="jlm_cmsy10"/>
-		<SymbolMapping name="bigtriangledown" ch="53" fontId="jlm_cmsy10"/>
+		<!--SymbolMapping name="bigtriangleup" ch="52" fontId="jlm_cmsy10"/>
+		<SymbolMapping name="bigtriangledown" ch="53" fontId="jlm_cmsy10"/-->
 		<SymbolMapping name="vee" ch="95" fontId="jlm_cmsy10"/>
 		<SymbolMapping name="lor" ch="95" fontId="jlm_cmsy10"/>
 		<SymbolMapping name="wedge" ch="94" fontId="jlm_cmsy10"/>

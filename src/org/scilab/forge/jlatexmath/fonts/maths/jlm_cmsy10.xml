@@ -60,8 +60,12 @@
    <Char code="49" width="1.000003" height="0.430555" />
    <Char code="50" width="0.666669" height="0.539098" depth="0.039098" />
    <Char code="51" width="0.666669" height="0.539098" depth="0.039098" />
-   <Char code="52" width="0.888891" height="0.694445" depth="0.194445" />
-   <Char code="53" width="0.888891" height="0.694445" depth="0.194445" />
+   <Char code="52" width="0.888891" height="0.694445" depth="0.194445" >
+     <NextLarger fontId="jlm_stmary10" code="129"/>
+   </Char>
+   <Char code="53" width="0.888891" height="0.694445" depth="0.194445" >
+     <NextLarger fontId="jlm_stmary10" code="128"/>
+   </Char>
    <Char code="54" width="0.0" height="0.694445" depth="0.194443" />
    <Char code="55" width="0.0" height="0.366875" depth="-0.133125" />
    <Char code="56" width="0.555557" height="0.694445" />

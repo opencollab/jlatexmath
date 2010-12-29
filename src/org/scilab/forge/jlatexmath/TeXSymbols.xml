@@ -580,8 +580,6 @@
   <Symbol name="triangleright" type="bin"/>  
   <Symbol name="wr" type="bin"/>  
   <Symbol name="bigcirc" type="bin"/>  
-  <Symbol name="bigtriangleup" type="bin"/>  
-  <Symbol name="bigtriangledown" type="bin"/>  
   <Symbol name="vee" type="bin"/>  
   <Symbol name="lor" type="bin"/>  
   <Symbol name="land" type="bin"/>  
