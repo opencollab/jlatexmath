@@ -337,6 +337,8 @@
 	  <Map char="&#8898;" formula="\bigcap"/>
 	  <Map char="&#9827;" formula="\clubsuit"/>
 	  <Map char="&#8835;" formula="\supset"/>
+	  <Map char="&#8836;" formula="\not\subset"/>
+	  <Map char="&#8837;" formula="\not\supset"/>
 	  <Map char="&#8856;" formula="\oslash"/>
 	  <Map char="&#8756;" formula="\therefore"/>
 	  <Map char="&#10936;" formula="\succapprox"/>
@@ -405,6 +407,7 @@
 	  <Map char="&#8639;" formula="\upharpoonleft"/>
 	  <Map char="&#8865;" formula="\boxdot"/>
 	  <Map char="&#8841;" formula="\nsupseteq"/>
+	  <Map char="&#8712;" formula="\in"/>
 	  <Map char="&#8713;" formula="\notin"/>
 	  <Map char="&#8905;" formula="\ltimes"/>
 	  <Map char="&#8827;" formula="\succ"/>
@@ -555,7 +558,6 @@
 	  <Map char="&#10955;" formula="\varsubsetneqq"/>
 	  <Map char="&#8739;" formula="\vert"/>
 	  <Map char="&#8831;" formula="\succsim"/>
-	  <Map char="&#8747;" formula="\smallint"/>
 	  <Map char="&#8657;" formula="\Uparrow"/>
 	  <Map char="&#8806;" formula="\nleqq"/>
 	  <Map char="&#8487;" formula="\mho"/>
@@ -563,6 +565,7 @@
 	  <Map char="&#8620;" formula="\looparrowright"/>
 	  <Map char="&#8640;" formula="\rightharpoonup"/>
 	  <Map char="&#8801;" formula="\equiv"/>
+	  <Map char="&#8802;" formula="\not\equiv"/>
 	  <Map char="&#8610;" formula="\leftarrowtail"/>
 	  <Map char="&#8882;" formula="\lhd"/>
 	  <Map char="&#9733;" formula="\bigstar"/>
@@ -656,7 +659,6 @@
 	  <Map char="&#0776;" formula="\ddot"/> 
 	  <Map char="&#0779;" formula="\doubleacute"/>
 	  <Map char="&#0771;" formula="\tilde"/>
-  	  <Map char="&#0730;" formula="\mathring"/>
 	  <Map char="&#0730;" formula="\jlatexmathring"/>
 	  <Map char="&#0772;" formula="\bar"/>  
 	  <Map char="&#0774;" formula="\breve"/> 
@@ -667,6 +669,13 @@
 	  <Map char="&#0770;" formula="\widehat"/>  
 	  <Map char="&#0771;" formula="\widetilde"/>
 	  <Map char="&#8799;" formula="\stackrel{?}{=}"/>
+	  <Map char="&#8450;" formula="\mathbb{C}"/>
+	  <Map char="&#8461;" formula="\mathbb{H}"/>
+	  <Map char="&#8469;" formula="\mathbb{N}"/>
+	  <Map char="&#8473;" formula="\mathbb{P}"/>
+	  <Map char="&#8474;" formula="\mathbb{Q}"/>
+	  <Map char="&#8477;" formula="\mathbb{R}"/>
+	  <Map char="&#8484;" formula="\mathbb{Z}"/>
 	</CharacterToFormulaMappings>
 
 </FormulaSettings>

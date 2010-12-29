@@ -1,5 +1,12 @@
 jlatexmath (0.9.4)
 
+	* Add support for few Unicode characters.
+
+        * Fix a bug of cyclic referency between atoms coming from Unicode
+	  mapping.
+
+	* Convert foreign numbers into roman ones
+
         * Add a preview of an error in partial mode
    
         * Add the left quote and reduce slightly the space under for underarrows

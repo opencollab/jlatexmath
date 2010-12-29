@@ -73,9 +73,37 @@ public class TeXParser {
     private static final char SUPER_SCRIPT = '^';
     private static final char PRIME = '\'';
     private static final char DEGRE = '\u00B0';
-    private static final char SQUARE = '\u00B2';
-    private static final char CUBE = '\u00B3';
-    private static final char ONE = '\u00B9';
+    private static final char SUPZERO = '\u2070';
+    private static final char SUPONE = '\u00B9';
+    private static final char SUPTWO = '\u00B2';
+    private static final char SUPTHREE = '\u00B3';
+    private static final char SUPFOUR = '\u2074';
+    private static final char SUPFIVE = '\u2075';
+    private static final char SUPSIX = '\u2076';
+    private static final char SUPSEVEN = '\u2077';
+    private static final char SUPEIGHT = '\u2078';
+    private static final char SUPNINE = '\u2079';
+    private static final char SUPPLUS = '\u207A';
+    private static final char SUPMINUS = '\u207B';
+    private static final char SUPEQUAL = '\u207C';
+    private static final char SUPLPAR = '\u207D';
+    private static final char SUPRPAR = '\u207E';
+    private static final char SUPN = '\u207F';
+    private static final char SUBZERO = '\u2080';
+    private static final char SUBONE = '\u2081';
+    private static final char SUBTWO = '\u2082';
+    private static final char SUBTHREE = '\u2083';
+    private static final char SUBFOUR = '\u2084';
+    private static final char SUBFIVE = '\u2085';
+    private static final char SUBSIX = '\u2086';
+    private static final char SUBSEVEN = '\u2087';
+    private static final char SUBEIGHT = '\u2088';
+    private static final char SUBNINE = '\u2089';
+    private static final char SUBPLUS = '\u208A';
+    private static final char SUBMINUS = '\u208B';
+    private static final char SUBEQUAL = '\u208C';
+    private static final char SUBLPAR = '\u208D';
+    private static final char SUBRPAR = '\u208E';
 
     protected static boolean isLoading = false;
 
@@ -406,18 +434,158 @@ public class TeXParser {
                     len = parseString.length();
                     pos++;
                     break;
-                case SQUARE :
-                    parseString.replace(pos, pos + 1, "^2");
+                case SUPTWO :
+                    parseString.replace(pos, pos + 1, "\\jlatexmathcumsup{2}");
                     len = parseString.length();
                     pos++;
                     break;
-                case CUBE :
-                    parseString.replace(pos, pos + 1, "^3");
+                case SUPTHREE :
+                    parseString.replace(pos, pos + 1, "\\jlatexmathcumsup{3}");
                     len = parseString.length();
                     pos++;
                     break;
-                case ONE :
-                    parseString.replace(pos, pos + 1, "^1");
+                case SUPONE :
+                    parseString.replace(pos, pos + 1, "\\jlatexmathcumsup{1}");
+                    len = parseString.length();
+                    pos++;
+                    break;
+		case SUPZERO :
+                    parseString.replace(pos, pos + 1, "\\jlatexmathcumsup{0}");
+                    len = parseString.length();
+                    pos++;
+                    break;
+		case SUPFOUR :
+                    parseString.replace(pos, pos + 1, "\\jlatexmathcumsup{4}");
+                    len = parseString.length();
+                    pos++;
+                    break;
+		case SUPFIVE :
+                    parseString.replace(pos, pos + 1, "\\jlatexmathcumsup{5}");
+                    len = parseString.length();
+                    pos++;
+                    break;
+		case SUPSIX :
+                    parseString.replace(pos, pos + 1, "\\jlatexmathcumsup{6}");
+                    len = parseString.length();
+                    pos++;
+                    break;
+		case SUPSEVEN :
+                    parseString.replace(pos, pos + 1, "\\jlatexmathcumsup{7}");
+                    len = parseString.length();
+                    pos++;
+                    break;
+		case SUPEIGHT :
+                    parseString.replace(pos, pos + 1, "\\jlatexmathcumsup{8}");
+                    len = parseString.length();
+                    pos++;
+                    break;
+		case SUPNINE :
+                    parseString.replace(pos, pos + 1, "\\jlatexmathcumsup{9}");
+                    len = parseString.length();
+                    pos++;
+                    break;
+                case SUPPLUS :
+                    parseString.replace(pos, pos + 1, "\\jlatexmathcumsup{+}");
+                    len = parseString.length();
+                    pos++;
+                    break;
+                case SUPMINUS :
+                    parseString.replace(pos, pos + 1, "\\jlatexmathcumsup{-}");
+                    len = parseString.length();
+                    pos++;
+                    break;
+                case SUPEQUAL :
+                    parseString.replace(pos, pos + 1, "\\jlatexmathcumsup{=}");
+                    len = parseString.length();
+                    pos++;
+                    break;
+		case SUPLPAR :
+                    parseString.replace(pos, pos + 1, "\\jlatexmathcumsup{(}");
+                    len = parseString.length();
+                    pos++;
+                    break;
+                case SUPRPAR :
+                    parseString.replace(pos, pos + 1, "\\jlatexmathcumsup{)}");
+                    len = parseString.length();
+                    pos++;
+                    break;
+                case SUPN :
+                    parseString.replace(pos, pos + 1, "\\jlatexmathcumsup{n}");
+                    len = parseString.length();
+                    pos++;
+                    break;
+                case SUBTWO :
+                    parseString.replace(pos, pos + 1, "\\jlatexmathcumsub{2}");
+                    len = parseString.length();
+                    pos++;
+                    break;
+                case SUBTHREE :
+                    parseString.replace(pos, pos + 1, "\\jlatexmathcumsub{3}");
+                    len = parseString.length();
+                    pos++;
+                    break;
+                case SUBONE :
+                    parseString.replace(pos, pos + 1, "\\jlatexmathcumsub{1}");
+                    len = parseString.length();
+                    pos++;
+                    break;
+		case SUBZERO :
+                    parseString.replace(pos, pos + 1, "\\jlatexmathcumsub{0}");
+                    len = parseString.length();
+                    pos++;
+                    break;
+		case SUBFOUR :
+                    parseString.replace(pos, pos + 1, "\\jlatexmathcumsub{4}");
+                    len = parseString.length();
+                    pos++;
+                    break;
+		case SUBFIVE :
+                    parseString.replace(pos, pos + 1, "\\jlatexmathcumsub{5}");
+                    len = parseString.length();
+                    pos++;
+                    break;
+		case SUBSIX :
+                    parseString.replace(pos, pos + 1, "\\jlatexmathcumsub{6}");
+                    len = parseString.length();
+                    pos++;
+                    break;
+		case SUBSEVEN :
+                    parseString.replace(pos, pos + 1, "\\jlatexmathcumsub{7}");
+                    len = parseString.length();
+                    pos++;
+                    break;
+		case SUBEIGHT :
+                    parseString.replace(pos, pos + 1, "\\jlatexmathcumsub{8}");
+                    len = parseString.length();
+                    pos++;
+                    break;
+		case SUBNINE :
+                    parseString.replace(pos, pos + 1, "\\jlatexmathcumsub{9}");
+                    len = parseString.length();
+                    pos++;
+                    break;
+                case SUBPLUS :
+                    parseString.replace(pos, pos + 1, "\\jlatexmathcumsub{+}");
+                    len = parseString.length();
+                    pos++;
+                    break;
+                case SUBMINUS :
+                    parseString.replace(pos, pos + 1, "\\jlatexmathcumsub{-}");
+                    len = parseString.length();
+                    pos++;
+                    break;
+                case SUBEQUAL :
+                    parseString.replace(pos, pos + 1, "\\jlatexmathcumsub{=}");
+                    len = parseString.length();
+                    pos++;
+                    break;
+                case SUBLPAR :
+                    parseString.replace(pos, pos + 1, "\\jlatexmathcumsub{(}");
+                    len = parseString.length();
+                    pos++;
+                    break;
+                case SUBRPAR :
+                    parseString.replace(pos, pos + 1, "\\jlatexmathcumsub{)}");
                     len = parseString.length();
                     pos++;
                     break;
@@ -805,7 +973,7 @@ public class TeXParser {
                 }
             } else {
                 if (TeXFormula.symbolFormulaMappings != null && TeXFormula.symbolFormulaMappings[c] != null) {
-                    return TeXFormula.symbolFormulaMappings[c];
+                    return new TeXFormula(TeXFormula.symbolFormulaMappings[c]).root;
                 }
 
                 try {

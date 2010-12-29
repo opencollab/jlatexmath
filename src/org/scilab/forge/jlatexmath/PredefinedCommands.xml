@@ -1797,4 +1797,22 @@
 		</CreateCommand>
 		<Return name="f" />
 	</Command>
+
+	<Command name="jlatexmathcumsup" enabled="true">
+		<CreateCommand name="f">
+			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+			<Argument type="String" value="jlatexmathcumsup_macro" />
+			<Argument type="float" value="1" />
+		</CreateCommand>
+		<Return name="f" />
+	</Command>
+
+	<Command name="jlatexmathcumsub" enabled="true">
+		<CreateCommand name="f">
+			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+			<Argument type="String" value="jlatexmathcumsub_macro" />
+			<Argument type="float" value="1" />
+		</CreateCommand>
+		<Return name="f" />
+	</Command>
 </PredefinedCommands>

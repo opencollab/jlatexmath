@@ -424,7 +424,7 @@
 		</CreateTeXFormula>
 		<Return name="f" />
 	</TeXFormula>
-	
+
 	<TeXFormula name="iint" enabled="true">
 		<CreateTeXFormula name="f">
 			<Argument type="String" value="\int" />

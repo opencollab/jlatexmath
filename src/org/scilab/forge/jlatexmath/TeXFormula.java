@@ -107,7 +107,7 @@ public class TeXFormula {
     
     // character-to-symbol and character-to-delimiter mappings
     public static String[] symbolMappings;
-    public static Atom[] symbolFormulaMappings;
+    public static String[] symbolFormulaMappings;
     public List<MiddleAtom> middle = new LinkedList();
     
     private TeXParser parser;

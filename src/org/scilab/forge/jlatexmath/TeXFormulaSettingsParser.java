@@ -63,14 +63,14 @@ public class TeXFormulaSettingsParser {
         }
     }
 
-    public void parseSymbolToFormulaMappings(Atom[] mappings) throws ResourceParseException {
+    public void parseSymbolToFormulaMappings(String[] mappings) throws ResourceParseException {
         Element charToSymbol = (Element)root.getElementsByTagName("CharacterToFormulaMappings").item(0);
         if (charToSymbol != null) // element present
             addFormulaToMap(charToSymbol.getElementsByTagName("Map"), mappings);
     }
 
-    public Atom[] parseSymbolToFormulaMappings() throws ResourceParseException {
-        Atom[] mappings = new Atom[65536];
+    public String[] parseSymbolToFormulaMappings() throws ResourceParseException {
+        String[] mappings = new String[65536];
 	parseSymbolToFormulaMappings(mappings);
         return mappings;
     }
@@ -118,7 +118,7 @@ public class TeXFormulaSettingsParser {
         }
     }
 
-    private static void addFormulaToMap(NodeList mapList, Atom[] table) throws ResourceParseException {
+    private static void addFormulaToMap(NodeList mapList, String[] table) throws ResourceParseException {
         for (int i = 0; i < mapList.getLength(); i++) {
             Element map = (Element)mapList.item(i);
             String ch = map.getAttribute("char");
@@ -131,7 +131,7 @@ public class TeXFormulaSettingsParser {
                 throw new XMLResourceParseException(RESOURCE_NAME, map.getTagName(),
                         "formula", null);
             if (ch.length() == 1) {// valid element found
-		table[ch.charAt(0)] = new TeXFormula(formula).root;
+		table[ch.charAt(0)] = formula;
 	    }
             else
                 // only single-character mappings allowed, ignore others

@@ -175,7 +175,7 @@ Use "surd" instead. -->
 		<SymbolMapping name="clubsuit" ch="124" fontId="jlm_cmsy10"/>
 		<SymbolMapping name="diamondsuit" ch="125" fontId="jlm_cmsy10"/>
 		<SymbolMapping name="heartsuit" ch="126" fontId="jlm_cmsy10"/>
-		<SymbolMapping name="spadesuit" ch="127" fontId="jlm_cmsy10"/>
+		<SymbolMapping name="spadesuit" ch="196" fontId="jlm_cmsy10"/>
 		<SymbolMapping name="lacc" ch="102" fontId="jlm_cmsy10"/>  
 		<SymbolMapping name="racc" ch="103" fontId="jlm_cmsy10"/> 
 		<SymbolMapping name="Relbar" ch="61" fontId="jlm_cmr10"/> 

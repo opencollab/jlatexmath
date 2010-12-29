@@ -1086,8 +1086,7 @@ public class predefMacros {
 	return new FBoxAtom(new TeXFormula(tp.getIsPartial(), args[2]).root, c, c);
     }
 
-    public Atom fcolorbox_macro(TeXParser tp, String[] args) throws ParseException {
-	
+    public Atom fcolorbox_macro(TeXParser tp, String[] args) throws ParseException {	
 	return new FBoxAtom(new TeXFormula(tp.getIsPartial(), args[3]).root, ColorAtom.Colors.get(args[2]), ColorAtom.Colors.get(args[1]));
     }
     
@@ -1152,5 +1151,13 @@ public class predefMacros {
 	}
 
 	return new ScaleAtom(new TeXFormula(tp.getIsPartial(), tp.getOverArgument(), false).root, f, f);
+    }
+
+    public Atom jlatexmathcumsup_macro(TeXParser tp, String[] args) throws ParseException {	
+	return new CumulativeScriptsAtom(tp.getFormulaAtom(), null, new TeXFormula(tp.getIsPartial(), args[1]).root);
+    }
+
+    public Atom jlatexmathcumsub_macro(TeXParser tp, String[] args) throws ParseException {	
+	return new CumulativeScriptsAtom(tp.getFormulaAtom(), new TeXFormula(tp.getIsPartial(), args[1]).root, null);
     }
 }
