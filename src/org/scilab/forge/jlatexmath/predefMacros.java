@@ -520,6 +520,10 @@ public class predefMacros {
 	return at;
     }
     
+    public Atom mathpunct_macro(TeXParser tp, String[] args) throws ParseException {
+	return new TypedAtom(TeXConstants.TYPE_PUNCTUATION, TeXConstants.TYPE_PUNCTUATION, new TeXFormula(tp.getIsPartial(), args[1], false).root);
+    }
+
     public Atom mathord_macro(TeXParser tp, String[] args) throws ParseException {
 	return new TypedAtom(TeXConstants.TYPE_ORDINARY, TeXConstants.TYPE_ORDINARY, new TeXFormula(tp.getIsPartial(), args[1], false).root);
     }

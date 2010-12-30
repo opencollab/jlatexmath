@@ -61,6 +61,8 @@
 	</CharacterToSymbolMappings>
 
 	<CharacterToFormulaMappings>
+	  <Map char="&#171;" formula="\guillemotleft"/>
+	  <Map char="&#187;" formula="\guillemotright"/>
  	  <Map char="&#192;" formula="\`A"/>
 	  <Map char="&#193;" formula="\'A"/>
 	  <Map char="&#194;" formula="\^A"/>
@@ -249,7 +251,6 @@
 	  <Map char="&#381;" formula="\v Z"/>
 	  <Map char="&#382;" formula="\v z"/>
 	  <!-- f avec demi-barre-->
-
 	  <!-- Unicode to symbols -->
 	  <Map char="&#8742;" formula="\nshortparallel"/>
 	  <Map char="&#8651;" formula="\leftrightharpoons"/>
@@ -272,6 +273,10 @@
 	  <Map char="&#8994;" formula="\smallfrown"/>
 	  <Map char="&#8196;" formula="\,"/>
 	  <Map char="&#10914;" formula="\gg"/>
+	  <Map char="&#10916;" formula="\mathbin{\rlap{&gt;}\!&lt;"/>
+	  <Map char="&#10917;" formula="\mathbin{&gt;&lt;}"/>
+	  <Map char="&#10918;" formula="\leftslice"/>
+	  <Map char="&#10919;" formula="\rightslice"/>
 	  <Map char="&#8194;" formula="\;"/>
 	  <Map char="&#8197;" formula="\:"/>
 	  <Map char="&#8463;" formula="\hbar"/>
@@ -321,6 +326,7 @@
 	  <Map char="&#8648;" formula="\upuparrows"/>
 	  <Map char="&#8815;" formula="\ngtr"/>
 	  <Map char="&#8937;" formula="\succnsim"/>
+	  <Map char="&#10868;" formula="\mathbin{::=}"/>
 	  <Map char="&#10889;" formula="\lnapprox"/>
 	  <Map char="&#8919;" formula="\gtrdot"/>
 	  <Map char="&#8230;" formula="\ldots"/>
@@ -341,6 +347,7 @@
 	  <Map char="&#8837;" formula="\not\supset"/>
 	  <Map char="&#8856;" formula="\oslash"/>
 	  <Map char="&#8756;" formula="\therefore"/>
+	  <Map char="&#8759;" formula="\mathbin{::}"/>
 	  <Map char="&#10936;" formula="\succapprox"/>
 	  <Map char="&#8869;" formula="\bot"/>
 	  <Map char="&#8923;" formula="\gtreqless"/>
@@ -548,7 +555,7 @@
 	  <Map char="&#8476;" formula="\Re"/>
 	  <Map char="&#8848;" formula="\sqsupset"/>
 	  <Map char="&#8608;" formula="\twoheadrightarrow"/>
-	  <!--Map char="&#9632;" formula="\qedsymbol"/-->
+	  <Map char="&#9632;" formula="\blacksquare"/>
 	  <Map char="&#10956;" formula="\varsupsetneqq"/>
 	  <Map char="&#8630;" formula="\curvearrowleft"/>
 	  <Map char="&#8504;" formula="\daleth"/>
@@ -626,6 +633,10 @@
 	  <Map char="&#10937;" formula="\precnapprox"/>
 	  <Map char="&#9824;" formula="\spadesuit"/>
 	  <Map char="&#10236;" formula="\longmapsto"/>
+	  <Map char="&#10214;" formula="\llbracket"/>
+	  <Map char="&#10215;" formula="\rrbracket"/>
+	  <Map char="&#10216;" formula="\langle"/>
+	  <Map char="&#10217;" formula="\rangle"/>
 	  <Map char="&#9711;" formula="\bigcirc"/>
 	  <Map char="&#8909;" formula="\backsimeq"/>
 	  <Map char="&#0247;" formula="\div"/>
@@ -646,7 +657,6 @@
 	  <Map char="&#8709;" formula="\varnothing"/>
 	  <Map char="&#9586;" formula="\diagdown"/>
 	  <Map char="&#8614;" formula="\mapsto"/>
-	  <Map char="&#9633;" formula="\Box"/>
 	  <Map char="&#8883;" formula="\vartriangleright"/>
 	  <Map char="&#8853;" formula="\oplus"/>
 	  <Map char="&#8230;" formula="\dotso"/>
@@ -676,6 +686,26 @@
 	  <Map char="&#8474;" formula="\mathbb{Q}"/>
 	  <Map char="&#8477;" formula="\mathbb{R}"/>
 	  <Map char="&#8484;" formula="\mathbb{Z}"/>
+	  <Map char="&#8460;" formula="\mathscr{H}"/>
+	  <Map char="&#64256;" formula="ff"/>
+	  <Map char="&#64257;" formula="fi"/>
+	  <Map char="&#58290;" formula="fj"/>
+	  <Map char="&#64258;" formula="fl"/>
+	  <Map char="&#64259;" formula="ffi"/>
+	  <Map char="&#64260;" formula="ffl"/>
+	  <Map char="&#10643;" formula="\mathbin{\rlap{&lt;}\;(}"/>
+	  <Map char="&#10644;" formula="\mathbin{\rlap{&gt;}\,)}"/>
+	  <Map char="&#10677;" formula="\minuso"/>
+	  <Map char="&#10686;" formula="\varocircle"/>
+	  <Map char="&#10688;" formula="\olessthan"/>
+	  <Map char="&#10689;" formula="\ogreaterthan"/>
+	  <Map char="&#10692;" formula="\boxslash"/>
+	  <Map char="&#10693;" formula="\boxbslash"/>
+	  <Map char="&#8254;" formula="\mathpunct{\={\ }}"/>
+	  <Map char="&#8240;" formula="\textperthousand"/>
+	  <Map char="&#8241;" formula="\textpertenthousand"/>
+	  <Map char="&#8249;" formula="\guilsinglleft"/>
+	  <Map char="&#8250;" formula="\guilsinglright"/>
 	</CharacterToFormulaMappings>
 
 </FormulaSettings>

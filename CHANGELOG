@@ -1,5 +1,7 @@
 jlatexmath (0.9.4)
 
+	* Add characters in Unicode.
+
 	* Fix a bug on \bigtriangleup and \bigtriangledown (use stmary ones)
 
 	* Add support for few Unicode characters.

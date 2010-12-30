@@ -8,6 +8,13 @@
 		<SymbolMapping name="normaldot" ch="58" fontId="jlm_cmmi10_unchanged"/>  
 		<SymbolMapping name="slash" ch="61" fontId="jlm_cmmi10_unchanged"/>
 
+		<SymbolMapping name="guillemotleft" ch="33" fontId="jlm_jlmi10"/>
+		<SymbolMapping name="guillemotright" ch="36" fontId="jlm_jlmi10"/>
+		<SymbolMapping name="guilsinglleft" ch="34" fontId="jlm_jlmi10"/>
+		<SymbolMapping name="guilsinglright" ch="35" fontId="jlm_jlmi10"/>
+		<SymbolMapping name="textperthousand" ch="37" fontId="jlm_jlmr10"/>
+		<SymbolMapping name="textpertenthousand" ch="38" fontId="jlm_jlmr10"/>
+
 <!-- this symbol is not defined in "TeXSymbols.xml", because it's not meant to be used as a symbol. 
 Use "surd" instead. -->
 		<SymbolMapping name="sqrt" ch="112" fontId="jlm_cmsy10"/>  

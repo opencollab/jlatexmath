@@ -384,6 +384,13 @@
   <Symbol name="leadsto" type="rel" />
   <!-- miscellaneous symbols -->
 
+  <Symbol name="guillemotleft" type="punct"/>
+  <Symbol name="guillemotright" type="punct"/>
+  <Symbol name="guilsinglleft" type="punct"/>  
+  <Symbol name="guilsinglright" type="punct"/>
+  <Symbol name="textperthousand" type="ord"/>
+  <Symbol name="textpertenthousand" type="ord"/>
+
   <Symbol name="comma" type="punct"/>
   <Symbol name="ldotp" type="punct"/>
   <Symbol name="cdotp" type="punct"/>  

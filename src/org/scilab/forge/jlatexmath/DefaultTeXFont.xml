@@ -123,6 +123,15 @@ for a text style is not defined (e.g. "numbers" and "small" in "mathcal") -->
   <Metrics include="fonts/latin/jlm_cmbx10.xml" />
   <Metrics include="fonts/latin/jlm_cmssbx10.xml" />
   <Metrics include="fonts/maths/jlm_special.xml" />
+  <Metrics include="fonts/latin/jlm_jlmr10.xml" />
+  <Metrics include="fonts/latin/jlm_jlmss10.xml" />
+  <Metrics include="fonts/latin/jlm_jlmsi10.xml" />
+  <Metrics include="fonts/latin/jlm_jlmi10.xml" />
+  <Metrics include="fonts/latin/jlm_jlmbx10.xml" />
+  <Metrics include="fonts/latin/jlm_jlmbi10.xml" />
+  <Metrics include="fonts/latin/jlm_jlmsbi10.xml" />
+  <Metrics include="fonts/latin/jlm_jlmsb10.xml" />
+  <Metrics include="fonts/latin/jlm_jlmtt10.xml" />
 </FontDescriptions>
 
 </TeXFont>
