@@ -1,5 +1,7 @@
 jlatexmath (0.9.4)
 
+	* Avoid the loading of Greek fonts in math mode in GeoGebra.
+
 	* Add characters in Unicode.
 
 	* Fix a bug on \bigtriangleup and \bigtriangledown (use stmary ones)

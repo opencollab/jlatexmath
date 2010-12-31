@@ -49,7 +49,7 @@ public class SymbolAtom extends CharSymbol {
     private final String name;
     
     // contains all defined symbols
-    public static Map<String,SymbolAtom> symbols;
+    public static Map<String, SymbolAtom> symbols;
     
     // contains all the possible valid symbol types
     private static BitSet validSymbolTypes;

@@ -147,14 +147,11 @@ public class RowAtom extends Atom implements Row {
             float kern = 0;
 	    // Calixte : I put a while to handle the case where there are
 	    // several ligatures as in ffi or ffl
-            while (it.hasNext() && atom.getRightType() == TeXConstants.TYPE_ORDINARY
-                    && atom.isCharSymbol()) {
+            while (it.hasNext() && atom.getRightType() == TeXConstants.TYPE_ORDINARY && atom.isCharSymbol()) {
                 Atom next = (Atom) it.next();
-                if (next instanceof CharSymbol
-                        && ligKernSet.get(next.getLeftType())) {
+                if (next instanceof CharSymbol && ligKernSet.get(next.getLeftType())) {
                     atom.markAsTextSymbol();
-                    CharFont l = atom.getCharFont(tf), r = ((CharSymbol) next)
-                    .getCharFont(tf);
+                    CharFont l = atom.getCharFont(tf), r = ((CharSymbol) next).getCharFont(tf);
                     CharFont lig = tf.getLigature(l, r);
                     if (lig == null) {
                         kern = tf.getKern(l, r, env.getStyle());
@@ -173,10 +170,10 @@ public class RowAtom extends Atom implements Row {
             
             // insert glue, unless it's the first element of the row
             // OR this element or the next is a Kern.
-            if (it.previousIndex() != 0 && previousAtom != null
-                    && !previousAtom.isKern() && !atom.isKern())
+            if (it.previousIndex() != 0 && previousAtom != null && !previousAtom.isKern() && !atom.isKern()) {
                 hBox.add(Glue.get(previousAtom.getRightType(), atom.getLeftType(), env));
-            
+	    }            
+
             // insert atom's box
             atom.setPreviousAtom(previousAtom);
             Box b = atom.createBox(env);

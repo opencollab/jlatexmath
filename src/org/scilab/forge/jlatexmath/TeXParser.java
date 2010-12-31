@@ -41,15 +41,15 @@ public class TeXParser {
     private StringBuffer parseString;
     private int pos;
     private int spos;
-    private int line = 0;
-    private int col = 0;
+    private int line;
+    private int col;
     private int len;
-    private int group = 0;
-    private boolean insertion = false;
-    private int atIsLetter = 0;
-    private boolean arrayMode = false;
+    private int group;
+    private boolean insertion;
+    private int atIsLetter;
+    private boolean arrayMode;
     private boolean ignoreWhiteSpace = true;
-    private boolean isPartial = false;
+    private boolean isPartial;
 
     // the escape character
     private static final char ESCAPE = '\\';
@@ -72,6 +72,7 @@ public class TeXParser {
     private static final char SUB_SCRIPT = '_';
     private static final char SUPER_SCRIPT = '^';
     private static final char PRIME = '\'';
+    private static final char BACKPRIME = '\u2035';
     private static final char DEGRE = '\u00B0';
     private static final char SUPZERO = '\u2070';
     private static final char SUPONE = '\u00B9';
@@ -178,7 +179,7 @@ public class TeXParser {
      * @throws ParseException if the string could not be parsed correctly
      */
     public TeXParser(boolean isPartial, String parseString, ArrayOfAtoms aoa, boolean firstpass) {
-        this(isPartial, parseString, (TeXFormula)aoa, firstpass);
+        this(isPartial, parseString, (TeXFormula) aoa, firstpass);
         arrayMode = true;
     }
 
@@ -191,7 +192,7 @@ public class TeXParser {
      * @throws ParseException if the string could not be parsed correctly
      */
     public TeXParser(String parseString, ArrayOfAtoms aoa, boolean firstpass) {
-        this(false, parseString, (TeXFormula)aoa, firstpass);
+        this(false, parseString, (TeXFormula) aoa, firstpass);
     }
 
     /**
@@ -418,16 +419,6 @@ public class TeXParser {
                     parseString.replace(spos, pos, "");
                     len = parseString.length();
                     pos = spos;
-                    break;
-                case PRIME :
-                    String pr = "^{";
-                    spos = pos;
-                    while (pos < len && parseString.charAt(pos) == PRIME) {
-                        pr += "\\prime";
-                        pos++;
-                    }
-                    parseString.replace(spos, pos, pr + "}");
-                    len = parseString.length();
                     break;
                 case DEGRE :
                     parseString.replace(pos, pos + 1, "^\\circ");
@@ -662,8 +653,24 @@ public class TeXParser {
                     ((ArrayOfAtoms) formula).addCol();
                     pos++;
                     break;
+		case PRIME :
+                    if (ignoreWhiteSpace) {
+			formula.add(new CumulativeScriptsAtom(getLastAtom(), null, SymbolAtom.get("prime")));
+		    } else {
+			formula.add(convertCharacter(PRIME));
+		    }
+		    pos++;
+		    break;
+		case BACKPRIME :
+                    if (ignoreWhiteSpace) {
+			formula.add(new CumulativeScriptsAtom(getLastAtom(), null, SymbolAtom.get("backprime")));
+		    } else {
+			formula.add(convertCharacter(BACKPRIME));
+		    }
+		    pos++;
+		    break;
                 default :
-                    formula.add(convertCharacter(ch));
+		    formula.add(convertCharacter(ch));
                     pos++;
                 }
             }
@@ -956,6 +963,14 @@ public class TeXParser {
      * @throws ParseException if the character is unknown
      */
     public Atom convertCharacter(char c) throws ParseException {
+	if (ignoreWhiteSpace) {// The Unicode Greek letters in math mode are not drawn with the Greek font
+	    if (c >= 945 && c <= 969) {
+		return SymbolAtom.get(TeXFormula.symbolMappings[c]);
+	    } else if (c >= 913 && c <= 937) {
+		return new TeXFormula(TeXFormula.symbolFormulaMappings[c]).root;
+	    }
+	}
+      
         c = convertToRomanNumber(c);
         if (((c < '0' || c > '9') && (c < 'a' || c > 'z') && (c < 'A' || c > 'Z'))) {
             Character.UnicodeBlock block = Character.UnicodeBlock.of(c);
@@ -972,6 +987,11 @@ public class TeXParser {
                     return new ColorAtom(new RomanAtom(new TeXFormula("\\text{(Unknown char " + ((int) c) + ")}").root), null, Color.RED);
                 }
             } else {
+		if (!ignoreWhiteSpace) {// we are in text mode
+		    if (TeXFormula.symbolTextMappings[c] != null) {
+			return SymbolAtom.get(TeXFormula.symbolTextMappings[c]);
+		    }
+		}
                 if (TeXFormula.symbolFormulaMappings != null && TeXFormula.symbolFormulaMappings[c] != null) {
                     return new TeXFormula(TeXFormula.symbolFormulaMappings[c]).root;
                 }
@@ -1006,8 +1026,9 @@ public class TeXParser {
         if (ch == '\0')
             return "";
 
-        if (pos == spos)
+        if (pos == spos) {
             pos++;
+	}
 
         return parseString.substring(spos, pos);
     }

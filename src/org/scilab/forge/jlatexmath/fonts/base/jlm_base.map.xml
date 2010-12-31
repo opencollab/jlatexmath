@@ -19,15 +19,20 @@
 Use "surd" instead. -->
 		<SymbolMapping name="sqrt" ch="112" fontId="jlm_cmsy10"/>  
 
+		<SymbolMapping name="textslashsolidus" ch="47" fontId="jlm_cmr10"/>
+		<SymbolMapping name="textminus" ch="45" fontId="jlm_cmr10"/>
+		<SymbolMapping name="textendash" ch="123" fontId="jlm_cmr10"/>
+		<SymbolMapping name="textemdash" ch="124" fontId="jlm_cmr10"/>
 		<SymbolMapping name="semicolon" ch="59" fontId="jlm_cmr10"/>  
 		<SymbolMapping name="faculty" ch="33" fontId="jlm_cmr10"/>  
 		<SymbolMapping name="question" ch="63" fontId="jlm_cmr10"/>
+		<SymbolMapping name="questiondown" ch="62" fontId="jlm_cmr10"/>
 		<SymbolMapping name="jlatexmathsharp" ch="35" fontId="jlm_cmr10"/>
-		<SymbolMapping name="jlatexmathdollar" ch="36" fontId="jlm_cmr10"/>
-		<SymbolMapping name="jlatexmathpercent" ch="37" fontId="jlm_cmr10"/>
-		<SymbolMapping name="jlatexmathampersand" ch="38" fontId="jlm_cmr10"/>
+		<SymbolMapping name="textdollar" ch="36" fontId="jlm_cmr10"/>
+		<SymbolMapping name="textpercent" ch="37" fontId="jlm_cmr10"/>
+		<SymbolMapping name="textampersand" ch="38" fontId="jlm_cmr10"/>
 		<SymbolMapping name="jlatexmatharobase" ch="64" fontId="jlm_cmr10"/>
-		<SymbolMapping name="jlatexmathapos" ch="39" fontId="jlm_cmr10"/>
+		<SymbolMapping name="textapos" ch="39" fontId="jlm_cmr10"/>
 		<SymbolMapping name="jlatexmathlapos" ch="96" fontId="jlm_cmr10"/>
 
 		<SymbolMapping name="oe" ch="190" fontId="jlm_cmti10"/>

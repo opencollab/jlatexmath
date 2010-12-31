@@ -71,7 +71,11 @@
 		</TextStyleMapping>
 
 		<TextStyleMapping name="mathds">
-			<MapRange code="capitals" fontId="jlm_dsrom10" start="65"/>		
+			<MapRange code="capitals" fontId="jlm_dsrom10" start="65"/>
+		</TextStyleMapping>
+
+		<TextStyleMapping name="oldstylenums">
+			<MapRange code="numbers" fontId="jlm_cmmi10" start="48"/>
 		</TextStyleMapping>
 
 	</TextStyleMappings>

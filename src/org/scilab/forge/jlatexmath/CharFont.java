@@ -39,9 +39,7 @@ public class CharFont {
     public int boldFontId;
     
     public CharFont(char ch, int f) {
-	c = ch;
-	fontId = f;
-	boldFontId = f;
+	this(ch, f, f);
     }
     
     public CharFont(char ch, int f, int bf) {

@@ -889,7 +889,7 @@ public class predefMacros {
     
     public Atom undertilde_macro(TeXParser tp, String[] args) throws ParseException {
 	Atom at = new TeXFormula(tp.getIsPartial(), args[1], false).root;
-	return new UnderOverAtom(at, new AccentedAtom(new PhantomAtom(at, true, false, false),"widetilde"), TeXConstants.UNIT_MU, 0.3f, true, false);
+	return new UnderOverAtom(at, new AccentedAtom(new PhantomAtom(at, true, false, false), "widetilde"), TeXConstants.UNIT_MU, 0.3f, true, false);
     }
 
     public Atom boldsymbol_macro(TeXParser tp, String[] args) throws ParseException {
@@ -1158,10 +1158,50 @@ public class predefMacros {
     }
 
     public Atom jlatexmathcumsup_macro(TeXParser tp, String[] args) throws ParseException {	
-	return new CumulativeScriptsAtom(tp.getFormulaAtom(), null, new TeXFormula(tp.getIsPartial(), args[1]).root);
+	return new CumulativeScriptsAtom(tp.getLastAtom(), null, new TeXFormula(tp.getIsPartial(), args[1]).root);
     }
 
     public Atom jlatexmathcumsub_macro(TeXParser tp, String[] args) throws ParseException {	
-	return new CumulativeScriptsAtom(tp.getFormulaAtom(), new TeXFormula(tp.getIsPartial(), args[1]).root, null);
+	return new CumulativeScriptsAtom(tp.getLastAtom(), new TeXFormula(tp.getIsPartial(), args[1]).root, null);
+    }
+
+    public Atom hstrok_macro(TeXParser tp, String[] args) throws ParseException {
+	RowAtom ra = new RowAtom(new SpaceAtom(TeXConstants.UNIT_EX, -0.1f, 0f, 0f));
+	ra.add(SymbolAtom.get("bar"));
+	VRowAtom vra = new VRowAtom(new LapedAtom(ra, 'r'));
+	vra.setRaise(TeXConstants.UNIT_EX, -0.1f);
+	RowAtom at = new RowAtom(vra);
+	at.add(new RomanAtom(new CharAtom('h', tp.formula.textStyle)));
+	return at;
+    }
+
+    public Atom Hstrok_macro(TeXParser tp, String[] args) throws ParseException {
+	RowAtom ra = new RowAtom(new SpaceAtom(TeXConstants.UNIT_EX, 0.28f, 0f, 0f));
+	ra.add(SymbolAtom.get("textendash"));
+	VRowAtom vra = new VRowAtom(new LapedAtom(ra, 'r'));
+	vra.setRaise(TeXConstants.UNIT_EX, 0.55f);
+	RowAtom at = new RowAtom(vra);
+	at.add(new RomanAtom(new CharAtom('H', tp.formula.textStyle)));
+	return at;
+    }
+
+    public Atom dstrok_macro(TeXParser tp, String[] args) throws ParseException {
+	RowAtom ra = new RowAtom(new SpaceAtom(TeXConstants.UNIT_EX, 0.25f, 0f, 0f));
+	ra.add(SymbolAtom.get("bar"));
+	VRowAtom vra = new VRowAtom(new LapedAtom(ra, 'r'));
+	vra.setRaise(TeXConstants.UNIT_EX, -0.1f);
+	RowAtom at = new RowAtom(vra);
+	at.add(new RomanAtom(new CharAtom('d', tp.formula.textStyle)));
+	return at;
+    }
+
+    public Atom Dstrok_macro(TeXParser tp, String[] args) throws ParseException {
+	RowAtom ra = new RowAtom(new SpaceAtom(TeXConstants.UNIT_EX, -0.1f, 0f, 0f));
+	ra.add(SymbolAtom.get("bar"));
+	VRowAtom vra = new VRowAtom(new LapedAtom(ra, 'r'));
+	vra.setRaise(TeXConstants.UNIT_EX, -0.55f);
+	RowAtom at = new RowAtom(vra);
+	at.add(new RomanAtom(new CharAtom('D', tp.formula.textStyle)));
+	return at;
     }
 }

@@ -273,14 +273,14 @@
 
 	<TeXFormula name="&amp;" enabled="true">
 		<CreateTeXFormula name="f">
-			<Argument type="String" value="\jlatexmathampersand" />
+			<Argument type="String" value="\textampersand" />
 		</CreateTeXFormula>
 		<Return name="f" />
 	</TeXFormula>
 
 	<TeXFormula name="%" enabled="true">
 		<CreateTeXFormula name="f">
-			<Argument type="String" value="\jlatexmathpercent" />
+			<Argument type="String" value="\textpercent" />
 		</CreateTeXFormula>
 		<Return name="f" />
 	</TeXFormula>
@@ -294,7 +294,7 @@
 
 	<TeXFormula name="$" enabled="true">
 		<CreateTeXFormula name="f">
-			<Argument type="String" value="\jlatexmathdollar" />
+			<Argument type="String" value="\textdollar" />
 		</CreateTeXFormula>
 		<Return name="f" />
 	</TeXFormula>

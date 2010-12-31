@@ -41,7 +41,7 @@
   <Symbol name="O" type="ord" />
   <Symbol name="i" type="ord" />
   <Symbol name="j" type="ord" />
-  <Symbol name="jlatexmathapos" type="ord" />
+  <Symbol name="textapos" type="ord" />
   <Symbol name="jlatexmathlapos" type="ord" />
   <Symbol name="jlatexmathcedilla" type="ord" />
   <Symbol name="ogonek" type="acc" />
@@ -390,19 +390,23 @@
   <Symbol name="guilsinglright" type="punct"/>
   <Symbol name="textperthousand" type="ord"/>
   <Symbol name="textpertenthousand" type="ord"/>
-
+  <Symbol name="textminus" type="ord"/>
+  <Symbol name="textendash" type="ord"/>
+  <Symbol name="textemdash" type="ord"/>
   <Symbol name="comma" type="punct"/>
   <Symbol name="ldotp" type="punct"/>
   <Symbol name="cdotp" type="punct"/>  
   <Symbol name="normaldot" type="ord"/>  
   <Symbol name="slash" type="ord"/>    
   <Symbol name="semicolon" type="punct"/>  
-  <Symbol name="faculty" type="close"/>  
-  <Symbol name="question" type="close"/>  
+  <Symbol name="faculty" type="ord"/>  
+  <Symbol name="question" type="ord"/>
+  <Symbol name="questiondown" type="ord"/>  
   <Symbol name="jlatexmathsharp" type="ord"/>
-  <Symbol name="jlatexmathdollar" type="ord"/>
-  <Symbol name="jlatexmathpercent" type="ord"/>
-  <Symbol name="jlatexmathampersand" type="ord"/>
+  <Symbol name="textdollar" type="ord"/>
+  <Symbol name="textpercent" type="ord"/>
+  <Symbol name="textampersand" type="ord"/>
+  <Symbol name="textslashsolidus" type="ord"/>
   <Symbol name="jlatexmatharobase" type="ord"/>
   <Symbol name="underscore" type="ord"/>
   

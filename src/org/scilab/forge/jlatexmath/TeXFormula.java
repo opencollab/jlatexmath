@@ -106,8 +106,9 @@ public class TeXFormula {
     public static Map<String,TeXFormula> predefinedTeXFormulas = new HashMap<String,TeXFormula>();
     
     // character-to-symbol and character-to-delimiter mappings
-    public static String[] symbolMappings;
-    public static String[] symbolFormulaMappings;
+    public static String[] symbolMappings = new String[65536];
+    public static String[] symbolTextMappings = new String[65536];
+    public static String[] symbolFormulaMappings = new String[65536];
     public List<MiddleAtom> middle = new LinkedList();
     
     private TeXParser parser;
@@ -115,7 +116,7 @@ public class TeXFormula {
     static {
         // character-to-symbol and character-to-delimiter mappings
         TeXFormulaSettingsParser parser = new TeXFormulaSettingsParser();
-        symbolMappings = parser.parseSymbolMappings();
+	parser.parseSymbolMappings(symbolMappings, symbolTextMappings);
         
         // predefined TeXFormula's
 	try {
@@ -125,7 +126,7 @@ public class TeXFormula {
 	    System.err.println(e.toString());
 	}
 
-	symbolFormulaMappings = parser.parseSymbolToFormulaMappings();
+	parser.parseSymbolToFormulaMappings(symbolFormulaMappings, symbolTextMappings);
 	
 	try {
 	    DefaultTeXFont.registerAlphabet((AlphabetRegistration) Class.forName("org.scilab.forge.jlatexmath.cyrillic.CyrillicRegistration").newInstance());
@@ -145,8 +146,8 @@ public class TeXFormula {
     
     public static void addSymbolMappings(InputStream in, String name) throws ResourceParseException {
 	TeXFormulaSettingsParser tfsp = new TeXFormulaSettingsParser(in, name);
-	tfsp.parseSymbolMappings(symbolMappings);
-	tfsp.parseSymbolToFormulaMappings(symbolFormulaMappings);
+	tfsp.parseSymbolMappings(symbolMappings, symbolTextMappings);
+	tfsp.parseSymbolToFormulaMappings(symbolFormulaMappings, symbolTextMappings);
     }
     
     // the root atom of the "atom tree" that represents the formula
