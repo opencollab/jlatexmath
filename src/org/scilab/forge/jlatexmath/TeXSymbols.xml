@@ -153,11 +153,15 @@
   <Symbol name="bigparallel" type="op" />
   <Symbol name="biginterleave" type="op" />
   <Symbol name="bignplus" type="op" />
-  
+  <Symbol name="ulcorner" type="open" />
+  <Symbol name="urcorner" type="close" />
+  <Symbol name="llcorner" type="open" />
+  <Symbol name="lrcorner" type="close" />
+  <Symbol name="maltese" type="ord" />
+  <Symbol name="textregistered" type="ord" />
   <Symbol name="lhook" type="ord" />
   <Symbol name="rhook" type="ord" />
   <Symbol name="mapstochar" type="rel" />
-  <Symbol name="rightleftharpoons" type="rel" />
   <Symbol name="angle" type="ord" />
   <Symbol name="hbar" type="ord" />
   <Symbol name="sqsubset" type="rel" />
@@ -187,6 +191,7 @@
   <Symbol name="circlearrowright" type="rel" />
   <Symbol name="circlearrowleft" type="rel" />
   <Symbol name="leftrightharpoons" type="rel" />
+  <Symbol name="rightleftharpoons" type="rel" />
   <Symbol name="boxminus" type="bin" />
   <Symbol name="Vdash" type="rel" />
   <Symbol name="Vvdash" type="rel" />
@@ -406,9 +411,10 @@
   <Symbol name="textdollar" type="ord"/>
   <Symbol name="textpercent" type="ord"/>
   <Symbol name="textampersand" type="ord"/>
-  <Symbol name="textslashsolidus" type="ord"/>
+  <Symbol name="textfractionsolidus" type="ord"/>
   <Symbol name="jlatexmatharobase" type="ord"/>
   <Symbol name="underscore" type="ord"/>
+  <Symbol name="checkmark" type="ord"/>
   
   <!-- math accents -->
   

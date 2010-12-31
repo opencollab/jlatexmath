@@ -81,6 +81,7 @@
   <SymbolMapping name="gtreqqless" ch="84" fontId="jlm_msam10" />
   <SymbolMapping name="Rrightarrow" ch="86" fontId="jlm_msam10" />
   <SymbolMapping name="Lleftarrow" ch="87" fontId="jlm_msam10" />
+  <SymbolMapping name="checkmark" ch="88" fontId="jlm_msam10" />
   <SymbolMapping name="veebar" ch="89" fontId="jlm_msam10" />
   <SymbolMapping name="barwedge" ch="90" fontId="jlm_msam10" />
   <SymbolMapping name="doublebarwedge" ch="91" fontId="jlm_msam10" />
@@ -103,16 +104,23 @@
   <SymbolMapping name="Bumpeq" ch="109" fontId="jlm_msam10" />
   <SymbolMapping name="lll" ch="110" fontId="jlm_msam10" />
   <SymbolMapping name="ggg" ch="111" fontId="jlm_msam10" />
+  <SymbolMapping name="ulcorner" ch="112" fontId="jlm_msam10" />
+  <SymbolMapping name="urcorner" ch="113" fontId="jlm_msam10" />
+  <SymbolMapping name="textregistered" ch="114" fontId="jlm_msam10" />
   <SymbolMapping name="circledS" ch="115" fontId="jlm_msam10" />
   <SymbolMapping name="pitchfork" ch="116" fontId="jlm_msam10" />
   <SymbolMapping name="dotplus" ch="117" fontId="jlm_msam10" />
   <SymbolMapping name="backsim" ch="118" fontId="jlm_msam10" />
   <SymbolMapping name="backsimeq" ch="119" fontId="jlm_msam10" />
+  <SymbolMapping name="llcorner" ch="120" fontId="jlm_msam10" />
+  <SymbolMapping name="lrcorner" ch="121" fontId="jlm_msam10" />
+  <SymbolMapping name="maltese" ch="122" fontId="jlm_msam10" />
   <SymbolMapping name="complement" ch="123" fontId="jlm_msam10" />
   <SymbolMapping name="intercal" ch="124" fontId="jlm_msam10" />
   <SymbolMapping name="circledcirc" ch="125" fontId="jlm_msam10" />
   <SymbolMapping name="circledast" ch="126" fontId="jlm_msam10" />
   <SymbolMapping name="circleddash" ch="196" fontId="jlm_msam10" />
+
   <SymbolMapping name="lvertneqq" ch="161" fontId="jlm_msbm10" />
   <SymbolMapping name="gvertneqq" ch="162" fontId="jlm_msbm10" />
   <SymbolMapping name="nleq" ch="163" fontId="jlm_msbm10" />

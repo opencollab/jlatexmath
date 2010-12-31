@@ -306,9 +306,15 @@ public class TeXParser {
         return arrayMode;
     }
 
-    /** Return a boolean indicating if the parser is used to parse an array or not
+    /** Return a boolean indicating if the parser must ignore white spaces
      */
     public boolean isIgnoreWhiteSpace() {
+        return ignoreWhiteSpace;
+    }
+
+    /** Return a boolean indicating if the parser is in math mode
+     */
+    public boolean isMathMode() {
         return ignoreWhiteSpace;
     }
 

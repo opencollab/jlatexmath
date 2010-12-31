@@ -33,13 +33,12 @@ package org.scilab.forge.jlatexmath;
  */
 public class IddotsAtom extends Atom {
 
-    public IddotsAtom() {
-    }
+    public IddotsAtom() { }
     
     public Box createBox(TeXEnvironment env) {
-	Box ldots = new TeXFormula("\\ldots").root.createBox(env);
+	Box ldots = TeXFormula.get("ldots").root.createBox(env);
 	float w = ldots.getWidth();
-	Box dot = new TeXFormula("\\ldotp").root.createBox(env);
+	Box dot = SymbolAtom.get("ldotp").createBox(env);
 	HorizontalBox hb1 = new HorizontalBox(dot, w, TeXConstants.ALIGN_RIGHT);
 	HorizontalBox hb2 = new HorizontalBox(dot, w, TeXConstants.ALIGN_CENTER);
 	HorizontalBox hb3 = new HorizontalBox(dot, w, TeXConstants.ALIGN_LEFT);

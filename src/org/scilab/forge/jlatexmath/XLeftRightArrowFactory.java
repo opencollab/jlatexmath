@@ -36,9 +36,9 @@ import java.awt.Color;
  */
 public class XLeftRightArrowFactory {
     
-    private static final Atom MINUS = new TeXFormula("-").root;
-    private static final Atom LEFT = new TeXFormula("\\leftarrow").root;
-    private static final Atom RIGHT = new TeXFormula("\\rightarrow").root;
+    private static final Atom MINUS = SymbolAtom.get("minus");
+    private static final Atom LEFT = SymbolAtom.get("leftarrow");
+    private static final Atom RIGHT = SymbolAtom.get("rightarrow");
     
     public static Box create(boolean left, TeXEnvironment env, float width) {
         TeXFont tf = env.getTeXFont();

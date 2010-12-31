@@ -33,11 +33,10 @@ package org.scilab.forge.jlatexmath;
  */
 public class VdotsAtom extends Atom {
 
-    public VdotsAtom() {
-    }
+    public VdotsAtom() { }
     
     public Box createBox(TeXEnvironment env) {
-	Box dot = new TeXFormula("\\ldotp").root.createBox(env);
+	Box dot = SymbolAtom.get("ldotp").createBox(env);
 	VerticalBox vb = new VerticalBox(dot, 0, TeXConstants.ALIGN_BOTTOM);
 	Box b = new SpaceAtom(TeXConstants.UNIT_MU, 0, 4, 0).createBox(env);
 	vb.add(b);
@@ -48,6 +47,7 @@ public class VdotsAtom extends Atom {
 	float h = vb.getHeight(); 
 	vb.setDepth(0);
 	vb.setHeight(d + h);
+
 	return vb;
     }  
 }

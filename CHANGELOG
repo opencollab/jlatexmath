@@ -1,5 +1,7 @@
 jlatexmath (0.9.4)
 
+	* Add Unicode chars again and forgotten commands
+
 	* Avoid the loading of Greek fonts in math mode in GeoGebra.
 
 	* Add characters in Unicode.

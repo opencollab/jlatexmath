@@ -19,7 +19,7 @@
 Use "surd" instead. -->
 		<SymbolMapping name="sqrt" ch="112" fontId="jlm_cmsy10"/>  
 
-		<SymbolMapping name="textslashsolidus" ch="47" fontId="jlm_cmr10"/>
+		<SymbolMapping name="textfractionsolidus" ch="47" fontId="jlm_cmr10"/>
 		<SymbolMapping name="textminus" ch="45" fontId="jlm_cmr10"/>
 		<SymbolMapping name="textendash" ch="123" fontId="jlm_cmr10"/>
 		<SymbolMapping name="textemdash" ch="124" fontId="jlm_cmr10"/>

@@ -34,11 +34,11 @@ package org.scilab.forge.jlatexmath;
  */
 public class ParseException extends JMathTeXException {
     
-    protected ParseException(String str, Throwable cause) {
+    public ParseException(String str, Throwable cause) {
         super(str, cause);
     }
     
-    protected ParseException(String str) {
+    public ParseException(String str) {
         super(str);
     }
 }

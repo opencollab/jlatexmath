@@ -55,7 +55,7 @@ public class UnderOverAtom extends Atom {
     private final boolean overScriptSize;
     
     public UnderOverAtom(Atom base, Atom underOver, int underOverUnit,
-            float underOverSpace, boolean underOverScriptSize, boolean over) {
+			 float underOverSpace, boolean underOverScriptSize, boolean over) {
         // check if unit is valid
         SpaceAtom.checkUnit(underOverUnit);
         

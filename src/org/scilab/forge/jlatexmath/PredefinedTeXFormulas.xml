@@ -1120,6 +1120,41 @@
 		<Return name="f" />
 	</TeXFormula>
 
+	<TeXFormula name="marker" enabled="true">
+		<CreateTeXFormula name="f">
+			<Argument type="String" value="\kern{0.25ex}\rule{0.5ex}{1.2ex}\kern{0.25ex}" />
+		</CreateTeXFormula>
+		<Return name="f" />
+	</TeXFormula>
+
+	<TeXFormula name="hybull" enabled="true">
+		<CreateTeXFormula name="f">
+			<Argument type="String" value="\rule[0.6ex]{1ex}{0.2ex}" />
+		</CreateTeXFormula>
+		<Return name="f" />
+	</TeXFormula>
+
+	<TeXFormula name="block" enabled="true">
+		<CreateTeXFormula name="f">
+			<Argument type="String" value="\rule{1ex}{1.2ex}" />
+		</CreateTeXFormula>
+		<Return name="f" />
+	</TeXFormula>
+
+	<TeXFormula name="uhblk" enabled="true">
+		<CreateTeXFormula name="f">
+			<Argument type="String" value="\rule[0.6ex]{1ex}{0.6ex}" />
+		</CreateTeXFormula>
+		<Return name="f" />
+	</TeXFormula>
+
+	<TeXFormula name="lhblk" enabled="true">
+		<CreateTeXFormula name="f">
+			<Argument type="String" value="\rule{1ex}{0.6ex}" />
+		</CreateTeXFormula>
+		<Return name="f" />
+	</TeXFormula>
+
 <!-- Juan Enrique -->
 
         <TeXFormula name="notin" enabled="true">
