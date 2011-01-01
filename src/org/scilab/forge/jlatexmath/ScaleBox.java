@@ -42,18 +42,19 @@ public class ScaleBox extends Box {
 	this.box = b;
 	this.xscl = xscl;
 	this.yscl = yscl;
-	width = b.width * (float)Math.abs(xscl);
-	height = yscl > 0 ? b.height * (float)yscl : -b.depth * (float)yscl;
-	depth = yscl > 0 ? b.depth * (float)yscl : -b.height * (float)yscl;
-	shift = b.shift * (float)yscl;
+	width = b.width * (float) Math.abs(xscl);
+	height = yscl > 0 ? b.height * (float) yscl : -b.depth * (float) yscl;
+	depth = yscl > 0 ? b.depth * (float) yscl : -b.height * (float) yscl;
+	shift = b.shift * (float) yscl;
     }
     
     public void draw(Graphics2D g2, float x, float y) {
+	drawDebug(g2, x, y);
 	float dec = xscl < 0 ? width : 0;
 	g2.translate(x + dec, y);
 	g2.scale(xscl, yscl);
 	box.draw(g2, 0, 0);
-	g2.scale(1/xscl, 1/yscl);
+	g2.scale(1 / xscl, 1 / yscl);
 	g2.translate(-x - dec, -y);
     }
 

@@ -1,47 +1,50 @@
 jlatexmath (0.9.4)
 
-	* Add Unicode chars again and forgotten commands
+        * Fix bugs on rotatebox (bad default center), with the parser
+          (...\end{foo}a... gave an error)) and improve the debug mode.
 
-	* Avoid the loading of Greek fonts in math mode in GeoGebra.
+        * Add Unicode chars again and forgotten commands
 
-	* Add characters in Unicode.
+        * Avoid the loading of Greek fonts in math mode in GeoGebra.
 
-	* Fix a bug on \bigtriangleup and \bigtriangledown (use stmary ones)
+        * Add characters in Unicode.
 
-	* Add support for few Unicode characters.
+        * Fix a bug on \bigtriangleup and \bigtriangledown (use stmary ones)
+
+        * Add support for few Unicode characters.
 
         * Fix a bug of cyclic referency between atoms coming from Unicode
-	  mapping.
+          mapping.
 
-	* Convert foreign numbers into roman ones
+        * Convert foreign numbers into roman ones
 
         * Add a preview of an error in partial mode
-   
+
         * Add the left quote and reduce slightly the space under for underarrows
 
         * The percent for comments was not handled
 
-	* HTML entity &#8495; forgotten
+        * HTML entity &#8495; forgotten
 
-	* Fix bug in aligned & alignedat env. (thanks to Graeme Kidd)
+        * Fix bug in aligned & alignedat env. (thanks to Graeme Kidd)
 
-	* Add a thread-safe cache to cache the images generated from a formula
-	   
-        * Can use dollar in \text or \mbox to switch into math mode 
+        * Add a thread-safe cache to cache the images generated from a formula
 
-	* Add a static method TeXFormula.getPartialTeXFormula(String) which
-	  ignores errors and returns a partial TeXFormula (with no errors).
-	  Useful to display LaTeX on typing.
-	
-	* JLM is now ready for support FOP 1.0 :)
+        * Can use dollar in \text or \mbox to switch into math mode
 
-	* Fix a bug in jlmDynamic where the contents where preprocessed	
+        * Add a static method TeXFormula.getPartialTeXFormula(String) which
+          ignores errors and returns a partial TeXFormula (with no errors).
+          Useful to display LaTeX on typing.
+
+        * JLM is now ready for support FOP 1.0 :)
+
+        * Fix a bug in jlmDynamic where the contents where preprocessed
 
  -- Calixte Denizet <Calixte.Denizet@ac-rennes.fr>
 
 jlatexmath (0.9.3)
 
-	* 0.9.3 version
+        * 0.9.3 version
 
         * Fix bug of size with colored box
 
@@ -54,134 +57,133 @@ jlatexmath (0.9.2)
 
         * add new commands \tiny, \footnotesize,... and \overwithdelims,...
 
-	* Handle vertical and horizontal lines in array environment
+        * Handle vertical and horizontal lines in array environment
 
-	* Fix bug in the render of (over|under)braces
-	
-	* Fix bug with A{\scriptstyle BCD}E
+        * Fix bug in the render of (over|under)braces
 
-	* Fix bug with \left(A\leftarrow B\right)
+        * Fix bug with A{\scriptstyle BCD}E
 
-	* Fix bug with option *{20}c in array env.
+        * Fix bug with \left(A\leftarrow B\right)
 
-	* An argument beginning with \left must be closed by \right (thanks to Juan Enrique)
+        * Fix bug with option *{20}c in array env.
 
-	* Fix bug with \over (http://bugzilla.scilab.org/show_bug.cgi?id=7226)
-	
+        * An argument beginning with \left must be closed by \right (thanks to Juan Enrique)
+
+        * Fix bug with \over (http://bugzilla.scilab.org/show_bug.cgi?id=7226)
+
         * Improve the render of a cfrac (thanks to Juan Enrique)
 
-	* Improve the way to get the arguments of a macro (thanks to Juan Enrique)
+        * Improve the way to get the arguments of a macro (thanks to Juan Enrique)
  -- Calixte Denizet <Calixte.Denizet@ac-rennes.fr>
 
         * Add cfrac macro
 
-	* Possibility to have empty columns in array
-	 
+        * Possibility to have empty columns in array
+
  -- Calixte Denizet <Calixte.Denizet@ac-rennes.fr>
 
 jlatexmath (0.9.1)
-	* Few modifications in fop-plugin and improve \includegraphics
-	 
+        * Few modifications in fop-plugin and improve \includegraphics
+
  -- Calixte Denizet <Calixte.Denizet@ac-rennes.fr>
 
-	* Moved fop.properties at the root directory (this is only needed to
-	build and run fop plugin)
+        * Moved fop.properties at the root directory (this is only needed to
+        build and run fop plugin)
 
-	* examples/Export/build.xml uses fop.properties
+        * examples/Export/build.xml uses fop.properties
 
  -- Sylvestre Ledru <sylvestre.ledru@scilab.org> Tue, 16 Feb 2010 10:51:04 +0100
 
-jlatexmath (0.9) 
-	 * Avoid two generations of labels with fop.
-	 
+jlatexmath (0.9)
+         * Avoid two generations of labels with fop.
+
  -- Calixte Denizet <Calixte.Denizet@ac-rennes.fr>  Fri, 12 Feb 2010 18:23:56 +0100
 
-jlatexmath (0.8.9) 
-	 * Add new environments of amsmath : gather, flalign, alignat...
-	 
-	 * Add commands genfrac, rule, underscore, hdotsfor, multicolumn, ...
-	 
-	 * Add commands \textsuperscript et \textsubscript
-	 
+jlatexmath (0.8.9)
+         * Add new environments of amsmath : gather, flalign, alignat...
+
+         * Add commands genfrac, rule, underscore, hdotsfor, multicolumn, ...
+
+         * Add commands \textsuperscript et \textsubscript
+
  -- Calixte Denizet <Calixte.Denizet@ac-rennes.fr>  Thu, 11 Feb 2010 15:32:27 +0100
 
 jlatexmath (0.8.7)
-	 * Add the command \prescript
+         * Add the command \prescript
 
  -- Calixte Denizet <Calixte.Denizet@ac-rennes.fr>  Mon, 11 Jan 2010 19:07:18 +0100
 
-	 * Add the commands \mathclap, \mathrlap, \mathllap, \clap, \rlap and \llap
+         * Add the commands \mathclap, \mathrlap, \mathllap, \clap, \rlap and \llap
 
  -- Calixte Denizet <Calixte.Denizet@ac-rennes.fr>  Mon, 11 Jan 2010 16:29:51 +0100
-	   
-  	 * A basic (without options) \includegraphics command added
+
+         * A basic (without options) \includegraphics command added
 
  -- Calixte Denizet <Calixte.Denizet@ac-rennes.fr>  Sun, 10 Jan 2010 22:17:04 +0100
 
 jlatexmath (0.8.6)
-  	 * \over, \hspace and \vspace are supported
+         * \over, \hspace and \vspace are supported
 
  -- Calixte Denizet <Calixte.Denizet@ac-rennes.fr>  Sun, 10 Jan 2010 14:59:45 +0100
 
 jlatexmath (0.8.5)
-  	 * add a stroke T
+         * add a stroke T
 
-	 * Fix few bugs of rendering : cedilla, mathbf
+         * Fix few bugs of rendering : cedilla, mathbf
 
  -- Calixte Denizet <Calixte.Denizet@ac-rennes.fr>  Sun, 03 Jan 2010 18:35:12 +0100
-	 * Complete unicode table for latin alphabets
+         * Complete unicode table for latin alphabets
 
-	 * Fix few bugs of rendering
+         * Fix few bugs of rendering
 
  -- Calixte Denizet <Calixte.Denizet@ac-rennes.fr>  Sat, 02 Jan 2010 20:03:36 +0100
 
 jlatexmath (0.8.4)
-	 * Greek support added
+         * Greek support added
 
  -- Calixte Denizet <Calixte.Denizet@ac-rennes.fr>  Thu, 31 Dec 2009 16:10:23 +0100
 
 jlatexmath (0.8.3)
-	 * Cyrillic is now supported with unicode encoding (so we can search a cyrillic string in a pdf)
-	 
-	 * Fix several little bugs
-	 
-	 * Usage of commands such as \mathrm, \mathit, ... has been improved
+         * Cyrillic is now supported with unicode encoding (so we can search a cyrillic string in a pdf)
+
+         * Fix several little bugs
+
+         * Usage of commands such as \mathrm, \mathit, ... has been improved
 
  -- Calixte Denizet <Calixte.Denizet@ac-rennes.fr>  Wed, 30 Dec 2009 17:33:47 +0100
- 
-	 * Adds \fgcolor and \bgcolor
+
+         * Adds \fgcolor and \bgcolor
 
  -- Calixte Denizet <Calixte.Denizet@ac-rennes.fr>  Sat, 26 Dec 2009 21:05:38 +0100
 
-    	 * Fixes a bug with kerns pairs.
+         * Fixes a bug with kerns pairs.
 
  -- Calixte Denizet <Calixte.Denizet@ac-rennes.fr>  Fri, 25 Dec 2009 00:03:44 +0100
-    	 
-	 * Provides a target to build the doc "ant doc"
+
+         * Provides a target to build the doc "ant doc"
 
  -- Sylvestre Ledru <Sylvestre.ledru@scilab.org>  Wed, 16 Dec 2009 14:33:26 +0100
 
 jlatexmath (0.8.2)
-	 * Fixes a bad sqrt symbol and adds a little space after an atom under a sqrt
+         * Fixes a bad sqrt symbol and adds a little space after an atom under a sqrt
 
- -- Calixte Denizet <Calixte.Denizet@ac-rennes.fr>  Thu, 17 Dec 2009 21:27:38 +0100	   
+ -- Calixte Denizet <Calixte.Denizet@ac-rennes.fr>  Thu, 17 Dec 2009 21:27:38 +0100
 
 jlatexmath (0.8.1)
 
-	 * Fixes a regression in the version 0.8
+         * Fixes a regression in the version 0.8
 
  -- Sylvestre Ledru <Sylvestre.ledru@scilab.org>  Wed, 16 Dec 2009 14:33:26 +0100
 
 jlatexmath (0.8)
 
-	 * Jlatexmath can now compile under Java 1.5 (registerFont is disabled
-	 in this case).
+         * Jlatexmath can now compile under Java 1.5 (registerFont is disabled
+         in this case).
 
  -- Sylvestre Ledru <Sylvestre.ledru@scilab.org>  Tue, 15 Dec 2009 17:46:18 +0100
 
 jlatexmath (0.7)
 
-	 * Bad name in MANIFEST for stmary
+         * Bad name in MANIFEST for stmary
 
  -- Calixte Denizet <Calixte.Denizet@ac-rennes.fr>  Thu, 12 Dec 2009 15:50:38 +0100
-

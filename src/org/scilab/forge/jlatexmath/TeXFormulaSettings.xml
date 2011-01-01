@@ -60,6 +60,7 @@
 	  <Map char="`" symbol="jlatexmathlapos"/>
 	  <Map char="&#171;" symbol="guillemotleft"/>
 	  <Map char="&#174;" symbol="textregistered"/>
+	  <Map char="&#181;" symbol="textmu"/>
 	  <Map char="&#187;" symbol="guillemotright"/>
 	  <Map char="&#191;" symbol="questiondown"/>
 	  <Map char="&#945;" symbol="alpha" text="α"/>
@@ -83,10 +84,15 @@
 	  <Map char="&#963;" symbol="sigma" text="σ"/>
 	  <Map char="&#964;" symbol="tau" text="τ"/>
 	  <Map char="&#965;" symbol="upsilon" text="υ"/>
-	  <Map char="&#966;" symbol="varphi" text="φ"/>
+	  <Map char="&#966;" symbol="phi" text="φ"/>
 	  <Map char="&#967;" symbol="chi" text="χ"/>
 	  <Map char="&#968;" symbol="psi" text="ψ"/>
 	  <Map char="&#969;" symbol="omega" text="ω"/>
+	  <Map char="&#977;" symbol="vartheta" text="ϑ"/>
+	  <Map char="&#981;" symbol="varphi"/>
+	  <Map char="&#982;" symbol="varpi"/>
+	  <Map char="&#1008;" symbol="varkappa"/>
+	  <Map char="&#1009;" symbol="varrho"/>
 	</CharacterToSymbolMappings>
 
 	<CharacterToFormulaMappings>
@@ -736,6 +742,8 @@
 	  <Map char="&#0770;" formula="\widehat"/>  
 	  <Map char="&#0771;" formula="\widetilde"/>
 	  <Map char="&#8450;" formula="\mathbb{C}"/>
+	  <Map char="&#8451;" formula="\sideset{^\circ}{}\text{C}"/>
+	  <Map char="&#8457;" formula="\sideset{^\circ}{}\text{F}"/>
 	  <Map char="&#8461;" formula="\mathbb{H}"/>
 	  <Map char="&#8469;" formula="\mathbb{N}"/>
 	  <Map char="&#8473;" formula="\mathbb{P}"/>

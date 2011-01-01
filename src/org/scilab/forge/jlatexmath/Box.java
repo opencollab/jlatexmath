@@ -256,10 +256,18 @@ public abstract class Box {
 	    g2.setColor(prevColor); // old foreground color
 	else
 	    g2.setColor(foreground); // overriding foreground color
-	
+
+	drawDebug(g2, x, y);
+    }
+
+    protected void drawDebug(Graphics2D g2, float x, float y) {
 	if (DEBUG) {
 	    Stroke st = g2.getStroke();
-	    g2.setStroke(new BasicStroke((float) (1 / g2.getTransform().getScaleX()), BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER));
+	    g2.setStroke(new BasicStroke((float) (Math.abs(1 / g2.getTransform().getScaleX())), BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER));
+	    if (width < 0) {
+		x += width;
+		width = -width;
+	    }
 	    g2.draw(new Rectangle2D.Float(x, y - height, width, height + depth));
 	    g2.setStroke(st);
 	}

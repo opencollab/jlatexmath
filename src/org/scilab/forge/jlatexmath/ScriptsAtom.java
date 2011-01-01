@@ -113,9 +113,9 @@ public class ScriptsAtom extends Atom {
 	    } else if (base instanceof CharSymbol) {
 		shiftUp = shiftDown = 0;
 		CharFont cf = ((CharSymbol) base).getCharFont(tf);
-		if (!((CharSymbol) base).isMarkedAsTextSymbol()
-		    || !tf.hasSpace(cf.fontId))
+		if (!((CharSymbol) base).isMarkedAsTextSymbol() || !tf.hasSpace(cf.fontId)) {
 		    delta = tf.getChar(cf, style).getItalic();
+		}
 		if (delta > TeXFormula.PREC && subscript == null) {
 		    hor.add(new StrutBox(delta, 0, 0, 0));
 		    delta = 0;
@@ -128,15 +128,11 @@ public class ScriptsAtom extends Atom {
 	    if (superscript == null) { // only subscript
 		Box x = subscript.createBox(subStyle);
 		// calculate and set shift amount
-		x.setShift(Math.max(Math.max(shiftDown, tf.getSub1(style)), x
-				    .getHeight()
-				    - 4 * Math.abs(tf.getXHeight(style, lastFontId)) / 5));
-		
+		x.setShift(Math.max(Math.max(shiftDown, tf.getSub1(style)), x.getHeight() - 4 * Math.abs(tf.getXHeight(style, lastFontId)) / 5));
 		hor.add(x);
-		// add scriptspace (constant value!)
-		//hor.add(SCRIPT_SPACE.createBox(env));
 		hor.add(deltaSymbol);
-                return hor;
+                
+		return hor;
 	    } else {
 		Box x = superscript.createBox(supStyle);
 		float msiz = x.getWidth();
@@ -200,6 +196,7 @@ public class ScriptsAtom extends Atom {
 		    hor.add(vBox);
 		}
                 hor.add(deltaSymbol);
+
 		return hor;
 	    }
 	}

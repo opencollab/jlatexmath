@@ -38,83 +38,83 @@ import java.awt.geom.AffineTransform;
  */
 public class OverUnderBox extends Box {
 
-   // base, delimiter and script atom
-   private final Box base;
-   private final Box del;
-   private final Box script;
+    // base, delimiter and script atom
+    private final Box base;
+    private final Box del;
+    private final Box script;
 
-   // kern amount between the delimiter and the script
-   private final float kern;
+    // kern amount between the delimiter and the script
+    private final float kern;
 
-   // whether the delimiter should be drawn over (<-> under) the base atom 
-   private final boolean over;
+    // whether the delimiter should be drawn over (<-> under) the base atom 
+    private final boolean over;
 
-   /**
-    * the parameter boxes must have an equal width!!
-    * 
-    * @param b
-    *           base box to be drawn on the baseline
-    * @param d
-    *           delimiter box
-    * @param script
-    *           subscript or superscript box
-    * @param over
-    *           true : draws delimiter and script box above the base box, false : under the
-    *           base box
-    */
-   public OverUnderBox(Box b, Box d, Box script, float kern, boolean over) {
-      base = b;
-      del = d;
-      this.script = script;
-      this.kern = kern;
-      this.over = over;
+    /**
+     * the parameter boxes must have an equal width!!
+     * 
+     * @param b
+     *           base box to be drawn on the baseline
+     * @param d
+     *           delimiter box
+     * @param script
+     *           subscript or superscript box
+     * @param over
+     *           true : draws delimiter and script box above the base box, false : under the
+     *           base box
+     */
+    public OverUnderBox(Box b, Box d, Box script, float kern, boolean over) {
+	base = b;
+	del = d;
+	this.script = script;
+	this.kern = kern;
+	this.over = over;
 
-      // calculate metrics of the box
-      width = b.getWidth();
-      height = b.height
+	// calculate metrics of the box
+	width = b.getWidth();
+	height = b.height
             + (over ? d.getWidth() : 0)
             + (over && script != null ? script.height + script.depth + kern : 0);
-      depth = b.depth
+	depth = b.depth
             + (over ? 0 : d.getWidth())
-	  + (!over && script != null ? script.height + script.depth + kern : 0);
-   }
+	    + (!over && script != null ? script.height + script.depth + kern : 0);
+    }
 
-   public void draw(Graphics2D g2, float x, float y) {
-      base.draw(g2, x, y);
+    public void draw(Graphics2D g2, float x, float y) {
+	drawDebug(g2, x, y);
+	base.draw(g2, x, y);
 
-      float yVar = y - base.height - del.getWidth();
-      if (over) { // draw delimiter and script above base box
-         double transX = x + (del.getHeight() + del.depth) / 2, transY = yVar;
-         AffineTransform oldAt = g2.getTransform();
-         g2.translate(transX, transY);
-         g2.rotate(Math.PI / 2);
-         del.draw(g2, 0, 0);
-         g2.setTransform(oldAt);
+	float yVar = y - base.height - del.getWidth();
+	if (over) { // draw delimiter and script above base box
+	    double transX = x + (del.getHeight() + del.depth) / 2, transY = yVar;
+	    AffineTransform oldAt = g2.getTransform();
+	    g2.translate(transX, transY);
+	    g2.rotate(Math.PI / 2);
+	    del.draw(g2, 0, 0);
+	    g2.setTransform(oldAt);
          
-         // draw superscript
-         if (script != null)
-            script.draw(g2, x, yVar - kern - script.depth);
-      }
+	    // draw superscript
+	    if (script != null)
+		script.draw(g2, x, yVar - kern - script.depth);
+	}
 
-      yVar = y + base.depth;
-      if (!over) { // draw delimiter and script under base box
-	  double transX = x + (del.getHeight() + del.depth) / 2, transY = yVar;
-	  AffineTransform oldAt = g2.getTransform();
-	  g2.translate(transX, transY);
-	  g2.rotate(Math.PI / 2);
-	  del.draw(g2, 0, 0);
-	  g2.setTransform(oldAt);
-	  yVar += del.getWidth();
+	yVar = y + base.depth;
+	if (!over) { // draw delimiter and script under base box
+	    double transX = x + (del.getHeight() + del.depth) / 2, transY = yVar;
+	    AffineTransform oldAt = g2.getTransform();
+	    g2.translate(transX, transY);
+	    g2.rotate(Math.PI / 2);
+	    del.draw(g2, 0, 0);
+	    g2.setTransform(oldAt);
+	    yVar += del.getWidth();
 	  
-	  // draw subscript
-	  if (script != null)
-	      script.draw(g2, x, yVar + kern + script.height);
-      }
+	    // draw subscript
+	    if (script != null)
+		script.draw(g2, x, yVar + kern + script.height);
+	}
 
-   }
+    }
 
-   public int getLastFontId() {
-      return base.getLastFontId();
-   }
-
+    public int getLastFontId() {
+	return base.getLastFontId();
+    }
 }

@@ -503,6 +503,15 @@
 		</CreateCommand>
 		<Return name="f" />
 	</Command>
+
+	<Command name="T" enabled="true">
+		<CreateCommand name="f">
+			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+			<Argument type="String" value="T_macro" />
+			<Argument type="float" value="1" />        	
+		</CreateCommand>
+		<Return name="f" />
+	</Command>
 	
 	<Command name="t" enabled="true">
 		<CreateCommand name="f">
@@ -1478,6 +1487,7 @@
 			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
 			<Argument type="String" value="rotatebox_macro" />
 			<Argument type="float" value="2" />
+			<Argument type="float" value="1" />
 		</CreateCommand>
 		<Return name="f" />
 	</Command>
@@ -1928,6 +1938,15 @@
 		<CreateCommand name="f">
 			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
 			<Argument type="String" value="kern_macro" />
+			<Argument type="float" value="1" />
+		</CreateCommand>
+		<Return name="f" />
+	</Command>
+
+	<Command name="char" enabled="true">
+		<CreateCommand name="f">
+			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+			<Argument type="String" value="char_macro" />
 			<Argument type="float" value="1" />
 		</CreateCommand>
 		<Return name="f" />

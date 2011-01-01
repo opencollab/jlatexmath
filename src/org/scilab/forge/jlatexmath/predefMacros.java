@@ -1058,7 +1058,7 @@ public class predefMacros {
     }
 
     public Atom rotatebox_macro(TeXParser tp, String[] args) throws ParseException {
-	return new RotateAtom(new TeXFormula(tp.getIsPartial(), args[2]).root, args[1] == null ? 0 : Double.parseDouble(args[1]));
+	return new RotateAtom(new TeXFormula(tp.getIsPartial(), args[2]).root, args[1] == null ? 0 : Double.parseDouble(args[1]), args[3]);
     }
 
     public Atom reflectbox_macro(TeXParser tp, String[] args) throws ParseException {
@@ -1271,5 +1271,23 @@ public class predefMacros {
     public Atom kern_macro(TeXParser tp, String[] args) throws ParseException {
 	float[] info = SpaceAtom.getLength(args[1]);
 	return new SpaceAtom((int) info[0], info[1], 0f, 0f);
+    }
+
+    public Atom char_macro(TeXParser tp, String[] args) throws ParseException {
+	String number = args[1];
+	int radix = 10;
+	if (number.startsWith("0x")) {
+	    number = number.substring(2);
+	    radix = 16;
+	} else if (number.startsWith("0")) {
+	    number = number.substring(1);
+	    radix = 8;
+	}
+	int n = Integer.parseInt(number, radix);
+	return tp.convertCharacter((char) n);
+    }
+
+    public Atom T_macro(TeXParser tp, String[] args) throws ParseException {
+	return new RotateAtom(new TeXFormula(tp.getIsPartial(), args[1]).root, 180, "origin=c");
     }
 }

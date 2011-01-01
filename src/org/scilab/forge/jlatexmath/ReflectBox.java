@@ -46,6 +46,7 @@ public class ReflectBox extends Box {
     }
     
     public void draw(Graphics2D g2, float x, float y) {
+	drawDebug(g2, x, y);
 	g2.translate(x, y);
 	g2.scale(-1, 1);
 	box.draw(g2, -width, 0);

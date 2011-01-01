@@ -35,15 +35,16 @@ public class RotateAtom extends Atom {
     
     private Atom base;
     private double angle;
+    private int option;
     
-    public RotateAtom(Atom base, double angle) {
+    public RotateAtom(Atom base, double angle, String option) {
 	this.type = base.type;
 	this.base = base;
 	this.angle = angle;
+	this.option = RotateBox.getOption(option);
     }
     
     public Box createBox(TeXEnvironment env) {
-	RotateBox rb = new RotateBox(base.createBox(env), angle);
-	return rb;
+	return new RotateBox(base.createBox(env), angle, option);
     } 	
 }

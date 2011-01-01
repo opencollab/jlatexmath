@@ -388,10 +388,10 @@ public class TeXParser {
                             try {
                                 String[] optarg = getOptsArgs(mac.nbArgs - 1, 0);
                                 String grp = getGroup("\\begin{" + args[1] + "}", "\\end{" + args[1] + "}");
-                                String expr = "\\makeatletter \\" + args[1] + "@env";
+                                String expr = "{\\makeatletter \\" + args[1] + "@env";
                                 for (int i = 1; i <= mac.nbArgs - 1; i++)
                                     expr += "{" + optarg[i] + "}";
-                                expr += "{" + grp  + "}\\makeatother";
+                                expr += "{" + grp  + "}\\makeatother}";
                                 parseString.replace(spos, pos, expr);
                                 len = parseString.length();
                                 pos = spos;
@@ -690,18 +690,16 @@ public class TeXParser {
     private Atom getScripts(char f) throws ParseException {
         pos++;
         Atom first = getArgument();
-        Atom second = (Atom)null;
+        Atom second = null;
         char s = '\0';
 
         if (pos < len)
             s = parseString.charAt(pos);
 
-        if (f == SUB_SCRIPT && s == SUB_SCRIPT)
-            throw new ParseException("Consecutive subscripts are not allowed !");
-        if (f == SUPER_SCRIPT && s == SUPER_SCRIPT)
-            throw new ParseException("Consecutive superscripts are not allowed !");
-
-        if (f == SUB_SCRIPT && s == SUPER_SCRIPT) {
+        if (f == SUPER_SCRIPT && s == SUPER_SCRIPT) {
+	    second = first;
+	    first = null;
+	} else if (f == SUB_SCRIPT && s == SUPER_SCRIPT) {
             pos++;
             second = getArgument();
         } else if (f == SUPER_SCRIPT && s == SUB_SCRIPT) {
@@ -710,7 +708,7 @@ public class TeXParser {
             first = getArgument();
         } else if (f == SUPER_SCRIPT && s != SUB_SCRIPT) {
             second = first;
-            first = (Atom)null;
+            first = null;
         }
 
         Atom at;
@@ -810,39 +808,56 @@ public class TeXParser {
     public String getGroup(String open, String close) throws ParseException {
         int group = 1;
         int ol = open.length(), cl = close.length();
+	boolean lastO = isValidCharacterInCommand(open.charAt(ol - 1));
+	boolean lastC = isValidCharacterInCommand(close.charAt(cl - 1));
         int oc = 0, cc = 0;
+	int startC = 0;
+	char prev = '\0';
         StringBuffer buf = new StringBuffer();
 
         while (pos < len && group != 0) {
             char c = parseString.charAt(pos);
             char c1;
+
+	    if (prev != ESCAPE && c == ' ') {//Trick to handle case where close == "\end   {foo}"
+		while (pos < len && parseString.charAt(pos++) == ' ') {
+		    buf.append(' ');
+		}
+		c = parseString.charAt(--pos);
+		if (isValidCharacterInCommand(prev) && isValidCharacterInCommand(c)) {
+		    oc = cc = 0;
+		}
+	    }
+
             if (c == open.charAt(oc))
                 oc++;
             else
                 oc = 0;
 
-            if (c == close.charAt(cc))
+            if (c == close.charAt(cc)) {
+		if (cc == 0) {
+		    startC = pos;
+		}
                 cc++;
-            else
+	    } else
                 cc = 0;
 
             if (pos + 1 < len) {
                 c1 = parseString.charAt(pos + 1);
 
                 if (oc == ol) {
-                    if ((c1 < 'a' || c1 > 'z') && (c1 < 'A' || c1 > 'Z')) {
+                    if (!lastO || !isValidCharacterInCommand(c1)) {
                         group++;
                     }
                     oc = 0;
                 }
 
                 if (cc == cl) {
-                    if ((c1 < 'a' || c1 > 'z') && (c1 < 'A' || c1 > 'Z')) {
+                    if (!lastC || !isValidCharacterInCommand(c1)) {
                         group--;
                     }
                     cc = 0;
                 }
-
             } else {
                 if (oc == ol) {
                     group++;
@@ -854,14 +869,16 @@ public class TeXParser {
                 }
             }
 
+	    prev = c;
             buf.append(c);
             pos++;
         }
 
-        if (group != 0)
-            throw new ParseException("The token " + open + " must be closed by " + close);
+        if (group != 0) {
+	    throw new ParseException("The token " + open + " must be closed by " + close);
+	}
 
-        return buf.substring(0, buf.length() - cl);
+        return buf.substring(0, buf.length() - pos + startC);
     }
 
     /** Get the argument of a command in his atomic format
@@ -1022,7 +1039,6 @@ public class TeXParser {
 
         while (pos < len) {
             ch = parseString.charAt(pos);
-
             if ((ch < 'a' || ch > 'z') && (ch < 'A' || ch > 'Z') && (atIsLetter == 0 || ch != '@'))
                 break;
 
@@ -1048,19 +1064,14 @@ public class TeXParser {
             return new EmptyAtom();
         }
 
-        SymbolAtom s = null;
-        TeXFormula predef = null;
-
         if (MacroInfo.Commands.get(command) != null)
             return processCommands(command);
 
         try {
-            predef = TeXFormula.get(command);
-            return predef.root;
+            return TeXFormula.get(command).root;
         } catch (FormulaNotFoundException e) {
             try {
-                s = SymbolAtom.get(command);
-                return s;
+                return SymbolAtom.get(command);
             } catch (SymbolNotFoundException e1) { }
         }
 
@@ -1229,8 +1240,19 @@ public class TeXParser {
                     break;
                 pos++;
             }
-        } else return false;
+        } else {
+	    return false;
+	}
+
         return Character.isLetter(c);
+    }
+
+    /** Test the validity of a character in a command. It must contains only alpha characters and eventually a @ if makeAtletter activated
+     * @param com the command's name
+     * @return the validity of the name
+     */
+    public boolean isValidCharacterInCommand(char ch) {
+	return Character.isLetter(ch) || (atIsLetter != 0 && ch == '@');
     }
 
     private void skipWhiteSpace() {

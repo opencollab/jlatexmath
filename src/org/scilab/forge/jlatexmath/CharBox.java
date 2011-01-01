@@ -32,6 +32,9 @@ package org.scilab.forge.jlatexmath;
 import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
+import java.awt.geom.Rectangle2D;
+import java.awt.Stroke;
+import java.awt.BasicStroke;
 
 /**
  * A box representing a single character.
@@ -58,6 +61,7 @@ public class CharBox extends Box {
     }
     
     public void draw(Graphics2D g2, float x, float y) {
+	drawDebug(g2, x, y);
 	AffineTransform at = g2.getTransform();
         g2.translate(x, y);
 	Font font = FontInfo.getFont(cf.fontId);        
