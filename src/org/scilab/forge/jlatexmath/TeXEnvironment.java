@@ -62,7 +62,7 @@ public class TeXEnvironment {
 
     public TeXEnvironment(int style, TeXFont tf, int widthUnit, float textwidth) {
         this(style, tf, null, null);
-	this.textwidth = new SpaceAtom(widthUnit, textwidth, 0.0f, 0.0f).createBox(this).getWidth();
+	this.textwidth = textwidth * SpaceAtom.getFactor(widthUnit, this);
     }
 
     private TeXEnvironment(int style, TeXFont tf, Color bg, Color c) {
@@ -71,9 +71,9 @@ public class TeXEnvironment {
         background = bg;
         color = c;
     }
-    
+
     public void setTextwidth(int widthUnit, float textwidth) {
-	this.textwidth = new SpaceAtom(widthUnit, textwidth, 0.0f, 0.0f).createBox(this).getWidth();
+	this.textwidth = textwidth * SpaceAtom.getFactor(widthUnit, this);
     }
     
     public float getTextwidth() {

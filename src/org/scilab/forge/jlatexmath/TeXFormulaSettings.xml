@@ -385,7 +385,7 @@
 	  <Map char="&#8648;" formula="\upuparrows"/>
 	  <Map char="&#8815;" formula="\ngtr"/>
 	  <Map char="&#8937;" formula="\succnsim"/>
-	  <Map char="&#10868;" formula="\mathbin{::=}"/>
+	  <Map char="&#10868;" formula="\coloncolonequals"/>
 	  <Map char="&#10889;" formula="\lnapprox"/>
 	  <Map char="&#8919;" formula="\gtrdot"/>
 	  <Map char="&#8230;" formula="\ldots"/>
@@ -406,8 +406,8 @@
 	  <Map char="&#8837;" formula="\not\supset"/>
 	  <Map char="&#8856;" formula="\oslash"/>
 	  <Map char="&#8756;" formula="\therefore"/>
-	  <Map char="&#8758;" formula="\dotdot"/>
-	  <Map char="&#8759;" formula="\mathbin{\dotdot\dotdot}"/>
+	  <Map char="&#8758;" formula="\ratio"/>
+	  <Map char="&#8759;" formula="\mathbin{\ratio\ratio}"/>
 	  <Map char="&#10936;" formula="\succapprox"/>
 	  <Map char="&#8869;" formula="\bot"/>
 	  <Map char="&#8923;" formula="\gtreqless"/>
@@ -459,7 +459,7 @@
 	  <Map char="&#8938;" formula="\ntriangleleft"/>
 	  <Map char="&#8733;" formula="\varpropto"/>
 	  <Map char="&#8902;" formula="\star"/>
-	  <Map char="&#8761;" formula="\excess"/>
+	  <Map char="&#8761;" formula="\minuscolon"/>
 	  <Map char="&#8762;" formula="\geoprop"/>
 	  <Map char="&#8764;" formula="\thicksim"/>
 	  <Map char="&#8882;" formula="\vartriangleleft"/>
@@ -493,6 +493,7 @@
 	  <Map char="&#8747;" formula="\int"/>
 	  <Map char="&#9837;" formula="\flat"/>
 	  <Map char="&#8513;" formula="\Game"/>
+	  <Map char="&#8523;" formula="\parr"/>
 	  <Map char="&#8829;" formula="\succcurlyeq"/>
 	  <Map char="&#9001;" formula="\langle"/>
 	  <Map char="&#8901;" formula="\cdot"/>
@@ -515,6 +516,8 @@
 	  <Map char="&#8900;" formula="\diamond"/>
 	  <Map char="&#8878;" formula="\nVdash"/>
 	  <Map char="&#8786;" formula="\fallingdotseq"/>
+	  <Map char="&#8788;" formula="\colonequals"/>
+	  <Map char="&#8789;" formula="\equalscolon"/>
 	  <Map char="&#8812;" formula="\between"/>
 	  <Map char="&#8595;" formula="\downarrow"/>
 	  <Map char="&#8592;" formula="\gets"/>

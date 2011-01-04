@@ -260,7 +260,7 @@ public abstract class Box {
 	drawDebug(g2, x, y);
     }
 
-    protected void drawDebug(Graphics2D g2, float x, float y) {
+    protected void drawDebug(Graphics2D g2, float x, float y, boolean showDepth) {
 	if (DEBUG) {
 	    Stroke st = g2.getStroke();
 	    g2.setStroke(new BasicStroke((float) (Math.abs(1 / g2.getTransform().getScaleX())), BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER));
@@ -269,7 +269,20 @@ public abstract class Box {
 		width = -width;
 	    }
 	    g2.draw(new Rectangle2D.Float(x, y - height, width, height + depth));
+	    if (showDepth) {
+		Color c = g2.getColor();
+		g2.setColor(Color.LIGHT_GRAY);
+		g2.fill(new Rectangle2D.Float(x, y, width, depth));
+		g2.setColor(c);
+		g2.draw(new Rectangle2D.Float(x, y, width, depth));
+	    }
 	    g2.setStroke(st);
+	}
+    }
+
+    protected void drawDebug(Graphics2D g2, float x, float y) {
+	if (DEBUG) {
+	    drawDebug(g2, x, y, false);
 	}
     }
     

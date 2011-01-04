@@ -1,8 +1,8 @@
-/* CedillaAtom.java
+/* ResizeAtom.java
  * =========================================================================
  * This file is part of the JLaTeXMath Library - http://forge.scilab.org/jlatexmath
  *
- * Copyright (C) 2009 DENIZET Calixte
+ * Copyright (C) 2011 DENIZET Calixte
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -29,37 +29,36 @@
 package org.scilab.forge.jlatexmath;
 
 /**
- * An atom with a cedilla.
+ * An atom representing a scaled Atom.
  */
-public class CedillaAtom extends Atom {
-    
+public class ResizeAtom extends Atom {
+
     private Atom base;
+    private int wunit, hunit;
+    private float w, h;
 
-    public CedillaAtom(Atom base) {
-	this.base = base;
+    public ResizeAtom(Atom base, int wunit, float w, int hunit, float h) {
+        this.type = base.type;
+        this.base = base;
+        this.wunit = wunit;
+        this.hunit = hunit;
+        this.w = w;
+        this.h = h;
     }
-    
-    public Box createBox(TeXEnvironment env) {
-	Box b = base.createBox(env);
-	VerticalBox vb = new VerticalBox();
-	vb.add(b);
-	Char ch = env.getTeXFont().getChar("jlatexmathcedilla", env.getStyle());
-	float italic = ch.getItalic();
-	Box cedilla = new CharBox(ch);
-	Box y;
-	if (Math.abs(italic) > TeXFormula.PREC) {
-            y = new HorizontalBox(new StrutBox(-italic, 0, 0, 0));
-            y.add(cedilla);
-        } else
-            y = cedilla;
 
-	Box ce = new HorizontalBox(y, b.getWidth(), TeXConstants.ALIGN_CENTER);
-	float x = 0.4f * SpaceAtom.getFactor(TeXConstants.UNIT_MU, env);
-	vb.add(new StrutBox(0, -x, 0, 0));
-	vb.add(ce);
-	float f = vb.getHeight() + vb.getDepth();
-	vb.setHeight(b.getHeight());
-	vb.setDepth(f - b.getHeight());
-	return vb;
-    } 
+    public int getLeftType() {
+        return base.getLeftType();
+    }
+
+    public int getRightType() {
+        return base.getRightType();
+    }
+
+    public Box createBox(TeXEnvironment env) {
+        Box bbox = base.createBox(env);
+        double xscl = w * SpaceAtom.getFactor(wunit, env) / bbox.width;
+        double yscl = h * SpaceAtom.getFactor(hunit, env) / bbox.height;
+
+        return new ScaleBox(bbox, xscl, yscl);
+    }
 }

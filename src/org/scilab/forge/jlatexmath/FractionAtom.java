@@ -182,7 +182,7 @@ public class FractionAtom extends Atom {
         float drt = tf.getDefaultRuleThickness(style);
         if (noDefault)
             // convert the thickness to pixels
-            thickness = new SpaceAtom(unit, 0, thickness, 0).createBox(env).getHeight();
+	    thickness *= SpaceAtom.getFactor(unit, env); 
         else
             thickness = (defFactorSet ? defFactor * drt : drt);
         

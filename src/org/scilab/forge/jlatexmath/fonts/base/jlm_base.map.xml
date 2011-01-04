@@ -14,6 +14,8 @@
 		<SymbolMapping name="guilsinglright" ch="35" fontId="jlm_jlmi10"/>
 		<SymbolMapping name="textperthousand" ch="37" fontId="jlm_jlmr10"/>
 		<SymbolMapping name="textpertenthousand" ch="38" fontId="jlm_jlmr10"/>
+		<SymbolMapping name="textdbend" ch="126" fontId="jlm_jlmr10_unchanged"/>
+		<SymbolMapping name="dbend" ch="127" fontId="jlm_jlmr10_unchanged"/>
 
 <!-- this symbol is not defined in "TeXSymbols.xml", because it's not meant to be used as a symbol. 
 Use "surd" instead. -->

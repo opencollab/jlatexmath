@@ -1510,6 +1510,42 @@
 		</CreateCommand>
 		<Return name="f" />
 	</Command>
+
+	<Command name="resizebox" enabled="true">
+		<CreateCommand name="f">
+			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+			<Argument type="String" value="resizebox_macro" />
+			<Argument type="float" value="3" />
+		</CreateCommand>
+		<Return name="f" />
+	</Command>
+
+	<Command name="shadowbox" enabled="true">
+		<CreateCommand name="f">
+			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+			<Argument type="String" value="shadowbox_macro" />
+			<Argument type="float" value="1" />
+		</CreateCommand>
+		<Return name="f" />
+	</Command>
+
+	<Command name="ovalbox" enabled="true">
+		<CreateCommand name="f">
+			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+			<Argument type="String" value="ovalbox_macro" />
+			<Argument type="float" value="1" />
+		</CreateCommand>
+		<Return name="f" />
+	</Command>
+
+	<Command name="doublebox" enabled="true">
+		<CreateCommand name="f">
+			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+			<Argument type="String" value="doublebox_macro" />
+			<Argument type="float" value="1" />
+		</CreateCommand>
+		<Return name="f" />
+	</Command>
 	
 	<Command name="phantom" enabled="true">
 		<CreateCommand name="f">
@@ -1898,10 +1934,10 @@
 		<Return name="f" />
 	</Command>
 
-	<Command name="dotdot" enabled="true">
+	<Command name="ratio" enabled="true">
 		<CreateCommand name="f">
 			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="dotdot_macro" />
+			<Argument type="String" value="ratio_macro" />
 			<Argument type="float" value="0" />
 		</CreateCommand>
 		<Return name="f" />
@@ -1925,10 +1961,154 @@
 		<Return name="f" />
 	</Command>
 
-	<Command name="excess" enabled="true">
+	<Command name="minuscolon" enabled="true">
 		<CreateCommand name="f">
 			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="excess_macro" />
+			<Argument type="String" value="minuscolon_macro" />
+			<Argument type="float" value="0" />
+		</CreateCommand>
+		<Return name="f" />
+	</Command>
+
+	<Command name="minuscoloncolon" enabled="true">
+		<CreateCommand name="f">
+			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+			<Argument type="String" value="minuscoloncolon_macro" />
+			<Argument type="float" value="0" />
+		</CreateCommand>
+		<Return name="f" />
+	</Command>
+
+	<Command name="simcolon" enabled="true">
+		<CreateCommand name="f">
+			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+			<Argument type="String" value="simcolon_macro" />
+			<Argument type="float" value="0" />
+		</CreateCommand>
+		<Return name="f" />
+	</Command>
+
+	<Command name="simcoloncolon" enabled="true">
+		<CreateCommand name="f">
+			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+			<Argument type="String" value="simcoloncolon_macro" />
+			<Argument type="float" value="0" />
+		</CreateCommand>
+		<Return name="f" />
+	</Command>
+
+	<Command name="approxcolon" enabled="true">
+		<CreateCommand name="f">
+			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+			<Argument type="String" value="approxcolon_macro" />
+			<Argument type="float" value="0" />
+		</CreateCommand>
+		<Return name="f" />
+	</Command>
+
+	<Command name="approxcoloncolon" enabled="true">
+		<CreateCommand name="f">
+			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+			<Argument type="String" value="approxcoloncolon_macro" />
+			<Argument type="float" value="0" />
+		</CreateCommand>
+		<Return name="f" />
+	</Command>
+
+	<Command name="coloncolon" enabled="true">
+		<CreateCommand name="f">
+			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+			<Argument type="String" value="coloncolon_macro" />
+			<Argument type="float" value="0" />
+		</CreateCommand>
+		<Return name="f" />
+	</Command>
+
+	<Command name="equalscolon" enabled="true">
+		<CreateCommand name="f">
+			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+			<Argument type="String" value="equalscolon_macro" />
+			<Argument type="float" value="0" />
+		</CreateCommand>
+		<Return name="f" />
+	</Command>
+
+	<Command name="equalscoloncolon" enabled="true">
+		<CreateCommand name="f">
+			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+			<Argument type="String" value="equalscoloncolon_macro" />
+			<Argument type="float" value="0" />
+		</CreateCommand>
+		<Return name="f" />
+	</Command>
+
+	<Command name="colonminus" enabled="true">
+		<CreateCommand name="f">
+			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+			<Argument type="String" value="colonminus_macro" />
+			<Argument type="float" value="0" />
+		</CreateCommand>
+		<Return name="f" />
+	</Command>
+
+	<Command name="coloncolonminus" enabled="true">
+		<CreateCommand name="f">
+			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+			<Argument type="String" value="coloncolonminus_macro" />
+			<Argument type="float" value="0" />
+		</CreateCommand>
+		<Return name="f" />
+	</Command>
+
+	<Command name="colonequals" enabled="true">
+		<CreateCommand name="f">
+			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+			<Argument type="String" value="colonequals_macro" />
+			<Argument type="float" value="0" />
+		</CreateCommand>
+		<Return name="f" />
+	</Command>
+
+	<Command name="coloncolonequals" enabled="true">
+		<CreateCommand name="f">
+			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+			<Argument type="String" value="coloncolonequals_macro" />
+			<Argument type="float" value="0" />
+		</CreateCommand>
+		<Return name="f" />
+	</Command>
+
+	<Command name="colonsim" enabled="true">
+		<CreateCommand name="f">
+			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+			<Argument type="String" value="colonsim_macro" />
+			<Argument type="float" value="0" />
+		</CreateCommand>
+		<Return name="f" />
+	</Command>
+
+	<Command name="coloncolonsim" enabled="true">
+		<CreateCommand name="f">
+			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+			<Argument type="String" value="coloncolonsim_macro" />
+			<Argument type="float" value="0" />
+		</CreateCommand>
+		<Return name="f" />
+	</Command>
+
+	<Command name="colonapprox" enabled="true">
+		<CreateCommand name="f">
+			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+			<Argument type="String" value="colonapprox_macro" />
+			<Argument type="float" value="0" />
+		</CreateCommand>
+		<Return name="f" />
+	</Command>
+
+	<Command name="coloncolonapprox" enabled="true">
+		<CreateCommand name="f">
+			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+			<Argument type="String" value="coloncolonapprox_macro" />
 			<Argument type="float" value="0" />
 		</CreateCommand>
 		<Return name="f" />

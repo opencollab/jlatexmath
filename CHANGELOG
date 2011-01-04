@@ -1,5 +1,9 @@
 jlatexmath (0.9.4)
 
+	* Add a static method TeXFormula.setDPITarget(float dpi).
+
+	* Add shadowbox, doublebox and ovalbox.
+
         * Fix bugs on rotatebox (bad default center), with the parser
           (...\end{foo}a... gave an error)) and improve the debug mode.
 

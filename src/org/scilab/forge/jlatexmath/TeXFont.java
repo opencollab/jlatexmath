@@ -37,9 +37,6 @@ package org.scilab.forge.jlatexmath;
  */
 public interface TeXFont {
     
-    // point-to-pixel conversion
-    public static final float PIXELS_PER_POINT = 1f;
-    
     public static final int NO_FONT = -1;
     
     /**

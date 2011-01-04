@@ -64,7 +64,7 @@ public class CharBox extends Box {
 	drawDebug(g2, x, y);
 	AffineTransform at = g2.getTransform();
         g2.translate(x, y);
-	Font font = FontInfo.getFont(cf.fontId);        
+	Font font = FontInfo.getFont(cf.fontId);
         if (size != 1) {
 	    g2.scale(size, size);
 	}

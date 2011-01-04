@@ -33,15 +33,20 @@ package org.scilab.forge.jlatexmath;
  */
 public class RuleAtom extends Atom {
     
+    private int wunit, hunit, runit;
+    private float w, h, r;
     private SpaceAtom width, height, raise;
  
     public RuleAtom(int wunit, float width, int hunit, float height, int runit, float raise) {
-	this.width = new SpaceAtom(wunit, width, 0.0f, 0.0f);
-	this.height = new SpaceAtom(hunit, height, 0.0f, 0.0f);
-	this.raise = new SpaceAtom(runit, raise, 0.0f, 0.0f);
+	this.wunit = wunit;
+	this.hunit = hunit;
+	this.runit = runit;
+	this.w = width;
+	this.h = height;
+	this.r = raise;
     }
     
     public Box createBox(TeXEnvironment env) {
-	return new HorizontalRule(height.createBox(env).getWidth(), width.createBox(env).getWidth(), raise.createBox(env).getWidth()); 
+	return new HorizontalRule(h * SpaceAtom.getFactor(hunit, env), w * SpaceAtom.getFactor(wunit, env), r * SpaceAtom.getFactor(runit, env)); 
     }    
 }

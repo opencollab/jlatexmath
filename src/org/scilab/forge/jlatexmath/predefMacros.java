@@ -91,6 +91,8 @@ public class predefMacros {
 	NewCommandMacro.addNewCommand("texttt", "\\mathtt{\\text{#1}}", 1);
 	NewCommandMacro.addNewCommand("textrm", "\\text{#1}", 1);
 	NewCommandMacro.addNewCommand("degree", "^\\circ", 0);
+	NewCommandMacro.addNewCommand("with", "\\mathbin{\\&}", 0);
+	NewCommandMacro.addNewCommand("parr", "\\mathbin{\\rotatebox[origin=c]{180}{\\&}}", 0);
     }
 
     public Atom Braket_macro(TeXParser tp, String[] args) throws ParseException {
@@ -1068,6 +1070,24 @@ public class predefMacros {
     public Atom scalebox_macro(TeXParser tp, String[] args) throws ParseException {
 	return new ScaleAtom(new TeXFormula(tp.getIsPartial(), args[2]).root, Double.parseDouble(args[1]), args[3] == null ? Double.parseDouble(args[1]) : Double.parseDouble(args[3]));
     }
+
+    public Atom resizebox_macro(TeXParser tp, String[] args) throws ParseException {
+	float[] w = SpaceAtom.getLength(args[1]);
+	float[] h = SpaceAtom.getLength(args[2]);
+	return new ResizeAtom(new TeXFormula(tp.getIsPartial(), args[3]).root, (int) w[0], w[1], (int) h[0], h[1]);
+    }
+
+    public Atom shadowbox_macro(TeXParser tp, String[] args) throws ParseException {
+	return new ShadowAtom(new TeXFormula(tp.getIsPartial(), args[1]).root);
+    }
+
+    public Atom ovalbox_macro(TeXParser tp, String[] args) throws ParseException {
+	return new OvalAtom(new TeXFormula(tp.getIsPartial(), args[1]).root);
+    }
+
+    public Atom doublebox_macro(TeXParser tp, String[] args) throws ParseException {
+	return new DoubleFramedAtom(new TeXFormula(tp.getIsPartial(), args[1]).root);
+    }
     
     public Atom definecolor_macro(TeXParser tp, String[] args) throws ParseException {
 	Color color = null;
@@ -1099,16 +1119,24 @@ public class predefMacros {
     }
     
     public Atom fgcolor_macro(TeXParser tp, String[] args) throws ParseException {
+	String code = args[1] == null ? "" : args[1].trim();
+	if (!code.startsWith("#")) {
+	    code = "#" + code;
+	}
 	try {
-	    return new ColorAtom(new TeXFormula(tp.getIsPartial(), args[2]).root, null, Color.decode("#" + args[1]));
+	    return new ColorAtom(new TeXFormula(tp.getIsPartial(), args[2]).root, null, Color.decode(code));
 	} catch (NumberFormatException e) {
 	    throw new ParseException(e.toString());
 	}
     }	
 
     public Atom bgcolor_macro(TeXParser tp, String[] args) throws ParseException {
+	String code = args[1] == null ? "" : args[1].trim();
+	if (!code.startsWith("#")) {
+	    code = "#" + code;
+	}
 	try {
-	    return new ColorAtom(new TeXFormula(tp.getIsPartial(), args[2]).root, Color.decode("#" + args[1]), null);
+	    return new ColorAtom(new TeXFormula(tp.getIsPartial(), args[2]).root, Color.decode(code), null);
 	} catch (NumberFormatException e) {
 	    throw new ParseException(e.toString());
 	}
@@ -1203,7 +1231,7 @@ public class predefMacros {
 	return new TypedAtom(TeXConstants.TYPE_BINARY_OPERATOR, TeXConstants.TYPE_BINARY_OPERATOR, at);
     }
 
-    public Atom dotdot_macro(TeXParser tp, String[] args) throws ParseException {
+    public Atom ratio_macro(TeXParser tp, String[] args) throws ParseException {
 	Atom at = new UnderOverAtom(SymbolAtom.get("normaldot"), SymbolAtom.get("normaldot"), TeXConstants.UNIT_MU, 5.2f, false, true);
 	return new TypedAtom(TeXConstants.TYPE_RELATION, TeXConstants.TYPE_RELATION, at);
     }
@@ -1216,10 +1244,138 @@ public class predefMacros {
 	return new TypedAtom(TeXConstants.TYPE_RELATION, TeXConstants.TYPE_RELATION, at);
     }
 
-    public Atom excess_macro(TeXParser tp, String[] args) throws ParseException {
-	RowAtom sdot = new RowAtom(new SpaceAtom(TeXConstants.UNIT_EM, 2f, 0f, 0f));
-	sdot.add(SymbolAtom.get("normaldot"));
-	Atom at = new UnderOverAtom(SymbolAtom.get("minus"), sdot, TeXConstants.UNIT_MU, -3.4f, false, sdot, TeXConstants.UNIT_MU, -3.4f, false);
+    public Atom minuscolon_macro(TeXParser tp, String[] args) throws ParseException {
+	RowAtom at = new RowAtom(SymbolAtom.get("minus"));
+	at.add(new SpaceAtom(TeXConstants.UNIT_EM, -0.22f, 0f, 0f));
+	at.add(new UnderOverAtom(SymbolAtom.get("normaldot"), SymbolAtom.get("normaldot"), TeXConstants.UNIT_MU, 5.2f, false, true));
+	return new TypedAtom(TeXConstants.TYPE_RELATION, TeXConstants.TYPE_RELATION, at);
+    }
+
+    public Atom minuscoloncolon_macro(TeXParser tp, String[] args) throws ParseException {
+	RowAtom at = new RowAtom(SymbolAtom.get("minus"));
+	at.add(new SpaceAtom(TeXConstants.UNIT_EM, -0.22f, 0f, 0f));
+	Atom colon = new UnderOverAtom(SymbolAtom.get("normaldot"), SymbolAtom.get("normaldot"), TeXConstants.UNIT_MU, 5.2f, false, true); 
+	at.add(colon);
+	at.add(colon);
+	return new TypedAtom(TeXConstants.TYPE_RELATION, TeXConstants.TYPE_RELATION, at);
+    }
+
+    public Atom simcolon_macro(TeXParser tp, String[] args) throws ParseException {
+	RowAtom at = new RowAtom(SymbolAtom.get("sim"));
+	at.add(new SpaceAtom(TeXConstants.UNIT_EM, -0.22f, 0f, 0f));
+	at.add(new UnderOverAtom(SymbolAtom.get("normaldot"), SymbolAtom.get("normaldot"), TeXConstants.UNIT_MU, 5.2f, false, true));
+	return new TypedAtom(TeXConstants.TYPE_RELATION, TeXConstants.TYPE_RELATION, at);
+    }
+
+    public Atom simcoloncolon_macro(TeXParser tp, String[] args) throws ParseException {
+	RowAtom at = new RowAtom(SymbolAtom.get("sim"));
+	at.add(new SpaceAtom(TeXConstants.UNIT_EM, -0.22f, 0f, 0f));
+	Atom colon = new UnderOverAtom(SymbolAtom.get("normaldot"), SymbolAtom.get("normaldot"), TeXConstants.UNIT_MU, 5.2f, false, true); 
+	at.add(colon);
+	at.add(colon);
+	return new TypedAtom(TeXConstants.TYPE_RELATION, TeXConstants.TYPE_RELATION, at);
+    }
+
+    public Atom approxcolon_macro(TeXParser tp, String[] args) throws ParseException {
+	RowAtom at = new RowAtom(SymbolAtom.get("approx"));
+	at.add(new SpaceAtom(TeXConstants.UNIT_EM, -0.22f, 0f, 0f));
+	at.add(new UnderOverAtom(SymbolAtom.get("normaldot"), SymbolAtom.get("normaldot"), TeXConstants.UNIT_MU, 5.2f, false, true));
+	return new TypedAtom(TeXConstants.TYPE_RELATION, TeXConstants.TYPE_RELATION, at);
+    }
+
+    public Atom approxcoloncolon_macro(TeXParser tp, String[] args) throws ParseException {
+	RowAtom at = new RowAtom(SymbolAtom.get("approx"));
+	at.add(new SpaceAtom(TeXConstants.UNIT_EM, -0.22f, 0f, 0f));
+	Atom colon = new UnderOverAtom(SymbolAtom.get("normaldot"), SymbolAtom.get("normaldot"), TeXConstants.UNIT_MU, 5.2f, false, true); 
+	at.add(colon);
+	at.add(colon);
+	return new TypedAtom(TeXConstants.TYPE_RELATION, TeXConstants.TYPE_RELATION, at);
+    }
+
+    public Atom equalscolon_macro(TeXParser tp, String[] args) throws ParseException {
+	RowAtom at = new RowAtom(SymbolAtom.get("equals"));
+	at.add(new SpaceAtom(TeXConstants.UNIT_EM, -0.22f, 0f, 0f));
+	at.add(new UnderOverAtom(SymbolAtom.get("normaldot"), SymbolAtom.get("normaldot"), TeXConstants.UNIT_MU, 5.2f, false, true));
+	return new TypedAtom(TeXConstants.TYPE_RELATION, TeXConstants.TYPE_RELATION, at);
+    }
+
+    public Atom equalscoloncolon_macro(TeXParser tp, String[] args) throws ParseException {
+	RowAtom at = new RowAtom(SymbolAtom.get("equals"));
+	at.add(new SpaceAtom(TeXConstants.UNIT_EM, -0.22f, 0f, 0f));
+	Atom colon = new UnderOverAtom(SymbolAtom.get("normaldot"), SymbolAtom.get("normaldot"), TeXConstants.UNIT_MU, 5.2f, false, true); 
+	at.add(colon);
+	at.add(colon);
+	return new TypedAtom(TeXConstants.TYPE_RELATION, TeXConstants.TYPE_RELATION, at);
+    }
+
+    public Atom colonminus_macro(TeXParser tp, String[] args) throws ParseException {
+	RowAtom at = new RowAtom(new UnderOverAtom(SymbolAtom.get("normaldot"), SymbolAtom.get("normaldot"), TeXConstants.UNIT_MU, 5.2f, false, true));
+	at.add(new SpaceAtom(TeXConstants.UNIT_EM, -0.75f, 0f, 0f));
+	at.add(SymbolAtom.get("minus"));
+	return new TypedAtom(TeXConstants.TYPE_RELATION, TeXConstants.TYPE_RELATION, at);
+    }
+
+    public Atom coloncolonminus_macro(TeXParser tp, String[] args) throws ParseException {
+	Atom colon = new UnderOverAtom(SymbolAtom.get("normaldot"), SymbolAtom.get("normaldot"), TeXConstants.UNIT_MU, 5.2f, false, true);
+	RowAtom at = new RowAtom(colon);
+	at.add(colon);
+	at.add(new SpaceAtom(TeXConstants.UNIT_EM, -0.75f, 0f, 0f));
+	at.add(SymbolAtom.get("minus"));
+	return new TypedAtom(TeXConstants.TYPE_RELATION, TeXConstants.TYPE_RELATION, at);
+    }
+
+    public Atom colonequals_macro(TeXParser tp, String[] args) throws ParseException {
+	RowAtom at = new RowAtom(new UnderOverAtom(SymbolAtom.get("normaldot"), SymbolAtom.get("normaldot"), TeXConstants.UNIT_MU, 5.2f, false, true));
+	at.add(new SpaceAtom(TeXConstants.UNIT_EM, -0.75f, 0f, 0f));
+	at.add(SymbolAtom.get("equals"));
+	return new TypedAtom(TeXConstants.TYPE_RELATION, TeXConstants.TYPE_RELATION, at);
+    }
+
+    public Atom coloncolonequals_macro(TeXParser tp, String[] args) throws ParseException {
+	Atom colon = new UnderOverAtom(SymbolAtom.get("normaldot"), SymbolAtom.get("normaldot"), TeXConstants.UNIT_MU, 5.2f, false, true);
+	RowAtom at = new RowAtom(colon);
+	at.add(colon);
+	at.add(new SpaceAtom(TeXConstants.UNIT_EM, -0.75f, 0f, 0f));
+	at.add(SymbolAtom.get("equals"));
+	return new TypedAtom(TeXConstants.TYPE_RELATION, TeXConstants.TYPE_RELATION, at);
+    }
+
+    public Atom coloncolon_macro(TeXParser tp, String[] args) throws ParseException {
+	Atom colon = new UnderOverAtom(SymbolAtom.get("normaldot"), SymbolAtom.get("normaldot"), TeXConstants.UNIT_MU, 5.2f, false, true);
+	RowAtom at = new RowAtom(colon);
+	at.add(colon);
+	return new TypedAtom(TeXConstants.TYPE_RELATION, TeXConstants.TYPE_RELATION, at);
+    }
+
+    public Atom colonsim_macro(TeXParser tp, String[] args) throws ParseException {
+	RowAtom at = new RowAtom(new UnderOverAtom(SymbolAtom.get("normaldot"), SymbolAtom.get("normaldot"), TeXConstants.UNIT_MU, 5.2f, false, true));
+	at.add(new SpaceAtom(TeXConstants.UNIT_EM, -0.75f, 0f, 0f));
+	at.add(SymbolAtom.get("sim"));
+	return new TypedAtom(TeXConstants.TYPE_RELATION, TeXConstants.TYPE_RELATION, at);
+    }
+
+    public Atom coloncolonsim_macro(TeXParser tp, String[] args) throws ParseException {
+	Atom colon = new UnderOverAtom(SymbolAtom.get("normaldot"), SymbolAtom.get("normaldot"), TeXConstants.UNIT_MU, 5.2f, false, true);
+	RowAtom at = new RowAtom(colon);
+	at.add(colon);
+	at.add(new SpaceAtom(TeXConstants.UNIT_EM, -0.75f, 0f, 0f));
+	at.add(SymbolAtom.get("sim"));
+	return new TypedAtom(TeXConstants.TYPE_RELATION, TeXConstants.TYPE_RELATION, at);
+    }
+
+    public Atom colonapprox_macro(TeXParser tp, String[] args) throws ParseException {
+	RowAtom at = new RowAtom(new UnderOverAtom(SymbolAtom.get("normaldot"), SymbolAtom.get("normaldot"), TeXConstants.UNIT_MU, 5.2f, false, true));
+	at.add(new SpaceAtom(TeXConstants.UNIT_EM, -0.75f, 0f, 0f));
+	at.add(SymbolAtom.get("approx"));
+	return new TypedAtom(TeXConstants.TYPE_RELATION, TeXConstants.TYPE_RELATION, at);
+    }
+
+    public Atom coloncolonapprox_macro(TeXParser tp, String[] args) throws ParseException {
+	Atom colon = new UnderOverAtom(SymbolAtom.get("normaldot"), SymbolAtom.get("normaldot"), TeXConstants.UNIT_MU, 5.2f, false, true);
+	RowAtom at = new RowAtom(colon);
+	at.add(colon);
+	at.add(new SpaceAtom(TeXConstants.UNIT_EM, -0.75f, 0f, 0f));
+	at.add(SymbolAtom.get("approx"));
 	return new TypedAtom(TeXConstants.TYPE_RELATION, TeXConstants.TYPE_RELATION, at);
     }
 
@@ -1276,8 +1432,11 @@ public class predefMacros {
     public Atom char_macro(TeXParser tp, String[] args) throws ParseException {
 	String number = args[1];
 	int radix = 10;
-	if (number.startsWith("0x")) {
+	if (number.startsWith("0x") || number.startsWith("0X")) {
 	    number = number.substring(2);
+	    radix = 16;
+	} else if (number.startsWith("x") || number.startsWith("X")) {
+	    number = number.substring(1);
 	    radix = 16;
 	} else if (number.startsWith("0")) {
 	    number = number.substring(1);
@@ -1288,6 +1447,6 @@ public class predefMacros {
     }
 
     public Atom T_macro(TeXParser tp, String[] args) throws ParseException {
-	return new RotateAtom(new TeXFormula(tp.getIsPartial(), args[1]).root, 180, "origin=c");
+	return new RotateAtom(new TeXFormula(tp.getIsPartial(), args[1]).root, 180, "origin=cc");
     }
 }

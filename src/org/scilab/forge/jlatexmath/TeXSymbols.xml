@@ -47,7 +47,8 @@
   <Symbol name="ogonek" type="acc" />
   <Symbol name="lq" type="ord" />
   <Symbol name="rq" type="ord" />
-
+  <Symbol name="textdbend" type="ord" />
+  <Symbol name="dbend" type="ord" />
   <Symbol name="shortleftarrow" type="rel" />
   <Symbol name="shortrightarrow" type="rel" />
   <Symbol name="shortuparrow" type="rel" />

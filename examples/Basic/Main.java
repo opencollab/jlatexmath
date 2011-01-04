@@ -2,7 +2,7 @@
  * =========================================================================
  * This file is part of the JLaTeXMath Library - http://jlatexmath.sourceforge.net
  * 
- * Copyright (C) 2009 DENIZET Calixte
+ * Copyright (C) 2009-2011 DENIZET Calixte
  * 
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -33,5 +33,6 @@ public class Main {
         Example3.main(new String[0]);
         Example4.main(new String[0]);
         Example5.main(new String[0]);
+        Example6.main(new String[0]);
     }
 }

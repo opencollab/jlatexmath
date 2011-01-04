@@ -38,11 +38,9 @@ import java.util.ListIterator;
 class VerticalBox extends Box {
     
     private float leftMostPos = Float.MAX_VALUE;
-    private float rightMostPos = Float.MIN_VALUE; // NOPMD
+    private float rightMostPos = Float.MIN_VALUE;
     
-    public VerticalBox() {
-        // empty
-    }
+    public VerticalBox() { }
     
     public VerticalBox(Box b, float rest, int alignment) {
         this();
@@ -74,8 +72,7 @@ class VerticalBox extends Box {
     
     private void recalculateWidth(Box b) {
         leftMostPos = Math.min(leftMostPos, b.shift);
-        rightMostPos = Math.max(rightMostPos, b.shift
-                + (b.width > 0 ? b.width : 0));
+        rightMostPos = Math.max(rightMostPos, b.shift + (b.width > 0 ? b.width : 0));
         width = rightMostPos - leftMostPos;
     }
     

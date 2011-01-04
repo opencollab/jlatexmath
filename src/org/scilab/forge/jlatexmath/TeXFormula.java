@@ -95,6 +95,9 @@ public class TeXFormula {
         { "Vert", "Vert" }
     };
 
+    // point-to-pixel conversion
+    public static float PIXELS_PER_POINT = 1f;
+
     // used as second index in "delimiterNames" table (over or under)
     private static final int OVER_DEL = 0;
     private static final int UNDER_DEL = 1;
@@ -150,6 +153,10 @@ public class TeXFormula {
 	tfsp.parseSymbolToFormulaMappings(symbolFormulaMappings, symbolTextMappings);
     }
     
+    public static void setDPITarget(float dpi) {
+	PIXELS_PER_POINT = dpi / 72f;
+    }
+
     // the root atom of the "atom tree" that represents the formula
     public Atom root = null;
     
@@ -555,7 +562,7 @@ public class TeXFormula {
      * @param size the size
      * @param transparency, if true the background is transparent
      * @return the generated image
-     */ 
+     */ static int toto=0;
     public Image createBufferedImage(int style, float size, Color fg, Color bg) throws ParseException {
 	TeXIcon icon = createTeXIcon(style, size);
         icon.setInsets(new Insets(2, 2, 2, 2));
@@ -571,7 +578,7 @@ public class TeXFormula {
 	icon.setForeground(fg == null ? Color.BLACK : fg);
         icon.paintIcon(null, g2, 0, 0);
 	g2.dispose();
-	
+
 	return image;
     }
 

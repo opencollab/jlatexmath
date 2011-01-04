@@ -35,12 +35,11 @@ import java.awt.Color;
  */
 public class FBoxAtom extends Atom {
 
-    public static SpaceAtom hsep = new SpaceAtom(TeXConstants.UNIT_EM, 0.5f, 0.0f, 0.0f);
-    public static SpaceAtom vsep = new SpaceAtom(TeXConstants.UNIT_EX, 0.0f, 0.5f, 0.0f);
+    public float INTERSPACE = 0.65f;
 
     // base atom
-    private final Atom base;
-    private Color bg = null, line = null;
+    protected final Atom base;
+    protected Color bg = null, line = null;
 	
     public FBoxAtom(Atom base) {
 	if (base == null)
@@ -58,26 +57,14 @@ public class FBoxAtom extends Atom {
     }
 
     public Box createBox(TeXEnvironment env) {
-	Box Hsep = hsep.createBox(env);
-	Box Vsep = vsep.createBox(env);
 	Box bbase = base.createBox(env);
-	HorizontalBox hb = new HorizontalBox(Hsep);
-	hb.add(bbase);
-	hb.add(Hsep);
-	VerticalBox vb = new VerticalBox();
-	vb.add(Vsep);
-	vb.add(hb);
-	vb.add(Vsep);
-	vb.setHeight(bbase.getHeight() + Vsep.getHeight());
-	vb.setDepth(bbase.getDepth() + Vsep.getHeight());
 	float drt = env.getTeXFont().getDefaultRuleThickness(env.getStyle());
+	float space = INTERSPACE * SpaceAtom.getFactor(TeXConstants.UNIT_EM, env);
 	if (bg == null) {
-	    return new FramedBox(vb, drt);
+	    return new FramedBox(bbase, drt, space);
 	} else {
 	    env.isColored = true;
-	    HorizontalBox hbb = new HorizontalBox(env.getColor(), bg);
-	    hbb.add(vb);
-	    return new FramedBox(hbb, drt, line);
+	    return new FramedBox(bbase, drt, space, line, bg);
 	}
     }
 }

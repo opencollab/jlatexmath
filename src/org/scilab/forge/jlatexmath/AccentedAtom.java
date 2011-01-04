@@ -144,7 +144,7 @@ public class AccentedAtom extends Atom {
         }
         
         // calculate delta
-	float ec = new SpaceAtom(TeXConstants.UNIT_MU, 0, -1, 0).createBox(env).getHeight();
+	float ec = -SpaceAtom.getFactor(TeXConstants.UNIT_MU, env);
         float delta = acc ? ec : Math.min(b.getHeight(), tf.getXHeight(style, ch.getFontCode()));
         
         // create vertical box

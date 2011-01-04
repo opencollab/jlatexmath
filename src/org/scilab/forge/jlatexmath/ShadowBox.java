@@ -32,59 +32,53 @@ import java.awt.Graphics2D;
 import java.awt.Stroke;
 import java.awt.BasicStroke;
 import java.awt.geom.Rectangle2D;
-import java.awt.Color;
 
 /**
  * A box representing a rotated box.
  */
-public class FramedBox extends Box {
+public class ShadowBox extends FramedBox {
     
-    protected Box box;
-    protected float thickness;
-    protected float space;
-    private Color line;
-    private Color bg;
+    private float shadowRule;
 
-    public FramedBox(Box box, float thickness, float space) {
-	this.box = box;
-	this.width = box.width + 2 * thickness + 2 * space;
-	this.height = box.height + thickness + space;
-	this.depth = box.depth + thickness + space;
-	this.shift = box.shift;
-	this.thickness = thickness;
-	this.space = space;
-    }
-
-    public FramedBox(Box box, float thickness, float space, Color line, Color bg) {
-	this(box, thickness, space);
-	this.line = line;
-	this.bg = bg;
+    public ShadowBox(FramedBox fbox, float shadowRule) {
+	super(fbox.box, fbox.thickness, fbox.space);
+	this.shadowRule = shadowRule;
+	depth += shadowRule;
+	width += shadowRule;
     }
 
     public void draw(Graphics2D g2, float x, float y) {
+	float th = thickness / 2;
+	box.draw(g2, x + space + thickness, y);
 	Stroke st = g2.getStroke();
 	g2.setStroke(new BasicStroke(thickness, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER));
-	float th = thickness / 2;
-	if (bg != null) {
-	    Color prev = g2.getColor();
-	    g2.setColor(bg);
-	    g2.fill(new Rectangle2D.Float(x + th, y - height + th, width - thickness, height + depth - thickness));
-	    g2.setColor(prev);
-	}
-	if (line != null) {
-	    Color prev = g2.getColor();
-	    g2.setColor(line);
-	    g2.draw(new Rectangle2D.Float(x + th, y - height + th, width - thickness, height + depth - thickness));
-	    g2.setColor(prev);
-	} else {
-	    g2.draw(new Rectangle2D.Float(x + th, y - height + th, width - thickness, height + depth - thickness));
-	}
+	g2.draw(new Rectangle2D.Float(x + th, y - height + th, width - shadowRule - thickness, height + depth - shadowRule - thickness));
+	float penth = (float) Math.abs(1 / g2.getTransform().getScaleX());
+	g2.setStroke(new BasicStroke(penth, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER));
+	g2.fill(new Rectangle2D.Float(x + shadowRule - penth, y + depth - shadowRule - penth, width - shadowRule, shadowRule));
+	g2.fill(new Rectangle2D.Float(x + width - shadowRule - penth, y - height + th + shadowRule, shadowRule, depth + height - 2 * shadowRule - th));
 	//drawDebug(g2, x, y);
 	g2.setStroke(st);
-	box.draw(g2, x + space + thickness, y);
     }
 
     public int getLastFontId() {
 	return box.getLastFontId();
     }
 }
+/*
+
+    public void draw(Graphics2D g2, float x, float y) {
+	float th = thickness / 2;
+	float sh = shadowRule / 2;
+	box.draw(g2, x + space + thickness, y);
+	Stroke st = g2.getStroke();
+	g2.setStroke(new BasicStroke(shadowRule, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER));
+	g2.draw(new Line2D.Float(x + shadowRule, y + depth - sh, x + width, y +  depth - sh));
+	g2.draw(new Line2D.Float(x + width - sh, y - height + shadowRule, x + width - sh, y + depth - shadowRule));
+	g2.setStroke(new BasicStroke(thickness, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER));
+	g2.draw(new Rectangle2D.Float(x + th, y - height + th, width - shadowRule - thickness, height + depth - shadowRule - thickness));
+	//drawDebug(g2, x, y);
+	g2.setStroke(st);
+    }
+
+*/
