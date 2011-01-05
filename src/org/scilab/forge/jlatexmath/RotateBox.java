@@ -57,7 +57,7 @@ public class RotateBox extends Box {
     private float shiftX;
     private float shiftY;
 
-    public RotateBox(Box b, double angle, int option) {
+    public RotateBox(Box b, double angle, float x, float y) {
         this.box = b;
         this.angle = angle * Math.PI / 180;
         height = b.height;
@@ -65,9 +65,8 @@ public class RotateBox extends Box {
         width = b.width;
         double s = Math.sin(this.angle);
         double c = Math.cos(this.angle);
-        Point2D.Float origin = calculateShift(option);
-        shiftX = (float) (origin.x * (1 - c) + origin.y * s);
-        shiftY = (float) (origin.y * (1 - c) - origin.x * s);
+        shiftX = (float) (x * (1 - c) + y * s);
+        shiftY = (float) (y * (1 - c) - x * s);
         xmax = (float) Math.max(-height * s, Math.max(depth * s, Math.max(width * c + depth * s, width * c - height * s))) + shiftX;
         xmin = (float) Math.min(-height * s, Math.min(depth * s, Math.min(width * c + depth * s, width * c - height * s))) + shiftX;
         ymax = (float) Math.max(height * c, Math.max(-depth * c, Math.max(width * s - depth * c, width * s + height * c)));
@@ -77,15 +76,19 @@ public class RotateBox extends Box {
         depth = -ymin - shiftY;
     }
 
-    public static int getOption(String option) {
+    public RotateBox(Box b, double angle, Point2D.Float origin) {
+        this(b, angle, origin.x, origin.y);
+    }
+
+    public RotateBox(Box b, double angle, int option) {
+        this(b, angle, calculateShift(b, option));
+    }
+
+    public static int getOrigin(String option) {
         if (option == null || option.length() == 0) {
             return BBL;
         }
-        option = option.trim();
-        if (!option.startsWith("origin=")) {
-            return BBL;
-        }
-        option = option.substring("origin=".length());
+
         if (option.length() == 1) {
             option += "c";
         }
@@ -118,56 +121,56 @@ public class RotateBox extends Box {
         return BBL;
     }
 
-    private Point2D.Float calculateShift(int option) {
-        Point2D.Float p = new Point2D.Float(0, -box.depth);
+    private static Point2D.Float calculateShift(Box b, int option) {
+        Point2D.Float p = new Point2D.Float(0, -b.depth);
         switch (option) {
         case BL :
             p.x = 0;
-            p.y = -box.depth;
+            p.y = -b.depth;
             break;
         case BR :
-            p.x = box.width;
-            p.y = -box.depth;
+            p.x = b.width;
+            p.y = -b.depth;
             break;
         case BC :
-            p.x = box.width / 2;
-            p.y = - box.depth;
+            p.x = b.width / 2;
+            p.y = - b.depth;
             break;
         case TL :
             p.x = 0;
-            p.y = box.height;
+            p.y = b.height;
             break;
         case TR :
-            p.x = box.width;
-            p.y = box.height;
+            p.x = b.width;
+            p.y = b.height;
             break;
         case TC :
-            p.x = box.width / 2;
-            p.y = box.height;
+            p.x = b.width / 2;
+            p.y = b.height;
             break;
         case BBL :
             p.x = 0;
             p.y = 0;
             break;
         case BBR :
-            p.x = box.width;
+            p.x = b.width;
             p.y = 0;
             break;
         case BBC :
-            p.x = box.width / 2;
+            p.x = b.width / 2;
             p.y = 0;
             break;
         case CL :
             p.x = 0;
-            p.y = (box.height - box.depth) / 2;
+            p.y = (b.height - b.depth) / 2;
             break;
         case CR :
-            p.x = box.width;
-            p.y = (box.height - box.depth) / 2;
+            p.x = b.width;
+            p.y = (b.height - b.depth) / 2;
             break;
         case CC :
-            p.x = box.width / 2;
-            p.y = (box.height - box.depth) / 2;
+            p.x = b.width / 2;
+            p.y = (b.height - b.depth) / 2;
             break;
         default :
         }

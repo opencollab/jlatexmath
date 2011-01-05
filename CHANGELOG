@@ -1,5 +1,9 @@
 jlatexmath (0.9.4)
 
+	* Handle options in \includegraphics.
+
+        * Add a static method TeXFormula.setDefaultDPI().
+
 	* Add a static method TeXFormula.setDPITarget(float dpi).
 
 	* Add shadowbox, doublebox and ovalbox.

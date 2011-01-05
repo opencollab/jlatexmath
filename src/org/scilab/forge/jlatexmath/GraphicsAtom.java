@@ -38,6 +38,7 @@ import java.awt.Toolkit;
 import java.io.File;
 import java.net.URL;
 import java.net.MalformedURLException;
+import java.util.Map;
 
 /**
  * An atom representing an atom containing a graphic.
@@ -49,7 +50,11 @@ public class GraphicsAtom extends Atom {
     private Label c;
     private int w, h;
 
-    public GraphicsAtom(String path) {
+    private Atom base;
+    private boolean first = true;
+    private int interp = -1;
+
+    public GraphicsAtom(String path, String option) {
 	File f = new File(path);
 	if (!f.exists()) {
 	    try {
@@ -73,8 +78,34 @@ public class GraphicsAtom extends Atom {
 	    }
 	}
 	draw();
+	buildAtom(option);
     }
-    
+
+    protected void buildAtom(String option) {
+	base = this;
+    	Map<String, String> options = ParseOption.parseMap(option);
+	if (options.containsKey("width") || options.containsKey("height")) {
+	    base = new ResizeAtom(base, options.get("width"), options.get("height"), options.containsKey("keepaspectratio"));
+	}
+	if (options.containsKey("scale")) {
+	    double scl = Double.parseDouble(options.get("scale"));
+	    base = new ScaleAtom(base, scl, scl); 
+	}
+	if (options.containsKey("angle") || options.containsKey("origin")) {
+	    base = new RotateAtom(base, options.get("angle"), options.get("origin"));
+	}
+	if (options.containsKey("interpolation")) {
+	    String meth = options.get("interpolation");
+	    if (meth.equalsIgnoreCase("bilinear")) {
+		interp = GraphicsBox.BILINEAR;
+	    } else if (meth.equalsIgnoreCase("bicubic")) {
+		interp = GraphicsBox.BICUBIC;
+	    } else if (meth.equalsIgnoreCase("nearest_neighbor")) {
+		interp = GraphicsBox.NEAREST_NEIGHBOR;
+	    }
+	}
+    }
+	
     public void draw() {
 	if (image != null) {
 	    w = image.getWidth(c);
@@ -88,11 +119,17 @@ public class GraphicsAtom extends Atom {
 
     public Box createBox(TeXEnvironment env) {
 	if (image != null) {
-	    env.isColored = true;
-	    float width = new SpaceAtom(TeXConstants.UNIT_PIXEL, w, 0, 0).createBox(env).getWidth();
-	    float height = new SpaceAtom(TeXConstants.UNIT_PIXEL, h, 0, 0).createBox(env).getWidth();
-	    return new GraphicsBox(bimage, w, h, width, height);
+	    if (first) {
+		first = false;
+		return base.createBox(env);
+	    } else {
+		env.isColored = true;
+		float width = w * SpaceAtom.getFactor(TeXConstants.UNIT_PIXEL, env);
+		float height = h * SpaceAtom.getFactor(TeXConstants.UNIT_PIXEL, env);
+		return new GraphicsBox(bimage, width, height, env.getSize(), interp);
+	    }
 	}
+
 	return new TeXFormula("\\text{ No such image file ! }").root.createBox(env);
     }
 }

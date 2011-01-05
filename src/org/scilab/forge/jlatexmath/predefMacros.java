@@ -152,7 +152,7 @@ public class predefMacros {
     }
 
     public Atom includegraphics_macro(TeXParser tp, String[] args) throws ParseException {
-	return new GraphicsAtom(args[1]);
+	return new GraphicsAtom(args[1], args[2]);
     }
      
     public Atom rule_macro(TeXParser tp, String[] args) throws ParseException {
@@ -1072,9 +1072,7 @@ public class predefMacros {
     }
 
     public Atom resizebox_macro(TeXParser tp, String[] args) throws ParseException {
-	float[] w = SpaceAtom.getLength(args[1]);
-	float[] h = SpaceAtom.getLength(args[2]);
-	return new ResizeAtom(new TeXFormula(tp.getIsPartial(), args[3]).root, (int) w[0], w[1], (int) h[0], h[1]);
+	return new ResizeAtom(new TeXFormula(tp.getIsPartial(), args[3]).root, args[1], args[2], false);
     }
 
     public Atom shadowbox_macro(TeXParser tp, String[] args) throws ParseException {
@@ -1215,7 +1213,7 @@ public class predefMacros {
 	    f = 2.5;
 	}
 
-	return new ScaleAtom(new TeXFormula(tp.getIsPartial(), tp.getOverArgument(), false).root, f, f);
+	return new ScaleAtom(new TeXFormula(tp.getIsPartial(), tp.getOverArgument(), null, false, tp.isIgnoreWhiteSpace()).root, f, f);
     }
 
     public Atom jlatexmathcumsup_macro(TeXParser tp, String[] args) throws ParseException {	
@@ -1448,5 +1446,24 @@ public class predefMacros {
 
     public Atom T_macro(TeXParser tp, String[] args) throws ParseException {
 	return new RotateAtom(new TeXFormula(tp.getIsPartial(), args[1]).root, 180, "origin=cc");
+    }
+
+    public Atom romannumeral_macro(TeXParser tp, String[] args) throws ParseException {
+	int[] numbers = { 1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1};
+        String[] letters = { "M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"};
+	String roman = "";
+        int num = Integer.parseInt(args[1]);
+        for (int i = 0; i < numbers.length; i++) {
+           while (num >= numbers[i]) {
+              roman += letters[i];
+              num -= numbers[i];
+           }
+        }
+	
+	if (args[0].charAt(0) == 'r') {
+	    roman = roman.toLowerCase();
+	}
+
+	return new TeXFormula(roman, false).root;
     }
 }

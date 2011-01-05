@@ -50,10 +50,17 @@ import org.scilab.forge.jlatexmath.TeXIcon;
 public class Example4 {
     public static void main(String[] args) {
 	
-	String latex = "\\mbox{An image from the \\LaTeX3 project }\\includegraphics{lion.png}"; 
-	
+	String latex = "\\begin{array}{|c|c|c|c|}\n";
+	latex += "\\multicolumn{4}{c}{\\shadowbox{\\text{\\Huge An image from the \\LaTeX3 project}}}\\cr\n";
+	latex += "\\hline\n";
+	latex += "\\text{Left}\\includegraphics{lion.png}\\text{Right} & \\text{Left}\\includegraphics[width=3cm,interpolation=bicubic]{lion.png}\\text{Right} & \\text{Left}\\includegraphics[angle=45,width=3cm]{lion.png}\\text{Right} & \\text{Left}\\includegraphics[angle=160]{lion.png}\\text{Right} \\cr\n";
+	latex += "\\hline\n";
+	latex += "\\text{\\backslash includegraphics\\{lion.png\\}} & \\text{\\backslash includegraphics[width=3cm,interpolation=bicubic]\\{lion.png\\}} & \\text{\\backslash includegraphics[angle=45,width=3cm]\\{lion.png\\}} & \\text{\\backslash includegraphics[angle=160]\\{lion.png\\}}\\cr\n";
+	latex += "\\hline\n";
+	latex += "\\end{array}\n";
+
 	TeXFormula formula = new TeXFormula(latex);
-	TeXIcon icon = formula.createTeXIcon(TeXConstants.STYLE_DISPLAY, 20);
+	TeXIcon icon = formula.createTeXIcon(TeXConstants.STYLE_DISPLAY, 10);
 	icon.setInsets(new Insets(5, 5, 5, 5));
 	
 	BufferedImage image = new BufferedImage(icon.getIconWidth(), icon.getIconHeight(), BufferedImage.TYPE_INT_ARGB);

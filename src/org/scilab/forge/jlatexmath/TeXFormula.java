@@ -48,7 +48,9 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Insets;
 import java.awt.image.BufferedImage;
+import java.awt.GraphicsEnvironment;
 import java.awt.Image;
+import java.awt.Toolkit;
 import javax.imageio.ImageIO;
 import javax.imageio.stream.FileImageOutputStream;
 
@@ -135,6 +137,8 @@ public class TeXFormula {
 	    DefaultTeXFont.registerAlphabet((AlphabetRegistration) Class.forName("org.scilab.forge.jlatexmath.cyrillic.CyrillicRegistration").newInstance());
 	    DefaultTeXFont.registerAlphabet((AlphabetRegistration) Class.forName("org.scilab.forge.jlatexmath.greek.GreekRegistration").newInstance());
 	} catch (Exception e) { }
+	
+	setDefaultDPI();
     }
 
     public static void addSymbolMappings(String file) throws ResourceParseException {
@@ -153,8 +157,21 @@ public class TeXFormula {
 	tfsp.parseSymbolToFormulaMappings(symbolFormulaMappings, symbolTextMappings);
     }
     
+    /**
+     * Set the DPI of target
+     * @param dpi the target DPI
+     */
     public static void setDPITarget(float dpi) {
 	PIXELS_PER_POINT = dpi / 72f;
+    }
+
+    /**
+     * Set the default target DPI to the screen dpi (only if we're in non-headless mode)
+     */
+    public static void setDefaultDPI() {
+	if (!GraphicsEnvironment.isHeadless()) {
+	    setDPITarget((float) Toolkit.getDefaultToolkit().getScreenResolution());
+	}
     }
 
     // the root atom of the "atom tree" that represents the formula
