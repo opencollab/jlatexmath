@@ -46,14 +46,17 @@ public class SpaceAtom extends Atom {
 	units.put("px", TeXConstants.UNIT_PIXEL);
 	units.put("pix", TeXConstants.UNIT_PIXEL);
 	units.put("pixel", TeXConstants.UNIT_PIXEL);
-	units.put("pt", TeXConstants.UNIT_POINT);
-	units.put("point", TeXConstants.UNIT_POINT);
+	units.put("pt", TeXConstants.UNIT_PT);
+	units.put("bp", TeXConstants.UNIT_POINT);
 	units.put("pica", TeXConstants.UNIT_PICA);
 	units.put("pc", TeXConstants.UNIT_PICA);
 	units.put("mu", TeXConstants.UNIT_MU);
 	units.put("cm", TeXConstants.UNIT_CM);
 	units.put("mm", TeXConstants.UNIT_MM);
 	units.put("in", TeXConstants.UNIT_IN);
+	units.put("sp", TeXConstants.UNIT_SP);
+	units.put("dd", TeXConstants.UNIT_DD);
+	units.put("dd", TeXConstants.UNIT_CC);
     }
 
     private static interface UnitConversion { // NOPMD
@@ -82,7 +85,7 @@ public class SpaceAtom extends Atom {
             }
         },
         
-        new UnitConversion() {//POINT
+        new UnitConversion() {//BP (or PostScript point)
             public float getPixelConversion(TeXEnvironment env) {
                 return TeXFormula.PIXELS_PER_POINT / env.getSize();
             }
@@ -116,6 +119,30 @@ public class SpaceAtom extends Atom {
 	new UnitConversion() {//IN
             public float getPixelConversion(TeXEnvironment env) {
                 return (72 * TeXFormula.PIXELS_PER_POINT) / env.getSize();
+            }
+        },
+
+	new UnitConversion() {//SP
+            public float getPixelConversion(TeXEnvironment env) {
+                return (65536 * TeXFormula.PIXELS_PER_POINT) / env.getSize();
+            }
+        },
+
+	new UnitConversion() {//PT (or Standard Anglo-American point)
+            public float getPixelConversion(TeXEnvironment env) {
+                return (.9962640099f * TeXFormula.PIXELS_PER_POINT) / env.getSize();
+            }
+        },
+
+	new UnitConversion() {//DD
+            public float getPixelConversion(TeXEnvironment env) {
+                return (1.0660349422f * TeXFormula.PIXELS_PER_POINT) / env.getSize();
+            }
+        },
+
+	new UnitConversion() {//CC
+            public float getPixelConversion(TeXEnvironment env) {
+                return (12.7924193070f * TeXFormula.PIXELS_PER_POINT) / env.getSize();
             }
         }
     };

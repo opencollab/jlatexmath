@@ -96,19 +96,15 @@ public class HorizontalBox extends Box {
     private void recalculate(Box b) {
         curPos += b.getWidth();
         width = Math.max(width, curPos);
-        height = Math.max((children.size() == 0 ? Float.NEGATIVE_INFINITY
-                : height), b.height - b.shift);
-        depth = Math.max(
-                (children.size() == 0 ? Float.NEGATIVE_INFINITY : depth), b.depth
-                + b.shift);
+        height = Math.max((children.size() == 0 ? Float.NEGATIVE_INFINITY : height), b.height - b.shift);
+        depth = Math.max((children.size() == 0 ? Float.NEGATIVE_INFINITY : depth), b.depth + b.shift);
     }
     
     public int getLastFontId() {
         // iterate from the last child box to the first untill a font id is found
         // that's not equal to NO_FONT
         int fontId = TeXFont.NO_FONT;
-        for (ListIterator it = children.listIterator(children.size()); fontId == TeXFont.NO_FONT
-                && it.hasPrevious();)
+        for (ListIterator it = children.listIterator(children.size()); fontId == TeXFont.NO_FONT && it.hasPrevious();)
             fontId = ((Box) it.previous()).getLastFontId();
         
         return fontId;

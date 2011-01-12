@@ -266,7 +266,7 @@ public class TeXConstants {
     public static final int UNIT_PIXEL = 2;
     
     /**
-     * Unit constant: point
+     * Unit constant: postscript point
      */
     public static final int UNIT_POINT = 3;
     
@@ -304,5 +304,32 @@ public class TeXConstants {
      * 1 in = 72 point
      */
    public static final int UNIT_IN = 8;
-    
+
+    /**
+     * Unit constant: sp
+     * <p>
+     * 1 sp = 65536 point
+     */
+   public static final int UNIT_SP = 9;
+
+    /**
+     * Unit constant: in
+     * <p>
+     * 1 in = 72.27 pt
+     */
+   public static final int UNIT_PT = 10;
+
+    /**
+     * Unit constant: in
+     * <p>
+     * 1 in = 72 point
+     */
+   public static final int UNIT_DD = 11;
+
+    /**
+     * Unit constant: in
+     * <p>
+     * 1 in = 72 point
+     */
+   public static final int UNIT_CC = 12;
 }

@@ -1075,6 +1075,19 @@ public class predefMacros {
 	return new ResizeAtom(new TeXFormula(tp.getIsPartial(), args[3]).root, args[1], args[2], false);
     }
 
+    public Atom raisebox_macro(TeXParser tp, String[] args) throws ParseException {
+	float[] raise = SpaceAtom.getLength(args[1]);
+	float[] height = SpaceAtom.getLength(args[3]);
+	float[] depth = SpaceAtom.getLength(args[4]);
+	if (height.length == 1 || height[1] == 0) {
+	    height[0] = -1;
+	}
+	if (depth.length == 1 || depth[1] == 0) {
+	    depth[0] = -1;
+	}
+	return new RaiseAtom(new TeXFormula(tp.getIsPartial(), args[2]).root, (int) raise[0], raise[1], (int) height[0], height[1], (int) depth[0], depth[1]);
+    }
+
     public Atom shadowbox_macro(TeXParser tp, String[] args) throws ParseException {
 	return new ShadowAtom(new TeXFormula(tp.getIsPartial(), args[1]).root);
     }
@@ -1117,7 +1130,7 @@ public class predefMacros {
     }
     
     public Atom fgcolor_macro(TeXParser tp, String[] args) throws ParseException {
-	String code = args[1] == null ? "" : args[1].trim();
+	String code = args[1] == null ? "#000000" : args[1].trim();
 	if (!code.startsWith("#")) {
 	    code = "#" + code;
 	}
@@ -1129,7 +1142,7 @@ public class predefMacros {
     }	
 
     public Atom bgcolor_macro(TeXParser tp, String[] args) throws ParseException {
-	String code = args[1] == null ? "" : args[1].trim();
+	String code = args[1] == null ? "#000000" : args[1].trim();
 	if (!code.startsWith("#")) {
 	    code = "#" + code;
 	}
@@ -1452,7 +1465,7 @@ public class predefMacros {
 	int[] numbers = { 1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1};
         String[] letters = { "M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"};
 	String roman = "";
-        int num = Integer.parseInt(args[1]);
+        int num = Integer.parseInt(args[1].trim());
         for (int i = 0; i < numbers.length; i++) {
            while (num >= numbers[i]) {
               roman += letters[i];

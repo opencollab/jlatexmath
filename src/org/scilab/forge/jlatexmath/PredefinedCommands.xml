@@ -1521,6 +1521,16 @@
 		<Return name="f" />
 	</Command>
 
+	<Command name="raisebox" enabled="true">
+		<CreateCommand name="f">
+			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+			<Argument type="String" value="raisebox_macro" />
+			<Argument type="float" value="2" />
+			<Argument type="float" value="2" />
+		</CreateCommand>
+		<Return name="f" />
+	</Command>
+
 	<Command name="shadowbox" enabled="true">
 		<CreateCommand name="f">
 			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />

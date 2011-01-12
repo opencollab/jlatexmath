@@ -1,5 +1,7 @@
 jlatexmath (0.9.4)
 
+	* Add \raisebox and \romannumeral.
+
 	* Handle options in \includegraphics.
 
         * Add a static method TeXFormula.setDefaultDPI().

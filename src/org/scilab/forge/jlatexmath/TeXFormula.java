@@ -256,7 +256,13 @@ public class TeXFormula {
     public TeXFormula(boolean isPartial, String s, boolean firstpass) throws ParseException {
 	this.textStyle = null;
 	parser = new TeXParser(isPartial, s, this, firstpass);
-        parser.parse();
+	if (isPartial) {
+	    try {
+		parser.parse();
+	    } catch (Exception e) { }
+	} else {
+	    parser.parse();
+	}
     }
     
    /*
@@ -266,13 +272,25 @@ public class TeXFormula {
     public TeXFormula(boolean isPartial, String s, String textStyle) throws ParseException {
         this.textStyle = textStyle;
 	parser = new TeXParser(isPartial, s, this);
-        parser.parse();
+	if (isPartial) {
+	    try {
+		parser.parse();
+	    } catch (Exception e) { }
+	} else {
+	    parser.parse();
+	}
     }
 
     public TeXFormula(boolean isPartial, String s, String textStyle, boolean firstpass, boolean space) throws ParseException {
         this.textStyle = textStyle;
 	parser = new TeXParser(isPartial, s, this, firstpass, space);
-        parser.parse();
+	if (isPartial) {
+	    try {
+		parser.parse();
+	    } catch (Exception e) { }
+	} else {
+	    parser.parse();
+	}
     }
 
     /**

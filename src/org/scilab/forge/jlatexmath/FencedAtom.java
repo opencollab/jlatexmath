@@ -42,8 +42,7 @@ public class FencedAtom extends Atom {
     // parameters used in the TeX algorithm
     private static final int DELIMITER_FACTOR = 901;
     
-    //private static final float DELIMITER_SHORTFALL = 0.5f;
-    private static final SpaceAtom DS = new SpaceAtom(TeXConstants.UNIT_POINT,5f,0f,0f);
+    private static final float DELIMITER_SHORTFALL = 5f;
 
     // base atom
     private final Atom base;
@@ -99,12 +98,12 @@ public class FencedAtom extends Atom {
     }
     
     public Box createBox(TeXEnvironment env) {
-	TeXFont tf = env.getTeXFont();
-	
+	TeXFont tf = env.getTeXFont();	
 	Box content = base.createBox(env);
-	float DELIMITER_SHORTFALL = DS.createBox(env).getWidth();
-	float axis = tf.getAxisHeight(env.getStyle()), delta = Math.max(content.getHeight() - axis, content.getDepth() + axis);
-	float minHeight = Math.max((delta / 500) * DELIMITER_FACTOR, 2 * delta - DELIMITER_SHORTFALL);
+	float shortfall = DELIMITER_SHORTFALL * SpaceAtom.getFactor(TeXConstants.UNIT_POINT, env);
+	float axis = tf.getAxisHeight(env.getStyle());
+	float delta = Math.max(content.getHeight() - axis, content.getDepth() + axis);
+	float minHeight = Math.max((delta / 500) * DELIMITER_FACTOR, 2 * delta - shortfall);
 	
 	// construct box
 	HorizontalBox hBox = new HorizontalBox();
@@ -113,7 +112,7 @@ public class FencedAtom extends Atom {
 	    for (int i = 0; i < middle.size(); i++) {
 		MiddleAtom at = middle.get(i);
 		if (at.base instanceof SymbolAtom) {
-		    Box b = DelimiterFactory.create(((SymbolAtom)at.base).getName(), env, minHeight);
+		    Box b = DelimiterFactory.create(((SymbolAtom) at.base).getName(), env, minHeight);
 		    center(b, axis);
 		    at.box = b;
 		}
@@ -131,18 +130,18 @@ public class FencedAtom extends Atom {
 	}
 	
 	// glue between left delimiter and content (if not whitespace)
-	if (!(base instanceof SpaceAtom))
+	if (!(base instanceof SpaceAtom)) {
 	    hBox.add(Glue.get(TeXConstants.TYPE_OPENING, base.getLeftType(), env));
-	
+	}	
+
 	// add content
 	hBox.add(content);
 	
 	// glue between right delimiter and content (if not whitespace)
-	if (!(base instanceof SpaceAtom))
-	    hBox
-		.add(Glue.get(base.getRightType(), TeXConstants.TYPE_CLOSING,
-			      env));
-	
+	if (!(base instanceof SpaceAtom)) {
+	    hBox.add(Glue.get(base.getRightType(), TeXConstants.TYPE_CLOSING, env));
+	}
+
 	// right delimiter
 	if (right != null) {
 	    Box b = DelimiterFactory.create(right.getName(), env, minHeight);
