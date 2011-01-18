@@ -1,8 +1,8 @@
-/* RomanAtom.java
+/* MathAtom.java
  * =========================================================================
  * This file is part of the JLaTeXMath Library - http://forge.scilab.org/jlatexmath
  * 
- * Copyright (C) 2009 DENIZET Calixte
+ * Copyright (C) 2011 DENIZET Calixte
  * 
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -29,19 +29,19 @@
 package org.scilab.forge.jlatexmath;
 
 /**
- * An atom representing a roman atom. 
+ * An atom representing a math atom. 
  */
-public class RomanAtom extends Atom {
+public class MathAtom extends Atom {
     
     protected Atom base;
     
-    public RomanAtom(Atom base) {
+    public MathAtom(Atom base) {
 	this.base = base;
     }
     
     public Box createBox(TeXEnvironment env) {
 	env = env.copy(env.getTeXFont().copy());
-	env.getTeXFont().setRoman(true);
+	env.getTeXFont().setRoman(false);
 	Box box = base.createBox(env);
 	return box; 
     }   

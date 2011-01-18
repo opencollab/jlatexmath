@@ -627,7 +627,7 @@ public class TeXParser {
                 case DOLLAR :
                     pos++;
                     if (!ignoreWhiteSpace) {// We are in a mbox
-                        formula.add(new TeXFormula(isPartial, getDollarGroup(DOLLAR), false).root);
+                        formula.add(new MathAtom(new TeXFormula(isPartial, getDollarGroup(DOLLAR), false).root));
                     }
                     break;
                 case ESCAPE :
