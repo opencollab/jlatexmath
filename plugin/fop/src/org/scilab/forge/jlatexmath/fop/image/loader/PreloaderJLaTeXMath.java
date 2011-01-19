@@ -61,8 +61,16 @@ public class PreloaderJLaTeXMath extends AbstractImagePreloader {
     
     /** {@inheritDoc} */
     public ImageInfo preloadImage(String uri, Source src, ImageContext context) {
-	Document doc = (Document) ((DOMSource) src).getNode();
-	Element e = doc.getDocumentElement();
+	Document doc;
+	Element e;
+	if (src instanceof DOMSource) {
+	    doc = (Document) ((DOMSource) src).getNode();
+	    e = doc.getDocumentElement();
+	}
+	else {
+	    return null;
+	}
+
 	if (e.getTagName() != "latex") {
 	    return null;
 	}

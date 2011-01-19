@@ -1,5 +1,10 @@
 jlatexmath (0.9.4)
 
+        * Fix a bug in the FOP plugin when latex is mixed with other
+	  image source.
+
+	* $...$ was ignored
+
 	* Add \raisebox and \romannumeral.
 
 	* Handle options in \includegraphics.
