@@ -355,8 +355,9 @@ public class predefMacros {
 	    args[0] = "mathbb";
 	else if ("bold".equals(args[0]))
 	    return new BoldAtom(new TeXFormula(tp.getIsPartial(), args[1], false).root);
-
-	return new TeXFormula(tp.getIsPartial(), args[1], args[0]).root;
+	
+	return new TextStyleAtom(new TeXFormula(tp.getIsPartial(), args[1], false).root, args[0]);
+	//return new TeXFormula(tp.getIsPartial(), args[1], args[0]).root;
     }
 
     public Atom mbox_macro(TeXParser tp, String[] args) throws ParseException {
@@ -1478,5 +1479,13 @@ public class predefMacros {
 	}
 
 	return new TeXFormula(roman, false).root;
+    }
+
+    public Atom textcircled_macro(TeXParser tp, String[] args) throws ParseException {
+	return new TextCircledAtom(new RomanAtom(new TeXFormula(tp.getIsPartial(), args[1]).root));
+    }
+
+    public Atom textsc_macro(TeXParser tp, String[] args) throws ParseException {
+	return new SmallCapAtom(new TeXFormula(tp.getIsPartial(), args[1], false).root);
     }
 }

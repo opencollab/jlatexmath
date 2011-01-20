@@ -1,4 +1,4 @@
-/* tcaronAtom.java
+/* TextCircledAtom.java
  * =========================================================================
  * This file is part of the JLaTeXMath Library - http://forge.scilab.org/jlatexmath
  *
@@ -31,17 +31,21 @@ package org.scilab.forge.jlatexmath;
 /**
  * An atom with representing an t with a caron.
  */
-public class tcaronAtom extends Atom {
+public class TextCircledAtom extends Atom {
 
-    public tcaronAtom() {
+    private Atom at;
+
+    public TextCircledAtom(Atom at) {
+	this.at = at;
     }
     
     public Box createBox(TeXEnvironment env) {
-	CharBox A = new CharBox(env.getTeXFont().getChar("jlatexmathapos", env.getStyle()));
-	CharBox t = new CharBox(env.getTeXFont().getChar('t', "mathnormal", env.getStyle()));
-	HorizontalBox hb = new HorizontalBox(t);
-	hb.add(new SpaceAtom(TeXConstants.UNIT_EM, -0.3f, 0, 0).createBox(env));
-	hb.add(A);
+	Box circle = SymbolAtom.get("bigcirc").createBox(env);
+	circle.setShift(-0.07f * SpaceAtom.getFactor(TeXConstants.UNIT_EX, env));
+	Box box = at.createBox(env);
+	HorizontalBox hb = new HorizontalBox(box, circle.getWidth(), TeXConstants.ALIGN_CENTER);
+	hb.add(new StrutBox(-hb.getWidth(), 0, 0, 0));
+	hb.add(circle);
 	return hb;
     } 
 }

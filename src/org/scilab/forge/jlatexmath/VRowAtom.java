@@ -80,7 +80,7 @@ public class VRowAtom extends Atom {
             vb.add(((Atom)it.next()).createBox(env));
 	}
 
-	vb.setShift( - raise.createBox(env).getWidth());
+	vb.setShift(-raise.createBox(env).getWidth());
 	float t = vb.children.getLast().getDepth();
 	vb.setHeight(vb.getDepth() + vb.getHeight() - t);
 	vb.setDepth(t);

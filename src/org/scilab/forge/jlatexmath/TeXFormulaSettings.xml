@@ -858,6 +858,68 @@
 	  <Map char="&#9617;" formula="\fgcolor{bfbfbf}{\block}"/>
 	  <Map char="&#9618;" formula="\fgcolor{808080}{\block}"/>
 	  <Map char="&#9619;" formula="\fgcolor{404040}{\block}"/>
+	  <Map char="&#9312;" formula="\textcircled{\texttt 1}"/>
+	  <Map char="&#9313;" formula="\textcircled{\texttt 2}"/>
+	  <Map char="&#9314;" formula="\textcircled{\texttt 3}"/>
+	  <Map char="&#9315;" formula="\textcircled{\texttt 4}"/>
+	  <Map char="&#9316;" formula="\textcircled{\texttt 5}"/>
+	  <Map char="&#9317;" formula="\textcircled{\texttt 6}"/>
+	  <Map char="&#9318;" formula="\textcircled{\texttt 7}"/>
+	  <Map char="&#9319;" formula="\textcircled{\texttt 8}"/>
+	  <Map char="&#9320;" formula="\textcircled{\texttt 9}"/>
+	  <Map char="&#9398;" formula="\textcircled{\texttt A}"/>
+	  <Map char="&#9399;" formula="\textcircled{\texttt B}"/>
+	  <Map char="&#9400;" formula="\textcircled{\texttt C}"/>
+	  <Map char="&#9401;" formula="\textcircled{\texttt D}"/>
+	  <Map char="&#9402;" formula="\textcircled{\texttt E}"/>
+	  <Map char="&#9403;" formula="\textcircled{\texttt F}"/>
+	  <Map char="&#9404;" formula="\textcircled{\texttt G}"/>
+	  <Map char="&#9405;" formula="\textcircled{\texttt H}"/>
+	  <Map char="&#9406;" formula="\textcircled{\texttt I}"/>
+	  <Map char="&#9407;" formula="\textcircled{\texttt J}"/>
+	  <Map char="&#9408;" formula="\textcircled{\texttt K}"/>
+	  <Map char="&#9409;" formula="\textcircled{\texttt L}"/>
+	  <Map char="&#9410;" formula="\textcircled{\texttt M}"/>
+	  <Map char="&#9411;" formula="\textcircled{\texttt N}"/>
+	  <Map char="&#9412;" formula="\textcircled{\texttt O}"/>
+	  <Map char="&#9413;" formula="\textcircled{\texttt P}"/>
+	  <Map char="&#9414;" formula="\textcircled{\texttt Q}"/>
+	  <Map char="&#9415;" formula="\textcircled{\texttt R}"/>
+	  <Map char="&#9416;" formula="\textcircled{\texttt S}"/>
+	  <Map char="&#9417;" formula="\textcircled{\texttt T}"/>
+	  <Map char="&#9418;" formula="\textcircled{\texttt U}"/>
+	  <Map char="&#9419;" formula="\textcircled{\texttt V}"/>
+	  <Map char="&#9420;" formula="\textcircled{\texttt W}"/>
+	  <Map char="&#9421;" formula="\textcircled{\texttt X}"/>
+	  <Map char="&#9422;" formula="\textcircled{\texttt Y}"/>
+	  <Map char="&#9423;" formula="\textcircled{\texttt Z}"/>
+	  <Map char="&#9424;" formula="\textcircled{\texttt a}"/>
+	  <Map char="&#9425;" formula="\textcircled{\texttt b}"/>
+	  <Map char="&#9426;" formula="\textcircled{\texttt c}"/>
+	  <Map char="&#9427;" formula="\textcircled{\texttt d}"/>
+	  <Map char="&#9428;" formula="\textcircled{\texttt e}"/>
+	  <Map char="&#9429;" formula="\textcircled{\texttt f}"/>
+	  <Map char="&#9430;" formula="\textcircled{\texttt g}"/>
+	  <Map char="&#9431;" formula="\textcircled{\texttt h}"/>
+	  <Map char="&#9432;" formula="\textcircled{\texttt i}"/>
+	  <Map char="&#9433;" formula="\textcircled{\texttt j}"/>
+	  <Map char="&#9434;" formula="\textcircled{\texttt k}"/>
+	  <Map char="&#9435;" formula="\textcircled{\texttt l}"/>
+	  <Map char="&#9436;" formula="\textcircled{\texttt m}"/>
+	  <Map char="&#9437;" formula="\textcircled{\texttt n}"/>
+	  <Map char="&#9438;" formula="\textcircled{\texttt o}"/>
+	  <Map char="&#9439;" formula="\textcircled{\texttt p}"/>
+	  <Map char="&#9440;" formula="\textcircled{\texttt q}"/>
+	  <Map char="&#9441;" formula="\textcircled{\texttt r}"/>
+	  <Map char="&#9442;" formula="\textcircled{\texttt s}"/>
+	  <Map char="&#9443;" formula="\textcircled{\texttt t}"/>
+	  <Map char="&#9444;" formula="\textcircled{\texttt u}"/>
+	  <Map char="&#9445;" formula="\textcircled{\texttt v}"/>
+	  <Map char="&#9446;" formula="\textcircled{\texttt w}"/>
+	  <Map char="&#9447;" formula="\textcircled{\texttt x}"/>
+	  <Map char="&#9448;" formula="\textcircled{\texttt y}"/>
+	  <Map char="&#9449;" formula="\textcircled{\texttt z}"/>
+
 	</CharacterToFormulaMappings>
 
 </FormulaSettings>

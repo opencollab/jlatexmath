@@ -53,6 +53,8 @@ public class SymbolAtom extends CharSymbol {
     
     // contains all the possible valid symbol types
     private static BitSet validSymbolTypes;
+
+    private char unicode;
     
     static {
         symbols = new TeXSymbolParser().readSymbols();
@@ -97,6 +99,15 @@ public class SymbolAtom extends CharSymbol {
 	    this.type_limits = TeXConstants.SCRIPT_NORMAL;
 
         delimiter = del;
+    }
+
+    public SymbolAtom setUnicode(char c) {
+	this.unicode = c;
+	return this;
+    }
+
+    public char getUnicode() {
+	return unicode;
     }
     
     public static void addSymbolAtom(String file) {
@@ -150,7 +161,12 @@ public class SymbolAtom extends CharSymbol {
         TeXFont tf = env.getTeXFont();
         int style = env.getStyle();
 	Char c = tf.getChar(name, style);
-	CharBox cb = new CharBox(c);
+	Box cb = new CharBox(c);
+	if (env.getSmallCap() && unicode != 0 && Character.isLowerCase(unicode)) {
+	    try {
+		cb = new ScaleBox(new CharBox(tf.getChar(TeXFormula.symbolTextMappings[Character.toUpperCase(unicode)], style)), 0.8, 0.8);
+	    } catch (SymbolMappingNotFoundException e) { }
+	}
 
 	if (type == TeXConstants.TYPE_BIG_OPERATOR) {
 	    if (style < TeXConstants.STYLE_TEXT && tf.hasNextLarger(c))

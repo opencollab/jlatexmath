@@ -1,5 +1,7 @@
 jlatexmath (0.9.4)
 
+	* Add commands \textsc and \textcircled. 
+
         * Fix a bug in the FOP plugin when latex is mixed with other
 	  image source.
 

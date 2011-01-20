@@ -1,4 +1,4 @@
-/* tcaronAtom.java
+/* TextStyleAtom.java
  * =========================================================================
  * This file is part of the JLaTeXMath Library - http://forge.scilab.org/jlatexmath
  *
@@ -29,19 +29,23 @@
 package org.scilab.forge.jlatexmath;
 
 /**
- * An atom with representing an t with a caron.
+ * An atom representing a modification of style in a formula (e.g. textstyle or displaystyle).
  */
-public class tcaronAtom extends Atom {
-
-    public tcaronAtom() {
-    }
+public class TextStyleAtom extends Atom {
     
+    private String style;
+    private Atom at;
+    
+    public TextStyleAtom(Atom at, String style) {
+	this.style = style;
+	this.at = at;
+    }
+
     public Box createBox(TeXEnvironment env) {
-	CharBox A = new CharBox(env.getTeXFont().getChar("jlatexmathapos", env.getStyle()));
-	CharBox t = new CharBox(env.getTeXFont().getChar('t', "mathnormal", env.getStyle()));
-	HorizontalBox hb = new HorizontalBox(t);
-	hb.add(new SpaceAtom(TeXConstants.UNIT_EM, -0.3f, 0, 0).createBox(env));
-	hb.add(A);
-	return hb;
+	String prevStyle = env.getTextStyle();
+	env.setTextStyle(style);
+	Box box = at.createBox(env);
+	env.setTextStyle(prevStyle);
+	return box;
     } 
 }

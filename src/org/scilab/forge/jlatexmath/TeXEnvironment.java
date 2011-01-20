@@ -54,6 +54,8 @@ public class TeXEnvironment {
     
     private float textwidth = Float.POSITIVE_INFINITY;
 
+    private String textStyle;
+    private boolean smallCap;
     public boolean isColored = false;
         
     public TeXEnvironment(int style, TeXFont tf) {
@@ -72,6 +74,15 @@ public class TeXEnvironment {
         color = c;
     }
 
+    private TeXEnvironment(int style, TeXFont tf, Color bg, Color c, String textStyle, boolean smallCap) {
+        this.style = style;
+        this.tf = tf;
+	this.textStyle = textStyle;
+	this.smallCap = smallCap;
+        background = bg;
+        color = c;
+    }
+
     public void setTextwidth(int widthUnit, float textwidth) {
 	this.textwidth = textwidth * SpaceAtom.getFactor(widthUnit, this);
     }
@@ -81,11 +92,11 @@ public class TeXEnvironment {
     }
 
     protected TeXEnvironment copy() {
-        return new TeXEnvironment(style, tf, background, color);
+        return new TeXEnvironment(style, tf, background, color, textStyle, smallCap);
     }
 
     protected TeXEnvironment copy(TeXFont tf) {
-        TeXEnvironment te = new TeXEnvironment(style, tf, background, color);
+        TeXEnvironment te = new TeXEnvironment(style, tf, background, color, textStyle, smallCap);
 	te.textwidth = textwidth;
 	return te;
     }
@@ -144,6 +155,28 @@ public class TeXEnvironment {
 
     public void setStyle(int style) {
         this.style = style;
+    }
+
+    /**
+     * @return the current textStyle
+     */
+    public String getTextStyle() {
+        return textStyle;
+    }
+
+    public void setTextStyle(String textStyle) {
+        this.textStyle = textStyle;
+    }
+
+    /**
+     * @return the current textStyle
+     */
+    public boolean getSmallCap() {
+        return smallCap;
+    }
+
+    public void setSmallCap(boolean smallCap) {
+        this.smallCap = smallCap;
     }
     
     /**

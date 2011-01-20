@@ -1012,7 +1012,7 @@ public class TeXParser {
             } else {
 		if (!ignoreWhiteSpace) {// we are in text mode
 		    if (TeXFormula.symbolTextMappings[c] != null) {
-			return SymbolAtom.get(TeXFormula.symbolTextMappings[c]);
+			return SymbolAtom.get(TeXFormula.symbolTextMappings[c]).setUnicode(c);
 		    }
 		}
                 if (TeXFormula.symbolFormulaMappings != null && TeXFormula.symbolFormulaMappings[c] != null) {
@@ -1054,7 +1054,6 @@ public class TeXParser {
 
         return parseString.substring(spos, pos);
     }
-
 
     private Atom processEscape() throws ParseException {
         spos = pos;

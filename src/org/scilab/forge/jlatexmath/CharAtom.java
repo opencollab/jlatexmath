@@ -39,7 +39,7 @@ public class CharAtom extends CharSymbol {
     private final char c;
     
     // text style (null means the default text style)
-    private final String textStyle;
+    private String textStyle;
 
     /**
      * Creates a CharAtom that will represent the given character in the given text style.
@@ -54,21 +54,41 @@ public class CharAtom extends CharSymbol {
     }
 
     public Box createBox(TeXEnvironment env) {
-	Char ch = getChar(env.getTeXFont(), env.getStyle());
-	return new CharBox(ch);
+	if (textStyle == null) {
+	    String ts = env.getTextStyle();
+	    if (ts != null) {
+		textStyle = ts;
+	    }
+	}
+	boolean smallCap = env.getSmallCap();
+	Char ch = getChar(env.getTeXFont(), env.getStyle(), smallCap);
+	Box box = new CharBox(ch);
+	if (smallCap && Character.isLowerCase(c)) {
+	    // We have a small capital
+	    box = new ScaleBox(box, 0.8f, 0.8f);
+	}
+	
+	return box;
     }
 
     /*
      * Get the Char-object representing this character ("c") in the right text style
      */
-    private Char getChar(TeXFont tf, int style) {
-	if (textStyle == null) // default text style
-	    return tf.getDefaultChar(c, style);
-	else
-	    return tf.getChar(c, textStyle, style);
+    private Char getChar(TeXFont tf, int style, boolean smallCap) {
+	char chr = c;
+	if (smallCap) {
+	    if (Character.isLowerCase(c)) {
+		chr = Character.toUpperCase(c);
+	    }
+	}
+	if (textStyle == null) {
+	    return tf.getDefaultChar(chr, style);
+	} else {
+	    return tf.getChar(chr, textStyle, style);
+	}
     }
 
     public CharFont getCharFont(TeXFont tf) {
-	return getChar(tf, TeXConstants.STYLE_DISPLAY).getCharFont();
+	return getChar(tf, TeXConstants.STYLE_DISPLAY, false).getCharFont();
     }
 }

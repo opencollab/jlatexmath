@@ -63,11 +63,11 @@ public class DefaultTeXFont implements TeXFont {
     private static final int NUMBER_OF_FONT_IDS = 256;
     
     
-    private static Map<String,CharFont[]> textStyleMappings;
-    private static Map<String,CharFont> symbolMappings;
+    private static Map<String, CharFont[]> textStyleMappings;
+    private static Map<String, CharFont> symbolMappings;
     private static FontInfo[] fontInfo = new FontInfo[0];
-    private static Map<String,Float> parameters;
-    private static Map<String,Number> generalSettings;
+    private static Map<String, Float> parameters;
+    private static Map<String, Number> generalSettings;
 
     private static boolean magnificationEnable = true;
     
@@ -256,12 +256,10 @@ public class DefaultTeXFont implements TeXFont {
         if (cf[kind] == null)
             return getDefaultChar(c, style);
         else 
-            return getChar(new CharFont((char) (cf[kind].c + offset),
-					cf[kind].fontId), style);
+            return getChar(new CharFont((char) (cf[kind].c + offset), cf[kind].fontId), style);
     }
     
-    public Char getChar(char c, String textStyle, int style)
-    throws TextStyleMappingNotFoundException {
+    public Char getChar(char c, String textStyle, int style) throws TextStyleMappingNotFoundException {
         Object mapping = textStyleMappings.get(textStyle);
         if (mapping == null) // text style mapping not found
             throw new TextStyleMappingNotFoundException(textStyle);

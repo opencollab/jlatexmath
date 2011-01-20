@@ -2160,4 +2160,22 @@
 		</CreateCommand>
 		<Return name="f" />
 	</Command>
+
+	<Command name="textcircled" enabled="true">
+		<CreateCommand name="f">
+			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+			<Argument type="String" value="textcircled_macro" />
+			<Argument type="float" value="1" />
+		</CreateCommand>
+		<Return name="f" />
+	</Command>
+
+	<Command name="textsc" enabled="true">
+		<CreateCommand name="f">
+			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+			<Argument type="String" value="textsc_macro" />
+			<Argument type="float" value="1" />
+		</CreateCommand>
+		<Return name="f" />
+	</Command>
 </PredefinedCommands>
