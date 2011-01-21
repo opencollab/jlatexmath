@@ -361,17 +361,13 @@ public class predefMacros {
     }
 
     public Atom mbox_macro(TeXParser tp, String[] args) throws ParseException {
-	String str = args[1].replaceAll("\\^\\{\\\\prime\\}", "\'");
-	str = str.replaceAll("\\^\\{\\\\prime\\\\prime\\}", "\'\'");
-	str = str.replaceAll("_", "\\\\_");
+	String str = args[1].replaceAll("_", "\\\\_");
 	Atom group = new RomanAtom(new TeXFormula(tp.getIsPartial(), str, "mathnormal", false, false).root);
 	return new StyleAtom(TeXConstants.STYLE_TEXT, group);
     }
 
     public Atom text_macro(TeXParser tp, String[] args) throws ParseException {
-	String str = args[1].replaceAll("\\^\\{\\\\prime\\}", "\'");
-	str = str.replaceAll("\\^\\{\\\\prime\\\\prime\\}", "\'\'");
-	str = str.replaceAll("_", "\\\\_");
+	String str = args[1].replaceAll("_", "\\\\_");
 	return new RomanAtom(new TeXFormula(tp.getIsPartial(), str, "mathnormal", false, false).root);
     }
     
@@ -937,20 +933,40 @@ public class predefMacros {
 	return new RomanAtom(new TeXFormula(tp.getIsPartial(), args[1], false).root);
     }
 
+    public Atom rm_macro(TeXParser tp, String[] args) throws ParseException {
+	return new RomanAtom(new TeXFormula(tp.getIsPartial(), tp.getOverArgument(), null, false, tp.isIgnoreWhiteSpace()).root);
+    }
+
     public Atom mathbf_macro(TeXParser tp, String[] args) throws ParseException {
 	return new BoldAtom(new RomanAtom(new TeXFormula(tp.getIsPartial(), args[1], false).root));
+    }
+
+    public Atom bf_macro(TeXParser tp, String[] args) throws ParseException {
+	return new BoldAtom(new RomanAtom(new TeXFormula(tp.getIsPartial(), tp.getOverArgument(), null, false, tp.isIgnoreWhiteSpace()).root));
     }
 
     public Atom mathtt_macro(TeXParser tp, String[] args) throws ParseException {
 	return new TtAtom(new TeXFormula(tp.getIsPartial(), args[1], false).root);
     }
 
+    public Atom tt_macro(TeXParser tp, String[] args) throws ParseException {
+	return new TtAtom(new TeXFormula(tp.getIsPartial(), tp.getOverArgument(), null, false, tp.isIgnoreWhiteSpace()).root);
+    }
+
     public Atom mathit_macro(TeXParser tp, String[] args) throws ParseException {
 	return new ItAtom(new TeXFormula(tp.getIsPartial(), args[1], false).root);
     }
 
+    public Atom it_macro(TeXParser tp, String[] args) throws ParseException {
+	return new ItAtom(new TeXFormula(tp.getIsPartial(), tp.getOverArgument(), null, false, tp.isIgnoreWhiteSpace()).root);
+    }
+
     public Atom mathsf_macro(TeXParser tp, String[] args) throws ParseException {
 	return new SsAtom(new TeXFormula(tp.getIsPartial(), args[1], false).root);
+    }
+
+    public Atom sf_macro(TeXParser tp, String[] args) throws ParseException {
+	return new SsAtom(new TeXFormula(tp.getIsPartial(), tp.getOverArgument(), null, false, tp.isIgnoreWhiteSpace()).root);
     }
    
     public Atom LaTeX_macro(TeXParser tp, String[] args) throws ParseException {
@@ -1487,5 +1503,9 @@ public class predefMacros {
 
     public Atom textsc_macro(TeXParser tp, String[] args) throws ParseException {
 	return new SmallCapAtom(new TeXFormula(tp.getIsPartial(), args[1], false).root);
+    }
+
+    public Atom sc_macro(TeXParser tp, String[] args) throws ParseException {
+	return new SmallCapAtom(new TeXFormula(tp.getIsPartial(), tp.getOverArgument(), null, false, tp.isIgnoreWhiteSpace()).root);
     }
 }

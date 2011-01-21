@@ -219,6 +219,7 @@ public class TeXParser {
      */
     public TeXParser(String parseString, TeXFormula formula, boolean firstpass, boolean space) {
         this(false, parseString, formula, firstpass);
+        this.ignoreWhiteSpace = space;
     }
 
     /**

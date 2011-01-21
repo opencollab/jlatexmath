@@ -279,6 +279,15 @@
 		</CreateCommand>
 		<Return name="f" />
 	</Command>
+
+	<Command name="bf" enabled="true">
+		<CreateCommand name="f">
+			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+			<Argument type="String" value="bf_macro" />
+			<Argument type="float" value="0" />
+		</CreateCommand>
+		<Return name="f" />
+	</Command>
 	
 	<Command name="mathbb" enabled="true">
 		<CreateCommand name="f">
@@ -306,12 +315,30 @@
 		</CreateCommand>
 		<Return name="f" />
 	</Command>
+
+	<Command name="it" enabled="true">
+		<CreateCommand name="f">
+			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+			<Argument type="String" value="it_macro" />
+			<Argument type="float" value="0" />
+		</CreateCommand>
+		<Return name="f" />
+	</Command>
 	
 	<Command name="mathrm" enabled="true">
 		<CreateCommand name="f">
 			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
 			<Argument type="String" value="mathrm_macro" />
 			<Argument type="float" value="1" />
+		</CreateCommand>
+		<Return name="f" />
+	</Command>
+
+	<Command name="rm" enabled="true">
+		<CreateCommand name="f">
+			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+			<Argument type="String" value="rm_macro" />
+			<Argument type="float" value="0" />
 		</CreateCommand>
 		<Return name="f" />
 	</Command>
@@ -334,11 +361,29 @@
 		<Return name="f" />
 	</Command>
 
+	<Command name="sf" enabled="true">
+		<CreateCommand name="f">
+			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+			<Argument type="String" value="sf_macro" />
+			<Argument type="float" value="0" />
+		</CreateCommand>
+		<Return name="f" />
+	</Command>
+
 	<Command name="mathtt" enabled="true">
 		<CreateCommand name="f">
 			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
 			<Argument type="String" value="mathtt_macro" />
 			<Argument type="float" value="1" />
+		</CreateCommand>
+		<Return name="f" />
+	</Command>
+
+	<Command name="tt" enabled="true">
+		<CreateCommand name="f">
+			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+			<Argument type="String" value="tt_macro" />
+			<Argument type="float" value="0" />
 		</CreateCommand>
 		<Return name="f" />
 	</Command>
@@ -2175,6 +2220,15 @@
 			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
 			<Argument type="String" value="textsc_macro" />
 			<Argument type="float" value="1" />
+		</CreateCommand>
+		<Return name="f" />
+	</Command>
+
+	<Command name="sc" enabled="true">
+		<CreateCommand name="f">
+			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+			<Argument type="String" value="sc_macro" />
+			<Argument type="float" value="0" />
 		</CreateCommand>
 		<Return name="f" />
 	</Command>
