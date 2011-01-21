@@ -447,37 +447,37 @@ public class TeXParser {
                     len = parseString.length();
                     pos++;
                     break;
-		case SUPZERO :
+                case SUPZERO :
                     parseString.replace(pos, pos + 1, "\\jlatexmathcumsup{0}");
                     len = parseString.length();
                     pos++;
                     break;
-		case SUPFOUR :
+                case SUPFOUR :
                     parseString.replace(pos, pos + 1, "\\jlatexmathcumsup{4}");
                     len = parseString.length();
                     pos++;
                     break;
-		case SUPFIVE :
+                case SUPFIVE :
                     parseString.replace(pos, pos + 1, "\\jlatexmathcumsup{5}");
                     len = parseString.length();
                     pos++;
                     break;
-		case SUPSIX :
+                case SUPSIX :
                     parseString.replace(pos, pos + 1, "\\jlatexmathcumsup{6}");
                     len = parseString.length();
                     pos++;
                     break;
-		case SUPSEVEN :
+                case SUPSEVEN :
                     parseString.replace(pos, pos + 1, "\\jlatexmathcumsup{7}");
                     len = parseString.length();
                     pos++;
                     break;
-		case SUPEIGHT :
+                case SUPEIGHT :
                     parseString.replace(pos, pos + 1, "\\jlatexmathcumsup{8}");
                     len = parseString.length();
                     pos++;
                     break;
-		case SUPNINE :
+                case SUPNINE :
                     parseString.replace(pos, pos + 1, "\\jlatexmathcumsup{9}");
                     len = parseString.length();
                     pos++;
@@ -497,7 +497,7 @@ public class TeXParser {
                     len = parseString.length();
                     pos++;
                     break;
-		case SUPLPAR :
+                case SUPLPAR :
                     parseString.replace(pos, pos + 1, "\\jlatexmathcumsup{(}");
                     len = parseString.length();
                     pos++;
@@ -527,37 +527,37 @@ public class TeXParser {
                     len = parseString.length();
                     pos++;
                     break;
-		case SUBZERO :
+                case SUBZERO :
                     parseString.replace(pos, pos + 1, "\\jlatexmathcumsub{0}");
                     len = parseString.length();
                     pos++;
                     break;
-		case SUBFOUR :
+                case SUBFOUR :
                     parseString.replace(pos, pos + 1, "\\jlatexmathcumsub{4}");
                     len = parseString.length();
                     pos++;
                     break;
-		case SUBFIVE :
+                case SUBFIVE :
                     parseString.replace(pos, pos + 1, "\\jlatexmathcumsub{5}");
                     len = parseString.length();
                     pos++;
                     break;
-		case SUBSIX :
+                case SUBSIX :
                     parseString.replace(pos, pos + 1, "\\jlatexmathcumsub{6}");
                     len = parseString.length();
                     pos++;
                     break;
-		case SUBSEVEN :
+                case SUBSEVEN :
                     parseString.replace(pos, pos + 1, "\\jlatexmathcumsub{7}");
                     len = parseString.length();
                     pos++;
                     break;
-		case SUBEIGHT :
+                case SUBEIGHT :
                     parseString.replace(pos, pos + 1, "\\jlatexmathcumsub{8}");
                     len = parseString.length();
                     pos++;
                     break;
-		case SUBNINE :
+                case SUBNINE :
                     parseString.replace(pos, pos + 1, "\\jlatexmathcumsub{9}");
                     len = parseString.length();
                     pos++;
@@ -641,8 +641,10 @@ public class TeXParser {
                         insertion = false;
                     break;
                 case L_GROUP :
-		    Atom atom = getArgument();
-		    atom.type = TeXConstants.TYPE_ORDINARY;
+                    Atom atom = getArgument();
+                    if (atom != null) {
+                        atom.type = TeXConstants.TYPE_ORDINARY;
+                    }
                     formula.add(atom);
                     break;
                 case R_GROUP :
@@ -662,24 +664,24 @@ public class TeXParser {
                     ((ArrayOfAtoms) formula).addCol();
                     pos++;
                     break;
-		case PRIME :
+                case PRIME :
                     if (ignoreWhiteSpace) {
-			formula.add(new CumulativeScriptsAtom(getLastAtom(), null, SymbolAtom.get("prime")));
-		    } else {
-			formula.add(convertCharacter(PRIME));
-		    }
-		    pos++;
-		    break;
-		case BACKPRIME :
+                        formula.add(new CumulativeScriptsAtom(getLastAtom(), null, SymbolAtom.get("prime")));
+                    } else {
+                        formula.add(convertCharacter(PRIME));
+                    }
+                    pos++;
+                    break;
+                case BACKPRIME :
                     if (ignoreWhiteSpace) {
-			formula.add(new CumulativeScriptsAtom(getLastAtom(), null, SymbolAtom.get("backprime")));
-		    } else {
-			formula.add(convertCharacter(BACKPRIME));
-		    }
-		    pos++;
-		    break;
+                        formula.add(new CumulativeScriptsAtom(getLastAtom(), null, SymbolAtom.get("backprime")));
+                    } else {
+                        formula.add(convertCharacter(BACKPRIME));
+                    }
+                    pos++;
+                    break;
                 default :
-		    formula.add(convertCharacter(ch));
+                    formula.add(convertCharacter(ch));
                     pos++;
                 }
             }
@@ -700,9 +702,9 @@ public class TeXParser {
             s = parseString.charAt(pos);
 
         if (f == SUPER_SCRIPT && s == SUPER_SCRIPT) {
-	    second = first;
-	    first = null;
-	} else if (f == SUB_SCRIPT && s == SUPER_SCRIPT) {
+            second = first;
+            first = null;
+        } else if (f == SUB_SCRIPT && s == SUPER_SCRIPT) {
             pos++;
             second = getArgument();
         } else if (f == SUPER_SCRIPT && s == SUB_SCRIPT) {
@@ -811,26 +813,26 @@ public class TeXParser {
     public String getGroup(String open, String close) throws ParseException {
         int group = 1;
         int ol = open.length(), cl = close.length();
-	boolean lastO = isValidCharacterInCommand(open.charAt(ol - 1));
-	boolean lastC = isValidCharacterInCommand(close.charAt(cl - 1));
+        boolean lastO = isValidCharacterInCommand(open.charAt(ol - 1));
+        boolean lastC = isValidCharacterInCommand(close.charAt(cl - 1));
         int oc = 0, cc = 0;
-	int startC = 0;
-	char prev = '\0';
+        int startC = 0;
+        char prev = '\0';
         StringBuffer buf = new StringBuffer();
 
         while (pos < len && group != 0) {
             char c = parseString.charAt(pos);
             char c1;
 
-	    if (prev != ESCAPE && c == ' ') {//Trick to handle case where close == "\end   {foo}"
-		while (pos < len && parseString.charAt(pos++) == ' ') {
-		    buf.append(' ');
-		}
-		c = parseString.charAt(--pos);
-		if (isValidCharacterInCommand(prev) && isValidCharacterInCommand(c)) {
-		    oc = cc = 0;
-		}
-	    }
+            if (prev != ESCAPE && c == ' ') {//Trick to handle case where close == "\end   {foo}"
+                while (pos < len && parseString.charAt(pos++) == ' ') {
+                    buf.append(' ');
+                }
+                c = parseString.charAt(--pos);
+                if (isValidCharacterInCommand(prev) && isValidCharacterInCommand(c)) {
+                    oc = cc = 0;
+                }
+            }
 
             if (c == open.charAt(oc))
                 oc++;
@@ -838,11 +840,11 @@ public class TeXParser {
                 oc = 0;
 
             if (c == close.charAt(cc)) {
-		if (cc == 0) {
-		    startC = pos;
-		}
+                if (cc == 0) {
+                    startC = pos;
+                }
                 cc++;
-	    } else
+            } else
                 cc = 0;
 
             if (pos + 1 < len) {
@@ -872,14 +874,14 @@ public class TeXParser {
                 }
             }
 
-	    prev = c;
+            prev = c;
             buf.append(c);
             pos++;
         }
 
         if (group != 0) {
-	    throw new ParseException("The token " + open + " must be closed by " + close);
-	}
+            throw new ParseException("The token " + open + " must be closed by " + close);
+        }
 
         return buf.substring(0, buf.length() - pos + startC);
     }
@@ -989,14 +991,14 @@ public class TeXParser {
      * @throws ParseException if the character is unknown
      */
     public Atom convertCharacter(char c) throws ParseException {
-	if (ignoreWhiteSpace) {// The Unicode Greek letters in math mode are not drawn with the Greek font
-	    if (c >= 945 && c <= 969) {
-		return SymbolAtom.get(TeXFormula.symbolMappings[c]);
-	    } else if (c >= 913 && c <= 937) {
-		return new TeXFormula(TeXFormula.symbolFormulaMappings[c]).root;
-	    }
-	}
-      
+        if (ignoreWhiteSpace) {// The Unicode Greek letters in math mode are not drawn with the Greek font
+            if (c >= 945 && c <= 969) {
+                return SymbolAtom.get(TeXFormula.symbolMappings[c]);
+            } else if (c >= 913 && c <= 937) {
+                return new TeXFormula(TeXFormula.symbolFormulaMappings[c]).root;
+            }
+        }
+
         c = convertToRomanNumber(c);
         if (((c < '0' || c > '9') && (c < 'a' || c > 'z') && (c < 'A' || c > 'Z'))) {
             Character.UnicodeBlock block = Character.UnicodeBlock.of(c);
@@ -1013,11 +1015,11 @@ public class TeXParser {
                     return new ColorAtom(new RomanAtom(new TeXFormula("\\text{(Unknown char " + ((int) c) + ")}").root), null, Color.RED);
                 }
             } else {
-		if (!ignoreWhiteSpace) {// we are in text mode
-		    if (TeXFormula.symbolTextMappings[c] != null) {
-			return SymbolAtom.get(TeXFormula.symbolTextMappings[c]).setUnicode(c);
-		    }
-		}
+                if (!ignoreWhiteSpace) {// we are in text mode
+                    if (TeXFormula.symbolTextMappings[c] != null) {
+                        return SymbolAtom.get(TeXFormula.symbolTextMappings[c]).setUnicode(c);
+                    }
+                }
                 if (TeXFormula.symbolFormulaMappings != null && TeXFormula.symbolFormulaMappings[c] != null) {
                     return new TeXFormula(TeXFormula.symbolFormulaMappings[c]).root;
                 }
@@ -1053,7 +1055,7 @@ public class TeXParser {
 
         if (pos == spos) {
             pos++;
-	}
+        }
 
         return parseString.substring(spos, pos);
     }
@@ -1243,8 +1245,8 @@ public class TeXParser {
                 pos++;
             }
         } else {
-	    return false;
-	}
+            return false;
+        }
 
         return Character.isLetter(c);
     }
@@ -1254,7 +1256,7 @@ public class TeXParser {
      * @return the validity of the name
      */
     public boolean isValidCharacterInCommand(char ch) {
-	return Character.isLetter(ch) || (atIsLetter != 0 && ch == '@');
+        return Character.isLetter(ch) || (atIsLetter != 0 && ch == '@');
     }
 
     private void skipWhiteSpace() {
