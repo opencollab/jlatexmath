@@ -2,10 +2,11 @@
 <SymbolMappings>
 <!-- miscellaneous symbols -->
 
-		<SymbolMapping name="comma" ch="59" fontId="jlm_cmmi10_unchanged"/>  
+		<SymbolMapping name="comma" ch="59" fontId="jlm_cmmi10_unchanged"/>
 		<SymbolMapping name="ldotp" ch="58" fontId="jlm_cmmi10_unchanged"/>
 		<SymbolMapping name="cdotp" ch="162" fontId="jlm_cmsy10"/>
-		<SymbolMapping name="normaldot" ch="58" fontId="jlm_cmmi10_unchanged"/>  
+		<SymbolMapping name="normaldot" ch="58" fontId="jlm_cmmi10_unchanged"/>
+		<SymbolMapping name="textnormaldot" ch="58" fontId="jlm_cmmi10_unchanged"/>
 		<SymbolMapping name="slash" ch="61" fontId="jlm_cmmi10_unchanged"/>
 
 		<SymbolMapping name="guillemotleft" ch="33" fontId="jlm_jlmi10"/>
@@ -17,16 +18,16 @@
 		<SymbolMapping name="textdbend" ch="126" fontId="jlm_jlmr10_unchanged"/>
 		<SymbolMapping name="dbend" ch="127" fontId="jlm_jlmr10_unchanged"/>
 
-<!-- this symbol is not defined in "TeXSymbols.xml", because it's not meant to be used as a symbol. 
+<!-- this symbol is not defined in "TeXSymbols.xml", because it's not meant to be used as a symbol.
 Use "surd" instead. -->
-		<SymbolMapping name="sqrt" ch="112" fontId="jlm_cmsy10"/>  
+		<SymbolMapping name="sqrt" ch="112" fontId="jlm_cmsy10"/>
 
 		<SymbolMapping name="textfractionsolidus" ch="47" fontId="jlm_cmr10"/>
 		<SymbolMapping name="textminus" ch="45" fontId="jlm_cmr10"/>
 		<SymbolMapping name="textendash" ch="123" fontId="jlm_cmr10"/>
 		<SymbolMapping name="textemdash" ch="124" fontId="jlm_cmr10"/>
-		<SymbolMapping name="semicolon" ch="59" fontId="jlm_cmr10"/>  
-		<SymbolMapping name="faculty" ch="33" fontId="jlm_cmr10"/>  
+		<SymbolMapping name="semicolon" ch="59" fontId="jlm_cmr10"/>
+		<SymbolMapping name="faculty" ch="33" fontId="jlm_cmr10"/>
 		<SymbolMapping name="question" ch="63" fontId="jlm_cmr10"/>
 		<SymbolMapping name="questiondown" ch="62" fontId="jlm_cmr10"/>
 		<SymbolMapping name="jlatexmathsharp" ch="35" fontId="jlm_cmr10"/>
@@ -52,52 +53,52 @@ Use "surd" instead. -->
 		<SymbolMapping name="rq" ch="39" fontId="jlm_cmti10"/>
 <!-- math accents -->
 
-		<SymbolMapping name="acute" ch="182" fontId="jlm_cmr10"/>  
-		<SymbolMapping name="grave" ch="181" fontId="jlm_cmr10"/>  
-		<SymbolMapping name="ddot" ch="196" fontId="jlm_cmr10"/> 
+		<SymbolMapping name="acute" ch="182" fontId="jlm_cmr10"/>
+		<SymbolMapping name="grave" ch="181" fontId="jlm_cmr10"/>
+		<SymbolMapping name="ddot" ch="196" fontId="jlm_cmr10"/>
 		<SymbolMapping name="doubleacute" ch="125" fontId="jlm_cmr10"/>
 		<SymbolMapping name="tilde" ch="126" fontId="jlm_cmr10"/>
   		<SymbolMapping name="mathring" ch="186" fontId="jlm_cmr10"/>
 		<SymbolMapping name="jlatexmathring" ch="186" fontId="jlm_cmr10"/>
-		<SymbolMapping name="bar" ch="185" fontId="jlm_cmr10"/>  
-		<SymbolMapping name="breve" ch="184" fontId="jlm_cmr10"/> 
-		<SymbolMapping name="check" ch="183" fontId="jlm_cmr10"/>  
+		<SymbolMapping name="bar" ch="185" fontId="jlm_cmr10"/>
+		<SymbolMapping name="breve" ch="184" fontId="jlm_cmr10"/>
+		<SymbolMapping name="check" ch="183" fontId="jlm_cmr10"/>
 		<SymbolMapping name="hat" ch="94" fontId="jlm_cmr10"/>
 		<SymbolMapping name="ogonek" ch="197" fontId="jlm_cmr10"/>
-		<SymbolMapping name="vec" ch="126" fontId="jlm_cmmi10_unchanged"/>  
-		<SymbolMapping name="dot" ch="95" fontId="jlm_cmr10"/>  
-		<SymbolMapping name="widehat" ch="98" fontId="jlm_cmex10"/>  
-		<SymbolMapping name="widetilde" ch="101" fontId="jlm_cmex10"/>  
-	
+		<SymbolMapping name="vec" ch="126" fontId="jlm_cmmi10_unchanged"/>
+		<SymbolMapping name="dot" ch="95" fontId="jlm_cmr10"/>
+		<SymbolMapping name="widehat" ch="98" fontId="jlm_cmex10"/>
+		<SymbolMapping name="widetilde" ch="101" fontId="jlm_cmex10"/>
+
 <!-- delimiters that can change size -->
 
-		<SymbolMapping name="lbrace" ch="102" fontId="jlm_cmsy10"/>  
-		<SymbolMapping name="rbrace" ch="103" fontId="jlm_cmsy10"/>  
-		<SymbolMapping name="lbrack" ch="40" fontId="jlm_cmr10"/>  
-		<SymbolMapping name="rbrack" ch="41" fontId="jlm_cmr10"/>  
-		<SymbolMapping name="rsqbrack" ch="93" fontId="jlm_cmr10"/>  
-		<SymbolMapping name="lsqbrack" ch="91" fontId="jlm_cmr10"/>  
-		<SymbolMapping name="langle" ch="104" fontId="jlm_cmsy10"/>  
-		<SymbolMapping name="rangle" ch="105" fontId="jlm_cmsy10"/>  
-		<SymbolMapping name="lfloor" ch="98" fontId="jlm_cmsy10"/>  
-		<SymbolMapping name="rfloor" ch="99" fontId="jlm_cmsy10"/>  
-		<SymbolMapping name="lceil" ch="100" fontId="jlm_cmsy10"/>  
-		<SymbolMapping name="rceil" ch="101" fontId="jlm_cmsy10"/>  
+		<SymbolMapping name="lbrace" ch="102" fontId="jlm_cmsy10"/>
+		<SymbolMapping name="rbrace" ch="103" fontId="jlm_cmsy10"/>
+		<SymbolMapping name="lbrack" ch="40" fontId="jlm_cmr10"/>
+		<SymbolMapping name="rbrack" ch="41" fontId="jlm_cmr10"/>
+		<SymbolMapping name="rsqbrack" ch="93" fontId="jlm_cmr10"/>
+		<SymbolMapping name="lsqbrack" ch="91" fontId="jlm_cmr10"/>
+		<SymbolMapping name="langle" ch="104" fontId="jlm_cmsy10"/>
+		<SymbolMapping name="rangle" ch="105" fontId="jlm_cmsy10"/>
+		<SymbolMapping name="lfloor" ch="98" fontId="jlm_cmsy10"/>
+		<SymbolMapping name="rfloor" ch="99" fontId="jlm_cmsy10"/>
+		<SymbolMapping name="lceil" ch="100" fontId="jlm_cmsy10"/>
+		<SymbolMapping name="rceil" ch="101" fontId="jlm_cmsy10"/>
 		<SymbolMapping name="uparrow" ch="34" fontId="jlm_cmsy10"/>
 		<SymbolMapping name="Uparrow" ch="42" fontId="jlm_cmsy10"/>
 		<SymbolMapping name="downarrow" ch="35" fontId="jlm_cmsy10"/>
 		<SymbolMapping name="Downarrow" ch="43" fontId="jlm_cmsy10"/>
 		<SymbolMapping name="updownarrow" ch="108" fontId="jlm_cmsy10"/>
 		<SymbolMapping name="Updownarrow" ch="109" fontId="jlm_cmsy10"/>
-		<SymbolMapping name="vert" ch="106" fontId="jlm_cmsy10"/>  
-		<SymbolMapping name="Vert" ch="107" fontId="jlm_cmsy10"/>  
+		<SymbolMapping name="vert" ch="106" fontId="jlm_cmsy10"/>
+		<SymbolMapping name="Vert" ch="107" fontId="jlm_cmsy10"/>
 		<SymbolMapping name="slashdel" ch="47" fontId="jlm_cmr10"/>
 		<SymbolMapping name="lgroup" ch="58" fontId="jlm_cmex10"/>
-		<SymbolMapping name="rgroup" ch="59" fontId="jlm_cmex10"/>  
-		<SymbolMapping name="bracevert" ch="62" fontId="jlm_cmex10"/>  
+		<SymbolMapping name="rgroup" ch="59" fontId="jlm_cmex10"/>
+		<SymbolMapping name="bracevert" ch="62" fontId="jlm_cmex10"/>
 		<SymbolMapping name="lmoustache" ch="64" fontId="jlm_moustache"/>
-		<SymbolMapping name="rmoustache" ch="65" fontId="jlm_moustache"/>  
-		
+		<SymbolMapping name="rmoustache" ch="65" fontId="jlm_moustache"/>
+
 <!-- lowercase Greek letters -->
 
 		<SymbolMapping name="alpha" ch="174" fontId="jlm_cmmi10_unchanged"/>
@@ -133,7 +134,7 @@ Use "surd" instead. -->
 		<SymbolMapping name="chi" ch="194" fontId="jlm_cmmi10_unchanged"/>
 		<SymbolMapping name="psi" ch="195" fontId="jlm_cmmi10_unchanged"/>
 		<SymbolMapping name="omega" ch="33" fontId="jlm_cmmi10_unchanged"/>
-	
+
 <!-- uppercase Greek letters -->
 
 		<SymbolMapping name="Gamma" ch="161" fontId="jlm_cmr10"/>
@@ -178,7 +179,7 @@ Use "surd" instead. -->
 		<SymbolMapping name="bot" ch="63" fontId="jlm_cmsy10"/>
 		<SymbolMapping name="|" ch="107" fontId="jlm_cmsy10"/>
 		<SymbolMapping name="triangle" ch="52" fontId="jlm_cmsy10"/>
-		<SymbolMapping name="backslash" ch="110" fontId="jlm_cmsy10"/>  
+		<SymbolMapping name="backslash" ch="110" fontId="jlm_cmsy10"/>
 		<SymbolMapping name="forall" ch="56" fontId="jlm_cmsy10"/>
 		<SymbolMapping name="exists" ch="57" fontId="jlm_cmsy10"/>
 		<SymbolMapping name="neg" ch="58" fontId="jlm_cmsy10"/>
@@ -190,39 +191,39 @@ Use "surd" instead. -->
 		<SymbolMapping name="diamondsuit" ch="125" fontId="jlm_cmsy10"/>
 		<SymbolMapping name="heartsuit" ch="126" fontId="jlm_cmsy10"/>
 		<SymbolMapping name="spadesuit" ch="196" fontId="jlm_cmsy10"/>
-		<SymbolMapping name="lacc" ch="102" fontId="jlm_cmsy10"/>  
-		<SymbolMapping name="racc" ch="103" fontId="jlm_cmsy10"/> 
-		<SymbolMapping name="Relbar" ch="61" fontId="jlm_cmr10"/> 
-		<SymbolMapping name="lhook" ch="44" fontId="jlm_cmmi10_unchanged"/> 
+		<SymbolMapping name="lacc" ch="102" fontId="jlm_cmsy10"/>
+		<SymbolMapping name="racc" ch="103" fontId="jlm_cmsy10"/>
+		<SymbolMapping name="Relbar" ch="61" fontId="jlm_cmr10"/>
+		<SymbolMapping name="lhook" ch="44" fontId="jlm_cmmi10_unchanged"/>
 		<SymbolMapping name="rhook" ch="45" fontId="jlm_cmmi10_unchanged"/>
 		<SymbolMapping name="mapstochar" ch="55" fontId="jlm_cmsy10"/>
 <!-- "large" operators -->
 
-		<SymbolMapping name="bigcap" ch="84" fontId="jlm_cmex10"/>  
-		<SymbolMapping name="bigcup" ch="83" fontId="jlm_cmex10"/>  
-		<SymbolMapping name="bigodot" ch="74" fontId="jlm_cmex10"/>  
-		<SymbolMapping name="bigoplus" ch ="76" fontId="jlm_cmex10"/>  
-		<SymbolMapping name="bigotimes" ch="78" fontId="jlm_cmex10"/>  
-		<SymbolMapping name="bigsqcup" ch="70" fontId="jlm_cmex10"/>  
-		<SymbolMapping name="biguplus" ch="85" fontId="jlm_cmex10"/>  
-		<SymbolMapping name="bigvee" ch="87" fontId="jlm_cmex10"/>  
-		<SymbolMapping name="bigwedge" ch="86" fontId="jlm_cmex10"/>  
-		<SymbolMapping name="coprod" ch="96" fontId="jlm_cmex10"/>  
-		<SymbolMapping name="int" ch="82" fontId="jlm_cmex10"/>  
-		<SymbolMapping name="oint" ch="72" fontId="jlm_cmex10"/>  
-		<SymbolMapping name="sum" ch="80" fontId="jlm_cmex10"/>  
-		<SymbolMapping name="prod" ch="81" fontId="jlm_cmex10"/>  
-		<SymbolMapping name="smallint" ch="115" fontId="jlm_cmsy10"/>  
+		<SymbolMapping name="bigcap" ch="84" fontId="jlm_cmex10"/>
+		<SymbolMapping name="bigcup" ch="83" fontId="jlm_cmex10"/>
+		<SymbolMapping name="bigodot" ch="74" fontId="jlm_cmex10"/>
+		<SymbolMapping name="bigoplus" ch ="76" fontId="jlm_cmex10"/>
+		<SymbolMapping name="bigotimes" ch="78" fontId="jlm_cmex10"/>
+		<SymbolMapping name="bigsqcup" ch="70" fontId="jlm_cmex10"/>
+		<SymbolMapping name="biguplus" ch="85" fontId="jlm_cmex10"/>
+		<SymbolMapping name="bigvee" ch="87" fontId="jlm_cmex10"/>
+		<SymbolMapping name="bigwedge" ch="86" fontId="jlm_cmex10"/>
+		<SymbolMapping name="coprod" ch="96" fontId="jlm_cmex10"/>
+		<SymbolMapping name="int" ch="82" fontId="jlm_cmex10"/>
+		<SymbolMapping name="oint" ch="72" fontId="jlm_cmex10"/>
+		<SymbolMapping name="sum" ch="80" fontId="jlm_cmex10"/>
+		<SymbolMapping name="prod" ch="81" fontId="jlm_cmex10"/>
+		<SymbolMapping name="smallint" ch="115" fontId="jlm_cmsy10"/>
 
 <!-- binary operations -->
 
-		<SymbolMapping name="minus" ch="161" fontId="jlm_cmsy10"/>  
-		<SymbolMapping name="plus" ch="43" fontId="jlm_cmr10"/>  
+		<SymbolMapping name="minus" ch="161" fontId="jlm_cmsy10"/>
+		<SymbolMapping name="plus" ch="43" fontId="jlm_cmr10"/>
 		<SymbolMapping name="pm" ch="167" fontId="jlm_cmsy10"/>
 		<SymbolMapping name="mp" ch="168" fontId="jlm_cmsy10"/>
 		<SymbolMapping name="setminus" ch="110" fontId="jlm_cmsy10"/>
 		<SymbolMapping name="cdot" ch="162" fontId="jlm_cmsy10"/>
-		<SymbolMapping name="times" ch="163" fontId="jlm_cmsy10"/>  
+		<SymbolMapping name="times" ch="163" fontId="jlm_cmsy10"/>
 		<SymbolMapping name="ast" ch="164" fontId="jlm_cmsy10"/>
 		<SymbolMapping name="star" ch="63" fontId="jlm_cmmi10_unchanged"/>
 		<SymbolMapping name="diamond" ch="166" fontId="jlm_cmsy10"/>
@@ -296,7 +297,7 @@ Use "surd" instead. -->
 
 <!-- arrows = pointing relations -->
 
-		<SymbolMapping name="colon" ch="58" fontId="jlm_cmr10"/>  
+		<SymbolMapping name="colon" ch="58" fontId="jlm_cmr10"/>
 		<SymbolMapping name="nearrow" ch="37" fontId="jlm_cmsy10"/>
 		<SymbolMapping name="searrow" ch="38" fontId="jlm_cmsy10"/>
 		<SymbolMapping name="swarrow" ch="46" fontId="jlm_cmsy10"/>

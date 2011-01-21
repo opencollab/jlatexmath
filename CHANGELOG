@@ -1,5 +1,7 @@
 jlatexmath (0.9.4)
 
+	* In text mode, the normal dot must be a punctuation symbol.
+
 	* Add \cal.
 
 	* Add \it, \bf, \sc, ...

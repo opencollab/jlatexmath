@@ -3,30 +3,30 @@
   TeXSymbols.xml
   =========================================================================
   This file is originally part of the JMathTeX Library - http://jmathtex.sourceforge.net
-  
+
   Copyright (C) 2004-2007 Universiteit Gent
   Copyright (C) 2009 DENIZET Calixte
-  
+
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
   the Free Software Foundation; either version 2 of the License, or (at
   your option) any later version.
-  
+
   This program is distributed in the hope that it will be useful, but
   WITHOUT ANY WARRANTY; without even the implied warranty of
   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
   General Public License for more details.
-  
+
   A copy of the GNU General Public License can be found in the file
   LICENSE.txt provided with the source distribution of this program (see
   the META-INF directory in the source jar). This license can also be
   found on the GNU website at http://www.gnu.org/licenses/gpl.html.
-  
+
   If you did not receive a copy of the GNU General Public License along
   with this program, contact the lead developer, or write to the Free
   Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
   02110-1301, USA.
-  
+
 -->
 
 <!-- Modified by Calixte Denizet -->
@@ -392,7 +392,7 @@
 
   <Symbol name="guillemotleft" type="punct"/>
   <Symbol name="guillemotright" type="punct"/>
-  <Symbol name="guilsinglleft" type="punct"/>  
+  <Symbol name="guilsinglleft" type="punct"/>
   <Symbol name="guilsinglright" type="punct"/>
   <Symbol name="textperthousand" type="ord"/>
   <Symbol name="textpertenthousand" type="ord"/>
@@ -401,13 +401,14 @@
   <Symbol name="textemdash" type="ord"/>
   <Symbol name="comma" type="punct"/>
   <Symbol name="ldotp" type="punct"/>
-  <Symbol name="cdotp" type="punct"/>  
-  <Symbol name="normaldot" type="ord"/>  
-  <Symbol name="slash" type="ord"/>    
-  <Symbol name="semicolon" type="punct"/>  
-  <Symbol name="faculty" type="ord"/>  
+  <Symbol name="cdotp" type="punct"/>
+  <Symbol name="normaldot" type="ord"/>
+  <Symbol name="textnormaldot" type="punct"/>
+  <Symbol name="slash" type="ord"/>
+  <Symbol name="semicolon" type="punct"/>
+  <Symbol name="faculty" type="ord"/>
   <Symbol name="question" type="ord"/>
-  <Symbol name="questiondown" type="ord"/>  
+  <Symbol name="questiondown" type="ord"/>
   <Symbol name="jlatexmathsharp" type="ord"/>
   <Symbol name="textdollar" type="ord"/>
   <Symbol name="textpercent" type="ord"/>
@@ -416,56 +417,56 @@
   <Symbol name="jlatexmatharobase" type="ord"/>
   <Symbol name="underscore" type="ord"/>
   <Symbol name="checkmark" type="ord"/>
-  
+
   <!-- math accents -->
-  
-  <Symbol name="acute" type="acc"/>  
-  <Symbol name="grave" type="acc"/>  
+
+  <Symbol name="acute" type="acc"/>
+  <Symbol name="grave" type="acc"/>
   <Symbol name="ddot" type="acc"/>
   <Symbol name="doubleacute" type="acc"/>
   <Symbol name="tilde" type="acc"/>
   <Symbol name="jlatexmathring" type="acc"/>
-  <Symbol name="mathring" type="acc"/> 
-  <Symbol name="bar" type="acc"/>  
-  <Symbol name="breve" type="acc"/>  
-  <Symbol name="check" type="acc"/>  
-  <Symbol name="hat" type="acc"/>  	
-  <Symbol name="vec" type="acc"/>  
-  <Symbol name="dot" type="acc"/>  	
-  <Symbol name="widehat" type="acc"/>  
-  <Symbol name="widetilde" type="acc"/>  
+  <Symbol name="mathring" type="acc"/>
+  <Symbol name="bar" type="acc"/>
+  <Symbol name="breve" type="acc"/>
+  <Symbol name="check" type="acc"/>
+  <Symbol name="hat" type="acc"/>
+  <Symbol name="vec" type="acc"/>
+  <Symbol name="dot" type="acc"/>
+  <Symbol name="widehat" type="acc"/>
+  <Symbol name="widetilde" type="acc"/>
   <Symbol name="tie" type="acc"/>
   <!-- delimiters that can change size -->
-  
-  <Symbol name="lbrace" type="open" del="true"/>  
-  <Symbol name="rbrace" type="close" del="true"/>  
-  <Symbol name="lbrack" type="open" del="true"/>  
-  <Symbol name="rbrack" type="close" del="true"/>  
-  <Symbol name="rsqbrack" type="close" del="true"/>  
-  <Symbol name="lsqbrack" type="open" del="true"/>  
-  <Symbol name="langle" type="open" del="true"/>  
-  <Symbol name="rangle" type="close" del="true"/>  
-  <Symbol name="lfloor" type="open" del="true"/> 
-  <Symbol name="rfloor" type="close" del="true"/>   
-  <Symbol name="lceil" type="open" del="true"/> 
+
+  <Symbol name="lbrace" type="open" del="true"/>
+  <Symbol name="rbrace" type="close" del="true"/>
+  <Symbol name="lbrack" type="open" del="true"/>
+  <Symbol name="rbrack" type="close" del="true"/>
+  <Symbol name="rsqbrack" type="close" del="true"/>
+  <Symbol name="lsqbrack" type="open" del="true"/>
+  <Symbol name="langle" type="open" del="true"/>
+  <Symbol name="rangle" type="close" del="true"/>
+  <Symbol name="lfloor" type="open" del="true"/>
+  <Symbol name="rfloor" type="close" del="true"/>
+  <Symbol name="lceil" type="open" del="true"/>
   <Symbol name="rceil" type="close" del="true"/>
-  <Symbol name="uparrow" type="rel" del="true"/>  
+  <Symbol name="uparrow" type="rel" del="true"/>
   <Symbol name="Uparrow" type="rel" del="true"/>
-  <Symbol name="downarrow" type="rel" del="true"/>  
+  <Symbol name="downarrow" type="rel" del="true"/>
   <Symbol name="Downarrow" type="rel" del="true"/>
-  <Symbol name="updownarrow" type="rel" del="true"/>  
-  <Symbol name="Updownarrow" type="rel" del="true"/>  
-  <Symbol name="vert" type="ord" del="true"/>   
-  <Symbol name="Vert" type="ord" del="true"/>  
-  <Symbol name="slashdel" type="open" del="true"/> 
-  <Symbol name="Relbar" type="rel" del="true"/> 
-  <Symbol name="lgroup" type="open" del="true"/>  
-  <Symbol name="rgroup" type="close" del="true"/> 
+  <Symbol name="updownarrow" type="rel" del="true"/>
+  <Symbol name="Updownarrow" type="rel" del="true"/>
+  <Symbol name="vert" type="ord" del="true"/>
+  <Symbol name="Vert" type="ord" del="true"/>
+  <Symbol name="slashdel" type="open" del="true"/>
+  <Symbol name="Relbar" type="rel" del="true"/>
+  <Symbol name="lgroup" type="open" del="true"/>
+  <Symbol name="rgroup" type="close" del="true"/>
   <Symbol name="bracevert" type="ord" del="true"/>
-  <Symbol name="lmoustache" type="open" del="true"/>  
-  <Symbol name="rmoustache" type="close" del="true"/> 
+  <Symbol name="lmoustache" type="open" del="true"/>
+  <Symbol name="rmoustache" type="close" del="true"/>
   <!-- lowercase Greek letters -->
-  
+
   <Symbol name="alpha" type="ord"/>
   <Symbol name="beta" type="ord"/>
   <Symbol name="gamma" type="ord"/>
@@ -496,9 +497,9 @@
   <Symbol name="chi" type="ord"/>
   <Symbol name="psi" type="ord"/>
   <Symbol name="omega" type="ord"/>
-  
+
   <!-- uppercase Greek letters -->
-  
+
   <Symbol name="Gamma" type="ord"/>
   <Symbol name="Delta" type="ord"/>
   <Symbol name="Theta" type="ord"/>
@@ -521,9 +522,9 @@
   <Symbol name="varPhi" type="ord"/>
   <Symbol name="varPsi" type="ord"/>
   <Symbol name="varOmega" type="ord"/>
-  
+
   <!-- miscellaneous symbols of type "ord" -->
-  
+
   <Symbol name="aleph" type="ord"/>
   <Symbol name="imath" type="ord"/>
   <Symbol name="jmath" type="ord"/>
@@ -541,7 +542,7 @@
   <Symbol name="bot" type="ord"/>
   <Symbol name="|" type="ord"/>
   <Symbol name="triangle" type="ord"/>
-  <Symbol name="backslash" type="ord" del="true"/>  
+  <Symbol name="backslash" type="ord" del="true"/>
   <Symbol name="forall" type="ord"/>
   <Symbol name="exists" type="ord"/>
   <Symbol name="neg" type="ord"/>
@@ -555,122 +556,122 @@
   <Symbol name="spadesuit" type="ord"/>
   <Symbol name="lacc" type="ord"/>
   <Symbol name="racc" type="ord"/>
-  
+
   <!-- "large" operators -->
-  
-  <Symbol name="bigcap" type="op"/>  
-  <Symbol name="bigcup" type="op"/>  
-  <Symbol name="bigodot" type="op"/>  
-  <Symbol name="bigoplus" type="op"/>  
-  <Symbol name="bigotimes" type="op"/>  
-  <Symbol name="bigsqcup" type="op"/>  
-  <Symbol name="biguplus" type="op"/>  
-  <Symbol name="bigvee" type="op"/>  
-  <Symbol name="bigwedge" type="op"/> 
-  <Symbol name="coprod" type="op"/>  
-  <Symbol name="int" type="op"/>  
-  <Symbol name="oint" type="op"/>  
-  <Symbol name="sum" type="op"/>  
-  <Symbol name="prod" type="op"/>  
-  <Symbol name="smallint" type="op"/>  
-  
+
+  <Symbol name="bigcap" type="op"/>
+  <Symbol name="bigcup" type="op"/>
+  <Symbol name="bigodot" type="op"/>
+  <Symbol name="bigoplus" type="op"/>
+  <Symbol name="bigotimes" type="op"/>
+  <Symbol name="bigsqcup" type="op"/>
+  <Symbol name="biguplus" type="op"/>
+  <Symbol name="bigvee" type="op"/>
+  <Symbol name="bigwedge" type="op"/>
+  <Symbol name="coprod" type="op"/>
+  <Symbol name="int" type="op"/>
+  <Symbol name="oint" type="op"/>
+  <Symbol name="sum" type="op"/>
+  <Symbol name="prod" type="op"/>
+  <Symbol name="smallint" type="op"/>
+
   <!-- binary operations -->
-  
-  <Symbol name="minus" type="bin"/>  
-  <Symbol name="plus" type="bin"/>  
-  <Symbol name="pm" type="bin"/>  
-  <Symbol name="mp" type="bin"/>  
-  <Symbol name="setminus" type="bin"/>  
-  <Symbol name="cdot" type="bin"/>  
-  <Symbol name="times" type="bin"/>  
-  <Symbol name="ast" type="bin"/>  
-  <Symbol name="star" type="bin"/>  
-  <Symbol name="diamond" type="bin"/>  
-  <Symbol name="circ" type="bin"/>  
-  <Symbol name="bullet" type="bin"/>  
-  <Symbol name="div" type="bin"/>  
-  <Symbol name="cap" type="bin"/>  
-  <Symbol name="cup" type="bin"/>  
-  <Symbol name="uplus" type="bin"/>  
-  <Symbol name="sqcap" type="bin"/>  
-  <Symbol name="sqcup" type="bin"/>  
-  <Symbol name="triangleleft" type="bin"/>  
-  <Symbol name="triangleright" type="bin"/>  
-  <Symbol name="wr" type="bin"/>  
-  <Symbol name="bigcirc" type="bin"/>  
-  <Symbol name="vee" type="bin"/>  
-  <Symbol name="lor" type="bin"/>  
-  <Symbol name="land" type="bin"/>  
+
+  <Symbol name="minus" type="bin"/>
+  <Symbol name="plus" type="bin"/>
+  <Symbol name="pm" type="bin"/>
+  <Symbol name="mp" type="bin"/>
+  <Symbol name="setminus" type="bin"/>
+  <Symbol name="cdot" type="bin"/>
+  <Symbol name="times" type="bin"/>
+  <Symbol name="ast" type="bin"/>
+  <Symbol name="star" type="bin"/>
+  <Symbol name="diamond" type="bin"/>
+  <Symbol name="circ" type="bin"/>
+  <Symbol name="bullet" type="bin"/>
+  <Symbol name="div" type="bin"/>
+  <Symbol name="cap" type="bin"/>
+  <Symbol name="cup" type="bin"/>
+  <Symbol name="uplus" type="bin"/>
+  <Symbol name="sqcap" type="bin"/>
+  <Symbol name="sqcup" type="bin"/>
+  <Symbol name="triangleleft" type="bin"/>
+  <Symbol name="triangleright" type="bin"/>
+  <Symbol name="wr" type="bin"/>
+  <Symbol name="bigcirc" type="bin"/>
+  <Symbol name="vee" type="bin"/>
+  <Symbol name="lor" type="bin"/>
+  <Symbol name="land" type="bin"/>
   <Symbol name="wedge" type="bin"/>
-  <Symbol name="oplus" type="bin"/>  
-  <Symbol name="ominus" type="bin"/>  
-  <Symbol name="otimes" type="bin"/>  
-  <Symbol name="oslash" type="bin"/>  
-  <Symbol name="odot" type="bin"/>  
-  <Symbol name="dagger" type="bin"/>  
-  <Symbol name="ddagger" type="bin"/>  
-  <Symbol name="amalg" type="bin"/>  
-  
+  <Symbol name="oplus" type="bin"/>
+  <Symbol name="ominus" type="bin"/>
+  <Symbol name="otimes" type="bin"/>
+  <Symbol name="oslash" type="bin"/>
+  <Symbol name="odot" type="bin"/>
+  <Symbol name="dagger" type="bin"/>
+  <Symbol name="ddagger" type="bin"/>
+  <Symbol name="amalg" type="bin"/>
+
   <!-- relations -->
-  
+
   <Symbol name="equals" type="rel"/>
-  <Symbol name="gt" type="rel"/>  
-  <Symbol name="lt" type="rel"/>  
+  <Symbol name="gt" type="rel"/>
+  <Symbol name="lt" type="rel"/>
   <Symbol name="leq" type="rel"/>
   <Symbol name="le" type="rel"/>
-  <Symbol name="prec" type="rel"/>  
-  <Symbol name="preceq" type="rel"/>  
+  <Symbol name="prec" type="rel"/>
+  <Symbol name="preceq" type="rel"/>
   <Symbol name="ll" type="rel"/>
-  <Symbol name="subset" type="rel"/>  
-  <Symbol name="subseteq" type="rel"/>  
+  <Symbol name="subset" type="rel"/>
+  <Symbol name="subseteq" type="rel"/>
   <Symbol name="sqsubseteq" type="rel"/>
-  <Symbol name="in" type="rel"/>  
-  <Symbol name="vdash" type="rel"/>  
+  <Symbol name="in" type="rel"/>
+  <Symbol name="vdash" type="rel"/>
   <Symbol name="smile" type="rel"/>
-  <Symbol name="frown" type="rel"/>  
-  <Symbol name="geq" type="rel"/> 
-  <Symbol name="ge" type="rel"/> 
+  <Symbol name="frown" type="rel"/>
+  <Symbol name="geq" type="rel"/>
+  <Symbol name="ge" type="rel"/>
   <Symbol name="succ" type="rel"/>
-  <Symbol name="succeq" type="rel"/>  
-  <Symbol name="gg" type="rel"/>  
+  <Symbol name="succeq" type="rel"/>
+  <Symbol name="gg" type="rel"/>
   <Symbol name="supset" type="rel"/>
-  <Symbol name="supseteq" type="rel"/>  
-  <Symbol name="sqsupseteq" type="rel"/>  
+  <Symbol name="supseteq" type="rel"/>
+  <Symbol name="sqsupseteq" type="rel"/>
   <Symbol name="ni" type="rel"/>
   <Symbol name="owns" type="rel"/>
-  <Symbol name="dashv" type="rel"/>  
-  <Symbol name="mid" type="rel"/>  
+  <Symbol name="dashv" type="rel"/>
+  <Symbol name="mid" type="rel"/>
   <Symbol name="parallel" type="rel"/>
-  <Symbol name="equiv" type="rel"/>  
-  <Symbol name="sim" type="rel"/>  
+  <Symbol name="equiv" type="rel"/>
+  <Symbol name="sim" type="rel"/>
   <Symbol name="simeq" type="rel"/>
-  <Symbol name="asymp" type="rel"/>  
-  <Symbol name="approx" type="rel"/>  
-  <Symbol name="propto" type="rel"/>  
-  <Symbol name="perp" type="rel"/>  
-  
+  <Symbol name="asymp" type="rel"/>
+  <Symbol name="approx" type="rel"/>
+  <Symbol name="propto" type="rel"/>
+  <Symbol name="perp" type="rel"/>
+
   <!-- special relation symbol with "width=0" (to overlap other relational symbols) -->
-  
+
   <Symbol name="not" type="rel"/>
-  
+
   <!-- arrows = pointing relations -->
-  
-  <Symbol name="colon" type="rel"/>  
-  <Symbol name="nearrow" type="rel"/>  
-  <Symbol name="searrow" type="rel"/>  
-  <Symbol name="swarrow" type="rel"/>  
-  <Symbol name="nwarrow" type="rel"/>  
-  <Symbol name="leftarrow" type="rel"/>  
+
+  <Symbol name="colon" type="rel"/>
+  <Symbol name="nearrow" type="rel"/>
+  <Symbol name="searrow" type="rel"/>
+  <Symbol name="swarrow" type="rel"/>
+  <Symbol name="nwarrow" type="rel"/>
+  <Symbol name="leftarrow" type="rel"/>
   <Symbol name="gets" type="rel"/>
-  <Symbol name="Leftarrow" type="rel"/>  
-  <Symbol name="rightarrow" type="rel"/>  
+  <Symbol name="Leftarrow" type="rel"/>
+  <Symbol name="rightarrow" type="rel"/>
   <Symbol name="to" type="rel"/>
-  <Symbol name="Rightarrow" type="rel"/>  
-  <Symbol name="leftrightarrow" type="rel"/>  
-  <Symbol name="Leftrightarrow" type="rel"/>  
-  <Symbol name="leftharpoonup" type="rel"/>  
-  <Symbol name="leftharpoondown" type="rel"/>  
-  <Symbol name="rightharpoonup" type="rel"/>  
+  <Symbol name="Rightarrow" type="rel"/>
+  <Symbol name="leftrightarrow" type="rel"/>
+  <Symbol name="Leftrightarrow" type="rel"/>
+  <Symbol name="leftharpoonup" type="rel"/>
+  <Symbol name="leftharpoondown" type="rel"/>
+  <Symbol name="rightharpoonup" type="rel"/>
   <Symbol name="rightharpoondown" type="rel"/>
 
   <!-- specials -->

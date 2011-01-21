@@ -3,30 +3,30 @@
   TeXFormulaSettings.xml
   =========================================================================
   This file is originally part of the JMathTeX Library - http://jmathtex.sourceforge.net
-  
+
   Copyright (C) 2004-2007 Universiteit Gent
   Copyright (C) 2009 DENIZET Calixte
-  
+
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
   the Free Software Foundation; either version 2 of the License, or (at
   your option) any later version.
-  
+
   This program is distributed in the hope that it will be useful, but
   WITHOUT ANY WARRANTY; without even the implied warranty of
   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
   General Public License for more details.
-  
+
   A copy of the GNU General Public License can be found in the file
   LICENSE.txt provided with the source distribution of this program (see
   the META-INF directory in the source jar). This license can also be
   found on the GNU website at http://www.gnu.org/licenses/gpl.html.
-  
+
   If you did not receive a copy of the GNU General Public License along
   with this program, contact the lead developer, or write to the Free
   Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
   02110-1301, USA.
-  
+
 -->
 
 <!-- all the symbolnames that appear here, must be defined in "TeXSymbols.xml"! -->
@@ -41,7 +41,7 @@
 	  <Map char="/" symbol="slash" text="textfractionsolidus"/>
 	  <Map char="*" symbol="ast" />
       	  <Map char="(" symbol="lbrack"/>
-      	  <Map char="." symbol="normaldot"/>
+      	  <Map char="." symbol="normaldot" text="textnormaldot"/>
       	  <Map char=";" symbol="semicolon"/>
       	  <Map char="&gt;" symbol="gt"/>
       	  <Map char="{" symbol="lbrace"/>
@@ -730,19 +730,19 @@
 	  <Map char="&#8969;" formula="\rceil"/>
 	  <Map char="&#8912;" formula="\Subset"/>
 	  <Map char="&#8652;" formula="\rightleftharpoons"/>
-	  <Map char="&#0769;" formula="\acute"/>  
-	  <Map char="&#0768;" formula="\grave"/>  
-	  <Map char="&#0776;" formula="\ddot"/> 
+	  <Map char="&#0769;" formula="\acute"/>
+	  <Map char="&#0768;" formula="\grave"/>
+	  <Map char="&#0776;" formula="\ddot"/>
 	  <Map char="&#0779;" formula="\doubleacute"/>
 	  <Map char="&#0771;" formula="\tilde"/>
 	  <Map char="&#0730;" formula="\jlatexmathring"/>
-	  <Map char="&#0772;" formula="\bar"/>  
-	  <Map char="&#0774;" formula="\breve"/> 
-	  <Map char="&#0780;" formula="\check"/>  
+	  <Map char="&#0772;" formula="\bar"/>
+	  <Map char="&#0774;" formula="\breve"/>
+	  <Map char="&#0780;" formula="\check"/>
 	  <Map char="&#0770;" formula="\hat"/>
-	  <Map char="&#8407;" formula="\vec"/>  
-	  <Map char="&#0775;" formula="\dot"/>  
-	  <Map char="&#0770;" formula="\widehat"/>  
+	  <Map char="&#8407;" formula="\vec"/>
+	  <Map char="&#0775;" formula="\dot"/>
+	  <Map char="&#0770;" formula="\widehat"/>
 	  <Map char="&#0771;" formula="\widetilde"/>
 	  <Map char="&#8450;" formula="\mathbb{C}"/>
 	  <Map char="&#8451;" formula="\sideset{^\circ}{}\text{C}"/>
@@ -919,7 +919,6 @@
 	  <Map char="&#9447;" formula="\textcircled{\texttt x}"/>
 	  <Map char="&#9448;" formula="\textcircled{\texttt y}"/>
 	  <Map char="&#9449;" formula="\textcircled{\texttt z}"/>
-
 	</CharacterToFormulaMappings>
 
 </FormulaSettings>

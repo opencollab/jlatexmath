@@ -641,7 +641,9 @@ public class TeXParser {
                         insertion = false;
                     break;
                 case L_GROUP :
-                    formula.add(getArgument());
+		    Atom atom = getArgument();
+		    atom.type = TeXConstants.TYPE_ORDINARY;
+                    formula.add(atom);
                     break;
                 case R_GROUP :
                     group--;

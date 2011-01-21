@@ -138,7 +138,7 @@ public class TeXFormula {
 	    DefaultTeXFont.registerAlphabet((AlphabetRegistration) Class.forName("org.scilab.forge.jlatexmath.greek.GreekRegistration").newInstance());
 	} catch (Exception e) { }
 	
-	setDefaultDPI();
+	//setDefaultDPI();
     }
 
     public static void addSymbolMappings(String file) throws ResourceParseException {
