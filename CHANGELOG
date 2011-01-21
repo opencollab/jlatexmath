@@ -1,5 +1,7 @@
 jlatexmath (0.9.4)
 
+	* Add \cal.
+
 	* Add \it, \bf, \sc, ...
 
 	* Add commands \textsc and \textcircled. 

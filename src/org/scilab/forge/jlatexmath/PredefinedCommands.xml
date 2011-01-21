@@ -306,6 +306,15 @@
 		</CreateCommand>
 		<Return name="f" />
 	</Command>
+
+	<Command name="cal" enabled="true">
+		<CreateCommand name="f">
+			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+			<Argument type="String" value="textstyle_macros" />
+			<Argument type="float" value="1" />
+		</CreateCommand>
+		<Return name="f" />
+	</Command>
 	
 	<Command name="mathit" enabled="true">
 		<CreateCommand name="f">

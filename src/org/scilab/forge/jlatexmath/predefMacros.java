@@ -349,14 +349,17 @@ public class predefMacros {
     }
     
     public Atom textstyle_macros(TeXParser tp, String[] args) throws ParseException {
+	String style = args[0];
 	if ("frak".equals(args[0]))
-	    args[0] = "mathfrak";
+	    style = "mathfrak";
 	else if ("Bbb".equals(args[0]))
-	    args[0] = "mathbb";
+	    style = "mathbb";
 	else if ("bold".equals(args[0]))
 	    return new BoldAtom(new TeXFormula(tp.getIsPartial(), args[1], false).root);
+	else if ("cal".equals(args[0]))
+	    style = "mathcal";
 	
-	return new TextStyleAtom(new TeXFormula(tp.getIsPartial(), args[1], false).root, args[0]);
+	return new TextStyleAtom(new TeXFormula(tp.getIsPartial(), args[1], false).root, style);
 	//return new TeXFormula(tp.getIsPartial(), args[1], args[0]).root;
     }
 
