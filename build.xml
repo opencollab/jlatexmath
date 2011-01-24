@@ -202,11 +202,15 @@
   </target>
   
   <target name="source" depends="info" >
-    <jar jarfile="${output.jar.dir}/jlatexmath-src-${version}.zip" basedir="${project.root.dir}" includes="COPYING LICENSE README build.xml version.xml MANIFEST.MF src/**/*.java src/**/*.xml src/**/*.ttf src/**/licences/* src/**/README examples/**/*.java examples/**/lion.png examples/**/*.xml examples/**/README"/>
+    <zip destfile="${output.jar.dir}/jlatexmath-src-${version}.zip">
+      <zipfileset prefix="jlatexmath-${version}/" dir="${project.root.dir}" includes="COPYING LICENSE README build.xml version.xml MANIFEST.MF src/**/*.java src/**/*.xml src/**/*.ttf src/**/licences/* src/**/README examples/**/*.java examples/**/lion.png examples/**/*.xml examples/**/README" />
+    </zip>
   </target>
   
   <target name="src-all" depends="info" >
-    <jar jarfile="${output.jar.dir}/jlatexmath-src-all-${version}.zip" basedir="${project.root.dir}" includes="COPYING LICENSE README fop.properties build.xml version.xml MANIFEST.MF src/**/*.java src/**/*.xml src/**/*.ttf src/**/licences/* src/**/greek/* src/**/cyrillic/* src/**/README examples/**/*.java examples/**/lion.png examples/**/*.xml examples/**/README plugin/**/src/**/*.java plugin/**/src/META-INF/**/* plugin/**/build.xml plugin/**/COPYING plugin/**/LICENSE plugin/**/examples/*.*"/>
+    <zip destfile="${output.jar.dir}/jlatexmath-src-all-${version}.zip" >
+      <zipfileset prefix="jlatexmath-${version}/" dir="${project.root.dir}" includes="COPYING LICENSE README fop.properties build.xml version.xml MANIFEST.MF src/**/*.java src/**/*.xml src/**/*.ttf src/**/licences/* src/**/greek/* src/**/cyrillic/* src/**/README examples/**/*.java examples/**/lion.png examples/**/*.xml examples/**/README plugin/**/src/**/*.java plugin/**/src/META-INF/**/* plugin/**/build.xml plugin/**/COPYING plugin/**/LICENSE plugin/**/examples/*.*" />
+    </zip>
   </target>
   
   <target name="all" depends="init, buildJar, buildJarMinimal, source, src-all, embedded, plugin, plugin-src, embedded-zip"/>

@@ -1,5 +1,7 @@
 jlatexmath (0.9.4)
 
+	* Update build.xml to add a base directory in zip archives.
+
 	* Add \og and \fg.
 
 	* In text mode, the normal dot must be a punctuation symbol.
