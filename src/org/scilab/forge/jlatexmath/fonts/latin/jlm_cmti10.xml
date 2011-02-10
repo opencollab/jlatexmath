@@ -56,8 +56,12 @@
       <Kern code="63" val="0.1022215"/>
       <Kern code="33" val="0.1022215"/>
    </Char>
-   <Char code="40" width="0.408887" height="0.75" depth="0.25" italic="0.161944" />
-   <Char code="41" width="0.408887" height="0.75" depth="0.25" italic="0.036944" />
+   <Char code="40" width="0.408887" height="0.75" depth="0.25" italic="0.161944" >
+     <NextLarger fontId="jlm_cmex10" code="161"/>
+   </Char>
+   <Char code="41" width="0.408887" height="0.75" depth="0.25" italic="0.036944" >
+     <NextLarger fontId="jlm_cmex10" code="162"/>
+   </Char>
    <Char code="42" width="0.511108" height="0.75" italic="0.149167" />
    <Char code="43" width="0.766663" height="0.561666" depth="0.056665" italic="0.036944" />
    <Char code="44" width="0.306665" height="0.105556" depth="0.194445" />
@@ -65,7 +69,9 @@
       <Lig code="45" ligCode="123"/>
    </Char>
    <Char code="46" width="0.306665" height="0.105556" />
-   <Char code="47" width="0.511108" height="0.75" depth="0.25" italic="0.161944" />
+   <Char code="47" width="0.511108" height="0.75" depth="0.25" italic="0.161944" >
+     <NextLarger fontId="jlm_cmex10" code="177"/>
+   </Char>
    <Char code="48" width="0.511108" height="0.644444" italic="0.135556" />
    <Char code="49" width="0.511108" height="0.644444" italic="0.135556" />
    <Char code="50" width="0.511108" height="0.644444" italic="0.135556" />
@@ -244,9 +250,13 @@
       <Kern code="65" val="-0.076666"/>
    </Char>
    <Char code="90" width="0.61333" height="0.683332" italic="0.145277" />
-   <Char code="91" width="0.306665" height="0.75" depth="0.25" italic="0.1875" />
+   <Char code="91" width="0.306665" height="0.75" depth="0.25" italic="0.1875" >
+     <NextLarger fontId="jlm_cmex10" code="163"/>
+   </Char>
    <Char code="92" width="0.514442" height="0.694445" italic="0.1685" />
-   <Char code="93" width="0.306665" height="0.75" depth="0.25" italic="0.105278" />
+   <Char code="93" width="0.306665" height="0.75" depth="0.25" italic="0.105278" >
+     <NextLarger fontId="jlm_cmex10" code="164"/>
+   </Char>
    <Char code="94" width="0.511108" height="0.694445" italic="0.06646" />
    <Char code="95" width="0.306665" height="0.667859" italic="0.117521" />
    <Char code="96" width="0.306665" height="0.694445" italic="0.124168" >

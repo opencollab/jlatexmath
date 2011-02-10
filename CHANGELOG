@@ -1,31 +1,35 @@
+jlatexmath (0.9.5)
+
+        * \left(...\right) was inactive in \mathsf
+
 jlatexmath (0.9.4)
 
-	* Update build.xml to add a base directory in zip archives.
+        * Update build.xml to add a base directory in zip archives.
 
-	* Add \og and \fg.
+        * Add \og and \fg.
 
-	* In text mode, the normal dot must be a punctuation symbol.
+        * In text mode, the normal dot must be a punctuation symbol.
 
-	* Add \cal.
+        * Add \cal.
 
-	* Add \it, \bf, \sc, ...
+        * Add \it, \bf, \sc, ...
 
-	* Add commands \textsc and \textcircled. 
+        * Add commands \textsc and \textcircled.
 
         * Fix a bug in the FOP plugin when latex is mixed with other
-	  image source.
+          image source.
 
-	* $...$ was ignored
+        * $...$ was ignored
 
-	* Add \raisebox and \romannumeral.
+        * Add \raisebox and \romannumeral.
 
-	* Handle options in \includegraphics.
+        * Handle options in \includegraphics.
 
         * Add a static method TeXFormula.setDefaultDPI().
 
-	* Add a static method TeXFormula.setDPITarget(float dpi).
+        * Add a static method TeXFormula.setDPITarget(float dpi).
 
-	* Add shadowbox, doublebox and ovalbox.
+        * Add shadowbox, doublebox and ovalbox.
 
         * Fix bugs on rotatebox (bad default center), with the parser
           (...\end{foo}a... gave an error)) and improve the debug mode.

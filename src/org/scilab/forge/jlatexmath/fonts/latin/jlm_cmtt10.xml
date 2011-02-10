@@ -41,14 +41,20 @@
    <Char code="37" width="0.524996" height="0.694445" depth="0.083333" />
    <Char code="38" width="0.524996" height="0.611112" />
    <Char code="39" width="0.524996" height="0.611112" />
-   <Char code="40" width="0.524996" height="0.694445" depth="0.083331" />
-   <Char code="41" width="0.524996" height="0.694445" depth="0.083331" />
+   <Char code="40" width="0.524996" height="0.694445" depth="0.083331" >
+     <NextLarger fontId="jlm_cmex10" code="161"/>
+   </Char>
+   <Char code="41" width="0.524996" height="0.694445" depth="0.083331" >
+     <NextLarger fontId="jlm_cmex10" code="162"/>
+   </Char>
    <Char code="42" width="0.524996" height="0.520834" />
    <Char code="43" width="0.524996" height="0.530554" depth="-0.080557" />
    <Char code="44" width="0.524996" height="0.125" depth="0.138888" />
    <Char code="45" width="0.524996" height="0.530554" depth="-0.080557" />
    <Char code="46" width="0.524996" height="0.125" />
-   <Char code="47" width="0.524996" height="0.694445" depth="0.083331" />
+   <Char code="47" width="0.524996" height="0.694445" depth="0.083331" >
+     <NextLarger fontId="jlm_cmex10" code="177"/>
+   </Char>
    <Char code="48" width="0.524996" height="0.611112" />
    <Char code="49" width="0.524996" height="0.611112" />
    <Char code="50" width="0.524996" height="0.611112" />
@@ -94,9 +100,13 @@
    <Char code="88" width="0.524996" height="0.611112" />
    <Char code="89" width="0.524996" height="0.611112" />
    <Char code="90" width="0.524996" height="0.611112" />
-   <Char code="91" width="0.524996" height="0.694445" depth="0.083331" />
+   <Char code="91" width="0.524996" height="0.694445" depth="0.083331" >
+     <NextLarger fontId="jlm_cmex10" code="163"/>
+   </Char>
    <Char code="92" width="0.524996" height="0.694445" depth="0.083331" />
-   <Char code="93" width="0.524996" height="0.694445" depth="0.083331" />
+   <Char code="93" width="0.524996" height="0.694445" depth="0.083331" >
+     <NextLarger fontId="jlm_cmex10" code="164"/>
+   </Char>
    <Char code="94" width="0.524996" height="0.611112" />
    <Char code="95" width="0.524996" depth="0.095136" />
    <Char code="96" width="0.524996" height="0.611112" />

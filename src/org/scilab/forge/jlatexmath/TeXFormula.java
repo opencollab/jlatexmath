@@ -79,7 +79,7 @@ import javax.imageio.stream.FileImageOutputStream;
  */
 public class TeXFormula {
     
-    public static final String VERSION = "0.9.4";
+    public static final String VERSION = "0.9.5";
 
     // table for putting delimiters over and under formula's,
     // indexed by constants from "TeXConstants"
