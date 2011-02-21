@@ -1,4 +1,5 @@
 jlatexmath (0.9.5)
+	* The fop plugin is now available with fop 0.95 and 1.0
 
         * \left(...\right) was inactive in \mathsf
 

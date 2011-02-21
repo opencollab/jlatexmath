@@ -71,6 +71,7 @@ public class JLaTeXMathElement extends JLaTeXMathObj {
     private Color fg;
     private TeXIcon icon = null;
     private boolean bool = true;
+    private String PR_COLOR = "PR_COLOR";
 
     public JLaTeXMathElement(FONode parent) {
         super(parent);
@@ -155,7 +156,15 @@ public class JLaTeXMathElement extends JLaTeXMathObj {
         CommonFont commonFont = pList.getFontProps();
         this.size = (float) commonFont.fontSize.getNumericValue() / 1000;
 
-        Property colorProp = pList.get(org.apache.fop.fo.Constants.PR_COLOR);
+        int n = org.apache.fop.fo.Constants.PR_COLOR;
+	try {
+	    n = org.apache.fop.fo.Constants.class.getDeclaredField(PR_COLOR).getInt(null);
+	} catch (Exception e) {
+	    System.err.println("Error in getting field:\n" + e);
+	}
+
+	Property colorProp = pList.get(n);
+	
         this.fg = colorProp != null ? colorProp.getColor(userAgent) : null;
         
         return super.createPropertyList(pList, foEventHandler);
