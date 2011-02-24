@@ -49,7 +49,7 @@
     </delete>
   </target>
   
-  <target name="example" depends="Macros">
+  <target name="example" depends="buildJar">
     <javac includeantruntime="false" srcdir="${ex.basic}" destdir="${ex.basic}" debug="on" source="${java_version}" target="${java_version}" classpath="${output.jar.dir}/jlatexmath-${version}.jar:${output.jar.dir}/jlm_cyrillic.jar:${output.jar.dir}/jlm_greek.jar">
     </javac>
     <java fork="true" classpath="${ex.basic}:${output.jar.dir}/jlatexmath-${version}.jar:${output.jar.dir}/jlm_cyrillic.jar:${output.jar.dir}/jlm_greek.jar" dir="${ex.basic}" className="Main"/> 
