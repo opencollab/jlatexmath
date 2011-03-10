@@ -800,8 +800,9 @@ public class TeXParser {
             }
 
             return parseString.substring(spos + 1, pos - 1);
-        } else
+        } else {
             throw new ParseException("missing '" + open + "'!");
+        }
     }
 
     /** Get the contents between two strings as in \begin{foo}...\end{foo}
@@ -880,6 +881,9 @@ public class TeXParser {
         }
 
         if (group != 0) {
+            if (isPartial) {
+                return buf.toString();
+            }
             throw new ParseException("The token " + open + " must be closed by " + close);
         }
 
