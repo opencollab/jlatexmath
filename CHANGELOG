@@ -1,10 +1,15 @@
 jlatexmath (0.9.5)
 
+	* Add \(...\) & \[...\], $$...$$, \begin{math}...\end{math} and 
+	  \begin{displaymath}...\end{displaymath} 
+
 	* No display with \left in partial mode
 
 	* The fop plugin is now available with fop 0.95 and 1.0
 
         * \left(...\right) was inactive in \mathsf
+
+ -- Calixte Denizet <calixte@contrib.scilab.org>
 
 jlatexmath (0.9.4)
 

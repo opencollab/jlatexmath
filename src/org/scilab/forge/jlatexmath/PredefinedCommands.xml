@@ -3,2242 +3,2260 @@
   PredefinedCommands.xml
   =========================================================================
   This file is part of the JLaTeXMath Library - http://forge.scilab.org/jlatexmath
-  
+
   Copyright (C) 2009 DENIZET Calixte
-  
+
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
   the Free Software Foundation; either version 2 of the License, or (at
   your option) any later version.
-  
+
   This program is distributed in the hope that it will be useful, but
   WITHOUT ANY WARRANTY; without even the implied warranty of
   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
   General Public License for more details.
-  
+
   A copy of the GNU General Public License can be found in the file
   LICENSE.txt provided with the source distribution of this program (see
   the META-INF directory in the source jar). This license can also be
   found on the GNU website at http://www.gnu.org/licenses/gpl.html.
-  
+
   If you did not receive a copy of the GNU General Public License along
   with this program, contact the lead developer, or write to the Free
   Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
   02110-1301, USA.
-  
+
 -->
 
 <PredefinedCommands enabled="true">
 
 <!-- Built-in LaTeX commands -->
 
-	<Command name="newcommand" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="newcommand_macro" />
-			<Argument type="float" value="2" />
-			<Argument type="float" value="2" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="renewcommand" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="renewcommand_macro" />
-			<Argument type="float" value="2" />
-			<Argument type="float" value="2" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="rule" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="rule_macro" />
-			<Argument type="float" value="2" />
-			<Argument type="float" value="1" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="hspace" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="hvspace_macro" />
-			<Argument type="float" value="1" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="vspace" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="hvspace_macro" />
-			<Argument type="float" value="1" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="llap" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="clrlap_macro" />
-			<Argument type="float" value="1" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="rlap" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="clrlap_macro" />
-			<Argument type="float" value="1" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="clap" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="clrlap_macro" />
-			<Argument type="float" value="1" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="mathllap" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="mathclrlap_macro" />
-			<Argument type="float" value="1" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="mathrlap" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="mathclrlap_macro" />
-			<Argument type="float" value="1" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="mathclap" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="mathclrlap_macro" />
-			<Argument type="float" value="1" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="includegraphics" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="includegraphics_macro" />
-			<Argument type="float" value="1" />
-			<Argument type="float" value="1" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="cfrac" enabled="true">
-	        <CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="cfrac_macro" />
-			<Argument type="float" value="2" />
-			<Argument type="float" value="1" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="frac" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="frac_macro" />
-			<Argument type="float" value="2" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="sfrac" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="sfrac_macro" />
-			<Argument type="float" value="2" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="genfrac" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="genfrac_macro" />
-			<Argument type="float" value="6" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="over" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="over_macro" />
-			<Argument type="float" value="0" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="overwithdelims" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="overwithdelims_macro" />
-			<Argument type="float" value="2" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="atop" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="atop_macro" />
-			<Argument type="float" value="0" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="atopwithdelims" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="atopwithdelims_macro" />
-			<Argument type="float" value="2" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="choose" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="choose_macro" />
-			<Argument type="float" value="0" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="underscore" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="underscore_macro" />
-			<Argument type="float" value="0" />        	
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="mbox" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="mbox_macro" />
-			<Argument type="float" value="1" />        	
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="text" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="text_macro" />
-			<Argument type="float" value="1" />        	
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="intertext" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="intertext_macro" />
-			<Argument type="float" value="1" />        	
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="binom" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="binom_macro" />
-			<Argument type="float" value="2" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="mathbf" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="mathbf_macro" />
-			<Argument type="float" value="1" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="bf" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="bf_macro" />
-			<Argument type="float" value="0" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-	
-	<Command name="mathbb" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="textstyle_macros" />
-			<Argument type="float" value="1" />	
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-	
-	<Command name="mathcal" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="textstyle_macros" />
-			<Argument type="float" value="1" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="cal" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="textstyle_macros" />
-			<Argument type="float" value="1" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-	
-	<Command name="mathit" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="mathit_macro" />
-			<Argument type="float" value="1" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="it" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="it_macro" />
-			<Argument type="float" value="0" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-	
-	<Command name="mathrm" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="mathrm_macro" />
-			<Argument type="float" value="1" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="rm" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="rm_macro" />
-			<Argument type="float" value="0" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="mathscr" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="textstyle_macros" />
-			<Argument type="float" value="1" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="mathsf" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="mathsf_macro" />
-			<Argument type="float" value="1" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="sf" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="sf_macro" />
-			<Argument type="float" value="0" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="mathtt" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="mathtt_macro" />
-			<Argument type="float" value="1" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="tt" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="tt_macro" />
-			<Argument type="float" value="0" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="mathfrak" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="textstyle_macros" />
-			<Argument type="float" value="1" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="mathds" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="textstyle_macros" />
-			<Argument type="float" value="1" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="frak" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="textstyle_macros" />
-			<Argument type="float" value="1" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-	
-	<Command name="Bbb" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="textstyle_macros" />
-			<Argument type="float" value="1" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="oldstylenums" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="textstyle_macros" />
-			<Argument type="float" value="1" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="bold" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="textstyle_macros" />
-			<Argument type="float" value="1" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="^" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="accentbis_macros" />
-			<Argument type="float" value="1" />        	
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="'" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="accentbis_macros" />
-			<Argument type="float" value="1" />		  	
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
- 
-	<Command name="&quot;" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="accentbis_macros" />
-			<Argument type="float" value="1" />	        	
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="`" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="accentbis_macros" />
-			<Argument type="float" value="1" />        	
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="=" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="accentbis_macros" />
-			<Argument type="float" value="1" />        	
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="." enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="accentbis_macros" />
-			<Argument type="float" value="1" />        	
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-	
-	<Command name="~" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="accentbis_macros" />
-			<Argument type="float" value="1" />        	
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="u" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="accentbis_macros" />
-			<Argument type="float" value="1" />        	
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="v" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="accentbis_macros" />
-			<Argument type="float" value="1" />        	
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="H" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="accentbis_macros" />
-			<Argument type="float" value="1" />        	
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="r" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="accentbis_macros" />
-			<Argument type="float" value="1" />        	
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="U" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="accentbis_macros" />
-			<Argument type="float" value="1" />        	
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="T" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="T_macro" />
-			<Argument type="float" value="1" />        	
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-	
-	<Command name="t" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="accentbis_macros" />
-			<Argument type="float" value="1" />        	
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="accent" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="accent_macro" />
-			<Argument type="float" value="2" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="grkaccent" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="grkaccent_macro" />
-			<Argument type="float" value="2" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="hat" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="accent_macros" />
-			<Argument type="float" value="1" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="widehat" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="accent_macros" />
-			<Argument type="float" value="1" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="tilde" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="accent_macros" />
-			<Argument type="float" value="1" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-	
-	<Command name="acute" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="accent_macros" />
-			<Argument type="float" value="1" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="grave" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="accent_macros" />
-			<Argument type="float" value="1" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="ddot" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="accent_macros" />
-			<Argument type="float" value="1" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="cyrddot" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="accent_macros" />
-			<Argument type="float" value="1" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-	
-	<Command name="mathring" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="accent_macros" />
-			<Argument type="float" value="1" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="bar" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="accent_macros" />
-			<Argument type="float" value="1" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="breve" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="accent_macros" />
-			<Argument type="float" value="1" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-	
-	<Command name="check" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="accent_macros" />
-			<Argument type="float" value="1" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-	
-	<Command name="vec" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="accent_macros" />
-			<Argument type="float" value="1" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-	
-	<Command name="dot" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="accent_macros" />
-			<Argument type="float" value="1" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-	
-	<Command name="widetilde" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="accent_macros" />
-			<Argument type="float" value="1" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-	
-	<Command name="nbsp" enabled="true">
-	        <CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="nbsp_macro" />
-			<Argument type="float" value="0" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="smallmatrix@@env" enabled="true">
-	        <CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="smallmatrixATATenv_macro" />
-			<Argument type="float" value="1" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="matrix@@env" enabled="true">
-	        <CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="matrixATATenv_macro" />
-			<Argument type="float" value="1" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="overrightarrow" enabled="true">
-	        <CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="overrightarrow_macro" />
-			<Argument type="float" value="1" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="overleftarrow" enabled="true">
-	        <CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="overleftarrow_macro" />
-			<Argument type="float" value="1" />			        	</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="overleftrightarrow" enabled="true">
-	        <CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="overleftrightarrow_macro" />
-			<Argument type="float" value="1" />			
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="underrightarrow" enabled="true">
-	        <CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="underrightarrow_macro" />
-			<Argument type="float" value="1" />        	
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="underleftarrow" enabled="true">
-	        <CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="underleftarrow_macro" />
-			<Argument type="float" value="1" />        	
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="underleftrightarrow" enabled="true">
-	        <CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="underleftrightarrow_macro" />
-			<Argument type="float" value="1" />        	
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="xleftarrow" enabled="true">
-	        <CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="xleftarrow_macro" />
-			<Argument type="float" value="1" />
-			<Argument type="float" value="1" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="xrightarrow" enabled="true">
-	        <CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="xrightarrow_macro" />
-			<Argument type="float" value="1" />
-			<Argument type="float" value="1" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="underbrace" enabled="true">
-	        <CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="underbrace_macro" />
-			<Argument type="float" value="1" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="overbrace" enabled="true">
-	        <CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="overbrace_macro" />
-			<Argument type="float" value="1" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="underbrack" enabled="true">
-	        <CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="underbrack_macro" />
-			<Argument type="float" value="1" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="overbrack" enabled="true">
-	        <CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="overbrack_macro" />
-			<Argument type="float" value="1" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="underparen" enabled="true">
-	        <CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="underparen_macro" />
-			<Argument type="float" value="1" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="overparen" enabled="true">
-	        <CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="overparen_macro" />
-			<Argument type="float" value="1" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="sqrt" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="sqrt_macro" />
-			<Argument type="float" value="1" />
-			<Argument type="float" value="1" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="sqrtsign" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="sqrt_macro" />
-			<Argument type="float" value="1" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="overline" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="overline_macro" />
-			<Argument type="float" value="1" />  	
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="underline" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="underline_macro" />
-			<Argument type="float" value="1" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-	
-	<Command name="mathop" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="mathop_macro" />
-			<Argument type="float" value="1" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="mathpunct" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="mathpunct_macro" />
-			<Argument type="float" value="1" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="mathord" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="mathord_macro" />
-			<Argument type="float" value="1" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-	
-	<Command name="mathrel" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="mathrel_macro" />
-			<Argument type="float" value="1" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="mathinner" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="mathinner_macro" />
-			<Argument type="float" value="1" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-	
-	<Command name="mathbin" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="mathbin_macro" />
-			<Argument type="float" value="1" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-	
-	<Command name="mathopen" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="mathopen_macro" />
-			<Argument type="float" value="1" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-	
-	<Command name="mathclose" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="mathclose_macro" />
-			<Argument type="float" value="1" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-	
-	<Command name="joinrel" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="joinrel_macro" />
-			<Argument type="float" value="0" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-	
-	<Command name="smash" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="smash_macro" />
-			<Argument type="float" value="1" />
-			<Argument type="float" value="1" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-	
-	<Command name="vdots" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="vdots_macro" />
-			<Argument type="float" value="0" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="ddots" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="ddots_macro" />
-			<Argument type="float" value="0" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="iddots" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="iddots_macro" />
-			<Argument type="float" value="0" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="nolimits" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="nolimits_macro" />
-			<Argument type="float" value="0" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="limits" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="limits_macro" />
-			<Argument type="float" value="0" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="normal" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="normal_macro" />
-			<Argument type="float" value="0" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="left" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="left_macro" />
-			<Argument type="float" value="1" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="middle" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="middle_macro" />
-			<Argument type="float" value="1" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="cr" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="cr_macro" />
-			<Argument type="float" value="0" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="multicolumn" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="multicolumn_macro" />
-			<Argument type="float" value="3" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="hdotsfor" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="hdotsfor_macro" />
-			<Argument type="float" value="1" />
-			<Argument type="float" value="1" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-	
-	<Command name="array@@env" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="arrayATATenv_macro" />
-			<Argument type="float" value="2" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="align@@env" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="alignATATenv_macro" />
-			<Argument type="float" value="2" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="aligned@@env" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="alignedATATenv_macro" />
-			<Argument type="float" value="2" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="flalign@@env" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="flalignATATenv_macro" />
-			<Argument type="float" value="2" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="alignat@@env" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="alignatATATenv_macro" />
-			<Argument type="float" value="2" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="alignedat@@env" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="alignedatATATenv_macro" />
-			<Argument type="float" value="2" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="multline@@env" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="multlineATATenv_macro" />
-			<Argument type="float" value="2" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="gather@@env" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="gatherATATenv_macro" />
-			<Argument type="float" value="2" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="gathered@@env" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="gatheredATATenv_macro" />
-			<Argument type="float" value="2" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-	
-	<Command name="shoveright" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="shoveright_macro" />
-			<Argument type="float" value="1" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="shoveleft" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="shoveleft_macro" />
-			<Argument type="float" value="1" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-	
-	<Command name="\" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="backslashcr_macro" />
-			<Argument type="float" value="0" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="newenvironment" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="newenvironment_macro" />
-			<Argument type="float" value="3" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="renewenvironment" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="renewenvironment_macro" />
-			<Argument type="float" value="3" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="makeatletter" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="makeatletter_macro" />
-			<Argument type="float" value="0" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="makeatother" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="makeatother_macro" />
-			<Argument type="float" value="0" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="fbox" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="fbox_macro" />
-			<Argument type="float" value="1" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="boxed" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="fbox_macro" />
-			<Argument type="float" value="1" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="stackrel" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="stackrel_macro" />
-			<Argument type="float" value="2" />
-			<Argument type="float" value="1" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="stackbin" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="stackbin_macro" />
-			<Argument type="float" value="2" />
-			<Argument type="float" value="1" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="accentset" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="accentset_macro" />
-			<Argument type="float" value="2" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="underaccent" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="underaccent_macro" />
-			<Argument type="float" value="2" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="undertilde" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="undertilde_macro" />
-			<Argument type="float" value="1" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="overset" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="overset_macro" />
-			<Argument type="float" value="2" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="Braket" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="Braket_macro" />
-			<Argument type="float" value="1" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="Set" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="Set_macro" />
-			<Argument type="float" value="1" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-	
-	<Command name="underset" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="underset_macro" />
-			<Argument type="float" value="2" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="boldsymbol" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="boldsymbol_macro" />
-			<Argument type="float" value="1" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="LaTeX" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="LaTeX_macro" />
-			<Argument type="float" value="0" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="GeoGebra" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="GeoGebra_macro" />
-			<Argument type="float" value="0" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="big" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="big_macro" />
-			<Argument type="float" value="1" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="Big" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="Big_macro" />
-			<Argument type="float" value="1" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="bigg" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="bigg_macro" />
-			<Argument type="float" value="1" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="Bigg" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="Bigg_macro" />
-			<Argument type="float" value="1" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="bigl" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="bigl_macro" />
-			<Argument type="float" value="1" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="Bigl" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="Bigl_macro" />
-			<Argument type="float" value="1" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="biggl" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="biggl_macro" />
-			<Argument type="float" value="1" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="Biggl" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="Biggl_macro" />
-			<Argument type="float" value="1" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="bigr" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="bigr_macro" />
-			<Argument type="float" value="1" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="Bigr" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="Bigr_macro" />
-			<Argument type="float" value="1" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="biggr" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="biggr_macro" />
-			<Argument type="float" value="1" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="Biggr" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="Biggr_macro" />
-			<Argument type="float" value="1" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="displaystyle" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="displaystyle_macro" />
-			<Argument type="float" value="0" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="textstyle" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="textstyle_macro" />
-			<Argument type="float" value="0" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="scriptstyle" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="scriptstyle_macro" />
-			<Argument type="float" value="0" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="scriptscriptstyle" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="scriptscriptstyle_macro" />
-			<Argument type="float" value="0" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="sideset" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="sideset_macro" />
-			<Argument type="float" value="3" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="prescript" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="prescript_macro" />
-			<Argument type="float" value="3" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="rotatebox" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="rotatebox_macro" />
-			<Argument type="float" value="2" />
-			<Argument type="float" value="1" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="reflectbox" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="reflectbox_macro" />
-			<Argument type="float" value="1" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="scalebox" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="scalebox_macro" />
-			<Argument type="float" value="2" />
-			<Argument type="float" value="2" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="resizebox" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="resizebox_macro" />
-			<Argument type="float" value="3" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="raisebox" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="raisebox_macro" />
-			<Argument type="float" value="2" />
-			<Argument type="float" value="2" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="shadowbox" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="shadowbox_macro" />
-			<Argument type="float" value="1" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="ovalbox" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="ovalbox_macro" />
-			<Argument type="float" value="1" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="doublebox" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="doublebox_macro" />
-			<Argument type="float" value="1" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-	
-	<Command name="phantom" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="phantom_macro" />
-			<Argument type="float" value="1" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="hphantom" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="hphantom_macro" />
-			<Argument type="float" value="1" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="vphantom" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="vphantom_macro" />
-			<Argument type="float" value="1" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="sp@breve" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="spATbreve_macro" />
-			<Argument type="float" value="0" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="sp@hat" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="spAThat_macro" />
-			<Argument type="float" value="0" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="definecolor" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="definecolor_macro" />
-			<Argument type="float" value="3" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="textcolor" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="textcolor_macro" />
-			<Argument type="float" value="2" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="fgcolor" enabled="true">
-	        <CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="fgcolor_macro" />
-			<Argument type="float" value="2" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="bgcolor" enabled="true">
-	        <CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="bgcolor_macro" />
-			<Argument type="float" value="2" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="colorbox" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="colorbox_macro" />
-			<Argument type="float" value="2" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="fcolorbox" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="fcolorbox_macro" />
-			<Argument type="float" value="3" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="c" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="cedilla_macro" />
-			<Argument type="float" value="1" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="IJ" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="IJ_macro" />
-			<Argument type="float" value="0" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="ij" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="IJ_macro" />
-			<Argument type="float" value="0" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="TStroke" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="TStroke_macro" />
-			<Argument type="float" value="0" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="tStroke" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="TStroke_macro" />
-			<Argument type="float" value="0" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="Lcaron" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="LCaron_macro" />
-			<Argument type="float" value="0" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="tcaron" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="tcaron_macro" />
-			<Argument type="float" value="0" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="lcaron" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="LCaron_macro" />
-			<Argument type="float" value="0" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="k" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="ogonek_macro" />
-			<Argument type="float" value="1" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="cong" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="cong_macro" />
-			<Argument type="float" value="0" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="doteq" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="doteq_macro" />
-			<Argument type="float" value="0" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="jlmDynamic" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="jlmDynamic_macro" />
-			<Argument type="float" value="1" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="DeclareMathSizes" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="DeclareMathSizes_macro" />
-			<Argument type="float" value="4" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="magnification" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="magnification_macro" />
-			<Argument type="float" value="1" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="hline" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="hline_macro" />
-			<Argument type="float" value="0" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="tiny" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="size_macros" />
-			<Argument type="float" value="0" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="scriptsize" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="size_macros" />
-			<Argument type="float" value="0" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="footnotesize" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="size_macros" />
-			<Argument type="float" value="0" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="small" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="size_macros" />
-			<Argument type="float" value="0" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="normalsize" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="size_macros" />
-			<Argument type="float" value="0" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="large" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="size_macros" />
-			<Argument type="float" value="0" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="Large" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="size_macros" />
-			<Argument type="float" value="0" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="LARGE" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="size_macros" />
-			<Argument type="float" value="0" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="huge" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="size_macros" />
-			<Argument type="float" value="0" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="Huge" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="size_macros" />
-			<Argument type="float" value="0" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="jlatexmathcumsup" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="jlatexmathcumsup_macro" />
-			<Argument type="float" value="1" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="jlatexmathcumsub" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="jlatexmathcumsub_macro" />
-			<Argument type="float" value="1" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="hstrok" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="hstrok_macro" />
-			<Argument type="float" value="0" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="Hstrok" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="Hstrok_macro" />
-			<Argument type="float" value="0" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="dstrok" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="dstrok_macro" />
-			<Argument type="float" value="0" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="Dstrok" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="Dstrok_macro" />
-			<Argument type="float" value="0" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="dotminus" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="dotminus_macro" />
-			<Argument type="float" value="0" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="ratio" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="ratio_macro" />
-			<Argument type="float" value="0" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="smallfrowneq" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="smallfrowneq_macro" />
-			<Argument type="float" value="0" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="geoprop" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="geoprop_macro" />
-			<Argument type="float" value="0" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="minuscolon" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="minuscolon_macro" />
-			<Argument type="float" value="0" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="minuscoloncolon" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="minuscoloncolon_macro" />
-			<Argument type="float" value="0" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="simcolon" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="simcolon_macro" />
-			<Argument type="float" value="0" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="simcoloncolon" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="simcoloncolon_macro" />
-			<Argument type="float" value="0" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="approxcolon" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="approxcolon_macro" />
-			<Argument type="float" value="0" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="approxcoloncolon" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="approxcoloncolon_macro" />
-			<Argument type="float" value="0" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="coloncolon" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="coloncolon_macro" />
-			<Argument type="float" value="0" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="equalscolon" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="equalscolon_macro" />
-			<Argument type="float" value="0" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="equalscoloncolon" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="equalscoloncolon_macro" />
-			<Argument type="float" value="0" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="colonminus" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="colonminus_macro" />
-			<Argument type="float" value="0" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="coloncolonminus" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="coloncolonminus_macro" />
-			<Argument type="float" value="0" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="colonequals" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="colonequals_macro" />
-			<Argument type="float" value="0" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="coloncolonequals" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="coloncolonequals_macro" />
-			<Argument type="float" value="0" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="colonsim" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="colonsim_macro" />
-			<Argument type="float" value="0" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="coloncolonsim" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="coloncolonsim_macro" />
-			<Argument type="float" value="0" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="colonapprox" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="colonapprox_macro" />
-			<Argument type="float" value="0" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="coloncolonapprox" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="coloncolonapprox_macro" />
-			<Argument type="float" value="0" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="kern" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="kern_macro" />
-			<Argument type="float" value="1" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="char" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="char_macro" />
-			<Argument type="float" value="1" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="roman" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="romannumeral_macro" />
-			<Argument type="float" value="1" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="Roman" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="romannumeral_macro" />
-			<Argument type="float" value="1" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="textcircled" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="textcircled_macro" />
-			<Argument type="float" value="1" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="textsc" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="textsc_macro" />
-			<Argument type="float" value="1" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
-
-	<Command name="sc" enabled="true">
-		<CreateCommand name="f">
-			<Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
-			<Argument type="String" value="sc_macro" />
-			<Argument type="float" value="0" />
-		</CreateCommand>
-		<Return name="f" />
-	</Command>
+        <Command name="newcommand" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="newcommand_macro" />
+                        <Argument type="float" value="2" />
+                        <Argument type="float" value="2" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="renewcommand" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="renewcommand_macro" />
+                        <Argument type="float" value="2" />
+                        <Argument type="float" value="2" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="rule" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="rule_macro" />
+                        <Argument type="float" value="2" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="hspace" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="hvspace_macro" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="vspace" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="hvspace_macro" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="llap" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="clrlap_macro" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="rlap" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="clrlap_macro" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="clap" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="clrlap_macro" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="mathllap" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="mathclrlap_macro" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="mathrlap" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="mathclrlap_macro" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="mathclap" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="mathclrlap_macro" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="includegraphics" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="includegraphics_macro" />
+                        <Argument type="float" value="1" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="cfrac" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="cfrac_macro" />
+                        <Argument type="float" value="2" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="frac" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="frac_macro" />
+                        <Argument type="float" value="2" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="sfrac" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="sfrac_macro" />
+                        <Argument type="float" value="2" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="genfrac" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="genfrac_macro" />
+                        <Argument type="float" value="6" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="over" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="over_macro" />
+                        <Argument type="float" value="0" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="overwithdelims" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="overwithdelims_macro" />
+                        <Argument type="float" value="2" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="atop" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="atop_macro" />
+                        <Argument type="float" value="0" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="atopwithdelims" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="atopwithdelims_macro" />
+                        <Argument type="float" value="2" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="choose" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="choose_macro" />
+                        <Argument type="float" value="0" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="underscore" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="underscore_macro" />
+                        <Argument type="float" value="0" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="mbox" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="mbox_macro" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="text" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="text_macro" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="intertext" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="intertext_macro" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="binom" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="binom_macro" />
+                        <Argument type="float" value="2" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="mathbf" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="mathbf_macro" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="bf" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="bf_macro" />
+                        <Argument type="float" value="0" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="mathbb" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="textstyle_macros" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="mathcal" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="textstyle_macros" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="cal" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="textstyle_macros" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="mathit" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="mathit_macro" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="it" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="it_macro" />
+                        <Argument type="float" value="0" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="mathrm" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="mathrm_macro" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="rm" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="rm_macro" />
+                        <Argument type="float" value="0" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="mathscr" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="textstyle_macros" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="mathsf" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="mathsf_macro" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="sf" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="sf_macro" />
+                        <Argument type="float" value="0" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="mathtt" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="mathtt_macro" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="tt" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="tt_macro" />
+                        <Argument type="float" value="0" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="mathfrak" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="textstyle_macros" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="mathds" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="textstyle_macros" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="frak" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="textstyle_macros" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="Bbb" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="textstyle_macros" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="oldstylenums" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="textstyle_macros" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="bold" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="textstyle_macros" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="^" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="accentbis_macros" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="'" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="accentbis_macros" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="&quot;" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="accentbis_macros" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="`" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="accentbis_macros" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="=" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="accentbis_macros" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="." enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="accentbis_macros" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="~" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="accentbis_macros" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="u" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="accentbis_macros" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="v" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="accentbis_macros" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="H" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="accentbis_macros" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="r" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="accentbis_macros" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="U" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="accentbis_macros" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="T" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="T_macro" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="t" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="accentbis_macros" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="accent" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="accent_macro" />
+                        <Argument type="float" value="2" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="grkaccent" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="grkaccent_macro" />
+                        <Argument type="float" value="2" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="hat" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="accent_macros" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="widehat" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="accent_macros" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="tilde" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="accent_macros" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="acute" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="accent_macros" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="grave" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="accent_macros" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="ddot" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="accent_macros" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="cyrddot" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="accent_macros" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="mathring" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="accent_macros" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="bar" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="accent_macros" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="breve" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="accent_macros" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="check" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="accent_macros" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="vec" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="accent_macros" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="dot" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="accent_macros" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="widetilde" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="accent_macros" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="nbsp" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="nbsp_macro" />
+                        <Argument type="float" value="0" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="smallmatrix@@env" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="smallmatrixATATenv_macro" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="matrix@@env" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="matrixATATenv_macro" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="overrightarrow" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="overrightarrow_macro" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="overleftarrow" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="overleftarrow_macro" />
+                        <Argument type="float" value="1" />                                     </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="overleftrightarrow" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="overleftrightarrow_macro" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="underrightarrow" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="underrightarrow_macro" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="underleftarrow" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="underleftarrow_macro" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="underleftrightarrow" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="underleftrightarrow_macro" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="xleftarrow" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="xleftarrow_macro" />
+                        <Argument type="float" value="1" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="xrightarrow" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="xrightarrow_macro" />
+                        <Argument type="float" value="1" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="underbrace" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="underbrace_macro" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="overbrace" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="overbrace_macro" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="underbrack" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="underbrack_macro" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="overbrack" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="overbrack_macro" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="underparen" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="underparen_macro" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="overparen" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="overparen_macro" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="sqrt" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="sqrt_macro" />
+                        <Argument type="float" value="1" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="sqrtsign" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="sqrt_macro" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="overline" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="overline_macro" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="underline" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="underline_macro" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="mathop" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="mathop_macro" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="mathpunct" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="mathpunct_macro" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="mathord" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="mathord_macro" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="mathrel" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="mathrel_macro" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="mathinner" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="mathinner_macro" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="mathbin" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="mathbin_macro" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="mathopen" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="mathopen_macro" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="mathclose" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="mathclose_macro" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="joinrel" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="joinrel_macro" />
+                        <Argument type="float" value="0" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="smash" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="smash_macro" />
+                        <Argument type="float" value="1" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="vdots" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="vdots_macro" />
+                        <Argument type="float" value="0" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="ddots" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="ddots_macro" />
+                        <Argument type="float" value="0" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="iddots" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="iddots_macro" />
+                        <Argument type="float" value="0" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="nolimits" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="nolimits_macro" />
+                        <Argument type="float" value="0" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="limits" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="limits_macro" />
+                        <Argument type="float" value="0" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="normal" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="normal_macro" />
+                        <Argument type="float" value="0" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="(" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="leftparenthesis_macro" />
+                        <Argument type="float" value="0" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="[" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="leftbracket_macro" />
+                        <Argument type="float" value="0" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="left" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="left_macro" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="middle" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="middle_macro" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="cr" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="cr_macro" />
+                        <Argument type="float" value="0" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="multicolumn" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="multicolumn_macro" />
+                        <Argument type="float" value="3" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="hdotsfor" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="hdotsfor_macro" />
+                        <Argument type="float" value="1" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="array@@env" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="arrayATATenv_macro" />
+                        <Argument type="float" value="2" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="align@@env" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="alignATATenv_macro" />
+                        <Argument type="float" value="2" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="aligned@@env" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="alignedATATenv_macro" />
+                        <Argument type="float" value="2" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="flalign@@env" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="flalignATATenv_macro" />
+                        <Argument type="float" value="2" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="alignat@@env" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="alignatATATenv_macro" />
+                        <Argument type="float" value="2" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="alignedat@@env" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="alignedatATATenv_macro" />
+                        <Argument type="float" value="2" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="multline@@env" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="multlineATATenv_macro" />
+                        <Argument type="float" value="2" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="gather@@env" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="gatherATATenv_macro" />
+                        <Argument type="float" value="2" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="gathered@@env" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="gatheredATATenv_macro" />
+                        <Argument type="float" value="2" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="shoveright" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="shoveright_macro" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="shoveleft" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="shoveleft_macro" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="\" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="backslashcr_macro" />
+                        <Argument type="float" value="0" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="newenvironment" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="newenvironment_macro" />
+                        <Argument type="float" value="3" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="renewenvironment" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="renewenvironment_macro" />
+                        <Argument type="float" value="3" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="makeatletter" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="makeatletter_macro" />
+                        <Argument type="float" value="0" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="makeatother" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="makeatother_macro" />
+                        <Argument type="float" value="0" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="fbox" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="fbox_macro" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="boxed" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="fbox_macro" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="stackrel" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="stackrel_macro" />
+                        <Argument type="float" value="2" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="stackbin" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="stackbin_macro" />
+                        <Argument type="float" value="2" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="accentset" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="accentset_macro" />
+                        <Argument type="float" value="2" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="underaccent" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="underaccent_macro" />
+                        <Argument type="float" value="2" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="undertilde" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="undertilde_macro" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="overset" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="overset_macro" />
+                        <Argument type="float" value="2" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="Braket" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="Braket_macro" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="Set" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="Set_macro" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="underset" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="underset_macro" />
+                        <Argument type="float" value="2" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="boldsymbol" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="boldsymbol_macro" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="LaTeX" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="LaTeX_macro" />
+                        <Argument type="float" value="0" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="GeoGebra" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="GeoGebra_macro" />
+                        <Argument type="float" value="0" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="big" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="big_macro" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="Big" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="Big_macro" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="bigg" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="bigg_macro" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="Bigg" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="Bigg_macro" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="bigl" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="bigl_macro" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="Bigl" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="Bigl_macro" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="biggl" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="biggl_macro" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="Biggl" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="Biggl_macro" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="bigr" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="bigr_macro" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="Bigr" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="Bigr_macro" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="biggr" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="biggr_macro" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="Biggr" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="Biggr_macro" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="displaystyle" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="displaystyle_macro" />
+                        <Argument type="float" value="0" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="textstyle" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="textstyle_macro" />
+                        <Argument type="float" value="0" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="scriptstyle" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="scriptstyle_macro" />
+                        <Argument type="float" value="0" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="scriptscriptstyle" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="scriptscriptstyle_macro" />
+                        <Argument type="float" value="0" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="sideset" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="sideset_macro" />
+                        <Argument type="float" value="3" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="prescript" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="prescript_macro" />
+                        <Argument type="float" value="3" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="rotatebox" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="rotatebox_macro" />
+                        <Argument type="float" value="2" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="reflectbox" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="reflectbox_macro" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="scalebox" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="scalebox_macro" />
+                        <Argument type="float" value="2" />
+                        <Argument type="float" value="2" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="resizebox" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="resizebox_macro" />
+                        <Argument type="float" value="3" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="raisebox" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="raisebox_macro" />
+                        <Argument type="float" value="2" />
+                        <Argument type="float" value="2" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="shadowbox" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="shadowbox_macro" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="ovalbox" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="ovalbox_macro" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="doublebox" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="doublebox_macro" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="phantom" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="phantom_macro" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="hphantom" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="hphantom_macro" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="vphantom" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="vphantom_macro" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="sp@breve" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="spATbreve_macro" />
+                        <Argument type="float" value="0" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="sp@hat" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="spAThat_macro" />
+                        <Argument type="float" value="0" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="definecolor" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="definecolor_macro" />
+                        <Argument type="float" value="3" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="textcolor" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="textcolor_macro" />
+                        <Argument type="float" value="2" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="fgcolor" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="fgcolor_macro" />
+                        <Argument type="float" value="2" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="bgcolor" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="bgcolor_macro" />
+                        <Argument type="float" value="2" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="colorbox" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="colorbox_macro" />
+                        <Argument type="float" value="2" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="fcolorbox" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="fcolorbox_macro" />
+                        <Argument type="float" value="3" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="c" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="cedilla_macro" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="IJ" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="IJ_macro" />
+                        <Argument type="float" value="0" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="ij" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="IJ_macro" />
+                        <Argument type="float" value="0" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="TStroke" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="TStroke_macro" />
+                        <Argument type="float" value="0" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="tStroke" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="TStroke_macro" />
+                        <Argument type="float" value="0" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="Lcaron" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="LCaron_macro" />
+                        <Argument type="float" value="0" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="tcaron" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="tcaron_macro" />
+                        <Argument type="float" value="0" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="lcaron" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="LCaron_macro" />
+                        <Argument type="float" value="0" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="k" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="ogonek_macro" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="cong" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="cong_macro" />
+                        <Argument type="float" value="0" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="doteq" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="doteq_macro" />
+                        <Argument type="float" value="0" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="jlmDynamic" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="jlmDynamic_macro" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="DeclareMathSizes" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="DeclareMathSizes_macro" />
+                        <Argument type="float" value="4" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="magnification" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="magnification_macro" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="hline" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="hline_macro" />
+                        <Argument type="float" value="0" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="tiny" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="size_macros" />
+                        <Argument type="float" value="0" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="scriptsize" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="size_macros" />
+                        <Argument type="float" value="0" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="footnotesize" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="size_macros" />
+                        <Argument type="float" value="0" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="small" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="size_macros" />
+                        <Argument type="float" value="0" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="normalsize" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="size_macros" />
+                        <Argument type="float" value="0" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="large" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="size_macros" />
+                        <Argument type="float" value="0" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="Large" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="size_macros" />
+                        <Argument type="float" value="0" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="LARGE" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="size_macros" />
+                        <Argument type="float" value="0" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="huge" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="size_macros" />
+                        <Argument type="float" value="0" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="Huge" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="size_macros" />
+                        <Argument type="float" value="0" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="jlatexmathcumsup" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="jlatexmathcumsup_macro" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="jlatexmathcumsub" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="jlatexmathcumsub_macro" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="hstrok" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="hstrok_macro" />
+                        <Argument type="float" value="0" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="Hstrok" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="Hstrok_macro" />
+                        <Argument type="float" value="0" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="dstrok" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="dstrok_macro" />
+                        <Argument type="float" value="0" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="Dstrok" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="Dstrok_macro" />
+                        <Argument type="float" value="0" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="dotminus" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="dotminus_macro" />
+                        <Argument type="float" value="0" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="ratio" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="ratio_macro" />
+                        <Argument type="float" value="0" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="smallfrowneq" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="smallfrowneq_macro" />
+                        <Argument type="float" value="0" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="geoprop" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="geoprop_macro" />
+                        <Argument type="float" value="0" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="minuscolon" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="minuscolon_macro" />
+                        <Argument type="float" value="0" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="minuscoloncolon" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="minuscoloncolon_macro" />
+                        <Argument type="float" value="0" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="simcolon" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="simcolon_macro" />
+                        <Argument type="float" value="0" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="simcoloncolon" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="simcoloncolon_macro" />
+                        <Argument type="float" value="0" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="approxcolon" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="approxcolon_macro" />
+                        <Argument type="float" value="0" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="approxcoloncolon" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="approxcoloncolon_macro" />
+                        <Argument type="float" value="0" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="coloncolon" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="coloncolon_macro" />
+                        <Argument type="float" value="0" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="equalscolon" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="equalscolon_macro" />
+                        <Argument type="float" value="0" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="equalscoloncolon" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="equalscoloncolon_macro" />
+                        <Argument type="float" value="0" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="colonminus" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="colonminus_macro" />
+                        <Argument type="float" value="0" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="coloncolonminus" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="coloncolonminus_macro" />
+                        <Argument type="float" value="0" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="colonequals" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="colonequals_macro" />
+                        <Argument type="float" value="0" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="coloncolonequals" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="coloncolonequals_macro" />
+                        <Argument type="float" value="0" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="colonsim" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="colonsim_macro" />
+                        <Argument type="float" value="0" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="coloncolonsim" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="coloncolonsim_macro" />
+                        <Argument type="float" value="0" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="colonapprox" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="colonapprox_macro" />
+                        <Argument type="float" value="0" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="coloncolonapprox" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="coloncolonapprox_macro" />
+                        <Argument type="float" value="0" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="kern" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="kern_macro" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="char" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="char_macro" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="roman" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="romannumeral_macro" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="Roman" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="romannumeral_macro" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="textcircled" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="textcircled_macro" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="textsc" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="textsc_macro" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="sc" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="sc_macro" />
+                        <Argument type="float" value="0" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
 </PredefinedCommands>
