@@ -1,5 +1,7 @@
 jlatexmath (0.9.5)
 
+	* In \overbrace{a}, the brace were misplaced.
+
 	* Add \(...\) & \[...\], $$...$$, \begin{math}...\end{math} and 
 	  \begin{displaymath}...\end{displaymath} 
 

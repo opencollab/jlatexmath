@@ -84,8 +84,10 @@ public class OverUnderBox extends Box {
 	base.draw(g2, x, y);
 
 	float yVar = y - base.height - del.getWidth();
+	del.setDepth(del.getHeight() + del.getDepth());
+	del.setHeight(0);
 	if (over) { // draw delimiter and script above base box
-	    double transX = x + (del.getHeight() + del.depth) / 2, transY = yVar;
+	    double transX = x + (del.height + del.depth) * 0.75, transY = yVar;
 	    AffineTransform oldAt = g2.getTransform();
 	    g2.translate(transX, transY);
 	    g2.rotate(Math.PI / 2);
@@ -93,13 +95,14 @@ public class OverUnderBox extends Box {
 	    g2.setTransform(oldAt);
          
 	    // draw superscript
-	    if (script != null)
+	    if (script != null) {
 		script.draw(g2, x, yVar - kern - script.depth);
+	    }
 	}
 
 	yVar = y + base.depth;
 	if (!over) { // draw delimiter and script under base box
-	    double transX = x + (del.getHeight() + del.depth) / 2, transY = yVar;
+	    double transX = x + (del.getHeight() + del.depth) * 0.75, transY = yVar;
 	    AffineTransform oldAt = g2.getTransform();
 	    g2.translate(transX, transY);
 	    g2.rotate(Math.PI / 2);
@@ -108,10 +111,10 @@ public class OverUnderBox extends Box {
 	    yVar += del.getWidth();
 	  
 	    // draw subscript
-	    if (script != null)
+	    if (script != null) {
 		script.draw(g2, x, yVar + kern + script.height);
+	    }
 	}
-
     }
 
     public int getLastFontId() {
