@@ -84,12 +84,12 @@
 	  <Map char="&#963;" symbol="sigma" text="σ"/>
 	  <Map char="&#964;" symbol="tau" text="τ"/>
 	  <Map char="&#965;" symbol="upsilon" text="υ"/>
-	  <Map char="&#966;" symbol="phi" text="φ"/>
+	  <Map char="&#966;" symbol="varphi" text="φ"/>
 	  <Map char="&#967;" symbol="chi" text="χ"/>
 	  <Map char="&#968;" symbol="psi" text="ψ"/>
 	  <Map char="&#969;" symbol="omega" text="ω"/>
 	  <Map char="&#977;" symbol="vartheta" text="ϑ"/>
-	  <Map char="&#981;" symbol="varphi"/>
+	  <Map char="&#981;" symbol="phi"/>
 	  <Map char="&#982;" symbol="varpi"/>
 	  <Map char="&#1008;" symbol="varkappa"/>
 	  <Map char="&#1009;" symbol="varrho"/>
