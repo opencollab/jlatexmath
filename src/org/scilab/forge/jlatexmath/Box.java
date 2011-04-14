@@ -129,7 +129,7 @@ public abstract class Box {
      * foreground and background color set (default values will be used: null)
      */
     protected Box() {
-	this (null, null);
+	this(null, null);
     }
     
     /**
@@ -154,7 +154,7 @@ public abstract class Box {
     }
     
     public void negWidth() {
-	width = - width;
+	width = -width;
     }
     
     /**

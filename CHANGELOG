@@ -1,5 +1,7 @@
 jlatexmath (0.9.5)
 
+	* \huge\huge foo apply two times the huge factor
+
 	* In \overbrace{a}, the brace were misplaced.
 
 	* Add \(...\) & \[...\], $$...$$, \begin{math}...\end{math} and 

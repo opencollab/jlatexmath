@@ -1235,30 +1235,30 @@ public class predefMacros {
     }
 
     public Atom size_macros(TeXParser tp, String[] args) throws ParseException {
-        double f = 1;
+        float f = 1f;
         if ("tiny".equals(args[0])) {
-            f = 0.5;
+            f = 0.5f;
         } else if ("scriptsize".equals(args[0])) {
-            f = 0.7;
+            f = 0.7f;
         } else if ("footnotesize".equals(args[0])) {
-            f = 0.8;
+            f = 0.8f;
         } else if ("small".equals(args[0])) {
-            f = 0.9;
+            f = 0.9f;
         } else if ("normalsize".equals(args[0])) {
-            f = 1;
+            f = 1f;
         } else if ("large".equals(args[0])) {
-            f = 1.2;
+            f = 1.2f;
         } else if ("Large".equals(args[0])) {
-            f = 1.4;
+            f = 1.4f;
         } else if ("LARGE".equals(args[0])) {
-            f = 1.8;
+            f = 1.8f;
         } else if ("huge".equals(args[0])) {
-            f = 2;
+            f = 2f;
         } else if ("Huge".equals(args[0])) {
-            f = 2.5;
+            f = 2.5f;
         }
 
-        return new ScaleAtom(new TeXFormula(tp.getIsPartial(), tp.getOverArgument(), null, false, tp.isIgnoreWhiteSpace()).root, f, f);
+        return new MonoScaledFontAtom(new TeXFormula(tp.getIsPartial(), tp.getOverArgument(), null, false, tp.isIgnoreWhiteSpace()).root, f);
     }
 
     public Atom jlatexmathcumsup_macro(TeXParser tp, String[] args) throws ParseException {

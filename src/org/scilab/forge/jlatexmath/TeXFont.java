@@ -46,6 +46,8 @@ public interface TeXFont {
      * @return a <b>copy</b> of this {@link TeXFont} with the new size
      */
     public TeXFont deriveFont(float pointSize);
+
+    public TeXFont scaleFont(float factor);
     
     public float getAxisHeight(int style);
     
