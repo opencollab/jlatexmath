@@ -212,11 +212,11 @@ public class DefaultTeXFont implements TeXFont {
     }
 
     public TeXFont copy() {
-        return new DefaultTeXFont(size, isBold, isRoman, isSs, isTt, isIt);
+        return new DefaultTeXFont(size, factor, isBold, isRoman, isSs, isTt, isIt);
     }
 
     public TeXFont deriveFont(float size) {
-        return new DefaultTeXFont(size, isBold, isRoman, isSs, isTt, isIt);
+        return new DefaultTeXFont(size, factor, isBold, isRoman, isSs, isTt, isIt);
     }
 
     public TeXFont scaleFont(float factor) {
