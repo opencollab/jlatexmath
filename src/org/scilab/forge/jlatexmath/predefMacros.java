@@ -1258,7 +1258,7 @@ public class predefMacros {
             f = 2.5f;
         }
 
-        return new MonoScaledFontAtom(new TeXFormula(tp.getIsPartial(), tp.getOverArgument(), null, false, tp.isIgnoreWhiteSpace()).root, f);
+        return new MonoScaleAtom(new TeXFormula(tp.getIsPartial(), tp.getOverArgument(), null, false, tp.isIgnoreWhiteSpace()).root, f);
     }
 
     public Atom jlatexmathcumsup_macro(TeXParser tp, String[] args) throws ParseException {

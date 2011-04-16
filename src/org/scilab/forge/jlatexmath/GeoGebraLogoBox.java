@@ -48,8 +48,8 @@ public class GeoGebraLogoBox extends Box {
 
     public GeoGebraLogoBox(float w, float h) {
 	this.depth = 0;
-	this.height = h;//2.15f;
-	this.width = w;//2.35f;
+	this.height = h;
+	this.width = w;
 	this.shift = 0;
     }
    
@@ -70,7 +70,6 @@ public class GeoGebraLogoBox extends Box {
 	drawCircle(g2, 5f, 28f);
 	drawCircle(g2, 27f, 24f);
 	drawCircle(g2, 36f, 3f);
-	//g2.drawRect(-2,-6,47,43);
 	g2.setStroke(oldS);
 	g2.setTransform(oldAt);
 	g2.setColor(oldC);

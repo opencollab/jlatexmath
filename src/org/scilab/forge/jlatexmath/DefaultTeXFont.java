@@ -223,6 +223,10 @@ public class DefaultTeXFont implements TeXFont {
         return new DefaultTeXFont(size, factor, isBold, isRoman, isSs, isTt, isIt);
     }
 
+    public float getScaleFactor() {
+        return factor;
+    }
+
     public float getAxisHeight(int style) {
         return getParameter("axisheight") * getSizeFactor(style) * TeXFormula.PIXELS_PER_POINT;
     }

@@ -48,7 +48,9 @@ public interface TeXFont {
     public TeXFont deriveFont(float pointSize);
 
     public TeXFont scaleFont(float factor);
-    
+
+    public float getScaleFactor();
+
     public float getAxisHeight(int style);
     
     public float getBigOpSpacing1(int style);

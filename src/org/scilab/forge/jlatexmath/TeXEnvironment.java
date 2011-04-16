@@ -56,6 +56,8 @@ public class TeXEnvironment {
 
     private String textStyle;
     private boolean smallCap;
+    private float scaleFactor = 1;
+
     public boolean isColored = false;
         
     public TeXEnvironment(int style, TeXFont tf) {
@@ -74,8 +76,9 @@ public class TeXEnvironment {
         color = c;
     }
 
-    private TeXEnvironment(int style, TeXFont tf, Color bg, Color c, String textStyle, boolean smallCap) {
+    private TeXEnvironment(int style, float scaleFactor, TeXFont tf, Color bg, Color c, String textStyle, boolean smallCap) {
         this.style = style;
+	this.scaleFactor = scaleFactor;
         this.tf = tf;
 	this.textStyle = textStyle;
 	this.smallCap = smallCap;
@@ -91,18 +94,25 @@ public class TeXEnvironment {
 	return textwidth;
     }
 
+    public void setScaleFactor(float f) {
+	scaleFactor = f;
+    }
+
+    public float getScaleFactor() {
+	return scaleFactor;
+    }
+
     protected TeXEnvironment copy() {
-        return new TeXEnvironment(style, tf, background, color, textStyle, smallCap);
+        return new TeXEnvironment(style, scaleFactor, tf, background, color, textStyle, smallCap);
     }
 
     protected TeXEnvironment copy(TeXFont tf) {
-        TeXEnvironment te = new TeXEnvironment(style, tf, background, color, textStyle, smallCap);
+        TeXEnvironment te = new TeXEnvironment(style, scaleFactor, tf, background, color, textStyle, smallCap);
 	te.textwidth = textwidth;
 	return te;
     }
     
     /**
-     *
      * @return a copy of the environment, but in a cramped style.
      */
     public TeXEnvironment crampStyle() {
@@ -253,7 +263,7 @@ public class TeXEnvironment {
     }
     
     public float getSpace() {
-        return tf.getSpace(style);
+        return tf.getSpace(style) * tf.getScaleFactor();
     }
     
     public void setLastFontId(int id) {

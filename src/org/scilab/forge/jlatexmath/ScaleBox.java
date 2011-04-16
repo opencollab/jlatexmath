@@ -37,6 +37,7 @@ public class ScaleBox extends Box {
 
     private Box box;
     private double xscl, yscl;
+    private float factor = 1;
 
     public ScaleBox(Box b, double xscl, double yscl) {
 	this.box = b;
@@ -46,6 +47,11 @@ public class ScaleBox extends Box {
 	height = yscl > 0 ? b.height * (float) yscl : -b.depth * (float) yscl;
 	depth = yscl > 0 ? b.depth * (float) yscl : -b.height * (float) yscl;
 	shift = b.shift * (float) yscl;
+    }
+
+    public ScaleBox(Box b, float factor) {
+	this(b, (double) factor, (double) factor);
+	this.factor = factor;
     }
     
     public void draw(Graphics2D g2, float x, float y) {

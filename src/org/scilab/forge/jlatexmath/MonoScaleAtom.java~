@@ -1,4 +1,4 @@
-/* ScaleAtom.java
+/* MonoScaleAtom.java
  * =========================================================================
  * This file is part of the JLaTeXMath Library - http://forge.scilab.org/jlatexmath
  *
@@ -29,18 +29,15 @@
 package org.scilab.forge.jlatexmath;
 
 /**
- * An atom representing a scaled Atom.
+ * An atom representing a scale Atom.
  */
-public class ScaleAtom extends Atom {
-    
-    protected Atom base;
-    private double xscl, yscl;
+public class MonoScaleAtom extends ScaleAtom {
 
-    public ScaleAtom(Atom base, double xscl, double yscl) {
-	this.type = base.type;
-	this.base = base;
-	this.xscl = xscl;
-	this.yscl = yscl;
+    private float factor;
+
+    public MonoScaleAtom(Atom base, float factor) {
+	super(base, (double) factor, (double) factor);
+	this.factor = factor;
     }
     
     public int getLeftType() {
@@ -52,6 +49,6 @@ public class ScaleAtom extends Atom {
     }
     
     public Box createBox(TeXEnvironment env) {
-	return new ScaleBox(base.createBox(env), xscl, yscl);
+	return ScaleBox(base.createBox(env), factor);
     } 	
 }

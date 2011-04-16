@@ -29,31 +29,21 @@
 package org.scilab.forge.jlatexmath;
 
 /**
- * An atom representing a scaled font Atom.
+ * An atom representing a mono scale Atom.
  */
-public class MonoScaledFontAtom extends Atom {
-    
-    private Atom base;
+public class MonoScaleAtom extends ScaleAtom {
+
     private float factor;
 
-    public MonoScaledFontAtom(Atom base, float factor) {
-	this.type = base.type;
-	this.base = base;
+    public MonoScaleAtom(Atom base, float factor) {
+	super(base, (double) factor, (double) factor);
 	this.factor = factor;
     }
     
-    public int getLeftType() {
-	return base.getLeftType();
-    }
-    
-    public int getRightType() {
-	return base.getRightType();
-    }
-    
     public Box createBox(TeXEnvironment env) {
-	env = env.copy(env.getTeXFont().scaleFont(factor));
-	Box box = base.createBox(env);
-
-	return box; 
+	env = env.copy();
+	float f = env.getScaleFactor();
+	env.setScaleFactor(factor);
+	return new ScaleBox(base.createBox(env), factor / f);
     } 	
 }
