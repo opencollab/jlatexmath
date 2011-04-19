@@ -29,6 +29,7 @@
 package org.scilab.forge.jlatexmath;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.lang.Character.UnicodeBlock;
 import java.util.HashSet;
 import java.util.Set;
@@ -112,12 +113,12 @@ public class TeXParser {
 
     private static final Set<String> unparsedContents = new HashSet<String>(6);
     static {
-	unparsedContents.add("jlmDynamic");
-	unparsedContents.add("jlmText");
-	unparsedContents.add("jlmTextit");
-	unparsedContents.add("jlmTextbf");
-	unparsedContents.add("jlmTextitbf");
-	unparsedContents.add("jlmExternalFont");
+        unparsedContents.add("jlmDynamic");
+        unparsedContents.add("jlmText");
+        unparsedContents.add("jlmTextit");
+        unparsedContents.add("jlmTextbf");
+        unparsedContents.add("jlmTextitbf");
+        unparsedContents.add("jlmExternalFont");
     }
 
     /**
@@ -1036,6 +1037,21 @@ public class TeXParser {
 
             String symbolName = TeXFormula.symbolMappings[c];
             if (symbolName == null && (TeXFormula.symbolFormulaMappings == null || TeXFormula.symbolFormulaMappings[c] == null)) {
+		Font f = TeXFormula.externalFontMap.get(block);
+		if (f != null) {
+		    int start = pos++;
+		    int end = len - 1;
+		    while (pos < len) {
+			c = parseString.charAt(pos);
+			if (!Character.UnicodeBlock.of(c).equals(block)) {
+			    end = pos--;
+			    break;
+			}
+			pos++;
+		    }
+		    return new JavaFontRenderingAtom(parseString.substring(start, end), f);
+		}
+
                 if (!isPartial) {
                     throw new ParseException("Unknown character : '"
                                              + Character.toString(c) + "' (or " + ((int) c) + ")");

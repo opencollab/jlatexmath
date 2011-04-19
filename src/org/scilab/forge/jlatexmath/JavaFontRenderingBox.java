@@ -47,14 +47,18 @@ public class JavaFontRenderingBox extends Box {
     private TextLayout text;
     private float size;
 
-    public JavaFontRenderingBox(String str, int type, float size) {
+    public JavaFontRenderingBox(String str, int type, float size, Font f) {
 	this.str = str;
 	this.size = size;
-	this.text = new TextLayout(str, font.deriveFont(type), TEMPGRAPHIC.getFontRenderContext());
+	this.text = new TextLayout(str, f.deriveFont(type), TEMPGRAPHIC.getFontRenderContext());
 	Rectangle2D rect = text.getBounds();
 	this.height = (float) (-rect.getY() / 10);
         this.depth = (float) (rect.getHeight() / 10) - this.height;
 	this.width = (float) ((rect.getWidth() + rect.getX()) / 10);
+    }
+
+    public JavaFontRenderingBox(String str, int type, float size) {
+	this(str, type, size, font);
     }
 
     public static void setFont(String name) {

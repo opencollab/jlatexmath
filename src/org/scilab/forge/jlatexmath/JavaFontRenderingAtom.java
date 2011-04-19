@@ -37,13 +37,26 @@ public class JavaFontRenderingAtom extends Atom {
 
     private String str;
     private int type;
+    private Font font;
 
     public JavaFontRenderingAtom(String str, int type) {
         this.str = str;
         this.type = type;
     }
 
+    public JavaFontRenderingAtom(String str, Font f) {
+        this(str, 0);
+        this.font = f.deriveFont(10.0f);
+    }
+
     public Box createBox(TeXEnvironment env) {
-        return new JavaFontRenderingBox(str, type, DefaultTeXFont.getSizeFactor(env.getStyle()));
+        if (font != null) {
+	    return new JavaFontRenderingBox(str, type, DefaultTeXFont.getSizeFactor(env.getStyle()));
+	} else {
+	    DefaultTeXFont dtf = (DefaultTeXFont) env.getTeXFont();
+	    int type = dtf.isIt ? Font.ITALIC : Font.PLAIN;
+	    type = type | (dtf.isBold ? Font.BOLD : 0);
+	    return new JavaFontRenderingBox(str, type, DefaultTeXFont.getSizeFactor(env.getStyle()), font);
+	}
     }
 }

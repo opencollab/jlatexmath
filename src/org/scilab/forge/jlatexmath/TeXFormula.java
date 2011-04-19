@@ -45,6 +45,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.Insets;
 import java.awt.image.BufferedImage;
@@ -53,6 +54,7 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import javax.imageio.ImageIO;
 import javax.imageio.stream.FileImageOutputStream;
+import java.lang.Character.UnicodeBlock;
 
 /**
  * Represents a logical mathematical formula that will be displayed (by creating a
@@ -114,6 +116,8 @@ public class TeXFormula {
     public static String[] symbolMappings = new String[65536];
     public static String[] symbolTextMappings = new String[65536];
     public static String[] symbolFormulaMappings = new String[65536];
+    public static Map<Character.UnicodeBlock, Font> externalFontMap = new HashMap<Character.UnicodeBlock, Font>();
+    
     public List<MiddleAtom> middle = new LinkedList();
     
     private TeXParser parser;
@@ -155,6 +159,10 @@ public class TeXFormula {
 	TeXFormulaSettingsParser tfsp = new TeXFormulaSettingsParser(in, name);
 	tfsp.parseSymbolMappings(symbolMappings, symbolTextMappings);
 	tfsp.parseSymbolToFormulaMappings(symbolFormulaMappings, symbolTextMappings);
+    }
+
+    public static void registerExternalFont(Character.UnicodeBlock block, Font font) {
+	externalFontMap.put(block, font);
     }
     
     /**
