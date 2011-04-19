@@ -54,6 +54,7 @@ import javax.swing.Icon;
 public class TeXIcon implements Icon {
     
     public static float defaultSize = -1;
+    public static float magFactor = 0;
 
     private Box box;
     
@@ -82,7 +83,11 @@ public class TeXIcon implements Icon {
 	    size = defaultSize;
 	}
 
-	this.size = size;
+	if (magFactor != 0) {
+	    this.size = size * Math.abs(magFactor);
+	} else {
+	    this.size = size;
+	}
 
 	/* I add this little value because it seems that tftopl calculates badly
 	   the height and the depth of certains characters.

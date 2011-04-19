@@ -1,15 +1,18 @@
 jlatexmath (0.9.5)
+        * add \jlmText,\jlmTextit,\jlmTextbf,\jlmTextitbf and \jlmExternalFont
 
-	* \huge\huge foo apply two times the huge factor
+        * \huge\huge bug definitly fixed
 
-	* In \overbrace{a}, the brace were misplaced.
+        * \huge\huge foo apply two times the huge factor
 
-	* Add \(...\) & \[...\], $$...$$, \begin{math}...\end{math} and 
-	  \begin{displaymath}...\end{displaymath} 
+        * In \overbrace{a}, the brace were misplaced.
 
-	* No display with \left in partial mode
+        * Add \(...\) & \[...\], $$...$$, \begin{math}...\end{math} and
+          \begin{displaymath}...\end{displaymath}
 
-	* The fop plugin is now available with fop 0.95 and 1.0
+        * No display with \left in partial mode
+
+        * The fop plugin is now available with fop 0.95 and 1.0
 
         * \left(...\right) was inactive in \mathsf
 

@@ -1837,6 +1837,51 @@
                 <Return name="f" />
         </Command>
 
+        <Command name="jlmExternalFont" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="jlmExternalFont_macro" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="jlmText" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="jlmText_macro" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="jlmTextit" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="jlmTextit_macro" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="jlmTextbf" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="jlmTextbf_macro" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
+        <Command name="jlmTextitbf" enabled="true">
+                <CreateCommand name="f">
+                        <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />
+                        <Argument type="String" value="jlmTextitbf_macro" />
+                        <Argument type="float" value="1" />
+                </CreateCommand>
+                <Return name="f" />
+        </Command>
+
         <Command name="DeclareMathSizes" enabled="true">
                 <CreateCommand name="f">
                         <Argument type="String" value="org.scilab.forge.jlatexmath.predefMacros" />

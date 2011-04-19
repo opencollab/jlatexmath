@@ -69,8 +69,7 @@ public class DefaultTeXFont implements TeXFont {
     private static Map<String, Number> generalSettings;
 
     private static boolean magnificationEnable = true;
-    private static float magnification = 1f;
-
+    
     protected static final int TOP = 0, MID = 1, REP = 2, BOT = 3;
 
     protected static final int WIDTH = 0, HEIGHT = 1, DEPTH = 2, IT = 3;
@@ -312,7 +311,7 @@ public class DefaultTeXFont implements TeXFont {
             cf = new CharFont(cf.c, id, style);
         }
         Font font = info.getFont();
-        return new Char(cf.c, font, id, getMetrics(cf, magnification * factor * fsize));
+        return new Char(cf.c, font, id, getMetrics(cf, factor * fsize));
     }
 
     public Char getChar(String symbolName, int style) throws SymbolMappingNotFoundException {
@@ -538,7 +537,7 @@ public class DefaultTeXFont implements TeXFont {
 
     public static void setMagnification(float mag) {
         if (magnificationEnable) {
-            magnification = mag / 1000f;
+            TeXIcon.magFactor = mag / 1000f;
         }
     }
 
@@ -554,7 +553,7 @@ public class DefaultTeXFont implements TeXFont {
             return ((Float) param).floatValue();
     }
 
-    private static float getSizeFactor(int style) {
+    public static float getSizeFactor(int style) {
         if (style < TeXConstants.STYLE_TEXT)
             return 1;
         else if (style < TeXConstants.STYLE_SCRIPT)

@@ -1,4 +1,4 @@
-/* MonoScaleAtom.java
+/* ScaleAtom.java
  * =========================================================================
  * This file is part of the JLaTeXMath Library - http://forge.scilab.org/jlatexmath
  *
@@ -28,27 +28,22 @@
 
 package org.scilab.forge.jlatexmath;
 
+import java.awt.Font;
+
 /**
- * An atom representing a scale Atom.
+ * The string rendering is made in using Java Graphics2D.drawString.
  */
-public class MonoScaleAtom extends ScaleAtom {
+public class JavaFontRenderingAtom extends Atom {
 
-    private float factor;
+    private String str;
+    private int type;
 
-    public MonoScaleAtom(Atom base, float factor) {
-	super(base, (double) factor, (double) factor);
-	this.factor = factor;
+    public JavaFontRenderingAtom(String str, int type) {
+        this.str = str;
+        this.type = type;
     }
-    
-    public int getLeftType() {
-	return base.getLeftType();
-    }
-    
-    public int getRightType() {
-	return base.getRightType();
-    }
-    
+
     public Box createBox(TeXEnvironment env) {
-	return ScaleBox(base.createBox(env), factor);
-    } 	
+        return new JavaFontRenderingBox(str, type, DefaultTeXFont.getSizeFactor(env.getStyle()));
+    }
 }

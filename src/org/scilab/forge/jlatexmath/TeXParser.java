@@ -30,6 +30,8 @@ package org.scilab.forge.jlatexmath;
 
 import java.awt.Color;
 import java.lang.Character.UnicodeBlock;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * This class implements a parser for LaTeX' formulas.
@@ -107,6 +109,16 @@ public class TeXParser {
     private static final char SUBRPAR = '\u208E';
 
     protected static boolean isLoading = false;
+
+    private static final Set<String> unparsedContents = new HashSet<String>(6);
+    static {
+	unparsedContents.add("jlmDynamic");
+	unparsedContents.add("jlmText");
+	unparsedContents.add("jlmTextit");
+	unparsedContents.add("jlmTextbf");
+	unparsedContents.add("jlmTextitbf");
+	unparsedContents.add("jlmExternalFont");
+    }
 
     /**
      * Create a new TeXParser
@@ -406,8 +418,7 @@ public class TeXParser {
                         atIsLetter++;
                     else if ("makeatother".equals(com))
                         atIsLetter--;
-                    else if ("jlmDynamic".equals(com)) {
-                        //the argument of jlmDynamic is skipped
+                    else if (unparsedContents.contains(com)) {
                         getOptsArgs(1, 0);
                     }
                     break;

@@ -29,6 +29,7 @@
 package org.scilab.forge.jlatexmath;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.util.StringTokenizer;
 
 import org.scilab.forge.jlatexmath.dynamic.DynamicAtom;
@@ -1214,8 +1215,30 @@ public class predefMacros {
     public Atom jlmDynamic_macro(TeXParser tp, String[] args) throws ParseException {
         if (DynamicAtom.hasAnExternalConverterFactory()) {
             return new DynamicAtom(args[1]);
-        } else
+        } else {
             throw new ParseException("No ExternalConverterFactory set !");
+	}
+    }
+
+    public Atom jlmExternalFont_macro(TeXParser tp, String[] args) throws ParseException {
+	JavaFontRenderingBox.setFont(args[1]);
+	return null;
+    }
+
+    public Atom jlmText_macro(TeXParser tp, String[] args) throws ParseException {
+	return new JavaFontRenderingAtom(args[1], Font.PLAIN);
+    }
+
+    public Atom jlmTextit_macro(TeXParser tp, String[] args) throws ParseException {
+	return new JavaFontRenderingAtom(args[1], Font.ITALIC);
+    }
+
+    public Atom jlmTextbf_macro(TeXParser tp, String[] args) throws ParseException {
+	return new JavaFontRenderingAtom(args[1], Font.BOLD);
+    }
+
+    public Atom jlmTextitbf_macro(TeXParser tp, String[] args) throws ParseException {
+	return new JavaFontRenderingAtom(args[1], Font.BOLD | Font.ITALIC);
     }
 
     public Atom DeclareMathSizes_macro(TeXParser tp, String[] args) throws ParseException {
