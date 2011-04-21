@@ -1037,19 +1037,19 @@ public class TeXParser {
 
             String symbolName = TeXFormula.symbolMappings[c];
             if (symbolName == null && (TeXFormula.symbolFormulaMappings == null || TeXFormula.symbolFormulaMappings[c] == null)) {
-		Font f = TeXFormula.externalFontMap.get(block);
-		if (f != null) {
+		String fontName = TeXFormula.externalFontMap.get(block);
+		if (fontName != null) {
 		    int start = pos++;
 		    int end = len - 1;
 		    while (pos < len) {
 			c = parseString.charAt(pos);
 			if (!Character.UnicodeBlock.of(c).equals(block)) {
-			    end = pos--;
+			    end = --pos;
 			    break;
 			}
 			pos++;
 		    }
-		    return new JavaFontRenderingAtom(parseString.substring(start, end), f);
+		    return new JavaFontRenderingAtom(parseString.substring(start, end + 1), fontName);
 		}
 
                 if (!isPartial) {

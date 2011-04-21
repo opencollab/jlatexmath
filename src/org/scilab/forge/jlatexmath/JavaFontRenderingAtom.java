@@ -44,13 +44,13 @@ public class JavaFontRenderingAtom extends Atom {
         this.type = type;
     }
 
-    public JavaFontRenderingAtom(String str, Font f) {
+    public JavaFontRenderingAtom(String str, String fontName) {
         this(str, 0);
-        this.font = f.deriveFont(10.0f);
+        this.font = new Font(fontName, Font.PLAIN, 10);
     }
 
     public Box createBox(TeXEnvironment env) {
-        if (font != null) {
+        if (font == null) {
 	    return new JavaFontRenderingBox(str, type, DefaultTeXFont.getSizeFactor(env.getStyle()));
 	} else {
 	    DefaultTeXFont dtf = (DefaultTeXFont) env.getTeXFont();

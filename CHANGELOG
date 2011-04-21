@@ -1,4 +1,6 @@
 jlatexmath (0.9.5)
+	* Delegate the font rendering to java.
+
         * add \jlmText,\jlmTextit,\jlmTextbf,\jlmTextitbf and \jlmExternalFont
 
         * \huge\huge bug definitly fixed

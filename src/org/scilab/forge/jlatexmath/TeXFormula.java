@@ -116,7 +116,7 @@ public class TeXFormula {
     public static String[] symbolMappings = new String[65536];
     public static String[] symbolTextMappings = new String[65536];
     public static String[] symbolFormulaMappings = new String[65536];
-    public static Map<Character.UnicodeBlock, Font> externalFontMap = new HashMap<Character.UnicodeBlock, Font>();
+    public static Map<Character.UnicodeBlock, String> externalFontMap = new HashMap<Character.UnicodeBlock, String>();
     
     public List<MiddleAtom> middle = new LinkedList();
     
@@ -161,8 +161,8 @@ public class TeXFormula {
 	tfsp.parseSymbolToFormulaMappings(symbolFormulaMappings, symbolTextMappings);
     }
 
-    public static void registerExternalFont(Character.UnicodeBlock block, Font font) {
-	externalFontMap.put(block, font);
+    public static void registerExternalFont(Character.UnicodeBlock block, String fontName) {
+	externalFontMap.put(block, fontName);
     }
     
     /**
