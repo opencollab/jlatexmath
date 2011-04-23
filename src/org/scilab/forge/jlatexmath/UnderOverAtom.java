@@ -35,35 +35,35 @@ package org.scilab.forge.jlatexmath;
  * it (if not null) seperated by a kern and in a smaller size depending on "underScriptSize"
  */
 public class UnderOverAtom extends Atom {
-    
+
     // base, underscript and overscript
     private final Atom base;
     private final Atom under;
     private final Atom over;
-    
+
     // kern between base and under- and overscript
     private final float underSpace;
     private final float overSpace;
-    
+
     // units for the kerns
     private final int underUnit; // NOPMD
-     // TODO: seems never to be used?
+    // TODO: seems never to be used?
     private final int overUnit;
-    
+
     // whether the under- and overscript should be drawn in a smaller size
     private final boolean underScriptSize;
     private final boolean overScriptSize;
-    
+
     public UnderOverAtom(Atom base, Atom underOver, int underOverUnit,
-			 float underOverSpace, boolean underOverScriptSize, boolean over) {
+                         float underOverSpace, boolean underOverScriptSize, boolean over) {
         // check if unit is valid
         SpaceAtom.checkUnit(underOverUnit);
-        
+
         // units valid
         this.base = base;
-	this.type = type;
+        this.type = type;
         // TODO: split into two different classes?
-        
+
         if (over) {
             this.under = null;
             this.underSpace = 0.0f;
@@ -84,14 +84,14 @@ public class UnderOverAtom extends Atom {
             this.overScriptSize = false;
         }
     }
-    
+
     public UnderOverAtom(Atom base, Atom under, int underUnit, float underSpace,
-            boolean underScriptSize, Atom over, int overUnit, float overSpace,
-            boolean overScriptSize) throws InvalidUnitException {
+                         boolean underScriptSize, Atom over, int overUnit, float overSpace,
+                         boolean overScriptSize) throws InvalidUnitException {
         // check if units are valid
         SpaceAtom.checkUnit(underUnit);
         SpaceAtom.checkUnit(overUnit);
-        
+
         // units valid
         this.base = base;
         this.under = under;
@@ -103,9 +103,8 @@ public class UnderOverAtom extends Atom {
         this.overSpace = overSpace;
         this.overScriptSize = overScriptSize;
     }
-    
+
     public Box createBox(TeXEnvironment env) {
-        
         // create boxes in right style and calculate maximum width
         Box b = (base == null ? new StrutBox(0, 0, 0, 0) : base.createBox(env));
         Box o = null, u = null;
@@ -118,53 +117,53 @@ public class UnderOverAtom extends Atom {
             u = under.createBox(underScriptSize ? env.subStyle() : env);
             max = Math.max(max, u.getWidth());
         }
-        
+
         // create vertical box
         VerticalBox vBox = new VerticalBox();
-        
+
         // last font used by the base (for Mspace atoms following)
         env.setLastFontId(b.getLastFontId());
-        
+
         // overscript + space
         if (over != null) {
             vBox.add(changeWidth(o, max));
             // unit will be valid (checked in constructor)
             vBox.add(new SpaceAtom(overUnit, 0, overSpace, 0).createBox(env));
         }
-        
+
         // base
-	Box c = changeWidth(b, max);
+        Box c = changeWidth(b, max);
         vBox.add(c);
-        
+
         // calculate future height of the vertical box (to make sure that the base
         // stays on the baseline!)
         float h = vBox.getHeight() + vBox.getDepth() - c.getDepth();
-        
+
         // underscript + space
         if (under != null) {
             // unit will be valid (checked in constructor)
             vBox.add(new SpaceAtom(overUnit, 0, underSpace, 0).createBox(env));
             vBox.add(changeWidth(u, max));
         }
-        
+
         // set height and depth
         vBox.setDepth(vBox.getHeight() + vBox.getDepth() - h);
         vBox.setHeight(h);
         return vBox;
     }
-    
+
     private static Box changeWidth(Box b, float maxWidth) {
         if (b != null && Math.abs(maxWidth - b.getWidth()) > TeXFormula.PREC)
             return new HorizontalBox(b, maxWidth, TeXConstants.ALIGN_CENTER);
         else
             return b;
     }
-    
+
     public int getLeftType() {
-	return base.getLeftType();
+        return base.getLeftType();
     }
-    
+
     public int getRightType() {
-	return base.getRightType();
+        return base.getRightType();
     }
 }

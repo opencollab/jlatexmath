@@ -56,7 +56,8 @@ public class JavaFontRenderingAtom extends Atom {
 	    DefaultTeXFont dtf = (DefaultTeXFont) env.getTeXFont();
 	    int type = dtf.isIt ? Font.ITALIC : Font.PLAIN;
 	    type = type | (dtf.isBold ? Font.BOLD : 0);
-	    return new JavaFontRenderingBox(str, type, DefaultTeXFont.getSizeFactor(env.getStyle()), font);
+	    boolean kerning = dtf.isRoman;
+	    return new JavaFontRenderingBox(str, type, DefaultTeXFont.getSizeFactor(env.getStyle()), font, kerning);
 	}
     }
 }

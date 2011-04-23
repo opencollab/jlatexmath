@@ -693,7 +693,7 @@ public class TeXParser {
                     if (ignoreWhiteSpace) {
                         formula.add(new CumulativeScriptsAtom(getLastAtom(), null, SymbolAtom.get("prime")));
                     } else {
-                        formula.add(convertCharacter(PRIME));
+                        formula.add(convertCharacter(PRIME, true));
                     }
                     pos++;
                     break;
@@ -701,12 +701,12 @@ public class TeXParser {
                     if (ignoreWhiteSpace) {
                         formula.add(new CumulativeScriptsAtom(getLastAtom(), null, SymbolAtom.get("backprime")));
                     } else {
-                        formula.add(convertCharacter(BACKPRIME));
+                        formula.add(convertCharacter(BACKPRIME, true));
                     }
                     pos++;
                     break;
                 default :
-                    formula.add(convertCharacter(ch));
+                    formula.add(convertCharacter(ch, false));
                     pos++;
                 }
             }
@@ -951,9 +951,10 @@ public class TeXParser {
             }
             return at;
         }
-        pos++;
 
-        return convertCharacter(ch);
+        Atom at = convertCharacter(ch, true);
+	pos++;
+	return at;
     }
 
     public String getOverArgument() throws ParseException {
@@ -1019,7 +1020,7 @@ public class TeXParser {
      * @return the corresponding atom
      * @throws ParseException if the character is unknown
      */
-    public Atom convertCharacter(char c) throws ParseException {
+    public Atom convertCharacter(char c, boolean oneChar) throws ParseException {
         if (ignoreWhiteSpace) {// The Unicode Greek letters in math mode are not drawn with the Greek font
             if (c >= 945 && c <= 969) {
                 return SymbolAtom.get(TeXFormula.symbolMappings[c]);
@@ -1037,20 +1038,23 @@ public class TeXParser {
 
             String symbolName = TeXFormula.symbolMappings[c];
             if (symbolName == null && (TeXFormula.symbolFormulaMappings == null || TeXFormula.symbolFormulaMappings[c] == null)) {
-		String fontName = TeXFormula.externalFontMap.get(block);
+                String fontName = TeXFormula.externalFontMap.get(block);
 		if (fontName != null) {
-		    int start = pos++;
-		    int end = len - 1;
-		    while (pos < len) {
-			c = parseString.charAt(pos);
-			if (!Character.UnicodeBlock.of(c).equals(block)) {
-			    end = --pos;
-			    break;
-			}
-			pos++;
+		    if (oneChar) {
+			return new JavaFontRenderingAtom(Character.toString(c), fontName);
 		    }
-		    return new JavaFontRenderingAtom(parseString.substring(start, end + 1), fontName);
-		}
+                    int start = pos++;
+                    int end = len - 1;
+                    while (pos < len) {
+                        c = parseString.charAt(pos);
+                        if (!Character.UnicodeBlock.of(c).equals(block)) {
+                            end = --pos;
+                            break;
+                        }
+                        pos++;
+                    }
+                    return new JavaFontRenderingAtom(parseString.substring(start, end + 1), fontName);
+                }
 
                 if (!isPartial) {
                     throw new ParseException("Unknown character : '"
@@ -1077,9 +1081,28 @@ public class TeXParser {
                                              + symbolName + "'!", e);
                 }
             }
-        } else
+        } else {
             // alphanumeric character
+            String fontName = TeXFormula.externalFontMap.get(Character.UnicodeBlock.BASIC_LATIN);
+	    if (fontName != null) {
+		if (oneChar) {
+		    return new JavaFontRenderingAtom(Character.toString(c), fontName);
+		}
+            
+                int start = pos++;
+                int end = len - 1;
+                while (pos < len) {
+                    c = parseString.charAt(pos);
+                    if (((c < '0' || c > '9') && (c < 'a' || c > 'z') && (c < 'A' || c > 'Z'))) {
+                        end = --pos;
+                        break;
+                    }
+                    pos++;
+                }
+                return new JavaFontRenderingAtom(parseString.substring(start, end + 1), fontName);
+            }
             return new CharAtom(c, formula.textStyle);
+        }
     }
 
     private String getCommand() {

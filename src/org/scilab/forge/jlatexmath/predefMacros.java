@@ -362,8 +362,16 @@ public class predefMacros {
         else if ("cal".equals(args[0]))
             style = "mathcal";
 
-        return new TextStyleAtom(new TeXFormula(tp.getIsPartial(), args[1], false).root, style);
-        //return new TeXFormula(tp.getIsPartial(), args[1], args[0]).root;
+        String fontName = TeXFormula.externalFontMap.get(Character.UnicodeBlock.BASIC_LATIN);
+        if (fontName != null) {
+            TeXFormula.externalFontMap.put(Character.UnicodeBlock.BASIC_LATIN, null);
+        }
+        Atom at = new TeXFormula(tp.getIsPartial(), args[1], false).root;
+        if (fontName != null) {
+            TeXFormula.externalFontMap.put(Character.UnicodeBlock.BASIC_LATIN, fontName);
+        }
+
+        return new TextStyleAtom(at, style);
     }
 
     public Atom mbox_macro(TeXParser tp, String[] args) throws ParseException {
@@ -1217,28 +1225,28 @@ public class predefMacros {
             return new DynamicAtom(args[1]);
         } else {
             throw new ParseException("No ExternalConverterFactory set !");
-	}
+        }
     }
 
     public Atom jlmExternalFont_macro(TeXParser tp, String[] args) throws ParseException {
-	JavaFontRenderingBox.setFont(args[1]);
-	return null;
+        JavaFontRenderingBox.setFont(args[1]);
+        return null;
     }
 
     public Atom jlmText_macro(TeXParser tp, String[] args) throws ParseException {
-	return new JavaFontRenderingAtom(args[1], Font.PLAIN);
+        return new JavaFontRenderingAtom(args[1], Font.PLAIN);
     }
 
     public Atom jlmTextit_macro(TeXParser tp, String[] args) throws ParseException {
-	return new JavaFontRenderingAtom(args[1], Font.ITALIC);
+        return new JavaFontRenderingAtom(args[1], Font.ITALIC);
     }
 
     public Atom jlmTextbf_macro(TeXParser tp, String[] args) throws ParseException {
-	return new JavaFontRenderingAtom(args[1], Font.BOLD);
+        return new JavaFontRenderingAtom(args[1], Font.BOLD);
     }
 
     public Atom jlmTextitbf_macro(TeXParser tp, String[] args) throws ParseException {
-	return new JavaFontRenderingAtom(args[1], Font.BOLD | Font.ITALIC);
+        return new JavaFontRenderingAtom(args[1], Font.BOLD | Font.ITALIC);
     }
 
     public Atom DeclareMathSizes_macro(TeXParser tp, String[] args) throws ParseException {
@@ -1509,7 +1517,7 @@ public class predefMacros {
             radix = 8;
         }
         int n = Integer.parseInt(number, radix);
-        return tp.convertCharacter((char) n);
+        return tp.convertCharacter((char) n, true);
     }
 
     public Atom T_macro(TeXParser tp, String[] args) throws ParseException {
