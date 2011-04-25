@@ -37,26 +37,40 @@ public class JavaFontRenderingAtom extends Atom {
 
     private String str;
     private int type;
-    private Font font;
+    private TeXFormula.FontInfos fontInfos;
 
     public JavaFontRenderingAtom(String str, int type) {
         this.str = str;
         this.type = type;
     }
 
-    public JavaFontRenderingAtom(String str, String fontName) {
+    public JavaFontRenderingAtom(String str, TeXFormula.FontInfos fontInfos) {
         this(str, 0);
-        this.font = new Font(fontName, Font.PLAIN, 10);
+	this.fontInfos = fontInfos;
     }
 
     public Box createBox(TeXEnvironment env) {
-        if (font == null) {
+        if (fontInfos == null) {
 	    return new JavaFontRenderingBox(str, type, DefaultTeXFont.getSizeFactor(env.getStyle()));
 	} else {
 	    DefaultTeXFont dtf = (DefaultTeXFont) env.getTeXFont();
 	    int type = dtf.isIt ? Font.ITALIC : Font.PLAIN;
 	    type = type | (dtf.isBold ? Font.BOLD : 0);
 	    boolean kerning = dtf.isRoman;
+	    Font font;
+	    if (dtf.isSs) {
+		if (fontInfos.sansserif == null) {
+		    font = new Font(fontInfos.serif, Font.PLAIN, 10);
+		} else {
+		    font = new Font(fontInfos.sansserif, Font.PLAIN, 10);
+		}
+	    } else {
+		if (fontInfos.serif == null) {
+		    font = new Font(fontInfos.sansserif, Font.PLAIN, 10);
+		} else {
+		    font = new Font(fontInfos.serif, Font.PLAIN, 10);
+		}
+	    }
 	    return new JavaFontRenderingBox(str, type, DefaultTeXFont.getSizeFactor(env.getStyle()), font, kerning);
 	}
     }

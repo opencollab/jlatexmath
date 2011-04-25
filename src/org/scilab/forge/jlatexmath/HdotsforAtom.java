@@ -34,7 +34,7 @@ package org.scilab.forge.jlatexmath;
 public class HdotsforAtom extends MulticolumnAtom {
 
     private static final Atom ldotp = SymbolAtom.get("ldotp");
-    private static final Atom thin = TeXFormula.get(",").root;
+    private static final Atom thin = new SpaceAtom(TeXConstants.THINMUSKIP);
     private float coeff;
 
     public HdotsforAtom(int n, float coeff) {

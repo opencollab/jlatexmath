@@ -230,8 +230,12 @@ public class TeXIcon implements Icon {
 			    RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 	
 	g2.scale(size, size); // the point size 
-	g2.setColor(c != null ? c.getForeground() : fg); // foreground will be used as default painting color 
-	
+	if (fg != null) {
+	    g2.setColor(fg);
+	} else {
+	    g2.setColor(c != null ? c.getForeground() : fg); // foreground will be used as default painting color 
+	}
+
 	// draw formula box
 	box.draw(g2, (x + insets.left) / size, (y + insets.top) / size+ box.getHeight());
 	

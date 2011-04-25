@@ -83,6 +83,13 @@ public class TeXFormula {
 
     public static final String VERSION = "0.9.5";
 
+    public static final int SERIF = 0;
+    public static final int SANSSERIF = 1;
+    public static final int BOLD = 2;
+    public static final int ITALIC = 4;
+    public static final int ROMAN = 8;
+    public static final int TYPEWRITER = 16;
+
     // table for putting delimiters over and under formula's,
     // indexed by constants from "TeXConstants"
     private static final String[][] delimiterNames = {
@@ -110,41 +117,40 @@ public class TeXFormula {
     protected static final float PREC = 0.0000001f;
 
     // predefined TeXFormula's
-    public static Map<String,TeXFormula> predefinedTeXFormulas = new HashMap<String,TeXFormula>();
+    public static Map<String, TeXFormula> predefinedTeXFormulas = new HashMap<String, TeXFormula>(150);
+    public static Map<String, String> predefinedTeXFormulasAsString = new HashMap<String, String>(150);
 
     // character-to-symbol and character-to-delimiter mappings
     public static String[] symbolMappings = new String[65536];
     public static String[] symbolTextMappings = new String[65536];
     public static String[] symbolFormulaMappings = new String[65536];
-    public static Map<Character.UnicodeBlock, String> externalFontMap = new HashMap<Character.UnicodeBlock, String>();
+    public static Map<Character.UnicodeBlock, FontInfos> externalFontMap = new HashMap<Character.UnicodeBlock, FontInfos>();
 
     public List<MiddleAtom> middle = new LinkedList();
 
     private TeXParser parser;
 
     static {
-	externalFontMap.put(Character.UnicodeBlock.BASIC_LATIN, "Sans Serif");
-	
         // character-to-symbol and character-to-delimiter mappings
         TeXFormulaSettingsParser parser = new TeXFormulaSettingsParser();
         parser.parseSymbolMappings(symbolMappings, symbolTextMappings);
 
-        // predefined TeXFormula's
-        try {
-            new PredefinedTeXFormulaParser("PredefinedCommands.xml", "Command").parse(MacroInfo.Commands);
-            new PredefinedTeXFormulaParser("PredefinedTeXFormulas.xml", "TeXFormula").parse(predefinedTeXFormulas);
-        } catch (Exception e) {
-            System.err.println(e.toString());
-        }
+        new PredefinedCommands();
+        new PredefinedTeXFormulas();
+        new PredefMacros();
+
+        /*try {
+          new PredefinedTeXFormulaParser("PredefinedTeXFormulas.xml", "TeXFormula").parse(predefinedTeXFormulas);
+          } catch (Exception e) {
+          System.err.println(e.toString());
+          }*/
 
         parser.parseSymbolToFormulaMappings(symbolFormulaMappings, symbolTextMappings);
 
         try {
             DefaultTeXFont.registerAlphabet((AlphabetRegistration) Class.forName("org.scilab.forge.jlatexmath.cyrillic.CyrillicRegistration").newInstance());
             DefaultTeXFont.registerAlphabet((AlphabetRegistration) Class.forName("org.scilab.forge.jlatexmath.greek.GreekRegistration").newInstance());
-        } catch (Exception e) {
-            System.err.println(e.toString());
-        }
+        } catch (Exception e) { }
 
         //setDefaultDPI();
     }
@@ -165,12 +171,19 @@ public class TeXFormula {
         tfsp.parseSymbolToFormulaMappings(symbolFormulaMappings, symbolTextMappings);
     }
 
-    public static void registerExternalFont(Character.UnicodeBlock block, String fontName) {
-	externalFontMap.put(block, fontName);
-	if (block.equals(Character.UnicodeBlock.BASIC_LATIN)) {
-	    predefinedTeXFormulas = new HashMap<String,TeXFormula>();
-	    new PredefinedTeXFormulaParser("PredefinedTeXFormulas.xml", "TeXFormula").parse(predefinedTeXFormulas);
+    public static void registerExternalFont(Character.UnicodeBlock block, String sansserif, String serif) {
+        if (sansserif == null && serif == null) {
+            externalFontMap.remove(block);
+            return;
         }
+        externalFontMap.put(block, new FontInfos(sansserif, serif));
+        if (block.equals(Character.UnicodeBlock.BASIC_LATIN)) {
+            predefinedTeXFormulas.clear();
+	}
+    }
+
+    public static void registerExternalFont(Character.UnicodeBlock block, String fontName) {
+        registerExternalFont(block, fontName, fontName);
     }
 
     /**
@@ -246,10 +259,10 @@ public class TeXFormula {
      * @param f the formula to be copied
      */
     public TeXFormula(TeXFormula f) {
-        if (f != null)
+        if (f != null) {
             addImpl(f);
+        }
     }
-
 
     /**
      * Creates an empty TeXFormula.
@@ -506,6 +519,30 @@ public class TeXFormula {
             return root.createBox(style);
     }
 
+    private DefaultTeXFont createFont(float size, int type) {
+        DefaultTeXFont dtf = new DefaultTeXFont(size);
+        if (type == 0) {
+            dtf.setSs(false);
+        }
+        if ((type & ROMAN) != 0) {
+            dtf.setRoman(true);
+        }
+        if ((type & TYPEWRITER) != 0) {
+            dtf.setTt(true);
+        }
+        if ((type & SANSSERIF) != 0) {
+            dtf.setSs(true);
+        }
+        if ((type & ITALIC) != 0) {
+            dtf.setIt(true);
+        }
+        if ((type & BOLD) != 0) {
+            dtf.setBold(true);
+        }
+
+        return dtf;
+    }
+
     /**
      * Creates a TeXIcon from this TeXFormula using the default TeXFont in the given
      * point size and starting from the given TeX style. If the given integer value
@@ -524,6 +561,25 @@ public class TeXFormula {
         return ti;
     }
 
+    public TeXIcon createTeXIcon(int style, float size, int type) {
+        TeXEnvironment te = new TeXEnvironment(style, createFont(size, type));
+        Box box = createBox(te);
+        TeXIcon ti = new TeXIcon(box, size);
+        ti.isColored = te.isColored;
+        return ti;
+    }
+
+    public TeXIcon createTeXIcon(int style, float size, int type, Color fgcolor) {
+        TeXEnvironment te = new TeXEnvironment(style, createFont(size, type));
+        Box box = createBox(te);
+        TeXIcon ti = new TeXIcon(box, size);
+        if (fgcolor != null) {
+            ti.setForeground(fgcolor);
+        }
+        ti.isColored = te.isColored;
+        return ti;
+    }
+
     public TeXIcon createTeXIcon(int style, float size, boolean trueValues) {
         TeXEnvironment te = new TeXEnvironment(style, new DefaultTeXFont(size));
         Box box = createBox(te);
@@ -533,7 +589,11 @@ public class TeXFormula {
     }
 
     public TeXIcon createTeXIcon(int style, float size, int widthUnit, float textwidth, int align) {
-        TeXEnvironment te = new TeXEnvironment(style, new DefaultTeXFont(size), widthUnit, textwidth);
+        return createTeXIcon(style, size, 0, widthUnit, textwidth, align);
+    }
+
+    public TeXIcon createTeXIcon(int style, float size, int type, int widthUnit, float textwidth, int align) {
+        TeXEnvironment te = new TeXEnvironment(style, createFont(size, type), widthUnit, textwidth);
         Box box = createBox(te);
         HorizontalBox hb = new HorizontalBox(box, te.getTextwidth(), align);
         TeXIcon ti = new TeXIcon(hb, size, true);
@@ -706,9 +766,27 @@ public class TeXFormula {
      */
     public static TeXFormula get(String name) throws FormulaNotFoundException {
         TeXFormula formula = predefinedTeXFormulas.get(name);
-        if (formula == null)
-            throw new FormulaNotFoundException(name);
-        else
+        if (formula == null) {
+            String f = predefinedTeXFormulasAsString.get(name);
+            if (f == null) {
+                throw new FormulaNotFoundException(name);
+            }
+            TeXFormula tf = new TeXFormula(f);
+            predefinedTeXFormulas.put(name, tf);
+            return tf;
+        } else {
             return new TeXFormula(formula);
+        }
+    }
+
+    static class FontInfos {
+
+        String sansserif;
+        String serif;
+
+        FontInfos(String sansserif, String serif) {
+            this.sansserif = sansserif;
+            this.serif = serif;
+        }
     }
 }

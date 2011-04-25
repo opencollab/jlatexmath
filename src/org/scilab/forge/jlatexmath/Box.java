@@ -252,11 +252,11 @@ public abstract class Box {
 	  g2.setColor(background);
 	  g2.fill(new Rectangle2D.Float(x, y - height, width, height + depth));
 	}
-	if (foreground == null)
+	if (foreground == null) {
 	    g2.setColor(prevColor); // old foreground color
-	else
+	} else {
 	    g2.setColor(foreground); // overriding foreground color
-
+	}
 	drawDebug(g2, x, y);
     }
 

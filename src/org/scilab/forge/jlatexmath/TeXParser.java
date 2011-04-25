@@ -1038,10 +1038,10 @@ public class TeXParser {
 
             String symbolName = TeXFormula.symbolMappings[c];
             if (symbolName == null && (TeXFormula.symbolFormulaMappings == null || TeXFormula.symbolFormulaMappings[c] == null)) {
-                String fontName = TeXFormula.externalFontMap.get(block);
-		if (fontName != null) {
+                TeXFormula.FontInfos fontInfos = TeXFormula.externalFontMap.get(block);
+		if (fontInfos != null) {
 		    if (oneChar) {
-			return new JavaFontRenderingAtom(Character.toString(c), fontName);
+			return new JavaFontRenderingAtom(Character.toString(c), fontInfos);
 		    }
                     int start = pos++;
                     int end = len - 1;
@@ -1053,7 +1053,7 @@ public class TeXParser {
                         }
                         pos++;
                     }
-                    return new JavaFontRenderingAtom(parseString.substring(start, end + 1), fontName);
+                    return new JavaFontRenderingAtom(parseString.substring(start, end + 1), fontInfos);
                 }
 
                 if (!isPartial) {
@@ -1083,12 +1083,11 @@ public class TeXParser {
             }
         } else {
             // alphanumeric character
-            String fontName = TeXFormula.externalFontMap.get(Character.UnicodeBlock.BASIC_LATIN);
-	    if (fontName != null) {
+	    TeXFormula.FontInfos fontInfos = TeXFormula.externalFontMap.get(Character.UnicodeBlock.BASIC_LATIN);
+	    if (fontInfos != null) {
 		if (oneChar) {
-		    return new JavaFontRenderingAtom(Character.toString(c), fontName);
+		    return new JavaFontRenderingAtom(Character.toString(c), fontInfos);
 		}
-            
                 int start = pos++;
                 int end = len - 1;
                 while (pos < len) {
@@ -1099,7 +1098,7 @@ public class TeXParser {
                     }
                     pos++;
                 }
-                return new JavaFontRenderingAtom(parseString.substring(start, end + 1), fontName);
+                return new JavaFontRenderingAtom(parseString.substring(start, end + 1), fontInfos);
             }
             return new CharAtom(c, formula.textStyle);
         }

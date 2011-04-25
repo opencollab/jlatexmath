@@ -28,6 +28,7 @@
 
 package org.scilab.forge.jlatexmath.cache;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Insets;
@@ -74,8 +75,12 @@ public final class JLaTeXMathCache {
      * @param inset the inset to add on the top, bottom, left and right
      * @return an array of length 3 containing width, height and depth
      */
+    public static int[] getCachedTeXFormulaDimensions(String f, int style, int type, int size, int inset, Color fgcolor) throws ParseException  {
+        return getCachedTeXFormulaDimensions(new CachedTeXFormula(f, style, type, size, inset, fgcolor));
+    }
+
     public static int[] getCachedTeXFormulaDimensions(String f, int style, int size, int inset) throws ParseException  {
-        return getCachedTeXFormulaDimensions(new CachedTeXFormula(f, style, size, inset));
+        return getCachedTeXFormulaDimensions(f, style, 0, size, inset, null);
     }
 
     /**
@@ -103,14 +108,18 @@ public final class JLaTeXMathCache {
      * @param inset the inset to add on the top, bottom, left and right
      * @return the key in the map
      */
-    public static Object getCachedTeXFormula(String f, int style, int size, int inset) throws ParseException  {
-        CachedTeXFormula cached = new CachedTeXFormula(f, style, size, inset);
+    public static Object getCachedTeXFormula(String f, int style, int type, int size, int inset, Color fgcolor) throws ParseException  {
+        CachedTeXFormula cached = new CachedTeXFormula(f, style, type, size, inset, fgcolor);
         SoftReference<CachedImage> img = cache.get(cached);
         if (img == null || img.get() == null) {
             img = makeImage(cached);
         }
 
         return cached;
+    }
+
+    public static Object getCachedTeXFormula(String f, int style, int size, int inset) throws ParseException  {
+        return getCachedTeXFormula(f, style, 0, size, inset, null);
     }
 
     /**
@@ -127,8 +136,12 @@ public final class JLaTeXMathCache {
      * @param size the size of font
      * @param inset the inset to add on the top, bottom, left and right
      */
+    public static void removeCachedTeXFormula(String f, int style, int type, int size, int inset, Color fgcolor) throws ParseException  {
+        cache.remove(new CachedTeXFormula(f, style, type, size, inset, fgcolor));
+    }
+
     public static void removeCachedTeXFormula(String f, int style, int size, int inset) throws ParseException  {
-        cache.remove(new CachedTeXFormula(f, style, size, inset));
+        removeCachedTeXFormula(f, style, 0, size, inset, null);
     }
 
     /**
@@ -149,8 +162,12 @@ public final class JLaTeXMathCache {
      * @param inset the inset to add on the top, bottom, left and right
      * @return the key in the map
      */
+    public static Object paintCachedTeXFormula(String f, int style, int type, int size, int inset, Color fgcolor, Graphics2D g) throws ParseException  {
+        return paintCachedTeXFormula(new CachedTeXFormula(f, style, type, size, inset, fgcolor), g);
+    }
+
     public static Object paintCachedTeXFormula(String f, int style, int size, int inset, Graphics2D g) throws ParseException  {
-        return paintCachedTeXFormula(new CachedTeXFormula(f, style, size, inset), g);
+        return paintCachedTeXFormula(f, style, 0, size, inset, null, g);
     }
 
     /**
@@ -181,8 +198,12 @@ public final class JLaTeXMathCache {
      * @param inset the inset to add on the top, bottom, left and right
      * @return the cached image
      */
+    public static Image getCachedTeXFormulaImage(String f, int style, int type, int size, int inset, Color fgcolor) throws ParseException {
+        return getCachedTeXFormulaImage(new CachedTeXFormula(f, style, type, size, inset, fgcolor));
+    }
+
     public static Image getCachedTeXFormulaImage(String f, int style, int size, int inset) throws ParseException {
-        return getCachedTeXFormulaImage(new CachedTeXFormula(f, style, size, inset));
+        return getCachedTeXFormulaImage(f, style, 0, size, inset, null);
     }
 
     /**
@@ -205,7 +226,7 @@ public final class JLaTeXMathCache {
 
     private static SoftReference<CachedImage> makeImage(CachedTeXFormula cached) throws ParseException {
         TeXFormula formula = new TeXFormula(cached.f);
-        TeXIcon icon = formula.createTeXIcon(cached.style, cached.size);
+        TeXIcon icon = formula.createTeXIcon(cached.style, cached.size, cached.type, cached.fgcolor);
         icon.setInsets(new Insets(cached.inset, cached.inset, cached.inset, cached.inset));
         BufferedImage image = new BufferedImage(icon.getIconWidth(), icon.getIconHeight(), BufferedImage.TYPE_INT_ARGB);
         Graphics2D g2 = image.createGraphics();
@@ -249,17 +270,21 @@ public final class JLaTeXMathCache {
 
         String f;
         int style;
+        int type;
         int size;
         int inset;
         int width = -1;
         int height;
         int depth;
+	Color fgcolor;
 
-        CachedTeXFormula(String f, int style, int size, int inset) {
+        CachedTeXFormula(String f, int style, int type, int size, int inset, Color fgcolor) {
             this.f = f;
             this.style = style;
+            this.type = type;
             this.size = size;
             this.inset = inset;
+	    this.fgcolor = fgcolor;
         }
 
         void setDimensions(int width, int height, int depth) {
@@ -274,7 +299,7 @@ public final class JLaTeXMathCache {
         public boolean equals(Object o) {
             if (o != null && o instanceof CachedTeXFormula) {
                 CachedTeXFormula c = (CachedTeXFormula) o;
-                boolean b = (c.f.equals(f) && c.style == style && c.size == size && c.inset == inset);
+                boolean b = (c.f.equals(f) && c.style == style && c.type == type && c.size == size && c.inset == inset && c.fgcolor.equals(fgcolor));
                 if (b) {
                     if (c.width == -1) {
                         c.width = width;

@@ -105,6 +105,8 @@ public class TeXFormulaParser {
             Class[] argClasses = getArgumentClasses(args);
             Object[] argValues = getArgumentValues(args);
             // create TeXFormula object
+	    String code = "TeXFormula.predefinedTeXFormulasAsString.put(\"%s\", \"%s\");";
+	    System.out.println(String.format(code, formulaName, argValues[0]));
             try {
                 TeXFormula f = TeXFormula.class.getConstructor(argClasses).newInstance(argValues);
                 // succesfully created, so add to "temporary formula's"-hashtable
@@ -137,7 +139,20 @@ public class TeXFormulaParser {
                 MacroInfo f = MacroInfo.class.getConstructor(argClasses).newInstance(argValues);
                 // succesfully created, so add to "temporary formula's"-hashtable
                 tempCommands.put(name, f);
-            } catch (Exception e) {
+            } catch (IllegalArgumentException e) {
+		String err = "IllegalArgumentException:\n";
+		err += "ClassLoader to load this class (TeXFormulaParser): " + this.getClass().getClassLoader() + "\n";
+		for (Class cl : argClasses) {
+		    err += "Created class: " + cl + " loaded with the ClassLoader: " + cl.getClassLoader() + "\n";
+		}
+		for (Object obj : argValues) {
+		    err += "Created object: " + obj + "\n";
+		}
+		throw new XMLResourceParseException(
+                    "Error creating the temporary command '" + name
+                    + "' while constructing the predefined command '"
+                    + formulaName + "'!\n" + err);
+	    } catch (Exception e) {
                 throw new XMLResourceParseException(
                     "Error creating the temporary command '" + name
                     + "' while constructing the predefined command '"

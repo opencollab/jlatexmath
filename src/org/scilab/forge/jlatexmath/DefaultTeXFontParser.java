@@ -198,6 +198,9 @@ public class DefaultTeXFontParser {
     }
     
     public FontInfo[] parseFontDescriptions(FontInfo[] fi, InputStream file, String name) throws ResourceParseException {
+	if (file == null) {
+	    return fi;
+	}
         ArrayList<FontInfo> res = new ArrayList<FontInfo>(Arrays.asList(fi));
 	Element font;
 	try {
