@@ -81,7 +81,7 @@ import java.lang.Character.UnicodeBlock;
  */
 public class TeXFormula {
 
-    public static final String VERSION = "0.9.5";
+    public static final String VERSION = "0.9.6";
 
     public static final int SERIF = 0;
     public static final int SANSSERIF = 1;
