@@ -209,7 +209,7 @@
   
   <target name="src-all" depends="info" >
     <zip destfile="${output.jar.dir}/jlatexmath-src-all-${version}.zip" >
-      <zipfileset prefix="jlatexmath-${version}/" dir="${project.root.dir}" includes="COPYING LICENSE README fop.properties build.xml version.xml MANIFEST.MF src/**/*.java src/**/*.xml src/**/*.ttf src/**/licences/* src/**/greek/* src/**/cyrillic/* src/**/README examples/**/*.java examples/**/lion.png examples/**/*.xml examples/**/README plugin/**/src/**/*.java plugin/**/src/META-INF/**/* plugin/**/build.xml plugin/**/COPYING plugin/**/LICENSE plugin/**/examples/*.*" />
+      <zipfileset prefix="jlatexmath-${version}/" dir="${project.root.dir}" includes="COPYING LICENSE README fop.properties build.xml version.xml MANIFEST.MF src/**/*.java src/**/*.xml src/**/*.ttf src/**/licences/* src/**/greek/* src/**/cyrillic/* src/**/README examples/**/*.java examples/**/lion.png examples/**/*.xml examples/**/README plugin/**/src/**/*.java plugin/**/src/META-INF/**/* plugin/**/build.xml plugin/**/COPYING plugin/**/LICENSE plugin/**/MANIFEST.MF plugin/**/examples/*.*" />
     </zip>
   </target>
   
