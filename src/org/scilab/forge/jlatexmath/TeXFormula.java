@@ -343,7 +343,11 @@ public class TeXFormula {
         TeXParser parser = new TeXParser(true, formula, f);
         try {
             parser.parse();
-        } catch (Exception e) { }
+        } catch (Exception e) {
+            if (f.root == null) {
+                f.root = new EmptyAtom();
+            }
+        }
 
         return f;
     }
