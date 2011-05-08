@@ -1,5 +1,7 @@
 jlatexmath (0.9.6)
         * A TeXFormula.root must not be null in partial mode.
+        * Provide a manifest for the fop plugin defining the dependency on the
+          jlatexmath jar package
 
 jlatexmath (0.9.5)
 	* Remove the Java reflection use and reorganization in the fonts dir.
