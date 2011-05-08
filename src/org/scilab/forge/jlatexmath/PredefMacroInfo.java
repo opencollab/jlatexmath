@@ -546,7 +546,7 @@ class PredefMacroInfo extends MacroInfo {
 	    default:
                 return null;
             }
-        } catch (ParseException e) {
+        } catch (Exception e) {
             throw new ParseException("Problem with command " + args[0] + " at position " + tp.getLine() + ":" + tp.getCol() + "\n" + e.getMessage());
         }
     }

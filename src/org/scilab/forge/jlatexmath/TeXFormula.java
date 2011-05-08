@@ -179,7 +179,7 @@ public class TeXFormula {
         externalFontMap.put(block, new FontInfos(sansserif, serif));
         if (block.equals(Character.UnicodeBlock.BASIC_LATIN)) {
             predefinedTeXFormulas.clear();
-	}
+        }
     }
 
     public static void registerExternalFont(Character.UnicodeBlock block, String fontName) {
@@ -304,7 +304,11 @@ public class TeXFormula {
         if (isPartial) {
             try {
                 parser.parse();
-            } catch (Exception e) { }
+            } catch (Exception e) {
+                if (root == null) {
+                    root = new EmptyAtom();
+                }
+            }
         } else {
             parser.parse();
         }
@@ -316,7 +320,11 @@ public class TeXFormula {
         if (isPartial) {
             try {
                 parser.parse();
-            } catch (Exception e) { }
+            } catch (Exception e) {
+                if (root == null) {
+                    root = new EmptyAtom();
+                }
+            }
         } else {
             parser.parse();
         }

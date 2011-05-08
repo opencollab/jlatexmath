@@ -1,3 +1,6 @@
+jlatexmath (0.9.6)
+        * A TeXFormula.root must not be null in partial mode.
+
 jlatexmath (0.9.5)
 	* Remove the Java reflection use and reorganization in the fonts dir.
 

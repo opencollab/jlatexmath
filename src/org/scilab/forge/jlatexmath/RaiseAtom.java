@@ -57,7 +57,12 @@ public class RaiseAtom extends Atom {
 
     public Box createBox(TeXEnvironment env) {
         Box bbox = base.createBox(env);
-	bbox.setShift(-r * SpaceAtom.getFactor(runit, env));
+	if (runit == -1) {
+	    bbox.setShift(0);
+	} else {
+	    bbox.setShift(-r * SpaceAtom.getFactor(runit, env));
+	}
+
 	if (hunit == -1) {
 	    return bbox;
 	}

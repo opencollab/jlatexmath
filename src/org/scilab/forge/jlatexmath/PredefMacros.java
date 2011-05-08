@@ -1017,42 +1017,42 @@ public class PredefMacros {
     }
 
     public static final Atom big_macro(final TeXParser tp, final String[] args) throws ParseException {
-	Atom at = new TeXFormula(tp.getIsPartial(), args[1], false).root;
-	if (!(at instanceof SymbolAtom)) {
-	    return at;
-	}
+        Atom at = new TeXFormula(tp.getIsPartial(), args[1], false).root;
+        if (!(at instanceof SymbolAtom)) {
+            return at;
+        }
         return new BigDelimiterAtom((SymbolAtom) at, 1);
     }
 
     public static final Atom Big_macro(final TeXParser tp, final String[] args) throws ParseException {
         Atom at = new TeXFormula(tp.getIsPartial(), args[1], false).root;
-	if (!(at instanceof SymbolAtom)) {
-	    return at;
-	}
+        if (!(at instanceof SymbolAtom)) {
+            return at;
+        }
         return new BigDelimiterAtom((SymbolAtom) at, 2);
     }
 
     public static final Atom bigg_macro(final TeXParser tp, final String[] args) throws ParseException {
         Atom at = new TeXFormula(tp.getIsPartial(), args[1], false).root;
-	if (!(at instanceof SymbolAtom)) {
-	    return at;
-	}
+        if (!(at instanceof SymbolAtom)) {
+            return at;
+        }
         return new BigDelimiterAtom((SymbolAtom) at, 3);
     }
 
     public static final Atom Bigg_macro(final TeXParser tp, final String[] args) throws ParseException {
         Atom at = new TeXFormula(tp.getIsPartial(), args[1], false).root;
-	if (!(at instanceof SymbolAtom)) {
-	    return at;
-	}
+        if (!(at instanceof SymbolAtom)) {
+            return at;
+        }
         return new BigDelimiterAtom((SymbolAtom) at, 4);
     }
 
     public static final Atom bigl_macro(final TeXParser tp, final String[] args) throws ParseException {
         Atom at = new TeXFormula(tp.getIsPartial(), args[1], false).root;
-	if (!(at instanceof SymbolAtom)) {
-	    return at;
-	}
+        if (!(at instanceof SymbolAtom)) {
+            return at;
+        }
         Atom att = new BigDelimiterAtom((SymbolAtom) at, 1);
         att.type = TeXConstants.TYPE_OPENING;
         return att;
@@ -1060,9 +1060,9 @@ public class PredefMacros {
 
     public static final Atom Bigl_macro(final TeXParser tp, final String[] args) throws ParseException {
         Atom at = new TeXFormula(tp.getIsPartial(), args[1], false).root;
-	if (!(at instanceof SymbolAtom)) {
-	    return at;
-	}
+        if (!(at instanceof SymbolAtom)) {
+            return at;
+        }
         Atom att = new BigDelimiterAtom((SymbolAtom) at, 2);
         att.type = TeXConstants.TYPE_OPENING;
         return att;
@@ -1070,9 +1070,9 @@ public class PredefMacros {
 
     public static final Atom biggl_macro(final TeXParser tp, final String[] args) throws ParseException {
         Atom at = new TeXFormula(tp.getIsPartial(), args[1], false).root;
-	if (!(at instanceof SymbolAtom)) {
-	    return at;
-	}
+        if (!(at instanceof SymbolAtom)) {
+            return at;
+        }
         Atom att = new BigDelimiterAtom((SymbolAtom) at, 3);
         att.type = TeXConstants.TYPE_OPENING;
         return att;
@@ -1080,9 +1080,9 @@ public class PredefMacros {
 
     public static final Atom Biggl_macro(final TeXParser tp, final String[] args) throws ParseException {
         Atom at = new TeXFormula(tp.getIsPartial(), args[1], false).root;
-	if (!(at instanceof SymbolAtom)) {
-	    return at;
-	}
+        if (!(at instanceof SymbolAtom)) {
+            return at;
+        }
         Atom att = new BigDelimiterAtom((SymbolAtom) at, 4);
         att.type = TeXConstants.TYPE_OPENING;
         return att;
@@ -1090,9 +1090,9 @@ public class PredefMacros {
 
     public static final Atom bigr_macro(final TeXParser tp, final String[] args) throws ParseException {
         Atom at = new TeXFormula(tp.getIsPartial(), args[1], false).root;
-	if (!(at instanceof SymbolAtom)) {
-	    return at;
-	}
+        if (!(at instanceof SymbolAtom)) {
+            return at;
+        }
         Atom att = new BigDelimiterAtom((SymbolAtom) at, 1);
         att.type = TeXConstants.TYPE_CLOSING;
         return att;
@@ -1100,9 +1100,9 @@ public class PredefMacros {
 
     public static final Atom Bigr_macro(final TeXParser tp, final String[] args) throws ParseException {
         Atom at = new TeXFormula(tp.getIsPartial(), args[1], false).root;
-	if (!(at instanceof SymbolAtom)) {
-	    return at;
-	}
+        if (!(at instanceof SymbolAtom)) {
+            return at;
+        }
         Atom att = new BigDelimiterAtom((SymbolAtom) at, 2);
         att.type = TeXConstants.TYPE_CLOSING;
         return att;
@@ -1110,9 +1110,9 @@ public class PredefMacros {
 
     public static final Atom biggr_macro(final TeXParser tp, final String[] args) throws ParseException {
         Atom at = new TeXFormula(tp.getIsPartial(), args[1], false).root;
-	if (!(at instanceof SymbolAtom)) {
-	    return at;
-	}
+        if (!(at instanceof SymbolAtom)) {
+            return at;
+        }
         Atom att = new BigDelimiterAtom((SymbolAtom) at, 3);
         att.type = TeXConstants.TYPE_CLOSING;
         return att;
@@ -1120,9 +1120,9 @@ public class PredefMacros {
 
     public static final Atom Biggr_macro(final TeXParser tp, final String[] args) throws ParseException {
         Atom at = new TeXFormula(tp.getIsPartial(), args[1], false).root;
-	if (!(at instanceof SymbolAtom)) {
-	    return at;
-	}
+        if (!(at instanceof SymbolAtom)) {
+            return at;
+        }
         Atom att = new BigDelimiterAtom((SymbolAtom) at, 4);
         att.type = TeXConstants.TYPE_CLOSING;
         return att;
@@ -1166,14 +1166,18 @@ public class PredefMacros {
 
     public static final Atom raisebox_macro(final TeXParser tp, final String[] args) throws ParseException {
         float[] raise = SpaceAtom.getLength(args[1]);
+        if (raise.length == 1) {
+            throw new ParseException("Error in getting raise in \\raisebox command !");
+        }
         float[] height = SpaceAtom.getLength(args[3]);
         float[] depth = SpaceAtom.getLength(args[4]);
         if (height.length == 1 || height[1] == 0) {
-            height[0] = -1;
+            height = new float[]{-1, 0};
         }
         if (depth.length == 1 || depth[1] == 0) {
-            depth[0] = -1;
+            depth = new float[]{-1, 0};
         }
+
         return new RaiseAtom(new TeXFormula(tp.getIsPartial(), args[2]).root, (int) raise[0], raise[1], (int) height[0], height[1], (int) depth[0], depth[1]);
     }
 
@@ -1548,6 +1552,10 @@ public class PredefMacros {
 
     public static final Atom kern_macro(final TeXParser tp, final String[] args) throws ParseException {
         float[] info = SpaceAtom.getLength(args[1]);
+        if (info.length == 1) {
+            throw new ParseException("Error in getting kern in \\kern command !");
+        }
+
         return new SpaceAtom((int) info[0], info[1], 0f, 0f);
     }
 
@@ -1641,13 +1649,13 @@ public class PredefMacros {
     public static final Atom int_macro(final TeXParser tp, final String[] args) throws ParseException {
         Atom integral = SymbolAtom.get("int").clone();
         integral.type_limits = TeXConstants.SCRIPT_NOLIMITS;
-	return integral;
+        return integral;
     }
 
     public static final Atom oint_macro(final TeXParser tp, final String[] args) throws ParseException {
         Atom integral = SymbolAtom.get("oint").clone();
         integral.type_limits = TeXConstants.SCRIPT_NOLIMITS;
-	return integral;
+        return integral;
     }
 
     public static final Atom iint_macro(final TeXParser tp, final String[] args) throws ParseException {
