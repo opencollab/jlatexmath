@@ -139,12 +139,6 @@ public class TeXFormula {
         new PredefinedTeXFormulas();
         new PredefMacros();
 
-        /*try {
-          new PredefinedTeXFormulaParser("PredefinedTeXFormulas.xml", "TeXFormula").parse(predefinedTeXFormulas);
-          } catch (Exception e) {
-          System.err.println(e.toString());
-          }*/
-
         parser.parseSymbolToFormulaMappings(symbolFormulaMappings, symbolTextMappings);
 
         try {
