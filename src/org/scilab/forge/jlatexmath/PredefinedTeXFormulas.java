@@ -88,7 +88,7 @@ final class PredefinedTeXFormulas {
         TeXFormula.predefinedTeXFormulasAsString.put("sinh", "\\mathop{\\mathrm{sinh}}\\nolimits");
         TeXFormula.predefinedTeXFormulasAsString.put("cos", "\\mathop{\\mathrm{cos}}\\nolimits");
         TeXFormula.predefinedTeXFormulasAsString.put("arccos", "\\mathop{\\mathrm{arccos}}\\nolimits");
-        TeXFormula.predefinedTeXFormulasAsString.put("cot", "\\mathop{\\mathrm{cos}}\\nolimits");
+        TeXFormula.predefinedTeXFormulasAsString.put("cot", "\\mathop{\\mathrm{cot}}\\nolimits");
         TeXFormula.predefinedTeXFormulasAsString.put("arccot", "\\mathop{\\mathrm{arccot}}\\nolimits");
         TeXFormula.predefinedTeXFormulasAsString.put("cosh", "\\mathop{\\mathrm{cosh}}\\nolimits");
         TeXFormula.predefinedTeXFormulasAsString.put("tan", "\\mathop{\\mathrm{tan}}\\nolimits");
