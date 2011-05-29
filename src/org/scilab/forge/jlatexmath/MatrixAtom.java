@@ -101,7 +101,7 @@ public class MatrixAtom extends Atom {
             }
         } else {
             position = new int[matrix.col];
-            for (int i = 0; i < matrix.col; i += 2) {
+            for (int i = 0; i < matrix.col; i++) {
                 position[i] = TeXConstants.ALIGN_CENTER;
             }
         }

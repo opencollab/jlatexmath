@@ -1,3 +1,9 @@
+jlatexmath (0.9.7)
+	* Bugs fix: Columns was not centered in matrix env and \cot was
+          displayed as \cos.
+	* Add an option in jlmDynamic ([i]) to give the possibility to insert
+          a group as if it was not a group.
+
 jlatexmath (0.9.6)
         * A TeXFormula.root must not be null in partial mode.
         * Provide a manifest for the fop plugin defining the dependency on the

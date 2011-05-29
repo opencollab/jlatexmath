@@ -36,23 +36,25 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
 
+import org.scilab.forge.jlatexmath.dynamic.DynamicAtom;
+
 /**
  * An atom representing a horizontal row of other atoms, to be seperated by glue.
  * It's also responsible for inserting kerns and ligatures.
  */
 public class RowAtom extends Atom implements Row {
-    
+
     // atoms to be displayed horizontally next to eachother
     protected LinkedList<Atom> elements = new LinkedList<Atom>();
-    
+
     public boolean lookAtLastAtom = false;
-    
+
     // previous atom (for nested Row atoms)
     private Dummy previousAtom = null;
-    
+
     // set of atom types that make a previous bin atom change to ord
     private static BitSet binSet;
-    
+
     // set of atom types that can possibly need a kern or, together with the
     // previous atom, be replaced by a ligature
     private static BitSet ligKernSet;
@@ -65,7 +67,7 @@ public class RowAtom extends Atom implements Row {
         binSet.set(TeXConstants.TYPE_RELATION);
         binSet.set(TeXConstants.TYPE_OPENING);
         binSet.set(TeXConstants.TYPE_PUNCTUATION);
-        
+
         // fill ligKernSet
         ligKernSet = new BitSet (16);
         ligKernSet.set(TeXConstants.TYPE_ORDINARY);
@@ -76,11 +78,11 @@ public class RowAtom extends Atom implements Row {
         ligKernSet.set(TeXConstants.TYPE_CLOSING);
         ligKernSet.set(TeXConstants.TYPE_PUNCTUATION);
     }
-    
+
     protected RowAtom() {
         // empty
     }
-    
+
     public RowAtom(Atom el) {
         if (el != null) {
             if (el instanceof RowAtom)
@@ -90,20 +92,20 @@ public class RowAtom extends Atom implements Row {
                 elements.add(el);
         }
     }
-    
+
     public Atom getLastAtom() {
-	if (elements.size() != 0) {
-	    return elements.removeLast();
-	}
-	
-	return new SpaceAtom(TeXConstants.UNIT_POINT, 0.0f, 0.0f, 0.0f);
+        if (elements.size() != 0) {
+            return elements.removeLast();
+        }
+
+        return new SpaceAtom(TeXConstants.UNIT_POINT, 0.0f, 0.0f, 0.0f);
     }
-	
+
     public final void add(Atom el) {
         if (el != null)
             elements.add(el);
     }
-    
+
     /**
      *
      * @param cur
@@ -113,42 +115,55 @@ public class RowAtom extends Atom implements Row {
      */
     private void changeToOrd(Dummy cur, Dummy prev, Atom next) {
         int type = cur.getLeftType();
-        if (type == TeXConstants.TYPE_BINARY_OPERATOR
-                && (prev == null || binSet.get(prev.getRightType())))
+        if (type == TeXConstants.TYPE_BINARY_OPERATOR && ((prev == null || binSet.get(prev.getRightType())) || next == null)) {
             cur.setType(TeXConstants.TYPE_ORDINARY);
-        else if (next != null
-                && cur.getRightType() == TeXConstants.TYPE_BINARY_OPERATOR) {
+        } else if (next != null && cur.getRightType() == TeXConstants.TYPE_BINARY_OPERATOR) {
             int nextType = next.getLeftType();
-            if (nextType == TeXConstants.TYPE_RELATION
-                    || nextType == TeXConstants.TYPE_CLOSING
-                    || nextType == TeXConstants.TYPE_PUNCTUATION)
+            if (nextType == TeXConstants.TYPE_RELATION || nextType == TeXConstants.TYPE_CLOSING || nextType == TeXConstants.TYPE_PUNCTUATION) {
                 cur.setType(TeXConstants.TYPE_ORDINARY);
+            }
         }
     }
-    
+
     public Box createBox(TeXEnvironment env) {
         TeXFont tf = env.getTeXFont();
         HorizontalBox hBox = new HorizontalBox(env.getColor(), env.getBackground());
+        int position = 0;
         env.reset();
-        
+
         // convert atoms to boxes and add to the horizontal box
-        for (ListIterator it = elements.listIterator(); it.hasNext();) {
-            Dummy atom = new Dummy((Atom) it.next());
-            
+        for (ListIterator<Atom> it = elements.listIterator(); it.hasNext();) {
+            Atom at = it.next();
+            position++;
+            if (at instanceof DynamicAtom && ((DynamicAtom) at).getInsertMode()) {
+                Atom a = ((DynamicAtom) at).getAtom();
+                if (a instanceof RowAtom) {
+                    elements.remove(position - 1);
+                    elements.addAll(position - 1, ((RowAtom) a).elements);
+                    it = elements.listIterator(position - 1);
+                    at = it.next();
+                } else {
+                    at = a;
+                }
+            }
+
+            Dummy atom = new Dummy(at);
+
             // if necessary, change BIN type to ORD
             Atom nextAtom = null;
             if (it.hasNext()) {
-                nextAtom = (Atom) it.next();
+                nextAtom = it.next();
                 it.previous();
             }
             changeToOrd(atom, previousAtom, nextAtom);
-            
+
             // check for ligatures or kerning
             float kern = 0;
-	    // Calixte : I put a while to handle the case where there are
-	    // several ligatures as in ffi or ffl
+            // Calixte : I put a while to handle the case where there are
+            // several ligatures as in ffi or ffl
             while (it.hasNext() && atom.getRightType() == TeXConstants.TYPE_ORDINARY && atom.isCharSymbol()) {
-                Atom next = (Atom) it.next();
+                Atom next = it.next();
+                position++;
                 if (next instanceof CharSymbol && ligKernSet.get(next.getLeftType())) {
                     atom.markAsTextSymbol();
                     CharFont l = atom.getCharFont(tf), r = ((CharSymbol) next).getCharFont(tf);
@@ -156,60 +171,62 @@ public class RowAtom extends Atom implements Row {
                     if (lig == null) {
                         kern = tf.getKern(l, r, env.getStyle());
                         it.previous();
-			break; // iterator remains unchanged (no ligature!)
-                    } 
+                        position--;
+                        break; // iterator remains unchanged (no ligature!)
+                    }
                     else { // ligature
-                        atom.changeAtom(new FixedCharAtom(lig)); // go on with the	 
-			// ligature
+                        atom.changeAtom(new FixedCharAtom(lig)); // go on with the
+                        // ligature
                     }
                 } else {
                     it.previous();
-		    break;
-		}// iterator remains unchanged
+                    position--;
+                    break;
+                }// iterator remains unchanged
             }
-            
+
             // insert glue, unless it's the first element of the row
             // OR this element or the next is a Kern.
             if (it.previousIndex() != 0 && previousAtom != null && !previousAtom.isKern() && !atom.isKern()) {
                 hBox.add(Glue.get(previousAtom.getRightType(), atom.getLeftType(), env));
-	    }            
+            }
 
             // insert atom's box
             atom.setPreviousAtom(previousAtom);
             Box b = atom.createBox(env);
             hBox.add(b);
-            
+
             // set last used fontId (for next atom)
             env.setLastFontId(b.getLastFontId());
-            
+
             // insert kern
             if (Math.abs(kern) > TeXFormula.PREC)
                 hBox.add(new StrutBox(kern, 0, 0, 0));
-            
+
             // kerns do not interfere with the normal glue-rules without kerns
             if (!atom.isKern())
                 previousAtom = atom;
         }
         // reset previousAtom
         previousAtom = null;
-        
+
         // return resulting horizontal box
         return hBox;
     }
-    
+
     public void setPreviousAtom(Dummy prev) {
         previousAtom = prev;
     }
-    
+
     public int getLeftType() {
-        if (elements.equals(""))
+        if (elements.size() == 0)
             return TeXConstants.TYPE_ORDINARY;
         else
             return (elements.get(0)).getLeftType();
     }
-    
+
     public int getRightType() {
-        if (elements.equals(""))
+        if (elements.size() == 0)
             return TeXConstants.TYPE_ORDINARY;
         else
             return (elements.get(elements.size() - 1)).getRightType();

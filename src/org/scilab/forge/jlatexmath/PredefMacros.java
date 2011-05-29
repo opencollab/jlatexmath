@@ -1275,7 +1275,7 @@ public class PredefMacros {
 
     public static final Atom jlmDynamic_macro(final TeXParser tp, final String[] args) throws ParseException {
         if (DynamicAtom.hasAnExternalConverterFactory()) {
-            return new DynamicAtom(args[1]);
+            return new DynamicAtom(args[1], args[2]);
         } else {
             throw new ParseException("No ExternalConverterFactory set !");
         }
