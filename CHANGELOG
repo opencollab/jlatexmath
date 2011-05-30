@@ -1,4 +1,6 @@
 jlatexmath (0.9.7)
+	* Add a check !=null in cache.
+
 	* Bugs fix: Columns was not centered in matrix env and \cot was
           displayed as \cos.
 	* Add an option in jlmDynamic ([i]) to give the possibility to insert

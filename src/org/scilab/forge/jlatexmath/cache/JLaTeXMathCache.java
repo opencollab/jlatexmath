@@ -246,7 +246,10 @@ public final class JLaTeXMathCache {
             Iterator<CachedTeXFormula> iter = cache.keySet().iterator();
             if (iter.hasNext()) {
                 CachedTeXFormula c = iter.next();
-                cache.get(c).clear();
+                SoftReference<CachedImage> cachedImage = cache.get(c);
+                if (cachedImage != null) {
+                    cachedImage.clear();
+                }
                 cache.remove(c);
             }
         }
@@ -276,7 +279,7 @@ public final class JLaTeXMathCache {
         int width = -1;
         int height;
         int depth;
-	Color fgcolor;
+        Color fgcolor;
 
         CachedTeXFormula(String f, int style, int type, int size, int inset, Color fgcolor) {
             this.f = f;
@@ -284,7 +287,7 @@ public final class JLaTeXMathCache {
             this.type = type;
             this.size = size;
             this.inset = inset;
-	    this.fgcolor = fgcolor;
+            this.fgcolor = fgcolor;
         }
 
         void setDimensions(int width, int height, int depth) {
