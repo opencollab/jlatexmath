@@ -78,11 +78,11 @@ public class FencedAtom extends Atom {
     }
 
     public int getLeftType() {
-        return TeXConstants.TYPE_OPENING;
+        return TeXConstants.TYPE_INNER;
     }
 
     public int getRightType() {
-        return TeXConstants.TYPE_CLOSING;
+        return TeXConstants.TYPE_INNER;
     }
 
     /**
