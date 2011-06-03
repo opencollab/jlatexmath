@@ -1,4 +1,6 @@
 jlatexmath (0.9.7)
+	* Bad translation of &8821; (right guillemet) into LaTeX.
+
 	* Issue with default color in TeXIcon.
 
 	* Fix build problems.

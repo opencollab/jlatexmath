@@ -793,7 +793,7 @@
 	  <Map char="&#8220;" formula="``"/>
 	  <Map char="&#8217;" formula="\textapos"/>
 	  <Map char="&#8218;" formula=","/>
-	  <Map char="&#8221;" formula="\textapos\textapos}"/>
+	  <Map char="&#8221;" formula="\textapos\textapos"/>
 	  <Map char="&#8222;" formula=",,"/>
 	  <Map char="&#8206;" formula=" "/>
 	  <Map char="&#8207;" formula=" "/>
