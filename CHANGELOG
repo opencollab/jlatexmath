@@ -1,4 +1,6 @@
 jlatexmath (0.9.7)
+	* Issue with default color in TeXIcon.
+
 	* Fix build problems.
 
 	* Change FSF address in LICENSE files.
