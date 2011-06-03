@@ -1,4 +1,8 @@
 jlatexmath (0.9.7)
+	* Fix build problems.
+
+	* Change FSF address in LICENSE files.
+
 	* Add a check !=null in cache.
 
 	* Bugs fix: Columns was not centered in matrix env and \cot was

@@ -47,8 +47,17 @@
     <delete dir="${ex.macros}/bin">
       <fileset dir="${ex.macros}" includes="**/*.png **/*.class **/*.jar"/>
     </delete>
+    <delete verbose="true">
+      <fileset dir="${project.root.dir}" includes="**/*~" defaultexcludes="no"/>
+    </delete>
   </target>
   
+  <target name="dir.fop.check">
+    <condition property="dir.exists">
+      <available file="${fop.base.dir}" type="dir"/>
+    </condition>
+  </target>
+
   <target name="example" depends="buildJar">
     <javac includeantruntime="false" srcdir="${ex.basic}" destdir="${ex.basic}" debug="on" source="${java_version}" target="${java_version}" classpath="${output.jar.dir}/jlatexmath-${version}.jar:${output.jar.dir}/jlm_cyrillic.jar:${output.jar.dir}/jlm_greek.jar">
     </javac>
@@ -158,13 +167,14 @@
     <jar jarfile="${package.dir}/jlatexmath-${version}.jar" basedir="${project.bin.dir}" manifest="MANIFEST.MF" excludes="cyrillic/** greek/**"/>
   </target>
 
-  <target name="fop" depends="plugin"/>
-  <target name="plugin" depends="init">
+  <target name="fop" depends="plugin,dir.fop.check" if="dir.exists"/>
+  
+  <target name="plugin" depends="init,dir.fop.check" if="dir.exists">
     <ant antfile="build.xml" dir="${fop.base.dir}" inheritAll="false"/>
     <copy file="${fop.base.dir}/dist/jlatexmath-fop-${version}.jar" todir="${package.dir}"/>
   </target>
 
-  <target name="plugin-src" depends="init">
+  <target name="plugin-src" depends="init,dir.fop.check" if="dir.exists">
     <ant antfile="build.xml" target="source" dir="${fop.base.dir}" inheritAll="false"/>
     <copy file="${fop.base.dir}/dist/jlatexmath-fop-src-${version}.zip" tofile="${package.dir}/jlatexmath-fop-src-${version}.zip"/>
   </target>
@@ -180,14 +190,14 @@
     </zip>
   </target>
 
-  <target name="embedded-zip" depends="embedded">
+  <target name="embedded-zip" depends="embedded,dir.fop.check" if="dir.exists">
     <zip destfile="${package.dir}/jlatexmath-embedded-fop-${version}.zip">
       <fileset dir="${package.dir}" includes="jlatexmath-embedded-fop-${version}.jar"/>
       <fileset dir="${fop.base.dir}" includes="examples/*"/>
     </zip>
   </target>
 
-  <target name="embedded" depends="compile">
+  <target name="embedded" depends="compile,dir.fop.check" if="dir.exists">
    <ant antfile="build.xml" dir="${fop.base.dir}" inheritAll="false" target="embedded"/>
    <copy todir="${project.bin.dir}${class.dir}" >
       <fileset dir="${project.src.dir}">
@@ -203,11 +213,11 @@
   
   <target name="source" depends="info" >
     <zip destfile="${output.jar.dir}/jlatexmath-src-${version}.zip">
-      <zipfileset prefix="jlatexmath-${version}/" dir="${project.root.dir}" includes="COPYING LICENSE README build.xml version.xml MANIFEST.MF src/**/*.java src/**/*.xml src/**/*.ttf src/**/licences/* src/**/README examples/**/*.java examples/**/lion.png examples/**/*.xml examples/**/README" />
+      <zipfileset prefix="jlatexmath-${version}/" dir="${project.root.dir}" includes="COPYING LICENSE README build.xml version.xml MANIFEST.MF src/**/*.java src/**/*.xml src/**/*.ttf src/**/licences/* src/**/greek/* src/**/cyrillic/* src/**/README examples/**/*.java examples/**/lion.png examples/**/*.xml examples/**/README" />
     </zip>
   </target>
   
-  <target name="src-all" depends="info" >
+  <target name="src-all" depends="info,dir.fop.check" if="dir.exists" >
     <zip destfile="${output.jar.dir}/jlatexmath-src-all-${version}.zip" >
       <zipfileset prefix="jlatexmath-${version}/" dir="${project.root.dir}" includes="COPYING LICENSE README fop.properties build.xml version.xml MANIFEST.MF src/**/*.java src/**/*.xml src/**/*.ttf src/**/licences/* src/**/greek/* src/**/cyrillic/* src/**/README examples/**/*.java examples/**/lion.png examples/**/*.xml examples/**/README plugin/**/src/**/*.java plugin/**/src/META-INF/**/* plugin/**/build.xml plugin/**/COPYING plugin/**/LICENSE plugin/**/MANIFEST.MF plugin/**/examples/*.*" />
     </zip>
