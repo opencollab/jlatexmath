@@ -3,7 +3,7 @@ JLateXMath is an fork of JMathTeX with a lot of modifications to support
 many more LaTeX commands, drop of the jdom dependency and easy evolution 
 capabilities.
 
-Copyright (C) 2009 DENIZET Calixte
+Copyright (C) 2009-2011 DENIZET Calixte
 Copyright (C) Kris Coolsaet
 Copyright (C) Nico Van Cleemput
 Copyright (C) Kurt Vermeulen
@@ -22,7 +22,8 @@ GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
 along with this program; see the file COPYING. If not, write to the
-Free Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston,
+MA 02110-1301, USA.
 
 
 
