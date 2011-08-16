@@ -1,4 +1,6 @@
 jlatexmath (0.9.7)
+	* Add the possibility to add a break in a line in using \-.
+
 	* Bad type for FencedAtom.
 
 	* Bad translation of &8821; (right guillemet) into LaTeX.

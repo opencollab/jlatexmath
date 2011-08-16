@@ -371,12 +371,13 @@ public class TeXFormula {
     public TeXFormula add(Atom el) {
         if (el != null) {
             if (el instanceof MiddleAtom)
-                middle.add((MiddleAtom)el);
-            if (root == null)
+                middle.add((MiddleAtom) el);
+            if (root == null) {
                 root = el;
-            else {
-                if (!(root instanceof RowAtom))
+            } else {
+                if (!(root instanceof RowAtom)) {
                     root = new RowAtom(root);
+                }
                 ((RowAtom) root).add(el);
             }
         }
@@ -602,6 +603,22 @@ public class TeXFormula {
         TeXEnvironment te = new TeXEnvironment(style, createFont(size, type), widthUnit, textwidth);
         Box box = createBox(te);
         HorizontalBox hb = new HorizontalBox(box, te.getTextwidth(), align);
+
+        TeXIcon ti = new TeXIcon(hb, size, true);
+        ti.isColored = te.isColored;
+        return ti;
+    }
+
+    public TeXIcon createTeXIcon(int style, float size, int widthUnit, float textwidth, int align, int interlineUnit, float interline) {
+        return createTeXIcon(style, size, 0, widthUnit, textwidth, align, interlineUnit, interline);
+    }
+
+    public TeXIcon createTeXIcon(int style, float size, int type, int widthUnit, float textwidth, int align, int interlineUnit, float interline) {
+        TeXEnvironment te = new TeXEnvironment(style, createFont(size, type), widthUnit, textwidth);
+        Box box = createBox(te);
+        float il = interline * SpaceAtom.getFactor(interlineUnit, te);
+        HorizontalBox hb = new HorizontalBox(BreakFormula.split(box, te.getTextwidth(), il), te.getTextwidth(), align);
+
         TeXIcon ti = new TeXIcon(hb, size, true);
         ti.isColored = te.isColored;
         return ti;
@@ -679,7 +696,7 @@ public class TeXFormula {
      * @param size the size
      * @param transparency, if true the background is transparent
      * @return the generated image
-     */ static int toto=0;
+     */
     public Image createBufferedImage(int style, float size, Color fg, Color bg) throws ParseException {
         TeXIcon icon = createTeXIcon(style, size);
         icon.setInsets(new Insets(2, 2, 2, 2));

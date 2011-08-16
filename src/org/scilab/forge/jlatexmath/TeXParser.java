@@ -53,6 +53,7 @@ public class TeXParser {
     private boolean arrayMode;
     private boolean ignoreWhiteSpace = true;
     private boolean isPartial;
+    private boolean autoNumberBreaking;
 
     // the escape character
     private static final char ESCAPE = '\\';
@@ -161,10 +162,10 @@ public class TeXParser {
             this.parseString = new StringBuffer(parseString);
             this.len = parseString.length();
             this.pos = 0;
-            if (firstpass)
+            if (firstpass) {
                 firstpass();
-        }
-        else {
+	    }
+        } else {
             this.parseString = null;
             this.pos = 0;
             this.len = 0;
@@ -657,13 +658,14 @@ public class TeXParser {
                     }
                     break;
                 case ESCAPE :
-                    Atom at = processEscape();
-                    formula.add(at);
-                    if (arrayMode && at instanceof HlineAtom) {
-                        ((ArrayOfAtoms)formula).addRow();
-                    }
-                    if (insertion)
-                        insertion = false;
+		    Atom at = processEscape();
+		    formula.add(at);
+		    if (arrayMode && at instanceof HlineAtom) {
+			((ArrayOfAtoms) formula).addRow();
+		    }
+		    if (insertion) {
+			insertion = false;
+		    }
                     break;
                 case L_GROUP :
                     Atom atom = getArgument();
@@ -676,8 +678,7 @@ public class TeXParser {
                     group--;
                     pos++;
                     if (group == -1)
-                        throw new ParseException("Found a closing '" + R_GROUP
-                                                 + "' without an opening '" + L_GROUP + "'!");
+                        throw new ParseException("Found a closing '" + R_GROUP + "' without an opening '" + L_GROUP + "'!");
                     return;
                 case SUPER_SCRIPT :
                 case SUB_SCRIPT :

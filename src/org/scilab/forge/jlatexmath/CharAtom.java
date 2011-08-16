@@ -71,6 +71,10 @@ public class CharAtom extends CharSymbol {
 	return box;
     }
 
+    public char getCharacter() {
+	return c;
+    }
+
     /*
      * Get the Char-object representing this character ("c") in the right text style
      */

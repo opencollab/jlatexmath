@@ -79,4 +79,8 @@ public class CharBox extends Box {
     public int getLastFontId() {
 	return cf.fontId;
     }
+
+    public String toString() {
+	return super.toString() + "=" + cf.c;
+    }
 }

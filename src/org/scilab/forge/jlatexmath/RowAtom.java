@@ -102,8 +102,9 @@ public class RowAtom extends Atom implements Row {
     }
 
     public final void add(Atom el) {
-        if (el != null)
+        if (el != null) {
             elements.add(el);
+        }
     }
 
     /**
@@ -135,6 +136,20 @@ public class RowAtom extends Atom implements Row {
         for (ListIterator<Atom> it = elements.listIterator(); it.hasNext();) {
             Atom at = it.next();
             position++;
+
+	    boolean markAdded = false;
+	    while (at instanceof BreakMarkAtom) {
+		if (!markAdded) {
+		    markAdded = true;
+		}
+		if (it.hasNext()) {
+		    at = it.next();
+		    position++;
+		} else {
+		    break;
+		}
+	    }
+            
             if (at instanceof DynamicAtom && ((DynamicAtom) at).getInsertMode()) {
                 Atom a = ((DynamicAtom) at).getAtom();
                 if (a instanceof RowAtom) {
@@ -194,24 +209,28 @@ public class RowAtom extends Atom implements Row {
             // insert atom's box
             atom.setPreviousAtom(previousAtom);
             Box b = atom.createBox(env);
+	    if (markAdded || (at instanceof CharAtom && Character.isDigit(((CharAtom) at).getCharacter()))) {
+		hBox.addBreakPosition(hBox.children.size());
+	    }
             hBox.add(b);
 
             // set last used fontId (for next atom)
             env.setLastFontId(b.getLastFontId());
 
             // insert kern
-            if (Math.abs(kern) > TeXFormula.PREC)
+            if (Math.abs(kern) > TeXFormula.PREC) {
                 hBox.add(new StrutBox(kern, 0, 0, 0));
+	    }
 
             // kerns do not interfere with the normal glue-rules without kerns
-            if (!atom.isKern())
+            if (!atom.isKern()) {
                 previousAtom = atom;
+	    }
         }
         // reset previousAtom
         previousAtom = null;
-
-        // return resulting horizontal box
-        return hBox;
+	
+	return hBox;
     }
 
     public void setPreviousAtom(Dummy prev) {
@@ -219,16 +238,18 @@ public class RowAtom extends Atom implements Row {
     }
 
     public int getLeftType() {
-        if (elements.size() == 0)
+        if (elements.size() == 0) {
             return TeXConstants.TYPE_ORDINARY;
-        else
+        } else {
             return (elements.get(0)).getLeftType();
+        }
     }
 
     public int getRightType() {
-        if (elements.size() == 0)
+        if (elements.size() == 0) {
             return TeXConstants.TYPE_ORDINARY;
-        else
+        } else {
             return (elements.get(elements.size() - 1)).getRightType();
+        }
     }
 }

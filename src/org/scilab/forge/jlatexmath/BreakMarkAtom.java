@@ -1,4 +1,4 @@
-/* EmptyAtom.java
+/* BreakMarkAtom.java
  * =========================================================================
  * This file is part of the JLaTeXMath Library - http://forge.scilab.org/jlatexmath
  *
@@ -29,13 +29,13 @@
 package org.scilab.forge.jlatexmath;
 
 /**
- * An empty atom.
+ * An empty atom just to add a mark.
  */
-public class EmptyAtom extends Atom {
+public class BreakMarkAtom extends Atom {
 
-    public EmptyAtom() { }
- 
+    public BreakMarkAtom() { }
+
     public Box createBox(TeXEnvironment env) {
-	return new StrutBox(0, 0, 0, 0);
-    } 
+        return new StrutBox(0, 0, 0, 0);
+    }
 }

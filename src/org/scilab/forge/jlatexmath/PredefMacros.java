@@ -1722,4 +1722,8 @@ public class PredefMacros {
         at.type = TeXConstants.TYPE_CLOSING;
         return at;
     }
+
+    public static final Atom insertBreakMark_macro(final TeXParser tp, final String[] args) throws ParseException {
+        return new BreakMarkAtom();
+    }
 }

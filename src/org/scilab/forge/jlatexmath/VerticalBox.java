@@ -69,6 +69,13 @@ class VerticalBox extends Box {
             depth += b.height + b.depth;
         recalculateWidth(b);
     }
+
+    public final void add(Box b, float interline) {
+	if (children.size() == 1) {
+	    add(new StrutBox(0, interline, 0, 0));
+	}
+	add(b);
+    }
     
     private void recalculateWidth(Box b) {
         leftMostPos = Math.min(leftMostPos, b.shift);

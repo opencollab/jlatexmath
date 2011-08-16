@@ -543,6 +543,8 @@ class PredefMacroInfo extends MacroInfo {
                 return PredefMacros.lmoustache_macro(tp, args);
 	    case 270:
                 return PredefMacros.rmoustache_macro(tp, args);
+	    case 271:
+                return PredefMacros.insertBreakMark_macro(tp, args);
 	    default:
                 return null;
             }
