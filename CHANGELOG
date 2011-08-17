@@ -1,4 +1,7 @@
 jlatexmath (0.9.7)
+	* Add a command \jlmXML which can replaces $foo by the value of foo
+	  attribute.
+
 	* Add the possibility to add a break in a line in using \-.
 
 	* Bad type for FencedAtom.

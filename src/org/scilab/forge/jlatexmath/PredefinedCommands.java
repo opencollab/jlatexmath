@@ -305,5 +305,6 @@ final class PredefinedCommands {
         MacroInfo.Commands.put("lmoustache", new PredefMacroInfo(269, 0));
         MacroInfo.Commands.put("rmoustache", new PredefMacroInfo(270, 0));
         MacroInfo.Commands.put("-", new PredefMacroInfo(271, 0));
+        MacroInfo.Commands.put("jlmXML", new PredefMacroInfo(272, 1));
     }
 }

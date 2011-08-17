@@ -27,7 +27,7 @@
  */
 
 /* This file is largely inspired by files wrote by Jeremias Maerki,
- * for the fop plugin of barcode4j available at 
+ * for the fop plugin of barcode4j available at
  * http://barcode4j.sourceforge.net/
  */
 
@@ -40,8 +40,10 @@ import org.scilab.forge.jlatexmath.SpaceAtom;
 
 import java.awt.Color;
 import java.awt.geom.Point2D;
+import java.util.HashMap;
 import java.util.List;
 import java.util.LinkedList;
+import java.util.Map;
 import java.util.StringTokenizer;
 
 import org.apache.fop.apps.FOPException;
@@ -62,11 +64,12 @@ import org.apache.fop.fo.FONode;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.NamedNodeMap;
 import org.xml.sax.Attributes;
 import org.xml.sax.Locator;
 
 public class JLaTeXMathElement extends JLaTeXMathObj {
-    
+
     private float size;
     private Color fg;
     private TeXIcon icon = null;
@@ -76,7 +79,7 @@ public class JLaTeXMathElement extends JLaTeXMathObj {
     public JLaTeXMathElement(FONode parent) {
         super(parent);
     }
-    
+
     public void processNode(final String elementName, final Locator locator,
                             final Attributes attlist, final PropertyList propertyList)
         throws FOPException {
@@ -85,49 +88,49 @@ public class JLaTeXMathElement extends JLaTeXMathObj {
         e.setAttribute("size", "" + size);
         e.setAttribute("fg", "" + fg.getRGB());
     }
-    
+
     public Point2D getDimension(Point2D p) {
         if (icon == null) {
-	    icon = calculate(doc, size);
+            icon = calculate(doc, size);
         }
-	return new Point2D.Float(icon.getTrueIconWidth(), icon.getTrueIconHeight());
+        return new Point2D.Float(icon.getTrueIconWidth(), icon.getTrueIconHeight());
     }
-    
+
     public Length getIntrinsicAlignmentAdjust() {
         if (icon == null) {
-	    icon = calculate(doc, size);
+            icon = calculate(doc, size);
         }
-	return FixedLength.getInstance(-icon.getTrueIconDepth(), "px");
+        return FixedLength.getInstance(-icon.getTrueIconDepth(), "px");
     }
 
     public static float getFWidth(String str) {
-	StringTokenizer tok = new StringTokenizer(str, ",");
-	int sum = 0;
-	while (tok.hasMoreTokens()) {
-	    int i = 0;
-	    String s = tok.nextToken();
-	    for (; i < s.length() && !Character.isLetter(s.charAt(i)); i++);
-	    double w = 0;
-	    try {
-		w = Double.parseDouble(s.substring(0, i));
-	    } catch (NumberFormatException e) {
-		return 0.0f;
-	    }
-	    
-	    String unit = "px";
-	    if (i != s.length()) {
-		unit = s.substring(i).toLowerCase();
-	    }
-	    
-	    sum += FixedLength.getInstance(w, unit).getValue();
-	}
+        StringTokenizer tok = new StringTokenizer(str, ",");
+        int sum = 0;
+        while (tok.hasMoreTokens()) {
+            int i = 0;
+            String s = tok.nextToken();
+            for (; i < s.length() && !Character.isLetter(s.charAt(i)); i++);
+            double w = 0;
+            try {
+                w = Double.parseDouble(s.substring(0, i));
+            } catch (NumberFormatException e) {
+                return 0.0f;
+            }
 
-	return (float) (sum / 1000f);
+            String unit = "px";
+            if (i != s.length()) {
+                unit = s.substring(i).toLowerCase();
+            }
+
+            sum += FixedLength.getInstance(w, unit).getValue();
+        }
+
+        return (float) (sum / 1000f);
     }
-    
+
     public static TeXIcon calculate(Document doc, float size) {
         TeXIcon icon;
-	Element e = doc.getDocumentElement();
+        Element e = doc.getDocumentElement();
         String code = e.getTextContent();
         String style = e.getAttribute("style");
         int st = TeXConstants.STYLE_DISPLAY;
@@ -138,18 +141,24 @@ public class JLaTeXMathElement extends JLaTeXMathObj {
         } else if ("script_script".equals(style)) {
             st = TeXConstants.STYLE_SCRIPT_SCRIPT;
         }
-        
-	String stfw = e.getAttribute("fwidth");
-	
-	if (stfw.length() != 0) {
-	    icon = new TeXFormula(code).createTeXIcon(st, size, TeXConstants.UNIT_PIXEL, getFWidth(stfw), TeXConstants.ALIGN_CENTER);
-	} else {
-	    icon = new TeXFormula(code).createTeXIcon(st, size, true);
-	}
-	
-	return icon;
-    }    
-    
+
+        NamedNodeMap attributes = e.getAttributes();
+        int len = attributes.getLength();
+        Map<String, String> map = new HashMap<String, String>();
+        for (int i = 0; i < len; i++) {
+            map.put(attributes.item(i).getNodeName(), attributes.item(i).getNodeValue());
+        }
+
+        String stfw = e.getAttribute("fwidth");
+        if (stfw.length() != 0) {
+            icon = new TeXFormula(code, map).createTeXIcon(st, size, TeXConstants.UNIT_PIXEL, getFWidth(stfw), TeXConstants.ALIGN_CENTER);
+        } else {
+            icon = new TeXFormula(code, map).createTeXIcon(st, size, true);
+        }
+
+        return icon;
+    }
+
     protected PropertyList createPropertyList(final PropertyList pList,
                                               final FOEventHandler foEventHandler) throws FOPException {
         FOUserAgent userAgent = this.getUserAgent();
@@ -157,16 +166,16 @@ public class JLaTeXMathElement extends JLaTeXMathObj {
         this.size = (float) commonFont.fontSize.getNumericValue() / 1000;
 
         int n = org.apache.fop.fo.Constants.PR_COLOR;
-	try {
-	    n = org.apache.fop.fo.Constants.class.getDeclaredField(PR_COLOR).getInt(null);
-	} catch (Exception e) {
-	    System.err.println("Error in getting field:\n" + e);
-	}
+        try {
+            n = org.apache.fop.fo.Constants.class.getDeclaredField(PR_COLOR).getInt(null);
+        } catch (Exception e) {
+            System.err.println("Error in getting field:\n" + e);
+        }
 
-	Property colorProp = pList.get(n);
-	
+        Property colorProp = pList.get(n);
+
         this.fg = colorProp != null ? colorProp.getColor(userAgent) : null;
-        
+
         return super.createPropertyList(pList, foEventHandler);
     }
 }

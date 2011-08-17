@@ -545,6 +545,8 @@ class PredefMacroInfo extends MacroInfo {
                 return PredefMacros.rmoustache_macro(tp, args);
 	    case 271:
                 return PredefMacros.insertBreakMark_macro(tp, args);
+	    case 272:
+                return PredefMacros.jlmXML_macro(tp, args);
 	    default:
                 return null;
             }

@@ -128,8 +128,9 @@ public class TeXFormula {
 
     public List<MiddleAtom> middle = new LinkedList();
 
+    protected Map<String, String> jlmXMLMap;
     private TeXParser parser;
-
+    
     static {
         // character-to-symbol and character-to-delimiter mappings
         TeXFormulaSettingsParser parser = new TeXFormulaSettingsParser();
@@ -219,8 +220,21 @@ public class TeXFormula {
      * @param s the string to be parsed
      * @throws ParseException if the string could not be parsed correctly
      */
+    public TeXFormula(String s, Map<String, String> map) throws ParseException {
+	this.jlmXMLMap = map;
+        this.textStyle = textStyle;
+        parser = new TeXParser(s, this);
+        parser.parse();
+    }
+
+    /**
+     * Creates a new TeXFormula by parsing the given string (using a primitive TeX parser).
+     *
+     * @param s the string to be parsed
+     * @throws ParseException if the string could not be parsed correctly
+     */
     public TeXFormula(String s) throws ParseException {
-        this(s, null);
+        this(s, (String) null);
     }
 
     public TeXFormula(String s, boolean firstpass) throws ParseException {
@@ -262,8 +276,9 @@ public class TeXFormula {
      * Creates an empty TeXFormula.
      *
      */
-    public TeXFormula(boolean isPartial) {
-        parser = new TeXParser(isPartial, "", this, false);
+    protected TeXFormula(TeXParser tp) {
+	this.jlmXMLMap = tp.formula.jlmXMLMap;
+        parser = new TeXParser(tp.getIsPartial(), "", this, false);
     }
 
     /**
@@ -272,12 +287,14 @@ public class TeXFormula {
      * @param s the string to be parsed
      * @throws ParseException if the string could not be parsed correctly
      */
-    public TeXFormula(boolean isPartial, String s) throws ParseException {
-        this(isPartial, s, null);
+    protected TeXFormula(TeXParser tp, String s) throws ParseException {
+        this(tp, s, null);
     }
 
-    public TeXFormula(boolean isPartial, String s, boolean firstpass) throws ParseException {
+    protected TeXFormula(TeXParser tp, String s, boolean firstpass) throws ParseException {
         this.textStyle = null;
+	this.jlmXMLMap = tp.formula.jlmXMLMap;
+	boolean isPartial = tp.getIsPartial();
         parser = new TeXParser(isPartial, s, this, firstpass);
         if (isPartial) {
             try {
@@ -292,8 +309,10 @@ public class TeXFormula {
      * Creates a TeXFormula by parsing the given string in the given text style.
      * Used when a text style command was found in the parse string.
      */
-    public TeXFormula(boolean isPartial, String s, String textStyle) throws ParseException {
+    protected TeXFormula(TeXParser tp, String s, String textStyle) throws ParseException {
         this.textStyle = textStyle;
+	this.jlmXMLMap = tp.formula.jlmXMLMap;
+	boolean isPartial = tp.getIsPartial();
         parser = new TeXParser(isPartial, s, this);
         if (isPartial) {
             try {
@@ -308,8 +327,10 @@ public class TeXFormula {
         }
     }
 
-    public TeXFormula(boolean isPartial, String s, String textStyle, boolean firstpass, boolean space) throws ParseException {
+    protected TeXFormula(TeXParser tp, String s, String textStyle, boolean firstpass, boolean space) throws ParseException {
         this.textStyle = textStyle;
+	this.jlmXMLMap = tp.formula.jlmXMLMap;
+	boolean isPartial = tp.getIsPartial();
         parser = new TeXParser(isPartial, s, this, firstpass, space);
         if (isPartial) {
             try {

@@ -649,7 +649,7 @@ public class TeXParser {
                             pos++;
                         }
 
-                        formula.add(new MathAtom(new TeXFormula(isPartial, getDollarGroup(DOLLAR), false).root, style));
+                        formula.add(new MathAtom(new TeXFormula(this, getDollarGroup(DOLLAR), false).root, style));
                         if (doubleDollar) {
                             if (parseString.charAt(pos) == DOLLAR) {
                                 pos++;
