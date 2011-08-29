@@ -1,4 +1,6 @@
 jlatexmath (0.9.7)
+	* Bug with \fg
+
 	* Add a command \jlmXML which can replaces $foo by the value of foo
 	  attribute.
 

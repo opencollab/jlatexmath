@@ -14,7 +14,7 @@
   <SymbolMapping name="guilsinglleft" ch="34" fontId="jlm_jlmi10"/>
   <SymbolMapping name="guilsinglright" ch="35" fontId="jlm_jlmi10"/>
   <SymbolMapping name="og" ch="33" fontId="jlm_jlmi10"/>
-  <SymbolMapping name="fg" ch="35" fontId="jlm_jlmi10"/>
+  <SymbolMapping name="fg" ch="36" fontId="jlm_jlmi10"/>
   <SymbolMapping name="textperthousand" ch="37" fontId="jlm_jlmr10"/>
   <SymbolMapping name="textpertenthousand" ch="38" fontId="jlm_jlmr10"/>
   <SymbolMapping name="textdbend" ch="126" fontId="jlm_jlmr10_unchanged"/>
