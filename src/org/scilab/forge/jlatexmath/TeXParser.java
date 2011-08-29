@@ -64,6 +64,7 @@ public class TeXParser {
     private static final char L_BRACK = '[';
     private static final char R_BRACK = ']';
     private static final char DOLLAR = '$';
+    private static final char DQUOTE = '\"';
 
     // Percent char for comments
     private static final char PERCENT = '%';
@@ -164,7 +165,7 @@ public class TeXParser {
             this.pos = 0;
             if (firstpass) {
                 firstpass();
-	    }
+            }
         } else {
             this.parseString = null;
             this.pos = 0;
@@ -658,14 +659,14 @@ public class TeXParser {
                     }
                     break;
                 case ESCAPE :
-		    Atom at = processEscape();
-		    formula.add(at);
-		    if (arrayMode && at instanceof HlineAtom) {
-			((ArrayOfAtoms) formula).addRow();
-		    }
-		    if (insertion) {
-			insertion = false;
-		    }
+                    Atom at = processEscape();
+                    formula.add(at);
+                    if (arrayMode && at instanceof HlineAtom) {
+                        ((ArrayOfAtoms) formula).addRow();
+                    }
+                    if (insertion) {
+                        insertion = false;
+                    }
                     break;
                 case L_GROUP :
                     Atom atom = getArgument();
@@ -703,6 +704,16 @@ public class TeXParser {
                         formula.add(new CumulativeScriptsAtom(getLastAtom(), null, SymbolAtom.get("backprime")));
                     } else {
                         formula.add(convertCharacter(BACKPRIME, true));
+                    }
+                    pos++;
+                    break;
+                case DQUOTE :
+                    if (ignoreWhiteSpace) {
+                        formula.add(new CumulativeScriptsAtom(getLastAtom(), null, SymbolAtom.get("prime")));
+                        formula.add(new CumulativeScriptsAtom(getLastAtom(), null, SymbolAtom.get("prime")));
+                    } else {
+                        formula.add(convertCharacter(PRIME, true));
+                        formula.add(convertCharacter(PRIME, true));
                     }
                     pos++;
                     break;
@@ -954,8 +965,8 @@ public class TeXParser {
         }
 
         Atom at = convertCharacter(ch, true);
-	pos++;
-	return at;
+        pos++;
+        return at;
     }
 
     public String getOverArgument() throws ParseException {
@@ -1040,10 +1051,10 @@ public class TeXParser {
             String symbolName = TeXFormula.symbolMappings[c];
             if (symbolName == null && (TeXFormula.symbolFormulaMappings == null || TeXFormula.symbolFormulaMappings[c] == null)) {
                 TeXFormula.FontInfos fontInfos = TeXFormula.externalFontMap.get(block);
-		if (fontInfos != null) {
-		    if (oneChar) {
-			return new JavaFontRenderingAtom(Character.toString(c), fontInfos);
-		    }
+                if (fontInfos != null) {
+                    if (oneChar) {
+                        return new JavaFontRenderingAtom(Character.toString(c), fontInfos);
+                    }
                     int start = pos++;
                     int end = len - 1;
                     while (pos < len) {
@@ -1084,11 +1095,11 @@ public class TeXParser {
             }
         } else {
             // alphanumeric character
-	    TeXFormula.FontInfos fontInfos = TeXFormula.externalFontMap.get(Character.UnicodeBlock.BASIC_LATIN);
-	    if (fontInfos != null) {
-		if (oneChar) {
-		    return new JavaFontRenderingAtom(Character.toString(c), fontInfos);
-		}
+            TeXFormula.FontInfos fontInfos = TeXFormula.externalFontMap.get(Character.UnicodeBlock.BASIC_LATIN);
+            if (fontInfos != null) {
+                if (oneChar) {
+                    return new JavaFontRenderingAtom(Character.toString(c), fontInfos);
+                }
                 int start = pos++;
                 int end = len - 1;
                 while (pos < len) {
