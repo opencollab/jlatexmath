@@ -149,7 +149,7 @@ public final class JLaTeXMathCache {
      * @param o an Object to identify the image in the cache
      */
     public static void removeCachedTeXFormula(Object o) throws ParseException  {
-        if (o == null || o instanceof CachedTeXFormula) {
+        if (o != null && o instanceof CachedTeXFormula) {
             cache.remove((CachedTeXFormula) o);
         }
     }
