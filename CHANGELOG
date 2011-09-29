@@ -1,4 +1,6 @@
 jlatexmath (0.9.7)
+        * Resizebox could lead to a box with NaN as dimensions !
+	   
 	* Add " for ''
 
 	* Bug with \fg

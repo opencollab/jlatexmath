@@ -41,12 +41,12 @@ public class ScaleBox extends Box {
 
     public ScaleBox(Box b, double xscl, double yscl) {
 	this.box = b;
-	this.xscl = xscl;
-	this.yscl = yscl;
-	width = b.width * (float) Math.abs(xscl);
-	height = yscl > 0 ? b.height * (float) yscl : -b.depth * (float) yscl;
-	depth = yscl > 0 ? b.depth * (float) yscl : -b.height * (float) yscl;
-	shift = b.shift * (float) yscl;
+	this.xscl = (Double.isNaN(xscl) || Double.isInfinite(xscl)) ? 0 : xscl;
+	this.yscl = (Double.isNaN(yscl) || Double.isInfinite(yscl)) ? 0 : yscl;
+	width = b.width * (float) Math.abs(this.xscl);
+	height = this.yscl > 0 ? b.height * (float) this.yscl : -b.depth * (float) this.yscl;
+	depth = this.yscl > 0 ? b.depth * (float) this.yscl : -b.height * (float) this.yscl;
+	shift = b.shift * (float) this.yscl;
     }
 
     public ScaleBox(Box b, float factor) {
@@ -56,12 +56,14 @@ public class ScaleBox extends Box {
     
     public void draw(Graphics2D g2, float x, float y) {
 	drawDebug(g2, x, y);
-	float dec = xscl < 0 ? width : 0;
-	g2.translate(x + dec, y);
-	g2.scale(xscl, yscl);
-	box.draw(g2, 0, 0);
-	g2.scale(1 / xscl, 1 / yscl);
-	g2.translate(-x - dec, -y);
+	if (xscl != 0 && yscl != 0) {
+	    float dec = xscl < 0 ? width : 0;
+	    g2.translate(x + dec, y);
+	    g2.scale(xscl, yscl);
+	    box.draw(g2, 0, 0);
+	    g2.scale(1 / xscl, 1 / yscl);
+	    g2.translate(-x - dec, -y);
+	}
     }
 
     public int getLastFontId() {

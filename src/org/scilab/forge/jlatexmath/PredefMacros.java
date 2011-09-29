@@ -1163,7 +1163,7 @@ public class PredefMacros {
     }
 
     public static final Atom resizebox_macro(final TeXParser tp, final String[] args) throws ParseException {
-        return new ResizeAtom(new TeXFormula(tp, args[3]).root, args[1], args[2], false);
+        return new ResizeAtom(new TeXFormula(tp, args[3]).root, args[1], args[2], args[1].equals("!") || args[2].equals("!"));
     }
 
     public static final Atom raisebox_macro(final TeXParser tp, final String[] args) throws ParseException {

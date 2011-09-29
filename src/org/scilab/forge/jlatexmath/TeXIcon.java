@@ -213,6 +213,10 @@ public class TeXIcon implements Icon {
                         ((box.getHeight() + box.getDepth()) * size + 0.99 + insets.top + insets.bottom));
     }
 
+    public Box getBox() {
+	return box;
+    }
+
     /**
      * Paint the {@link TeXFormula} that created this icon.
      */
