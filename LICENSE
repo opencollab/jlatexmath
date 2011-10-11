@@ -36,4 +36,8 @@ The archive contains several fonts :
 
 4) the fonts cmbsy10.ttf, cmbx10.ttf, cmbxti10.ttf, cmex10.ttf, cmmi10.ttf, cmr10.ttf, cmss10.ttf, cmssbx10.ttf, cmsy10.ttf and cmtt10.ttf are under Knuth License.
 
-You can find a copy of these licenses in the fonts directory.
+5) the greek fonts fcmbipg.ttf, fcmripg.tff, fcmrpg.ttf, fcsropg.ttf, fcmbpg.ttf, fcsbpg.ttf, fctrpg.ttf, fcsrpg.ttf are under GNU GPL version 2.
+
+6) the cyrillic fonts wnbx10.ttf, wnss10.ttf, wnti10.ttf, wnr10.ttf, wnssi10.ttf, wnbxti10.ttf, wnssbx10.ttf, wntt10.ttf are under Knuth License.
+
+You can find a copy of these licenses in org/scilab/forge/jlatexmath/fonts/licences.
