@@ -74,8 +74,8 @@ public class DefaultTeXFont implements TeXFont {
 
     protected static final int WIDTH = 0, HEIGHT = 1, DEPTH = 2, IT = 3;
 
-    public static List<Character.UnicodeBlock> loadedAlphabets = new ArrayList();
-    public static Map<Character.UnicodeBlock, AlphabetRegistration> registeredAlphabets = new HashMap();
+    public static List<Character.UnicodeBlock> loadedAlphabets = new ArrayList<Character.UnicodeBlock>();
+    public static Map<Character.UnicodeBlock, AlphabetRegistration> registeredAlphabets = new HashMap<Character.UnicodeBlock, AlphabetRegistration>();
 
     protected float factor = 1f;
 

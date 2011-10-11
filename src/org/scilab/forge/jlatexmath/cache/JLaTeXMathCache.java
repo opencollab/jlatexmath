@@ -52,7 +52,7 @@ import org.scilab.forge.jlatexmath.TeXIcon;
 public final class JLaTeXMathCache {
 
     private static final AffineTransform identity = new AffineTransform();
-    private static ConcurrentMap<CachedTeXFormula, SoftReference<CachedImage>> cache = new ConcurrentHashMap(128);
+    private static ConcurrentMap<CachedTeXFormula, SoftReference<CachedImage>> cache = new ConcurrentHashMap<CachedTeXFormula, SoftReference<CachedImage>>(128);
     private static int max = Integer.MAX_VALUE;
     private static ReferenceQueue queue = new ReferenceQueue();
 
@@ -65,7 +65,7 @@ public final class JLaTeXMathCache {
     public static void setMaxCachedObjects(int max) {
         JLaTeXMathCache.max = Math.max(max, 1);
         cache.clear();
-        cache = new ConcurrentHashMap(JLaTeXMathCache.max);
+        cache = new ConcurrentHashMap<CachedTeXFormula, SoftReference<CachedImage>>(JLaTeXMathCache.max);
     }
 
     /**
@@ -233,7 +233,7 @@ public final class JLaTeXMathCache {
         icon.paintIcon(null, g2, 0, 0);
         g2.dispose();
         cached.setDimensions(icon.getIconWidth(), icon.getIconHeight(), icon.getIconDepth());
-        SoftReference<CachedImage> img = new SoftReference(new CachedImage(image, cached), queue);
+        SoftReference<CachedImage> img = new SoftReference<CachedImage>(new CachedImage(image, cached), queue);
 
         if (cache.size() >= max) {
             Reference soft;

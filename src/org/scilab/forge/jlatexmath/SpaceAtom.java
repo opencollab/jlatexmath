@@ -32,6 +32,7 @@
 package org.scilab.forge.jlatexmath;
 
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * An atom representing whitespace. The dimension values can be set using different
@@ -39,7 +40,7 @@ import java.util.HashMap;
  */
 public class SpaceAtom extends Atom {
 
-    private static HashMap units = new HashMap<String, Integer>();
+    private static Map<String, Integer> units = new HashMap<String, Integer>();
     static {
         units.put("em", TeXConstants.UNIT_EM);
         units.put("ex", TeXConstants.UNIT_EX);

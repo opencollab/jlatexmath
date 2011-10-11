@@ -58,7 +58,7 @@ public class MatrixAtom extends Atom {
 
     private ArrayOfAtoms matrix;
     private int[] position;
-    private Map<Integer, VlineAtom> vlines = new HashMap();
+    private Map<Integer, VlineAtom> vlines = new HashMap<Integer, VlineAtom>();
     private boolean isAlign;
     private boolean isAlignat;
     private boolean isFl;
@@ -117,7 +117,7 @@ public class MatrixAtom extends Atom {
         char ch;
         TeXFormula tf;
         TeXParser tp;
-        List<Integer> lposition = new ArrayList();
+        List<Integer> lposition = new ArrayList<Integer>();
         while (pos < len) {
             ch = opt.charAt(pos);
             switch (ch) {
@@ -328,7 +328,7 @@ public class MatrixAtom extends Atom {
             env.setStyle(TeXConstants.STYLE_SCRIPT);
         }
 
-        List<MulticolumnAtom> listMulti = new ArrayList();
+        List<MulticolumnAtom> listMulti = new ArrayList<MulticolumnAtom>();
 
         for (int i = 0; i < row; i++) {
             lineDepth[i] = 0;

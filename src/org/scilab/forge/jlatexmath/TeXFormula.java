@@ -126,7 +126,7 @@ public class TeXFormula {
     public static String[] symbolFormulaMappings = new String[65536];
     public static Map<Character.UnicodeBlock, FontInfos> externalFontMap = new HashMap<Character.UnicodeBlock, FontInfos>();
 
-    public List<MiddleAtom> middle = new LinkedList();
+    public List<MiddleAtom> middle = new LinkedList<MiddleAtom>();
 
     protected Map<String, String> jlmXMLMap;
     private TeXParser parser;

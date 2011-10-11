@@ -80,9 +80,9 @@ public class PredefinedTeXFormulaParser {
                     
                     // parse and build the formula and add it to the table
                     if ("TeXFormula".equals(this.type))
-			predefinedTeXFormulas.put(name, (TeXFormula)new TeXFormulaParser(name, formula, this.type).parse());
+			predefinedTeXFormulas.put(name, (TeXFormula) new TeXFormulaParser(name, formula, this.type).parse());
 		    else 
-			predefinedTeXFormulas.put(name, (MacroInfo)new TeXFormulaParser(name, formula, this.type).parse());
+			predefinedTeXFormulas.put(name, (MacroInfo) new TeXFormulaParser(name, formula, this.type).parse());
                 }
             }
         }

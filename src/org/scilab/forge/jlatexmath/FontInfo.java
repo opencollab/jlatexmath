@@ -43,7 +43,7 @@ public class FontInfo {
      */
     public static final int NUMBER_OF_CHAR_CODES = 256;
 
-    private static Map<Integer, FontInfo> fonts = new HashMap();
+    private static Map<Integer, FontInfo> fonts = new HashMap<Integer, FontInfo>();
     
     private class CharCouple {
         
@@ -113,7 +113,7 @@ public class FontInfo {
 	this.itVersion = itVersion;
 	int num = NUMBER_OF_CHAR_CODES;
 	if (unicode != 0) {
-	    this.unicode = new HashMap(unicode);
+	    this.unicode = new HashMap<Character, Character>(unicode);
 	    num = unicode;
 	}
 	metrics = new float[num][];
