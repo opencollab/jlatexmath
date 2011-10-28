@@ -1,4 +1,6 @@
 jlatexmath (0.9.7)
+	* \v accent was badly scaled in certain font files. 
+
         * Resizebox could lead to a box with NaN as dimensions !
 	   
 	* Add " for ''
