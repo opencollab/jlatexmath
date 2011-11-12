@@ -1201,22 +1201,22 @@ public class PredefMacros {
             float f = Float.parseFloat(args[3]);
             color = new Color(f, f, f);
         } else if ("rgb".equals(args[2])) {
-            StringTokenizer stok = new StringTokenizer(args[3], ",");
+            StringTokenizer stok = new StringTokenizer(args[3], ";,");
             if (stok.countTokens() != 3)
                 throw new ParseException("The color definition must have three components !");
-            float r = Float.parseFloat(stok.nextToken());
-            float g = Float.parseFloat(stok.nextToken());
-            float b = Float.parseFloat(stok.nextToken());
+            float r = Float.parseFloat(stok.nextToken().trim());
+            float g = Float.parseFloat(stok.nextToken().trim());
+            float b = Float.parseFloat(stok.nextToken().trim());
             color = new Color(r, g, b);
         } else if ("cmyk".equals(args[2])) {
-            StringTokenizer stok = new StringTokenizer(args[3], ",");
+            StringTokenizer stok = new StringTokenizer(args[3], ",;");
             if (stok.countTokens() != 4)
                 throw new ParseException("The color definition must have four components !");
             float[] cmyk = new float[4];
             for (int i = 0; i < 4; i++)
-                cmyk[i] = Float.parseFloat(stok.nextToken());
+                cmyk[i] = Float.parseFloat(stok.nextToken().trim());
             float k = 1 - cmyk[3];
-            color = new Color(k*(1-cmyk[0]), k*(1-cmyk[1]), k*(1-cmyk[2]));
+            color = new Color(k * (1 - cmyk[0]), k * (1 - cmyk[1]), k * (1 - cmyk[2]));
         } else
             throw new ParseException("The color model is incorrect !");
 
@@ -1225,40 +1225,32 @@ public class PredefMacros {
     }
 
     public static final Atom fgcolor_macro(final TeXParser tp, final String[] args) throws ParseException {
-        String code = args[1] == null ? "#000000" : args[1].trim();
-        if (!code.startsWith("#")) {
-            code = "#" + code;
-        }
         try {
-            return new ColorAtom(new TeXFormula(tp, args[2]).root, null, Color.decode(code));
+            return new ColorAtom(new TeXFormula(tp, args[2]).root, null, ColorAtom.getColor(args[1]));
         } catch (NumberFormatException e) {
             throw new ParseException(e.toString());
         }
     }
 
     public static final Atom bgcolor_macro(final TeXParser tp, final String[] args) throws ParseException {
-        String code = args[1] == null ? "#000000" : args[1].trim();
-        if (!code.startsWith("#")) {
-            code = "#" + code;
-        }
         try {
-            return new ColorAtom(new TeXFormula(tp, args[2]).root, Color.decode(code), null);
+            return new ColorAtom(new TeXFormula(tp, args[2]).root, ColorAtom.getColor(args[1]), null);
         } catch (NumberFormatException e) {
             throw new ParseException(e.toString());
         }
     }
 
     public static final Atom textcolor_macro(final TeXParser tp, final String[] args) throws ParseException {
-        return new ColorAtom(new TeXFormula(tp, args[2]).root, null, ColorAtom.Colors.get(args[1]));
+        return new ColorAtom(new TeXFormula(tp, args[2]).root, null, ColorAtom.getColor(args[1]));
     }
 
     public static final Atom colorbox_macro(final TeXParser tp, final String[] args) throws ParseException {
-        Color c = ColorAtom.Colors.get(args[1]);
+        Color c = ColorAtom.getColor(args[1]);
         return new FBoxAtom(new TeXFormula(tp, args[2]).root, c, c);
     }
 
     public static final Atom fcolorbox_macro(final TeXParser tp, final String[] args) throws ParseException {
-        return new FBoxAtom(new TeXFormula(tp, args[3]).root, ColorAtom.Colors.get(args[2]), ColorAtom.Colors.get(args[1]));
+        return new FBoxAtom(new TeXFormula(tp, args[3]).root, ColorAtom.getColor(args[2]), ColorAtom.getColor(args[1]));
     }
 
     public static final Atom cong_macro(final TeXParser tp, final String[] args) throws ParseException {
