@@ -1,4 +1,6 @@
 jlatexmath (0.9.7)
+	* Blanks after a command were skipped in text mode.
+
 	* Extend the way to code colors in \textcolor, \colorbox, \fcolorbox, 
 	  fgcolor and bgcolor.
 	  Now \textcolor{color} where color could be 255,0,0 (int RGB) or

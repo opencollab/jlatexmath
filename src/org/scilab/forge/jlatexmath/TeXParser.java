@@ -1234,12 +1234,15 @@ public class TeXParser {
                         args[i] = "" + parseString.charAt(pos);
                         pos++;
                     }
-                    else
+                    else {
                         args[i] = getCommandWithArgs(getCommand());
-                }
+		    }
+		}
             }
 
-            skipWhiteSpace();
+	    if (ignoreWhiteSpace) {
+		skipWhiteSpace();
+	    }
         }
         return args;
     }
