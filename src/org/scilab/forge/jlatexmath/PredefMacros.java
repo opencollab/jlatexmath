@@ -353,6 +353,46 @@ public class PredefMacros {
         return new FencedAtom(new FractionAtom(num.root, denom.root, false), new SymbolAtom("lbrack", TeXConstants.TYPE_OPENING, true), new SymbolAtom("rbrack", TeXConstants.TYPE_CLOSING, true));
     }
 
+    public static final Atom above_macro(final TeXParser tp, final String[] args) throws ParseException {
+        Atom num = tp.getFormulaAtom();
+        float[] dim = tp.getLength();
+        Atom denom = new TeXFormula(tp, tp.getOverArgument(), false).root;
+        if (dim == null || dim.length != 2) {
+            throw new ParseException("Invalid length in above macro");
+        }
+        if (num == null || denom == null)
+            throw new ParseException("Both numerator and denominator of a fraction can't be empty!");
+
+        return new FractionAtom(num, denom, (int) dim[0], dim[1]);
+    }
+
+    public static final Atom abovewithdelims_macro(final TeXParser tp, final String[] args) throws ParseException {
+        Atom num = tp.getFormulaAtom();
+        float[] dim = tp.getLength();
+        Atom denom = new TeXFormula(tp, tp.getOverArgument(), false).root;
+        if (dim == null || dim.length != 2) {
+            throw new ParseException("Invalid length in above macro");
+        }
+        if (num == null || denom == null)
+            throw new ParseException("Both numerator and denominator of a fraction can't be empty!");
+
+        Atom left = new TeXFormula(tp, args[1], false).root;
+        if (left instanceof BigDelimiterAtom)
+            left = ((BigDelimiterAtom)left).delim;
+        Atom right = new TeXFormula(tp, args[2], false).root;
+        if (right instanceof BigDelimiterAtom)
+            right = ((BigDelimiterAtom)right).delim;
+        if (left instanceof SymbolAtom && right instanceof SymbolAtom) {
+            return new FencedAtom(new FractionAtom(num, denom, (int) dim[0], dim[1]), (SymbolAtom) left, (SymbolAtom) right);
+        }
+
+        RowAtom ra = new RowAtom();
+        ra.add(left);
+        ra.add(new FractionAtom(num, denom, true));
+        ra.add(right);
+        return ra;
+    }
+
     public static final Atom textstyle_macros(final TeXParser tp, final String[] args) throws ParseException {
         String style = args[0];
         if ("frak".equals(args[0]))

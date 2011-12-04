@@ -512,42 +512,46 @@ class PredefMacroInfo extends MacroInfo {
                 return PredefMacros.textsc_macro(tp, args);
             case 250:
                 return PredefMacros.sc_macro(tp, args);
-	    case 251:
-	    case 252:
-	    case 253:
-	    case 254:
-	    case 255:
-	    case 256:
-	    case 257:
-	    case 258:
-	    case 259:
-	    case 260:
+            case 251:
+            case 252:
+            case 253:
+            case 254:
+            case 255:
+            case 256:
+            case 257:
+            case 258:
+            case 259:
+            case 260:
                 return PredefMacros.muskip_macros(tp, args);
-	    case 261:
+            case 261:
                 return PredefMacros.quad_macro(tp, args);
             case 262:
                 return PredefMacros.surd_macro(tp, args);
-	    case 263:
+            case 263:
                 return PredefMacros.iint_macro(tp, args);
-	    case 264:
+            case 264:
                 return PredefMacros.iiint_macro(tp, args);
-	    case 265:
+            case 265:
                 return PredefMacros.iiiint_macro(tp, args);
-	    case 266:
+            case 266:
                 return PredefMacros.idotsint_macro(tp, args);
-	    case 267:
+            case 267:
                 return PredefMacros.int_macro(tp, args);
             case 268:
                 return PredefMacros.oint_macro(tp, args);
             case 269:
                 return PredefMacros.lmoustache_macro(tp, args);
-	    case 270:
+            case 270:
                 return PredefMacros.rmoustache_macro(tp, args);
-	    case 271:
+            case 271:
                 return PredefMacros.insertBreakMark_macro(tp, args);
-	    case 272:
+            case 272:
                 return PredefMacros.jlmXML_macro(tp, args);
-	    default:
+            case 273:
+                return PredefMacros.above_macro(tp, args);
+            case 274:
+                return PredefMacros.abovewithdelims_macro(tp, args);
+            default:
                 return null;
             }
         } catch (Exception e) {

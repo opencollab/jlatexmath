@@ -57,7 +57,7 @@ public class SpaceAtom extends Atom {
         units.put("in", TeXConstants.UNIT_IN);
         units.put("sp", TeXConstants.UNIT_SP);
         units.put("dd", TeXConstants.UNIT_DD);
-        units.put("dd", TeXConstants.UNIT_CC);
+        units.put("cc", TeXConstants.UNIT_CC);
     }
 
     private static interface UnitConversion { // NOPMD

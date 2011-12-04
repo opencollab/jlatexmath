@@ -106,7 +106,7 @@ public class ColorAtom extends Atom implements Row {
     }
 
     public static Color getColor(String s) {
-        if (s != null && !s.isEmpty()) {
+        if (s != null && s.length() != 0) {
             s = s.trim();
             if (s.charAt(0) == '#') {
                 return Color.decode(s);

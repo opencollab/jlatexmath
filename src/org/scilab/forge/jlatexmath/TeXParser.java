@@ -1027,6 +1027,23 @@ public class TeXParser {
         return str;
     }
 
+    public float[] getLength() throws ParseException {
+        if (pos == len)
+            return null;
+
+        int ogroup = 1, spos;
+        char ch = '\0';
+
+        skipWhiteSpace();
+        spos = pos;
+        while (pos < len && ch != ' ') {
+            ch = parseString.charAt(pos++);
+        }
+        skipWhiteSpace();
+
+        return SpaceAtom.getLength(parseString.substring(spos, pos - 1));
+    }
+
     /** Convert a character in the corresponding atom in using the file TeXFormulaSettings.xml for non-alphanumeric characters
      * @param c the character to be converted
      * @return the corresponding atom
@@ -1236,13 +1253,13 @@ public class TeXParser {
                     }
                     else {
                         args[i] = getCommandWithArgs(getCommand());
-		    }
-		}
+                    }
+                }
             }
 
-	    if (ignoreWhiteSpace) {
-		skipWhiteSpace();
-	    }
+            if (ignoreWhiteSpace) {
+                skipWhiteSpace();
+            }
         }
         return args;
     }
