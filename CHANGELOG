@@ -1,4 +1,6 @@
 jlatexmath (0.9.7)
+	* Fix bug when getting length.
+
 	* Add the TeX macros: \above and \abovewithdelims.
 
 	* Blanks after a command were skipped in text mode.

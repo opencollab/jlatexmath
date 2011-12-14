@@ -216,12 +216,12 @@ public class SpaceAtom extends Atom {
 
     public static int getUnit(String unit) {
         Integer u = (Integer) units.get(unit);
-        return u == null ? -1 : u.intValue();
+        return u == null ? TeXConstants.UNIT_PIXEL : u.intValue();
     }
 
     public static float[] getLength(String lgth) {
         if (lgth == null) {
-            return new float[]{0f, 0f};
+            return new float[]{TeXConstants.UNIT_PIXEL, 0f};
         }
 
         int i = 0;
