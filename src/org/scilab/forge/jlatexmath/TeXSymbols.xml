@@ -41,6 +41,7 @@
   <Symbol name="O" type="ord" />
   <Symbol name="i" type="ord" />
   <Symbol name="j" type="ord" />
+  <Symbol name="jlmEuler" type="ord" />
   <Symbol name="textapos" type="ord" />
   <Symbol name="jlatexmathlapos" type="ord" />
   <Symbol name="jlatexmathcedilla" type="ord" />

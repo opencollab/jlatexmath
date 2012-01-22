@@ -746,6 +746,7 @@
 	  <Map char="&#0771;" formula="\widetilde"/>
 	  <Map char="&#8450;" formula="\mathbb{C}"/>
 	  <Map char="&#8451;" formula="\sideset{^\circ}{}\text{C}"/>
+	  <Map char="&#8455;" formula="\jlmEuler"/>
 	  <Map char="&#8457;" formula="\sideset{^\circ}{}\text{F}"/>
 	  <Map char="&#8461;" formula="\mathbb{H}"/>
 	  <Map char="&#8469;" formula="\mathbb{N}"/>
@@ -800,6 +801,11 @@
 	  <Map char="&#8208;" formula="\textminus"/>
 	  <Map char="&#8211;" formula="\textendash"/>
 	  <Map char="&#8212;" formula="\textemdash"/>
+	  <Map char="&#8448;" formula="\sfrac{a}{c}"/>
+	  <Map char="&#8449;" formula="\sfrac{a}{s}"/>
+	  <Map char="&#8453;" formula="\sfrac{c}{o}"/>
+	  <Map char="&#8454;" formula="\sfrac{c}{u}"/>
+	  <Map char="&#8480;" formula="{}^{\text{TM}}"/>
 	  <Map char="&#8988;" formula="\ulcorner"/>
 	  <Map char="&#8989;" formula="\urcorner"/>
 	  <Map char="&#8990;" formula="\llcorner"/>

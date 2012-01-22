@@ -1,4 +1,6 @@
 jlatexmath (0.9.7)
+	* Add the unicode for Euler's constant.
+
 	* Fix bug when getting length.
 
 	* Add the TeX macros: \above and \abovewithdelims.

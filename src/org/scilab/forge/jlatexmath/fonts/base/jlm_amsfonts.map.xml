@@ -13,4 +13,5 @@
   <SymbolMapping name="unlhd" ch="69" fontId="jlm_msam10" />
   <SymbolMapping name="rhd" ch="66" fontId="jlm_msam10" />
   <SymbolMapping name="unrhd" ch="68" fontId="jlm_msam10" />
+  <SymbolMapping name="jlmEuler" ch="101" fontId="jlm_cmmi10_unchanged" />
 </SymbolMappings>

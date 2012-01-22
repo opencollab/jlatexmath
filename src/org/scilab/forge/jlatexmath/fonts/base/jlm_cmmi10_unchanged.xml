@@ -48,6 +48,9 @@
    <Char code="96" width="0.41667" height="0.694445" >
       <Kern code="196" val="0.1111145"/>
    </Char>
+   <Char code="101" width="0.465627" height="0.430555" >
+      <Kern code="196" val="0.055557"/>
+   </Char>
    <Char code="111" width="0.484723" height="0.430555" >
       <Kern code="196" val="0.055557"/>
    </Char>
