@@ -40,7 +40,7 @@ public class LCaronAtom extends Atom {
     }
     
     public Box createBox(TeXEnvironment env) {
-	CharBox A = new CharBox(env.getTeXFont().getChar("jlatexmathapos", env.getStyle()));
+	CharBox A = new CharBox(env.getTeXFont().getChar("textapos", env.getStyle()));
 	CharBox L = new CharBox(env.getTeXFont().getChar(upper ? 'L' : 'l', "mathnormal", env.getStyle()));
 	HorizontalBox hb = new HorizontalBox(L);
 	if (upper) 
