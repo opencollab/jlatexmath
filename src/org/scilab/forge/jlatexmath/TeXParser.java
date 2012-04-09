@@ -375,15 +375,15 @@ public class TeXParser {
                         args = getOptsArgs(2, 2);
                         mac = MacroInfo.Commands.get(com);
                         try {
-			    mac.invoke(this, args);
-			} catch (ParseException e) {
-			    if (!isPartial) {
+                            mac.invoke(this, args);
+                        } catch (ParseException e) {
+                            if (!isPartial) {
                                 throw e;
                             }
-			}
-			parseString.delete(spos, pos);
-			len = parseString.length();
-			pos = spos;
+                        }
+                        parseString.delete(spos, pos);
+                        len = parseString.length();
+                        pos = spos;
                     } else if (NewCommandMacro.isMacro(com)) {
                         mac = MacroInfo.Commands.get(com);
                         args = getOptsArgs(mac.nbArgs, mac.hasOptions ? 1 : 0);
@@ -832,7 +832,7 @@ public class TeXParser {
                     group++;
                 else if (ch == close)
                     group--;
-                else if (ch == ESCAPE)
+                else if (ch == ESCAPE && pos != len - 1)
                     pos++;
             }
 

@@ -1,4 +1,6 @@
 jlatexmath (0.9.7)
+	* Fix bugs with \bold{\b and \DeclareMathOperator{\ in partial mode.
+
 	* Add a static method TeXFormula.getAsText to break the line according to \n and to convert into a RomanAtom.
 	* newcommand{ threw an exception in partial mode.
 
