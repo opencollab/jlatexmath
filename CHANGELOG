@@ -1,4 +1,5 @@
 jlatexmath (0.9.7)
+	* Add a static method TeXFormula.getAsText to break the line according to \n and to convert into a RomanAtom.
 	* newcommand{ threw an exception in partial mode.
 
 	* Fix bug with T carron and L carron.

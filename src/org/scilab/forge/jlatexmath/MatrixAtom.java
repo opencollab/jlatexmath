@@ -73,7 +73,7 @@ public class MatrixAtom extends Atom {
      */
     public MatrixAtom(boolean isPartial, ArrayOfAtoms array, String options) {
         this.isPartial = isPartial;
-	this.matrix = array;
+        this.matrix = array;
         this.type = ARRAY;
         parsePositions(new StringBuffer(options));
     }
@@ -88,7 +88,7 @@ public class MatrixAtom extends Atom {
 
     public MatrixAtom(boolean isPartial, ArrayOfAtoms array, int type) {
         this.isPartial = isPartial;
-	this.matrix = array;
+        this.matrix = array;
         this.type = type;
 
         if (type != MATRIX && type != SMALLMATRIX) {
@@ -107,8 +107,19 @@ public class MatrixAtom extends Atom {
         }
     }
 
+    public MatrixAtom(boolean isPartial, ArrayOfAtoms array, int type, int alignment) {
+        this.isPartial = isPartial;
+        this.matrix = array;
+        this.type = type;
+
+        position = new int[matrix.col];
+        for (int i = 0; i < matrix.col; i++) {
+            position[i] = alignment;
+        }
+    }
+
     public MatrixAtom(ArrayOfAtoms array, int type) {
-	this(false, array, type);
+        this(false, array, type);
     }
 
     private void parsePositions(StringBuffer opt) {
@@ -183,14 +194,14 @@ public class MatrixAtom extends Atom {
         }
 
         if (lposition.size() != 0) {
-	    Integer[] tab = lposition.toArray(new Integer[0]);
-	    position = new int[tab.length];
-	    for (int i = 0; i < tab.length; i++) {
-		position[i] = tab[i];
-	    }
-	} else {
-	    position = new int[]{TeXConstants.ALIGN_CENTER};
-	}
+            Integer[] tab = lposition.toArray(new Integer[0]);
+            position = new int[tab.length];
+            for (int i = 0; i < tab.length; i++) {
+                position[i] = tab[i];
+            }
+        } else {
+            position = new int[]{TeXConstants.ALIGN_CENTER};
+        }
     }
 
     public Box[] getColumnSep(TeXEnvironment env, float width) {
