@@ -374,10 +374,16 @@ public class TeXParser {
                     if ("newcommand".equals(com) || "renewcommand".equals(com)) {
                         args = getOptsArgs(2, 2);
                         mac = MacroInfo.Commands.get(com);
-                        mac.invoke(this, args);
-                        parseString.delete(spos, pos);
-                        len = parseString.length();
-                        pos = spos;
+                        try {
+			    mac.invoke(this, args);
+			} catch (ParseException e) {
+			    if (!isPartial) {
+                                throw e;
+                            }
+			}
+			parseString.delete(spos, pos);
+			len = parseString.length();
+			pos = spos;
                     } else if (NewCommandMacro.isMacro(com)) {
                         mac = MacroInfo.Commands.get(com);
                         args = getOptsArgs(mac.nbArgs, mac.hasOptions ? 1 : 0);
@@ -1332,6 +1338,10 @@ public class TeXParser {
      * @return the validity of the name
      */
     public boolean isValidName(String com) {
+        if (com == null || com.isEmpty()) {
+            return false;
+        }
+
         char c = '\0';
         if (com.charAt(0) == '\\') {
             int pos = 1;

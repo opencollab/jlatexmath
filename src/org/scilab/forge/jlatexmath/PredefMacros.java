@@ -888,16 +888,18 @@ public class PredefMacros {
     public static final Atom newcommand_macro(final TeXParser tp, final String[] args) throws ParseException {
         String newcom = args[1];
         Integer nbArgs;
-        if (!tp.isValidName(newcom))
+        if (!tp.isValidName(newcom)) {
             throw new ParseException("Invalid name for the command :" + newcom);
+        }
 
         if (args[3] == null)
             nbArgs = new Integer(0);
         else
             nbArgs = Integer.parseInt(args[3]);
 
-        if (nbArgs == null)
+        if (nbArgs == null) {
             throw new ParseException("The optional argument should be an integer !");
+        }
 
         if (args[4] == null)
             NewCommandMacro.addNewCommand(newcom.substring(1), args[2], nbArgs.intValue());
@@ -910,8 +912,9 @@ public class PredefMacros {
     public static final Atom renewcommand_macro(final TeXParser tp, final String[] args) throws ParseException {
         String newcom = args[1];
         Integer nbArgs;
-        if (!tp.isValidName(newcom))
+        if (!tp.isValidName(newcom)) {
             throw new ParseException("Invalid name for the command :" + newcom);
+	}
 
         if (args[3] == null)
             nbArgs = new Integer(0);

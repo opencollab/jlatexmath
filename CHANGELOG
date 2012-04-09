@@ -1,4 +1,6 @@
 jlatexmath (0.9.7)
+	* newcommand{ threw an exception in partial mode.
+
 	* Fix bug with T carron and L carron.
 
 	* Add the unicode for Euler's constant.
