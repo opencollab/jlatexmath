@@ -123,7 +123,7 @@
 	  <Map char="&#217;" formula="\`U"/>
 	  <Map char="&#218;" formula="\'U"/>
 	  <Map char="&#219;" formula="\^U"/>
-	  <Map char="&#220;" formula="\&quot;O"/>
+	  <Map char="&#220;" formula="\&quot;U"/>
 	  <Map char="&#221;" formula="\'Y"/>
 	  <!-- THORN Map char="&#222;" formula=""/-->
 	  <Map char="&#223;" formula="\ss"/>
