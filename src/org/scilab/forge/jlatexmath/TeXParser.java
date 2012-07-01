@@ -39,7 +39,7 @@ import java.util.Set;
  */
 public class TeXParser {
 
-    public TeXFormula formula;
+    TeXFormula formula;
 
     private StringBuffer parseString;
     private int pos;
@@ -322,6 +322,10 @@ public class TeXParser {
         return arrayMode;
     }
 
+    public void setArrayMode(boolean arrayMode) {
+        this.arrayMode = arrayMode;
+    }
+
     /** Return a boolean indicating if the parser must ignore white spaces
      */
     public boolean isIgnoreWhiteSpace() {
@@ -347,6 +351,14 @@ public class TeXParser {
     public int rewind(int n) {
         pos -= n;
         return pos;
+    }
+
+    public String getStringFromCurrentPos() {
+        return parseString.substring(pos);
+    }
+
+    public void finish() {
+        pos = parseString.length();
     }
 
     /** Add a new row when the parser is in array mode

@@ -710,16 +710,24 @@ public class PredefMacros {
     }
 
     public static final Atom cr_macro(final TeXParser tp, final String[] args) throws ParseException {
-        if (!tp.isArrayMode())
-            throw new ParseException("The token \\cr is only available in array mode !");
-        tp.addRow();
+        if (tp.isArrayMode()) {
+            tp.addRow();
+        } else {
+            ArrayOfAtoms array = new ArrayOfAtoms();
+            array.add(tp.formula.root);
+            array.addRow();
+            TeXParser parser = new TeXParser(tp.getIsPartial(), tp.getStringFromCurrentPos(), array, false);
+            parser.parse();
+            array.checkDimensions();
+            tp.finish();
+            tp.formula.root = new MatrixAtom(tp.getIsPartial(), array, MatrixAtom.ARRAY, TeXConstants.ALIGN_LEFT);
+        }
+
         return null;
     }
 
     public static final Atom backslashcr_macro(final TeXParser tp, final String[] args) throws ParseException {
-        if (tp.isArrayMode())
-            tp.addRow();
-        return null;
+        return cr_macro(tp, args);
     }
 
     public static final Atom intertext_macro(final TeXParser tp, final String[] args) throws ParseException {
@@ -914,7 +922,7 @@ public class PredefMacros {
         Integer nbArgs;
         if (!tp.isValidName(newcom)) {
             throw new ParseException("Invalid name for the command :" + newcom);
-	}
+        }
 
         if (args[3] == null)
             nbArgs = new Integer(0);

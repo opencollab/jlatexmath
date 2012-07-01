@@ -1,3 +1,9 @@
+jlatexmath (0.9.8)
+	* Handle breakline.
+
+	* Add a static method TexFormula::getAsText to manage breakline and text
+	  as default.
+
 jlatexmath (0.9.7)
 	* Fix bugs with \bold{\b and \DeclareMathOperator{\ in partial mode.
 

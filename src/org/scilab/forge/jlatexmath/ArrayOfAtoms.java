@@ -62,6 +62,14 @@ public class ArrayOfAtoms extends TeXFormula {
 	array.add(new LinkedList<Atom>());
 	row++;
     }
+
+    public int getRows() {
+	return row;
+    }
+
+    public int getCols() {
+	return col;
+    }
     
     public void checkDimensions() {
 	if (array.getLast().size() != 0)
