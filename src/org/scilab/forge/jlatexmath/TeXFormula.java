@@ -347,7 +347,7 @@ public class TeXFormula {
 
     public static TeXFormula getAsText(String text, int alignment) throws ParseException {
         TeXFormula formula = new TeXFormula();
-        if (text == null || text.isEmpty()) {
+        if (text == null || "".equals(text)) {
             formula.add(new EmptyAtom());
             return formula;
         }

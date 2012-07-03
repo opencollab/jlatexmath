@@ -1350,7 +1350,7 @@ public class TeXParser {
      * @return the validity of the name
      */
     public boolean isValidName(String com) {
-        if (com == null || com.isEmpty()) {
+        if (com == null || "".equals(com)) {
             return false;
         }
 
