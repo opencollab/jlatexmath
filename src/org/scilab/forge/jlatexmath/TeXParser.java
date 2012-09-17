@@ -700,8 +700,15 @@ public class TeXParser {
                         throw new ParseException("Found a closing '" + R_GROUP + "' without an opening '" + L_GROUP + "'!");
                     return;
                 case SUPER_SCRIPT :
-                case SUB_SCRIPT :
                     formula.add(getScripts(ch));
+                    break;
+                case SUB_SCRIPT :
+                    if (ignoreWhiteSpace) {
+                        formula.add(getScripts(ch));
+                    } else {
+                        formula.add(new UnderscoreAtom());
+                        pos++;
+                    }
                     break;
                 case '&' :
                     if (!arrayMode)

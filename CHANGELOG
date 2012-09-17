@@ -1,4 +1,6 @@
 jlatexmath (0.9.8)
+	* Bugs 907 fixed: bad rendering of \text{\text{x_1Test}}. 
+
 	* Handle breakline.
 
 	* Add a static method TexFormula::getAsText to manage breakline and text

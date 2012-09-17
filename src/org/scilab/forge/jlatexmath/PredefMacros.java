@@ -417,14 +417,12 @@ public class PredefMacros {
     }
 
     public static final Atom mbox_macro(final TeXParser tp, final String[] args) throws ParseException {
-        String str = args[1].replaceAll("_", "\\\\_");
-        Atom group = new RomanAtom(new TeXFormula(tp, str, "mathnormal", false, false).root);
+        Atom group = new RomanAtom(new TeXFormula(tp, args[1], "mathnormal", false, false).root);
         return new StyleAtom(TeXConstants.STYLE_TEXT, group);
     }
 
     public static final Atom text_macro(final TeXParser tp, final String[] args) throws ParseException {
-        String str = args[1].replaceAll("_", "\\\\_");
-        return new RomanAtom(new TeXFormula(tp, str, "mathnormal", false, false).root);
+        return new RomanAtom(new TeXFormula(tp, args[1], "mathnormal", false, false).root);
     }
 
     public static final Atom underscore_macro(final TeXParser tp, final String[] args) throws ParseException {
