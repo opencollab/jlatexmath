@@ -1,5 +1,14 @@
+jlatexmath (1.0.0)
+	* Fix bug 767: U with umlaut was shown as O with umlaut
+
+	* Handle breakline in math mode
+
+	* Remove String::isEmpty for Java 5 compatibility
+
+        * Fix bug 907: bad rendering of text{text{x_1Test}}
+
 jlatexmath (0.9.8)
-	* Bugs 907 fixed: bad rendering of \text{\text{x_1Test}}. 
+	* Bugs 907 fixed: bad rendering of \text{\text{x_1Test}}.
 
 	* Handle breakline.
 
@@ -22,13 +31,13 @@ jlatexmath (0.9.7)
 
 	* Blanks after a command were skipped in text mode.
 
-	* Extend the way to code colors in \textcolor, \colorbox, \fcolorbox, 
+	* Extend the way to code colors in \textcolor, \colorbox, \fcolorbox,
 	  fgcolor and bgcolor.
 	  Now \textcolor{color} where color could be 255,0,0 (int RGB) or
           1.0,0,0 (float RGB) or 1.0,0,0,0.5 (float CMYK) or 0.6 (Gray) or
           #FF0000 (html RGB) or FF0000 (hexa RGB) are accepted.
 
-	* \v accent was badly scaled in certain font files. 
+	* \v accent was badly scaled in certain font files.
 
         * Resizebox could lead to a box with NaN as dimensions !
 	   
