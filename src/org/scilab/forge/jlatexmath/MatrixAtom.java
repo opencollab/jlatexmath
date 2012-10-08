@@ -109,14 +109,14 @@ public class MatrixAtom extends Atom {
     }
 
     public MatrixAtom(boolean isPartial, ArrayOfAtoms array, int type, int alignment) {
-	this(isPartial, array, type, alignment, true);
+        this(isPartial, array, type, alignment, true);
     }
 
     public MatrixAtom(boolean isPartial, ArrayOfAtoms array, int type, int alignment, boolean spaceAround) {
         this.isPartial = isPartial;
         this.matrix = array;
         this.type = type;
-	this.spaceAround = spaceAround;
+        this.spaceAround = spaceAround;
 
         position = new int[matrix.col];
         for (int i = 0; i < matrix.col; i++) {
@@ -230,11 +230,11 @@ public class MatrixAtom extends Atom {
                 arr[1] = new StrutBox(0.0f, 0.0f, 0.0f, 0.0f);
                 i = 2;
             }
-	    if (spaceAround) {
-		arr[0] = semihsep.createBox(env);
-	    } else {
-		arr[0] = new StrutBox(0.0f, 0.0f, 0.0f, 0.0f);
-	    }
+            if (spaceAround) {
+                arr[0] = semihsep.createBox(env);
+            } else {
+                arr[0] = new StrutBox(0.0f, 0.0f, 0.0f, 0.0f);
+            }
             arr[col] = arr[0];
             Hsep = hsep.createBox(env);
             for (; i < col; i++) {

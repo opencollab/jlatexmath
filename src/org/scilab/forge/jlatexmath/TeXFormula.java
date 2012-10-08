@@ -637,7 +637,7 @@ public class TeXFormula {
     }
 
     public TeXIcon createTeXIcon(int style, float size, int widthUnit, float textwidth, int align) {
-	return createTeXIcon(style, size, 0, widthUnit, textwidth, align);
+        return createTeXIcon(style, size, 0, widthUnit, textwidth, align);
     }
 
     public TeXIcon createTeXIcon(int style, float size, int type, int widthUnit, float textwidth, int align) {
@@ -655,7 +655,7 @@ public class TeXFormula {
     }
 
     public TeXIcon createTeXIcon(int style, float size, int type, int widthUnit, float textwidth, int align, int interlineUnit, float interline) {
-	TeXEnvironment te = new TeXEnvironment(style, createFont(size, type), widthUnit, textwidth);
+        TeXEnvironment te = new TeXEnvironment(style, createFont(size, type), widthUnit, textwidth);
         Box box = createBox(te);
         float il = interline * SpaceAtom.getFactor(interlineUnit, te);
         HorizontalBox hb = new HorizontalBox(BreakFormula.split(box, te.getTextwidth(), il), te.getTextwidth(), align);
