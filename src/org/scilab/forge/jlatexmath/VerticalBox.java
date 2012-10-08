@@ -44,7 +44,7 @@ class VerticalBox extends Box {
     
     public VerticalBox(Box b, float rest, int alignment) {
         this();
-        add(b);
+        add(b);System.out.println("calixte="+(alignment == TeXConstants.ALIGN_CENTER));
         if (alignment == TeXConstants.ALIGN_CENTER) {
             StrutBox s = new StrutBox(0, rest / 2, 0, 0);
             super.add(0, s);
@@ -71,7 +71,7 @@ class VerticalBox extends Box {
     }
 
     public final void add(Box b, float interline) {
-	if (children.size() == 1) {
+	if (children.size() >= 1) {
 	    add(new StrutBox(0, interline, 0, 0));
 	}
 	add(b);

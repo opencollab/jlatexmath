@@ -1,4 +1,6 @@
 jlatexmath (1.0.0)
+	* Fix bug with line-breaking (infinite loop on "\\ {abcdef}a" or exceptions).
+
 	* Fix bug 767: U with umlaut was shown as O with umlaut
 
 	* Handle breakline in math mode

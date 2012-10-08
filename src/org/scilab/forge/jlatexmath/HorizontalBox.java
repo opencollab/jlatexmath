@@ -147,6 +147,7 @@ public class HorizontalBox extends Box {
         for (int i = 0; i <= position; i++) {
             hb1.add(children.get(i));
         }
+
         for (int i = position + shift; i < children.size(); i++) {
             hb2.add(children.get(i));
         }

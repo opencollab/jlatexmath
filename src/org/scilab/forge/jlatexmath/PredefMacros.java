@@ -718,7 +718,7 @@ public class PredefMacros {
             parser.parse();
             array.checkDimensions();
             tp.finish();
-            tp.formula.root = new MatrixAtom(tp.getIsPartial(), array, MatrixAtom.ARRAY, TeXConstants.ALIGN_LEFT);
+            tp.formula.root = new MatrixAtom(tp.getIsPartial(), array, MatrixAtom.ARRAY, TeXConstants.ALIGN_LEFT, false);
         }
 
         return null;
