@@ -649,6 +649,7 @@ public class TeXParser {
                     pos++;
                     if (!ignoreWhiteSpace) {// We are in a mbox
                         formula.add(new SpaceAtom());
+                        formula.add(new BreakMarkAtom());
                         while (pos < len) {
                             ch = parseString.charAt(pos);
                             if (ch != ' ' || ch != '\t' || ch != '\r')
