@@ -1,6 +1,10 @@
-jlatexmath (1.0.0)
+jlatexmath (1.0.1)
+
+	* Bad positions of the exponent & indice with Bigr{|}_1^3
+
 	* Fix bug with line-breaking (infinite loop on "\\ {abcdef}a" or exceptions).
 
+jlatexmath (1.0.0)
 	* Fix bug 767: U with umlaut was shown as O with umlaut
 
 	* Handle breakline in math mode
