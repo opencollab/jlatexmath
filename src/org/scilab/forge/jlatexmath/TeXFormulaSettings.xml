@@ -651,7 +651,7 @@
 	  <Map char="&#8935;" formula="\gnsim"/>
 	  <Map char="&#8872;" formula="\vDash"/>
 	  <Map char="&#10731;" formula="\blacklozenge"/>
-	  <Map char="&#0183;" formula="\centerdot"/>
+	  <Map char="&#0183;" formula="\cdot"/>
 	  <Map char="&#8814;" formula="\nless"/>
 	  <Map char="&#8225;" formula="\ddagger"/>
 	  <Map char="&#8787;" formula="\risingdotseq"/>
