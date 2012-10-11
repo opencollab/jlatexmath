@@ -1,4 +1,5 @@
 jlatexmath (1.0.1)
+	* Spaces were not ignored in tabular options.
 
 	* Bad positions of the exponent & indice with Bigr{|}_1^3
 

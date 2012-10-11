@@ -189,6 +189,9 @@ public class MatrixAtom extends Atom {
                 len = opt.length();
                 pos--;
                 break;
+	    case ' ':
+	    case '\t':
+		break;
             default :
                 lposition.add(TeXConstants.ALIGN_CENTER);
             }
