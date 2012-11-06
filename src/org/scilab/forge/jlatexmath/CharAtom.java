@@ -95,4 +95,8 @@ public class CharAtom extends CharSymbol {
     public CharFont getCharFont(TeXFont tf) {
 	return getChar(tf, TeXConstants.STYLE_DISPLAY, false).getCharFont();
     }
+
+    public String toString() {
+	return "CharAtom: \'" + c + "\'";
+    }
 }

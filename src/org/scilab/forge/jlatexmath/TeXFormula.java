@@ -420,6 +420,13 @@ public class TeXFormula {
                     root = new RowAtom(root);
                 }
                 ((RowAtom) root).add(el);
+		if (el instanceof TypedAtom) {
+		    TypedAtom ta = (TypedAtom) el;
+		    int rtype = ta.getRightType();
+		    if (rtype == TeXConstants.TYPE_BINARY_OPERATOR || rtype == TeXConstants.TYPE_RELATION) {
+			((RowAtom) root).add(new BreakMarkAtom());
+		    }
+		}
             }
         }
         return this;

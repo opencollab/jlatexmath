@@ -438,7 +438,7 @@ public class MatrixAtom extends Atom {
                     boolean lastVline = true;
 
                     if (boxarr[i][j].type == -1) {
-                        hb.add(new HorizontalBox(boxarr[i][j], rowWidth[j], position[j]));
+			hb.add(new HorizontalBox(boxarr[i][j], rowWidth[j], position[j]));
                     } else {
                         Box b = generateMulticolumn(env, Hsep, rowWidth, i, j);
                         MulticolumnAtom matom = (MulticolumnAtom) matrix.array.get(i).get(j);

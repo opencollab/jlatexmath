@@ -714,11 +714,11 @@ public class PredefMacros {
             ArrayOfAtoms array = new ArrayOfAtoms();
             array.add(tp.formula.root);
             array.addRow();
-            TeXParser parser = new TeXParser(tp.getIsPartial(), tp.getStringFromCurrentPos(), array, false);
+            TeXParser parser = new TeXParser(tp.getIsPartial(), tp.getStringFromCurrentPos(), array, false, tp.isIgnoreWhiteSpace());
             parser.parse();
             array.checkDimensions();
             tp.finish();
-            tp.formula.root = new MatrixAtom(tp.getIsPartial(), array, MatrixAtom.ARRAY, TeXConstants.ALIGN_LEFT, false);
+            tp.formula.root = array.getAsVRow();//new MatrixAtom(tp.getIsPartial(), array, MatrixAtom.ARRAY, TeXConstants.ALIGN_LEFT, false);
         }
 
         return null;

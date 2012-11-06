@@ -70,6 +70,17 @@ public class ArrayOfAtoms extends TeXFormula {
     public int getCols() {
 	return col;
     }
+
+    public VRowAtom getAsVRow() {
+	VRowAtom vr = new VRowAtom();
+	for (LinkedList<Atom> r : array) {
+	    for (Atom a : r) {
+		vr.append(a);
+	    }
+	}
+
+	return vr;
+    }
     
     public void checkDimensions() {
 	if (array.getLast().size() != 0)

@@ -48,7 +48,7 @@ public final class BreakFormula {
         HorizontalBox first;
         HorizontalBox second = null;
         Stack<Position> positions = new Stack<Position>();
-        float w=-1;
+        float w = -1;
         while (hbox.width > width && (w = canBreak(positions, hbox, width)) != hbox.width) {
             Position pos = positions.pop();
             HorizontalBox[] hboxes = pos.hbox.split(pos.index - 1);
@@ -76,7 +76,7 @@ public final class BreakFormula {
 
     private static Box split(VerticalBox vbox, float width, float interline) {
         VerticalBox newBox = new VerticalBox();
-        for(Box box:vbox.children){
+        for (Box box:vbox.children) {
             newBox.add(split(box, width, interline));
         }
 

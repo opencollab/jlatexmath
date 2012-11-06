@@ -71,6 +71,11 @@ public class VRowAtom extends Atom {
         if (el != null)
             elements.add(0, el);
     }
+
+    public final void append(Atom el) {
+        if (el != null)
+            elements.add(el);
+    }
     
     public Box createBox(TeXEnvironment env) {
         VerticalBox vb = new VerticalBox();

@@ -105,8 +105,8 @@ public class TeXFormulaParser {
             Class[] argClasses = getArgumentClasses(args);
             Object[] argValues = getArgumentValues(args);
             // create TeXFormula object
-	    String code = "TeXFormula.predefinedTeXFormulasAsString.put(\"%s\", \"%s\");";
-	    System.out.println(String.format(code, formulaName, argValues[0]));
+	    //String code = "TeXFormula.predefinedTeXFormulasAsString.put(\"%s\", \"%s\");";
+	    //System.out.println(String.format(code, formulaName, argValues[0]));
             try {
                 TeXFormula f = TeXFormula.class.getConstructor(argClasses).newInstance(argValues);
                 // succesfully created, so add to "temporary formula's"-hashtable

@@ -201,6 +201,20 @@ public class TeXParser {
     /**
      * Create a new TeXParser in the context of an array. When the parser meets a & a new atom is added in the current line and when a \\ is met, a new line is created.
      *
+     * @param isPartial if true certains exceptions are not thrown
+     * @param parseString the string to be parsed
+     * @param aoa an ArrayOfAtoms where to put the elements
+     * @param firstpass a boolean to indicate if the parser must replace the user-defined macros by their content
+     * @throws ParseException if the string could not be parsed correctly
+     */
+    public TeXParser(boolean isPartial, String parseString, ArrayOfAtoms aoa, boolean firstpass, boolean space) {
+        this(isPartial, parseString, (TeXFormula) aoa, firstpass, space);
+        arrayMode = true;
+    }
+
+    /**
+     * Create a new TeXParser in the context of an array. When the parser meets a & a new atom is added in the current line and when a \\ is met, a new line is created.
+     *
      * @param parseString the string to be parsed
      * @param aoa an ArrayOfAtoms where to put the elements
      * @param firstpass a boolean to indicate if the parser must replace the user-defined macros by their content
