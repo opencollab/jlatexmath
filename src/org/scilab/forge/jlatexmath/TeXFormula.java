@@ -599,6 +599,180 @@ public class TeXFormula {
     }
 
     /**
+     * Apply the Builder pattern instead of using the createTeXIcon(...) factories 
+     * @author Felix Natter
+     *
+     */
+    public class TeXIconBuilder {
+        private Integer style;
+        private Float size;
+        private Integer type;
+        private Color fgcolor;
+        private boolean trueValues = false;
+        private Integer widthUnit;
+        private Float textWidth;
+        private Integer align;
+        private boolean isMaxWidth = false;
+        private Integer interLineUnit;
+        private Float interLineSpacing;
+
+        /**
+         * Specify the style for rendering the given TeXFormula
+         * @param style the style
+         * @return the builder, used for chaining
+         */
+        public TeXIconBuilder setStyle(final int style)
+        {
+            this.style = style;
+            return this;
+        }
+
+        /**
+         * Specify the font size for rendering the given TeXFormula
+         * @param size the size
+         * @return the builder, used for chaining
+         */
+        public TeXIconBuilder setSize(final float size)
+        {
+            this.size = size;
+            return this;
+        }
+
+        /**
+         * Specify the font type for rendering the given TeXFormula
+         * @param type the font type
+         * @return the builder, used for chaining
+         */
+        public TeXIconBuilder setType(final int type)
+        {
+            this.type = type;
+            return this;
+        }
+
+        /**
+         * Specify the background color for rendering the given TeXFormula
+         * @param fgcolor the foreground color
+         * @return the builder, used for chaining
+         */
+        public TeXIconBuilder setFGColor(final Color fgcolor)
+        {
+            this.fgcolor = fgcolor;
+            return this;
+        }
+
+        /**
+         * Specify the "true values" parameter for rendering the given TeXFormula
+         * @param trueValues the "true values" value
+         * @return the builder, used for chaining
+         */
+        public TeXIconBuilder setTrueValues(final boolean trueValues)
+        {
+            this.trueValues = trueValues;
+            return this;
+        }
+
+        /**
+         * Specify the width of the formula (may be exact or maximum width, see {@link #setIsMaxWidth(boolean)})
+         * @param widthUnit the width unit
+         * @param textWidth the width
+         * @param align the alignment
+         * @return the builder, used for chaining
+         */
+        public TeXIconBuilder setWidth(final int widthUnit, final float textWidth, final int align)
+        {
+            this.widthUnit = widthUnit;
+            this.textWidth = textWidth;
+            this.align = align;
+            trueValues = true; // TODO: is this necessary?
+            return this;
+        }
+
+        /**
+         * Specifies whether the width is the exact or the maximum width
+         * @param isMaxWidth whether the width is a maximum width
+         * @return the builder, used for chaining
+         */
+        public TeXIconBuilder setIsMaxWidth(final boolean isMaxWidth)
+        {
+            if (widthUnit == null)
+            {
+                throw new IllegalStateException("Cannot set 'isMaxWidth' without having specified a width!");
+            }
+            this.isMaxWidth = isMaxWidth;
+            return this;
+        }
+
+        /**
+         * Specify the inter line spacing unit and value. NOTE: this is required for automatic linebreaks to work!
+         * @param interLineUnit the unit
+         * @param interLineSpacing the value
+         * @return the builder, used for chaining
+         */
+        public TeXIconBuilder setInterLineSpacing(final int interLineUnit, final float interLineSpacing)
+        {
+            if (widthUnit == null)
+            {
+                throw new IllegalStateException("Cannot set inter line spacing without having specified a width!");
+            }
+            this.interLineUnit = interLineUnit;
+            this.interLineSpacing = interLineSpacing;
+            return this;
+        }
+
+        /**
+         * Create a TeXIcon from the information gathered by the (chained) setXXX() methods.
+         * (see Builder pattern)
+         * @return the TeXIcon
+         */
+        public TeXIcon build()
+        {
+            if (style == null)
+            {
+                throw new IllegalStateException("A style is required. Use setStyle()");
+            }
+            if (size == null)
+            {
+                throw new IllegalStateException("A size is required. Use setStyle()");
+            }
+            DefaultTeXFont font = (type == null) ? new DefaultTeXFont(size) : createFont(size, type);
+            TeXEnvironment te;
+            if (widthUnit != null)
+            {
+                te = new TeXEnvironment(style, font, widthUnit, textWidth);
+            }
+            else
+            {
+                te = new TeXEnvironment(style, font);
+            }
+            Box box = createBox(te);
+            TeXIcon ti;
+            if (widthUnit != null)
+            {
+                HorizontalBox hb;
+                if (interLineUnit != null)
+                {
+                    float il = interLineSpacing * SpaceAtom.getFactor(interLineUnit, te);
+                    hb = new HorizontalBox(BreakFormula.split(box, te.getTextwidth(), il), isMaxWidth ? 0 : te.getTextwidth(), align);
+                }
+                else
+                {
+                    hb = new HorizontalBox(box, isMaxWidth ? 0 : te.getTextwidth(), align);
+                }
+                ti = new TeXIcon(hb, size, trueValues);
+            }
+            else
+            {
+                ti = new TeXIcon(box, size, trueValues);
+            }
+            if (fgcolor != null) {
+                ti.setForeground(fgcolor);
+            }
+            ti.isColored = te.isColored;
+            return ti;
+        }
+    }
+
+    /**
      * Creates a TeXIcon from this TeXFormula using the default TeXFont in the given
      * point size and starting from the given TeX style. If the given integer value
      * does not represent a valid TeX style, the default style

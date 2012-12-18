@@ -1,11 +1,14 @@
 jlatexmath (1.0.1)
-	* Handle auto-break after a binop or relation op. 
+	* Handle auto-break after a binop or relation op.
 
 	* Spaces were not ignored in tabular options.
 
 	* Bad positions of the exponent & indice with Bigr{|}_1^3
 
 	* Fix bug with line-breaking (infinite loop on "\\ {abcdef}a" or exceptions).
+
+	* Option added for max. width vs exact width.
+	  Thanks to Felix Natter for the patch.
 
 jlatexmath (1.0.0)
 	* Fix bug 767: U with umlaut was shown as O with umlaut
@@ -49,7 +52,7 @@ jlatexmath (0.9.7)
 	* \v accent was badly scaled in certain font files.
 
         * Resizebox could lead to a box with NaN as dimensions !
-	   
+
 	* Add " for ''
 
 	* Bug with \fg
