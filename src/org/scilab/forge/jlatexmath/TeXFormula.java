@@ -783,38 +783,19 @@ public class TeXFormula {
      * @return the created TeXIcon
      */
     public TeXIcon createTeXIcon(int style, float size) {
-        TeXEnvironment te = new TeXEnvironment(style, new DefaultTeXFont(size));
-        Box box = createBox(te);
-        TeXIcon ti = new TeXIcon(box, size);
-        ti.isColored = te.isColored;
-        return ti;
+        return new TeXIconBuilder().setStyle(style).setSize(size).build();
     }
 
     public TeXIcon createTeXIcon(int style, float size, int type) {
-        TeXEnvironment te = new TeXEnvironment(style, createFont(size, type));
-        Box box = createBox(te);
-        TeXIcon ti = new TeXIcon(box, size);
-        ti.isColored = te.isColored;
-        return ti;
+        return new TeXIconBuilder().setStyle(style).setSize(size).setType(type).build();
     }
 
     public TeXIcon createTeXIcon(int style, float size, int type, Color fgcolor) {
-        TeXEnvironment te = new TeXEnvironment(style, createFont(size, type));
-        Box box = createBox(te);
-        TeXIcon ti = new TeXIcon(box, size);
-        if (fgcolor != null) {
-            ti.setForeground(fgcolor);
-        }
-        ti.isColored = te.isColored;
-        return ti;
+        return new TeXIconBuilder().setStyle(style).setSize(size).setType(type).setFGColor(fgcolor).build();
     }
 
     public TeXIcon createTeXIcon(int style, float size, boolean trueValues) {
-        TeXEnvironment te = new TeXEnvironment(style, new DefaultTeXFont(size));
-        Box box = createBox(te);
-        TeXIcon ti = new TeXIcon(box, size, trueValues);
-        ti.isColored = te.isColored;
-        return ti;
+        return new TeXIconBuilder().setStyle(style).setSize(size).setTrueValues(trueValues).build();
     }
 
     public TeXIcon createTeXIcon(int style, float size, int widthUnit, float textwidth, int align) {
@@ -822,13 +803,7 @@ public class TeXFormula {
     }
 
     public TeXIcon createTeXIcon(int style, float size, int type, int widthUnit, float textwidth, int align) {
-        TeXEnvironment te = new TeXEnvironment(style, createFont(size, type), widthUnit, textwidth);
-        Box box = createBox(te);
-        HorizontalBox hb = new HorizontalBox(box, te.getTextwidth(), align);
-
-        TeXIcon ti = new TeXIcon(hb, size, true);
-        ti.isColored = te.isColored;
-        return ti;
+        return new TeXIconBuilder().setStyle(style).setSize(size).setType(type).setWidth(widthUnit, textwidth, align).build();
     }
 
     public TeXIcon createTeXIcon(int style, float size, int widthUnit, float textwidth, int align, int interlineUnit, float interline) {
@@ -836,14 +811,7 @@ public class TeXFormula {
     }
 
     public TeXIcon createTeXIcon(int style, float size, int type, int widthUnit, float textwidth, int align, int interlineUnit, float interline) {
-        TeXEnvironment te = new TeXEnvironment(style, createFont(size, type), widthUnit, textwidth);
-        Box box = createBox(te);
-        float il = interline * SpaceAtom.getFactor(interlineUnit, te);
-        HorizontalBox hb = new HorizontalBox(BreakFormula.split(box, te.getTextwidth(), il), te.getTextwidth(), align);
-
-        TeXIcon ti = new TeXIcon(hb, size, true);
-        ti.isColored = te.isColored;
-        return ti;
+        return new TeXIconBuilder().setStyle(style).setSize(size).setType(type).setWidth(widthUnit, textwidth, align).setInterLineSpacing(interlineUnit, interline).build();
     }
 
     public void createImage(String format, int style, float size, String out, Color bg, Color fg, boolean transparency) {
