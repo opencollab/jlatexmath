@@ -51,6 +51,7 @@ public class Example3 {
     public static void main(String[] args) {
         
         String latex = "\\definecolor{gris}{gray}{0.9}";
+        latex += "\\definecolor{noir}{rgb}{0,0,0}";
         latex += "\\definecolor{bleu}{rgb}{0,0,1}\\newcommand{\\pa}{\\left|}";
         latex += "\\begin{array}{c}";
         latex += "\\JLaTeXMath\\\\";
