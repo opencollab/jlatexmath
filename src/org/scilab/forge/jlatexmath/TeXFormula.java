@@ -698,6 +698,25 @@ public class TeXFormula {
             {
                 throw new IllegalStateException("Cannot set 'isMaxWidth' without having specified a width!");
             }
+            if (isMaxWidth)
+            {
+            	// NOTE: Currently isMaxWidth==true does not work with ALIGN_CENTER or ALIGN_RIGHT (see HorizontalBox ctor)
+            	// The case (1) we don't support by setting align := ALIGN_LEFT here is this:
+            	//  \text{hello world\\hello} with align=ALIGN_CENTER (but forced to ALIGN_LEFT) and isMaxWidth==true results in:
+            	// [hello world]
+            	// [hello      ]
+            	// and NOT:
+            	// [hello world]
+            	// [   hello   ]
+            	// However, this case (2) is currently not supported anyway (ALIGN_CENTER with isMaxWidth==false):
+            	// [  hello world  ]
+            	// [  hello        ]
+            	// and NOT:
+            	// [  hello world  ]
+            	// [     hello     ]
+            	// => until (2) is solved, we stick with the hack to set align := ALIGN_LEFT!
+            	this.align = TeXConstants.ALIGN_LEFT;
+            }
             this.isMaxWidth = isMaxWidth;
             return this;
         }
