@@ -43,6 +43,7 @@ import javax.swing.JLabel;
 import org.scilab.forge.jlatexmath.TeXConstants; 
 import org.scilab.forge.jlatexmath.TeXFormula;
 import org.scilab.forge.jlatexmath.TeXIcon;
+import org.scilab.forge.jlatexmath.TeXFormula.TeXIconBuilder;
 
 /**
  * A class to test LaTeX rendering.
@@ -60,7 +61,11 @@ public class Example4 {
 	latex += "\\end{array}\n";
 
 	TeXFormula formula = new TeXFormula(latex);
-	TeXIcon icon = formula.createTeXIcon(TeXConstants.STYLE_DISPLAY, 10);
+	// Note: Old interface for creating icons:
+	//TeXIcon icon = formula.createTeXIcon(TeXConstants.STYLE_DISPLAY, 10);
+	// Note: New interface using builder pattern (inner class):
+	TeXIcon icon = formula.new TeXIconBuilder().setStyle(TeXConstants.STYLE_DISPLAY).setSize(10).build();
+
 	icon.setInsets(new Insets(5, 5, 5, 5));
 	
 	BufferedImage image = new BufferedImage(icon.getIconWidth(), icon.getIconHeight(), BufferedImage.TYPE_INT_ARGB);

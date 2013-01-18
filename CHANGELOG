@@ -10,6 +10,9 @@ jlatexmath (1.0.1)
 	* Option added for max. width vs exact width.
 	  Thanks to Felix Natter for the patch.
 
+	* Update the example to use the TeXIconBuilder.
+          Thanks to Felix Natter for the patch.
+
 jlatexmath (1.0.0)
 	* Fix bug 767: U with umlaut was shown as O with umlaut
 
