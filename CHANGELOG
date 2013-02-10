@@ -1,4 +1,6 @@
 jlatexmath (1.0.1)
+	* Fix ligatures definitions in XML (\textbf{\text{-7}} was printed as \Omega)
+
 	* Handle auto-break after a binop or relation op.
 
 	* Spaces were not ignored in tabular options.
