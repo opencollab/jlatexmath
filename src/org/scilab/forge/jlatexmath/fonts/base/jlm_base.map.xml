@@ -23,7 +23,6 @@
   <!-- this symbol is not defined in "TeXSymbols.xml", because it's not meant to be used as a symbol.
        Use "surd" instead. -->
   <SymbolMapping name="sqrt" ch="112" fontId="jlm_cmsy10"/>
-
   <SymbolMapping name="textfractionsolidus" ch="47" fontId="jlm_cmr10"/>
   <SymbolMapping name="textminus" ch="45" fontId="jlm_cmr10"/>
   <SymbolMapping name="textendash" ch="123" fontId="jlm_cmr10"/>
@@ -189,6 +188,8 @@
   <SymbolMapping name="flat" ch="91" fontId="jlm_cmmi10_unchanged"/>
   <SymbolMapping name="natural" ch="92" fontId="jlm_cmmi10_unchanged"/>
   <SymbolMapping name="sharp" ch="93" fontId="jlm_cmmi10_unchanged"/>
+  <SymbolMapping name="S" ch="120" fontId="jlm_cmsy10"/>
+  <SymbolMapping name="P" ch="123" fontId="jlm_cmsy10"/>
   <SymbolMapping name="clubsuit" ch="124" fontId="jlm_cmsy10"/>
   <SymbolMapping name="diamondsuit" ch="125" fontId="jlm_cmsy10"/>
   <SymbolMapping name="heartsuit" ch="126" fontId="jlm_cmsy10"/>

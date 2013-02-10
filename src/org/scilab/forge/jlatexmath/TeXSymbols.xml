@@ -402,6 +402,8 @@
   <Symbol name="textminus" type="ord"/>
   <Symbol name="textendash" type="ord"/>
   <Symbol name="textemdash" type="ord"/>
+  <Symbol name="S" type="ord"/>
+  <Symbol name="P" type="ord"/>
   <Symbol name="comma" type="punct"/>
   <Symbol name="ldotp" type="punct"/>
   <Symbol name="cdotp" type="punct"/>

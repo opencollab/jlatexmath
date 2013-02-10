@@ -58,9 +58,11 @@
       	  <Map char="}" symbol="rbrace"/>
 	  <Map char="&apos;" symbol="textapos"/>
 	  <Map char="`" symbol="jlatexmathlapos"/>
+	  <Map char="&#167;" symbol="S"/>
 	  <Map char="&#171;" symbol="guillemotleft"/>
 	  <Map char="&#174;" symbol="textregistered"/>
 	  <Map char="&#181;" symbol="textmu"/>
+	  <Map char="&#182;" symbol="P"/>
 	  <Map char="&#187;" symbol="guillemotright"/>
 	  <Map char="&#191;" symbol="questiondown"/>
 	  <Map char="&#945;" symbol="alpha" text="α"/>
@@ -96,6 +98,8 @@
 	</CharacterToSymbolMappings>
 
 	<CharacterToFormulaMappings>
+	  <Map char="&#160;" formula="\ "/>
+	  <Map char="&#161;" formula="!`"/>
  	  <Map char="&#192;" formula="\`A"/>
 	  <Map char="&#193;" formula="\'A"/>
 	  <Map char="&#194;" formula="\^A"/>
