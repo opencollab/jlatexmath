@@ -38,6 +38,7 @@
   <SymbolMapping name="jlatexmatharobase" ch="64" fontId="jlm_cmr10"/>
   <SymbolMapping name="textapos" ch="39" fontId="jlm_cmr10"/>
   <SymbolMapping name="jlatexmathlapos" ch="96" fontId="jlm_cmr10"/>
+  <SymbolMapping name="mathsterling" ch="36" fontId="jlm_cmti10"/>
 
   <SymbolMapping name="oe" ch="190" fontId="jlm_cmti10"/>
   <SymbolMapping name="ae" ch="189" fontId="jlm_cmti10"/>
@@ -52,8 +53,8 @@
   <SymbolMapping name="jlatexmathcedilla" ch="187" fontId="jlm_cmti10"/>
   <SymbolMapping name="lq" ch="96" fontId="jlm_cmti10"/>
   <SymbolMapping name="rq" ch="39" fontId="jlm_cmti10"/>
-  <!-- math accents -->
 
+  <!-- math accents -->
   <SymbolMapping name="acute" ch="182" fontId="jlm_cmr10"/>
   <SymbolMapping name="grave" ch="181" fontId="jlm_cmr10"/>
   <SymbolMapping name="ddot" ch="196" fontId="jlm_cmr10"/>
@@ -66,6 +67,7 @@
   <SymbolMapping name="check" ch="183" fontId="jlm_cmr10"/>
   <SymbolMapping name="hat" ch="94" fontId="jlm_cmr10"/>
   <SymbolMapping name="ogonek" ch="197" fontId="jlm_cmr10"/>
+  <SymbolMapping name="polishlcross" ch="195" fontId="jlm_cmr10"/>
   <SymbolMapping name="vec" ch="126" fontId="jlm_cmmi10_unchanged"/>
   <SymbolMapping name="dot" ch="95" fontId="jlm_cmr10"/>
   <SymbolMapping name="widehat" ch="98" fontId="jlm_cmex10"/>

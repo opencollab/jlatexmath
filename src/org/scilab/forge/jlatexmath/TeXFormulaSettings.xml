@@ -58,6 +58,8 @@
       	  <Map char="}" symbol="rbrace"/>
 	  <Map char="&apos;" symbol="textapos"/>
 	  <Map char="`" symbol="jlatexmathlapos"/>
+	  <Map char="&#163;" symbol="mathsterling"/>
+	  <Map char="&#165;" symbol="yen"/>
 	  <Map char="&#167;" symbol="S"/>
 	  <Map char="&#171;" symbol="guillemotleft"/>
 	  <Map char="&#174;" symbol="textregistered"/>
@@ -100,6 +102,7 @@
 	<CharacterToFormulaMappings>
 	  <Map char="&#160;" formula="\ "/>
 	  <Map char="&#161;" formula="!`"/>
+	  <Map char="&#169;" formula="\copyright"/>
  	  <Map char="&#192;" formula="\`A"/>
 	  <Map char="&#193;" formula="\'A"/>
 	  <Map char="&#194;" formula="\^A"/>
@@ -228,6 +231,8 @@
 	  <Map char="&#318;" formula="\lcaron"/>
 	  <Map char="&#319;" formula="L\cdot"/>
 	  <Map char="&#320;" formula="l\cdot"/>
+	  <Map char="&#321;" formula="\L"/>
+	  <Map char="&#322;" formula="\l"/>
 	  <!-- L barre-->
 	  <Map char="&#323;" formula="\'N"/>
 	  <Map char="&#324;" formula="\'n"/>

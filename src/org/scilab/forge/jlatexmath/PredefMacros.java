@@ -98,6 +98,8 @@ public class PredefMacros {
         NewCommandMacro.addNewCommand("with", "\\mathbin{\\&}", 0);
         NewCommandMacro.addNewCommand("parr", "\\mathbin{\\rotatebox[origin=c]{180}{\\&}}", 0);
         NewCommandMacro.addNewCommand("copyright", "\\textcircled{\\raisebox{0.2ex}{c}}", 0);
+        NewCommandMacro.addNewCommand("L", "\\mathrm{\\polishlcross L}", 0);
+        NewCommandMacro.addNewCommand("l", "\\mathrm{\\polishlcross l}", 0);
     }
 
     public static final Atom Braket_macro(final TeXParser tp, final String[] args) throws ParseException {

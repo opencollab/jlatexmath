@@ -46,6 +46,7 @@
   <Symbol name="jlatexmathlapos" type="ord" />
   <Symbol name="jlatexmathcedilla" type="ord" />
   <Symbol name="ogonek" type="acc" />
+  <Symbol name="polishlcross" type="ord" />
   <Symbol name="lq" type="ord" />
   <Symbol name="rq" type="ord" />
   <Symbol name="textdbend" type="ord" />
@@ -422,6 +423,8 @@
   <Symbol name="jlatexmatharobase" type="ord"/>
   <Symbol name="underscore" type="ord"/>
   <Symbol name="checkmark" type="ord"/>
+  <Symbol name="mathsterling" type="ord"/>
+  <Symbol name="yen" type="ord"/>
 
   <!-- math accents -->
 

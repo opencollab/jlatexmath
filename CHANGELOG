@@ -1,4 +1,6 @@
 jlatexmath (1.0.1)
+	* Add \L, \l, \yen, \mathsterling (in unicode too)
+
 	* Handle nbsp, \P and \S
 
 	* Fix ligatures definitions in XML (\textbf{\text{-7}} was printed as \Omega)

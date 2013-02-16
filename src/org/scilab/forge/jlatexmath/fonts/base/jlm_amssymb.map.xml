@@ -79,6 +79,7 @@
   <SymbolMapping name="gtreqless" ch="82" fontId="jlm_msam10" />
   <SymbolMapping name="lesseqqgtr" ch="83" fontId="jlm_msam10" />
   <SymbolMapping name="gtreqqless" ch="84" fontId="jlm_msam10" />
+  <SymbolMapping name="yen" ch="85" fontId="jlm_msam10" />
   <SymbolMapping name="Rrightarrow" ch="86" fontId="jlm_msam10" />
   <SymbolMapping name="Lleftarrow" ch="87" fontId="jlm_msam10" />
   <SymbolMapping name="checkmark" ch="88" fontId="jlm_msam10" />
