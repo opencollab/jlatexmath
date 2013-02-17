@@ -1,4 +1,6 @@
 jlatexmath (1.0.1)
+        * Fix bad cmex10.ttf rendering with OpenJDK
+
 	* Add \L, \l, \yen, \mathsterling (in unicode too)
 
 	* Handle nbsp, \P and \S
