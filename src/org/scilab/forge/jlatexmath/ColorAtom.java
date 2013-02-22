@@ -125,14 +125,14 @@ public class ColorAtom extends Atom implements Row {
                         float b = Float.parseFloat(B);
 
                         if (r == (int) r && g == (int) g && b == (int) b && R.indexOf('.') == -1 && G.indexOf('.') == -1 && B.indexOf('.') == -1) {
-                            int ir = (int) Math.min(255, Math.max(0 ,r));
-                            int ig = (int) Math.min(255, Math.max(0 ,g));
-                            int ib = (int) Math.min(255, Math.max(0 ,b));
+                            int ir = (int) Math.min(255, Math.max(0, r));
+                            int ig = (int) Math.min(255, Math.max(0, g));
+                            int ib = (int) Math.min(255, Math.max(0, b));
                             return new Color(ir, ig, ib);
                         } else {
-                            r = (float) Math.min(1, Math.max(0 ,r));
-                            g = (float) Math.min(1, Math.max(0 ,g));
-                            b = (float) Math.min(1, Math.max(0 ,b));
+                            r = (float) Math.min(1, Math.max(0, r));
+                            g = (float) Math.min(1, Math.max(0, g));
+                            b = (float) Math.min(1, Math.max(0, b));
                             return new Color(r, g, b);
                         }
                     } catch (NumberFormatException e) {
@@ -146,10 +146,10 @@ public class ColorAtom extends Atom implements Row {
                         float y = Float.parseFloat(toks.nextToken().trim());
                         float k = Float.parseFloat(toks.nextToken().trim());
 
-                        c = (float) Math.min(1, Math.max(0 ,c));
-                        m = (float) Math.min(1, Math.max(0 ,m));
-                        y = (float) Math.min(1, Math.max(0 ,y));
-                        k = (float) Math.min(1, Math.max(0 ,k));
+                        c = (float) Math.min(1, Math.max(0, c));
+                        m = (float) Math.min(1, Math.max(0, m));
+                        y = (float) Math.min(1, Math.max(0, y));
+                        k = (float) Math.min(1, Math.max(0, k));
 
                         return convColor(c, m, y, k);
                     } catch (NumberFormatException e) {
@@ -158,7 +158,7 @@ public class ColorAtom extends Atom implements Row {
                 }
             }
 
-            Color c = Colors.get(s);
+            Color c = Colors.get(s.toLowerCase());
             if (c != null) {
                 return c;
             } else {
@@ -186,74 +186,67 @@ public class ColorAtom extends Atom implements Row {
         Colors.put("cyan", Color.cyan);
         Colors.put("magenta", Color.magenta);
         Colors.put("yellow", Color.yellow);
-        Colors.put("GreenYellow", convColor(0.15f, 0f, 0.69f, 0f));
-        Colors.put("Yellow", convColor(0f, 0f, 1f, 0f));
-        Colors.put("Goldenrod", convColor(0f, 0.10f, 0.84f, 0f));
-        Colors.put("Dandelion", convColor(0f, 0.29f, 0.84f, 0f));
-        Colors.put("Apricot", convColor(0f, 0.32f, 0.52f, 0f));
-        Colors.put("Peach", convColor(0f, 0.50f, 0.70f, 0f));
-        Colors.put("Melon", convColor(0f, 0.46f, 0.50f, 0f));
-        Colors.put("YellowOrange", convColor(0f, 0.42f, 1f, 0f));
-        Colors.put("Orange", convColor(0f, 0.61f, 0.87f, 0f));
-        Colors.put("BurntOrange", convColor(0f, 0.51f, 1f, 0f));
-        Colors.put("Bittersweet", convColor(0f, 0.75f, 1f, 0.24f));
-        Colors.put("RedOrange", convColor(0f, 0.77f, 0.87f, 0f));
-        Colors.put("Mahogany", convColor(0f, 0.85f, 0.87f, 0.35f));
-        Colors.put("Maroon", convColor(0f, 0.87f, 0.68f, 0.32f));
-        Colors.put("BrickRed", convColor(0f, 0.89f, 0.94f, 0.28f));
-        Colors.put("Red", convColor(0f, 1f, 1f, 0f));
-        Colors.put("OrangeRed", convColor(0f, 1f, 0.50f, 0f));
-        Colors.put("RubineRed", convColor(0f, 1f, 0.13f, 0f));
-        Colors.put("WildStrawberry", convColor(0f, 0.96f, 0.39f, 0f));
-        Colors.put("Salmon", convColor(0f, 0.53f, 0.38f, 0f));
-        Colors.put("CarnationPink", convColor(0f, 0.63f, 0f, 0f));
-        Colors.put("Magenta", convColor(0f, 1f, 0f, 0f));
-        Colors.put("VioletRed", convColor(0f, 0.81f, 0f, 0f));
-        Colors.put("Rhodamine", convColor(0f, 0.82f, 0f, 0f));
-        Colors.put("Mulberry", convColor(0.34f, 0.90f, 0f, 0.02f));
-        Colors.put("RedViolet", convColor(0.07f, 0.90f, 0f, 0.34f));
-        Colors.put("Fuchsia", convColor(0.47f, 0.91f, 0f, 0.08f));
-        Colors.put("Lavender", convColor(0f, 0.48f, 0f, 0f));
-        Colors.put("Thistle", convColor(0.12f, 0.59f, 0f, 0f));
-        Colors.put("Orchid", convColor(0.32f, 0.64f, 0f, 0f));
-        Colors.put("DarkOrchid", convColor(0.40f, 0.80f, 0.20f, 0f));
-        Colors.put("Purple", convColor(0.45f, 0.86f, 0f, 0f));
-        Colors.put("Plum", convColor(0.50f, 1f, 0f, 0f));
-        Colors.put("Violet", convColor(0.79f, 0.88f, 0f, 0f));
-        Colors.put("RoyalPurple", convColor(0.75f, 0.90f, 0f, 0f));
-        Colors.put("BlueViolet", convColor(0.86f, 0.91f, 0f, 0.04f));
-        Colors.put("Periwinkle", convColor(0.57f, 0.55f, 0f, 0f));
-        Colors.put("CadetBlue", convColor(0.62f, 0.57f, 0.23f, 0f));
-        Colors.put("CornflowerBlue", convColor(0.65f, 0.13f, 0f, 0f));
-        Colors.put("MidnightBlue", convColor(0.98f, 0.13f, 0f, 0.43f));
-        Colors.put("NavyBlue", convColor(0.94f, 0.54f, 0f, 0f));
-        Colors.put("RoyalBlue", convColor(1f, 0.50f, 0f, 0f));
-        Colors.put("Blue", convColor(1f, 1f, 0f, 0f));
-        Colors.put("Cerulean", convColor(0.94f, 0.11f, 0f, 0f));
-        Colors.put("Cyan", convColor(1f, 0f, 0f, 0f));
-        Colors.put("ProcessBlue", convColor(0.96f, 0f, 0f, 0f));
-        Colors.put("SkyBlue", convColor(0.62f, 0f, 0.12f, 0f));
-        Colors.put("Turquoise", convColor(0.85f, 0f, 0.20f, 0f));
-        Colors.put("TealBlue", convColor(0.86f, 0f, 0.34f, 0.02f));
-        Colors.put("Aquamarine", convColor(0.82f, 0f, 0.30f, 0f));
-        Colors.put("BlueGreen", convColor(0.85f, 0f, 0.33f, 0f));
-        Colors.put("Emerald", convColor(1f, 0f, 0.50f, 0f));
-        Colors.put("JungleGreen", convColor(0.99f, 0f, 0.52f, 0f));
-        Colors.put("SeaGreen", convColor(0.69f, 0f, 0.50f, 0f));
-        Colors.put("Green", convColor(1f, 0f, 1f, 0f));
-        Colors.put("ForestGreen", convColor(0.91f, 0f, 0.88f, 0.12f));
-        Colors.put("PineGreen", convColor(0.92f, 0f, 0.59f, 0.25f));
-        Colors.put("LimeGreen", convColor(0.50f, 0f, 1f, 0f));
-        Colors.put("YellowGreen", convColor(0.44f, 0f, 0.74f, 0f));
-        Colors.put("SpringGreen", convColor(0.26f, 0f, 0.76f, 0f));
-        Colors.put("OliveGreen", convColor(0.64f, 0f, 0.95f, 0.40f));
-        Colors.put("RawSienna", convColor(0f, 0.72f, 1f, 0.45f));
-        Colors.put("Sepia", convColor(0f, 0.83f, 1f, 0.70f));
-        Colors.put("Brown", convColor(0f, 0.81f, 1f, 0.60f));
-        Colors.put("Tan", convColor(0.14f, 0.42f, 0.56f, 0f));
-        Colors.put("Gray", convColor(0f, 0f, 0f, 0.50f));
-        Colors.put("Black", convColor(0f, 0f, 0f, 1f));
-        Colors.put("White", convColor(0f, 0f, 0f, 0f));
+        Colors.put("greenyellow", convColor(0.15f, 0f, 0.69f, 0f));
+        Colors.put("goldenrod", convColor(0f, 0.10f, 0.84f, 0f));
+        Colors.put("dandelion", convColor(0f, 0.29f, 0.84f, 0f));
+        Colors.put("apricot", convColor(0f, 0.32f, 0.52f, 0f));
+        Colors.put("peach", convColor(0f, 0.50f, 0.70f, 0f));
+        Colors.put("melon", convColor(0f, 0.46f, 0.50f, 0f));
+        Colors.put("yelloworange", convColor(0f, 0.42f, 1f, 0f));
+        Colors.put("orange", convColor(0f, 0.61f, 0.87f, 0f));
+        Colors.put("burntorange", convColor(0f, 0.51f, 1f, 0f));
+        Colors.put("bittersweet", convColor(0f, 0.75f, 1f, 0.24f));
+        Colors.put("redorange", convColor(0f, 0.77f, 0.87f, 0f));
+        Colors.put("mahogany", convColor(0f, 0.85f, 0.87f, 0.35f));
+        Colors.put("maroon", convColor(0f, 0.87f, 0.68f, 0.32f));
+        Colors.put("brickred", convColor(0f, 0.89f, 0.94f, 0.28f));
+        Colors.put("orangered", convColor(0f, 1f, 0.50f, 0f));
+        Colors.put("rubinered", convColor(0f, 1f, 0.13f, 0f));
+        Colors.put("wildstrawberry", convColor(0f, 0.96f, 0.39f, 0f));
+        Colors.put("salmon", convColor(0f, 0.53f, 0.38f, 0f));
+        Colors.put("carnationpink", convColor(0f, 0.63f, 0f, 0f));
+        Colors.put("magenta", convColor(0f, 1f, 0f, 0f));
+        Colors.put("violetred", convColor(0f, 0.81f, 0f, 0f));
+        Colors.put("rhodamine", convColor(0f, 0.82f, 0f, 0f));
+        Colors.put("mulberry", convColor(0.34f, 0.90f, 0f, 0.02f));
+        Colors.put("redviolet", convColor(0.07f, 0.90f, 0f, 0.34f));
+        Colors.put("fuchsia", convColor(0.47f, 0.91f, 0f, 0.08f));
+        Colors.put("lavender", convColor(0f, 0.48f, 0f, 0f));
+        Colors.put("thistle", convColor(0.12f, 0.59f, 0f, 0f));
+        Colors.put("orchid", convColor(0.32f, 0.64f, 0f, 0f));
+        Colors.put("darkorchid", convColor(0.40f, 0.80f, 0.20f, 0f));
+        Colors.put("purple", convColor(0.45f, 0.86f, 0f, 0f));
+        Colors.put("plum", convColor(0.50f, 1f, 0f, 0f));
+        Colors.put("violet", convColor(0.79f, 0.88f, 0f, 0f));
+        Colors.put("royalpurple", convColor(0.75f, 0.90f, 0f, 0f));
+        Colors.put("blueviolet", convColor(0.86f, 0.91f, 0f, 0.04f));
+        Colors.put("periwinkle", convColor(0.57f, 0.55f, 0f, 0f));
+        Colors.put("cadetblue", convColor(0.62f, 0.57f, 0.23f, 0f));
+        Colors.put("cornflowerblue", convColor(0.65f, 0.13f, 0f, 0f));
+        Colors.put("midnightblue", convColor(0.98f, 0.13f, 0f, 0.43f));
+        Colors.put("navyblue", convColor(0.94f, 0.54f, 0f, 0f));
+        Colors.put("royalblue", convColor(1f, 0.50f, 0f, 0f));
+        Colors.put("cerulean", convColor(0.94f, 0.11f, 0f, 0f));
+        Colors.put("processblue", convColor(0.96f, 0f, 0f, 0f));
+        Colors.put("skyblue", convColor(0.62f, 0f, 0.12f, 0f));
+        Colors.put("turquoise", convColor(0.85f, 0f, 0.20f, 0f));
+        Colors.put("tealblue", convColor(0.86f, 0f, 0.34f, 0.02f));
+        Colors.put("aquamarine", convColor(0.82f, 0f, 0.30f, 0f));
+        Colors.put("bluegreen", convColor(0.85f, 0f, 0.33f, 0f));
+        Colors.put("emerald", convColor(1f, 0f, 0.50f, 0f));
+        Colors.put("junglegreen", convColor(0.99f, 0f, 0.52f, 0f));
+        Colors.put("seagreen", convColor(0.69f, 0f, 0.50f, 0f));
+        Colors.put("forestgreen", convColor(0.91f, 0f, 0.88f, 0.12f));
+        Colors.put("pinegreen", convColor(0.92f, 0f, 0.59f, 0.25f));
+        Colors.put("limegreen", convColor(0.50f, 0f, 1f, 0f));
+        Colors.put("yellowgreen", convColor(0.44f, 0f, 0.74f, 0f));
+        Colors.put("springgreen", convColor(0.26f, 0f, 0.76f, 0f));
+        Colors.put("olivegreen", convColor(0.64f, 0f, 0.95f, 0.40f));
+        Colors.put("rawsienna", convColor(0f, 0.72f, 1f, 0.45f));
+        Colors.put("sepia", convColor(0f, 0.83f, 1f, 0.70f));
+        Colors.put("brown", convColor(0f, 0.81f, 1f, 0.60f));
+        Colors.put("tan", convColor(0.14f, 0.42f, 0.56f, 0f));
+        Colors.put("gray", convColor(0f, 0f, 0f, 0.50f));
     }
 
     private static Color convColor(final float c, final float m, final float y, final float k) {

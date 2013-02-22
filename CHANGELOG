@@ -1,4 +1,8 @@
 jlatexmath (1.0.1)
+        * Color name must not be case sensitive
+
+        * Add an example to connect C++ and JLaTeXMath in using Giws
+
         * Fix bad cmex10.ttf rendering with OpenJDK
 
 	* Add \L, \l, \yen, \mathsterling (in unicode too)
