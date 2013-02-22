@@ -1192,7 +1192,12 @@ public class TeXParser {
             pos++;
         }
 
-        return parseString.substring(spos, pos);
+        String com = parseString.substring(spos, pos);
+        if ("cr".equals(com) && parseString.charAt(pos) == ' ') {
+            pos++;
+        }
+
+        return com;
     }
 
     private Atom processEscape() throws ParseException {

@@ -1,4 +1,6 @@
 jlatexmath (1.0.1)
+        * Eat one white (if it exists) after a \cr.
+
         * Color name must not be case sensitive
 
         * Add an example to connect C++ and JLaTeXMath in using Giws
