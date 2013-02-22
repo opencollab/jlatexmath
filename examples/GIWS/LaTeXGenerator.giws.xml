@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package name="org.scilab.forge.example.giws">
+  <object name="LaTeXGenerator">
+      <method name="generate" returnType="void">
+        <param type="String" name="formula" />
+        <param type="String" name="path" />
+      </method>
+  </object>
+</package>

@@ -1,0 +1,9 @@
+It is a simple example to show how to use JLaTeXMath from C++ in using Giws wrapper.
+To run it:
+i) make
+ii) export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib/jvm/java-6-openjdk-amd64/jre/lib/amd64/server
+iii) ./latex "\int_0^{+\infty} e^{-x^2}\mathrm{d}x = \frac\sqrt{\pi}2 \text{ and } \sum_{n=0}^{\infty}\frac{1}{n^2}=\frac{\pi^2}6" foo.png
+
+Depending of your configuration, you probably need to modify build.xml, Makefile and latex.cpp to adapt the different paths.
+
+Calixte & Sylvestre.
