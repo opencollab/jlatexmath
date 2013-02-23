@@ -35,14 +35,16 @@
 	
 	<GlueTypes>
 		<GlueType name="default" space="0" shrink="0" stretch="0"/>
-		<GlueType name="thin" space="2" shrink="0" stretch="0"/>
+		<GlueType name="thin" space="3" shrink="0" stretch="0"/>
 		<GlueType name="med" space="4" shrink="4" stretch="2"/>
 		<GlueType name="thick" space="5" shrink="0" stretch="5"/>
 	</GlueTypes>
 
 <!-- Glue table for the 4 possible TeX-styles (display, text, script and script_script) and the 8 possible 
 atom types (rd, op, bin, rel, open, close, punct and inner). Other atom types (over, under, acc, rad and vcent) 
-are treated as type ord. No table entry for a specific lefttype, righttype and style means gluetype "default" -->
+are treated as type ord. No table entry for a specific lefttype, righttype and style means gluetype "default"
+Page 181 in TeXBook
+-->
 
 	<GlueTable>
 		<Glue lefttype="ord" righttype="op" gluetype="thin">

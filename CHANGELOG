@@ -1,4 +1,7 @@
 jlatexmath (1.0.1)
+	* Negative spaces were not taken into accound at the end of a horizontal
+          box.
+
         * Add command \Join.
 
         * Fix bad space around \begin{array}...\end{array}

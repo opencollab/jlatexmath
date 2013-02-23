@@ -110,8 +110,11 @@ public class HorizontalBox extends Box {
     }
 
     private void recalculate(Box b) {
-        curPos += b.getWidth();
-        width = Math.max(width, curPos);
+        // Commented for ticket 764
+        // \left(\!\!\!\begin{array}{c}n\\\\r\end{array}\!\!\!\right)+123
+        //curPos += b.getWidth();
+        //width = Math.max(width, curPos);
+        width += b.getWidth();
         height = Math.max((children.size() == 0 ? Float.NEGATIVE_INFINITY : height), b.height - b.shift);
         depth = Math.max((children.size() == 0 ? Float.NEGATIVE_INFINITY : depth), b.depth + b.shift);
     }

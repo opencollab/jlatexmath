@@ -248,9 +248,9 @@ public class SpaceAtom extends Atom {
             else {
                 int bl = blankType < 0 ? -blankType : blankType;
                 Box b;
-                if (bl == TeXConstants.THINMUSKIP)
-                    b = Glue.get(TeXConstants.TYPE_INNER, TeXConstants.TYPE_ORDINARY, env);
-                else if (bl == TeXConstants.MEDMUSKIP)
+                if (bl == TeXConstants.THINMUSKIP) {
+                    b = Glue.get(TeXConstants.TYPE_INNER, TeXConstants.TYPE_BIG_OPERATOR, env);
+                } else if (bl == TeXConstants.MEDMUSKIP)
                     b = Glue.get(TeXConstants.TYPE_BINARY_OPERATOR, TeXConstants.TYPE_BIG_OPERATOR, env);
                 else
                     b = Glue.get(TeXConstants.TYPE_RELATION, TeXConstants.TYPE_BIG_OPERATOR, env);
