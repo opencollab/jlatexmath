@@ -64,13 +64,11 @@ public class SpaceAtom extends Atom {
         public float getPixelConversion(TeXEnvironment env);
     }
 
-    // TODO: UNIT_EM and UNIT_EX yield the same converters ??
-
     private static UnitConversion[] unitConversions = new UnitConversion[] {
 
         new UnitConversion() {//EM
             public float getPixelConversion(TeXEnvironment env) {
-                return env.getTeXFont().getXHeight(env.getStyle(), env.getLastFontId());
+                return env.getTeXFont().getEM(env.getStyle());
             }
         },
 

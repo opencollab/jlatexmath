@@ -1,4 +1,6 @@
 jlatexmath (1.0.1)
+        * There were no spaces around fraction (\nulldelimiterspace).
+
         * Eat one white (if it exists) after a \cr.
 
         * Color name must not be case sensitive

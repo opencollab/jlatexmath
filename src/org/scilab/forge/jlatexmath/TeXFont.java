@@ -200,6 +200,8 @@ public interface TeXFont {
     public float getSupDrop(int style);
     
     public float getXHeight(int style, int fontCode);
+
+    public float getEM(int style);
     
     /**
      * 

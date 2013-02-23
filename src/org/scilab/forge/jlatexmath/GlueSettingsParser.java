@@ -109,8 +109,9 @@ public class GlueSettingsParser {
         }
         
         // make reverse map
-        for (int i = 0; i < glueTypes.length; i++)
-            glueTypeMappings.put(glueTypes[i].getName(), i);
+        for (int i = 0; i < glueTypes.length; i++) {
+	    glueTypeMappings.put(glueTypes[i].getName(), i);
+	}
     }
     
     private Glue createGlue(Element type, String name) throws ResourceParseException {
@@ -157,9 +158,9 @@ public class GlueSettingsParser {
             for (int i = 0; i < list.getLength(); i++) {
                 Element glue = (Element)list.item(i);
                 // retrieve required attribute values and throw exception if they're not set
-                String left = getAttrValueAndCheckIfNotNull("lefttype", glue), right = getAttrValueAndCheckIfNotNull(
-                        "righttype", glue), type = getAttrValueAndCheckIfNotNull(
-                        "gluetype", glue);
+                String left = getAttrValueAndCheckIfNotNull("lefttype", glue);
+		String right = getAttrValueAndCheckIfNotNull("righttype", glue);
+		String type = getAttrValueAndCheckIfNotNull("gluetype", glue);
 		// iterate all the "Style"-elements
 		NodeList listG = glue.getElementsByTagName("Style");
                 for (int j = 0; j < listG.getLength(); j++) {
@@ -175,10 +176,8 @@ public class GlueSettingsParser {
                     checkMapping(r, "Glue", "righttype", right);
                     checkMapping(val, "Glue", "gluetype", type);
                     checkMapping(st, "Style", "name", styleName);
-                    
                     // put value in table
-                    table[((Integer) l).intValue()][((Integer) r).intValue()][((Integer) st)
-                    .intValue()] = ((Integer) val).intValue();
+                    table[((Integer) l).intValue()][((Integer) r).intValue()][((Integer) st).intValue()] = ((Integer) val).intValue();
                 }
             }
         }

@@ -471,6 +471,10 @@ public class DefaultTeXFont implements TeXFont {
         return info.getXHeight(getSizeFactor(style) * TeXFormula.PIXELS_PER_POINT);
     }
 
+    public float getEM(int style) {
+        return getSizeFactor(style) * TeXFormula.PIXELS_PER_POINT;
+    }
+
     public boolean hasNextLarger(Char c) {
         FontInfo info = fontInfo[c.getFontCode()];
         return (info.getNextLarger(c.getChar()) != null);
