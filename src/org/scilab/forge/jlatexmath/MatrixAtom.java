@@ -39,8 +39,8 @@ import java.util.List;
  */
 public class MatrixAtom extends Atom {
 
-    public static SpaceAtom hsep = new SpaceAtom(TeXConstants.UNIT_EM, 2.0f, 0.0f, 0.0f);
-    public static SpaceAtom semihsep = new SpaceAtom(TeXConstants.UNIT_EM, 1.0f, 0.0f, 0.0f);
+    public static SpaceAtom hsep = new SpaceAtom(TeXConstants.UNIT_EM, 1f, 0.0f, 0.0f);
+    public static SpaceAtom semihsep = new SpaceAtom(TeXConstants.UNIT_EM, 0.5f, 0.0f, 0.0f);
     public static SpaceAtom vsep_in = new SpaceAtom(TeXConstants.UNIT_EX, 0.0f, 1f, 0.0f);
     public static SpaceAtom vsep_ext_top = new SpaceAtom(TeXConstants.UNIT_EX, 0.0f, 0.4f, 0.0f);
     public static SpaceAtom vsep_ext_bot = new SpaceAtom(TeXConstants.UNIT_EX, 0.0f, 0.4f, 0.0f);
@@ -72,11 +72,20 @@ public class MatrixAtom extends Atom {
      * Creates an empty matrix
      *
      */
-    public MatrixAtom(boolean isPartial, ArrayOfAtoms array, String options) {
+    public MatrixAtom(boolean isPartial, ArrayOfAtoms array, String options, boolean spaceAround) {
         this.isPartial = isPartial;
         this.matrix = array;
         this.type = ARRAY;
+        this.spaceAround = spaceAround;
         parsePositions(new StringBuffer(options));
+    }
+
+    /**
+     * Creates an empty matrix
+     *
+     */
+    public MatrixAtom(boolean isPartial, ArrayOfAtoms array, String options) {
+        this(isPartial, array, options, false);
     }
 
     /**
@@ -88,9 +97,14 @@ public class MatrixAtom extends Atom {
     }
 
     public MatrixAtom(boolean isPartial, ArrayOfAtoms array, int type) {
+        this(isPartial, array, type, false);
+    }
+
+    public MatrixAtom(boolean isPartial, ArrayOfAtoms array, int type, boolean spaceAround) {
         this.isPartial = isPartial;
         this.matrix = array;
         this.type = type;
+        this.spaceAround = spaceAround;
 
         if (type != MATRIX && type != SMALLMATRIX) {
             position = new int[matrix.col];
@@ -189,9 +203,9 @@ public class MatrixAtom extends Atom {
                 len = opt.length();
                 pos--;
                 break;
-	    case ' ':
-	    case '\t':
-		break;
+            case ' ':
+            case '\t':
+                break;
             default :
                 lposition.add(TeXConstants.ALIGN_CENTER);
             }
@@ -438,7 +452,7 @@ public class MatrixAtom extends Atom {
                     boolean lastVline = true;
 
                     if (boxarr[i][j].type == -1) {
-			hb.add(new HorizontalBox(boxarr[i][j], rowWidth[j], position[j]));
+                        hb.add(new HorizontalBox(boxarr[i][j], rowWidth[j], position[j]));
                     } else {
                         Box b = generateMulticolumn(env, Hsep, rowWidth, i, j);
                         MulticolumnAtom matom = (MulticolumnAtom) matrix.array.get(i).get(j);

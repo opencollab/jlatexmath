@@ -783,7 +783,7 @@ public class PredefMacros {
         TeXParser parser = new TeXParser(tp.getIsPartial(), args[2], array, false);
         parser.parse();
         array.checkDimensions();
-        return new MatrixAtom(tp.getIsPartial(), array, args[1]);
+        return new MatrixAtom(tp.getIsPartial(), array, args[1], true);
     }
 
     public static final Atom alignATATenv_macro(final TeXParser tp, final String[] args) throws ParseException {
