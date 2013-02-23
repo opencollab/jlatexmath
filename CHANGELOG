@@ -1,4 +1,6 @@
 jlatexmath (1.0.1)
+        * Add command \Join.
+
         * Fix bad space around \begin{array}...\end{array}
 
         * There were no spaces around fraction (\nulldelimiterspace).
