@@ -146,7 +146,7 @@
     <copy file="COPYING" todir="${project.bin.dir}/META-INF" />
     <delete dir="${project.bin.dir}/META-INF/services"/>
     <jar jarfile="${package.dir}/jlatexmath-minimal-${version}.jar" basedir="${project.bin.dir}" manifest="MANIFEST.MF" excludes="cyrillic/** greek/** **/greek/** **/cyrillic/** **/fop/** **/services/**"/>
-    <zip destfile="${package.dir}/jlatexmath-minimal.zip">
+    <zip destfile="${package.dir}/jlatexmath-minimal-${version}.zip">
       <fileset dir="${package.dir}" includes="jlm_greek.jar"/>
       <fileset dir="${package.dir}" includes="jlm_cyrillic.jar"/>
       <fileset dir="${package.dir}" includes="jlatexmath-minimal-${version}.jar"/>

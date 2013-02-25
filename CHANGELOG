@@ -1,3 +1,6 @@
+jlatexmath (1.0.2)
+	* jlatexmath-minimal.zip renamed to jlatexmath-minimal-${version}.zip
+
 jlatexmath (1.0.1)
 	* Negative spaces were not taken into accound at the end of a horizontal
           box.
