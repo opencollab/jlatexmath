@@ -1,4 +1,6 @@
 jlatexmath (1.0.2)
+        * Fix bug in parser when no chars after command \cr
+
         * Add missing glyph in jlm_cmex10.ttf (char 183)
 
 	* jlatexmath-minimal.zip renamed to jlatexmath-minimal-${version}.zip

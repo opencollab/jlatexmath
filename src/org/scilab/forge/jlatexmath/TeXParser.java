@@ -1193,7 +1193,7 @@ public class TeXParser {
         }
 
         String com = parseString.substring(spos, pos);
-        if ("cr".equals(com) && parseString.charAt(pos) == ' ') {
+        if ("cr".equals(com) && pos < len && parseString.charAt(pos) == ' ') {
             pos++;
         }
 
