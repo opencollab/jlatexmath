@@ -1107,7 +1107,7 @@ public class TeXParser {
 
             String symbolName = TeXFormula.symbolMappings[c];
             if (symbolName == null && (TeXFormula.symbolFormulaMappings == null || TeXFormula.symbolFormulaMappings[c] == null)) {
-                TeXFormula.FontInfos fontInfos = TeXFormula.externalFontMap.get(block);
+                TeXFormula.FontInfos fontInfos = TeXFormula.getExternalFont(block);
                 if (fontInfos != null) {
                     if (oneChar) {
                         return new JavaFontRenderingAtom(Character.toString(c), fontInfos);

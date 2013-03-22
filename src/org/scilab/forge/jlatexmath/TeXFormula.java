@@ -166,6 +166,16 @@ public class TeXFormula {
         tfsp.parseSymbolToFormulaMappings(symbolFormulaMappings, symbolTextMappings);
     }
 
+    public static FontInfos getExternalFont(Character.UnicodeBlock block) {
+        FontInfos infos = externalFontMap.get(block);
+	if (infos == null) {
+	    infos = new FontInfos("SansSerif", "Serif");
+	    externalFontMap.put(block, infos);
+	}
+
+	return infos;
+    }
+
     public static void registerExternalFont(Character.UnicodeBlock block, String sansserif, String serif) {
         if (sansserif == null && serif == null) {
             externalFontMap.remove(block);

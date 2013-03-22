@@ -1,4 +1,6 @@
 jlatexmath (1.0.2)
+        * Use default Java font when char is in an unknown unicode block.   
+
         * Fix bug in \LaTeX (due to modification of EM value)
 
         * Fix bug in parser when no chars after command \cr
