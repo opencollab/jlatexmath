@@ -79,10 +79,14 @@ public class VRowAtom extends Atom {
     
     public Box createBox(TeXEnvironment env) {
         VerticalBox vb = new VerticalBox();
-        
+	Box interline = new StrutBox(0, env.getInterline(), 0, 0);
+
         // convert atoms to boxes and add to the horizontal box
         for (ListIterator it = elements.listIterator(); it.hasNext();) {
             vb.add(((Atom)it.next()).createBox(env));
+	    if (it.hasNext()) {
+		vb.add(interline);
+	    }
 	}
 
 	vb.setShift(-raise.createBox(env).getWidth());

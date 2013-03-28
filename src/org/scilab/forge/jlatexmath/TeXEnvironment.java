@@ -57,6 +57,8 @@ public class TeXEnvironment {
     private String textStyle;
     private boolean smallCap;
     private float scaleFactor = 1;
+    private int interlineUnit;
+    private float interline;
 
     public boolean isColored = false;
         
@@ -74,6 +76,7 @@ public class TeXEnvironment {
         this.tf = tf;
         background = bg;
         color = c;
+	setInterline(TeXConstants.UNIT_EX, 1f);
     }
 
     private TeXEnvironment(int style, float scaleFactor, TeXFont tf, Color bg, Color c, String textStyle, boolean smallCap) {
@@ -84,6 +87,16 @@ public class TeXEnvironment {
 	this.smallCap = smallCap;
         background = bg;
         color = c;
+	setInterline(TeXConstants.UNIT_EX, 1f);
+    }
+
+    public void setInterline(int unit, float len) {
+	this.interline = len;
+	this.interlineUnit = unit;
+    } 
+
+    public float getInterline() {
+	return interline * SpaceAtom.getFactor(interlineUnit, this);
     }
 
     public void setTextwidth(int widthUnit, float textwidth) {
@@ -109,6 +122,8 @@ public class TeXEnvironment {
     protected TeXEnvironment copy(TeXFont tf) {
         TeXEnvironment te = new TeXEnvironment(style, scaleFactor, tf, background, color, textStyle, smallCap);
 	te.textwidth = textwidth;
+	te.interline = interline;
+	te.interlineUnit = interlineUnit;
 	return te;
     }
     
