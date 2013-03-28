@@ -168,12 +168,12 @@ public class TeXFormula {
 
     public static FontInfos getExternalFont(Character.UnicodeBlock block) {
         FontInfos infos = externalFontMap.get(block);
-	if (infos == null) {
-	    infos = new FontInfos("SansSerif", "Serif");
-	    externalFontMap.put(block, infos);
-	}
+        if (infos == null) {
+            infos = new FontInfos("SansSerif", "Serif");
+            externalFontMap.put(block, infos);
+        }
 
-	return infos;
+        return infos;
     }
 
     public static void registerExternalFont(Character.UnicodeBlock block, String sansserif, String serif) {
@@ -430,13 +430,13 @@ public class TeXFormula {
                     root = new RowAtom(root);
                 }
                 ((RowAtom) root).add(el);
-		if (el instanceof TypedAtom) {
-		    TypedAtom ta = (TypedAtom) el;
-		    int rtype = ta.getRightType();
-		    if (rtype == TeXConstants.TYPE_BINARY_OPERATOR || rtype == TeXConstants.TYPE_RELATION) {
-			((RowAtom) root).add(new BreakMarkAtom());
-		    }
-		}
+                if (el instanceof TypedAtom) {
+                    TypedAtom ta = (TypedAtom) el;
+                    int rtype = ta.getRightType();
+                    if (rtype == TeXConstants.TYPE_BINARY_OPERATOR || rtype == TeXConstants.TYPE_RELATION) {
+                        ((RowAtom) root).add(new BreakMarkAtom());
+                    }
+                }
             }
         }
         return this;
@@ -609,7 +609,7 @@ public class TeXFormula {
     }
 
     /**
-     * Apply the Builder pattern instead of using the createTeXIcon(...) factories 
+     * Apply the Builder pattern instead of using the createTeXIcon(...) factories
      * @author Felix Natter
      *
      */
@@ -632,10 +632,10 @@ public class TeXFormula {
          * @return the builder, used for chaining
          */
         public TeXIconBuilder setStyle(final int style)
-        {
-            this.style = style;
-            return this;
-        }
+            {
+                this.style = style;
+                return this;
+            }
 
         /**
          * Specify the font size for rendering the given TeXFormula
@@ -643,10 +643,10 @@ public class TeXFormula {
          * @return the builder, used for chaining
          */
         public TeXIconBuilder setSize(final float size)
-        {
-            this.size = size;
-            return this;
-        }
+            {
+                this.size = size;
+                return this;
+            }
 
         /**
          * Specify the font type for rendering the given TeXFormula
@@ -654,10 +654,10 @@ public class TeXFormula {
          * @return the builder, used for chaining
          */
         public TeXIconBuilder setType(final int type)
-        {
-            this.type = type;
-            return this;
-        }
+            {
+                this.type = type;
+                return this;
+            }
 
         /**
          * Specify the background color for rendering the given TeXFormula
@@ -665,10 +665,10 @@ public class TeXFormula {
          * @return the builder, used for chaining
          */
         public TeXIconBuilder setFGColor(final Color fgcolor)
-        {
-            this.fgcolor = fgcolor;
-            return this;
-        }
+            {
+                this.fgcolor = fgcolor;
+                return this;
+            }
 
         /**
          * Specify the "true values" parameter for rendering the given TeXFormula
@@ -676,10 +676,10 @@ public class TeXFormula {
          * @return the builder, used for chaining
          */
         public TeXIconBuilder setTrueValues(final boolean trueValues)
-        {
-            this.trueValues = trueValues;
-            return this;
-        }
+            {
+                this.trueValues = trueValues;
+                return this;
+            }
 
         /**
          * Specify the width of the formula (may be exact or maximum width, see {@link #setIsMaxWidth(boolean)})
@@ -689,13 +689,13 @@ public class TeXFormula {
          * @return the builder, used for chaining
          */
         public TeXIconBuilder setWidth(final int widthUnit, final float textWidth, final int align)
-        {
-            this.widthUnit = widthUnit;
-            this.textWidth = textWidth;
-            this.align = align;
-            trueValues = true; // TODO: is this necessary?
-            return this;
-        }
+            {
+                this.widthUnit = widthUnit;
+                this.textWidth = textWidth;
+                this.align = align;
+                trueValues = true; // TODO: is this necessary?
+                return this;
+            }
 
         /**
          * Specifies whether the width is the exact or the maximum width
@@ -703,33 +703,33 @@ public class TeXFormula {
          * @return the builder, used for chaining
          */
         public TeXIconBuilder setIsMaxWidth(final boolean isMaxWidth)
-        {
-            if (widthUnit == null)
             {
-                throw new IllegalStateException("Cannot set 'isMaxWidth' without having specified a width!");
+                if (widthUnit == null)
+                {
+                    throw new IllegalStateException("Cannot set 'isMaxWidth' without having specified a width!");
+                }
+                if (isMaxWidth)
+                {
+                    // NOTE: Currently isMaxWidth==true does not work with ALIGN_CENTER or ALIGN_RIGHT (see HorizontalBox ctor)
+                    // The case (1) we don't support by setting align := ALIGN_LEFT here is this:
+                    //  \text{hello world\\hello} with align=ALIGN_CENTER (but forced to ALIGN_LEFT) and isMaxWidth==true results in:
+                    // [hello world]
+                    // [hello      ]
+                    // and NOT:
+                    // [hello world]
+                    // [   hello   ]
+                    // However, this case (2) is currently not supported anyway (ALIGN_CENTER with isMaxWidth==false):
+                    // [  hello world  ]
+                    // [  hello        ]
+                    // and NOT:
+                    // [  hello world  ]
+                    // [     hello     ]
+                    // => until (2) is solved, we stick with the hack to set align := ALIGN_LEFT!
+                    this.align = TeXConstants.ALIGN_LEFT;
+                }
+                this.isMaxWidth = isMaxWidth;
+                return this;
             }
-            if (isMaxWidth)
-            {
-            	// NOTE: Currently isMaxWidth==true does not work with ALIGN_CENTER or ALIGN_RIGHT (see HorizontalBox ctor)
-            	// The case (1) we don't support by setting align := ALIGN_LEFT here is this:
-            	//  \text{hello world\\hello} with align=ALIGN_CENTER (but forced to ALIGN_LEFT) and isMaxWidth==true results in:
-            	// [hello world]
-            	// [hello      ]
-            	// and NOT:
-            	// [hello world]
-            	// [   hello   ]
-            	// However, this case (2) is currently not supported anyway (ALIGN_CENTER with isMaxWidth==false):
-            	// [  hello world  ]
-            	// [  hello        ]
-            	// and NOT:
-            	// [  hello world  ]
-            	// [     hello     ]
-            	// => until (2) is solved, we stick with the hack to set align := ALIGN_LEFT!
-            	this.align = TeXConstants.ALIGN_LEFT;
-            }
-            this.isMaxWidth = isMaxWidth;
-            return this;
-        }
 
         /**
          * Specify the inter line spacing unit and value. NOTE: this is required for automatic linebreaks to work!
@@ -738,15 +738,15 @@ public class TeXFormula {
          * @return the builder, used for chaining
          */
         public TeXIconBuilder setInterLineSpacing(final int interLineUnit, final float interLineSpacing)
-        {
-            if (widthUnit == null)
             {
-                throw new IllegalStateException("Cannot set inter line spacing without having specified a width!");
+                if (widthUnit == null)
+                {
+                    throw new IllegalStateException("Cannot set inter line spacing without having specified a width!");
+                }
+                this.interLineUnit = interLineUnit;
+                this.interLineSpacing = interLineSpacing;
+                return this;
             }
-            this.interLineUnit = interLineUnit;
-            this.interLineSpacing = interLineSpacing;
-            return this;
-        }
 
         /**
          * Create a TeXIcon from the information gathered by the (chained) setXXX() methods.
@@ -754,51 +754,52 @@ public class TeXFormula {
          * @return the TeXIcon
          */
         public TeXIcon build()
-        {
-            if (style == null)
             {
-                throw new IllegalStateException("A style is required. Use setStyle()");
-            }
-            if (size == null)
-            {
-                throw new IllegalStateException("A size is required. Use setStyle()");
-            }
-            DefaultTeXFont font = (type == null) ? new DefaultTeXFont(size) : createFont(size, type);
-            TeXEnvironment te;
-            if (widthUnit != null)
-            {
-                te = new TeXEnvironment(style, font, widthUnit, textWidth);
-            }
-            else
-            {
-                te = new TeXEnvironment(style, font);
-            }
-            Box box = createBox(te);
-            TeXIcon ti;
-            if (widthUnit != null)
-            {
-                HorizontalBox hb;
-                if (interLineUnit != null)
+                if (style == null)
                 {
-                    float il = interLineSpacing * SpaceAtom.getFactor(interLineUnit, te);
-                    hb = new HorizontalBox(BreakFormula.split(box, te.getTextwidth(), il), isMaxWidth ? 0 : te.getTextwidth(), align);
+                    throw new IllegalStateException("A style is required. Use setStyle()");
+                }
+                if (size == null)
+                {
+                    throw new IllegalStateException("A size is required. Use setStyle()");
+                }
+                DefaultTeXFont font = (type == null) ? new DefaultTeXFont(size) : createFont(size, type);
+                TeXEnvironment te;
+                if (widthUnit != null)
+                {
+                    te = new TeXEnvironment(style, font, widthUnit, textWidth);
                 }
                 else
                 {
-                    hb = new HorizontalBox(box, isMaxWidth ? 0 : te.getTextwidth(), align);
+                    te = new TeXEnvironment(style, font);
                 }
-                ti = new TeXIcon(hb, size, trueValues);
+                Box box = createBox(te);
+                TeXIcon ti;
+                if (widthUnit != null)
+                {
+                    HorizontalBox hb;
+                    if (interLineUnit != null)
+                    {
+                        float il = interLineSpacing * SpaceAtom.getFactor(interLineUnit, te);
+                        Box b = BreakFormula.split(box, te.getTextwidth(), il);
+                        hb = new HorizontalBox(b, isMaxWidth ? b.getWidth() : te.getTextwidth(), align);
+                    }
+                    else
+                    {
+                        hb = new HorizontalBox(box, isMaxWidth ? box.getWidth() : te.getTextwidth(), align);
+                    }
+                    ti = new TeXIcon(hb, size, trueValues);
+                }
+                else
+                {
+                    ti = new TeXIcon(box, size, trueValues);
+                }
+                if (fgcolor != null) {
+                    ti.setForeground(fgcolor);
+                }
+                ti.isColored = te.isColored;
+                return ti;
             }
-            else
-            {
-                ti = new TeXIcon(box, size, trueValues);
-            }
-            if (fgcolor != null) {
-                ti.setForeground(fgcolor);
-            }
-            ti.isColored = te.isColored;
-            return ti;
-        }
     }
 
     /**
