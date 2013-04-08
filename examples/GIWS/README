@@ -6,4 +6,9 @@ iii) ./latex "\int_0^{+\infty} e^{-x^2}\mathrm{d}x = \frac\sqrt{\pi}2 \text{ and
 
 Depending of your configuration, you probably need to modify build.xml, Makefile and latex.cpp to adapt the different paths.
 
+On Windows :
+ - you must have a environment variable JAVA_HOME to your JDK folder ( ex : C:\Program Files\java\jdk )
+ - ant must be in you PATH
+ - jvm.dll must be in you PATH ( Ex : C:\Program Files\Java\jre6\bin\server )
+
 Calixte & Sylvestre.

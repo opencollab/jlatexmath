@@ -17,7 +17,7 @@
   </target>
 
   <path id="compile.classpath">
-    <pathelement location="/usr/share/java/jlatexmath.jar"/>
+    <pathelement location="../../dist/jlatexmath-1.0.2.jar"/>
   </path>
   
   <!-- Info -->
