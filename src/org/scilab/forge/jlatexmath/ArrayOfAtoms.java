@@ -73,6 +73,7 @@ public class ArrayOfAtoms extends TeXFormula {
 
     public VRowAtom getAsVRow() {
 	VRowAtom vr = new VRowAtom();
+	vr.setAddInterline(true);
 	for (LinkedList<Atom> r : array) {
 	    for (Atom a : r) {
 		vr.append(a);

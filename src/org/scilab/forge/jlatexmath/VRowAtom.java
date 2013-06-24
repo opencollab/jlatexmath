@@ -44,6 +44,7 @@ public class VRowAtom extends Atom {
     // atoms to be displayed horizontally next to eachother
     protected LinkedList<Atom> elements = new LinkedList<Atom>();
     private SpaceAtom raise = new SpaceAtom(TeXConstants.UNIT_EX, 0, 0, 0);
+    protected boolean addInterline = false;
     
     public VRowAtom() {
         // empty
@@ -57,6 +58,14 @@ public class VRowAtom extends Atom {
             else
                 elements.add(el);
         }
+    }
+
+    public void setAddInterline(boolean addInterline) {
+	this.addInterline = addInterline;
+    }
+
+    public boolean getAddInterline() {
+	return this.addInterline;
     }
 
     public void setRaise(int unit, float r) {
@@ -84,13 +93,13 @@ public class VRowAtom extends Atom {
         // convert atoms to boxes and add to the horizontal box
         for (ListIterator it = elements.listIterator(); it.hasNext();) {
             vb.add(((Atom)it.next()).createBox(env));
-	    if (it.hasNext()) {
+	    if (addInterline && it.hasNext()) {
 		vb.add(interline);
 	    }
 	}
 
 	vb.setShift(-raise.createBox(env).getWidth());
-	float t = vb.children.getLast().getDepth();
+	float t = vb.getSize() == 0 ? 0 : vb.children.getLast().getDepth();
 	vb.setHeight(vb.getDepth() + vb.getHeight() - t);
 	vb.setDepth(t);
 		

@@ -166,6 +166,10 @@ public class TeXFormula {
         tfsp.parseSymbolToFormulaMappings(symbolFormulaMappings, symbolTextMappings);
     }
 
+    public static boolean isRegisteredBlock(Character.UnicodeBlock block) {
+	return externalFontMap.get(block) != null;
+    }
+
     public static FontInfos getExternalFont(Character.UnicodeBlock block) {
         FontInfos infos = externalFontMap.get(block);
         if (infos == null) {

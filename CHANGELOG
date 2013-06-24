@@ -1,5 +1,8 @@
+jlatexmath (1.0.3)
+	* Fix several bugs due to modification in VRowAtom.
+
 jlatexmath (1.0.2)
-	* Fix for ticket 1113: by default interline is 1ex (can be set with TeXIconBuilder::setInterLineSpacing (see Example7))
+       	* Fix for ticket 1113: by default interline is 1ex (can be set with TeXIconBuilder::setInterLineSpacing (see Example7))
 
 	* Fix bug with maxwidth.
 

@@ -1107,7 +1107,11 @@ public class TeXParser {
 
             String symbolName = TeXFormula.symbolMappings[c];
             if (symbolName == null && (TeXFormula.symbolFormulaMappings == null || TeXFormula.symbolFormulaMappings[c] == null)) {
-                TeXFormula.FontInfos fontInfos = TeXFormula.getExternalFont(block);
+		TeXFormula.FontInfos fontInfos = null;
+		boolean isLatin = Character.UnicodeBlock.BASIC_LATIN.equals(block);
+		if ((isLatin && TeXFormula.isRegisteredBlock(Character.UnicodeBlock.BASIC_LATIN)) || !isLatin) {
+		    fontInfos = TeXFormula.getExternalFont(block);
+		}
                 if (fontInfos != null) {
                     if (oneChar) {
                         return new JavaFontRenderingAtom(Character.toString(c), fontInfos);

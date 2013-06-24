@@ -56,7 +56,7 @@ import java.util.List;
  */
 public abstract class Box {
 
-    public static boolean DEBUG = false;;
+    public static boolean DEBUG = false;
 
     /**
      * The foreground color of the whole box. Child boxes can override this color.
