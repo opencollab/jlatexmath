@@ -36,10 +36,11 @@ JavaVM* create_vm() {
     args.version = JNI_VERSION_1_4;
 
     args.nOptions = 2;
+
 #ifndef _MSC_VER
     options[0].optionString = const_cast<char*>("-Djava.class.path=./dist/GiwsExample.jar:/usr/share/java/jlatexmath.jar");
 #else
-    options[0].optionString = const_cast<char*>("-Djava.class.path=./dist/GiwsExample.jar;../../dist/jlatexmath-1.0.2.jar");
+    options[0].optionString = const_cast<char*>("-Djava.class.path=./dist/GiwsExample.jar;../../dist/jlatexmath-1.0.3.jar");
 #endif
 
     options[1].optionString = const_cast<char*>("-Xcheck:jni");
