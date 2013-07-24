@@ -272,7 +272,7 @@ public abstract class Box {
         prevColor = g2.getColor();
         if (background != null) { // draw background
             g2.setColor(background);
-            g2.fill(new Rectangle2D.Float(x, y - height, width, height + depth));
+            //g2.fill(new Rectangle2D.Float(x, y - height, width, height + depth));
         }
         if (foreground == null) {
             g2.setColor(prevColor); // old foreground color
@@ -299,10 +299,18 @@ public abstract class Box {
             g2.draw(new Rectangle2D.Float(x, y - height, width, height + depth));
             if (showDepth) {
                 Color c = g2.getColor();
-                g2.setColor(Color.LIGHT_GRAY);
-                g2.fill(new Rectangle2D.Float(x, y, width, depth));
-                g2.setColor(c);
-                g2.draw(new Rectangle2D.Float(x, y, width, depth));
+                g2.setColor(Color.RED);
+		if (depth > 0) {
+		    g2.fill(new Rectangle2D.Float(x, y, width, depth));
+		    g2.setColor(c);
+		    g2.draw(new Rectangle2D.Float(x, y, width, depth));
+		} else if (depth < 0) {
+		    g2.fill(new Rectangle2D.Float(x, y + depth, width, -depth));
+		    g2.setColor(c);
+		    g2.draw(new Rectangle2D.Float(x, y + depth, width, -depth));
+		} else {
+		    g2.setColor(c);
+		}
             }
             g2.setStroke(st);
         }
@@ -310,7 +318,7 @@ public abstract class Box {
 
     protected void drawDebug(Graphics2D g2, float x, float y) {
         if (DEBUG) {
-            drawDebug(g2, x, y, false);
+            drawDebug(g2, x, y, true);
         }
     }
 

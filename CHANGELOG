@@ -1,4 +1,6 @@
 jlatexmath (1.0.3)
+	* Fix arrow shift in \overrightarrow macro
+
 	* Fix several bugs due to modification in VRowAtom.
 
 jlatexmath (1.0.2)

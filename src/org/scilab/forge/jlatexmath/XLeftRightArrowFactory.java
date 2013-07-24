@@ -44,13 +44,17 @@ public class XLeftRightArrowFactory {
         TeXFont tf = env.getTeXFont();
         int style = env.getStyle();
 	Box arr = left ? LEFT.createBox(env) : RIGHT.createBox(env);
+	float h = arr.getHeight();
+	float d = arr.getDepth();
 	
 	float swidth = arr.getWidth();
-	if (width <= swidth) 
+	if (width <= swidth) {
+	    arr.setDepth(d / 2);
 	    return arr;
+	}
 
 	Box minus = new SmashedAtom(MINUS, "").createBox(env);
-	Box kern = new SpaceAtom(TeXConstants.UNIT_MU, -3.4f, 0, 0).createBox(env);
+	Box kern = new SpaceAtom(TeXConstants.UNIT_MU, -4f, 0, 0).createBox(env);
 	float mwidth = minus.getWidth() + kern.getWidth();
 	swidth += kern.getWidth();
 	HorizontalBox hb = new HorizontalBox();
@@ -60,15 +64,21 @@ public class XLeftRightArrowFactory {
 	    hb.add(kern);
 	}
 
-	hb.add(new ScaleAtom(MINUS, (width - swidth - w) / minus.getWidth(), 1).createBox(env));
+	float sf = (width - swidth - w) / minus.getWidth();
+
+	hb.add(new SpaceAtom(TeXConstants.UNIT_MU, -2f * sf, 0, 0).createBox(env));
+	hb.add(new ScaleAtom(MINUS, sf, 1).createBox(env));
 	
 	if (left) {
-	    hb.add(0, new SpaceAtom(TeXConstants.UNIT_MU, -2.8f, 0, 0).createBox(env));
+	    hb.add(0, new SpaceAtom(TeXConstants.UNIT_MU, -3.5f, 0, 0).createBox(env));
 	    hb.add(0, arr);
 	} else {
-	    hb.add(new SpaceAtom(TeXConstants.UNIT_MU, -1.8f, 0, 0).createBox(env));
+	    hb.add(new SpaceAtom(TeXConstants.UNIT_MU, -2f * sf - 2f, 0, 0).createBox(env));
 	    hb.add(arr);
 	}
+
+	hb.setDepth(d / 2);
+	hb.setHeight(h);
 
 	return hb;
     }
