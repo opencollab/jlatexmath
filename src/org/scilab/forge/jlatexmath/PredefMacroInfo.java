@@ -551,6 +551,8 @@ class PredefMacroInfo extends MacroInfo {
                 return PredefMacros.above_macro(tp, args);
             case 274:
                 return PredefMacros.abovewithdelims_macro(tp, args);
+            case 275:
+                return PredefMacros.st_macro(tp, args);
             default:
                 return null;
             }

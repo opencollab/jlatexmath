@@ -1,4 +1,6 @@
 jlatexmath (1.0.3)
+	* Add macro \st (i.e. strike-through)
+
 	* Fix arrow shift in \overrightarrow macro
 
 	* Fix several bugs due to modification in VRowAtom.

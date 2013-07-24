@@ -103,6 +103,10 @@ public class PredefMacros {
         NewCommandMacro.addNewCommand("Join", "\\mathop{\\rlap{\\ltimes}\\rtimes}", 0);
     }
 
+    public static final Atom st_macro(final TeXParser tp, final String[] args) throws ParseException {
+	return new StrikeThroughAtom(new TeXFormula(tp, args[1], false).root);
+    }
+
     public static final Atom Braket_macro(final TeXParser tp, final String[] args) throws ParseException {
         String str = args[1].replaceAll("\\|", "\\\\middle\\\\vert ");
         return new TeXFormula(tp, "\\left\\langle " + str + "\\right\\rangle").root;
