@@ -1,4 +1,6 @@
 jlatexmath (1.0.3)
+        * Add macros \texteuro and \euro ( and map char &#8364; on \euro)
+
 	* Add macro \st (i.e. strike-through)
 
 	* Fix arrow shift in \overrightarrow macro

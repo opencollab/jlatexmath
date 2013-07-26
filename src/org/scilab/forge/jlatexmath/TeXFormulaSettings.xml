@@ -807,6 +807,7 @@
 	  <Map char="&#8222;" formula=",,"/>
 	  <Map char="&#8206;" formula=" "/>
 	  <Map char="&#8207;" formula=" "/>
+	  <Map char="&#8364;" formula="\euro"/>
 	  <Map char="&#8208;" formula="\textminus"/>
 	  <Map char="&#8211;" formula="\textendash"/>
 	  <Map char="&#8212;" formula="\textemdash"/>

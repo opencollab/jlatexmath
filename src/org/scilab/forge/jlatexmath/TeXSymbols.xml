@@ -684,5 +684,7 @@
 
   <!-- specials -->
   <Symbol name="textmu" type="ord" />
+  <Symbol name="texteuro" type="ord" />
+  <Symbol name="euro" type="ord" />
 
 </TeXSymbols>
