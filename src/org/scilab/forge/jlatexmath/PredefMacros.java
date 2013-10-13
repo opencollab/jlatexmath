@@ -103,6 +103,23 @@ public class PredefMacros {
         NewCommandMacro.addNewCommand("Join", "\\mathop{\\rlap{\\ltimes}\\rtimes}", 0);
     }
 
+    public static final Atom fcscore_macro(final TeXParser tp, final String[] args) throws ParseException {
+	int n = Integer.parseInt(args[1]);
+	if (n > 5) {
+	    final int q = n / 5;
+	    final int r = n % 5;
+	    RowAtom rat = new RowAtom();
+	    for (int i = 0; i < q; i++) {
+		rat.add(new FcscoreAtom(5));
+	    }
+	    rat.add(new FcscoreAtom(r));
+	    
+	    return rat;
+	} else {
+	    return new FcscoreAtom(n);
+	}
+    }
+
     public static final Atom st_macro(final TeXParser tp, final String[] args) throws ParseException {
 	return new StrikeThroughAtom(new TeXFormula(tp, args[1], false).root);
     }

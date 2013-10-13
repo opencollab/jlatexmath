@@ -309,5 +309,6 @@ final class PredefinedCommands {
         MacroInfo.Commands.put("above", new PredefMacroInfo(273, 0));
         MacroInfo.Commands.put("abovewithdelims", new PredefMacroInfo(274, 2));
         MacroInfo.Commands.put("st", new PredefMacroInfo(275, 1));
+        MacroInfo.Commands.put("fcscore", new PredefMacroInfo(276, 1));
     }
 }

@@ -1,4 +1,6 @@
 jlatexmath (1.0.3)
+        * Add macro \fcscore.
+
         * CharBox not correctly drawn in multithread context
 
         * Add macros \texteuro and \euro ( and map char &#8364; on \euro)
