@@ -1,4 +1,6 @@
 jlatexmath (1.0.3)
+	* Allow use of # in code.
+
         * Add macro \fcscore.
 
         * CharBox not correctly drawn in multithread context
