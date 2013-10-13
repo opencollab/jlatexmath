@@ -97,6 +97,8 @@ public class TeXIcon implements Icon {
         if (!trueValues) {
             insets.top += (int)(0.18f * size);
             insets.bottom += (int)(0.18f * size);
+            insets.left += (int)(0.18f * size);
+            insets.right += (int)(0.18f * size);
         }
     }
 
@@ -124,6 +126,8 @@ public class TeXIcon implements Icon {
         if (!trueValues) {
             this.insets.top += (int)(0.18f * size);
             this.insets.bottom += (int)(0.18f * size);
+            this.insets.left += (int)(0.18f * size);
+            this.insets.right += (int)(0.18f * size);
         }
     }
 

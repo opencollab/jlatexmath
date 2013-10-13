@@ -1,4 +1,6 @@
 jlatexmath (1.0.3)
+	* By default, slightly increase left and right insets.
+
 	* Allow use of # in code.
 
         * Add macro \fcscore.
