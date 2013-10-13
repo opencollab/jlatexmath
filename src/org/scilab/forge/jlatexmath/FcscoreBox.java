@@ -28,7 +28,6 @@
 
 package org.scilab.forge.jlatexmath;
 
-import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Stroke;
 import java.awt.BasicStroke;
@@ -57,21 +56,23 @@ public class FcscoreBox extends Box {
 
     public void draw(Graphics2D g2, float x, float y) {
 	AffineTransform transf = g2.getTransform();
+	Stroke oldStroke = g2.getStroke();
+
 	final double sx = transf.getScaleX();
 	final double sy = transf.getScaleY();
 	double s = 1;
 	if (sx == sy) {
+	    // There are rounding problems due to scale factor: lines could have different
+	    // spacing... 
+	    // So the increment (space+thickness) is done in using integer.
 	    s = sx;
 	    AffineTransform t = (AffineTransform) transf.clone();
 	    t.scale(1 / sx, 1 / sy);
 	    g2.setTransform(t);
 	}
 
-	Stroke st = g2.getStroke();
 	g2.setStroke(new BasicStroke((float) (s * thickness), BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER));
 	float th = thickness / 2.f;
-	Color prev = g2.getColor();
-	g2.setColor(Color.BLACK);
 	final Line2D.Float line = new Line2D.Float(); 
 	float xx = x + space;
 	xx = (float) (xx * s + (space / 2.f) * s);
@@ -89,8 +90,8 @@ public class FcscoreBox extends Box {
 	    g2.draw(line);
 	}
 	
-	
 	g2.setTransform(transf);
+	g2.setStroke(oldStroke);
     }
 
     public int getLastFontId() {
