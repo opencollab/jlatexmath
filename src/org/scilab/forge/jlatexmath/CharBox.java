@@ -44,7 +44,7 @@ public class CharBox extends Box {
     private final CharFont cf;
     private final float size;
     
-    private final static char[] arr = new char[1]; 
+    private final char[] arr = new char[1]; 
 
     /**
      * Create a new CharBox that will represent the character defined by the given
