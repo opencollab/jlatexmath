@@ -1380,7 +1380,7 @@ public class TeXParser {
      * @param com the command's name
      * @return the validity of the name
      */
-    public boolean isValidName(String com) {
+    public final boolean isValidName(String com) {
         if (com == null || "".equals(com)) {
             return false;
         }
@@ -1406,11 +1406,11 @@ public class TeXParser {
      * @param com the command's name
      * @return the validity of the name
      */
-    public boolean isValidCharacterInCommand(char ch) {
+    public final boolean isValidCharacterInCommand(char ch) {
         return Character.isLetter(ch) || (atIsLetter != 0 && ch == '@');
     }
 
-    private void skipWhiteSpace() {
+    private final void skipWhiteSpace() {
         char c;
         while (pos < len) {
             c = parseString.charAt(pos);
