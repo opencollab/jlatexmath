@@ -71,7 +71,7 @@ public class PreloaderJLaTeXMath extends AbstractImagePreloader {
 	    return null;
 	}
 
-	if (e.getTagName() != "latex") {
+	if (!"latex".equals(e.getTagName())) {
 	    return null;
 	}
 	
