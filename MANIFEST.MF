@@ -2,7 +2,7 @@
 Name: org/scilab/forge/jlatexmath/fonts/maths/jlm_cmbsy10.ttf
 Content-Type: application/x-font
 
-Name: org/scilab/forge/jlatexmath/fonts/latin/jlm_cmbx10.ttf
+Name: org/scilab/forge/jlatexmath/fonts/latin/optional/jlm_cmbx10.ttf
 Content-Type: application/x-font
 
 Name: org/scilab/forge/jlatexmath/fonts/base/jlm_cmex10.ttf
@@ -11,10 +11,10 @@ Content-Type: application/x-font
 Name: org/scilab/forge/jlatexmath/fonts/base/jlm_cmmi10.ttf
 Content-Type: application/x-font
 
-Name: org/scilab/forge/jlatexmath/fonts/latin/jlm_cmti10.ttf
+Name: org/scilab/forge/jlatexmath/fonts/latin/optional/jlm_cmti10.ttf
 Content-Type: application/x-font
 
-Name: org/scilab/forge/jlatexmath/fonts/latin/jlm_cmbxti10.ttf
+Name: org/scilab/forge/jlatexmath/fonts/latin/optional/jlm_cmbxti10.ttf
 Content-Type: application/x-font
 
 Name: org/scilab/forge/jlatexmath/fonts/base/jlm_cmmib10.ttf
@@ -23,22 +23,22 @@ Content-Type: application/x-font
 Name: org/scilab/forge/jlatexmath/fonts/latin/jlm_cmr10.ttf
 Content-Type: application/x-font
 
-Name: org/scilab/forge/jlatexmath/fonts/latin/jlm_cmss10.ttf
+Name: org/scilab/forge/jlatexmath/fonts/latin/optional/jlm_cmss10.ttf
 Content-Type: application/x-font
 
-Name: org/scilab/forge/jlatexmath/fonts/latin/jlm_cmssi10.ttf
+Name: org/scilab/forge/jlatexmath/fonts/latin/optional/jlm_cmssi10.ttf
 Content-Type: application/x-font
 
-Name: org/scilab/forge/jlatexmath/fonts/latin/jlm_cmssbx10.ttf
+Name: org/scilab/forge/jlatexmath/fonts/latin/optional/jlm_cmssbx10.ttf
 Content-Type: application/x-font
 
 Name: org/scilab/forge/jlatexmath/fonts/maths/jlm_cmsy10.ttf
 Content-Type: application/x-font
 
-Name: org/scilab/forge/jlatexmath/fonts/latin/jlm_cmtt10.ttf
+Name: org/scilab/forge/jlatexmath/fonts/latin/optional/jlm_cmtt10.ttf
 Content-Type: application/x-font
 
-Name: org/scilab/forge/jlatexmath/fonts/maths/jlm_dsrom10.ttf
+Name: org/scilab/forge/jlatexmath/fonts/maths/optional/jlm_dsrom10.ttf
 Content-Type: application/x-font
 
 Name: org/scilab/forge/jlatexmath/fonts/euler/jlm_eufb10.ttf
