@@ -1,5 +1,7 @@
 jlatexmath (1.0.3)
-	* fix paths in MANIFEST.MF
+	* Pound sign was invalid in roman font.
+
+	* Fix paths in MANIFEST.MF
 
 	* By default, slightly increase left and right insets.
 

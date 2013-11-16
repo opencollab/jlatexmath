@@ -38,7 +38,7 @@
   <SymbolMapping name="jlatexmatharobase" ch="64" fontId="jlm_cmr10"/>
   <SymbolMapping name="textapos" ch="39" fontId="jlm_cmr10"/>
   <SymbolMapping name="jlatexmathlapos" ch="96" fontId="jlm_cmr10"/>
-  <SymbolMapping name="mathsterling" ch="36" fontId="jlm_cmti10"/>
+  <SymbolMapping name="mathsterling" ch="36" fontId="jlm_cmti10_unchanged"/>
 
   <SymbolMapping name="oe" ch="190" fontId="jlm_cmti10"/>
   <SymbolMapping name="ae" ch="189" fontId="jlm_cmti10"/>

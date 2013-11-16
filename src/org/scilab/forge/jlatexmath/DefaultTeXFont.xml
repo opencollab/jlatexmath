@@ -119,6 +119,7 @@ for a text style is not defined (e.g. "numbers" and "small" in "mathcal") -->
   <Metrics include="fonts/euler/jlm_eufm10.xml" />  
   <Metrics include="fonts/euler/jlm_eufb10.xml" />
   <Metrics include="fonts/latin/optional/jlm_cmti10.xml" />
+  <Metrics include="fonts/latin/optional/jlm_cmti10_unchanged.xml" />
   <Metrics include="fonts/latin/optional/jlm_cmbxti10.xml" />
   <Metrics include="fonts/latin/jlm_cmr10.xml" />
   <Metrics include="fonts/latin/optional/jlm_cmss10.xml" />
