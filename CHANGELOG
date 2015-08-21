@@ -1,3 +1,6 @@
+jlatexmath (1.0.4)
+	* Fix color displayed with the command bgcolor.
+
 jlatexmath (1.0.3)
 	* Pound sign was invalid in roman font.
 
@@ -24,7 +27,7 @@ jlatexmath (1.0.2)
 
 	* Fix bug with maxwidth.
 
-        * Use default Java font when char is in an unknown unicode block.   
+        * Use default Java font when char is in an unknown unicode block.
 
         * Fix bug in \LaTeX (due to modification of EM value)
 
