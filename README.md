@@ -2,7 +2,7 @@
 <p>JLaTeXMath is a Java library. Its main purpose is to display mathematical formulas written in LaTeX. JLaTeXMath is the best Java library to display LaTeX code.</p>
 <p>This library is used by numerous important projects like <a href="http://www.scilab.org/">Scilab</a>, <a href="http://www.geogebra.org/">Geogebra</a>, <a href="http://freeplane.sourceforge.net">Freeplane</a>, <a href="http://www.mathpiper.org/">Mathpiper</a>, <a href="http://db-maths.nuxit.net/CaRMetal/index_en.html">CaRMetal</a>, <a href="http://ultrastudio.org/">Ultrastudio</a>, etc.
 
-<p> You can now follow the development of <i>JLaTeXMath</i> or ask for questions or requests in using the mailing-list <a href="mailto:jlatexmath@lists.forge.scilab.org">jlatexmath@lists.forge.scilab.org</a>. The releases will be announced on it.
+<p> You can now follow the development of <i>JLaTeXMath</i> or ask for questions or requests in using the mailing-list <a href="mailto:jlatexmath@lists.forge.scilab.org">jlatexmath@lists.forge.scilab.org</a>. The releases are announced on it.
 </p>
 <p>You can subscribe to this mailing-list by checking <a href="http://lists.scilab.org/mailman/listinfo/jlatexmath">jlatexmath mailing list</a></p>
 <p>The default encoding is UTF-8.</p>
@@ -47,6 +47,5 @@ The default task is "buildJar", the others are:
 For the moment, the doc is very poor ... It will come in the future ...
 But some examples are provided to show how to use easily the library.
 
-Have fun and if you meet any problem, don't hesitate to write at :
+Have fun and if you meet any problem, don't hesitate to create a new issue on github
 
-	 		calixte.denizet@scilab-enterprises.com
