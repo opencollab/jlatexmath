@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <project name="jlatexmath" basedir="." default="buildJar">
   <import file="version.xml"/>
-  
+
   <!-- Init -->
   <target name="init" description="Initialize build">
     <property name="project.root.dir" value="." />
@@ -23,7 +23,7 @@
     <mkdir dir="${package.dir}"/>
     <mkdir dir="${ex.macros}/bin"/>
   </target>
-  
+
   <!-- Info -->
   <target name="info" depends="init" description="Display configuration">
     <echo message="**********************" />
@@ -36,7 +36,7 @@
     <echo message="Java home directory        : ${java.home}" />
     <echo message="Java classpath             : ${java.class.path}" />
   </target>
-  
+
   <!-- Remove all temp directories and/or files-->
   <target name="clean" depends="info" description="Removes all generated files">
     <delete dir="${project.bin.dir}"/>
@@ -51,7 +51,7 @@
       <fileset dir="${project.root.dir}" includes="**/*~" defaultexcludes="no"/>
     </delete>
   </target>
-  
+
   <target name="dir.fop.check">
     <condition property="dir.exists">
       <available file="${fop.base.dir}" type="dir"/>
@@ -61,19 +61,19 @@
   <target name="example" depends="buildJar">
     <javac includeantruntime="false" srcdir="${ex.basic}" destdir="${ex.basic}" debug="on" source="${java_version}" target="${java_version}" classpath="${output.jar.dir}/jlatexmath-${version}.jar:${output.jar.dir}/jlm_cyrillic.jar:${output.jar.dir}/jlm_greek.jar">
     </javac>
-    <java fork="true" classpath="${ex.basic}:${output.jar.dir}/jlatexmath-${version}.jar:${output.jar.dir}/jlm_cyrillic.jar:${output.jar.dir}/jlm_greek.jar" dir="${ex.basic}" className="Main"/> 
+    <java fork="true" classpath="${ex.basic}:${output.jar.dir}/jlatexmath-${version}.jar:${output.jar.dir}/jlm_cyrillic.jar:${output.jar.dir}/jlm_greek.jar" dir="${ex.basic}" className="Main"/>
   </target>
-  
+
   <target name="Macros" depends="compile">
     <javac includeantruntime="false" srcdir="${ex.macros}" destdir="${ex.macros}/bin" debug="on" source="${java_version}" target="${java_version}" classpath="${output.jar.dir}/jlatexmath-${version}.jar">
     </javac>
     <move file="${ex.macros}/bin/Main.class" todir="${ex.macros}"/>
     <jar jarfile="${ex.macros}/Foo.jar" basedir="${ex.macros}/bin"/>
-    <java fork="true" classpath="${ex.macros}:${ex.macros}/Foo.jar:${output.jar.dir}/jlatexmath-${version}.jar" dir="${ex.macros}" className="Main"/> 
+    <java fork="true" classpath="${ex.macros}:${ex.macros}/Foo.jar:${output.jar.dir}/jlatexmath-${version}.jar" dir="${ex.macros}" className="Main"/>
   </target>
-  
+
   <target name="examples" depends="example"/>
-  
+
   <!-- Compile source files -->
   <target name="compileWithoutAlph" depends="init">
     <javac includeantruntime="false" srcdir="${project.src.dir}" destdir="${project.bin.dir}" debug="on" source="${java_version}" target="${java_version}" excludes="cyrillic/** greek/** **/WebStartAlphabetRegistration.java">
@@ -130,7 +130,7 @@
     <jar jarfile="dist/jlm_greek.jar" basedir="${project.bin.dir}/greek" manifest="${project.src.dir}/greek/MANIFEST.MF"/>
   </target>
 
-  
+
   <!-- Build JAR files-->
   <target name="minimal" depends="buildJarMinimal"/>
   <target name="buildJarMinimal" depends="compileMinimal">
@@ -168,7 +168,7 @@
   </target>
 
   <target name="fop" depends="plugin,dir.fop.check" if="dir.exists"/>
-  
+
   <target name="plugin" depends="init,dir.fop.check" if="dir.exists">
     <ant antfile="build.xml" dir="${fop.base.dir}" inheritAll="false"/>
     <copy file="${fop.base.dir}/dist/jlatexmath-fop-${version}.jar" todir="${package.dir}"/>
@@ -210,19 +210,19 @@
     <jar jarfile="${package.dir}/jlatexmath-embedded-fop-${version}.jar" basedir="${project.bin.dir}" manifest="MANIFEST.MF" excludes="cyrillic/** greek/**"/>
    <ant antfile="build.xml" dir="${fop.base.dir}" inheritAll="false" target="clean_embedded"/>
   </target>
-  
+
   <target name="source" depends="info" >
     <zip destfile="${output.jar.dir}/jlatexmath-src-${version}.zip">
       <zipfileset prefix="jlatexmath-${version}/" dir="${project.root.dir}" includes="COPYING LICENSE README build.xml version.xml MANIFEST.MF src/**/*.java src/**/*.xml src/**/*.ttf src/**/licences/* src/**/greek/* src/**/cyrillic/* src/**/README examples/**/*.java examples/**/lion.png examples/**/*.xml examples/**/README" />
     </zip>
   </target>
-  
+
   <target name="src-all" depends="info,dir.fop.check" if="dir.exists" >
     <zip destfile="${output.jar.dir}/jlatexmath-src-all-${version}.zip" >
       <zipfileset prefix="jlatexmath-${version}/" dir="${project.root.dir}" includes="COPYING LICENSE README fop.properties build.xml version.xml MANIFEST.MF src/**/*.java src/**/*.xml src/**/*.ttf src/**/licences/* src/**/greek/* src/**/cyrillic/* src/**/README examples/**/*.java examples/**/lion.png examples/**/*.xml examples/**/README plugin/**/src/**/*.java plugin/**/src/META-INF/**/* plugin/**/build.xml plugin/**/COPYING plugin/**/LICENSE plugin/**/MANIFEST.MF plugin/**/examples/*.*" />
     </zip>
   </target>
-  
+
   <target name="all" depends="init, buildJar, buildJarMinimal, source, src-all, embedded, plugin, plugin-src, embedded-zip"/>
 
   <target name="doc" depends="compile" description="Generates the API specification (javadoc)">
