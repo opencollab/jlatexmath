@@ -30,7 +30,6 @@
     <echo message="*     JLaTeXMath     *" />
     <echo message="**********************" />
     <echo message="Author	                    : Calixte Denizet" />
-    <echo message="Script version             : 1.0.0" />
     <echo message="Ant  version               : ${ant.version}" />
     <echo message="Java version               : ${ant.java.version}" />
     <echo message="Java home directory        : ${java.home}" />
@@ -224,6 +223,8 @@
   </target>
 
   <target name="all" depends="init, buildJar, buildJarMinimal, source, src-all, embedded, plugin, plugin-src, embedded-zip"/>
+
+  <target name="test" depends="all"/>
 
   <target name="doc" depends="compile" description="Generates the API specification (javadoc)">
     <javadoc packagenames="org.scilab.forge.jlatexmath.*"
