@@ -48,3 +48,5 @@ Some examples are provided to show how to use easily the library.
 
 Have fun and if you meet any problem, don't hesitate to create a new issue on github
 
+<H1>License</H1>
+Regarding JLaTeXMath’s Classpath Exception and JavaScript: If you use the Google Web Toolkit (GWT) to compile JLaTeXMath to an “executable” (in JavaScript) you can then include/link this “executable” JavaScript library on a website or inside another program. In this case the rest of the website/program need not be licensed under the GPL.
