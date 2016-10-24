@@ -748,6 +748,10 @@ public class TeXParser {
                     ((ArrayOfAtoms) formula).addCol();
                     pos++;
                     break;
+                case '~' :
+                    formula.add(new SpaceAtom());
+                    pos++;
+                    break;
                 case PRIME :
                     if (ignoreWhiteSpace) {
                         formula.add(new CumulativeScriptsAtom(getLastAtom(), null, SymbolAtom.get("prime")));
