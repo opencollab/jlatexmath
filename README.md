@@ -1,4 +1,4 @@
-<p><img src="images/Logo.png"/></p>
+<p><img src="docs/images/Logo.png"/></p>
 <p>JLaTeXMath is a Java library. Its main purpose is to display mathematical formulas written in LaTeX. JLaTeXMath is the best Java library to display LaTeX code.</p>
 <p>This library is used by numerous important projects like <a href="http://www.scilab.org/">Scilab</a>, <a href="http://www.geogebra.org/">Geogebra</a>, <a href="http://freeplane.sourceforge.net">Freeplane</a>, <a href="http://www.mathpiper.org/">Mathpiper</a>, <a href="http://db-maths.nuxit.net/CaRMetal/index_en.html">CaRMetal</a>, <a href="http://ultrastudio.org/">Ultrastudio</a>, etc.
 
@@ -25,13 +25,13 @@
 There is no dependency and no external programs to install : <i>JLaTeXMath</i> is fully functional by itself.</p>
 <p>Few examples are available in the source distribution, they show how to use <i>JLaTeXMath</i> and for developpers how to write new commands in using Java.</p>
 <p>A first example :</p>
-<p><img src="images/Formula1.png"/></p>
+<p><img src="docs/images/Formula1.png"/></p>
 <p>a second one :</p>
-<p><img src="images/Formula2.png"/></p>
+<p><img src="docs/images/Formula2.png"/></p>
 <p>and a third one :</p>
-<p><img src="images/Formula3.png"/></p>
+<p><img src="docs/images/Formula3.png"/></p>
 <p><i>JLaTeXMath</i> is used by <a href="http://www.scilab.org">Scilab</a> to display formulas wrote in LaTeX in graphic windows :</p>
-<p><img src="images/ScilabScreenshot.png"/></p>
+<p><img src="docs/images/ScilabScreenshot.png"/></p>
 <p><i>JLaTeXMath</i> is a fork of the excellent project <a href="http://jmathtex.sourceforge.net/">JMathTeX</a>.</p>
 
 To build the jlatexmath library just type ant...

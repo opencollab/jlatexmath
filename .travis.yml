@@ -8,3 +8,13 @@ jdk:
 before_install:
   - sudo apt-get -qq update
   - sudo apt-get build-dep libjlatexmath-java
+
+before_script:
+  - "export DISPLAY=:99.0"
+  - "sh -e /etc/init.d/xvfb start"
+  - sleep 3 # give xvfb some time to start
+
+addons:
+  hosts:
+    - jlmhost
+  hostname: jlmhost 
