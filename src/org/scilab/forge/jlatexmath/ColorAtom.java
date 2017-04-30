@@ -25,6 +25,23 @@
  * Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
  * 02110-1301, USA.
  *
+ * Linking this library statically or dynamically with other modules
+ * is making a combined work based on this library. Thus, the terms
+ * and conditions of the GNU General Public License cover the whole
+ * combination.
+ *
+ * As a special exception, the copyright holders of this library give you
+ * permission to link this library with independent modules to produce
+ * an executable, regardless of the license terms of these independent
+ * modules, and to copy and distribute the resulting executable under terms
+ * of your choice, provided that you also meet, for each linked independent
+ * module, the terms and conditions of the license of that module.
+ * An independent module is a module which is not derived from or based
+ * on this library. If you modify this library, you may extend this exception
+ * to your version of the library, but you are not obliged to do so.
+ * If you do not wish to do so, delete this exception statement from your
+ * version.
+ *
  */
 
 package org.scilab.forge.jlatexmath;
@@ -106,71 +123,73 @@ public class ColorAtom extends Atom implements Row {
     }
 
     public static Color getColor(String s) {
-        if (s != null && s.length() != 0) {
+        if (s != null) {
             s = s.trim();
-            if (s.charAt(0) == '#') {
-                return Color.decode(s);
-            } else if (s.indexOf(',') != -1) {
-                StringTokenizer toks = new StringTokenizer(s, ";,");
-                int n = toks.countTokens();
-                if (n == 3) {
-                    // RGB model
-                    try  {
-                        String R = toks.nextToken().trim();
-                        String G = toks.nextToken().trim();
-                        String B = toks.nextToken().trim();
+            if (s.length() >= 1) {
+                if (s.charAt(0) == '#') {
+                    return Color.decode(s);
+                } else if (s.indexOf(',') != -1 || s.indexOf(';') != -1) {
+                    StringTokenizer toks = new StringTokenizer(s, ";,");
+                    int n = toks.countTokens();
+                    if (n == 3) {
+                        // RGB model
+                        try  {
+                            String R = toks.nextToken().trim();
+                            String G = toks.nextToken().trim();
+                            String B = toks.nextToken().trim();
 
-                        float r = Float.parseFloat(R);
-                        float g = Float.parseFloat(G);
-                        float b = Float.parseFloat(B);
+                            float r = Float.parseFloat(R);
+                            float g = Float.parseFloat(G);
+                            float b = Float.parseFloat(B);
 
-                        if (r == (int) r && g == (int) g && b == (int) b && R.indexOf('.') == -1 && G.indexOf('.') == -1 && B.indexOf('.') == -1) {
-                            int ir = (int) Math.min(255, Math.max(0, r));
-                            int ig = (int) Math.min(255, Math.max(0, g));
-                            int ib = (int) Math.min(255, Math.max(0, b));
-                            return new Color(ir, ig, ib);
-                        } else {
-                            r = (float) Math.min(1, Math.max(0, r));
-                            g = (float) Math.min(1, Math.max(0, g));
-                            b = (float) Math.min(1, Math.max(0, b));
-                            return new Color(r, g, b);
+                            if (r == (int) r && g == (int) g && b == (int) b && R.indexOf('.') == -1 && G.indexOf('.') == -1 && B.indexOf('.') == -1) {
+                                int ir = (int) Math.min(255, Math.max(0, r));
+                                int ig = (int) Math.min(255, Math.max(0, g));
+                                int ib = (int) Math.min(255, Math.max(0, b));
+                                return new Color(ir, ig, ib);
+                            } else {
+                                r = (float) Math.min(1, Math.max(0, r));
+                                g = (float) Math.min(1, Math.max(0, g));
+                                b = (float) Math.min(1, Math.max(0, b));
+                                return new Color(r, g, b);
+                            }
+                        } catch (NumberFormatException e) {
+                            return Color.black;
                         }
-                    } catch (NumberFormatException e) {
-                        return Color.black;
-                    }
-                } else if (n == 4) {
-                    // CMYK model
-                    try  {
-                        float c = Float.parseFloat(toks.nextToken().trim());
-                        float m = Float.parseFloat(toks.nextToken().trim());
-                        float y = Float.parseFloat(toks.nextToken().trim());
-                        float k = Float.parseFloat(toks.nextToken().trim());
+                    } else if (n == 4) {
+                        // CMYK model
+                        try  {
+                            float c = Float.parseFloat(toks.nextToken().trim());
+                            float m = Float.parseFloat(toks.nextToken().trim());
+                            float y = Float.parseFloat(toks.nextToken().trim());
+                            float k = Float.parseFloat(toks.nextToken().trim());
 
-                        c = (float) Math.min(1, Math.max(0, c));
-                        m = (float) Math.min(1, Math.max(0, m));
-                        y = (float) Math.min(1, Math.max(0, y));
-                        k = (float) Math.min(1, Math.max(0, k));
+                            c = (float) Math.min(1, Math.max(0, c));
+                            m = (float) Math.min(1, Math.max(0, m));
+                            y = (float) Math.min(1, Math.max(0, y));
+                            k = (float) Math.min(1, Math.max(0, k));
 
-                        return convColor(c, m, y, k);
-                    } catch (NumberFormatException e) {
-                        return Color.black;
+                            return convColor(c, m, y, k);
+                        } catch (NumberFormatException e) {
+                            return Color.black;
+                        }
                     }
                 }
-            }
 
-            Color c = Colors.get(s.toLowerCase());
-            if (c != null) {
-                return c;
-            } else {
-                if (s.indexOf('.') != -1) {
-                    try {
-                        float g = (float) Math.min(1, Math.max(Float.parseFloat(s), 0));
+                Color c = Colors.get(s.toLowerCase());
+                if (c != null) {
+                    return c;
+                } else {
+                    if (s.indexOf('.') != -1) {
+                        try {
+                            float g = (float) Math.min(1, Math.max(Float.parseFloat(s), 0));
 
-                        return new Color(g, g, g);
-                    } catch (NumberFormatException e) { }
+                            return new Color(g, g, g);
+                        } catch (NumberFormatException e) { }
+                    }
+
+                    return Color.decode("#" + s);
                 }
-
-                return Color.decode("#" + s);
             }
         }
 
@@ -250,7 +269,7 @@ public class ColorAtom extends Atom implements Row {
     }
 
     private static Color convColor(final float c, final float m, final float y, final float k) {
-        final float kk = 1 - k;
-        return new Color(kk * (1 - c), kk * (1 - m), kk * (1 - y));
+        final float kk = 1f - k;
+        return new Color(kk * (1f - c), kk * (1f - m), kk * (1f - y));
     }
 }

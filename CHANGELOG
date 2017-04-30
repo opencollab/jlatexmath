@@ -1,5 +1,10 @@
+jlatexmath (1.0.5)
+	* Support ~ as non breakable space.
+
 jlatexmath (1.0.4)
 	* Fix color displayed with the command bgcolor.
+
+	* Add the linking exception to the license
 
 jlatexmath (1.0.3)
 	* Pound sign was invalid in roman font.
