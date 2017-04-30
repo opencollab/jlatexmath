@@ -60,6 +60,7 @@ public class CharBox extends Box {
 
     private final CharFont cf;
     private final float size;
+    private float italic; 
     
     private final char[] arr = new char[1]; 
 
@@ -75,6 +76,12 @@ public class CharBox extends Box {
 	width = c.getWidth();
 	height = c.getHeight();
 	depth = c.getDepth();
+    italic = c.getItalic();
+    }
+
+    public void addItalicCorrectionToWidth() {
+        width += italic;
+        italic = 0;
     }
     
     public void draw(Graphics2D g2, float x, float y) {
