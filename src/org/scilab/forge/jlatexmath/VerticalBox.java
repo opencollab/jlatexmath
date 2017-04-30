@@ -55,7 +55,7 @@ import java.util.ListIterator;
 class VerticalBox extends Box {
 
     private float leftMostPos = Float.MAX_VALUE;
-    private float rightMostPos = Float.MIN_VALUE;
+    private float rightMostPos = -Float.MAX_VALUE;
 
     public VerticalBox() { }
 
