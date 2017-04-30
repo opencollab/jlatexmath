@@ -1,4 +1,6 @@
 jlatexmath (1.0.6)
+	* Add a command \mathnormal.
+
 	* Float.MIN_VALUE is not -Float.MAX_VALUE !
 
 	* Italic correction was not taken into account when making box for a CharSymbol.

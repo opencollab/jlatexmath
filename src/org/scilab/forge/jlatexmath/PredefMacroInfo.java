@@ -572,6 +572,8 @@ class PredefMacroInfo extends MacroInfo {
                 return PredefMacros.st_macro(tp, args);
             case 276:
                 return PredefMacros.fcscore_macro(tp, args);
+            case 277:
+                return PredefMacros.textstyle_macros(tp, args);
             default:
                 return null;
             }
