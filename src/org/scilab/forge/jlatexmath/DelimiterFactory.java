@@ -25,23 +25,23 @@
  * Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
  * 02110-1301, USA.
  *
- * Linking this library statically or dynamically with other modules 
- * is making a combined work based on this library. Thus, the terms 
- * and conditions of the GNU General Public License cover the whole 
+ * Linking this library statically or dynamically with other modules
+ * is making a combined work based on this library. Thus, the terms
+ * and conditions of the GNU General Public License cover the whole
  * combination.
- * 
- * As a special exception, the copyright holders of this library give you 
- * permission to link this library with independent modules to produce 
- * an executable, regardless of the license terms of these independent 
- * modules, and to copy and distribute the resulting executable under terms 
- * of your choice, provided that you also meet, for each linked independent 
- * module, the terms and conditions of the license of that module. 
- * An independent module is a module which is not derived from or based 
- * on this library. If you modify this library, you may extend this exception 
- * to your version of the library, but you are not obliged to do so. 
- * If you do not wish to do so, delete this exception statement from your 
+ *
+ * As a special exception, the copyright holders of this library give you
+ * permission to link this library with independent modules to produce
+ * an executable, regardless of the license terms of these independent
+ * modules, and to copy and distribute the resulting executable under terms
+ * of your choice, provided that you also meet, for each linked independent
+ * module, the terms and conditions of the license of that module.
+ * An independent module is a module which is not derived from or based
+ * on this library. If you modify this library, you may extend this exception
+ * to your version of the library, but you are not obliged to do so.
+ * If you do not wish to do so, delete this exception statement from your
  * version.
- * 
+ *
  */
 
 /* Modified by Calixte Denizet */
@@ -53,26 +53,26 @@ package org.scilab.forge.jlatexmath; // NOPMD
  * in different sizes.
  */
 public class DelimiterFactory {
-    
+
     public static Box create(SymbolAtom symbol, TeXEnvironment env, int size) {
-	if (size > 4)
-	    return symbol.createBox(env);
+        if (size > 4)
+            return symbol.createBox(env);
 
-	TeXFont tf = env.getTeXFont();
+        TeXFont tf = env.getTeXFont();
         int style = env.getStyle();
-	Char c = tf.getChar(symbol.getName(), style);
+        Char c = tf.getChar(symbol.getName(), style);
         int i;
-	
-	for (i = 1; i <= size && tf.hasNextLarger(c); i++)
-	    c = tf.getNextLarger(c, style);
-	
-	if (i <= size && !tf.hasNextLarger(c)) { 
-	    CharBox A = new CharBox(tf.getChar('A', "mathnormal", style));
-	    Box b = create(symbol.getName(), env, size*(A.getHeight() + A.getDepth()));
-	    return b;
-	}
 
-	return new CharBox(c);
+        for (i = 1; i <= size && tf.hasNextLarger(c); i++)
+            c = tf.getNextLarger(c, style);
+
+        if (i <= size && !tf.hasNextLarger(c)) {
+            CharBox A = new CharBox(tf.getChar('A', "mathnormal", style));
+            Box b = create(symbol.getName(), env, size*(A.getHeight() + A.getDepth()));
+            return b;
+        }
+
+        return new CharBox(c);
     }
 
     /**
@@ -86,12 +86,12 @@ public class DelimiterFactory {
     public static Box create(String symbol, TeXEnvironment env, float minHeight) {
         TeXFont tf = env.getTeXFont();
         int style = env.getStyle();
-	Char c = tf.getChar(symbol, style);
-        
+        Char c = tf.getChar(symbol, style);
+
         // start with smallest character
         Metrics m = c.getMetrics();
         float total = m.getHeight() + m.getDepth();
-        
+
         // try larger versions of the same character until minHeight has been
         // reached
         while (total < minHeight && tf.hasNextLarger(c)) {
@@ -105,23 +105,23 @@ public class DelimiterFactory {
             // construct tall enough vertical box
             VerticalBox vBox = new VerticalBox();
             Extension ext = tf.getExtension(c, style); // extension info
-            
+
             if (ext.hasTop()) { // insert top part
                 c = ext.getTop();
                 vBox.add(new CharBox(c));
             }
-            
+
             boolean middle = ext.hasMiddle();
             if (middle) { // insert middle part
                 c = ext.getMiddle();
                 vBox.add(new CharBox(c));
             }
-            
+
             if (ext.hasBottom()) { // insert bottom part
                 c = ext.getBottom();
                 vBox.add(new CharBox(c));
             }
-            
+
             // insert repeatable part until tall enough
             c = ext.getRepeat();
             CharBox rep = new CharBox(c);
@@ -135,7 +135,7 @@ public class DelimiterFactory {
                 else
                     vBox.add(rep);
             }
-            
+
             return vBox;
         } else
             // no extensions, so return tallest possible character

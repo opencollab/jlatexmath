@@ -24,23 +24,23 @@
  * Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
  * 02110-1301, USA.
  *
- * Linking this library statically or dynamically with other modules 
- * is making a combined work based on this library. Thus, the terms 
- * and conditions of the GNU General Public License cover the whole 
+ * Linking this library statically or dynamically with other modules
+ * is making a combined work based on this library. Thus, the terms
+ * and conditions of the GNU General Public License cover the whole
  * combination.
- * 
- * As a special exception, the copyright holders of this library give you 
- * permission to link this library with independent modules to produce 
- * an executable, regardless of the license terms of these independent 
- * modules, and to copy and distribute the resulting executable under terms 
- * of your choice, provided that you also meet, for each linked independent 
- * module, the terms and conditions of the license of that module. 
- * An independent module is a module which is not derived from or based 
- * on this library. If you modify this library, you may extend this exception 
- * to your version of the library, but you are not obliged to do so. 
- * If you do not wish to do so, delete this exception statement from your 
+ *
+ * As a special exception, the copyright holders of this library give you
+ * permission to link this library with independent modules to produce
+ * an executable, regardless of the license terms of these independent
+ * modules, and to copy and distribute the resulting executable under terms
+ * of your choice, provided that you also meet, for each linked independent
+ * module, the terms and conditions of the license of that module.
+ * An independent module is a module which is not derived from or based
+ * on this library. If you modify this library, you may extend this exception
+ * to your version of the library, but you are not obliged to do so.
+ * If you do not wish to do so, delete this exception statement from your
  * version.
- * 
+ *
  */
 
 package org.scilab.forge.jlatexmath;
@@ -55,13 +55,13 @@ public class RaiseAtom extends Atom {
     private float r, h, d;
 
     public RaiseAtom(Atom base, int runit, float r, int hunit, float h, int dunit, float d) {
-	this.base = base;
-	this.runit = runit;
-	this.r = r;
-	this.hunit = hunit;
-	this.h = h;
-	this.dunit = dunit;
-	this.d = d;
+        this.base = base;
+        this.runit = runit;
+        this.r = r;
+        this.hunit = hunit;
+        this.h = h;
+        this.dunit = dunit;
+        this.d = d;
     }
 
     public int getLeftType() {
@@ -74,24 +74,24 @@ public class RaiseAtom extends Atom {
 
     public Box createBox(TeXEnvironment env) {
         Box bbox = base.createBox(env);
-	if (runit == -1) {
-	    bbox.setShift(0);
-	} else {
-	    bbox.setShift(-r * SpaceAtom.getFactor(runit, env));
-	}
+        if (runit == -1) {
+            bbox.setShift(0);
+        } else {
+            bbox.setShift(-r * SpaceAtom.getFactor(runit, env));
+        }
 
-	if (hunit == -1) {
-	    return bbox;
-	}
+        if (hunit == -1) {
+            return bbox;
+        }
 
-	HorizontalBox hbox = new HorizontalBox(bbox);
-	hbox.setHeight(h * SpaceAtom.getFactor(hunit, env));
-	if (dunit == -1) {
-	    hbox.setDepth(0);
-	} else {
-	    hbox.setDepth(d * SpaceAtom.getFactor(dunit, env));
-	}
+        HorizontalBox hbox = new HorizontalBox(bbox);
+        hbox.setHeight(h * SpaceAtom.getFactor(hunit, env));
+        if (dunit == -1) {
+            hbox.setDepth(0);
+        } else {
+            hbox.setDepth(d * SpaceAtom.getFactor(dunit, env));
+        }
 
-	return hbox;
+        return hbox;
     }
 }

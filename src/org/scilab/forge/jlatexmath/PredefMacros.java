@@ -295,7 +295,7 @@ public class PredefMacros {
         boolean rule = true;
         float[] ths = SpaceAtom.getLength(args[3]);
         if (args[3] == null || args[3].length() == 0 || ths.length == 1) {
-            ths = new float[]{0.0f, 0.0f};
+            ths = new float[] {0.0f, 0.0f};
             rule = false;
         }
 
@@ -1264,10 +1264,10 @@ public class PredefMacros {
         float[] height = SpaceAtom.getLength(args[3]);
         float[] depth = SpaceAtom.getLength(args[4]);
         if (height.length == 1 || height[1] == 0) {
-            height = new float[]{-1, 0};
+            height = new float[] {-1, 0};
         }
         if (depth.length == 1 || depth[1] == 0) {
-            depth = new float[]{-1, 0};
+            depth = new float[] {-1, 0};
         }
 
         return new RaiseAtom(new TeXFormula(tp, args[2]).root, (int) raise[0], raise[1], (int) height[0], height[1], (int) depth[0], depth[1]);

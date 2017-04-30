@@ -24,23 +24,23 @@
  * Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
  * 02110-1301, USA.
  *
- * Linking this library statically or dynamically with other modules 
- * is making a combined work based on this library. Thus, the terms 
- * and conditions of the GNU General Public License cover the whole 
+ * Linking this library statically or dynamically with other modules
+ * is making a combined work based on this library. Thus, the terms
+ * and conditions of the GNU General Public License cover the whole
  * combination.
- * 
- * As a special exception, the copyright holders of this library give you 
- * permission to link this library with independent modules to produce 
- * an executable, regardless of the license terms of these independent 
- * modules, and to copy and distribute the resulting executable under terms 
- * of your choice, provided that you also meet, for each linked independent 
- * module, the terms and conditions of the license of that module. 
- * An independent module is a module which is not derived from or based 
- * on this library. If you modify this library, you may extend this exception 
- * to your version of the library, but you are not obliged to do so. 
- * If you do not wish to do so, delete this exception statement from your 
+ *
+ * As a special exception, the copyright holders of this library give you
+ * permission to link this library with independent modules to produce
+ * an executable, regardless of the license terms of these independent
+ * modules, and to copy and distribute the resulting executable under terms
+ * of your choice, provided that you also meet, for each linked independent
+ * module, the terms and conditions of the license of that module.
+ * An independent module is a module which is not derived from or based
+ * on this library. If you modify this library, you may extend this exception
+ * to your version of the library, but you are not obliged to do so.
+ * If you do not wish to do so, delete this exception statement from your
  * version.
- * 
+ *
  */
 
 package org.scilab.forge.jlatexmath;
@@ -56,40 +56,40 @@ public class URLAlphabetRegistration implements AlphabetRegistration {
     private String language;
     private AlphabetRegistration pack = null;
     private Character.UnicodeBlock[] blocks;
-    
+
     private URLAlphabetRegistration(URL url, String language, Character.UnicodeBlock[] blocks) {
-	this.url = url;
-	this.language = language;
-	this.blocks = blocks;
+        this.url = url;
+        this.language = language;
+        this.blocks = blocks;
     }
 
     public static void register(URL url, String language, Character.UnicodeBlock[] blocks) {
-	DefaultTeXFont.registerAlphabet(new URLAlphabetRegistration(url, language, blocks));
+        DefaultTeXFont.registerAlphabet(new URLAlphabetRegistration(url, language, blocks));
     }
 
     public Character.UnicodeBlock[] getUnicodeBlock() {
-	return blocks;
+        return blocks;
     }
 
     public Object getPackage() throws AlphabetRegistrationException {
-	URL urls[] = {url};
-	language = language.toLowerCase();
-	String name = "org.scilab.forge.jlatexmath." + language
-	    + "." + Character.toString(Character.toUpperCase(language.charAt(0)))
-	    + language.substring(1, language.length()) + "Registration"; 
-	
-	try {
-	    ClassLoader loader = new URLClassLoader(urls);
-	    pack = (AlphabetRegistration) Class.forName(name, true, loader).newInstance();
-	} catch (ClassNotFoundException e) {
-	    throw new AlphabetRegistrationException("Class at " + url + " cannot be got.");
-	} catch (Exception e) {
-	    throw new AlphabetRegistrationException("Problem in loading the class at " + url + " :\n" + e.getMessage());
-	} 
-	return pack;
+        URL urls[] = {url};
+        language = language.toLowerCase();
+        String name = "org.scilab.forge.jlatexmath." + language
+                      + "." + Character.toString(Character.toUpperCase(language.charAt(0)))
+                      + language.substring(1, language.length()) + "Registration";
+
+        try {
+            ClassLoader loader = new URLClassLoader(urls);
+            pack = (AlphabetRegistration) Class.forName(name, true, loader).newInstance();
+        } catch (ClassNotFoundException e) {
+            throw new AlphabetRegistrationException("Class at " + url + " cannot be got.");
+        } catch (Exception e) {
+            throw new AlphabetRegistrationException("Problem in loading the class at " + url + " :\n" + e.getMessage());
+        }
+        return pack;
     }
 
     public String getTeXFontFileName() {
-	return pack.getTeXFontFileName();
+        return pack.getTeXFontFileName();
     }
 }

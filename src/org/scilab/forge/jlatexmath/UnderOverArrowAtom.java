@@ -24,23 +24,23 @@
  * Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
  * 02110-1301, USA.
  *
- * Linking this library statically or dynamically with other modules 
- * is making a combined work based on this library. Thus, the terms 
- * and conditions of the GNU General Public License cover the whole 
+ * Linking this library statically or dynamically with other modules
+ * is making a combined work based on this library. Thus, the terms
+ * and conditions of the GNU General Public License cover the whole
  * combination.
- * 
- * As a special exception, the copyright holders of this library give you 
- * permission to link this library with independent modules to produce 
- * an executable, regardless of the license terms of these independent 
- * modules, and to copy and distribute the resulting executable under terms 
- * of your choice, provided that you also meet, for each linked independent 
- * module, the terms and conditions of the license of that module. 
- * An independent module is a module which is not derived from or based 
- * on this library. If you modify this library, you may extend this exception 
- * to your version of the library, but you are not obliged to do so. 
- * If you do not wish to do so, delete this exception statement from your 
+ *
+ * As a special exception, the copyright holders of this library give you
+ * permission to link this library with independent modules to produce
+ * an executable, regardless of the license terms of these independent
+ * modules, and to copy and distribute the resulting executable under terms
+ * of your choice, provided that you also meet, for each linked independent
+ * module, the terms and conditions of the license of that module.
+ * An independent module is a module which is not derived from or based
+ * on this library. If you modify this library, you may extend this exception
+ * to your version of the library, but you are not obliged to do so.
+ * If you do not wish to do so, delete this exception statement from your
  * version.
- * 
+ *
  */
 
 package org.scilab.forge.jlatexmath;
@@ -56,49 +56,49 @@ public class UnderOverArrowAtom extends Atom {
 
     public UnderOverArrowAtom(Atom base, boolean left, boolean over) {
         this.base = base;
-	this.arrow = left ? "leftarrow" : "rightarrow";
-	this.left = left;
-	this.over = over;
+        this.arrow = left ? "leftarrow" : "rightarrow";
+        this.left = left;
+        this.over = over;
     }
-    
+
     public UnderOverArrowAtom(Atom base, boolean over) {
         this.base = base;
-	this.over = over;
-	this.dble = true;
+        this.over = over;
+        this.dble = true;
     }
 
     public Box createBox(TeXEnvironment env) {
-	TeXFont tf = env.getTeXFont();
+        TeXFont tf = env.getTeXFont();
         int style = env.getStyle();
-	Box b = base != null ? base.createBox(env) : new StrutBox(0, 0, 0, 0);
-	float sep = new SpaceAtom(TeXConstants.UNIT_POINT, 1f, 0, 0).createBox(env).getWidth();
-	Box arrow;
+        Box b = base != null ? base.createBox(env) : new StrutBox(0, 0, 0, 0);
+        float sep = new SpaceAtom(TeXConstants.UNIT_POINT, 1f, 0, 0).createBox(env).getWidth();
+        Box arrow;
 
-	if (dble) {
-	    arrow = XLeftRightArrowFactory.create(env, b.getWidth());
-	    sep = 4 * sep;
-	} else {
-	    arrow = XLeftRightArrowFactory.create(left, env, b.getWidth());
-	    sep = -sep;
-	}
+        if (dble) {
+            arrow = XLeftRightArrowFactory.create(env, b.getWidth());
+            sep = 4 * sep;
+        } else {
+            arrow = XLeftRightArrowFactory.create(left, env, b.getWidth());
+            sep = -sep;
+        }
 
-	VerticalBox vb = new VerticalBox();
-	if (over) {
-	    vb.add(arrow);
-	    vb.add(new HorizontalBox(b, arrow.getWidth(), TeXConstants.ALIGN_CENTER));
-	    float h = vb.getDepth() + vb.getHeight();
-	    vb.setDepth(b.getDepth());
-	    vb.setHeight(h - b.getDepth());
-	} else {
-	    vb.add(new HorizontalBox(b, arrow.getWidth(), TeXConstants.ALIGN_CENTER));
-	    vb.add(new StrutBox(0, sep, 0, 0));
-	    vb.add(arrow);
-	    float h = vb.getDepth() + vb.getHeight();
-	    vb.setDepth(h - b.getHeight());
-	    vb.setHeight(b.getHeight());
-	}
+        VerticalBox vb = new VerticalBox();
+        if (over) {
+            vb.add(arrow);
+            vb.add(new HorizontalBox(b, arrow.getWidth(), TeXConstants.ALIGN_CENTER));
+            float h = vb.getDepth() + vb.getHeight();
+            vb.setDepth(b.getDepth());
+            vb.setHeight(h - b.getDepth());
+        } else {
+            vb.add(new HorizontalBox(b, arrow.getWidth(), TeXConstants.ALIGN_CENTER));
+            vb.add(new StrutBox(0, sep, 0, 0));
+            vb.add(arrow);
+            float h = vb.getDepth() + vb.getHeight();
+            vb.setDepth(h - b.getHeight());
+            vb.setHeight(b.getHeight());
+        }
 
-	return vb;
-	
+        return vb;
+
     }
 }

@@ -25,23 +25,23 @@
  * Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
  * 02110-1301, USA.
  *
- * Linking this library statically or dynamically with other modules 
- * is making a combined work based on this library. Thus, the terms 
- * and conditions of the GNU General Public License cover the whole 
+ * Linking this library statically or dynamically with other modules
+ * is making a combined work based on this library. Thus, the terms
+ * and conditions of the GNU General Public License cover the whole
  * combination.
- * 
- * As a special exception, the copyright holders of this library give you 
- * permission to link this library with independent modules to produce 
- * an executable, regardless of the license terms of these independent 
- * modules, and to copy and distribute the resulting executable under terms 
- * of your choice, provided that you also meet, for each linked independent 
- * module, the terms and conditions of the license of that module. 
- * An independent module is a module which is not derived from or based 
- * on this library. If you modify this library, you may extend this exception 
- * to your version of the library, but you are not obliged to do so. 
- * If you do not wish to do so, delete this exception statement from your 
+ *
+ * As a special exception, the copyright holders of this library give you
+ * permission to link this library with independent modules to produce
+ * an executable, regardless of the license terms of these independent
+ * modules, and to copy and distribute the resulting executable under terms
+ * of your choice, provided that you also meet, for each linked independent
+ * module, the terms and conditions of the license of that module.
+ * An independent module is a module which is not derived from or based
+ * on this library. If you modify this library, you may extend this exception
+ * to your version of the library, but you are not obliged to do so.
+ * If you do not wish to do so, delete this exception statement from your
  * version.
- * 
+ *
  */
 
 package org.scilab.forge.jlatexmath;
@@ -64,24 +64,24 @@ public class HorizontalBox extends Box {
     public HorizontalBox(Box b, float w, int alignment) {
         if (w != Float.POSITIVE_INFINITY) {
             float rest = w - b.getWidth();
-	    if (rest > 0) {
-		if (alignment == TeXConstants.ALIGN_CENTER || alignment == TeXConstants.ALIGN_NONE) {
-		    StrutBox s = new StrutBox(rest / 2, 0, 0, 0);
-		    add(s);
-		    add(b);
-		    add(s);
-		} else if (alignment == TeXConstants.ALIGN_LEFT) {
-		    add(b);
-		    add(new StrutBox(rest, 0, 0, 0));
-		} else if (alignment == TeXConstants.ALIGN_RIGHT) {
-		    add(new StrutBox(rest, 0, 0, 0));
-		    add(b);
-		} else {
-		    add(b);
-		}
-	    } else {
-		add(b);
-	    }
+            if (rest > 0) {
+                if (alignment == TeXConstants.ALIGN_CENTER || alignment == TeXConstants.ALIGN_NONE) {
+                    StrutBox s = new StrutBox(rest / 2, 0, 0, 0);
+                    add(s);
+                    add(b);
+                    add(s);
+                } else if (alignment == TeXConstants.ALIGN_LEFT) {
+                    add(b);
+                    add(new StrutBox(rest, 0, 0, 0));
+                } else if (alignment == TeXConstants.ALIGN_RIGHT) {
+                    add(new StrutBox(rest, 0, 0, 0));
+                    add(b);
+                } else {
+                    add(b);
+                }
+            } else {
+                add(b);
+            }
         } else {
             add(b);
         }
@@ -185,6 +185,6 @@ public class HorizontalBox extends Box {
             }
         }
 
-        return new HorizontalBox[]{hb1, hb2};
+        return new HorizontalBox[] {hb1, hb2};
     }
 }
