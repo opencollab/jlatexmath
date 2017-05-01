@@ -57,6 +57,7 @@ public class CharAtom extends CharSymbol {
     
     // text style (null means the default text style)
     private String textStyle;
+    private boolean mathMode;
 
     /**
      * Creates a CharAtom that will represent the given character in the given text style.
@@ -65,9 +66,18 @@ public class CharAtom extends CharSymbol {
      * @param c the alphanumeric character
      * @param textStyle the text style in which the character should be drawn
      */
+    public CharAtom(char c, String textStyle, boolean mathMode) {
+        this.c = c;
+        this.textStyle = textStyle;
+        this.mathMode = mathMode;
+    }
+
     public CharAtom(char c, String textStyle) {
-	this.c = c;
-	this.textStyle = textStyle;
+        this(c, textStyle, false);
+    }
+
+    public boolean isMathMode() {
+        return mathMode;
     }
 
     public Box createBox(TeXEnvironment env) {
