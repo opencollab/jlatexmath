@@ -1,4 +1,6 @@
 jlatexmath (1.0.6)
+	* Remove ligatures info for cyrillic
+
 	* Add italic correction only in math mode.
 
 	* Add a command \mathnormal.
