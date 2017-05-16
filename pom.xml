@@ -9,7 +9,7 @@
     <!--<groupId>org.scilab.forge</groupId> -->
     <groupId>org.scilab.forge</groupId>
     <artifactId>jlatexmath-parent</artifactId>
-    <version>1.0.7-SNAPSHOT</version>
+    <version>1.0.5-SNAPSHOT</version>
     <name>${project.artifactId}</name>
     <description>parent pom for jlatexmath artifacts</description>
     <packaging>pom</packaging>
