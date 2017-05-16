@@ -47,6 +47,8 @@
         <junit.version>4.12</junit.version>
         <jar.plugin.version>3.0.2</jar.plugin.version>
         <build.helper.plugin.version>1.12</build.helper.plugin.version>
+        <!-- nexus staging version should match the one used in sonatype-parent -->
+        <nexus.staging.plugin.version>1.6.5</nexus.staging.plugin.version>
         <scm.url>scm:git:https://github.com/opencollabnet/jlatexmath.git</scm.url>
     </properties>
 
@@ -57,6 +59,9 @@
         <module>jlatexmath-fop</module>
         <module>jlatexmath-example-giws</module>
         <module>jlatexmath-example-export</module>
+        <!-- require a dummy artifact so can ignore deployment of previous two example modules -->
+        <!-- see https://issues.sonatype.org/browse/NEXUS-9138 -->
+        <module>jlatexmath-ignore</module>
     </modules>
 
     <build>
