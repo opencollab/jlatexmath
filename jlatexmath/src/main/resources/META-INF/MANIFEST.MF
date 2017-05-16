@@ -1,0 +1,135 @@
+
+Name: org/scilab/forge/jlatexmath/fonts/maths/jlm_cmbsy10.ttf
+Content-Type: application/x-font
+
+Name: org/scilab/forge/jlatexmath/fonts/latin/optional/jlm_cmbx10.ttf
+Content-Type: application/x-font
+
+Name: org/scilab/forge/jlatexmath/fonts/base/jlm_cmex10.ttf
+Content-Type: application/x-font
+
+Name: org/scilab/forge/jlatexmath/fonts/base/jlm_cmmi10.ttf
+Content-Type: application/x-font
+
+Name: org/scilab/forge/jlatexmath/fonts/latin/optional/jlm_cmti10.ttf
+Content-Type: application/x-font
+
+Name: org/scilab/forge/jlatexmath/fonts/latin/optional/jlm_cmbxti10.ttf
+Content-Type: application/x-font
+
+Name: org/scilab/forge/jlatexmath/fonts/base/jlm_cmmib10.ttf
+Content-Type: application/x-font
+
+Name: org/scilab/forge/jlatexmath/fonts/latin/jlm_cmr10.ttf
+Content-Type: application/x-font
+
+Name: org/scilab/forge/jlatexmath/fonts/latin/optional/jlm_cmss10.ttf
+Content-Type: application/x-font
+
+Name: org/scilab/forge/jlatexmath/fonts/latin/optional/jlm_cmssi10.ttf
+Content-Type: application/x-font
+
+Name: org/scilab/forge/jlatexmath/fonts/latin/optional/jlm_cmssbx10.ttf
+Content-Type: application/x-font
+
+Name: org/scilab/forge/jlatexmath/fonts/maths/jlm_cmsy10.ttf
+Content-Type: application/x-font
+
+Name: org/scilab/forge/jlatexmath/fonts/latin/optional/jlm_cmtt10.ttf
+Content-Type: application/x-font
+
+Name: org/scilab/forge/jlatexmath/fonts/maths/optional/jlm_dsrom10.ttf
+Content-Type: application/x-font
+
+Name: org/scilab/forge/jlatexmath/fonts/euler/jlm_eufb10.ttf
+Content-Type: application/x-font
+
+Name: org/scilab/forge/jlatexmath/fonts/euler/jlm_eufm10.ttf
+Content-Type: application/x-font
+
+Name: org/scilab/forge/jlatexmath/fonts/maths/jlm_msam10.ttf
+Content-Type: application/x-font
+
+Name: org/scilab/forge/jlatexmath/fonts/maths/jlm_msbm10.ttf
+Content-Type: application/x-font
+
+Name: org/scilab/forge/jlatexmath/fonts/maths/jlm_rsfs10.ttf
+Content-Type: application/x-font
+
+Name: org/scilab/forge/jlatexmath/fonts/maths/jlm_stmary10.ttf
+Content-Type: application/x-font
+
+Name: org/scilab/forge/jlatexmath/cyrillic/fonts/jlm_wnr10.ttf
+Content-Type: application/x-font
+
+Name: org/scilab/forge/jlatexmath/cyrillic/fonts/jlm_wnti10.ttf
+Content-Type: application/x-font
+
+Name: org/scilab/forge/jlatexmath/cyrillic/fonts/jlm_wntt10.ttf
+Content-Type: application/x-font
+
+Name: org/scilab/forge/jlatexmath/cyrillic/fonts/jlm_wnss10.ttf
+Content-Type: application/x-font
+
+Name: org/scilab/forge/jlatexmath/cyrillic/fonts/jlm_wnssbx10.ttf
+Content-Type: application/x-font
+
+Name: org/scilab/forge/jlatexmath/cyrillic/fonts/jlm_wnssi10.ttf
+Content-Type: application/x-font
+
+Name: org/scilab/forge/jlatexmath/cyrillic/fonts/jlm_wnbx10.ttf
+Content-Type: application/x-font
+
+Name: org/scilab/forge/jlatexmath/cyrillic/fonts/jlm_wnbxti10.ttf
+Content-Type: application/x-font
+
+Name: org/scilab/forge/jlatexmath/greek/fonts/jlm_fcmbipg.ttf
+Content-Type: application/x-font
+
+Name: org/scilab/forge/jlatexmath/greek/fonts/jlm_fcmbpg.ttf
+Content-Type: application/x-font
+
+Name: org/scilab/forge/jlatexmath/greek/fonts/jlm_fcmripg.ttf
+Content-Type: application/x-font
+
+Name: org/scilab/forge/jlatexmath/greek/fonts/jlm_fcmrpg.ttf
+Content-Type: application/x-font
+
+Name: org/scilab/forge/jlatexmath/greek/fonts/jlm_fcsbpg.ttf
+Content-Type: application/x-font
+
+Name: org/scilab/forge/jlatexmath/greek/fonts/jlm_fcsropg.ttf
+Content-Type: application/x-font
+
+Name: org/scilab/forge/jlatexmath/greek/fonts/jlm_fcsrpg.ttf
+Content-Type: application/x-font
+
+Name: org/scilab/forge/jlatexmath/greek/fonts/jlm_fctrpg.ttf
+Content-Type: application/x-font
+
+Name: org/scilab/forge/jlatexmath/fonts/latin/jlm_jlmr10.ttf
+Content-Type: application/x-font
+
+Name: org/scilab/forge/jlatexmath/fonts/latin/jlm_jlmbx10.ttf
+Content-Type: application/x-font
+
+Name: org/scilab/forge/jlatexmath/fonts/latin/jlm_jlmbi10.ttf
+Content-Type: application/x-font
+
+Name: org/scilab/forge/jlatexmath/fonts/latin/jlm_jlmi10.ttf
+Content-Type: application/x-font
+
+Name: org/scilab/forge/jlatexmath/fonts/latin/jlm_jlmss10.ttf
+Content-Type: application/x-font
+
+Name: org/scilab/forge/jlatexmath/fonts/latin/jlm_jlmsi10.ttf
+Content-Type: application/x-font
+
+Name: org/scilab/forge/jlatexmath/fonts/latin/jlm_jlmsbi10.ttf
+Content-Type: application/x-font
+
+Name: org/scilab/forge/jlatexmath/fonts/latin/jlm_jlmsb10.ttf
+Content-Type: application/x-font
+
+Name: org/scilab/forge/jlatexmath/fonts/latin/jlm_jlmtt10.ttf
+Content-Type: application/x-font

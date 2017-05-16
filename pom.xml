@@ -1,115 +1,107 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.github.davidmoten</groupId>
+        <artifactId>sonatype-parent</artifactId>
+        <version>0.1</version>
+    </parent>
+    <!--<groupId>org.scilab.forge</groupId> -->
+    <groupId>org.scilab.forge</groupId>
+    <artifactId>jlatexmath-parent</artifactId>
+    <version>1.0.7-SNAPSHOT</version>
+    <name>${project.artifactId}</name>
+    <description>parent pom for jlatexmath artifacts</description>
+    <packaging>pom</packaging>
+    <url>http://forge.scilab.org/index.php/p/jlatexmath</url>
 
-	<groupId>org.scilab.forge</groupId>
-	<artifactId>jlatexmath</artifactId>
-	<version>1.0.5</version>
-	<packaging>jar</packaging>
+    <licenses>
+        <license>
+            <name>GPLv2 with Classpath Exception</name>
+            <url>http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
 
-	<name>JLaTeXMath</name>
-	<description>A Java API to render LaTeX</description>
-	<url>http://forge.scilab.org/index.php/p/jlatexmath</url>
+    <developers>
+        <developer>
+            <id>ledru</id>
+            <name>Sylvestre Ledru</name>
+        </developer>
+        <developer>
+            <id>denizet</id>
+            <name>Calixte Denizet</name>
+        </developer>
+    </developers>
 
-	<licenses>
-		<license>
-			<name>GPLv2 with Classpath Exception</name>
-			<url>http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt</url>
-			<distribution>repo</distribution>
-		</license>
-	</licenses>
+    <scm>
+        <connection>${scm.url}</connection>
+        <developerConnection>${scm.url}</developerConnection>
+        <url>${scm.url}</url>
+    </scm>
 
-	<developers>
-		<developer>
-			<id>ledru</id>
-			<name>Sylvestre Ledru</name>
-		</developer>
-		<developer>
-			<id>denizet</id>
-			<name>Calixte Denizet</name>
-		</developer>
-	</developers>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <java.version>1.7</java.version>
+        <fop.version>1.0</fop.version>
+        <junit.version>4.12</junit.version>
+        <jar.plugin.version>3.0.2</jar.plugin.version>
+        <build.helper.plugin.version>1.12</build.helper.plugin.version>
+        <scm.url>scm:git:https://github.com/opencollabnet/jlatexmath.git</scm.url>
+    </properties>
 
-	<scm>
-		<url>git://git.forge.scilab.org/jlatexmath.git</url>
-	</scm>
+    <modules>
+        <module>jlatexmath-font-cyrillic</module>
+        <module>jlatexmath-font-greek</module>
+        <module>jlatexmath</module>
+        <module>jlatexmath-fop</module>
+        <module>jlatexmath-example-giws</module>
+        <module>jlatexmath-example-export</module>
+    </modules>
 
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-	</properties>
-
-	<build>
-		<sourceDirectory>src</sourceDirectory>
-
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jar-plugin</artifactId>
-				<version>3.0.2</version>
-				<configuration>
-					<archive>
-						<manifestFile>MANIFEST.MF</manifestFile>
-					</archive>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-source-plugin</artifactId>
-				<version>3.0.1</version>
-				<configuration>
-					<archive>
-						<manifestFile>MANIFEST.MF</manifestFile>
-					</archive>
-				</configuration>
-				<executions>
-					<execution>
-						<id>attach-sources</id>
-						<goals>
-							<goal>jar</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>2.10.4</version>
-				<configuration>
-					<additionalparam>-Xdoclint:none</additionalparam>
-				</configuration>
-				<executions>
-					<execution>
-						<id>attach-javadocs</id>
-						<goals>
-							<goal>jar</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-		</plugins>
-
-		<resources>
-			<resource>
-				<directory>src</directory>
-				<filtering>false</filtering>
-				<includes>
-					<include>**/*.xml</include>
-					<include>**/*.ttf</include>
-					<include>**/*.txt</include>
-					<include>**/COPYING</include>
-					<include>**/LICENSE</include>
-					<include>**/MANIFEST.MF</include>
-				</includes>
-			</resource>
-			<resource>
-				<directory>${basedir}</directory>
-				<targetPath>META-INF</targetPath>
-				<filtering>false</filtering>
-				<includes>
-					<include>COPYING</include>
-					<include>LICENSE</include>
-				</includes>
-			</resource>
-		</resources>
-	</build>
+    <build>
+        <plugins>
+            <plugin>
+                <inherited>true</inherited>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.5.1</version>
+                <configuration>
+                    <verbose>true</verbose>
+                    <fork>true</fork>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>3.0.1</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.10.4</version>
+                <configuration>
+                    <additionalparam>-Xdoclint:none</additionalparam>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project>

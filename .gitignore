@@ -1,4 +1,6 @@
-*.class
-*~
-dist/*
-bin/*
+target
+.classpath
+.settings
+.project
+/bin
+/dist

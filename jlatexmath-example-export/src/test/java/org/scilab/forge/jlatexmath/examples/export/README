@@ -1,0 +1,9 @@
+In using fop 0.95 it's possible to generate PDF, PS or EPS via a SVG file.
+The glyphs can be converted into path to avoid the embedding of the fonts and make readable SVG files for the web or other usage.
+
+To compile check you have put in the classpath or in a directory you can precise in build.xml (with the variable myclasspath), the following jars :
+   fop.jar
+   avalon-framework.jar
+   xml-apis-ext.jar
+   commons-io.jar
+   commons-logging.jar		
