@@ -49,7 +49,7 @@
         <build.helper.plugin.version>1.12</build.helper.plugin.version>
         <!-- nexus staging version should match the one used in sonatype-parent -->
         <nexus.staging.plugin.version>1.6.5</nexus.staging.plugin.version>
-        <scm.url>scm:git:https://github.com/opencollabnet/jlatexmath.git</scm.url>
+        <scm.url>scm:git:https://github.com/opencollab/jlatexmath.git</scm.url>
     </properties>
 
     <modules>
