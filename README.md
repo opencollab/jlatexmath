@@ -4,10 +4,6 @@ JLaTeXMath is a Java library. Its main purpose is to display mathematical formul
 
 This library is used by numerous important projects like <a href="http://www.scilab.org/">Scilab</a>, <a href="http://www.geogebra.org/">Geogebra</a>, <a href="http://freeplane.sourceforge.net">Freeplane</a>, <a href="http://www.mathpiper.org/">Mathpiper</a>, <a href="http://db-maths.nuxit.net/CaRMetal/index_en.html">CaRMetal</a>, <a href="http://ultrastudio.org/">Ultrastudio</a>, etc.
 
-You can now follow the development of <i>JLaTeXMath</i>or ask questions or make requests using the mailing-list <a href="mailto:jlatexmath@lists.forge.scilab.org">jlatexmath@lists.forge.scilab.org</a>. The releases are announced on it.
-
-You can subscribe to the mailing-list <a href="http://lists.scilab.org/mailman/listinfo/jlatexmath">here</a>.
-
 The default encoding is UTF-8.
 
 Most LaTeX commands are available including:
