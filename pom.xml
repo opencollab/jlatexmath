@@ -8,7 +8,7 @@
     <!--<groupId>org.scilab.forge</groupId> -->
     <groupId>org.scilab.forge</groupId>
     <artifactId>jlatexmath-parent</artifactId>
-    <version>1.0.5</version>
+    <version>1.0.6-SNAPSHOT</version>
     <name>${project.artifactId}</name>
     <description>parent pom for jlatexmath artifacts</description>
     <packaging>pom</packaging>
@@ -37,7 +37,7 @@
         <connection>${scm.url}</connection>
         <developerConnection>${scm.url}</developerConnection>
         <url>${scm.url}</url>
-      <tag>1.0.5</tag>
+      <tag>HEAD</tag>
   </scm>
 
     <properties>
