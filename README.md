@@ -1,5 +1,8 @@
 <img src="docs/images/Logo.png"/>
 
+<a href="https://travis-ci.org/opencollab/jlatexmath"><img src="https://travis-ci.org/opencollab/jlatexmath.svg"/></a><br/>
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.scilab.forge/jlatexmath/badge.svg?style=flat)](https://maven-badges.herokuapp.com/maven-central/org.scilab.forge/jlatexmath)<br/>
+
 JLaTeXMath is a Java library. Its main purpose is to display mathematical formulas written in LaTeX. JLaTeXMath is the best Java library to display LaTeX code.
 
 This library is used by numerous important projects like <a href="http://www.scilab.org/">Scilab</a>, <a href="http://www.geogebra.org/">Geogebra</a>, <a href="http://freeplane.sourceforge.net">Freeplane</a>, <a href="http://www.mathpiper.org/">Mathpiper</a>, <a href="http://db-maths.nuxit.net/CaRMetal/index_en.html">CaRMetal</a>, <a href="http://ultrastudio.org/">Ultrastudio</a>, etc.
@@ -26,15 +29,15 @@ A few examples are available in the source distribution, they show how to use <i
 
 A first example :
 
-<img src="docs/images/Formula1.png"/>
+&nbsp;&nbsp;&nbsp;&nbsp;<img src="docs/images/Formula1.png"/>
 
 a second one :
 
-<img src="docs/images/Formula2.png"/>
+&nbsp;&nbsp;&nbsp;&nbsp;<img src="docs/images/Formula2.png"/>
 
 and a third one :
 
-<img src="docs/images/Formula3.png"/>
+&nbsp;&nbsp;&nbsp;&nbsp;<img src="docs/images/Formula3.png"/>
 
 <i>JLaTeXMath</i> is used by <a href="http://www.scilab.org">Scilab</a> to display formulas written in LaTeX in graphic windows:
 
