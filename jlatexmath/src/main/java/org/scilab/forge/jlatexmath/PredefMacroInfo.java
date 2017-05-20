@@ -574,6 +574,8 @@ class PredefMacroInfo extends MacroInfo {
                 return PredefMacros.fcscore_macro(tp, args);
             case 277:
                 return PredefMacros.textstyle_macros(tp, args);
+            case 278:
+                return PredefMacros.qquad_macro(tp, args);
             default:
                 return null;
             }

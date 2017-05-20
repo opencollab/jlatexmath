@@ -328,5 +328,6 @@ final class PredefinedCommands {
         MacroInfo.Commands.put("st", new PredefMacroInfo(275, 1));
         MacroInfo.Commands.put("fcscore", new PredefMacroInfo(276, 1));
         MacroInfo.Commands.put("mathnormal", new PredefMacroInfo(277, 1));
+        MacroInfo.Commands.put("qquad", new PredefMacroInfo(278, 0));
     }
 }
