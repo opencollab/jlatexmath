@@ -500,7 +500,7 @@ public class TeXFormula {
      * @return the modified TeXFormula
      */
     public TeXFormula add(TeXFormula f) {
-        addImpl (f);
+        addImpl(f);
         return this;
     }
 
@@ -1041,7 +1041,11 @@ public class TeXFormula {
                 throw new FormulaNotFoundException(name);
             }
             TeXFormula tf = new TeXFormula(f);
-            predefinedTeXFormulas.put(name, tf);
+            if (!(tf.root instanceof RowAtom)) {
+                // depending of the context a RowAtom can be modified
+                // so we can't reuse it
+                predefinedTeXFormulas.put(name, tf);
+            }
             return tf;
         } else {
             return new TeXFormula(formula);

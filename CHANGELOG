@@ -1,4 +1,6 @@
 jlatexmath (1.0.5)
+	* Fix an issue with predefined string commands with a RowAtom (\qquad used two times) 
+
 	* Remove ligatures info for cyrillic
 
 	* Add italic correction only in math mode.
