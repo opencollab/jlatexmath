@@ -1,4 +1,4 @@
-jlatexmath (1.0.6)
+jlatexmath (1.0.5)
 	* Remove ligatures info for cyrillic
 
 	* Add italic correction only in math mode.
@@ -9,7 +9,6 @@ jlatexmath (1.0.6)
 
 	* Italic correction was not taken into account when making box for a CharSymbol.
 
-jlatexmath (1.0.5)
 	* Support ~ as non breakable space.
 
 jlatexmath (1.0.4)
