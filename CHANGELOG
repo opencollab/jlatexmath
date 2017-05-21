@@ -1,4 +1,6 @@
 jlatexmath (1.0.6)
+	* Add the macro \longdiv.
+
 	* Add \qquad as a Java macro rather than a String definition
 
 	* Fix an issue with predefined string commands with a RowAtom (\qquad used two times)

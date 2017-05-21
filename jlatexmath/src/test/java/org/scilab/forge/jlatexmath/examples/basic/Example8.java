@@ -1,24 +1,24 @@
-/* SmashedAtom.java
+/* Example8.java
  * =========================================================================
- * This file is part of the JLaTeXMath Library - http://forge.scilab.org/jlatexmath
- *
- * Copyright (C) 2009 DENIZET Calixte
- *
+ * This file is part of the JLaTeXMath Library - http://jlatexmath.sourceforge.net
+ * 
+ * Copyright (C) 2017 DENIZET Calixte
+ * 
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or (at
  * your option) any later version.
- *
+ * 
  * This program is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * General Public License for more details.
- *
+ * 
  * A copy of the GNU General Public License can be found in the file
  * LICENSE.txt provided with the source distribution of this program (see
  * the META-INF directory in the source jar). This license can also be
  * found on the GNU website at http://www.gnu.org/licenses/gpl.html.
- *
+ * 
  * If you did not receive a copy of the GNU General Public License along
  * with this program, contact the lead developer, or write to the Free
  * Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
@@ -42,35 +42,41 @@
  * version.
  * 
  */
+package org.scilab.forge.jlatexmath.examples.basic;
 
-package org.scilab.forge.jlatexmath;
+import java.awt.Color;
+import java.awt.Graphics2D;
+import java.awt.Insets;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+import javax.swing.JLabel;
+
+import org.scilab.forge.jlatexmath.TeXConstants;
+import org.scilab.forge.jlatexmath.TeXFormula;
+import org.scilab.forge.jlatexmath.TeXIcon;
 
 /**
- * An atom representing a smashed atom (i.e. with no height and no depth). 
- */
-public class SmashedAtom extends Atom {
+ * A class to test LaTeX rendering.
+ **/
+public class Example8 {
+    public static void main(String[] args) throws IOException {
 
-    private Atom at;
-    private boolean h = true, d = true;
-    
-    public SmashedAtom(Atom at, String opt) {
-        this.at = at;
-	if ("t".equals(opt))
-	    d = false;
-	else if ("b".equals(opt))
-	    h = false;
-    }
-
-    public SmashedAtom(Atom at) {
-        this.at = at;
-    }
-    
-    public Box createBox(TeXEnvironment env) {
-        Box b = at.createBox(env);
-	if (h) 
-	    b.setHeight(0);
-	if (d) 
-	    b.setDepth(0);
-	return b;
+        String latex = "\\text{A long division \\longdiv{12345}{13}";
+        TeXFormula formula = new TeXFormula(latex);
+        TeXIcon icon = formula.new TeXIconBuilder().setStyle(TeXConstants.STYLE_DISPLAY).setSize(20).build();
+        icon.setInsets(new Insets(5, 5, 5, 5));
+        BufferedImage image = new BufferedImage(icon.getIconWidth(), icon.getIconHeight(),
+                                                BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g2 = image.createGraphics();
+        g2.setColor(Color.white);
+        g2.fillRect(0, 0, icon.getIconWidth(), icon.getIconHeight());
+        JLabel jl = new JLabel();
+        jl.setForeground(new Color(0, 0, 0));
+        icon.paintIcon(jl, g2, 0, 0);
+        File file = new File("target/Example8.png");
+        ImageIO.write(image, "png", file.getAbsoluteFile());
     }
 }

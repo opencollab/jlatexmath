@@ -137,6 +137,16 @@ public class PredefMacros {
         }
     }
 
+    public static final Atom longdiv_macro(final TeXParser tp, final String[] args) throws ParseException {
+        try {
+            long dividend = Long.valueOf(args[1]);
+            long divisor = Long.valueOf(args[2]); 
+            return new LongdivAtom(divisor, dividend);
+        } catch (NumberFormatException e) {
+            throw new ParseException("Divisor and dividend must be integer numbers");
+        }
+    }
+    
     public static final Atom st_macro(final TeXParser tp, final String[] args) throws ParseException {
         return new StrikeThroughAtom(new TeXFormula(tp, args[1], false).root);
     }
