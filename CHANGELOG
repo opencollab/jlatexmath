@@ -1,8 +1,9 @@
-jlatexmath (1.0.5)
+jlatexmath (1.0.6)
 	* Add \qquad as a Java macro rather than a String definition
 
 	* Fix an issue with predefined string commands with a RowAtom (\qquad used two times)
 
+jlatexmath (1.0.5)
 	* Remove ligatures info for cyrillic
 
 	* Add italic correction only in math mode.
