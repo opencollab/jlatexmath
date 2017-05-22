@@ -1,4 +1,6 @@
 jlatexmath (1.0.6)
+	* Add the macro \questeq.
+
 	* Add the macro \longdiv.
 
 	* Add \qquad as a Java macro rather than a String definition

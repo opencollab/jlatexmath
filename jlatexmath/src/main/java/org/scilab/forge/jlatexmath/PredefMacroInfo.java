@@ -578,6 +578,8 @@ class PredefMacroInfo extends MacroInfo {
                 return PredefMacros.qquad_macro(tp, args);
             case 279:
                 return PredefMacros.longdiv_macro(tp, args);
+            case 280:
+                return PredefMacros.questeq_macro(tp, args);
             default:
                 return null;
             }

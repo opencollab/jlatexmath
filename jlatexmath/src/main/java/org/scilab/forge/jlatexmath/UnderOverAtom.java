@@ -75,11 +75,8 @@ public class UnderOverAtom extends Atom {
                          float underOverSpace, boolean underOverScriptSize, boolean over) {
         // check if unit is valid
         SpaceAtom.checkUnit(underOverUnit);
-
         // units valid
         this.base = base;
-        this.type = type;
-        // TODO: split into two different classes?
 
         if (over) {
             this.under = null;

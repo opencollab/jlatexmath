@@ -461,7 +461,7 @@
 	  <Map char="&#8796;" formula="\triangleq"/>
 	  <Map char="&#8797;" formula="\stackrel{\scalebox{0.75}{\mathrm{def}}}{=}"/>
 	  <Map char="&#8798;" formula="\stackrel{\scalebox{0.75}{\mathrm{m}}}{=}"/>
-	  <Map char="&#8799;" formula="\stackrel{\scalebox{0.75}{\mathrm{?}}}{=}"/>
+	  <Map char="&#8799;" formula="\questeq"/>
 	  <Map char="&#8636;" formula="\leftharpoonup"/>
 	  <Map char="&#8858;" formula="\circledcirc"/>
 	  <Map char="&#8598;" formula="\nwarrow"/>

@@ -1018,6 +1018,11 @@ public class PredefMacros {
         return new FBoxAtom(new TeXFormula(tp, args[1], false).root);
     }
 
+    public static final Atom questeq_macro(final TeXParser tp, final String[] args) throws ParseException {
+        Atom at = new UnderOverAtom(SymbolAtom.get(TeXFormula.symbolMappings['=']), new ScaleAtom(SymbolAtom.get(TeXFormula.symbolMappings['?']), 0.75f), TeXConstants.UNIT_MU, 2.5f, true, true);
+        return new TypedAtom(TeXConstants.TYPE_RELATION, TeXConstants.TYPE_RELATION, at);
+    }
+    
     public static final Atom stackrel_macro(final TeXParser tp, final String[] args) throws ParseException {
         Atom at = new UnderOverAtom(new TeXFormula(tp, args[2], false).root, new TeXFormula(tp, args[3], false).root, TeXConstants.UNIT_MU, 0.5f, true, new TeXFormula(tp, args[1], false).root, TeXConstants.UNIT_MU, 2.5f, true);
         return new TypedAtom(TeXConstants.TYPE_RELATION, TeXConstants.TYPE_RELATION, at);
