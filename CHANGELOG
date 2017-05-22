@@ -1,4 +1,6 @@
 jlatexmath (1.0.6)
+	* Add TeX style macros \bangle, \brace and \brack.
+
 	* Add the macro \questeq.
 
 	* Add the macro \longdiv.

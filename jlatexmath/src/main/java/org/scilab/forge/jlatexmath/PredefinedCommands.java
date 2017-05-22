@@ -331,5 +331,8 @@ final class PredefinedCommands {
         MacroInfo.Commands.put("qquad", new PredefMacroInfo(278, 0));
         MacroInfo.Commands.put("longdiv", new PredefMacroInfo(279, 2));
         MacroInfo.Commands.put("questeq", new PredefMacroInfo(280, 0));
+        MacroInfo.Commands.put("bangle", new PredefMacroInfo(281, 0));
+        MacroInfo.Commands.put("brace", new PredefMacroInfo(282, 0));
+        MacroInfo.Commands.put("brack", new PredefMacroInfo(283, 0));
     }
 }

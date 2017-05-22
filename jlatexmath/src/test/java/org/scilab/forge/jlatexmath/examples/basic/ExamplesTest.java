@@ -99,6 +99,12 @@ public class ExamplesTest {
         check("Example8.png");
     }
 
+    @Test
+    public void testExample9() throws IOException {
+        Example9.main(new String[0]);
+        check("Example9.png");
+    }
+
     private static void check(String filename) {
         try {
             System.out.println("checking image " + filename);

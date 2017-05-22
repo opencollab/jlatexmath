@@ -580,6 +580,12 @@ class PredefMacroInfo extends MacroInfo {
                 return PredefMacros.longdiv_macro(tp, args);
             case 280:
                 return PredefMacros.questeq_macro(tp, args);
+            case 281:
+                return PredefMacros.bangle_macro(tp, args);
+            case 282:
+                return PredefMacros.brace_macro(tp, args);
+            case 283:
+                return PredefMacros.brack_macro(tp, args);
             default:
                 return null;
             }
