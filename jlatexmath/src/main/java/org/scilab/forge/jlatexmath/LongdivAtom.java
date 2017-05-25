@@ -45,7 +45,7 @@
 
 package org.scilab.forge.jlatexmath;
 
-import java.util.ArrayList;
+import java.util.ArrayList;
 
 /**
  * An atom representing a long division.
@@ -97,7 +97,6 @@ public class LongdivAtom extends VRowAtom {
     private String[] makeResults(long divisor, long dividend) {
         ArrayList<String> vec = new ArrayList<>();
         long q = dividend / divisor;
-        final long r = dividend % divisor;
         vec.add(Long.toString(q));
         vec.add(Long.toString(dividend));
 
