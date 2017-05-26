@@ -45,10 +45,6 @@
 
 package org.scilab.forge.jlatexmath;
 
-import java.lang.reflect.Method;
-import java.lang.reflect.InvocationTargetException;
-import java.util.HashMap;
-
 /**
  * Class to load the predefined commands. Mainly wrote to avoid the use of the Java reflection.
  */

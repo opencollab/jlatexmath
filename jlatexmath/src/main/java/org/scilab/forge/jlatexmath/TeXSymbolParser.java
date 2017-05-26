@@ -46,11 +46,12 @@
 
 package org.scilab.forge.jlatexmath;
 
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
-import java.io.InputStream;
 
 import javax.xml.parsers.DocumentBuilderFactory;
+
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 

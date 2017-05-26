@@ -51,12 +51,12 @@ import java.awt.Image;
 import java.awt.Insets;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
-import java.lang.ref.ReferenceQueue;
 import java.lang.ref.Reference;
+import java.lang.ref.ReferenceQueue;
 import java.lang.ref.SoftReference;
 import java.util.Iterator;
-import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
 import org.scilab.forge.jlatexmath.ParseException;
 import org.scilab.forge.jlatexmath.TeXFormula;

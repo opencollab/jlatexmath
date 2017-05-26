@@ -49,11 +49,10 @@ package org.scilab.forge.jlatexmath;
 import java.awt.Color;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.List;
 
 import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
 import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 /**
  * Parses a "TeXFormula"-element representing a predefined TeXFormula's from an XML-file.

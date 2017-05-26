@@ -46,9 +46,9 @@
 
 package org.scilab.forge.jlatexmath;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
-import java.awt.Color;
 
 /**
  * A box representing a horizontal line.

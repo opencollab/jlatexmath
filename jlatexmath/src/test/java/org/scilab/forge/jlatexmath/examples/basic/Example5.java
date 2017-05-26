@@ -44,7 +44,6 @@
  */
 package org.scilab.forge.jlatexmath.examples.basic;
 
-import java.io.IOException;
 import java.awt.Color;
 
 import org.scilab.forge.jlatexmath.TeXConstants;

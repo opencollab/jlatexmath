@@ -45,10 +45,8 @@
 
 package org.scilab.forge.jlatexmath;
 
-import java.lang.Character.UnicodeBlock;
 import java.net.URL;
 import java.net.URLClassLoader;
-import java.lang.ClassLoader;
 
 public class URLAlphabetRegistration implements AlphabetRegistration {
 

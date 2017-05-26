@@ -47,14 +47,13 @@
 package org.scilab.forge.jlatexmath;
 
 import java.awt.Font;
-import java.util.Map;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.ArrayList;
-import java.lang.Character.UnicodeBlock;
-import java.io.FileInputStream;
-import java.io.InputStream;
-import java.io.FileNotFoundException;
+import java.util.Map;
 
 /**
  * The default implementation of the TeXFont-interface. All font information is read

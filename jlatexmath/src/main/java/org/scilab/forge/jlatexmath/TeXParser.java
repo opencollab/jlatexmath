@@ -46,8 +46,6 @@
 package org.scilab.forge.jlatexmath;
 
 import java.awt.Color;
-import java.awt.Font;
-import java.lang.Character.UnicodeBlock;
 import java.util.HashSet;
 import java.util.Set;
 

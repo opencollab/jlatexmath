@@ -45,8 +45,6 @@
 
 package org.scilab.forge.jlatexmath;
 
-import java.lang.Character.UnicodeBlock;
-
 public interface AlphabetRegistration {
     
     public static final Character.UnicodeBlock[] JLM_GREEK = new Character.UnicodeBlock[]{Character.UnicodeBlock.GREEK, Character.UnicodeBlock.GREEK_EXTENDED};

@@ -49,9 +49,6 @@ package org.scilab.forge.jlatexmath;
 import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
-import java.awt.geom.Rectangle2D;
-import java.awt.Stroke;
-import java.awt.BasicStroke;
 
 /**
  * A box representing a single character.

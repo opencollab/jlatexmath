@@ -55,18 +55,16 @@ import java.awt.Color;
 import javax.xml.transform.Source;
 import javax.xml.transform.dom.DOMSource;
 
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-
-import org.scilab.forge.jlatexmath.TeXIcon;
-import org.scilab.forge.jlatexmath.fop.JLaTeXMathObj;
-import org.scilab.forge.jlatexmath.fop.JLaTeXMathElement;
-import org.scilab.forge.jlatexmath.fop.image.ImageJLaTeXMath;
-
 import org.apache.xmlgraphics.image.loader.ImageContext;
 import org.apache.xmlgraphics.image.loader.ImageInfo;
 import org.apache.xmlgraphics.image.loader.ImageSize;
 import org.apache.xmlgraphics.image.loader.impl.AbstractImagePreloader;
+import org.scilab.forge.jlatexmath.TeXIcon;
+import org.scilab.forge.jlatexmath.fop.JLaTeXMathElement;
+import org.scilab.forge.jlatexmath.fop.JLaTeXMathObj;
+import org.scilab.forge.jlatexmath.fop.image.ImageJLaTeXMath;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
 /**
  * Preloader

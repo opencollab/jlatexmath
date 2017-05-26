@@ -45,9 +45,6 @@
 
 package org.scilab.forge.jlatexmath;
 
-import java.util.HashMap;
-import java.util.regex.Matcher;
-
 public class NewEnvironmentMacro extends NewCommandMacro {
     
     public NewEnvironmentMacro() {

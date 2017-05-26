@@ -45,8 +45,6 @@
 
 package org.scilab.forge.jlatexmath;
 
-import java.awt.Color;
-
 /**
  * Responsible for creating a box containing a delimiter symbol that exists
  * in different sizes.

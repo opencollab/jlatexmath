@@ -45,11 +45,10 @@
 
 package org.scilab.forge.jlatexmath;
 
-import java.util.BitSet;
-import java.util.Map;
-import java.util.HashMap;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * A box representing a matrix.

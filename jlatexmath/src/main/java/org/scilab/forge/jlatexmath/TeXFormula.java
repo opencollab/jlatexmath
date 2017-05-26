@@ -48,30 +48,25 @@
 
 package org.scilab.forge.jlatexmath;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.List;
-import java.util.LinkedList;
-import java.util.Set;
-import java.util.Stack;
-import java.io.InputStream;
+import java.awt.Color;
+import java.awt.Graphics2D;
+import java.awt.GraphicsEnvironment;
+import java.awt.Image;
+import java.awt.Insets;
+import java.awt.Toolkit;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Graphics2D;
-import java.awt.Insets;
-import java.awt.image.BufferedImage;
-import java.awt.GraphicsEnvironment;
-import java.awt.Image;
-import java.awt.Toolkit;
 import javax.imageio.ImageIO;
 import javax.imageio.stream.FileImageOutputStream;
-import java.lang.Character.UnicodeBlock;
 
 /**
  * Represents a logical mathematical formula that will be displayed (by creating a

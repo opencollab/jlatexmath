@@ -45,9 +45,9 @@
 
 package org.scilab.forge.jlatexmath;
 
+import java.awt.BasicStroke;
 import java.awt.Graphics2D;
 import java.awt.Stroke;
-import java.awt.BasicStroke;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Line2D;
 

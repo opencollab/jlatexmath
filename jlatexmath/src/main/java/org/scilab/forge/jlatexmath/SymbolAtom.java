@@ -48,11 +48,11 @@
 
 package org.scilab.forge.jlatexmath;
 
-import java.util.BitSet;
-import java.util.Map;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.util.BitSet;
+import java.util.Map;
 
 /**
  * A box representing a symbol (a non-alphanumeric character).

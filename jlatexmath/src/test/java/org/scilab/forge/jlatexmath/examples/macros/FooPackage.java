@@ -45,18 +45,18 @@
 
 package org.scilab.forge.jlatexmath.examples.macros; 
 
-import org.scilab.forge.jlatexmath.Atom;
-import org.scilab.forge.jlatexmath.TeXParser;
-import org.scilab.forge.jlatexmath.ParseException;
-import org.scilab.forge.jlatexmath.TeXFormula;
-import org.scilab.forge.jlatexmath.TeXEnvironment;
-import org.scilab.forge.jlatexmath.TeXConstants;
-import org.scilab.forge.jlatexmath.SpaceAtom;
-import org.scilab.forge.jlatexmath.Box;
-
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
+
+import org.scilab.forge.jlatexmath.Atom;
+import org.scilab.forge.jlatexmath.Box;
+import org.scilab.forge.jlatexmath.ParseException;
+import org.scilab.forge.jlatexmath.SpaceAtom;
+import org.scilab.forge.jlatexmath.TeXConstants;
+import org.scilab.forge.jlatexmath.TeXEnvironment;
+import org.scilab.forge.jlatexmath.TeXFormula;
+import org.scilab.forge.jlatexmath.TeXParser;
 
 public class FooPackage {
     

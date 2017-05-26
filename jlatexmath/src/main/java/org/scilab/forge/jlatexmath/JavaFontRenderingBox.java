@@ -51,7 +51,6 @@ import java.awt.font.TextAttribute;
 import java.awt.font.TextLayout;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
-import java.lang.reflect.Field;
 import java.util.Hashtable;
 import java.util.Map;
 
