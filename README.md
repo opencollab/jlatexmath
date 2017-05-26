@@ -58,6 +58,9 @@ Regarding JLaTeXMath’s Classpath Exception and JavaScript: If you use the Goog
 
 ## Benchmarks
 To run jmh benchmarks (measuring parse and render performance):
-    # benchmarks are in core module
-    cd jlatexmath
-    mvn clean install -P benchmark
+
+```bash
+# benchmarks are in core module
+cd jlatexmath
+mvn clean install -P benchmark
+```
