@@ -90,7 +90,7 @@ public class TeXFormulaParser {
                 // parse arguments
                 NodeList args = el.getElementsByTagName("Argument");
                 // get argument classes and values
-                Class[] argClasses = getArgumentClasses(args);
+                Class<?>[] argClasses = getArgumentClasses(args);
                 Object[] argValues = getArgumentValues(args);
                 // invoke method
                 try {
@@ -118,7 +118,7 @@ public class TeXFormulaParser {
             // parse arguments
             NodeList args = el.getElementsByTagName("Argument");
             // get argument classes and values
-            Class[] argClasses = getArgumentClasses(args);
+            Class<?>[] argClasses = getArgumentClasses(args);
             Object[] argValues = getArgumentValues(args);
             // create TeXFormula object
 	    //String code = "TeXFormula.predefinedTeXFormulasAsString.put(\"%s\", \"%s\");";
@@ -148,7 +148,7 @@ public class TeXFormulaParser {
             // parse arguments
             NodeList args = el.getElementsByTagName("Argument");
             // get argument classes and values
-            Class[] argClasses = getArgumentClasses(args);
+            Class<?>[] argClasses = getArgumentClasses(args);
             Object[] argValues = getArgumentValues(args);
             // create TeXFormula object
             try {
@@ -158,7 +158,7 @@ public class TeXFormulaParser {
             } catch (IllegalArgumentException e) {
 		String err = "IllegalArgumentException:\n";
 		err += "ClassLoader to load this class (TeXFormulaParser): " + this.getClass().getClassLoader() + "\n";
-		for (Class cl : argClasses) {
+		for (Class<?> cl : argClasses) {
 		    err += "Created class: " + cl + " loaded with the ClassLoader: " + cl.getClassLoader() + "\n";
 		}
 		for (Object obj : argValues) {
@@ -454,9 +454,9 @@ public class TeXFormulaParser {
         return res;
     }
 
-    private static Class[] getArgumentClasses(NodeList args)
+    private static Class<?>[] getArgumentClasses(NodeList args)
         throws ResourceParseException {
-        Class[] res = new Class[args.getLength()];
+        Class<?>[] res = new Class<?>[args.getLength()];
         int i = 0;
         for (int j = 0; j < args.getLength(); j++) {
             Element arg = (Element)args.item(j);
@@ -469,7 +469,7 @@ public class TeXFormulaParser {
                     PredefinedTeXFormulaParser.RESOURCE_NAME, "Argument", "type",
                     "has an invalid class name value!");
             } else {
-                res[i] = (Class) cl;
+                res[i] = (Class<?>) cl;
             }
             i++;
         }

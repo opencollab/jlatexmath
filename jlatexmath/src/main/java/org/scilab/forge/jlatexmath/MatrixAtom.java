@@ -75,9 +75,6 @@ public class MatrixAtom extends Atom {
     private ArrayOfAtoms matrix;
     private int[] position;
     private Map<Integer, VlineAtom> vlines = new HashMap<Integer, VlineAtom>();
-    private boolean isAlign;
-    private boolean isAlignat;
-    private boolean isFl;
     private int type;
     private boolean isPartial;
     private boolean spaceAround;
@@ -244,7 +241,6 @@ public class MatrixAtom extends Atom {
     }
 
     public Box[] getColumnSep(TeXEnvironment env, float width) {
-        int row = matrix.row;
         int col = matrix.col;
         Box[] arr = new Box[col + 1];
         Box Align, AlignSep, Hsep;
@@ -444,7 +440,6 @@ public class MatrixAtom extends Atom {
         VerticalBox vb = new VerticalBox();
         Box Vsep = vsep_in.createBox(env);
         vb.add(vsep_ext_top.createBox(env));
-        float vsepH = Vsep.getHeight();
         float totalHeight = 0;
 
         for (int i = 0; i < row; i++) {

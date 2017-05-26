@@ -102,28 +102,8 @@ public class TeXFormula {
     public static final int ROMAN = 8;
     public static final int TYPEWRITER = 16;
 
-    // table for putting delimiters over and under formula's,
-    // indexed by constants from "TeXConstants"
-    private static final String[][] delimiterNames = {
-        { "lbrace", "rbrace" },
-        { "lsqbrack", "rsqbrack" },
-        { "lbrack", "rbrack" },
-        { "downarrow", "downarrow" },
-        { "uparrow", "uparrow" },
-        { "updownarrow", "updownarrow" },
-        { "Downarrow", "Downarrow" },
-        { "Uparrow", "Uparrow" },
-        { "Updownarrow", "Updownarrow" },
-        { "vert", "vert" },
-        { "Vert", "Vert" }
-    };
-
     // point-to-pixel conversion
     public static float PIXELS_PER_POINT = 1f;
-
-    // used as second index in "delimiterNames" table (over or under)
-    private static final int OVER_DEL = 0;
-    private static final int UNDER_DEL = 1;
 
     // for comparing floats with 0
     protected static final float PREC = 0.0000001f;
@@ -248,7 +228,6 @@ public class TeXFormula {
      */
     public TeXFormula(String s, Map<String, String> map) throws ParseException {
         this.jlmXMLMap = map;
-        this.textStyle = textStyle;
         parser = new TeXParser(s, this);
         parser.parse();
     }

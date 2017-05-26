@@ -144,7 +144,7 @@ public class HorizontalBox extends Box {
         // iterate from the last child box to the first untill a font id is found
         // that's not equal to NO_FONT
         int fontId = TeXFont.NO_FONT;
-        for (ListIterator it = children.listIterator(children.size()); fontId == TeXFont.NO_FONT && it.hasPrevious();)
+        for (ListIterator<Box> it = children.listIterator(children.size()); fontId == TeXFont.NO_FONT && it.hasPrevious();)
             fontId = ((Box) it.previous()).getLastFontId();
 
         return fontId;

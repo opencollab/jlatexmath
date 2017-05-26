@@ -55,8 +55,6 @@ import java.awt.geom.RoundRectangle2D;
  */
 public class OvalBox extends FramedBox {
     
-    private float shadowRule;
-
     public OvalBox(FramedBox fbox) {
 	super(fbox.box, fbox.thickness, fbox.space);
     }

@@ -50,7 +50,6 @@ package org.scilab.forge.jlatexmath;
  */
 public class OgonekAtom extends Atom {
     
-    private static final SymbolAtom ogonek = SymbolAtom.get("ogonek");
     private Atom base;
 
     public OgonekAtom(Atom base) {

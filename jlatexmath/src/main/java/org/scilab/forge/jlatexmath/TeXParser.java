@@ -68,7 +68,6 @@ public class TeXParser {
     private boolean arrayMode;
     private boolean ignoreWhiteSpace = true;
     private boolean isPartial;
-    private boolean autoNumberBreaking;
 
     // the escape character
     private static final char ESCAPE = '\\';
@@ -83,10 +82,6 @@ public class TeXParser {
 
     // Percent char for comments
     private static final char PERCENT = '%';
-
-    // used as second index in "delimiterNames" table (over or under)
-    private static final int OVER_DEL = 0;
-    private static final int UNDER_DEL = 1;
 
     // script characters (for parsing)
     private static final char SUB_SCRIPT = '_';
@@ -1090,7 +1085,7 @@ public class TeXParser {
         if (pos == len)
             return null;
 
-        int ogroup = 1, spos;
+        int spos;
         char ch = '\0';
 
         skipWhiteSpace();

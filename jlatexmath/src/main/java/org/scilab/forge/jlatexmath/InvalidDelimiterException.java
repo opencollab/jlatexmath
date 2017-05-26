@@ -54,7 +54,9 @@ package org.scilab.forge.jlatexmath;
  */
 public class InvalidDelimiterException extends JMathTeXException {
 
-   protected InvalidDelimiterException(String symbolName) {
+    private static final long serialVersionUID = 212553180078002724L;
+
+protected InvalidDelimiterException(String symbolName) {
       super("The symbol with the name '" + symbolName
             + "' is not defined as a delimiter ("
             + TeXSymbolParser.DELIMITER_ATTR + "='true') in '"

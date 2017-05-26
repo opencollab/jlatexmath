@@ -69,7 +69,6 @@ public class RotateBox extends Box {
     protected double angle = 0;
     private Box box;
     private float xmax, xmin, ymax, ymin;
-    private int option;
 
     private float shiftX;
     private float shiftY;

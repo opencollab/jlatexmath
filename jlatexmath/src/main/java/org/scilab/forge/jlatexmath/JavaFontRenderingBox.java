@@ -63,7 +63,6 @@ public class JavaFontRenderingBox extends Box {
 
     private static Font font = new Font("Serif", Font.PLAIN, 10);
 
-    private String str;
     private TextLayout text;
     private float size;
     private static TextAttribute KERNING;
@@ -81,7 +80,6 @@ public class JavaFontRenderingBox extends Box {
     }
 
     public JavaFontRenderingBox(String str, int type, float size, Font f, boolean kerning) {
-        this.str = str;
         this.size = size;
 
         if (kerning && KERNING != null) {

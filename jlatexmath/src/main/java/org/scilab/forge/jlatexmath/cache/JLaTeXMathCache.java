@@ -71,7 +71,7 @@ public final class JLaTeXMathCache {
     private static final AffineTransform identity = new AffineTransform();
     private static ConcurrentMap<CachedTeXFormula, SoftReference<CachedImage>> cache = new ConcurrentHashMap<CachedTeXFormula, SoftReference<CachedImage>>(128);
     private static int max = Integer.MAX_VALUE;
-    private static ReferenceQueue queue = new ReferenceQueue();
+    private static ReferenceQueue<CachedImage> queue = new ReferenceQueue<CachedImage>();
 
     private JLaTeXMathCache() { }
 
@@ -253,7 +253,7 @@ public final class JLaTeXMathCache {
         SoftReference<CachedImage> img = new SoftReference<CachedImage>(new CachedImage(image, cached), queue);
 
         if (cache.size() >= max) {
-            Reference soft;
+            Reference<? extends CachedImage> soft;
             while ((soft = queue.poll()) != null) {
                 CachedImage ci = (CachedImage) soft.get();
                 if (ci != null) {

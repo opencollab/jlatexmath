@@ -59,8 +59,6 @@ import org.w3c.dom.NodeList;
  */
 public class PredefinedTeXFormulaParser {
     
-    private static final String RESOURCE_DIR = "";
-    
     public static final String RESOURCE_NAME = "PredefinedTeXFormulas.xml";
     
     private Element root;

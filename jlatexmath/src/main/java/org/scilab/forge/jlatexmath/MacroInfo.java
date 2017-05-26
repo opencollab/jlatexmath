@@ -84,7 +84,7 @@ public class MacroInfo {
     
     public MacroInfo(String className, String methodName, float nbArgs) {
 	int nba = (int) nbArgs;
-	Class[] args = new Class[]{TeXParser.class, String[].class};
+	Class<?>[] args = new Class<?>[]{TeXParser.class, String[].class};
 	
 	try {
 	    Object pack = Packages.get(className);
@@ -104,7 +104,7 @@ public class MacroInfo {
 
     public MacroInfo(String className, String methodName, float nbArgs, float posOpts) {
 	int nba = (int) nbArgs;
-	Class[] args = new Class[]{TeXParser.class, String[].class};
+	Class<?>[] args = new Class<?>[]{TeXParser.class, String[].class};
 
 	try {
 	    Object pack = Packages.get(className);
