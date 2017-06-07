@@ -6,9 +6,7 @@ mvn --batch-mode release:prepare \
     -DreleaseVersion=$RELEASE_VERSION \
     -DdevelopmentVersion=$RELEASE_VERSION.1 \
     -DautoVersionSubmodules=true \
-    -s ~/.m2/settings-external.xml \
     -Darguments=-Dgpg.passphrase=$GPG_PASSPHRASE && \
 mvn --batch-mode release:perform \
-    -s ~/.m2/settings-external.xml \
     -Darguments=-Dgpg.passphrase=$GPG_PASSPHRASE
 
