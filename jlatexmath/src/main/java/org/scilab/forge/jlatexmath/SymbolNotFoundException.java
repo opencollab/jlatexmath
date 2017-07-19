@@ -53,6 +53,8 @@ package org.scilab.forge.jlatexmath;
  */
 public class SymbolNotFoundException extends JMathTeXException {
 
+    private static final long serialVersionUID = -3005021333407670912L;
+
     protected SymbolNotFoundException(String name) {
 	super("There's no symbol with the name '" + name + "' defined in '"
 	      + TeXSymbolParser.RESOURCE_NAME + "'!");

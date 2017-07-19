@@ -28,8 +28,6 @@
 
 package org.scilab.forge.jlatexmath.greek;
 
-import java.lang.Character.UnicodeBlock;
-
 import org.scilab.forge.jlatexmath.AlphabetRegistration;
 
 public class GreekRegistration implements AlphabetRegistration {

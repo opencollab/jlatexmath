@@ -48,9 +48,7 @@
 
 package org.scilab.forge.jlatexmath;
 
-import java.util.BitSet;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.ListIterator;
 
 /**
@@ -126,8 +124,8 @@ public class VRowAtom extends Atom {
         if (halign != TeXConstants.ALIGN_NONE) {
             float maxWidth = -Float.POSITIVE_INFINITY;
             LinkedList<Box> boxes = new LinkedList<>();
-            for (ListIterator it = elements.listIterator(); it.hasNext();) {
-                Box b = ((Atom)it.next()).createBox(env);
+            for (ListIterator<Atom> it = elements.listIterator(); it.hasNext();) {
+                Box b = it.next().createBox(env);
                 boxes.add(b);
                 if (maxWidth < b.getWidth()) {
                     maxWidth = b.getWidth();
@@ -136,8 +134,8 @@ public class VRowAtom extends Atom {
             Box interline = new StrutBox(0, env.getInterline(), 0, 0);
 
             // convert atoms to boxes and add to the horizontal box
-            for (ListIterator it = boxes.listIterator(); it.hasNext();) {
-                Box b = (Box) it.next();
+            for (ListIterator<Box> it = boxes.listIterator(); it.hasNext();) {
+                Box b = it.next();
                 vb.add(new HorizontalBox(b, maxWidth, halign));
                 if (addInterline && it.hasNext()) {
                     vb.add(interline);
@@ -147,8 +145,8 @@ public class VRowAtom extends Atom {
             Box interline = new StrutBox(0, env.getInterline(), 0, 0);
 
             // convert atoms to boxes and add to the horizontal box
-            for (ListIterator it = elements.listIterator(); it.hasNext();) {
-                vb.add(((Atom)it.next()).createBox(env));
+            for (ListIterator<Atom> it = elements.listIterator(); it.hasNext();) {
+                vb.add(it.next().createBox(env));
                 if (addInterline && it.hasNext()) {
                     vb.add(interline);
                 }

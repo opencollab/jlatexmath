@@ -47,14 +47,13 @@
 package org.scilab.forge.jlatexmath;
 
 import java.awt.Font;
-import java.util.Map;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.ArrayList;
-import java.lang.Character.UnicodeBlock;
-import java.io.FileInputStream;
-import java.io.InputStream;
-import java.io.FileNotFoundException;
+import java.util.Map;
 
 /**
  * The default implementation of the TeXFont-interface. All font information is read
@@ -73,11 +72,6 @@ public class DefaultTeXFont implements TeXFont {
     protected final static int CAPITALS = 1;
     protected final static int SMALL = 2;
     protected final static int UNICODE = 3;
-
-    /**
-     * Number of font ids in a single font description file.
-     */
-    private static final int NUMBER_OF_FONT_IDS = 256;
 
     private static Map<String, CharFont[]> textStyleMappings;
     private static Map<String, CharFont> symbolMappings;

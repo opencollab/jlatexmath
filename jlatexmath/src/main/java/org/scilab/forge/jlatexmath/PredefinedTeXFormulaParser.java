@@ -46,10 +46,11 @@
 
 package org.scilab.forge.jlatexmath;
 
-import java.util.Map;
 import java.io.InputStream;
+import java.util.Map;
 
 import javax.xml.parsers.DocumentBuilderFactory;
+
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
@@ -57,8 +58,6 @@ import org.w3c.dom.NodeList;
  * Parses and creates predefined TeXFormula objects form an XML-file.
  */
 public class PredefinedTeXFormulaParser {
-    
-    private static final String RESOURCE_DIR = "";
     
     public static final String RESOURCE_NAME = "PredefinedTeXFormulas.xml";
     

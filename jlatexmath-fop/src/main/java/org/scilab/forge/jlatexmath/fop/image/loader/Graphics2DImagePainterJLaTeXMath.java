@@ -50,18 +50,16 @@
 
 package org.scilab.forge.jlatexmath.fop.image.loader;
 
-import org.scilab.forge.jlatexmath.TeXIcon;
-import org.scilab.forge.jlatexmath.fop.JLaTeXMathElement;
-
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
 
 import org.apache.xmlgraphics.java2d.Graphics2DImagePainter;
+import org.scilab.forge.jlatexmath.TeXIcon;
+import org.scilab.forge.jlatexmath.fop.JLaTeXMathElement;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
 /**
  * @author Calixte DENIZET

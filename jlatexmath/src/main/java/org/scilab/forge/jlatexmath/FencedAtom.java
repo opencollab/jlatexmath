@@ -80,7 +80,7 @@ public class FencedAtom extends Atom {
         this(base, l, null, r);
     }
 
-    public FencedAtom(Atom base, SymbolAtom l, List m, SymbolAtom r) {
+    public FencedAtom(Atom base, SymbolAtom l, List<MiddleAtom> m, SymbolAtom r) {
         if (base == null)
             this.base = new RowAtom(); // empty base
         else

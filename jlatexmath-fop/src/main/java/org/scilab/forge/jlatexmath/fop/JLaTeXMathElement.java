@@ -50,16 +50,9 @@
 
 package org.scilab.forge.jlatexmath.fop;
 
-import org.scilab.forge.jlatexmath.TeXIcon;
-import org.scilab.forge.jlatexmath.TeXConstants;
-import org.scilab.forge.jlatexmath.TeXFormula;
-import org.scilab.forge.jlatexmath.SpaceAtom;
-
 import java.awt.Color;
 import java.awt.geom.Point2D;
 import java.util.HashMap;
-import java.util.List;
-import java.util.LinkedList;
 import java.util.Map;
 import java.util.StringTokenizer;
 
@@ -68,17 +61,13 @@ import org.apache.fop.apps.FOUserAgent;
 import org.apache.fop.datatypes.Length;
 import org.apache.fop.fo.FOEventHandler;
 import org.apache.fop.fo.FONode;
-import org.apache.fop.fo.XMLObj;
 import org.apache.fop.fo.PropertyList;
 import org.apache.fop.fo.properties.CommonFont;
 import org.apache.fop.fo.properties.FixedLength;
 import org.apache.fop.fo.properties.Property;
-import org.apache.fop.fo.properties.PercentLength;
-import org.apache.fop.datatypes.LengthBase;
-import org.apache.fop.fo.properties.LengthProperty;
-import org.apache.fop.fo.flow.BlockContainer;
-import org.apache.fop.fo.FONode;
-
+import org.scilab.forge.jlatexmath.TeXConstants;
+import org.scilab.forge.jlatexmath.TeXFormula;
+import org.scilab.forge.jlatexmath.TeXIcon;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NamedNodeMap;

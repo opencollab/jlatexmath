@@ -45,8 +45,6 @@
 
 package org.scilab.forge.jlatexmath;
 
-import java.util.BitSet;
-import java.util.Map;
 import java.util.LinkedList;
 
 public class ArrayOfAtoms extends TeXFormula {

@@ -48,6 +48,8 @@ package org.scilab.forge.jlatexmath;
 
 public class XMLResourceParseException extends ResourceParseException {
 
+    private static final long serialVersionUID = 2091302779298293946L;
+
     /*
      * Attribute problem
      */

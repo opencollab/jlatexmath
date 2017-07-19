@@ -45,12 +45,11 @@
 
 package org.scilab.forge.jlatexmath;
 
-import java.awt.Graphics2D;
-import java.awt.Color;
 import java.awt.BasicStroke;
+import java.awt.Color;
+import java.awt.Graphics2D;
 import java.awt.Stroke;
 import java.awt.geom.AffineTransform;
-import java.awt.image.BufferedImage;
 
 /**
  * A box representing a box containing a graphics.
@@ -61,7 +60,6 @@ public class GeoGebraLogoBox extends Box {
     private static final Color blue = new Color(153, 153, 255);
 
     private static final BasicStroke st = new BasicStroke(3.79999995f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER, 4f);
-    private static final BasicStroke stC = new BasicStroke(1f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER, 4f);
 
     public GeoGebraLogoBox(float w, float h) {
 	this.depth = 0;

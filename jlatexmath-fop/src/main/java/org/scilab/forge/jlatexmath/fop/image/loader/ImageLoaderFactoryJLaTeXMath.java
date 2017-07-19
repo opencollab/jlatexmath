@@ -50,12 +50,11 @@
 
 package org.scilab.forge.jlatexmath.fop.image.loader;
 
-import org.scilab.forge.jlatexmath.fop.JLaTeXMathObj;
-import org.scilab.forge.jlatexmath.fop.image.ImageJLaTeXMath;
-
 import org.apache.xmlgraphics.image.loader.ImageFlavor;
 import org.apache.xmlgraphics.image.loader.impl.AbstractImageLoaderFactory;
 import org.apache.xmlgraphics.image.loader.spi.ImageLoader;
+import org.scilab.forge.jlatexmath.fop.JLaTeXMathObj;
+import org.scilab.forge.jlatexmath.fop.image.ImageJLaTeXMath;
 
 /**
  * @author Calixte DENIZET

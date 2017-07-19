@@ -45,8 +45,6 @@
 
 package org.scilab.forge.jlatexmath;
 
-import java.lang.Character.UnicodeBlock;
-
 import org.scilab.forge.jlatexmath.cyrillic.CyrillicRegistration;
 import org.scilab.forge.jlatexmath.greek.GreekRegistration;
 

@@ -127,9 +127,9 @@ class VerticalBox extends Box {
         // iterate from the last child box (the lowest) to the first (the highest)
         // untill a font id is found that's not equal to NO_FONT
         int fontId = TeXFont.NO_FONT;
-        for (ListIterator it = children.listIterator(children.size()); fontId == TeXFont.NO_FONT
+        for (ListIterator<Box> it = children.listIterator(children.size()); fontId == TeXFont.NO_FONT
                  && it.hasPrevious();)
-            fontId = ((Box) it.previous()).getLastFontId();
+            fontId = it.previous().getLastFontId();
 
         return fontId;
     }

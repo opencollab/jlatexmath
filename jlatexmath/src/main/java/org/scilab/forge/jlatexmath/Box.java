@@ -48,13 +48,12 @@
 
 package org.scilab.forge.jlatexmath;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
-import java.awt.geom.Rectangle2D;
 import java.awt.Stroke;
-import java.awt.BasicStroke;
+import java.awt.geom.Rectangle2D;
 import java.util.LinkedList;
-import java.util.List;
 
 /**
  * An abstract graphical representation of a formula, that can be painted. All characters, font

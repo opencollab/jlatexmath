@@ -53,17 +53,14 @@ package org.scilab.forge.jlatexmath.fop.image.loader;
 import java.io.IOException;
 import java.util.Map;
 
-import org.scilab.forge.jlatexmath.fop.image.ImageJLaTeXMath;
-
 import org.apache.xmlgraphics.image.loader.Image;
 import org.apache.xmlgraphics.image.loader.ImageException;
 import org.apache.xmlgraphics.image.loader.ImageFlavor;
 import org.apache.xmlgraphics.image.loader.ImageInfo;
 import org.apache.xmlgraphics.image.loader.ImageSessionContext;
 import org.apache.xmlgraphics.image.loader.impl.AbstractImageLoader;
-import org.apache.xmlgraphics.image.loader.impl.ImageXMLDOM;
-
 import org.scilab.forge.jlatexmath.fop.JLaTeXMathObj;
+import org.scilab.forge.jlatexmath.fop.image.ImageJLaTeXMath;
 
 public class ImageLoaderJLaTeXMath extends AbstractImageLoader {
 

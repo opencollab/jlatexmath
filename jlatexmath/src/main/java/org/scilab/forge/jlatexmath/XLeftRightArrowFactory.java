@@ -45,8 +45,6 @@
 
 package org.scilab.forge.jlatexmath;
 
-import java.awt.Color;
-
 /**
  * Responsible for creating a box containing a delimiter symbol that exists
  * in different sizes.
@@ -58,8 +56,6 @@ public class XLeftRightArrowFactory {
     private static final Atom RIGHT = SymbolAtom.get("rightarrow");
     
     public static Box create(boolean left, TeXEnvironment env, float width) {
-        TeXFont tf = env.getTeXFont();
-        int style = env.getStyle();
 	Box arr = left ? LEFT.createBox(env) : RIGHT.createBox(env);
 	float h = arr.getHeight();
 	float d = arr.getDepth();
@@ -101,8 +97,6 @@ public class XLeftRightArrowFactory {
     }
     
     public static Box create(TeXEnvironment env, float width) {
-        TeXFont tf = env.getTeXFont();
-        int style = env.getStyle();
 	Box left = LEFT.createBox(env);
 	Box right = RIGHT.createBox(env);
 	float swidth = left.getWidth() + right.getWidth();

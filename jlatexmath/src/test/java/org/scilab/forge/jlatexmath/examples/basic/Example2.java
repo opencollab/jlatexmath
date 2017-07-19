@@ -44,8 +44,6 @@
  */
 package org.scilab.forge.jlatexmath.examples.basic;
 
-import java.io.IOException;
-
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Insets;

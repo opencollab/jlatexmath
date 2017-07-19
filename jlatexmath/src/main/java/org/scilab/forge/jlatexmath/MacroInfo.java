@@ -45,8 +45,8 @@
 
 package org.scilab.forge.jlatexmath;
 
-import java.lang.reflect.Method;
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.HashMap;
 
 public class MacroInfo {
@@ -84,7 +84,7 @@ public class MacroInfo {
     
     public MacroInfo(String className, String methodName, float nbArgs) {
 	int nba = (int) nbArgs;
-	Class[] args = new Class[]{TeXParser.class, String[].class};
+	Class<?>[] args = new Class<?>[]{TeXParser.class, String[].class};
 	
 	try {
 	    Object pack = Packages.get(className);
@@ -104,7 +104,7 @@ public class MacroInfo {
 
     public MacroInfo(String className, String methodName, float nbArgs, float posOpts) {
 	int nba = (int) nbArgs;
-	Class[] args = new Class[]{TeXParser.class, String[].class};
+	Class<?>[] args = new Class<?>[]{TeXParser.class, String[].class};
 
 	try {
 	    Object pack = Packages.get(className);

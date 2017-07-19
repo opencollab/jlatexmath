@@ -52,7 +52,6 @@ public class RuleAtom extends Atom {
     
     private int wunit, hunit, runit;
     private float w, h, r;
-    private SpaceAtom width, height, raise;
  
     public RuleAtom(int wunit, float width, int hunit, float height, int runit, float raise) {
 	this.wunit = wunit;
