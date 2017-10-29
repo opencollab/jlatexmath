@@ -12,7 +12,7 @@
     <name>${project.artifactId}</name>
     <description>parent pom for jlatexmath artifacts</description>
     <packaging>pom</packaging>
-    <url>http://forge.scilab.org/index.php/p/jlatexmath</url>
+    <url>https://github.com/opencollab/jlatexmath/</url>
 
     <licenses>
         <license>
