@@ -2,6 +2,7 @@
 
 <a href="https://travis-ci.org/opencollab/jlatexmath"><img src="https://travis-ci.org/opencollab/jlatexmath.svg"/></a><br/>
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.scilab.forge/jlatexmath/badge.svg?style=flat)](https://maven-badges.herokuapp.com/maven-central/org.scilab.forge/jlatexmath)<br/>
+[![Coverage Status](https://coveralls.io/repos/github/opencollab/jlatexmath/badge.svg?branch=master)](https://coveralls.io/github/opencollab/jlatexmath?branch=master)
 
 JLaTeXMath is a Java library. Its main purpose is to display mathematical formulas written in LaTeX. JLaTeXMath is the best Java library to display LaTeX code.
 
@@ -63,4 +64,11 @@ To run jmh benchmarks (measuring parse and render performance):
 # benchmarks are in core module
 cd jlatexmath
 mvn clean install -P benchmark
+```
+
+## Code coverage
+To run code coverage
+
+```bash
+mvn -DrepoToken=TOKEN clean cobertura:cobertura coveralls:report
 ```
