@@ -105,6 +105,9 @@ public class TeXFormula {
     // point-to-pixel conversion
     public static float PIXELS_PER_POINT = 1f;
 
+    // font scale for deriving
+    public static float FONT_SCALE_FACTOR = 100f;
+
     // for comparing floats with 0
     protected static final float PREC = 0.0000001f;
 

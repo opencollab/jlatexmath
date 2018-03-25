@@ -365,7 +365,8 @@ public class DefaultTeXFontParser {
 
     public static Font createFont(InputStream fontIn, String name) throws ResourceParseException {
         try {
-            Font f = Font.createFont(Font.TRUETYPE_FONT, fontIn).deriveFont(TeXFormula.PIXELS_PER_POINT);
+            Font f = Font.createFont(Font.TRUETYPE_FONT, fontIn)
+                    .deriveFont(TeXFormula.PIXELS_PER_POINT * TeXFormula.FONT_SCALE_FACTOR);
 	    GraphicsEnvironment graphicEnv = GraphicsEnvironment.getLocalGraphicsEnvironment();
 	    /**
 	     * The following fails under java 1.5
