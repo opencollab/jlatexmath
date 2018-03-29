@@ -14,7 +14,10 @@ before_script:
   - "sh -e /etc/init.d/xvfb start"
   - sleep 3 # give xvfb some time to start
 
+after_success:
+  - mvn cobertura:cobertura coveralls:report
+
 addons:
   hosts:
     - jlmhost
-  hostname: jlmhost 
+  hostname: jlmhost
