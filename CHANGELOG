@@ -1,4 +1,6 @@
 jlatexmath (1.0.7)
+	* Fix °C
+
 	* Fix deformed characters in SVG output by changing font scaling
 
 jlatexmath (1.0.6)

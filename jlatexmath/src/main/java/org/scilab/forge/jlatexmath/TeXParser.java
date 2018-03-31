@@ -484,7 +484,7 @@ public class TeXParser {
                     pos = spos;
                     break;
                 case DEGRE :
-                    parseString.replace(pos, pos + 1, "^\\circ");
+                    parseString.replace(pos, pos + 1, "^{\\circ}");
                     len = parseString.length();
                     pos++;
                     break;
