@@ -25,23 +25,23 @@
  * Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
  * 02110-1301, USA.
  *
- * Linking this library statically or dynamically with other modules 
- * is making a combined work based on this library. Thus, the terms 
- * and conditions of the GNU General Public License cover the whole 
+ * Linking this library statically or dynamically with other modules
+ * is making a combined work based on this library. Thus, the terms
+ * and conditions of the GNU General Public License cover the whole
  * combination.
- * 
- * As a special exception, the copyright holders of this library give you 
- * permission to link this library with independent modules to produce 
- * an executable, regardless of the license terms of these independent 
- * modules, and to copy and distribute the resulting executable under terms 
- * of your choice, provided that you also meet, for each linked independent 
- * module, the terms and conditions of the license of that module. 
- * An independent module is a module which is not derived from or based 
- * on this library. If you modify this library, you may extend this exception 
- * to your version of the library, but you are not obliged to do so. 
- * If you do not wish to do so, delete this exception statement from your 
+ *
+ * As a special exception, the copyright holders of this library give you
+ * permission to link this library with independent modules to produce
+ * an executable, regardless of the license terms of these independent
+ * modules, and to copy and distribute the resulting executable under terms
+ * of your choice, provided that you also meet, for each linked independent
+ * module, the terms and conditions of the license of that module.
+ * An independent module is a module which is not derived from or based
+ * on this library. If you modify this library, you may extend this exception
+ * to your version of the library, but you are not obliged to do so.
+ * If you do not wish to do so, delete this exception statement from your
  * version.
- * 
+ *
  */
 
 package org.scilab.forge.jlatexmath;
@@ -50,35 +50,35 @@ package org.scilab.forge.jlatexmath;
  * An atom representing another atom with an accent symbol above it.
  */
 public class AccentedAtom extends Atom {
-    
+
     // accent symbol
     private final SymbolAtom accent;
     private boolean acc = false;
     private boolean changeSize = true;
-    
+
     // base atom
     protected Atom base = null;
     protected Atom underbase = null;
-    
-    public AccentedAtom(Atom base, Atom accent) throws InvalidSymbolTypeException {
-	this.base = base;
-	if (base instanceof AccentedAtom)
-	    underbase = ((AccentedAtom)base).underbase;
-	else
-	    underbase = base;
 
-	if (!(accent instanceof SymbolAtom))
-	    throw new InvalidSymbolTypeException("Invalid accent");
-	
-	this.accent = (SymbolAtom)accent;
-	this.acc = true;
+    public AccentedAtom(Atom base, Atom accent) throws InvalidSymbolTypeException {
+        this.base = base;
+        if (base instanceof AccentedAtom)
+            underbase = ((AccentedAtom)base).underbase;
+        else
+            underbase = base;
+
+        if (!(accent instanceof SymbolAtom))
+            throw new InvalidSymbolTypeException("Invalid accent");
+
+        this.accent = (SymbolAtom)accent;
+        this.acc = true;
     }
 
     public AccentedAtom(Atom base, Atom accent, boolean changeSize) throws InvalidSymbolTypeException {
-	this(base, accent);
-	this.changeSize = changeSize;
+        this(base, accent);
+        this.changeSize = changeSize;
     }
-	
+
     /**
      * Creates an AccentedAtom from a base atom and an accent symbol defined by its name
      *
@@ -92,18 +92,17 @@ public class AccentedAtom extends Atom {
         accent = SymbolAtom.get(accentName);
         if (accent.type == TeXConstants.TYPE_ACCENT) {
             this.base = base;
-	    if (base instanceof AccentedAtom)
-		underbase = ((AccentedAtom)base).underbase;
-	    else
-		underbase = base;
-	}
-        else
+            if (base instanceof AccentedAtom)
+                underbase = ((AccentedAtom)base).underbase;
+            else
+                underbase = base;
+        } else
             throw new InvalidSymbolTypeException("The symbol with the name '"
-                    + accentName + "' is not defined as an accent ("
-                    + TeXSymbolParser.TYPE_ATTR + "='acc') in '"
-                    + TeXSymbolParser.RESOURCE_NAME + "'!");
+                                                 + accentName + "' is not defined as an accent ("
+                                                 + TeXSymbolParser.TYPE_ATTR + "='acc') in '"
+                                                 + TeXSymbolParser.RESOURCE_NAME + "'!");
     }
-    
+
     /**
      * Creates an AccentedAtom from a base atom and an accent symbol defined as a TeXFormula.
      * This is used for parsing MathML.
@@ -118,7 +117,7 @@ public class AccentedAtom extends Atom {
     throws InvalidTeXFormulaException, InvalidSymbolTypeException {
         if (acc == null)
             throw new InvalidTeXFormulaException(
-                    "The accent TeXFormula can't be null!");
+                "The accent TeXFormula can't be null!");
         else {
             Atom root = acc.root;
             if (root instanceof SymbolAtom) {
@@ -127,30 +126,30 @@ public class AccentedAtom extends Atom {
                     this.base = base;
                 else
                     throw new InvalidSymbolTypeException(
-                            "The accent TeXFormula represents a single symbol with the name '"
-                            + accent.getName()
-                            + "', but this symbol is not defined as an accent ("
-                            + TeXSymbolParser.TYPE_ATTR + "='acc') in '"
-                            + TeXSymbolParser.RESOURCE_NAME + "'!");
+                        "The accent TeXFormula represents a single symbol with the name '"
+                        + accent.getName()
+                        + "', but this symbol is not defined as an accent ("
+                        + TeXSymbolParser.TYPE_ATTR + "='acc') in '"
+                        + TeXSymbolParser.RESOURCE_NAME + "'!");
             } else
                 throw new InvalidTeXFormulaException(
-                        "The accent TeXFormula does not represent a single symbol!");
+                    "The accent TeXFormula does not represent a single symbol!");
         }
     }
-    
+
     public Box createBox(TeXEnvironment env) {
         TeXFont tf = env.getTeXFont();
         int style = env.getStyle();
-        
-	// set base in cramped style
+
+        // set base in cramped style
         Box b = (base == null ? new StrutBox(0, 0, 0, 0) : base.createBox(env.crampStyle()));
-        
+
         float u = b.getWidth();
         float s = 0;
         if (underbase instanceof CharSymbol)
             s = tf.getSkew(((CharSymbol) underbase).getCharFont(tf), style);
-        
-	// retrieve best Char from the accent symbol
+
+        // retrieve best Char from the accent symbol
         Char ch = tf.getChar(accent.getName(), style);
         while (tf.hasNextLarger(ch)) {
             Char larger = tf.getNextLarger(ch, style);
@@ -159,50 +158,50 @@ public class AccentedAtom extends Atom {
             else
                 break;
         }
-        
+
         // calculate delta
-	float ec = -SpaceAtom.getFactor(TeXConstants.UNIT_MU, env);
+        float ec = -SpaceAtom.getFactor(TeXConstants.UNIT_MU, env);
         float delta = acc ? ec : Math.min(b.getHeight(), tf.getXHeight(style, ch.getFontCode()));
-        
+
         // create vertical box
         VerticalBox vBox = new VerticalBox();
-        
+
         // accent
         Box y;
         float italic = ch.getItalic();
-	Box cb = new CharBox(ch);
-	if (acc) 
-	    cb = accent.createBox(changeSize ? env.subStyle() : env);
+        Box cb = new CharBox(ch);
+        if (acc)
+            cb = accent.createBox(changeSize ? env.subStyle() : env);
 
-	if (Math.abs(italic) > TeXFormula.PREC) {
+        if (Math.abs(italic) > TeXFormula.PREC) {
             y = new HorizontalBox(new StrutBox(-italic, 0, 0, 0));
             y.add(cb);
         } else
             y = cb;
-        
+
         // if diff > 0, center accent, otherwise center base
         float diff = (u - y.getWidth()) / 2;
         y.setShift(s + (diff > 0 ? diff : 0));
         if (diff < 0)
             b = new HorizontalBox(b, y.getWidth(), TeXConstants.ALIGN_CENTER);
         vBox.add(y);
-        
+
         // kern
-	vBox.add(new StrutBox(0, changeSize ? -delta : -b.getHeight(), 0, 0));
+        vBox.add(new StrutBox(0, changeSize ? -delta : -b.getHeight(), 0, 0));
         // base
         vBox.add(b);
-        
+
         // set height and depth vertical box
         float total = vBox.getHeight() + vBox.getDepth(), d = b.getDepth();
         vBox.setDepth(d);
         vBox.setHeight(total - d);
 
-	if (diff < 0) {
-	    HorizontalBox hb = new HorizontalBox(new StrutBox(diff, 0, 0, 0));
-	    hb.add(vBox);
-	    hb.setWidth(u);
-	    return hb;
-	}
+        if (diff < 0) {
+            HorizontalBox hb = new HorizontalBox(new StrutBox(diff, 0, 0, 0));
+            hb.add(vBox);
+            hb.setWidth(u);
+            return hb;
+        }
 
         return vBox;
     }

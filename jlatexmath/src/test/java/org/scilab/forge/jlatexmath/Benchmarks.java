@@ -20,11 +20,11 @@ public class Benchmarks {
     public BufferedImage parseAndRenderLatex() {
         TeXFormula formula = new TeXFormula(LATEX_1);
         TeXIcon icon = formula.new TeXIconBuilder().setStyle(TeXConstants.STYLE_DISPLAY).setSize(20)
-                .build();
+                       .build();
         icon.setInsets(new Insets(5, 5, 5, 5));
 
         BufferedImage image = new BufferedImage(icon.getIconWidth(), icon.getIconHeight(),
-                BufferedImage.TYPE_INT_ARGB);
+                                                BufferedImage.TYPE_INT_ARGB);
         Graphics2D g2 = image.createGraphics();
         g2.setColor(Color.white);
         g2.fillRect(0, 0, icon.getIconWidth(), icon.getIconHeight());

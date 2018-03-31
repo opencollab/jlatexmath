@@ -25,23 +25,23 @@
  * Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
  * 02110-1301, USA.
  *
- * Linking this library statically or dynamically with other modules 
- * is making a combined work based on this library. Thus, the terms 
- * and conditions of the GNU General Public License cover the whole 
+ * Linking this library statically or dynamically with other modules
+ * is making a combined work based on this library. Thus, the terms
+ * and conditions of the GNU General Public License cover the whole
  * combination.
- * 
- * As a special exception, the copyright holders of this library give you 
- * permission to link this library with independent modules to produce 
- * an executable, regardless of the license terms of these independent 
- * modules, and to copy and distribute the resulting executable under terms 
- * of your choice, provided that you also meet, for each linked independent 
- * module, the terms and conditions of the license of that module. 
- * An independent module is a module which is not derived from or based 
- * on this library. If you modify this library, you may extend this exception 
- * to your version of the library, but you are not obliged to do so. 
- * If you do not wish to do so, delete this exception statement from your 
+ *
+ * As a special exception, the copyright holders of this library give you
+ * permission to link this library with independent modules to produce
+ * an executable, regardless of the license terms of these independent
+ * modules, and to copy and distribute the resulting executable under terms
+ * of your choice, provided that you also meet, for each linked independent
+ * module, the terms and conditions of the license of that module.
+ * An independent module is a module which is not derived from or based
+ * on this library. If you modify this library, you may extend this exception
+ * to your version of the library, but you are not obliged to do so.
+ * If you do not wish to do so, delete this exception statement from your
  * version.
- * 
+ *
  */
 
 package org.scilab.forge.jlatexmath;
@@ -57,23 +57,23 @@ import org.w3c.dom.NodeList;
  * Parses predefined TeXFormula's from an XML-file.
  */
 public class TeXFormulaSettingsParser {
-    
+
     public static final String RESOURCE_NAME = "TeXFormulaSettings.xml";
     public static final String CHARTODEL_MAPPING_EL = "Map";
-    
+
     private Element root;
-    
+
     public TeXFormulaSettingsParser() throws ResourceParseException {
-	this(GlueSettingsParser.class.getResourceAsStream(RESOURCE_NAME), RESOURCE_NAME);
+        this(GlueSettingsParser.class.getResourceAsStream(RESOURCE_NAME), RESOURCE_NAME);
     }
 
     public TeXFormulaSettingsParser(InputStream file, String name) throws ResourceParseException {
-	try {
-   	    DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-	    factory.setIgnoringElementContentWhitespace(true);
-	    factory.setIgnoringComments(true);
-	    root = factory.newDocumentBuilder().parse(file).getDocumentElement();         
-	} catch (Exception e) { // JDOMException or IOException
+        try {
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            factory.setIgnoringElementContentWhitespace(true);
+            factory.setIgnoringComments(true);
+            root = factory.newDocumentBuilder().parse(file).getDocumentElement();
+        } catch (Exception e) { // JDOMException or IOException
             throw new XMLResourceParseException(name, e);
         }
     }
@@ -95,7 +95,7 @@ public class TeXFormulaSettingsParser {
             Element map = (Element) mapList.item(i);
             String ch = map.getAttribute("char");
             String symbol = map.getAttribute("symbol");
-	    String text = map.getAttribute("text");
+            String text = map.getAttribute("text");
             // both attributes are required!
             if (ch.equals("")) {
                 throw new XMLResourceParseException(RESOURCE_NAME, map.getTagName(), "char", null);
@@ -103,17 +103,17 @@ public class TeXFormulaSettingsParser {
                 throw new XMLResourceParseException(RESOURCE_NAME, map.getTagName(), "symbol", null);
             }
 
-	    if (ch.length() == 1) {// valid element found
+            if (ch.length() == 1) {// valid element found
                 tableMath[ch.charAt(0)] =  symbol;
             } else {
                 // only single-character mappings allowed, ignore others
                 throw new XMLResourceParseException(RESOURCE_NAME, map.getTagName(), "char", "must have a value that contains exactly 1 character!");
-	    }
+            }
 
-	    if (tableText != null && !text.equals("")) {
-		tableText[ch.charAt(0)] = text;
-	    }
-	}
+            if (tableText != null && !text.equals("")) {
+                tableText[ch.charAt(0)] = text;
+            }
+        }
     }
 
     private static void addFormulaToMap(NodeList mapList, String[] tableMath, String[] tableText) throws ResourceParseException {
@@ -121,26 +121,25 @@ public class TeXFormulaSettingsParser {
             Element map = (Element)mapList.item(i);
             String ch = map.getAttribute("char");
             String formula = map.getAttribute("formula");
-	    String text = map.getAttribute("text");
+            String text = map.getAttribute("text");
             // both attributes are required!
             if (ch.equals(""))
                 throw new XMLResourceParseException(RESOURCE_NAME, map.getTagName(),
-                        "char", null);
+                                                    "char", null);
             else if (formula.equals(""))
                 throw new XMLResourceParseException(RESOURCE_NAME, map.getTagName(),
-                        "formula", null);
+                                                    "formula", null);
             if (ch.length() == 1) {// valid element found
-		tableMath[ch.charAt(0)] = formula;
-	    }
-            else
+                tableMath[ch.charAt(0)] = formula;
+            } else
                 // only single-character mappings allowed, ignore others
                 throw new XMLResourceParseException(RESOURCE_NAME, map.getTagName(),
-                        "char",
-                        "must have a value that contains exactly 1 character!");
+                                                    "char",
+                                                    "must have a value that contains exactly 1 character!");
 
-	    if (tableText != null && !text.equals("")) {
-		tableText[ch.charAt(0)] = text;
-	    }
+            if (tableText != null && !text.equals("")) {
+                tableText[ch.charAt(0)] = text;
+            }
         }
     }
 }

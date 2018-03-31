@@ -24,27 +24,27 @@
  * Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
  * 02110-1301, USA.
  *
- * Linking this library statically or dynamically with other modules 
- * is making a combined work based on this library. Thus, the terms 
- * and conditions of the GNU General Public License cover the whole 
+ * Linking this library statically or dynamically with other modules
+ * is making a combined work based on this library. Thus, the terms
+ * and conditions of the GNU General Public License cover the whole
  * combination.
- * 
- * As a special exception, the copyright holders of this library give you 
- * permission to link this library with independent modules to produce 
- * an executable, regardless of the license terms of these independent 
- * modules, and to copy and distribute the resulting executable under terms 
- * of your choice, provided that you also meet, for each linked independent 
- * module, the terms and conditions of the license of that module. 
- * An independent module is a module which is not derived from or based 
- * on this library. If you modify this library, you may extend this exception 
- * to your version of the library, but you are not obliged to do so. 
- * If you do not wish to do so, delete this exception statement from your 
+ *
+ * As a special exception, the copyright holders of this library give you
+ * permission to link this library with independent modules to produce
+ * an executable, regardless of the license terms of these independent
+ * modules, and to copy and distribute the resulting executable under terms
+ * of your choice, provided that you also meet, for each linked independent
+ * module, the terms and conditions of the license of that module.
+ * An independent module is a module which is not derived from or based
+ * on this library. If you modify this library, you may extend this exception
+ * to your version of the library, but you are not obliged to do so.
+ * If you do not wish to do so, delete this exception statement from your
  * version.
- * 
+ *
  */
 
 /* This file is largely inspired by files wrote by Jeremias Maerki,
- * for the fop plugin of barcode4j available at 
+ * for the fop plugin of barcode4j available at
  * http://barcode4j.sourceforge.net/
  */
 
@@ -74,14 +74,14 @@ public class Graphics2DImagePainterJLaTeXMath implements Graphics2DImagePainter 
         float size = Float.parseFloat(e.getAttribute("size"));
         Color fg = new Color(Integer.parseInt(e.getAttribute("fg")));
         icon = JLaTeXMathElement.calculate(doc, size);
-	icon.setForeground(fg);
+        icon.setForeground(fg);
         dim = new Dimension((int) (icon.getTrueIconWidth() * 1000), (int) (icon.getTrueIconHeight() * 1000));
     }
 
     public Graphics2DImagePainterJLaTeXMath(TeXIcon icon) {
-	this.icon = icon;
+        this.icon = icon;
         dim = new Dimension((int) (icon.getTrueIconWidth() * 1000), (int) (icon.getTrueIconHeight() * 1000));
-    }	
+    }
 
     public int getDepth() {
         return (int) (icon.getTrueIconDepth() * 1000);
@@ -92,7 +92,7 @@ public class Graphics2DImagePainterJLaTeXMath implements Graphics2DImagePainter 
     }
 
     public void paint(Graphics2D g2d, Rectangle2D rect2d) {
-	g2d.scale(rect2d.getWidth() / dim.width * 1000, rect2d.getHeight() / dim.height * 1000);
-	icon.paintIcon(null, g2d, (int) rect2d.getX(), (int) rect2d.getY());
+        g2d.scale(rect2d.getWidth() / dim.width * 1000, rect2d.getHeight() / dim.height * 1000);
+        icon.paintIcon(null, g2d, (int) rect2d.getX(), (int) rect2d.getY());
     }
 }

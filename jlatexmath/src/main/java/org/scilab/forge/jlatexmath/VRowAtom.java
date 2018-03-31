@@ -140,7 +140,7 @@ public class VRowAtom extends Atom {
                 if (addInterline && it.hasNext()) {
                     vb.add(interline);
                 }
-            }            
+            }
         } else {
             Box interline = new StrutBox(0, env.getInterline(), 0, 0);
 
@@ -152,7 +152,7 @@ public class VRowAtom extends Atom {
                 }
             }
         }
-        
+
         vb.setShift(-raise.createBox(env).getWidth());
         if (vtop) {
             float t = vb.getSize() == 0 ? 0 : vb.children.getFirst().getHeight();
@@ -163,7 +163,7 @@ public class VRowAtom extends Atom {
             vb.setHeight(vb.getDepth() + vb.getHeight() - t);
             vb.setDepth(t);
         }
-        
+
         return vb;
     }
 }

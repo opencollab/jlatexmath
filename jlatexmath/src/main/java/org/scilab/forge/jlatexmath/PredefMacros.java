@@ -140,13 +140,13 @@ public class PredefMacros {
     public static final Atom longdiv_macro(final TeXParser tp, final String[] args) throws ParseException {
         try {
             long dividend = Long.valueOf(args[1]);
-            long divisor = Long.valueOf(args[2]); 
+            long divisor = Long.valueOf(args[2]);
             return new LongdivAtom(divisor, dividend);
         } catch (NumberFormatException e) {
             throw new ParseException("Divisor and dividend must be integer numbers");
         }
     }
-    
+
     public static final Atom st_macro(final TeXParser tp, final String[] args) throws ParseException {
         return new StrikeThroughAtom(new TeXFormula(tp, args[1], false).root);
     }
@@ -305,7 +305,7 @@ public class PredefMacros {
         boolean rule = true;
         float[] ths = SpaceAtom.getLength(args[3]);
         if (args[3] == null || args[3].length() == 0 || ths.length == 1) {
-            ths = new float[]{0.0f, 0.0f};
+            ths = new float[] {0.0f, 0.0f};
             rule = false;
         }
 
@@ -395,11 +395,11 @@ public class PredefMacros {
     public static final Atom brack_macro(final TeXParser tp, final String[] args) throws ParseException {
         return choose_brackets("lsqbrack", "rsqbrack", tp, args);
     }
-    
+
     public static final Atom bangle_macro(final TeXParser tp, final String[] args) throws ParseException {
         return choose_brackets("langle", "rangle", tp, args);
     }
-    
+
     public static final Atom brace_macro(final TeXParser tp, final String[] args) throws ParseException {
         return choose_brackets("lbrace", "rbrace", tp, args);
     }
@@ -1038,7 +1038,7 @@ public class PredefMacros {
         Atom at = new UnderOverAtom(SymbolAtom.get(TeXFormula.symbolMappings['=']), new ScaleAtom(SymbolAtom.get(TeXFormula.symbolMappings['?']), 0.75f), TeXConstants.UNIT_MU, 2.5f, true, true);
         return new TypedAtom(TeXConstants.TYPE_RELATION, TeXConstants.TYPE_RELATION, at);
     }
-    
+
     public static final Atom stackrel_macro(final TeXParser tp, final String[] args) throws ParseException {
         Atom at = new UnderOverAtom(new TeXFormula(tp, args[2], false).root, new TeXFormula(tp, args[3], false).root, TeXConstants.UNIT_MU, 0.5f, true, new TeXFormula(tp, args[1], false).root, TeXConstants.UNIT_MU, 2.5f, true);
         return new TypedAtom(TeXConstants.TYPE_RELATION, TeXConstants.TYPE_RELATION, at);
@@ -1295,10 +1295,10 @@ public class PredefMacros {
         float[] height = SpaceAtom.getLength(args[3]);
         float[] depth = SpaceAtom.getLength(args[4]);
         if (height.length == 1 || height[1] == 0) {
-            height = new float[]{-1, 0};
+            height = new float[] {-1, 0};
         }
         if (depth.length == 1 || depth[1] == 0) {
-            depth = new float[]{-1, 0};
+            depth = new float[] {-1, 0};
         }
 
         return new RaiseAtom(new TeXFormula(tp, args[2]).root, (int) raise[0], raise[1], (int) height[0], height[1], (int) depth[0], depth[1]);

@@ -25,23 +25,23 @@
  * Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
  * 02110-1301, USA.
  *
- * Linking this library statically or dynamically with other modules 
- * is making a combined work based on this library. Thus, the terms 
- * and conditions of the GNU General Public License cover the whole 
+ * Linking this library statically or dynamically with other modules
+ * is making a combined work based on this library. Thus, the terms
+ * and conditions of the GNU General Public License cover the whole
  * combination.
- * 
- * As a special exception, the copyright holders of this library give you 
- * permission to link this library with independent modules to produce 
- * an executable, regardless of the license terms of these independent 
- * modules, and to copy and distribute the resulting executable under terms 
- * of your choice, provided that you also meet, for each linked independent 
- * module, the terms and conditions of the license of that module. 
- * An independent module is a module which is not derived from or based 
- * on this library. If you modify this library, you may extend this exception 
- * to your version of the library, but you are not obliged to do so. 
- * If you do not wish to do so, delete this exception statement from your 
+ *
+ * As a special exception, the copyright holders of this library give you
+ * permission to link this library with independent modules to produce
+ * an executable, regardless of the license terms of these independent
+ * modules, and to copy and distribute the resulting executable under terms
+ * of your choice, provided that you also meet, for each linked independent
+ * module, the terms and conditions of the license of that module.
+ * An independent module is a module which is not derived from or based
+ * on this library. If you modify this library, you may extend this exception
+ * to your version of the library, but you are not obliged to do so.
+ * If you do not wish to do so, delete this exception statement from your
  * version.
- * 
+ *
  */
 
 /* Modified by Calixte Denizet to handle the case where several ligatures occure*/
@@ -153,19 +153,19 @@ public class RowAtom extends Atom implements Row {
             Atom at = it.next();
             position++;
 
-	    boolean markAdded = false;
-	    while (at instanceof BreakMarkAtom) {
-		if (!markAdded) {
-		    markAdded = true;
-		}
-		if (it.hasNext()) {
-		    at = it.next();
-		    position++;
-		} else {
-		    break;
-		}
-	    }
-            
+            boolean markAdded = false;
+            while (at instanceof BreakMarkAtom) {
+                if (!markAdded) {
+                    markAdded = true;
+                }
+                if (it.hasNext()) {
+                    at = it.next();
+                    position++;
+                } else {
+                    break;
+                }
+            }
+
             if (at instanceof DynamicAtom && ((DynamicAtom) at).getInsertMode()) {
                 Atom a = ((DynamicAtom) at).getAtom();
                 if (a instanceof RowAtom) {
@@ -204,8 +204,7 @@ public class RowAtom extends Atom implements Row {
                         it.previous();
                         position--;
                         break; // iterator remains unchanged (no ligature!)
-                    }
-                    else { // ligature
+                    } else { // ligature
                         atom.changeAtom(new FixedCharAtom(lig)); // go on with the
                         // ligature
                     }
@@ -231,9 +230,9 @@ public class RowAtom extends Atom implements Row {
                 CharBox cb = (CharBox) b;
                 cb.addItalicCorrectionToWidth();
             }
-	    if (markAdded || (at instanceof CharAtom && Character.isDigit(((CharAtom) at).getCharacter()))) {
-		hBox.addBreakPosition(hBox.children.size());
-	    }
+            if (markAdded || (at instanceof CharAtom && Character.isDigit(((CharAtom) at).getCharacter()))) {
+                hBox.addBreakPosition(hBox.children.size());
+            }
             hBox.add(b);
 
             // set last used fontId (for next atom)
@@ -242,17 +241,17 @@ public class RowAtom extends Atom implements Row {
             // insert kern
             if (Math.abs(kern) > TeXFormula.PREC) {
                 hBox.add(new StrutBox(kern, 0, 0, 0));
-	    }
+            }
 
             // kerns do not interfere with the normal glue-rules without kerns
             if (!atom.isKern()) {
                 previousAtom = atom;
-	    }
+            }
         }
         // reset previousAtom
         previousAtom = null;
-	
-	return hBox;
+
+        return hBox;
     }
 
     public void setPreviousAtom(Dummy prev) {

@@ -85,7 +85,7 @@ public class Convert {
         try {
             String filename = "target/" + inSVG;
             System.out.println("transcoding "
-                    + filename);
+                               + filename);
             TranscoderInput input = new TranscoderInput(new FileInputStream(filename));
             OutputStream os = new FileOutputStream("target/" + out);
             TranscoderOutput output = new TranscoderOutput(os);
@@ -94,7 +94,7 @@ public class Convert {
             os.close();
         } catch (Exception e) {
             System.out.println(
-                    "Problem when exporting " + inSVG + " to " + out + "!\n" + e.toString());
+                "Problem when exporting " + inSVG + " to " + out + "!\n" + e.toString());
             throw new RuntimeException(e);
         }
     }

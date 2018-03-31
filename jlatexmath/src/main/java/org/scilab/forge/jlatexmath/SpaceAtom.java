@@ -25,23 +25,23 @@
  * Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
  * 02110-1301, USA.
  *
- * Linking this library statically or dynamically with other modules 
- * is making a combined work based on this library. Thus, the terms 
- * and conditions of the GNU General Public License cover the whole 
+ * Linking this library statically or dynamically with other modules
+ * is making a combined work based on this library. Thus, the terms
+ * and conditions of the GNU General Public License cover the whole
  * combination.
- * 
- * As a special exception, the copyright holders of this library give you 
- * permission to link this library with independent modules to produce 
- * an executable, regardless of the license terms of these independent 
- * modules, and to copy and distribute the resulting executable under terms 
- * of your choice, provided that you also meet, for each linked independent 
- * module, the terms and conditions of the license of that module. 
- * An independent module is a module which is not derived from or based 
- * on this library. If you modify this library, you may extend this exception 
- * to your version of the library, but you are not obliged to do so. 
- * If you do not wish to do so, delete this exception statement from your 
+ *
+ * As a special exception, the copyright holders of this library give you
+ * permission to link this library with independent modules to produce
+ * an executable, regardless of the license terms of these independent
+ * modules, and to copy and distribute the resulting executable under terms
+ * of your choice, provided that you also meet, for each linked independent
+ * module, the terms and conditions of the license of that module.
+ * An independent module is a module which is not derived from or based
+ * on this library. If you modify this library, you may extend this exception
+ * to your version of the library, but you are not obliged to do so.
+ * If you do not wish to do so, delete this exception statement from your
  * version.
- * 
+ *
  */
 
 /* Modified by Calixte Denizet */
@@ -83,90 +83,90 @@ public class SpaceAtom extends Atom {
 
     private static UnitConversion[] unitConversions = new UnitConversion[] {
 
-        new UnitConversion() {//EM
-            public float getPixelConversion(TeXEnvironment env) {
-                return env.getTeXFont().getEM(env.getStyle());
-            }
-        },
-
-        new UnitConversion() {//EX
-            public float getPixelConversion(TeXEnvironment env) {
-                return env.getTeXFont().getXHeight(env.getStyle(), env.getLastFontId());
-            }
-        },
-
-        new UnitConversion() {//PIXEL
-            public float getPixelConversion(TeXEnvironment env) {
-                return 1 / env.getSize();
-            }
-        },
-
-        new UnitConversion() {//BP (or PostScript point)
-            public float getPixelConversion(TeXEnvironment env) {
-                return TeXFormula.PIXELS_PER_POINT / env.getSize();
-            }
-        },
-
-        new UnitConversion() {//PICA
-            public float getPixelConversion(TeXEnvironment env) {
-                return (12 * TeXFormula.PIXELS_PER_POINT) / env.getSize();
-            }
-        },
-
-        new UnitConversion() {//MU
-            public float getPixelConversion(TeXEnvironment env) {
-                TeXFont tf = env.getTeXFont();
-                return tf.getQuad(env.getStyle(), tf.getMuFontId()) / 18;
-            }
-        },
-
-        new UnitConversion() {//CM
-            public float getPixelConversion(TeXEnvironment env) {
-                return (28.346456693f * TeXFormula.PIXELS_PER_POINT) / env.getSize();
-            }
-        },
-
-        new UnitConversion() {//MM
-            public float getPixelConversion(TeXEnvironment env) {
-                return (2.8346456693f * TeXFormula.PIXELS_PER_POINT) / env.getSize();
-            }
-        },
-
-        new UnitConversion() {//IN
-            public float getPixelConversion(TeXEnvironment env) {
-                return (72 * TeXFormula.PIXELS_PER_POINT) / env.getSize();
-            }
-        },
-
-        new UnitConversion() {//SP
-            public float getPixelConversion(TeXEnvironment env) {
-                return (65536 * TeXFormula.PIXELS_PER_POINT) / env.getSize();
-            }
-        },
-
-        new UnitConversion() {//PT (or Standard Anglo-American point)
-            public float getPixelConversion(TeXEnvironment env) {
-                return (.9962640099f * TeXFormula.PIXELS_PER_POINT) / env.getSize();
-            }
-        },
-
-        new UnitConversion() {//DD
-            public float getPixelConversion(TeXEnvironment env) {
-                return (1.0660349422f * TeXFormula.PIXELS_PER_POINT) / env.getSize();
-            }
-        },
-
-        new UnitConversion() {//CC
-            public float getPixelConversion(TeXEnvironment env) {
-                return (12.7924193070f * TeXFormula.PIXELS_PER_POINT) / env.getSize();
-            }
-        },
-        
-        new UnitConversion() {//X8
-            public float getPixelConversion(TeXEnvironment env) {
-                return env.getTeXFont().getDefaultRuleThickness(env.getStyle());
-            }
+    new UnitConversion() {//EM
+        public float getPixelConversion(TeXEnvironment env) {
+            return env.getTeXFont().getEM(env.getStyle());
         }
+    },
+
+    new UnitConversion() {//EX
+        public float getPixelConversion(TeXEnvironment env) {
+            return env.getTeXFont().getXHeight(env.getStyle(), env.getLastFontId());
+        }
+    },
+
+    new UnitConversion() {//PIXEL
+        public float getPixelConversion(TeXEnvironment env) {
+            return 1 / env.getSize();
+        }
+    },
+
+    new UnitConversion() {//BP (or PostScript point)
+        public float getPixelConversion(TeXEnvironment env) {
+            return TeXFormula.PIXELS_PER_POINT / env.getSize();
+        }
+    },
+
+    new UnitConversion() {//PICA
+        public float getPixelConversion(TeXEnvironment env) {
+            return (12 * TeXFormula.PIXELS_PER_POINT) / env.getSize();
+        }
+    },
+
+    new UnitConversion() {//MU
+        public float getPixelConversion(TeXEnvironment env) {
+            TeXFont tf = env.getTeXFont();
+            return tf.getQuad(env.getStyle(), tf.getMuFontId()) / 18;
+        }
+    },
+
+    new UnitConversion() {//CM
+        public float getPixelConversion(TeXEnvironment env) {
+            return (28.346456693f * TeXFormula.PIXELS_PER_POINT) / env.getSize();
+        }
+    },
+
+    new UnitConversion() {//MM
+        public float getPixelConversion(TeXEnvironment env) {
+            return (2.8346456693f * TeXFormula.PIXELS_PER_POINT) / env.getSize();
+        }
+    },
+
+    new UnitConversion() {//IN
+        public float getPixelConversion(TeXEnvironment env) {
+            return (72 * TeXFormula.PIXELS_PER_POINT) / env.getSize();
+        }
+    },
+
+    new UnitConversion() {//SP
+        public float getPixelConversion(TeXEnvironment env) {
+            return (65536 * TeXFormula.PIXELS_PER_POINT) / env.getSize();
+        }
+    },
+
+    new UnitConversion() {//PT (or Standard Anglo-American point)
+        public float getPixelConversion(TeXEnvironment env) {
+            return (.9962640099f * TeXFormula.PIXELS_PER_POINT) / env.getSize();
+        }
+    },
+
+    new UnitConversion() {//DD
+        public float getPixelConversion(TeXEnvironment env) {
+            return (1.0660349422f * TeXFormula.PIXELS_PER_POINT) / env.getSize();
+        }
+    },
+
+    new UnitConversion() {//CC
+        public float getPixelConversion(TeXEnvironment env) {
+            return (12.7924193070f * TeXFormula.PIXELS_PER_POINT) / env.getSize();
+        }
+    },
+
+    new UnitConversion() {//X8
+        public float getPixelConversion(TeXEnvironment env) {
+            return env.getTeXFont().getDefaultRuleThickness(env.getStyle());
+        }
+    }
     };
 
     // whether a hard space should be represented
@@ -242,7 +242,7 @@ public class SpaceAtom extends Atom {
 
     public static float[] getLength(String lgth) {
         if (lgth == null) {
-            return new float[]{TeXConstants.UNIT_PIXEL, 0f};
+            return new float[] {TeXConstants.UNIT_PIXEL, 0f};
         }
 
         int i = 0;
@@ -251,7 +251,7 @@ public class SpaceAtom extends Atom {
         try {
             f = Float.parseFloat(lgth.substring(0, i));
         } catch (NumberFormatException e) {
-            return new float[]{Float.NaN};
+            return new float[] {Float.NaN};
         }
 
         int unit;
@@ -261,7 +261,7 @@ public class SpaceAtom extends Atom {
             unit = TeXConstants.UNIT_PIXEL;
         }
 
-        return new float[]{(float) unit, f};
+        return new float[] {(float) unit, f};
     }
 
     public Box createBox(TeXEnvironment env) {

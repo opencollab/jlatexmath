@@ -24,9 +24,9 @@ public final class Images {
                     Color ca = new Color(imgA.getRGB(x, y));
                     Color cb = new Color(imgB.getRGB(x, y));
                     double variance = sqr(ca.getRed() - cb.getRed()) //
-                            + sqr(ca.getBlue() - cb.getBlue()) //
-                            + sqr(ca.getGreen() - cb.getGreen()) //
-                            + sqr(ca.getAlpha() - cb.getAlpha());
+                                      + sqr(ca.getBlue() - cb.getBlue()) //
+                                      + sqr(ca.getGreen() - cb.getGreen()) //
+                                      + sqr(ca.getAlpha() - cb.getAlpha());
                     mse += variance;
                 }
             }
