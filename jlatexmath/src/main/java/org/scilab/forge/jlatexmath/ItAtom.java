@@ -59,11 +59,17 @@ public class ItAtom extends Atom {
     public Box createBox(TeXEnvironment env) {
         Box box;
         if (base != null) {
-            env = env.copy(env.getTeXFont().copy());
-            env.getTeXFont().setIt(true);
-            box = base.createBox(env);
+            final TeXFont tf = env.getTeXFont();
+            final boolean it = tf.getIt();
+            if (it) {
+                box = base.createBox(env);
+            } else {
+                tf.setIt(true);
+                box = base.createBox(env);
+                tf.setIt(false);
+            }
         } else {
-            box = new StrutBox(0, 0, 0, 0);
+            box = StrutBox.getEmpty();
         }
 
         return box;

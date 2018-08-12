@@ -49,43 +49,73 @@ package org.scilab.forge.jlatexmath;
 /**
  * An atom representing another atom that should be drawn invisibly.
  */
-public class PhantomAtom extends Atom implements Row {
+public class PhantomAtom extends Atom {
 
-    // RowAtom to be drawn invisibly
-    private RowAtom elements;
+    private final Atom base;
 
     // dimensions to be taken into account
-    private boolean w = true, h = true, d = true;
+    private boolean w;
+    private boolean h;
+    private boolean d;
 
-    public PhantomAtom(Atom el) {
-        if (el == null)
-            elements = new RowAtom();
-        else
-            elements = new RowAtom(el);
-    }
-
-    public PhantomAtom(Atom el, boolean width, boolean height, boolean depth) {
-        this(el);
+    public PhantomAtom(Atom base, boolean width, boolean height, boolean depth) {
+        this.base = base;
         w = width;
         h = height;
         d = depth;
     }
 
+    public PhantomAtom(Atom base) {
+        this(base, true, true, true);
+    }
+
     public Box createBox(TeXEnvironment env) {
-        Box res = elements.createBox(env);
-        return new StrutBox((w ? res.getWidth() : 0), (h ? res.getHeight() : 0),
-                            (d ? res.getDepth() : 0), res.getShift());
+        final Box res = base.createBox(env);
+        return new StrutBox((w ? res.getWidth() : 0.), (h ? res.getHeight() : 0.),
+                            (d ? res.getDepth() : 0.), res.getShift());
     }
 
     public int getLeftType() {
-        return elements.getLeftType();
+        return base.getLeftType();
     }
 
     public int getRightType() {
-        return elements.getRightType();
+        return base.getRightType();
     }
 
-    public void setPreviousAtom(Dummy prev) {
-        elements.setPreviousAtom(prev);
+    public int getLimits() {
+        return base.getLimits();
+    }
+
+    public double getItalic(TeXEnvironment env) {
+        return base.getItalic(env);
+    }
+
+    public double getXHeight(TeXEnvironment env) {
+        return base.getXHeight(env);
+    }
+
+    public boolean isMathMode() {
+        return base.isMathMode();
+    }
+
+    public void setMathMode(final boolean mathMode) {
+        base.setMathMode(mathMode);
+    }
+
+    public boolean mustAddItalicCorrection() {
+        return base.mustAddItalicCorrection();
+    }
+
+    public boolean setAddItalicCorrection(boolean b) {
+        return base.setAddItalicCorrection(b);
+    }
+
+    public Atom getBase() {
+        return base.getBase();
+    }
+
+    public String toString() {
+        return "PhantomAtom: " + base;
     }
 }

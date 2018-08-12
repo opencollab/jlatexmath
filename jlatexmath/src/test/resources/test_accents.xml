@@ -1,0 +1,35 @@
+<?xml version='1.0'?>
+<tests name="accents">
+  <test>
+    <id name="1"/>
+    <code>
+      <![CDATA[
+               \begin{gather}
+               \~x\cr
+               \tilde X\cr
+               \widetilde{AB}\cr
+               \widetilde{ABC}\cr
+               \widetilde{ABCD}\cr
+               \widetilde{ABCDE}\cr
+               \'x\cr
+               \acute X\cr
+               \^x\cr
+               \hat{X}\cr
+               \widehat{AB}\cr
+               \widehat{ABC}\cr
+               \widehat{ABCD}\cr
+               \widehat{ABCDE}\cr
+               \"x\cr
+               \ddot{X}\cr
+               \dddot{X}\cr
+               \ddddot{X}\cr
+               \`x\cr
+               \grave{X}\cr
+               \=x\cr
+               \bar{X}\cr
+               \end{gather}
+      ]]>      
+    </code>
+    <expected success="true"/>
+  </test>
+</tests>

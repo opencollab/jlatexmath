@@ -1,0 +1,53 @@
+<!--
+\DeclareMathOperator{\myop}{helloWorld}
+               \myop^{+\infty}_0 {x \over y}
+-->
+<svg width="106" height="39" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<style type="text/css">
+@font-face {
+font-family: 'jlm_cmmi10';
+src: url('fonts/jlm_cmmi10.ttf') format('truetype');
+font-style: normal;
+}
+.jlm_cmmi10 {
+font-family: 'jlm_cmmi10';
+font-size: 133px;
+}
+@font-face {
+font-family: 'jlm_cmr10';
+src: url('fonts/jlm_cmr10.ttf') format('truetype');
+font-style: normal;
+}
+.jlm_cmr10 {
+font-family: 'jlm_cmr10';
+font-size: 133px;
+}
+@font-face {
+font-family: 'jlm_cmsy10';
+src: url('fonts/jlm_cmsy10.ttf') format('truetype');
+font-style: normal;
+}
+.jlm_cmsy10 {
+font-family: 'jlm_cmsy10';
+font-size: 133px;
+}
+</style>
+<g stroke="rgb(0,0,0)" fill="rgb(0,0,0)" stroke-width="1.0" stroke-miterlimit="10.0" stroke-linejoin="miter" stroke-linecap="square">
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,6.0,20.76084)">h</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,13.407427,20.76084)">e</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,19.333374,20.76084)">l</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,23.037094,20.76084)">l</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,26.740814,20.76084)">o</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,33.407505,20.76084)">W</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,46.185307,20.76084)">o</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,52.852,20.76084)">r</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,58.07424,20.76084)">l</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,61.77796,20.76084)">d</text>
+<text class="jlm_cmr10" transform="matrix(0.06999999999999999,0.0,0.0,0.07,69.18539,15.105248)">+</text>
+<text class="jlm_cmsy10" transform="matrix(0.06999999999999999,0.0,0.0,0.07,76.44468,15.105248)">1</text>
+<text class="jlm_cmr10" transform="matrix(0.06999999999999999,0.0,0.0,0.07,69.18539,24.057066)">0</text>
+<text class="jlm_cmmi10" transform="matrix(0.1,0.0,0.0,0.1,90.25846,11.740733)">x</text>
+<path transform="matrix(10.0,0.0,0.0,10.0,0.0,0.0)" d=" M 9.0258465 1.7160847 L 9.787884 1.7160847 L 9.787884 1.7694167 L 9.0258465 1.7694167 L 9.0258465 1.7160847 Z " stroke="transparent" fill-rule="nonzero"/>
+<text class="jlm_cmmi10" transform="matrix(0.1,0.0,0.0,0.1,90.56091,29.906853)">y</text>
+</g>
+</svg>

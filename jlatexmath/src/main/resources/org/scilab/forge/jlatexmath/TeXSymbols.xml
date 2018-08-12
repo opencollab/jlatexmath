@@ -46,8 +46,6 @@
   
 -->
 
-<!-- Modified by Calixte Denizet -->
-
 <TeXSymbols>
   <Symbol name="ae" type="ord" />
   <Symbol name="AE" type="ord" />
@@ -58,7 +56,7 @@
   <Symbol name="O" type="ord" />
   <Symbol name="i" type="ord" />
   <Symbol name="j" type="ord" />
-  <Symbol name="jlmEuler" type="ord" />
+  <Symbol name="Eulerconst" type="ord" />
   <Symbol name="textapos" type="ord" />
   <Symbol name="jlatexmathlapos" type="ord" />
   <Symbol name="jlatexmathcedilla" type="ord" />
@@ -179,8 +177,8 @@
   <Symbol name="lrcorner" type="close" />
   <Symbol name="maltese" type="ord" />
   <Symbol name="textregistered" type="ord" />
-  <Symbol name="lhook" type="ord" />
-  <Symbol name="rhook" type="ord" />
+  <Symbol name="lhook" type="rel" />
+  <Symbol name="rhook" type="rel" />
   <Symbol name="mapstochar" type="rel" />
   <Symbol name="angle" type="ord" />
   <Symbol name="hbar" type="ord" />
@@ -199,7 +197,6 @@
   <Symbol name="rhd" type="rel" />
   <Symbol name="unrhd" type="rel" />
   <Symbol name="Box" type="ord" />
-
   <Symbol name="boxdot" type="bin" />
   <Symbol name="boxplus" type="bin" />
   <Symbol name="boxtimes" type="bin" />
@@ -244,6 +241,7 @@
   <Symbol name="therefore" type="rel" />
   <Symbol name="because" type="rel" />
   <Symbol name="doteqdot" type="rel" />
+  <Symbol name="Doteq" type="rel" />
   <Symbol name="triangleq" type="rel" />
   <Symbol name="precsim" type="rel" />
   <Symbol name="lesssim" type="rel" />
@@ -304,6 +302,7 @@
   <Symbol name="Bumpeq" type="rel" />
   <Symbol name="lll" type="rel" />
   <Symbol name="ggg" type="rel" />
+  <Symbol name="circledR" type="ord" />
   <Symbol name="circledS" type="ord" />
   <Symbol name="pitchfork" type="rel" />
   <Symbol name="dotplus" type="bin" />
@@ -407,8 +406,8 @@
   <Symbol name="backepsilon" type="rel" />
   <Symbol name="Diamond" type="rel" />
   <Symbol name="leadsto" type="rel" />
-  <!-- miscellaneous symbols -->
 
+  <!-- miscellaneous symbols -->
   <Symbol name="guillemotleft" type="punct"/>
   <Symbol name="guillemotright" type="punct"/>
   <Symbol name="guilsinglleft" type="punct"/>
@@ -432,19 +431,21 @@
   <Symbol name="faculty" type="ord"/>
   <Symbol name="question" type="ord"/>
   <Symbol name="questiondown" type="ord"/>
-  <Symbol name="jlatexmathsharp" type="ord"/>
+  <Symbol name="#" type="ord"/>
   <Symbol name="textdollar" type="ord"/>
+  <Symbol name="$" type="ord"/>
   <Symbol name="textpercent" type="ord"/>
+  <Symbol name="%" type="ord"/>
   <Symbol name="textampersand" type="ord"/>
+  <Symbol name="&amp;" type="ord"/>
   <Symbol name="textfractionsolidus" type="ord"/>
-  <Symbol name="jlatexmatharobase" type="ord"/>
+  <Symbol name="@" type="ord"/>
   <Symbol name="underscore" type="ord"/>
   <Symbol name="checkmark" type="ord"/>
   <Symbol name="mathsterling" type="ord"/>
   <Symbol name="yen" type="ord"/>
 
   <!-- math accents -->
-
   <Symbol name="acute" type="acc"/>
   <Symbol name="grave" type="acc"/>
   <Symbol name="ddot" type="acc"/>
@@ -461,8 +462,8 @@
   <Symbol name="widehat" type="acc"/>
   <Symbol name="widetilde" type="acc"/>
   <Symbol name="tie" type="acc"/>
-  <!-- delimiters that can change size -->
 
+  <!-- delimiters that can change size -->
   <Symbol name="lbrace" type="open" del="true"/>
   <Symbol name="rbrace" type="close" del="true"/>
   <Symbol name="lbrack" type="open" del="true"/>
@@ -483,6 +484,7 @@
   <Symbol name="Updownarrow" type="rel" del="true"/>
   <Symbol name="vert" type="ord" del="true"/>
   <Symbol name="Vert" type="ord" del="true"/>
+  <Symbol name="|" type="ord" del="true"/>
   <Symbol name="slashdel" type="open" del="true"/>
   <Symbol name="Relbar" type="rel" del="true"/>
   <Symbol name="lgroup" type="open" del="true"/>
@@ -490,8 +492,8 @@
   <Symbol name="bracevert" type="ord" del="true"/>
   <Symbol name="lmoustache" type="open" del="true"/>
   <Symbol name="rmoustache" type="close" del="true"/>
-  <!-- lowercase Greek letters -->
 
+  <!-- lowercase Greek letters -->
   <Symbol name="alpha" type="ord"/>
   <Symbol name="beta" type="ord"/>
   <Symbol name="gamma" type="ord"/>
@@ -524,7 +526,6 @@
   <Symbol name="omega" type="ord"/>
 
   <!-- uppercase Greek letters -->
-
   <Symbol name="Gamma" type="ord"/>
   <Symbol name="Delta" type="ord"/>
   <Symbol name="Theta" type="ord"/>
@@ -549,7 +550,6 @@
   <Symbol name="varOmega" type="ord"/>
 
   <!-- miscellaneous symbols of type "ord" -->
-
   <Symbol name="aleph" type="ord"/>
   <Symbol name="imath" type="ord"/>
   <Symbol name="jmath" type="ord"/>
@@ -565,7 +565,6 @@
   <Symbol name="surdsign" type="ord"/>
   <Symbol name="top" type="ord"/>
   <Symbol name="bot" type="ord"/>
-  <Symbol name="|" type="ord"/>
   <Symbol name="triangle" type="ord"/>
   <Symbol name="backslash" type="ord" del="true"/>
   <Symbol name="forall" type="ord"/>
@@ -583,7 +582,6 @@
   <Symbol name="racc" type="ord"/>
 
   <!-- "large" operators -->
-
   <Symbol name="bigcap" type="op"/>
   <Symbol name="bigcup" type="op"/>
   <Symbol name="bigodot" type="op"/>
@@ -594,14 +592,13 @@
   <Symbol name="bigvee" type="op"/>
   <Symbol name="bigwedge" type="op"/>
   <Symbol name="coprod" type="op"/>
-  <Symbol name="int" type="op"/>
+  <Symbol name="intop" type="op"/>
   <Symbol name="oint" type="op"/>
   <Symbol name="sum" type="op"/>
   <Symbol name="prod" type="op"/>
   <Symbol name="smallint" type="op"/>
 
   <!-- binary operations -->
-
   <Symbol name="minus" type="bin"/>
   <Symbol name="plus" type="bin"/>
   <Symbol name="pm" type="bin"/>
@@ -638,7 +635,6 @@
   <Symbol name="amalg" type="bin"/>
 
   <!-- relations -->
-
   <Symbol name="equals" type="rel"/>
   <Symbol name="gt" type="rel"/>
   <Symbol name="lt" type="rel"/>
@@ -676,11 +672,9 @@
   <Symbol name="perp" type="rel"/>
 
   <!-- special relation symbol with "width=0" (to overlap other relational symbols) -->
-
   <Symbol name="not" type="rel"/>
 
   <!-- arrows = pointing relations -->
-
   <Symbol name="colon" type="rel"/>
   <Symbol name="nearrow" type="rel"/>
   <Symbol name="searrow" type="rel"/>
@@ -703,5 +697,4 @@
   <Symbol name="textmu" type="ord" />
   <Symbol name="texteuro" type="ord" />
   <Symbol name="euro" type="ord" />
-
 </TeXSymbols>

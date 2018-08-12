@@ -1,0 +1,62 @@
+<!--
+\begin{gather}
+\ce{{(+)}_589{-}[Co(en)3]Cl3} \cr
+\ce{{Gluconic Acid} + H2O2} \cr
+\ce{X_{{red}}} \cr
+\end{gather}
+-->
+<svg width="141" height="60" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<style type="text/css">
+@font-face {
+font-family: 'jlm_cmr10';
+src: url('fonts/jlm_cmr10.ttf') format('truetype');
+font-style: normal;
+}
+.jlm_cmr10 {
+font-family: 'jlm_cmr10';
+font-size: 133px;
+}
+</style>
+<g stroke="rgb(0,0,0)" fill="rgb(0,0,0)" stroke-width="1.0" stroke-miterlimit="10.0" stroke-linejoin="miter" stroke-linecap="square">
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,15.712991,16.0)">(</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,20.898191,16.0)">+</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,31.268604,16.0)">)</text>
+<text class="jlm_cmr10" transform="matrix(0.06999999999999999,0.0,0.0,0.07,36.453804,19.8)">5</text>
+<text class="jlm_cmr10" transform="matrix(0.06999999999999999,0.0,0.0,0.07,41.12049,19.8)">8</text>
+<text class="jlm_cmr10" transform="matrix(0.06999999999999999,0.0,0.0,0.07,45.787174,19.8)">9</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,50.45386,16.0)">-</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,54.89831,16.0)">[</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,58.60203,16.0)">C</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,68.23169,16.0)">o</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,74.89838,16.0)">(</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,80.08358,16.0)">e</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,86.00953,16.0)">n</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,93.416954,16.0)">)</text>
+<text class="jlm_cmr10" transform="matrix(0.06999999999999999,0.0,0.0,0.07,98.60215,18.0)">3</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,103.26884,16.0)">]</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,106.97256,16.0)">C</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,116.60221,16.0)">l</text>
+<text class="jlm_cmr10" transform="matrix(0.06999999999999999,0.0,0.0,0.07,120.30593,18.0)">3</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,6.0,34.8)">G</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,16.462986,34.8)">l</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,20.166706,34.8)">u</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,27.574133,34.8)">c</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,33.50008,34.8)">o</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,40.166775,34.8)">n</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,47.5742,34.8)">i</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,51.27792,34.8)">c</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,61.64832,34.8)">A</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,71.648346,34.8)">c</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,77.574295,34.8)">i</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,81.278015,34.8)">d</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,91.648415,34.8)">+</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,104.9818,34.8)">H</text>
+<text class="jlm_cmr10" transform="matrix(0.06999999999999999,0.0,0.0,0.07,114.98183,36.8)">2</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,119.648506,34.8)">O</text>
+<text class="jlm_cmr10" transform="matrix(0.06999999999999999,0.0,0.0,0.07,130.01892,36.8)">2</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,58.848328,51.651825)">X</text>
+<text class="jlm_cmr10" transform="matrix(0.06999999999999999,0.0,0.0,0.07,68.84835,53.651825)">r</text>
+<text class="jlm_cmr10" transform="matrix(0.06999999999999999,0.0,0.0,0.07,72.50392,53.651825)">e</text>
+<text class="jlm_cmr10" transform="matrix(0.06999999999999999,0.0,0.0,0.07,76.652084,53.651825)">d</text>
+</g>
+</svg>

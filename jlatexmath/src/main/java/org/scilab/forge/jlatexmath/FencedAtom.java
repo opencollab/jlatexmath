@@ -3,7 +3,7 @@
  * This file is originally part of the JMathTeX Library - http://jmathtex.sourceforge.net
  *
  * Copyright (C) 2004-2007 Universiteit Gent
- * Copyright (C) 2009 DENIZET Calixte
+ * Copyright (C) 2009-2018 DENIZET Calixte
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -56,11 +56,6 @@ import java.util.List;
  */
 public class FencedAtom extends Atom {
 
-    // parameters used in the TeX algorithm
-    private static final int DELIMITER_FACTOR = 901;
-
-    private static final float DELIMITER_SHORTFALL = 5f;
-
     // base atom
     private final Atom base;
 
@@ -80,26 +75,11 @@ public class FencedAtom extends Atom {
         this(base, l, null, r);
     }
 
-    public FencedAtom(Atom base, SymbolAtom l, List<MiddleAtom> m, SymbolAtom r) {
-        if (base == null)
-            this.base = new RowAtom(); // empty base
-        else
-            this.base = base;
-        if (l == null || !l.getName().equals("normaldot")) {
-            left = l;
-        }
-        if (r == null || !r.getName().equals("normaldot")) {
-            right = r;
-        }
+    public FencedAtom(Atom base, SymbolAtom l, List m, SymbolAtom r) {
+        this.base = base;
+        left = l == Symbols.NORMALDOT ? null : l;
+        right = r == Symbols.NORMALDOT ? null : r;
         middle =  m;
-    }
-
-    public int getLeftType() {
-        return TeXConstants.TYPE_INNER;
-    }
-
-    public int getRightType() {
-        return TeXConstants.TYPE_INNER;
     }
 
     /**
@@ -109,29 +89,29 @@ public class FencedAtom extends Atom {
      * @param box
      *           box to be vertically centered with respect to the axis
      */
-    private static void center(Box box, float axis) {
-        float h = box.getHeight(), total = h + box.getDepth();
-        box.setShift(-(total / 2 - h) - axis);
+    private static Box center(Box box, double axis) {
+        final double h = box.getHeight();
+        final double total = h + box.getDepth();
+        box.setShift(-(total / 2. - h) - axis);
+        return box;
     }
 
     public Box createBox(TeXEnvironment env) {
-        TeXFont tf = env.getTeXFont();
+        final TeXFont tf = env.getTeXFont();
         Box content = base.createBox(env);
-        float shortfall = DELIMITER_SHORTFALL * SpaceAtom.getFactor(TeXConstants.UNIT_POINT, env);
-        float axis = tf.getAxisHeight(env.getStyle());
-        float delta = Math.max(content.getHeight() - axis, content.getDepth() + axis);
-        float minHeight = Math.max((delta / 500) * DELIMITER_FACTOR, 2 * delta - shortfall);
+        final double axis = tf.getAxisHeight(env.getStyle());
+        final double delta = Math.max(content.getHeight() - axis, content.getDepth() + axis);
+        final double minHeight = Math.max((delta / 500.) * TeXLength.getLength("delimiterfactor", env), 2. * delta - TeXLength.getLength("delimitershortfall", env));
 
         // construct box
-        HorizontalBox hBox = new HorizontalBox();
+        final HorizontalBox hBox = new HorizontalBox();
 
         if (middle != null) {
-            for (int i = 0; i < middle.size(); i++) {
-                MiddleAtom at = middle.get(i);
-                if (at.base instanceof SymbolAtom) {
-                    Box b = DelimiterFactory.create(((SymbolAtom) at.base).getName(), env, minHeight);
-                    center(b, axis);
-                    at.box = b;
+            for (final MiddleAtom at : middle) {
+                final Atom a = at.getBase();
+                if (a instanceof SymbolAtom) {
+                    final Box b = DelimiterFactory.create(((SymbolAtom) a).getCf(), env, minHeight);
+                    at.setBox(center(b, axis));
                 }
             }
             if (middle.size() != 0) {
@@ -141,14 +121,16 @@ public class FencedAtom extends Atom {
 
         // left delimiter
         if (left != null) {
-            Box b = DelimiterFactory.create(left.getName(), env, minHeight);
-            center(b, axis);
-            hBox.add(b);
+            final Box b = DelimiterFactory.create(left.getCf(), env, minHeight);
+            hBox.add(center(b, axis));
         }
 
         // glue between left delimiter and content (if not whitespace)
         if (!(base instanceof SpaceAtom)) {
-            hBox.add(Glue.get(TeXConstants.TYPE_OPENING, base.getLeftType(), env));
+            final Box glue = Glue.get(TeXConstants.TYPE_OPENING, base.getLeftType(), env);
+            if (glue != null) {
+                hBox.add(glue);
+            }
         }
 
         // add content
@@ -156,16 +138,31 @@ public class FencedAtom extends Atom {
 
         // glue between right delimiter and content (if not whitespace)
         if (!(base instanceof SpaceAtom)) {
-            hBox.add(Glue.get(base.getRightType(), TeXConstants.TYPE_CLOSING, env));
+            final Box glue = Glue.get(base.getRightType(), TeXConstants.TYPE_CLOSING, env);
+            if (glue != null) {
+                hBox.add(glue);
+            }
         }
 
         // right delimiter
         if (right != null) {
-            Box b = DelimiterFactory.create(right.getName(), env, minHeight);
-            center(b, axis);
-            hBox.add(b);
+            final Box b = DelimiterFactory.create(right.getCf(), env, minHeight);
+            hBox.add(center(b, axis));
         }
 
         return hBox;
+    }
+
+    public int getLeftType() {
+        return TeXConstants.TYPE_OPENING;
+
+    }
+
+    public int getRightType() {
+        return TeXConstants.TYPE_CLOSING;
+    }
+
+    public String toString() {
+        return "FencedAtom: left: " + left + " base: " + base + " right: " + right;
     }
 }

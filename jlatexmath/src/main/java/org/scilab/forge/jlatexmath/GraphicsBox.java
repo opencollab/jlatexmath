@@ -2,7 +2,7 @@
  * =========================================================================
  * This file is part of the JLaTeXMath Library - http://forge.scilab.org/jlatexmath
  *
- * Copyright (C) 2009 DENIZET Calixte
+ * Copyright (C) 2009-2018 DENIZET Calixte
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -46,9 +46,9 @@
 package org.scilab.forge.jlatexmath;
 
 import java.awt.Graphics2D;
-import java.awt.RenderingHints;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
+import java.awt.RenderingHints;
 
 /**
  * A box representing a box containing a graphics.
@@ -59,15 +59,15 @@ public class GraphicsBox extends Box {
     public final static int NEAREST_NEIGHBOR = 1;
     public final static int BICUBIC = 2;
 
-    private BufferedImage image;
-    private float scl;
-    private Object interp;
+    private final BufferedImage image;
+    private final double scl;
+    private final Object interp;
 
-    public GraphicsBox(BufferedImage image, float width, float height, float size, int interpolation) {
+    public GraphicsBox(final BufferedImage image, final double width, final double height, final double size, final int interpolation) {
         this.image = image;
         this.width = width;
         this.height = height;
-        this.scl = 1 / size;
+        this.scl = 1. / size;
         depth = 0;
         shift = 0;
         switch (interpolation) {
@@ -85,8 +85,8 @@ public class GraphicsBox extends Box {
         }
     }
 
-    public void draw(Graphics2D g2, float x, float y) {
-        AffineTransform oldAt = g2.getTransform();
+    public void draw(Graphics2D g2, double x, double y) {
+        final AffineTransform oldAt = g2.getTransform();
         Object oldKey = null;
         if (interp != null) {
             oldKey = g2.getRenderingHint(RenderingHints.KEY_INTERPOLATION);

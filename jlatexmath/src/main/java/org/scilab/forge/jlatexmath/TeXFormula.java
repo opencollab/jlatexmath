@@ -3,7 +3,7 @@
  * This file is originally part of the JMathTeX Library - http://jmathtex.sourceforge.net
  *
  * Copyright (C) 2004-2007 Universiteit Gent
- * Copyright (C) 2009 DENIZET Calixte
+ * Copyright (C) 2009-2018 DENIZET Calixte
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -48,25 +48,30 @@
 
 package org.scilab.forge.jlatexmath;
 
-import java.awt.Color;
-import java.awt.Graphics2D;
-import java.awt.GraphicsEnvironment;
-import java.awt.Image;
-import java.awt.Insets;
-import java.awt.Toolkit;
-import java.awt.image.BufferedImage;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.List;
+import java.util.LinkedList;
+import java.util.Set;
+import java.util.Stack;
+import java.io.InputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
 
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics2D;
+import java.awt.Insets;
+import java.awt.image.BufferedImage;
+import java.awt.GraphicsEnvironment;
+import java.awt.Image;
+import java.awt.Toolkit;
 import javax.imageio.ImageIO;
 import javax.imageio.stream.FileImageOutputStream;
+import java.lang.Character.UnicodeBlock;
 
 /**
  * Represents a logical mathematical formula that will be displayed (by creating a
@@ -95,107 +100,27 @@ public class TeXFormula {
 
     public static final String VERSION = "1.0.3";
 
-    public static final int SERIF = 0;
-    public static final int SANSSERIF = 1;
-    public static final int BOLD = 2;
-    public static final int ITALIC = 4;
-    public static final int ROMAN = 8;
-    public static final int TYPEWRITER = 16;
-
     // point-to-pixel conversion
-    public static float PIXELS_PER_POINT = 1f;
+    public static double PIXELS_PER_POINT = 1.;
 
     // font scale for deriving
-    public static float FONT_SCALE_FACTOR = 100f;
+    public static double FONT_SCALE_FACTOR = 100.;
 
-    // for comparing floats with 0
-    protected static final float PREC = 0.0000001f;
+    // for comparing doubles with 0
+    protected static final double PREC = 0.0000001;
 
-    // predefined TeXFormula's
-    public static Map<String, TeXFormula> predefinedTeXFormulas = new HashMap<String, TeXFormula>(150);
-    public static Map<String, String> predefinedTeXFormulasAsString = new HashMap<String, String>(150);
-
-    // character-to-symbol and character-to-delimiter mappings
-    public static String[] symbolMappings = new String[65536];
-    public static String[] symbolTextMappings = new String[65536];
-    public static String[] symbolFormulaMappings = new String[65536];
-    public static Map<Character.UnicodeBlock, FontInfos> externalFontMap = new HashMap<Character.UnicodeBlock, FontInfos>();
-
-    public List<MiddleAtom> middle = new LinkedList<MiddleAtom>();
-
-    protected Map<String, String> jlmXMLMap;
     private TeXParser parser;
 
     static {
-        // character-to-symbol and character-to-delimiter mappings
-        TeXFormulaSettingsParser parser = new TeXFormulaSettingsParser();
-        parser.parseSymbolMappings(symbolMappings, symbolTextMappings);
-
-        new PredefinedCommands();
-        new PredefinedTeXFormulas();
-        new PredefMacros();
-
-        parser.parseSymbolToFormulaMappings(symbolFormulaMappings, symbolTextMappings);
-
-        try {
-            DefaultTeXFont.registerAlphabet((AlphabetRegistration) Class.forName("org.scilab.forge.jlatexmath.cyrillic.CyrillicRegistration").newInstance());
-            DefaultTeXFont.registerAlphabet((AlphabetRegistration) Class.forName("org.scilab.forge.jlatexmath.greek.GreekRegistration").newInstance());
-        } catch (Exception e) { }
-
         //setDefaultDPI();
-    }
-
-    public static void addSymbolMappings(String file) throws ResourceParseException {
-        FileInputStream in;
-        try {
-            in = new FileInputStream(file);
-        } catch (FileNotFoundException e) {
-            throw new ResourceParseException(file, e);
-        }
-        addSymbolMappings(in, file);
-    }
-
-    public static void addSymbolMappings(InputStream in, String name) throws ResourceParseException {
-        TeXFormulaSettingsParser tfsp = new TeXFormulaSettingsParser(in, name);
-        tfsp.parseSymbolMappings(symbolMappings, symbolTextMappings);
-        tfsp.parseSymbolToFormulaMappings(symbolFormulaMappings, symbolTextMappings);
-    }
-
-    public static boolean isRegisteredBlock(Character.UnicodeBlock block) {
-        return externalFontMap.get(block) != null;
-    }
-
-    public static FontInfos getExternalFont(Character.UnicodeBlock block) {
-        FontInfos infos = externalFontMap.get(block);
-        if (infos == null) {
-            infos = new FontInfos("SansSerif", "Serif");
-            externalFontMap.put(block, infos);
-        }
-
-        return infos;
-    }
-
-    public static void registerExternalFont(Character.UnicodeBlock block, String sansserif, String serif) {
-        if (sansserif == null && serif == null) {
-            externalFontMap.remove(block);
-            return;
-        }
-        externalFontMap.put(block, new FontInfos(sansserif, serif));
-        if (block.equals(Character.UnicodeBlock.BASIC_LATIN)) {
-            predefinedTeXFormulas.clear();
-        }
-    }
-
-    public static void registerExternalFont(Character.UnicodeBlock block, String fontName) {
-        registerExternalFont(block, fontName, fontName);
     }
 
     /**
      * Set the DPI of target
      * @param dpi the target DPI
      */
-    public static void setDPITarget(float dpi) {
-        PIXELS_PER_POINT = dpi / 72f;
+    public static void setDPITarget(double dpi) {
+        PIXELS_PER_POINT = dpi / 72.;
     }
 
     /**
@@ -203,7 +128,7 @@ public class TeXFormula {
      */
     public static void setDefaultDPI() {
         if (!GraphicsEnvironment.isHeadless()) {
-            setDPITarget((float) Toolkit.getDefaultToolkit().getScreenResolution());
+            setDPITarget((double) Toolkit.getDefaultToolkit().getScreenResolution());
         }
     }
 
@@ -211,7 +136,7 @@ public class TeXFormula {
     public Atom root = null;
 
     // the current text style
-    public String textStyle = null;
+    private int textStyle = TextStyle.NONE;
 
     public boolean isColored = false;
 
@@ -220,7 +145,7 @@ public class TeXFormula {
      *
      */
     public TeXFormula() {
-        parser = new TeXParser("", this, false);
+        parser = new TeXParser(false, "");
     }
 
     /**
@@ -229,9 +154,15 @@ public class TeXFormula {
      * @param s the string to be parsed
      * @throws ParseException if the string could not be parsed correctly
      */
-    public TeXFormula(String s, Map<String, String> map) throws ParseException {
-        this.jlmXMLMap = map;
-        parser = new TeXParser(s, this);
+    TeXFormula(final String s, final boolean isPartial) throws ParseException {
+        parser = new TeXParser(isPartial, s);
+        parser.parse();
+        root = parser.get();
+    }
+
+    public TeXFormula(final String s, final Map<String, String> xmlMap) throws ParseException {
+        parser = new TeXParser(false, s);
+        parser.setXMLMap(xmlMap);
         parser.parse();
     }
 
@@ -241,134 +172,37 @@ public class TeXFormula {
      * @param s the string to be parsed
      * @throws ParseException if the string could not be parsed correctly
      */
-    public TeXFormula(String s) throws ParseException {
-        this(s, (String) null);
+    public TeXFormula(final String s) throws ParseException {
+        this(s, false);
     }
 
-    public TeXFormula(String s, boolean firstpass) throws ParseException {
-        this.textStyle = null;
-        parser = new TeXParser(s, this, firstpass);
+    public TeXFormula(final String s, final String textStyle) throws ParseException {
+        this.textStyle = TextStyle.getStyle(textStyle);
+        parser = new TeXParser(false, s);
         parser.parse();
+        root = parser.get();
     }
 
-    /*
-     * Creates a TeXFormula by parsing the given string in the given text style.
-     * Used when a text style command was found in the parse string.
-     */
-    public TeXFormula(String s, String textStyle) throws ParseException {
-        this.textStyle = textStyle;
-        parser = new TeXParser(s, this);
-        parser.parse();
-    }
-
-    public TeXFormula(String s, String textStyle, boolean firstpass, boolean space) throws ParseException {
-        this.textStyle = textStyle;
-        parser = new TeXParser(s, this, firstpass, space);
-        parser.parse();
-    }
-
-    /**
-     * Creates a new TeXFormula that is a copy of the given TeXFormula.
-     * <p>
-     * <b>Both TeXFormula's are independent of one another!</b>
-     *
-     * @param f the formula to be copied
-     */
-    public TeXFormula(TeXFormula f) {
-        if (f != null) {
-            addImpl(f);
-        }
-    }
-
-    /**
-     * Creates an empty TeXFormula.
-     *
-     */
-    protected TeXFormula(TeXParser tp) {
-        this.jlmXMLMap = tp.formula.jlmXMLMap;
-        parser = new TeXParser(tp.getIsPartial(), "", this, false);
-    }
-
-    /**
-     * Creates a new TeXFormula by parsing the given string (using a primitive TeX parser).
-     *
-     * @param s the string to be parsed
-     * @throws ParseException if the string could not be parsed correctly
-     */
-    protected TeXFormula(TeXParser tp, String s) throws ParseException {
-        this(tp, s, null);
-    }
-
-    protected TeXFormula(TeXParser tp, String s, boolean firstpass) throws ParseException {
-        this.textStyle = null;
-        this.jlmXMLMap = tp.formula.jlmXMLMap;
-        boolean isPartial = tp.getIsPartial();
-        parser = new TeXParser(isPartial, s, this, firstpass);
-        if (isPartial) {
-            try {
-                parser.parse();
-            } catch (Exception e) { }
-        } else {
-            parser.parse();
-        }
-    }
-
-    /*
-     * Creates a TeXFormula by parsing the given string in the given text style.
-     * Used when a text style command was found in the parse string.
-     */
-    protected TeXFormula(TeXParser tp, String s, String textStyle) throws ParseException {
-        this.textStyle = textStyle;
-        this.jlmXMLMap = tp.formula.jlmXMLMap;
-        boolean isPartial = tp.getIsPartial();
-        parser = new TeXParser(isPartial, s, this);
-        if (isPartial) {
-            try {
-                parser.parse();
-            } catch (Exception e) {
-                if (root == null) {
-                    root = new EmptyAtom();
-                }
-            }
-        } else {
-            parser.parse();
-        }
-    }
-
-    protected TeXFormula(TeXParser tp, String s, String textStyle, boolean firstpass, boolean space) throws ParseException {
-        this.textStyle = textStyle;
-        this.jlmXMLMap = tp.formula.jlmXMLMap;
-        boolean isPartial = tp.getIsPartial();
-        parser = new TeXParser(isPartial, s, this, firstpass, space);
-        if (isPartial) {
-            try {
-                parser.parse();
-            } catch (Exception e) {
-                if (root == null) {
-                    root = new EmptyAtom();
-                }
-            }
-        } else {
-            parser.parse();
-        }
-    }
-
-    public static TeXFormula getAsText(String text, int alignment) throws ParseException {
-        TeXFormula formula = new TeXFormula();
-        if (text == null || "".equals(text)) {
-            formula.add(new EmptyAtom());
+    public static TeXFormula getAsText(final String text, final TeXConstants.Align alignment) throws ParseException {
+        final TeXFormula formula = new TeXFormula();
+        if (text == null || text.isEmpty()) {
+            formula.root = EmptyAtom.get();
             return formula;
         }
 
-        String[] arr = text.split("\n|\\\\\\\\|\\\\cr");
-        ArrayOfAtoms atoms = new ArrayOfAtoms();
-        for (String s : arr) {
-            TeXFormula f = new TeXFormula(s, "mathnormal", true, false);
-            atoms.add(new RomanAtom(f.root));
-            atoms.addRow();
+        final String[] arr = text.split("\n|\\\\\\\\|\\\\cr");
+        final ArrayOfAtoms atoms = new ArrayOfAtoms(ArrayAtom.ARRAY);
+        final TeXParser parser = new TeXParser(false, arr[0]);
+        parser.parse();
+        atoms.add(new RomanAtom(parser.get()));
+        for (int i = 1; i < arr.length; ++i) {
+            parser.reset(arr[i]);
+            parser.parse();
+            atoms.add(new AlignedAtom(new RomanAtom(parser.get()), alignment));
+            atoms.add(EnvArray.RowSep.get());
         }
         atoms.checkDimensions();
-        formula.add(new MatrixAtom(false, atoms, MatrixAtom.ARRAY, alignment));
+        formula.root = new MultlineAtom(atoms, MultlineAtom.MULTLINE);
 
         return formula;
     }
@@ -377,20 +211,19 @@ public class TeXFormula {
      * @param a formula
      * @return a partial TeXFormula containing the valid part of formula
      */
-    public static TeXFormula getPartialTeXFormula(String formula) {
-        TeXFormula f = new TeXFormula();
+    public static TeXFormula getPartialTeXFormula(final String formula) {
+        final TeXFormula f = new TeXFormula();
         if (formula == null) {
-            f.add(new EmptyAtom());
+            f.root = EmptyAtom.get();
             return f;
         }
-        TeXParser parser = new TeXParser(true, formula, f);
+
+        final TeXParser parser = new TeXParser(true, formula);
         try {
             parser.parse();
-        } catch (Exception e) {
-            if (f.root == null) {
-                f.root = new EmptyAtom();
-            }
-        }
+        } catch (Exception e) { }
+        f.parser = parser;
+        f.root = parser.get();
 
         return f;
     }
@@ -400,7 +233,7 @@ public class TeXFormula {
      * with FOP.
      */
     public static void registerFonts(boolean b) {
-        DefaultTeXFontParser.registerFonts(b);
+        FontLoader.registerFonts(b);
     }
 
     /**
@@ -408,103 +241,17 @@ public class TeXFormula {
      *
      * @param ltx the latex formula
      */
-    public void setLaTeX(String ltx) throws ParseException {
+    public void setLaTeX(final String ltx) throws ParseException {
         parser.reset(ltx);
-        if (ltx != null && ltx.length() != 0)
+        if (ltx != null && ltx.length() != 0) {
             parser.parse();
-    }
-
-    /**
-     * Inserts an atom at the end of the current formula
-     */
-    public TeXFormula add(Atom el) {
-        if (el != null) {
-            if (el instanceof MiddleAtom)
-                middle.add((MiddleAtom) el);
-            if (root == null) {
-                root = el;
-            } else {
-                if (!(root instanceof RowAtom)) {
-                    root = new RowAtom(root);
-                }
-                ((RowAtom) root).add(el);
-                if (el instanceof TypedAtom) {
-                    TypedAtom ta = (TypedAtom) el;
-                    int rtype = ta.getRightType();
-                    if (rtype == TeXConstants.TYPE_BINARY_OPERATOR || rtype == TeXConstants.TYPE_RELATION) {
-                        ((RowAtom) root).add(new BreakMarkAtom());
-                    }
-                }
-            }
+            root = parser.get();
         }
-        return this;
-    }
-
-    /**
-     * Parses the given string and inserts the resulting formula
-     * at the end of the current TeXFormula.
-     *
-     * @param s the string to be parsed and inserted
-     * @throws ParseException if the string could not be parsed correctly
-     * @return the modified TeXFormula
-     */
-    public TeXFormula add(String s) throws ParseException {
-        if (s != null && s.length() != 0) {
-            // reset parsing variables
-            textStyle = null;
-            // parse and add the string
-            add(new TeXFormula(s));
-        }
-        return this;
-    }
-
-    public TeXFormula append(String s) throws ParseException {
-        return append(false, s);
-    }
-
-    public TeXFormula append(boolean isPartial, String s) throws ParseException {
-        if (s != null && s.length() != 0) {
-            TeXParser tp = new TeXParser(isPartial, s, this);
-            tp.parse();
-        }
-        return this;
-    }
-
-    /**
-     * Inserts the given TeXFormula at the end of the current TeXFormula.
-     *
-     * @param f the TeXFormula to be inserted
-     * @return the modified TeXFormula
-     */
-    public TeXFormula add(TeXFormula f) {
-        addImpl(f);
-        return this;
-    }
-
-    private void addImpl(TeXFormula f) {
-        if (f.root != null) {
-            // special copy-treatment for Mrow as a root!!
-            if (f.root instanceof RowAtom)
-                add(new RowAtom(f.root));
-            else
-                add(f.root);
-        }
-    }
-
-    public void setLookAtLastAtom(boolean b) {
-        if (root instanceof RowAtom)
-            ((RowAtom)root).lookAtLastAtom = b;
-    }
-
-    public boolean getLookAtLastAtom() {
-        if (root instanceof RowAtom)
-            return ((RowAtom)root).lookAtLastAtom;
-        return false;
     }
 
     /**
      * Centers the current TeXformula vertically on the axis (defined by the parameter
-     * "axisheight" in the resource "DefaultTeXFont.xml".
+     * "axisheight" in the resource "TeXFont.xml".
      *
      * @return the modified TeXFormula
      */
@@ -513,93 +260,39 @@ public class TeXFormula {
         return this;
     }
 
-    public static void addPredefinedTeXFormula(InputStream xmlFile) throws ResourceParseException {
-        new PredefinedTeXFormulaParser(xmlFile, "TeXFormula").parse(predefinedTeXFormulas);
-    }
-
-    public static void addPredefinedCommands(InputStream xmlFile) throws ResourceParseException {
-        new PredefinedTeXFormulaParser(xmlFile, "Command").parse(MacroInfo.Commands);
-    }
-
-    /**
-     * Inserts a strut box (whitespace) with the given width, height and depth (in
-     * the given unit) at the end of the current TeXFormula.
-     *
-     * @param unit a unit constant (from {@link TeXConstants})
-     * @param width the width of the strut box
-     * @param height the height of the strut box
-     * @param depth the depth of the strut box
-     * @return the modified TeXFormula
-     * @throws InvalidUnitException if the given integer value does not represent
-     *                  a valid unit
-     */
-    public TeXFormula addStrut(int unit, float width, float height, float depth)
-    throws InvalidUnitException {
-        return add(new SpaceAtom(unit, width, height, depth));
-    }
-
-    /**
-     * Inserts a strut box (whitespace) with the given width, height and depth (in
-     * the given unit) at the end of the current TeXFormula.
-     *
-     * @param type thinmuskip, medmuskip or thickmuskip (from {@link TeXConstants})
-     * @return the modified TeXFormula
-     * @throws InvalidUnitException if the given integer value does not represent
-     *                  a valid unit
-     */
-    public TeXFormula addStrut(int type)
-    throws InvalidUnitException {
-        return add(new SpaceAtom(type));
-    }
-
-    /**
-     * Inserts a strut box (whitespace) with the given width (in widthUnits), height
-     * (in heightUnits) and depth (in depthUnits) at the end of the current TeXFormula.
-     *
-     * @param widthUnit a unit constant used for the width (from {@link TeXConstants})
-     * @param width the width of the strut box
-     * @param heightUnit a unit constant used for the height (from TeXConstants)
-     * @param height the height of the strut box
-     * @param depthUnit a unit constant used for the depth (from TeXConstants)
-     * @param depth the depth of the strut box
-     * @return the modified TeXFormula
-     * @throws InvalidUnitException if the given integer value does not represent
-     *                  a valid unit
-     */
-    public TeXFormula addStrut(int widthUnit, float width, int heightUnit,
-                               float height, int depthUnit, float depth) throws InvalidUnitException {
-        return add(new SpaceAtom(widthUnit, width, heightUnit, height, depthUnit,
-                                 depth));
+    public Atom getAtom() {
+        return root;
     }
 
     /*
      * Convert this TeXFormula into a box, starting form the given style
      */
-    private Box createBox(TeXEnvironment style) {
-        if (root == null)
-            return new StrutBox(0, 0, 0, 0);
-        else
-            return root.createBox(style);
+    public Box createBox(TeXEnvironment env) {
+        if (root == null) {
+            return StrutBox.getEmpty();
+        } else {
+            return root.createBox(env);
+        }
     }
 
-    private DefaultTeXFont createFont(float size, int type) {
-        DefaultTeXFont dtf = new DefaultTeXFont(size);
-        if (type == 0) {
+    private TeXFont createFont(final double size, final int type) {
+        final TeXFont dtf = new TeXFont(size);
+        if (type == TeXFont.SERIF) {
             dtf.setSs(false);
         }
-        if ((type & ROMAN) != 0) {
+        if ((type & TeXFont.ROMAN) != 0) {
             dtf.setRoman(true);
         }
-        if ((type & TYPEWRITER) != 0) {
+        if ((type & TeXFont.TYPEWRITER) != 0) {
             dtf.setTt(true);
         }
-        if ((type & SANSSERIF) != 0) {
+        if ((type & TeXFont.SANSSERIF) != 0) {
             dtf.setSs(true);
         }
-        if ((type & ITALIC) != 0) {
+        if ((type & TeXFont.ITALIC) != 0) {
             dtf.setIt(true);
         }
-        if ((type & BOLD) != 0) {
+        if ((type & TeXFont.BOLD) != 0) {
             dtf.setBold(true);
         }
 
@@ -613,16 +306,16 @@ public class TeXFormula {
      */
     public class TeXIconBuilder {
         private Integer style;
-        private Float size;
+        private Double size;
         private Integer type;
         private Color fgcolor;
         private boolean trueValues = false;
-        private Integer widthUnit;
-        private Float textWidth;
-        private Integer align;
+        private TeXLength.Unit widthUnit = TeXLength.Unit.NONE;
+        private Double textWidth;
+        private TeXConstants.Align align;
         private boolean isMaxWidth = false;
-        private Integer interLineUnit;
-        private Float interLineSpacing;
+        private TeXLength.Unit interLineUnit = TeXLength.Unit.NONE;
+        private Double interLineSpacing;
 
         /**
          * Specify the style for rendering the given TeXFormula
@@ -639,7 +332,7 @@ public class TeXFormula {
          * @param size the size
          * @return the builder, used for chaining
          */
-        public TeXIconBuilder setSize(final float size) {
+        public TeXIconBuilder setSize(final double size) {
             this.size = size;
             return this;
         }
@@ -681,11 +374,11 @@ public class TeXFormula {
          * @param align the alignment
          * @return the builder, used for chaining
          */
-        public TeXIconBuilder setWidth(final int widthUnit, final float textWidth, final int align) {
+        public TeXIconBuilder setWidth(final TeXLength.Unit widthUnit, final double textWidth, final TeXConstants.Align align) {
             this.widthUnit = widthUnit;
             this.textWidth = textWidth;
             this.align = align;
-            trueValues = true; // TODO: is this necessary?
+            trueValues = true;
             return this;
         }
 
@@ -695,7 +388,7 @@ public class TeXFormula {
          * @return the builder, used for chaining
          */
         public TeXIconBuilder setIsMaxWidth(final boolean isMaxWidth) {
-            if (widthUnit == null) {
+            if (widthUnit == TeXLength.Unit.NONE) {
                 throw new IllegalStateException("Cannot set 'isMaxWidth' without having specified a width!");
             }
             if (isMaxWidth) {
@@ -714,7 +407,7 @@ public class TeXFormula {
                 // [  hello world  ]
                 // [     hello     ]
                 // => until (2) is solved, we stick with the hack to set align := ALIGN_LEFT!
-                this.align = TeXConstants.ALIGN_LEFT;
+                this.align = TeXConstants.Align.LEFT;
             }
             this.isMaxWidth = isMaxWidth;
             return this;
@@ -726,8 +419,8 @@ public class TeXFormula {
          * @param interLineSpacing the value
          * @return the builder, used for chaining
          */
-        public TeXIconBuilder setInterLineSpacing(final int interLineUnit, final float interLineSpacing) {
-            if (widthUnit == null) {
+        public TeXIconBuilder setInterLineSpacing(final TeXLength.Unit interLineUnit, final double interLineSpacing) {
+            if (widthUnit == TeXLength.Unit.NONE) {
                 throw new IllegalStateException("Cannot set inter line spacing without having specified a width!");
             }
             this.interLineUnit = interLineUnit;
@@ -747,24 +440,24 @@ public class TeXFormula {
             if (size == null) {
                 throw new IllegalStateException("A size is required. Use setStyle()");
             }
-            DefaultTeXFont font = (type == null) ? new DefaultTeXFont(size) : createFont(size, type);
+            TeXFont font = (type == null) ? new TeXFont(size) : createFont(size, type);
             TeXEnvironment te;
-            if (widthUnit != null) {
-                te = new TeXEnvironment(style, font, widthUnit, textWidth);
+            if (widthUnit != TeXLength.Unit.NONE) {
+                te = new TeXEnvironment(style, font, widthUnit, textWidth, textStyle);
             } else {
-                te = new TeXEnvironment(style, font);
+                te = new TeXEnvironment(style, font, textStyle);
             }
 
-            if (interLineUnit != null) {
+            if (interLineUnit != TeXLength.Unit.NONE) {
                 te.setInterline(interLineUnit, interLineSpacing);
             }
 
             Box box = createBox(te);
             TeXIcon ti;
-            if (widthUnit != null) {
+            if (widthUnit != TeXLength.Unit.NONE) {
                 HorizontalBox hb;
-                if (interLineUnit != null) {
-                    float il = interLineSpacing * SpaceAtom.getFactor(interLineUnit, te);
+                if (interLineUnit != TeXLength.Unit.NONE) {
+                    double il = interLineSpacing * TeXLength.getFactor(interLineUnit, te);
                     Box b = BreakFormula.split(box, te.getTextwidth(), il);
                     hb = new HorizontalBox(b, isMaxWidth ? b.getWidth() : te.getTextwidth(), align);
                 } else {
@@ -792,39 +485,39 @@ public class TeXFormula {
      * @param size the default TeXFont's point size
      * @return the created TeXIcon
      */
-    public TeXIcon createTeXIcon(int style, float size) {
+    public TeXIcon createTeXIcon(int style, double size) {
         return new TeXIconBuilder().setStyle(style).setSize(size).build();
     }
 
-    public TeXIcon createTeXIcon(int style, float size, int type) {
+    public TeXIcon createTeXIcon(int style, double size, int type) {
         return new TeXIconBuilder().setStyle(style).setSize(size).setType(type).build();
     }
 
-    public TeXIcon createTeXIcon(int style, float size, int type, Color fgcolor) {
+    public TeXIcon createTeXIcon(int style, double size, int type, Color fgcolor) {
         return new TeXIconBuilder().setStyle(style).setSize(size).setType(type).setFGColor(fgcolor).build();
     }
 
-    public TeXIcon createTeXIcon(int style, float size, boolean trueValues) {
+    public TeXIcon createTeXIcon(int style, double size, boolean trueValues) {
         return new TeXIconBuilder().setStyle(style).setSize(size).setTrueValues(trueValues).build();
     }
 
-    public TeXIcon createTeXIcon(int style, float size, int widthUnit, float textwidth, int align) {
+    public TeXIcon createTeXIcon(int style, double size, TeXLength.Unit widthUnit, double textwidth, TeXConstants.Align align) {
         return createTeXIcon(style, size, 0, widthUnit, textwidth, align);
     }
 
-    public TeXIcon createTeXIcon(int style, float size, int type, int widthUnit, float textwidth, int align) {
+    public TeXIcon createTeXIcon(int style, double size, int type, TeXLength.Unit widthUnit, double textwidth, TeXConstants.Align align) {
         return new TeXIconBuilder().setStyle(style).setSize(size).setType(type).setWidth(widthUnit, textwidth, align).build();
     }
 
-    public TeXIcon createTeXIcon(int style, float size, int widthUnit, float textwidth, int align, int interlineUnit, float interline) {
+    public TeXIcon createTeXIcon(int style, double size, TeXLength.Unit widthUnit, double textwidth, TeXConstants.Align align, TeXLength.Unit interlineUnit, double interline) {
         return createTeXIcon(style, size, 0, widthUnit, textwidth, align, interlineUnit, interline);
     }
 
-    public TeXIcon createTeXIcon(int style, float size, int type, int widthUnit, float textwidth, int align, int interlineUnit, float interline) {
+    public TeXIcon createTeXIcon(int style, double size, int type, TeXLength.Unit widthUnit, double textwidth, TeXConstants.Align align, TeXLength.Unit interlineUnit, double interline) {
         return new TeXIconBuilder().setStyle(style).setSize(size).setType(type).setWidth(widthUnit, textwidth, align).setInterLineSpacing(interlineUnit, interline).build();
     }
 
-    public void createImage(String format, int style, float size, String out, Color bg, Color fg, boolean transparency) {
+    public void createImage(String format, int style, double size, String out, Color bg, Color fg, boolean transparency) {
         TeXIcon icon = createTeXIcon(style, size);
         icon.setInsets(new Insets(1, 1, 1, 1));
         int w = icon.getIconWidth(), h = icon.getIconHeight();
@@ -850,16 +543,16 @@ public class TeXFormula {
         g2.dispose();
     }
 
-    public void createPNG(int style, float size, String out, Color bg, Color fg) {
+    public void createPNG(int style, double size, String out, Color bg, Color fg) {
         createImage("png", style, size, out, bg, fg, bg == null);
     }
 
-    public void createGIF(int style, float size, String out, Color bg, Color fg) {
+    public void createGIF(int style, double size, String out, Color bg, Color fg) {
         createImage("gif", style, size, out, bg, fg, bg == null);
     }
 
-    public void createJPEG(int style, float size, String out, Color bg, Color fg) {
-        //There is a bug when a BufferedImage has a component alpha so we disabel it
+    public void createJPEG(int style, double size, String out, Color bg, Color fg) {
+        //There is a bug when a BufferedImage has a component alpha so we disable it
         createImage("jpeg", style, size, out, bg, fg, false);
     }
 
@@ -870,7 +563,7 @@ public class TeXFormula {
      * @param transparency, if true the background is transparent
      * @return the generated image
      */
-    public static Image createBufferedImage(String formula, int style, float size, Color fg, Color bg) throws ParseException {
+    public static Image createBufferedImage(String formula, int style, double size, Color fg, Color bg) throws ParseException {
         TeXFormula f = new TeXFormula(formula);
         TeXIcon icon = f.createTeXIcon(style, size);
         icon.setInsets(new Insets(2, 2, 2, 2));
@@ -897,7 +590,7 @@ public class TeXFormula {
      * @param transparency, if true the background is transparent
      * @return the generated image
      */
-    public Image createBufferedImage(int style, float size, Color fg, Color bg) throws ParseException {
+    public Image createBufferedImage(int style, double size, Color fg, Color bg) throws ParseException {
         TeXIcon icon = createTeXIcon(style, size);
         icon.setInsets(new Insets(2, 2, 2, 2));
         int w = icon.getIconWidth(), h = icon.getIconHeight();
@@ -918,102 +611,5 @@ public class TeXFormula {
 
     public void setDEBUG(boolean b) {
         Box.DEBUG = b;
-    }
-
-    /**
-     * Changes the background color of the <i>current</i> TeXFormula into the given color.
-     * By default, a TeXFormula has no background color, it's transparent.
-     * The backgrounds of subformula's will be painted on top of the background of
-     * the whole formula! Any changes that will be made to this TeXFormula after this
-     * background color was set, will have the default background color (unless it will
-     * also be changed into another color afterwards)!
-     *
-     * @param c the desired background color for the <i>current</i> TeXFormula
-     * @return the modified TeXFormula
-     */
-    public TeXFormula setBackground(Color c) {
-        if (c != null) {
-            if (root instanceof ColorAtom)
-                root = new ColorAtom(c, null, (ColorAtom) root);
-            else
-                root = new ColorAtom(root, c, null);
-        }
-        return this;
-    }
-
-    /**
-     * Changes the (foreground) color of the <i>current</i> TeXFormula into the given color.
-     * By default, the foreground color of a TeXFormula is the foreground color of the
-     * component on which the TeXIcon (created from this TeXFormula) will be painted. The
-     * color of subformula's overrides the color of the whole formula.
-     * Any changes that will be made to this TeXFormula after this color was set, will be
-     * painted in the default color (unless the color will also be changed afterwards into
-     * another color)!
-     *
-     * @param c the desired foreground color for the <i>current</i> TeXFormula
-     * @return the modified TeXFormula
-     */
-    public TeXFormula setColor(Color c) {
-        if (c != null) {
-            if (root instanceof ColorAtom)
-                root = new ColorAtom(null, c, (ColorAtom) root);
-            else
-                root = new ColorAtom(root, null, c);
-        }
-        return this;
-    }
-
-    /**
-     * Sets a fixed left and right type of the current TeXFormula. This has an influence
-     * on the glue that will be inserted before and after this TeXFormula.
-     *
-     * @param leftType atom type constant (from {@link TeXConstants})
-     * @param rightType atom type constant (from TeXConstants)
-     * @return the modified TeXFormula
-     * @throws InvalidAtomTypeException if the given integer value does not represent
-     *                  a valid atom type
-     */
-    public TeXFormula setFixedTypes(int leftType, int rightType)
-    throws InvalidAtomTypeException {
-        root = new TypedAtom(leftType, rightType, root);
-        return this;
-    }
-
-    /**
-     * Get a predefined TeXFormula.
-     *
-     * @param name the name of the predefined TeXFormula
-     * @return a copy of the predefined TeXFormula
-     * @throws FormulaNotFoundException if no predefined TeXFormula is found with the
-     *                  given name
-     */
-    public static TeXFormula get(String name) throws FormulaNotFoundException {
-        TeXFormula formula = predefinedTeXFormulas.get(name);
-        if (formula == null) {
-            String f = predefinedTeXFormulasAsString.get(name);
-            if (f == null) {
-                throw new FormulaNotFoundException(name);
-            }
-            TeXFormula tf = new TeXFormula(f);
-            if (!(tf.root instanceof RowAtom)) {
-                // depending of the context a RowAtom can be modified
-                // so we can't reuse it
-                predefinedTeXFormulas.put(name, tf);
-            }
-            return tf;
-        } else {
-            return new TeXFormula(formula);
-        }
-    }
-
-    static class FontInfos {
-
-        String sansserif;
-        String serif;
-
-        FontInfos(String sansserif, String serif) {
-            this.sansserif = sansserif;
-            this.serif = serif;
-        }
     }
 }

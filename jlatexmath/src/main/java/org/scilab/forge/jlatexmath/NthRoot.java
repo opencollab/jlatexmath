@@ -51,9 +51,7 @@ package org.scilab.forge.jlatexmath;
  */
 public class NthRoot extends Atom {
 
-    private static final String sqrtSymbol = "sqrt";
-
-    private static final float FACTOR = 0.55f;
+    private static final double FACTOR = 0.55;
 
     // base atom to be put under the root sign
     private final Atom base;
@@ -62,34 +60,38 @@ public class NthRoot extends Atom {
     private final Atom root;
 
     public NthRoot(Atom base, Atom root) {
-        this.base = base == null ? new EmptyAtom() : base;
-        this.root = root == null ? new EmptyAtom() : root;
+        this.base = base == null ? EmptyAtom.get() : base;
+        this.root = root;
     }
 
     public Box createBox(TeXEnvironment env) {
         // first create a simple square root construction
-
         TeXFont tf = env.getTeXFont();
         int style = env.getStyle();
         // calculate minimum clearance clr
-        float clr, drt = tf.getDefaultRuleThickness(style);
-        if (style < TeXConstants.STYLE_TEXT)
-            clr = tf.getXHeight(style, tf.getChar(sqrtSymbol, style).getFontCode());
-        else
+        double clr;
+        final double drt = tf.getDefaultRuleThickness(style);
+        if (style < TeXConstants.STYLE_TEXT) {
+            clr = tf.getXHeight(style, tf.getChar(Symbols.SQRT.getCf(), style).getFontCode());
+        } else {
             clr = drt;
-        clr = drt + Math.abs(clr) / 4 ;
+        }
+        clr = drt + Math.abs(clr) / 4.;
 
         // cramped style for the formula under the root sign
         Box bs = base.createBox(env.crampStyle());
         HorizontalBox b = new HorizontalBox(bs);
-        b.add(new SpaceAtom(TeXConstants.UNIT_MU, 1, 0, 0).createBox(env.crampStyle()));
+        b.add(new SpaceAtom(TeXLength.Unit.MU, 1., 0., 0.).createBox(env.crampStyle()));
         // create root sign
-        float totalH = b.getHeight() + b.getDepth();
-        Box rootSign = DelimiterFactory.create(sqrtSymbol, env, totalH + clr + drt);
+        double totalH = b.getHeight() + b.getDepth();
+        Box rootSign = DelimiterFactory.create(Symbols.SQRT.getCf(), env, totalH + clr + drt);
+        if (rootSign instanceof CharBox) {
+            rootSign = ShapeBox.create(rootSign);
+        }
 
         // add half the excess to clr
-        float delta = rootSign.getDepth() - (totalH + clr);
-        clr += delta / 2;
+        double delta = rootSign.getDepth() - (totalH + clr);
+        clr += delta / 2.;
 
         // create total box
         rootSign.setShift(-(b.getHeight() + clr));
@@ -98,26 +100,26 @@ public class NthRoot extends Atom {
         HorizontalBox squareRoot = new HorizontalBox(rootSign);
         squareRoot.add(ob);
 
-        if (root == null)
+        if (root == null) {
             // simple square root
             return squareRoot;
-        else { // nthRoot, not a simple square root
-
+        } else { // nthRoot, not a simple square root
             // create box from root
             Box r = root.createBox(env.rootStyle());
 
             // shift root up
-            float bottomShift = FACTOR * (squareRoot.getHeight() + squareRoot.getDepth());
+            double bottomShift = FACTOR * (squareRoot.getHeight() + squareRoot.getDepth());
             r.setShift(squareRoot.getDepth() - r.getDepth() - bottomShift);
 
             // negative kern
-            Box negativeKern = new SpaceAtom(TeXConstants.UNIT_MU, -10f, 0, 0).createBox(env);
+            Box negativeKern = new SpaceAtom(TeXLength.Unit.MU, -10., 0., 0.).createBox(env);
 
             // arrange both boxes together with the negative kern
-            Box res = new HorizontalBox();
-            float pos = r.getWidth() + negativeKern.getWidth();
-            if (pos < 0)
-                res.add(new StrutBox(-pos, 0, 0, 0));
+            HorizontalBox res = new HorizontalBox();
+            double pos = r.getWidth() + negativeKern.getWidth();
+            if (pos < 0) {
+                res.add(new StrutBox(-pos, 0., 0., 0.));
+            }
 
             res.add(r);
             res.add(negativeKern);

@@ -50,8 +50,8 @@ package org.scilab.forge.jlatexmath;
  */
 public class MathAtom extends Atom {
 
-    private int style = TeXConstants.STYLE_DISPLAY;
-    protected Atom base;
+    private final int style;
+    protected final Atom base;
 
     public MathAtom(Atom base, int style) {
         this.base = base;
@@ -59,12 +59,16 @@ public class MathAtom extends Atom {
     }
 
     public Box createBox(TeXEnvironment env) {
-        env = env.copy(env.getTeXFont().copy());
-        env.getTeXFont().setRoman(false);
-        int sstyle = env.getStyle();
+        final TeXFont tf = env.getTeXFont();
+        final int sstyle = env.getStyle();
+        final boolean sroman = tf.getRoman();
+
+        tf.setRoman(false);
         env.setStyle(style);
-        Box box = base.createBox(env);
+        final Box box = base.createBox(env);
         env.setStyle(sstyle);
+        tf.setRoman(sroman);
+
         return box;
     }
 }

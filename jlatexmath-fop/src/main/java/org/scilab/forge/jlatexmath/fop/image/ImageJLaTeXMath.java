@@ -50,11 +50,13 @@
 
 package org.scilab.forge.jlatexmath.fop.image;
 
+import org.scilab.forge.jlatexmath.TeXIcon;
+import org.scilab.forge.jlatexmath.fop.JLaTeXMathObj;
+
+import org.apache.xmlgraphics.image.loader.Image;
 import org.apache.xmlgraphics.image.loader.ImageFlavor;
 import org.apache.xmlgraphics.image.loader.ImageInfo;
 import org.apache.xmlgraphics.image.loader.impl.AbstractImage;
-import org.scilab.forge.jlatexmath.TeXIcon;
-import org.scilab.forge.jlatexmath.fop.JLaTeXMathObj;
 
 /**
  * Image implementation

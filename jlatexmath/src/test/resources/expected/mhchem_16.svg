@@ -1,0 +1,118 @@
+<!--
+\begin{gather}
+\ce{C6H5-CHO} \cr
+\ce{A-B=C#D} \cr
+\ce{A\bond{-}B\bond{=}C\bond{#}D} \cr
+\ce{A\bond{1}B\bond{2}C\bond{3}D} \cr
+\ce{A\bond{~}B\bond{~-}C} \cr
+\ce{A\bond{~&#45;&#45;}B\bond{~=}C\bond{-~-}D} \cr
+\ce{A\bond{...}B\bond{....}C} \cr
+\ce{A\bond{->}B\bond{<-}C} \cr
+\end{gather}
+-->
+<svg width="105" height="128" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<style type="text/css">
+@font-face {
+font-family: 'jlm_cmr10';
+src: url('fonts/jlm_cmr10.ttf') format('truetype');
+font-style: normal;
+}
+.jlm_cmr10 {
+font-family: 'jlm_cmr10';
+font-size: 133px;
+}
+@font-face {
+font-family: 'jlm_cmsy10';
+src: url('fonts/jlm_cmsy10.ttf') format('truetype');
+font-style: normal;
+}
+.jlm_cmsy10 {
+font-family: 'jlm_cmsy10';
+font-size: 133px;
+}
+</style>
+<g stroke="rgb(0,0,0)" fill="rgb(0,0,0)" stroke-width="1.0" stroke-miterlimit="10.0" stroke-linejoin="miter" stroke-linecap="square">
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,13.925958,15.1110935)">C</text>
+<text class="jlm_cmr10" transform="matrix(0.06999999999999999,0.0,0.0,0.07,23.55561,17.111094)">6</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,28.222296,15.1110935)">H</text>
+<text class="jlm_cmr10" transform="matrix(0.06999999999999999,0.0,0.0,0.07,38.222324,17.111094)">5</text>
+<path transform="matrix(10.0,0.0,0.0,10.0,0.0,0.0)" d=" M 4.659272 1.15111 L 5.696314 1.15111 L 5.696314 1.204442 L 4.659272 1.204442 L 4.659272 1.15111 Z " stroke="transparent" fill-rule="nonzero"/>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,60.66685,15.1110935)">C</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,70.2965,15.1110935)">H</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,80.29653,15.1110935)">O</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,6.0,31.96292)">A</text>
+<path transform="matrix(10.0,0.0,0.0,10.0,0.0,0.0)" d=" M 1.9703741 2.8362927 L 3.0074155 2.8362927 L 3.0074155 2.8896246 L 1.9703741 2.8896246 L 1.9703741 2.8362927 Z " stroke="transparent" fill-rule="nonzero"/>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,33.77787,31.96292)">B</text>
+<path transform="matrix(10.0,0.0,0.0,10.0,0.0,0.0)" d=" M 4.6926064 2.7071254 L 5.7296476 2.7071254 L 5.7296476 2.7604573 L 4.6926064 2.7604573 L 4.6926064 2.7071254 Z " stroke="transparent" fill-rule="nonzero"/>
+<path transform="matrix(10.0,0.0,0.0,10.0,0.0,0.0)" d=" M 4.6926064 2.96546 L 5.7296476 2.96546 L 5.7296476 3.018792 L 4.6926064 3.018792 L 4.6926064 2.96546 Z " stroke="transparent" fill-rule="nonzero"/>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,61.00019,31.96292)">C</text>
+<path transform="matrix(10.0,0.0,0.0,10.0,0.0,0.0)" d=" M 7.4333563 2.577958 L 8.470397 2.577958 L 8.470397 2.63129 L 7.4333563 2.63129 L 7.4333563 2.577958 Z " stroke="transparent" fill-rule="nonzero"/>
+<path transform="matrix(10.0,0.0,0.0,10.0,0.0,0.0)" d=" M 7.4333563 2.8362927 L 8.470397 2.8362927 L 8.470397 2.8896246 L 7.4333563 2.8896246 L 7.4333563 2.8362927 Z " stroke="transparent" fill-rule="nonzero"/>
+<path transform="matrix(10.0,0.0,0.0,10.0,0.0,0.0)" d=" M 7.4333563 3.0946274 L 8.470397 3.0946274 L 8.470397 3.1479592 L 7.4333563 3.1479592 L 7.4333563 3.0946274 Z " stroke="transparent" fill-rule="nonzero"/>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,88.40769,31.96292)">D</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,6.0,46.814747)">A</text>
+<path transform="matrix(10.0,0.0,0.0,10.0,0.0,0.0)" d=" M 1.9703741 4.3214755 L 3.0074155 4.3214755 L 3.0074155 4.3748074 L 1.9703741 4.3748074 L 1.9703741 4.3214755 Z " stroke="transparent" fill-rule="nonzero"/>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,33.77787,46.814747)">B</text>
+<path transform="matrix(10.0,0.0,0.0,10.0,0.0,0.0)" d=" M 4.6926064 4.192308 L 5.7296476 4.192308 L 5.7296476 4.24564 L 4.6926064 4.24564 L 4.6926064 4.192308 Z " stroke="transparent" fill-rule="nonzero"/>
+<path transform="matrix(10.0,0.0,0.0,10.0,0.0,0.0)" d=" M 4.6926064 4.4506426 L 5.7296476 4.4506426 L 5.7296476 4.5039744 L 4.6926064 4.5039744 L 4.6926064 4.4506426 Z " stroke="transparent" fill-rule="nonzero"/>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,61.00019,46.814747)">C</text>
+<path transform="matrix(10.0,0.0,0.0,10.0,0.0,0.0)" d=" M 7.4333563 4.063141 L 8.470397 4.063141 L 8.470397 4.1164727 L 7.4333563 4.1164727 L 7.4333563 4.063141 Z " stroke="transparent" fill-rule="nonzero"/>
+<path transform="matrix(10.0,0.0,0.0,10.0,0.0,0.0)" d=" M 7.4333563 4.3214755 L 8.470397 4.3214755 L 8.470397 4.3748074 L 7.4333563 4.3748074 L 7.4333563 4.3214755 Z " stroke="transparent" fill-rule="nonzero"/>
+<path transform="matrix(10.0,0.0,0.0,10.0,0.0,0.0)" d=" M 7.4333563 4.57981 L 8.470397 4.57981 L 8.470397 4.633142 L 7.4333563 4.633142 L 7.4333563 4.57981 Z " stroke="transparent" fill-rule="nonzero"/>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,88.40769,46.814747)">D</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,6.0,61.666573)">A</text>
+<path transform="matrix(10.0,0.0,0.0,10.0,0.0,0.0)" d=" M 1.9703741 5.806658 L 3.0074155 5.806658 L 3.0074155 5.85999 L 1.9703741 5.85999 L 1.9703741 5.806658 Z " stroke="transparent" fill-rule="nonzero"/>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,33.77787,61.666573)">B</text>
+<path transform="matrix(10.0,0.0,0.0,10.0,0.0,0.0)" d=" M 4.6926064 5.6774907 L 5.7296476 5.6774907 L 5.7296476 5.7308226 L 4.6926064 5.7308226 L 4.6926064 5.6774907 Z " stroke="transparent" fill-rule="nonzero"/>
+<path transform="matrix(10.0,0.0,0.0,10.0,0.0,0.0)" d=" M 4.6926064 5.9358253 L 5.7296476 5.9358253 L 5.7296476 5.989157 L 4.6926064 5.989157 L 4.6926064 5.9358253 Z " stroke="transparent" fill-rule="nonzero"/>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,61.00019,61.666573)">C</text>
+<path transform="matrix(10.0,0.0,0.0,10.0,0.0,0.0)" d=" M 7.4333563 5.548323 L 8.470397 5.548323 L 8.470397 5.6016555 L 7.4333563 5.6016555 L 7.4333563 5.548323 Z " stroke="transparent" fill-rule="nonzero"/>
+<path transform="matrix(10.0,0.0,0.0,10.0,0.0,0.0)" d=" M 7.4333563 5.806658 L 8.470397 5.806658 L 8.470397 5.85999 L 7.4333563 5.85999 L 7.4333563 5.806658 Z " stroke="transparent" fill-rule="nonzero"/>
+<path transform="matrix(10.0,0.0,0.0,10.0,0.0,0.0)" d=" M 7.4333563 6.064993 L 8.470397 6.064993 L 8.470397 6.1183248 L 7.4333563 6.1183248 L 7.4333563 6.064993 Z " stroke="transparent" fill-rule="nonzero"/>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,88.40769,61.666573)">D</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,19.981527,76.5184)">A</text>
+<path transform="matrix(10.0,0.0,0.0,10.0,0.0,0.0)" d=" M 3.368527 7.2918406 L 3.6277874 7.2918406 L 3.6277874 7.345173 L 3.368527 7.345173 L 3.368527 7.2918406 Z " stroke="transparent" fill-rule="nonzero"/>
+<path transform="matrix(10.0,0.0,0.0,10.0,0.0,0.0)" d=" M 3.7574174 7.2918406 L 4.016678 7.2918406 L 4.016678 7.345173 L 3.7574174 7.345173 L 3.7574174 7.2918406 Z " stroke="transparent" fill-rule="nonzero"/>
+<path transform="matrix(10.0,0.0,0.0,10.0,0.0,0.0)" d=" M 4.146308 7.2918406 L 4.405568 7.2918406 L 4.405568 7.345173 L 4.146308 7.345173 L 4.146308 7.2918406 Z " stroke="transparent" fill-rule="nonzero"/>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,47.7594,76.5184)">B</text>
+<path transform="matrix(10.0,0.0,0.0,10.0,0.0,0.0)" d=" M 6.0907593 7.1626735 L 6.3500195 7.1626735 L 6.3500195 7.2160053 L 6.0907593 7.2160053 L 6.0907593 7.1626735 Z " stroke="transparent" fill-rule="nonzero"/>
+<path transform="matrix(10.0,0.0,0.0,10.0,0.0,0.0)" d=" M 6.4796495 7.1626735 L 6.73891 7.1626735 L 6.73891 7.2160053 L 6.4796495 7.2160053 L 6.4796495 7.1626735 Z " stroke="transparent" fill-rule="nonzero"/>
+<path transform="matrix(10.0,0.0,0.0,10.0,0.0,0.0)" d=" M 6.8685403 7.1626735 L 7.1278005 7.1626735 L 7.1278005 7.2160053 L 6.8685403 7.2160053 L 6.8685403 7.1626735 Z " stroke="transparent" fill-rule="nonzero"/>
+<path transform="matrix(10.0,0.0,0.0,10.0,0.0,0.0)" d=" M 6.0907593 7.421008 L 7.1278005 7.421008 L 7.1278005 7.47434 L 6.0907593 7.47434 L 6.0907593 7.421008 Z " stroke="transparent" fill-rule="nonzero"/>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,74.98172,76.5184)">C</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,6.0,91.370224)">A</text>
+<path transform="matrix(10.0,0.0,0.0,10.0,0.0,0.0)" d=" M 1.9703741 8.518688 L 2.2296345 8.518688 L 2.2296345 8.572021 L 1.9703741 8.572021 L 1.9703741 8.518688 Z " stroke="transparent" fill-rule="nonzero"/>
+<path transform="matrix(10.0,0.0,0.0,10.0,0.0,0.0)" d=" M 2.3592646 8.518688 L 2.618525 8.518688 L 2.618525 8.572021 L 2.3592646 8.572021 L 2.3592646 8.518688 Z " stroke="transparent" fill-rule="nonzero"/>
+<path transform="matrix(10.0,0.0,0.0,10.0,0.0,0.0)" d=" M 2.748155 8.518688 L 3.0074155 8.518688 L 3.0074155 8.572021 L 2.748155 8.572021 L 2.748155 8.518688 Z " stroke="transparent" fill-rule="nonzero"/>
+<path transform="matrix(10.0,0.0,0.0,10.0,0.0,0.0)" d=" M 1.9703741 8.777023 L 3.0074155 8.777023 L 3.0074155 8.830356 L 1.9703741 8.830356 L 1.9703741 8.777023 Z " stroke="transparent" fill-rule="nonzero"/>
+<path transform="matrix(10.0,0.0,0.0,10.0,0.0,0.0)" d=" M 1.9703741 9.035358 L 3.0074155 9.035358 L 3.0074155 9.08869 L 1.9703741 9.08869 L 1.9703741 9.035358 Z " stroke="transparent" fill-rule="nonzero"/>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,33.77787,91.370224)">B</text>
+<path transform="matrix(10.0,0.0,0.0,10.0,0.0,0.0)" d=" M 4.6926064 8.518688 L 4.9518666 8.518688 L 4.9518666 8.572021 L 4.6926064 8.572021 L 4.6926064 8.518688 Z " stroke="transparent" fill-rule="nonzero"/>
+<path transform="matrix(10.0,0.0,0.0,10.0,0.0,0.0)" d=" M 5.0814967 8.518688 L 5.3407574 8.518688 L 5.3407574 8.572021 L 5.0814967 8.572021 L 5.0814967 8.518688 Z " stroke="transparent" fill-rule="nonzero"/>
+<path transform="matrix(10.0,0.0,0.0,10.0,0.0,0.0)" d=" M 5.4703875 8.518688 L 5.7296476 8.518688 L 5.7296476 8.572021 L 5.4703875 8.572021 L 5.4703875 8.518688 Z " stroke="transparent" fill-rule="nonzero"/>
+<path transform="matrix(10.0,0.0,0.0,10.0,0.0,0.0)" d=" M 4.6926064 8.777023 L 5.7296476 8.777023 L 5.7296476 8.830356 L 4.6926064 8.830356 L 4.6926064 8.777023 Z " stroke="transparent" fill-rule="nonzero"/>
+<path transform="matrix(10.0,0.0,0.0,10.0,0.0,0.0)" d=" M 4.6926064 9.035358 L 5.7296476 9.035358 L 5.7296476 9.08869 L 4.6926064 9.08869 L 4.6926064 9.035358 Z " stroke="transparent" fill-rule="nonzero"/>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,61.00019,91.370224)">C</text>
+<path transform="matrix(10.0,0.0,0.0,10.0,0.0,0.0)" d=" M 7.4333563 8.518688 L 8.470397 8.518688 L 8.470397 8.572021 L 7.4333563 8.572021 L 7.4333563 8.518688 Z " stroke="transparent" fill-rule="nonzero"/>
+<path transform="matrix(10.0,0.0,0.0,10.0,0.0,0.0)" d=" M 7.4333563 8.777023 L 7.6926165 8.777023 L 7.6926165 8.830356 L 7.4333563 8.830356 L 7.4333563 8.777023 Z " stroke="transparent" fill-rule="nonzero"/>
+<path transform="matrix(10.0,0.0,0.0,10.0,0.0,0.0)" d=" M 7.8222466 8.777023 L 8.081507 8.777023 L 8.081507 8.830356 L 7.8222466 8.830356 L 7.8222466 8.777023 Z " stroke="transparent" fill-rule="nonzero"/>
+<path transform="matrix(10.0,0.0,0.0,10.0,0.0,0.0)" d=" M 8.211137 8.777023 L 8.470397 8.777023 L 8.470397 8.830356 L 8.211137 8.830356 L 8.211137 8.777023 Z " stroke="transparent" fill-rule="nonzero"/>
+<path transform="matrix(10.0,0.0,0.0,10.0,0.0,0.0)" d=" M 7.4333563 9.035358 L 8.470397 9.035358 L 8.470397 9.08869 L 7.4333563 9.08869 L 7.4333563 9.035358 Z " stroke="transparent" fill-rule="nonzero"/>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,88.40769,91.370224)">D</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,17.388922,106.22205)">A</text>
+<text class="jlm_cmsy10" transform="matrix(0.1,0.0,0.0,0.1,31.092663,106.22205)">¢</text>
+<text class="jlm_cmsy10" transform="matrix(0.1,0.0,0.0,0.1,34.796383,106.22205)">¢</text>
+<text class="jlm_cmsy10" transform="matrix(0.1,0.0,0.0,0.1,38.500103,106.22205)">¢</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,45.90754,106.22205)">B</text>
+<text class="jlm_cmsy10" transform="matrix(0.1,0.0,0.0,0.1,59.055733,106.22205)">¢</text>
+<text class="jlm_cmsy10" transform="matrix(0.1,0.0,0.0,0.1,62.759453,106.22205)">¢</text>
+<text class="jlm_cmsy10" transform="matrix(0.1,0.0,0.0,0.1,66.46317,106.22205)">¢</text>
+<text class="jlm_cmsy10" transform="matrix(0.1,0.0,0.0,0.1,70.16689,106.22205)">¢</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,77.574326,106.22205)">C</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,17.018568,121.07388)">A</text>
+<text class="jlm_cmsy10" transform="matrix(0.1,0.0,0.0,0.1,30.72231,121.07388)">!</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,47.7594,121.07388)">B</text>
+<text class="jlm_cmsy10" transform="matrix(0.1,0.0,0.0,0.1,60.907593,121.07388)">Ã</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,77.94468,121.07388)">C</text>
+</g>
+</svg>

@@ -2,7 +2,7 @@
  * =========================================================================
  * This file is part of the JLaTeXMath Library - http://forge.scilab.org/jlatexmath
  *
- * Copyright (C) 2010 DENIZET Calixte
+ * Copyright (C) 2010-2018 DENIZET Calixte
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -51,29 +51,27 @@ package org.scilab.forge.jlatexmath;
 public class MulticolumnAtom extends Atom {
 
     protected int n;
-    protected int align;
-    protected float w = 0;
+    protected ArrayOptions options;
+    protected double w = 0;
     protected Atom cols;
-    protected int beforeVlines;
-    protected int afterVlines;
     protected int row, col;
 
-    public MulticolumnAtom(int n, String align, Atom cols) {
+    public MulticolumnAtom(int n, ArrayOptions options, Atom cols) {
         this.n = n >= 1 ? n : 1;
         this.cols = cols;
-        this.align = parseAlign(align);
+        this.options = options;
     }
 
-    public void setWidth(float w) {
+    public void setWidth(double w) {
         this.w = w;
+    }
+
+    public double getWidth() {
+        return w;
     }
 
     public int getSkipped() {
         return n;
-    }
-
-    public boolean hasRightVline() {
-        return afterVlines != 0;
     }
 
     public void setRowColumn(int i, int j) {
@@ -89,59 +87,16 @@ public class MulticolumnAtom extends Atom {
         return col;
     }
 
-    private int parseAlign(String str) {
-        int pos = 0;
-        int len = str.length();
-        int align = TeXConstants.ALIGN_CENTER;
-        boolean first = true;
-        while (pos < len) {
-            char c = str.charAt(pos);
-            switch (c) {
-            case 'l' :
-                align = TeXConstants.ALIGN_LEFT;
-                first = false;
-                break;
-            case 'r':
-                align = TeXConstants.ALIGN_RIGHT;
-                first = false;
-                break;
-            case 'c':
-                align = TeXConstants.ALIGN_CENTER;
-                first = false;
-                break;
-            case '|':
-                if (first) {
-                    beforeVlines = 1;
-                } else {
-                    afterVlines = 1;
-                }
-                while (++pos < len) {
-                    c = str.charAt(pos);
-                    if (c != '|') {
-                        pos--;
-                        break;
-                    } else {
-                        if (first) {
-                            beforeVlines++;
-                        } else {
-                            afterVlines++;
-                        }
-                    }
-                }
-            }
-            pos++;
-        }
-        return align;
+    public ArrayOptions getOptions() {
+        return options;
+    }
+
+    public boolean mustBeRecreated() {
+        return false;
     }
 
     public Box createBox(TeXEnvironment env) {
-        Box b;
-        if (w == 0) {
-            b = cols.createBox(env);
-        } else {
-            b = new HorizontalBox(cols.createBox(env), w, align);
-        }
-
+        Box b = cols.createBox(env);
         b.type = TeXConstants.TYPE_MULTICOLUMN;
         return b;
     }

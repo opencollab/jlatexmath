@@ -1,4 +1,4 @@
-/* LaTeXAtom.java
+/* CyrillicRegistration.java
  * =========================================================================
  * This file is part of the JLaTeXMath Library - http://forge.scilab.org/jlatexmath
  *
@@ -45,7 +45,10 @@
 
 package org.scilab.forge.jlatexmath.cyrillic;
 
+import java.lang.Character.UnicodeBlock;
+
 import org.scilab.forge.jlatexmath.AlphabetRegistration;
+import org.scilab.forge.jlatexmath.cyrillic.CharMapping;
 
 public class CyrillicRegistration implements AlphabetRegistration {
 
@@ -62,5 +65,9 @@ public class CyrillicRegistration implements AlphabetRegistration {
 
     public String getTeXFontFileName() {
         return "fonts/language_cyrillic.xml";
+    }
+
+    public void initMapping() {
+        CharMapping.init();
     }
 }

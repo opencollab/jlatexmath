@@ -65,13 +65,13 @@ public class OverUnderDelimiter extends Atom {
     // whether the delimiter should be positioned above or under the base
     private final boolean over;
 
-    public OverUnderDelimiter(Atom base, Atom script, SymbolAtom s, int kernUnit,
-                              float kern, boolean over) throws InvalidUnitException {
-        type = TeXConstants.TYPE_INNER;
+    public OverUnderDelimiter(Atom base, Atom script, SymbolAtom s, TeXLength.Unit kernUnit,
+                              double kern, boolean over) {
+        this.type = TeXConstants.TYPE_INNER;
         this.base = base;
         this.script = script;
         symbol = s;
-        this.kern = new SpaceAtom(kernUnit, 0, kern, 0);
+        this.kern = new SpaceAtom(kernUnit, 0., kern, 0.);
         this.over = over;
     }
 
@@ -84,34 +84,37 @@ public class OverUnderDelimiter extends Atom {
     }
 
     public Box createBox(TeXEnvironment env) {
-        Box b = (base == null ? new StrutBox(0, 0, 0, 0) : base.createBox(env));
-        Box del = DelimiterFactory.create(symbol.getName(), env, b.getWidth());
-
+        Box b = (base == null ? StrutBox.getEmpty() : base.createBox(env));
+        Box del = DelimiterFactory.create(symbol.getCf(), env, b.getWidth());
         Box scriptBox = null;
         if (script != null) {
             scriptBox = script.createBox((over ? env.supStyle() : env.subStyle()));
         }
 
         // create centered horizontal box if smaller than maximum width
-        float max = getMaxWidth(b, del, scriptBox);
+        double max = getMaxWidth(b, del, scriptBox);
         if (max - b.getWidth() > TeXFormula.PREC) {
-            b = new HorizontalBox(b, max, TeXConstants.ALIGN_CENTER);
+            b = new HorizontalBox(b, max, TeXConstants.Align.CENTER);
         }
 
-        del = new VerticalBox(del, max, TeXConstants.ALIGN_CENTER);
+        del = new VerticalBox(del, max, TeXConstants.Align.CENTER);
         if (scriptBox != null && max - scriptBox.getWidth() > TeXFormula.PREC) {
-            scriptBox = new HorizontalBox(scriptBox, max, TeXConstants.ALIGN_CENTER);
+            scriptBox = new HorizontalBox(scriptBox, max, TeXConstants.Align.CENTER);
         }
 
         return new OverUnderBox(b, del, scriptBox, kern.createBox(env).getHeight(), over);
     }
 
-    private static float getMaxWidth(Box b, Box del, Box script) {
-        float max = Math.max(b.getWidth(), del.getHeight() + del.getDepth());
+    private static double getMaxWidth(Box b, Box del, Box script) {
+        double max = Math.max(b.getWidth(), del.getHeight() + del.getDepth());
         if (script != null) {
             max = Math.max(max, script.getWidth());
         }
 
         return max;
+    }
+
+    public int getLimits() {
+        return base.getLimits();
     }
 }

@@ -51,27 +51,57 @@ package org.scilab.forge.jlatexmath;
 public class ResizeAtom extends Atom {
 
     private Atom base;
-    private int wunit, hunit;
-    private float w, h;
+    private TeXLength.Unit wunit;
+    private TeXLength.Unit hunit;
+    private double w, h;
     private boolean keepaspectratio;
 
-    public ResizeAtom(Atom base, String ws, String hs, boolean keepaspectratio) {
-        this.type = base.type;
+    public ResizeAtom(Atom base, TeXLength width, TeXLength height, boolean keepaspectratio) {
         this.base = base;
         this.keepaspectratio = keepaspectratio;
-        float[] w = SpaceAtom.getLength(ws == null ? "" : ws);
-        float[] h = SpaceAtom.getLength(hs == null ? "" : hs);
-        if (w.length != 2) {
-            this.wunit = -1;
+        if (width == null) {
+            this.wunit = TeXLength.Unit.NONE;
+            this.w = 0;
         } else {
-            this.wunit = (int) w[0];
-            this.w = w[1];
+            this.wunit = width.getUnit();
+            this.w = width.getL();
         }
-        if (h.length != 2) {
-            this.hunit = -1;
+        if (height == null) {
+            this.hunit = TeXLength.Unit.NONE;
+            this.h = 0;
         } else {
-            this.hunit = (int) h[0];
-            this.h = h[1];
+            this.hunit = height.getUnit();
+            this.h = height.getL();
+        }
+    }
+
+    public ResizeAtom(Atom base, TeXLength width, TeXLength height) {
+        this(base, width, height, width == null || height == null);
+    }
+
+    public Box createBox(TeXEnvironment env) {
+        Box bbox = base.createBox(env);
+        if (wunit == TeXLength.Unit.NONE && hunit == TeXLength.Unit.NONE) {
+            return bbox;
+        } else {
+            double xscl = 1.;
+            double yscl = 1.;
+            if (wunit != TeXLength.Unit.NONE && hunit != TeXLength.Unit.NONE) {
+                xscl = w * TeXLength.getFactor(wunit, env) / bbox.width;
+                yscl = h * TeXLength.getFactor(hunit, env) / bbox.height;
+                if (keepaspectratio) {
+                    xscl = Math.min(xscl, yscl);
+                    yscl = xscl;
+                }
+            } else if (wunit != TeXLength.Unit.NONE && hunit == TeXLength.Unit.NONE) {
+                xscl = w * TeXLength.getFactor(wunit, env) / bbox.width;
+                yscl = xscl;
+            } else {
+                yscl = h * TeXLength.getFactor(hunit, env) / bbox.height;
+                xscl = yscl;
+            }
+
+            return new ScaleBox(bbox, xscl, yscl);
         }
     }
 
@@ -83,29 +113,7 @@ public class ResizeAtom extends Atom {
         return base.getRightType();
     }
 
-    public Box createBox(TeXEnvironment env) {
-        Box bbox = base.createBox(env);
-        if (wunit == -1 && hunit == -1) {
-            return bbox;
-        } else {
-            double xscl = 1;
-            double yscl = 1;
-            if (wunit != -1 && hunit != -1) {
-                xscl = w * SpaceAtom.getFactor(wunit, env) / bbox.width;
-                yscl = h * SpaceAtom.getFactor(hunit, env) / bbox.height;
-                if (keepaspectratio) {
-                    xscl = Math.min(xscl, yscl);
-                    yscl = xscl;
-                }
-            } else if (wunit != -1 && hunit == -1) {
-                xscl = w * SpaceAtom.getFactor(wunit, env) / bbox.width;
-                yscl = xscl;
-            } else {
-                yscl = h * SpaceAtom.getFactor(hunit, env) / bbox.height;
-                xscl = yscl;
-            }
-
-            return new ScaleBox(bbox, xscl, yscl);
-        }
+    public int getLimits() {
+        return base.getLimits();
     }
 }

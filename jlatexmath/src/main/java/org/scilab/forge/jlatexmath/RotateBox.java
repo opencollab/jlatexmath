@@ -2,7 +2,7 @@
  * =========================================================================
  * This file is part of the JLaTeXMath Library - http://forge.scilab.org/jlatexmath
  *
- * Copyright (C) 2009-2011 DENIZET Calixte
+ * Copyright (C) 2009-2018 DENIZET Calixte
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -47,52 +47,84 @@ package org.scilab.forge.jlatexmath;
 
 import java.awt.Graphics2D;
 import java.awt.geom.Point2D;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * A box representing a rotated box.
  */
 public class RotateBox extends Box {
 
-    public static final int BL = 0;
-    public static final int BC = 1;
-    public static final int BR = 2;
-    public static final int TL = 3;
-    public static final int TC = 4;
-    public static final int TR = 5;
-    public static final int BBL = 6;
-    public static final int BBR = 7;
-    public static final int BBC = 8;
-    public static final int CL = 9;
-    public static final int CC = 10;
-    public static final int CR = 11;
+    private static final int BL = 0;
+    private static final int BC = 1;
+    private static final int BR = 2;
+    private static final int TL = 3;
+    private static final int TC = 4;
+    private static final int TR = 5;
+    private static final int BBL = 6;
+    private static final int BBR = 7;
+    private static final int BBC = 8;
+    private static final int CL = 9;
+    private static final int CC = 10;
+    private static final int CR = 11;
 
-    protected double angle = 0;
+    private static final Map<String, Integer> map = new HashMap<String, Integer>() {
+        {
+            put("bl", BL);
+            put("lb", BL);
+            put("bc", BC);
+            put("cb", BC);
+            put("br", BR);
+            put("rb", BR);
+            put("cl", CL);
+            put("lc", CL);
+            put("cc", CC);
+            put("cr", CR);
+            put("rc", CR);
+            put("tl", TL);
+            put("lt", TL);
+            put("tc", TC);
+            put("ct", TC);
+            put("tr", TR);
+            put("rt", TR);
+            put("Bl", BBL);
+            put("lB", BBL);
+            put("Bc", BBC);
+            put("cB", BBC);
+            put("Br", BBR);
+            put("rB", BBR);
+        }
+    };
+
+    protected double angle = 0.;
     private Box box;
-    private float xmax, xmin, ymax, ymin;
+    private double xmax, xmin, ymax, ymin;
+    private int option;
 
-    private float shiftX;
-    private float shiftY;
+    private double shiftX;
+    private double shiftY;
 
-    public RotateBox(Box b, double angle, float x, float y) {
+    public RotateBox(Box b, double angle, double x, double y) {
         this.box = b;
-        this.angle = angle * Math.PI / 180;
+        this.angle = angle * Math.PI / 180.;
         height = b.height;
         depth = b.depth;
         width = b.width;
-        double s = Math.sin(this.angle);
-        double c = Math.cos(this.angle);
-        shiftX = (float) (x * (1 - c) + y * s);
-        shiftY = (float) (y * (1 - c) - x * s);
-        xmax = (float) Math.max(-height * s, Math.max(depth * s, Math.max(width * c + depth * s, width * c - height * s))) + shiftX;
-        xmin = (float) Math.min(-height * s, Math.min(depth * s, Math.min(width * c + depth * s, width * c - height * s))) + shiftX;
-        ymax = (float) Math.max(height * c, Math.max(-depth * c, Math.max(width * s - depth * c, width * s + height * c)));
-        ymin = (float) Math.min(height * c, Math.min(-depth * c, Math.min(width * s - depth * c, width * s + height * c)));
+
+        final double s = Math.sin(this.angle);
+        final double c = Math.cos(this.angle);
+        shiftX = x * (1 - c) + y * s;
+        shiftY = y * (1 - c) - x * s;
+        xmax = Math.max(-height * s, Math.max(depth * s, Math.max(width * c + depth * s, width * c - height * s))) + shiftX;
+        xmin = Math.min(-height * s, Math.min(depth * s, Math.min(width * c + depth * s, width * c - height * s))) + shiftX;
+        ymax = Math.max(height * c, Math.max(-depth * c, Math.max(width * s - depth * c, width * s + height * c)));
+        ymin = Math.min(height * c, Math.min(-depth * c, Math.min(width * s - depth * c, width * s + height * c)));
         width = xmax - xmin;
         height = ymax + shiftY;
         depth = -ymin - shiftY;
     }
 
-    public RotateBox(Box b, double angle, Point2D.Float origin) {
+    public RotateBox(Box b, double angle, Point2D.Double origin) {
         this(b, angle, origin.x, origin.y);
     }
 
@@ -100,48 +132,42 @@ public class RotateBox extends Box {
         this(b, angle, calculateShift(b, option));
     }
 
-    public static int getOrigin(String option) {
-        if (option == null || option.length() == 0) {
+    public static int getOrigin(final String option) {
+        if (option == null || option.isEmpty() || option.length() >= 3) {
             return BBL;
         }
 
         if (option.length() == 1) {
-            option += "c";
+            switch (option.charAt(0)) {
+            case 'b':
+                return BC;
+            case 'c':
+                return CC;
+            case 'l':
+                return CL;
+            case 'r':
+                return CR;
+            case 't':
+                return TC;
+            case 'B':
+                return BBC;
+            default:
+                return BBL;
+            }
         }
-        if (option.equals("bl") || option.equals("lb")) {
-            return BL;
-        } else if (option.equals("bc") || option.equals("cb")) {
-            return BC;
-        } else if (option.equals("br") || option.equals("rb")) {
-            return BR;
-        } else if (option.equals("cl") || option.equals("lc")) {
-            return CL;
-        } else if (option.equals("cc")) {
-            return CC;
-        } else if (option.equals("cr") || option.equals("cr")) {
-            return CR;
-        } else if (option.equals("tl") || option.equals("lt")) {
-            return TL;
-        } else if (option.equals("tc") || option.equals("ct")) {
-            return TC;
-        } else if (option.equals("tr") || option.equals("rt")) {
-            return TR;
-        } else if (option.equals("Bl") || option.equals("lB")) {
-            return BBL;
-        } else if (option.equals("Bc") || option.equals("cB")) {
-            return BBC;
-        } else if (option.equals("Br") || option.equals("rB")) {
-            return BBR;
-        } else
 
-            return BBL;
+        final Integer v = map.get(option);
+        if (v != null) {
+            return v.intValue();
+        }
+        return BBL;
     }
 
-    private static Point2D.Float calculateShift(Box b, int option) {
-        Point2D.Float p = new Point2D.Float(0, -b.depth);
+    private static Point2D.Double calculateShift(Box b, int option) {
+        Point2D.Double p = new Point2D.Double(0, -b.depth);
         switch (option) {
         case BL :
-            p.x = 0;
+            p.x = 0.;
             p.y = -b.depth;
             break;
         case BR :
@@ -149,11 +175,11 @@ public class RotateBox extends Box {
             p.y = -b.depth;
             break;
         case BC :
-            p.x = b.width / 2;
-            p.y = - b.depth;
+            p.x = b.width / 2.;
+            p.y = -b.depth;
             break;
         case TL :
-            p.x = 0;
+            p.x = 0.;
             p.y = b.height;
             break;
         case TR :
@@ -161,32 +187,32 @@ public class RotateBox extends Box {
             p.y = b.height;
             break;
         case TC :
-            p.x = b.width / 2;
+            p.x = b.width / 2.;
             p.y = b.height;
             break;
         case BBL :
-            p.x = 0;
-            p.y = 0;
+            p.x = 0.;
+            p.y = 0.;
             break;
         case BBR :
             p.x = b.width;
-            p.y = 0;
+            p.y = 0.;
             break;
         case BBC :
-            p.x = b.width / 2;
-            p.y = 0;
+            p.x = b.width / 2.;
+            p.y = 0.;
             break;
         case CL :
-            p.x = 0;
-            p.y = (b.height - b.depth) / 2;
+            p.x = 0.;
+            p.y = (b.height - b.depth) / 2.;
             break;
         case CR :
             p.x = b.width;
-            p.y = (b.height - b.depth) / 2;
+            p.y = (b.height - b.depth) / 2.;
             break;
         case CC :
-            p.x = b.width / 2;
-            p.y = (b.height - b.depth) / 2;
+            p.x = b.width / 2.;
+            p.y = (b.height - b.depth) / 2.;
             break;
         default :
         }
@@ -194,8 +220,8 @@ public class RotateBox extends Box {
         return p;
     }
 
-    public void draw(Graphics2D g2, float x, float y) {
-        drawDebug(g2, x, y);
+    public void draw(Graphics2D g2, double x, double y) {
+        startDraw(g2, x, y);
         box.drawDebug(g2, x, y, true);
         y -= shiftY;
         x += shiftX - xmin;
@@ -203,6 +229,7 @@ public class RotateBox extends Box {
         box.draw(g2, x, y);
         box.drawDebug(g2, x, y, true);
         g2.rotate(angle, x, y);
+        endDraw(g2);
     }
 
     public int getLastFontId() {

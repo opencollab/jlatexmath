@@ -50,18 +50,39 @@ package org.scilab.forge.jlatexmath;
  */
 public class RaiseAtom extends Atom {
 
-    private Atom base;
-    private int runit, hunit, dunit;
-    private float r, h, d;
+    private final Atom base;
+    private final TeXLength r;
+    private final TeXLength h;
+    private final TeXLength d;
 
-    public RaiseAtom(Atom base, int runit, float r, int hunit, float h, int dunit, float d) {
+    public RaiseAtom(Atom base, TeXLength r, TeXLength h, TeXLength d) {
         this.base = base;
-        this.runit = runit;
         this.r = r;
-        this.hunit = hunit;
-        this.h = h;
-        this.dunit = dunit;
-        this.d = d;
+        this.h = h == null ? TeXLength.getNone() : h;
+        this.d = d == null ? TeXLength.getNone() : d;
+    }
+
+    public Box createBox(TeXEnvironment env) {
+        final Box bbox = base.createBox(env);
+        if (r.isNone()) {
+            bbox.setShift(0.);
+        } else {
+            bbox.setShift(-r.getValue(env));
+        }
+
+        if (h.isNone()) {
+            return bbox;
+        }
+
+        final HorizontalBox hbox = new HorizontalBox(bbox);
+        hbox.setHeight(h.getValue(env));
+        if (d.isNone()) {
+            hbox.setDepth(0.);
+        } else {
+            hbox.setDepth(d.getValue(env));
+        }
+
+        return hbox;
     }
 
     public int getLeftType() {
@@ -72,26 +93,7 @@ public class RaiseAtom extends Atom {
         return base.getRightType();
     }
 
-    public Box createBox(TeXEnvironment env) {
-        Box bbox = base.createBox(env);
-        if (runit == -1) {
-            bbox.setShift(0);
-        } else {
-            bbox.setShift(-r * SpaceAtom.getFactor(runit, env));
-        }
-
-        if (hunit == -1) {
-            return bbox;
-        }
-
-        HorizontalBox hbox = new HorizontalBox(bbox);
-        hbox.setHeight(h * SpaceAtom.getFactor(hunit, env));
-        if (dunit == -1) {
-            hbox.setDepth(0);
-        } else {
-            hbox.setDepth(d * SpaceAtom.getFactor(dunit, env));
-        }
-
-        return hbox;
+    public int getLimits() {
+        return base.getLimits();
     }
 }

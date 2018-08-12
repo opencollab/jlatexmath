@@ -3,7 +3,7 @@
  * This file is originally part of the JMathTeX Library - http://jmathtex.sourceforge.net
  *
  * Copyright (C) 2004-2007 Universiteit Gent
- * Copyright (C) 2009 DENIZET Calixte
+ * Copyright (C) 2009-2018 DENIZET Calixte
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -59,72 +59,52 @@ public class UnderOverAtom extends Atom {
     private final Atom over;
 
     // kern between base and under- and overscript
-    private final float underSpace;
-    private final float overSpace;
-
-    // units for the kerns
-    private final int underUnit; // NOPMD
-    // TODO: seems never to be used?
-    private final int overUnit;
+    private final TeXLength underSpace;
+    private final TeXLength overSpace;
 
     // whether the under- and overscript should be drawn in a smaller size
     private final boolean underScriptSize;
     private final boolean overScriptSize;
 
-    public UnderOverAtom(Atom base, Atom underOver, int underOverUnit,
-                         float underOverSpace, boolean underOverScriptSize, boolean over) {
-        // check if unit is valid
-        SpaceAtom.checkUnit(underOverUnit);
-        // units valid
+    public UnderOverAtom(Atom base, Atom underOver, TeXLength underOverSpace, boolean underOverScriptSize, boolean over) {
         this.base = base;
-
         if (over) {
             this.under = null;
-            this.underSpace = 0.0f;
-            this.underUnit = 0;
+            this.underSpace = TeXLength.getZero();
             this.underScriptSize = false;
             this.over = underOver;
-            this.overUnit = underOverUnit;
             this.overSpace = underOverSpace;
             this.overScriptSize = underOverScriptSize;
         } else {
             this.under = underOver;
-            this.underUnit = underOverUnit;
             this.underSpace = underOverSpace;
             this.underScriptSize = underOverScriptSize;
-            this.overSpace = 0.0f;
+            this.overSpace = TeXLength.getZero();
             this.over = null;
-            this.overUnit = 0;
             this.overScriptSize = false;
         }
     }
 
-    public UnderOverAtom(Atom base, Atom under, int underUnit, float underSpace,
-                         boolean underScriptSize, Atom over, int overUnit, float overSpace,
-                         boolean overScriptSize) throws InvalidUnitException {
-        // check if units are valid
-        SpaceAtom.checkUnit(underUnit);
-        SpaceAtom.checkUnit(overUnit);
-
-        // units valid
+    public UnderOverAtom(Atom base, Atom under, TeXLength underSpace,
+                         boolean underScriptSize, Atom over,
+                         TeXLength overSpace, boolean overScriptSize) {
         this.base = base;
         this.under = under;
-        this.underUnit = underUnit;
         this.underSpace = underSpace;
         this.underScriptSize = underScriptSize;
         this.over = over;
-        this.overUnit = overUnit;
         this.overSpace = overSpace;
         this.overScriptSize = overScriptSize;
     }
 
     public Box createBox(TeXEnvironment env) {
         // create boxes in right style and calculate maximum width
-        Box b = (base == null ? new StrutBox(0, 0, 0, 0) : base.createBox(env));
-        Box o = null, u = null;
-        float max = b.getWidth();
+        Box b = (base == null ? StrutBox.getEmpty() : base.createBox(env));
+        Box o = null;
+        Box u = null;
+        double max = b.getWidth();
         if (over != null) {
-            o = over.createBox(overScriptSize ? env.subStyle() : env);
+            o = over.createBox(overScriptSize ? env.supStyle() : env);
             max = Math.max(max, o.getWidth());
         }
         if (under != null) {
@@ -141,8 +121,7 @@ public class UnderOverAtom extends Atom {
         // overscript + space
         if (over != null) {
             vBox.add(changeWidth(o, max));
-            // unit will be valid (checked in constructor)
-            vBox.add(new SpaceAtom(overUnit, 0, overSpace, 0).createBox(env));
+            vBox.add(new StrutBox(0., overSpace.getValue(env), 0., 0.));
         }
 
         // base
@@ -151,12 +130,11 @@ public class UnderOverAtom extends Atom {
 
         // calculate future height of the vertical box (to make sure that the base
         // stays on the baseline!)
-        float h = vBox.getHeight() + vBox.getDepth() - c.getDepth();
+        double h = vBox.getHeight() + vBox.getDepth() - c.getDepth();
 
         // underscript + space
         if (under != null) {
-            // unit will be valid (checked in constructor)
-            vBox.add(new SpaceAtom(overUnit, 0, underSpace, 0).createBox(env));
+            vBox.add(new StrutBox(0., underSpace.getValue(env), 0., 0.));
             vBox.add(changeWidth(u, max));
         }
 
@@ -166,11 +144,16 @@ public class UnderOverAtom extends Atom {
         return vBox;
     }
 
-    private static Box changeWidth(Box b, float maxWidth) {
-        if (b != null && Math.abs(maxWidth - b.getWidth()) > TeXFormula.PREC)
-            return new HorizontalBox(b, maxWidth, TeXConstants.ALIGN_CENTER);
-        else
-            return b;
+    private static Box changeWidth(Box b, double maxWidth) {
+        if (b != null) {
+            if (Math.abs(maxWidth - b.getWidth()) > TeXFormula.PREC) {
+                return new HorizontalBox(b, maxWidth, TeXConstants.Align.CENTER);
+            } else {
+                b.setHeight(Math.max(b.getHeight(), 0.));
+                b.setDepth(Math.max(b.getDepth(), 0.));
+            }
+        }
+        return b;
     }
 
     public int getLeftType() {
@@ -179,5 +162,9 @@ public class UnderOverAtom extends Atom {
 
     public int getRightType() {
         return base.getRightType();
+    }
+
+    public int getLimits() {
+        return base.getLimits();
     }
 }

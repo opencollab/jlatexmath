@@ -1,0 +1,113 @@
+<?xml version='1.0'?>
+<tests name="arrows">
+  <test>
+    <id name="1"/>
+    <code>
+      <![CDATA[
+               \begin{gather}
+               \hookrightarrow \cr
+               \hookleftarrow \cr
+               \Longrightarrow \cr
+               \Longleftarrow \cr
+               \longleftarrow \cr
+               \longrightarrow \cr
+               \longleftrightarrow \cr
+               \Longleftrightarrow \cr
+               \end{gather}
+      ]]>      
+    </code>
+    <expected success="true"/>
+  </test>
+
+  <test>
+    <id name="2"/>
+    <code>
+      <![CDATA[
+               \begin{gather}
+               \xrightarrow{\mbox{hello world}} \cr
+               \xrightarrow[\mbox{hello world}]{} \cr
+               \xrightarrow[\Omega]{\mbox{hello world}} \cr
+               \xrightarrow[\mbox{hello world}]{\Omega} \cr
+               \end{gather}
+      ]]>      
+    </code>
+    <expected success="true"/>
+  </test>
+
+  <test>
+    <id name="3"/>
+    <code>
+      <![CDATA[
+               \begin{gather}
+               \xleftarrow{\mbox{hello world}} \cr
+               \xleftarrow[\mbox{hello world}]{} \cr
+               \xleftarrow[\Omega]{\mbox{hello world}} \cr
+               \xleftarrow[\mbox{hello world}]{\Omega} \cr
+               \end{gather}
+      ]]>      
+    </code>
+    <expected success="true"/>
+  </test>
+
+  <test>
+    <id name="4"/>
+    <code>
+      <![CDATA[
+               \begin{gather}
+               \xhookrightarrow{\mbox{hello world}} \cr
+               \xhookrightarrow[\mbox{hello world}]{} \cr
+               \xhookrightarrow[\Omega]{\mbox{hello world}} \cr
+               \xhookrightarrow[\mbox{hello world}]{\Omega} \cr
+               \end{gather}
+      ]]>      
+    </code>
+    <expected success="true"/>
+  </test>
+
+  <test>
+    <id name="5"/>
+    <code>
+      <![CDATA[
+               \begin{gather}
+               \xhookleftarrow{\mbox{hello world}} \cr
+               \xhookleftarrow[\mbox{hello world}]{} \cr               
+               \xhookleftarrow[\Omega]{\mbox{hello world}} \cr
+               \xhookleftarrow[\mbox{hello world}]{\Omega} \cr               
+               \end{gather}
+      ]]>      
+    </code>
+    <expected success="true"/>
+  </test>
+
+  <test>
+    <id name="6"/>
+    <code>
+      <![CDATA[
+               \begin{gather}
+               \xleftrightarrow{\mbox{hello world}} \cr
+               \xleftrightarrow[\mbox{hello world}]{} \cr
+               \xleftrightarrow[\Omega]{\mbox{hello world}} \cr
+               \xleftrightarrow[\mbox{hello world}]{\Omega} \cr
+               \end{gather}
+      ]]>      
+    </code>
+    <expected success="true"/>
+  </test>
+
+  <test>
+    <id name="7"/>
+    <code>
+      <![CDATA[
+               \begin{gather}
+               \underleftrightarrow{\mbox{hello world}} \cr
+               \underleftarrow{\frac12} \cr
+               \underrightarrow{\sqrt{x}} \cr
+               \overleftrightarrow{\sum_{n=1}^{+\infty}\frac1{n^2}=\frac{\pi^2}6} \cr
+               \overleftarrow{\log x} \cr
+               \overrightarrow{\tiny x \over y} \cr
+               \end{gather}
+      ]]>      
+    </code>
+    <expected success="true"/>
+  </test>
+</tests>

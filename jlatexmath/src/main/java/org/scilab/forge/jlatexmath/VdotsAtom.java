@@ -2,7 +2,7 @@
  * =========================================================================
  * This file is part of the JLaTeXMath Library - http://forge.scilab.org/jlatexmath
  *
- * Copyright (C) 2009 DENIZET Calixte
+ * Copyright (C) 2009-2018 DENIZET Calixte
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -50,20 +50,21 @@ package org.scilab.forge.jlatexmath;
  */
 public class VdotsAtom extends Atom {
 
-    public VdotsAtom() { }
+    public VdotsAtom() {
+        this.type = TeXConstants.TYPE_RELATION;
+    }
 
     public Box createBox(TeXEnvironment env) {
-        Box dot = SymbolAtom.get("ldotp").createBox(env);
-        VerticalBox vb = new VerticalBox(dot, 0, TeXConstants.ALIGN_BOTTOM);
-        Box b = new SpaceAtom(TeXConstants.UNIT_MU, 0, 4, 0).createBox(env);
+        final Box dot = Symbols.LDOTP.createBox(env);
+        final VerticalBox vb = new VerticalBox(dot, 0, TeXConstants.Align.BOTTOM);
+        final Box b = new SpaceAtom(TeXLength.Unit.MU, 0., 4., 0.).createBox(env);
         vb.add(b);
         vb.add(dot);
         vb.add(b);
         vb.add(dot);
-        float d = vb.getDepth();
-        float h = vb.getHeight();
-        vb.setDepth(0);
-        vb.setHeight(d + h);
+        final double dh = vb.getDepth() + vb.getHeight();
+        vb.setDepth(0.);
+        vb.setHeight(dh);
 
         return vb;
     }

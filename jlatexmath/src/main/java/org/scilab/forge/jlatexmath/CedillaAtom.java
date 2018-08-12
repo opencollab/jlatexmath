@@ -51,6 +51,7 @@ package org.scilab.forge.jlatexmath;
 public class CedillaAtom extends Atom {
 
     private Atom base;
+    private static final SymbolAtom CEDILLA = SymbolAtom.get("jlatexmathcedilla");
 
     public CedillaAtom(Atom base) {
         this.base = base;
@@ -60,22 +61,23 @@ public class CedillaAtom extends Atom {
         Box b = base.createBox(env);
         VerticalBox vb = new VerticalBox();
         vb.add(b);
-        Char ch = env.getTeXFont().getChar("jlatexmathcedilla", env.getStyle());
-        float italic = ch.getItalic();
+        Char ch = env.getTeXFont().getChar(CEDILLA.getCf(), env.getStyle());
+        double italic = ch.getItalic();
         Box cedilla = new CharBox(ch);
         Box y;
         if (Math.abs(italic) > TeXFormula.PREC) {
-            y = new HorizontalBox(new StrutBox(-italic, 0, 0, 0));
-            y.add(cedilla);
+            HorizontalBox hb = new HorizontalBox(new StrutBox(-italic, 0, 0, 0));
+            hb.add(cedilla);
+            y = hb;
         } else {
             y = cedilla;
         }
 
-        Box ce = new HorizontalBox(y, b.getWidth(), TeXConstants.ALIGN_CENTER);
-        float x = 0.4f * SpaceAtom.getFactor(TeXConstants.UNIT_MU, env);
+        Box ce = new HorizontalBox(y, b.getWidth(), TeXConstants.Align.CENTER);
+        double x = 0.4 * TeXLength.getFactor(TeXLength.Unit.MU, env);
         vb.add(new StrutBox(0, -x, 0, 0));
         vb.add(ce);
-        float f = vb.getHeight() + vb.getDepth();
+        double f = vb.getHeight() + vb.getDepth();
         vb.setHeight(b.getHeight());
         vb.setDepth(f - b.getHeight());
         return vb;

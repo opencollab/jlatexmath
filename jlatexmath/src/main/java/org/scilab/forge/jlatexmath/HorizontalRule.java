@@ -3,7 +3,7 @@
  * This file is originally part of the JMathTeX Library - http://jmathtex.sourceforge.net
  *
  * Copyright (C) 2004-2007 Universiteit Gent
- * Copyright (C) 2009 DENIZET Calixte
+ * Copyright (C) 2009-2018 DENIZET Calixte
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -46,8 +46,8 @@
 
 package org.scilab.forge.jlatexmath;
 
-import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.geom.Area;
 import java.awt.geom.Rectangle2D;
 
 /**
@@ -55,44 +55,33 @@ import java.awt.geom.Rectangle2D;
  */
 public class HorizontalRule extends Box {
 
-    private Color color = null;
-    private float speShift = 0;;
+    protected double speShift;
 
-    public HorizontalRule(float thickness, float width, float s) {
+    public HorizontalRule(double thickness, double width, double s) {
         height = thickness;
         this.width = width;
         shift = s;
+        speShift = 0.;
     }
 
-    public HorizontalRule(float thickness, float width, float s, boolean trueShift) {
+    public HorizontalRule(double thickness, double width, double s, boolean trueShift) {
         height = thickness;
         this.width = width;
         if (trueShift) {
             shift = s;
+            speShift = 0.;
         } else {
-            shift = 0;
+            shift = 0.;
             speShift = s;
         }
     }
 
-    public HorizontalRule(float thickness, float width, float s, Color c) {
-        height = thickness;
-        this.width = width;
-        color = c;
-        shift = s;
+    public void draw(Graphics2D g2, double x, double y) {
+        g2.fill(new Rectangle2D.Double(x, y - height + speShift, width, height));
     }
 
-    public void draw(Graphics2D g2, float x, float y) {
-        Color old = g2.getColor();
-        if (color != null)
-            g2.setColor(color);
-
-        if (speShift == 0) {
-            g2.fill(new Rectangle2D.Float(x, y - height, width, height));
-        } else {
-            g2.fill(new Rectangle2D.Float(x, y - height + speShift, width, height));
-        }
-        g2.setColor(old);
+    public Area getArea() {
+        return new Area(new Rectangle2D.Double(0., -height + speShift, width, height));
     }
 
     public int getLastFontId() {

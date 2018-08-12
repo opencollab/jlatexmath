@@ -1,0 +1,21 @@
+<!--
+\frac23
+-->
+<svg width="22" height="40" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<style type="text/css">
+@font-face {
+font-family: 'jlm_cmr10';
+src: url('fonts/jlm_cmr10.ttf') format('truetype');
+font-style: normal;
+}
+.jlm_cmr10 {
+font-family: 'jlm_cmr10';
+font-size: 133px;
+}
+</style>
+<g stroke="rgb(0,0,0)" fill="rgb(0,0,0)" stroke-width="1.0" stroke-miterlimit="10.0" stroke-linejoin="miter" stroke-linecap="square">
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,7.5940223,14.5925865)">2</text>
+<path transform="matrix(10.0,0.0,0.0,10.0,0.0,0.0)" d=" M 0.7594022 2.00127 L 1.4260715 2.00127 L 1.4260715 2.054602 L 0.7594022 2.054602 L 0.7594022 2.00127 Z " stroke="transparent" fill-rule="nonzero"/>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,7.5940223,32.758705)">3</text>
+</g>
+</svg>

@@ -53,11 +53,10 @@ package org.scilab.forge.jlatexmath;
 public class CharAtom extends CharSymbol {
 
     // alphanumeric character
-    private final char c;
+    protected final char c;
 
     // text style (null means the default text style)
-    private String textStyle;
-    private boolean mathMode;
+    private int textStyle = TextStyle.NONE;
 
     /**
      * Creates a CharAtom that will represent the given character in the given text style.
@@ -66,33 +65,39 @@ public class CharAtom extends CharSymbol {
      * @param c the alphanumeric character
      * @param textStyle the text style in which the character should be drawn
      */
-    public CharAtom(char c, String textStyle, boolean mathMode) {
+    public CharAtom(char c, int textStyle, boolean mathMode) {
         this.c = c;
         this.textStyle = textStyle;
-        this.mathMode = mathMode;
     }
 
-    public CharAtom(char c, String textStyle) {
+    public CharAtom(char c, boolean mathMode) {
+        this(c, TextStyle.NONE, mathMode);
+    }
+
+    public CharAtom(char c, int textStyle) {
         this(c, textStyle, false);
     }
 
-    public boolean isMathMode() {
-        return mathMode;
+    public CharAtom(char c) {
+        this(c, TextStyle.NONE, false);
     }
 
     public Box createBox(TeXEnvironment env) {
-        if (textStyle == null) {
-            String ts = env.getTextStyle();
-            if (ts != null) {
-                textStyle = ts;
-            }
+        if (textStyle == TextStyle.NONE) {
+            textStyle = env.getTextStyle();
         }
-        boolean smallCap = env.getSmallCap();
-        Char ch = getChar(env.getTeXFont(), env.getStyle(), smallCap);
-        Box box = new CharBox(ch);
+        final boolean smallCap = env.getSmallCap();
+        final Char ch = getChar(env.getTeXFont(), env.getStyle(), smallCap);
+        CharBox box;
         if (smallCap && Character.isLowerCase(c)) {
             // We have a small capital
-            box = new ScaleBox(box, 0.8f, 0.8f);
+            box = new ScaledCharBox(ch, 0.8);
+        } else {
+            box = new CharBox(ch);
+        }
+
+        if (isMathMode() && mustAddItalicCorrection()) {
+            box.addToWidth(ch.getItalic());
         }
 
         return box;
@@ -105,18 +110,20 @@ public class CharAtom extends CharSymbol {
     /*
      * Get the Char-object representing this character ("c") in the right text style
      */
-    private Char getChar(TeXFont tf, int style, boolean smallCap) {
+    public Char getChar(TeXFont tf, int style, boolean smallCap) {
         char chr = c;
-        if (smallCap) {
-            if (Character.isLowerCase(c)) {
-                chr = Character.toUpperCase(c);
-            }
+        if (smallCap && Character.isLowerCase(c)) {
+            chr = Character.toUpperCase(c);
         }
-        if (textStyle == null) {
+        if (textStyle == TextStyle.NONE) {
             return tf.getDefaultChar(chr, style);
         } else {
             return tf.getChar(chr, textStyle, style);
         }
+    }
+
+    public Char getChar(TeXEnvironment env) {
+        return getChar(env.getTeXFont(), env.getStyle(), env.getSmallCap());
     }
 
     public CharFont getCharFont(TeXFont tf) {

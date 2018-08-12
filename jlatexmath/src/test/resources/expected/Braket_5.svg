@@ -1,0 +1,59 @@
+<!--
+\set{ x\in\mathbf{R}^2 | 0<{|x|}<5 }
+-->
+<svg width="134" height="28" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<style type="text/css">
+@font-face {
+font-family: 'jlm_cmbx10';
+src: url('fonts/jlm_cmbx10.ttf') format('truetype');
+font-style: normal;
+}
+.jlm_cmbx10 {
+font-family: 'jlm_cmbx10';
+font-size: 133px;
+}
+@font-face {
+font-family: 'jlm_cmmi10';
+src: url('fonts/jlm_cmmi10.ttf') format('truetype');
+font-style: normal;
+}
+.jlm_cmmi10 {
+font-family: 'jlm_cmmi10';
+font-size: 133px;
+}
+@font-face {
+font-family: 'jlm_cmr10';
+src: url('fonts/jlm_cmr10.ttf') format('truetype');
+font-style: normal;
+}
+.jlm_cmr10 {
+font-family: 'jlm_cmr10';
+font-size: 133px;
+}
+@font-face {
+font-family: 'jlm_cmsy10';
+src: url('fonts/jlm_cmsy10.ttf') format('truetype');
+font-style: normal;
+}
+.jlm_cmsy10 {
+font-family: 'jlm_cmsy10';
+font-size: 133px;
+}
+</style>
+<g stroke="rgb(0,0,0)" fill="rgb(0,0,0)" stroke-width="1.0" stroke-miterlimit="10.0" stroke-linejoin="miter" stroke-linecap="square">
+<text class="jlm_cmsy10" transform="matrix(0.1,0.0,0.0,0.1,6.0,17.559282)">f</text>
+<text class="jlm_cmmi10" transform="matrix(0.1,0.0,0.0,0.1,12.666694,17.559282)">x</text>
+<text class="jlm_cmsy10" transform="matrix(0.1,0.0,0.0,0.1,23.990782,17.559282)">2</text>
+<text class="jlm_cmbx10" transform="matrix(0.1,0.0,0.0,0.1,36.583416,17.559282)">R</text>
+<text class="jlm_cmr10" transform="matrix(0.06999999999999999,0.0,0.0,0.07,48.08335,12.014811)">2</text>
+<text class="jlm_cmsy10" transform="matrix(0.1,0.0,0.0,0.1,53.41421,17.559282)">j</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,57.11793,17.559282)">0</text>
+<text class="jlm_cmmi10" transform="matrix(0.1,0.0,0.0,0.1,67.48834,17.559282)">&lt;</text>
+<text class="jlm_cmsy10" transform="matrix(0.1,0.0,0.0,0.1,81.56247,17.559282)">j</text>
+<text class="jlm_cmmi10" transform="matrix(0.1,0.0,0.0,0.1,85.26619,17.559282)">x</text>
+<text class="jlm_cmsy10" transform="matrix(0.1,0.0,0.0,0.1,92.88656,17.559282)">j</text>
+<text class="jlm_cmmi10" transform="matrix(0.1,0.0,0.0,0.1,100.294,17.559282)">&lt;</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,114.368126,17.559282)">5</text>
+<text class="jlm_cmsy10" transform="matrix(0.1,0.0,0.0,0.1,121.03482,17.559282)">g</text>
+</g>
+</svg>

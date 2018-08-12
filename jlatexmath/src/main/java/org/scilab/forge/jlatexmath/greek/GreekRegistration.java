@@ -28,7 +28,10 @@
 
 package org.scilab.forge.jlatexmath.greek;
 
+import java.lang.Character.UnicodeBlock;
+
 import org.scilab.forge.jlatexmath.AlphabetRegistration;
+import org.scilab.forge.jlatexmath.greek.CharMapping;
 
 public class GreekRegistration implements AlphabetRegistration {
 
@@ -45,5 +48,9 @@ public class GreekRegistration implements AlphabetRegistration {
 
     public String getTeXFontFileName() {
         return "fonts/language_greek.xml";
+    }
+
+    public void initMapping() {
+        CharMapping.init();
     }
 }

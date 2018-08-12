@@ -3,7 +3,7 @@
  * This file is originally part of the JMathTeX Library - http://jmathtex.sourceforge.net
  *
  * Copyright (C) 2004-2007 Universiteit Gent
- * Copyright (C) 2009 DENIZET Calixte
+ * Copyright (C) 2009-2018 DENIZET Calixte
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -54,23 +54,33 @@ public class OverlinedAtom extends Atom {
     // base atom to be overlined
     private final Atom base;
 
-    public OverlinedAtom(Atom f) {
-        base = f;
-        type = TeXConstants.TYPE_ORDINARY;
+    public OverlinedAtom(Atom base) {
+        this.base = base;
     }
 
     public Box createBox(TeXEnvironment env) {
-        float drt = env.getTeXFont().getDefaultRuleThickness(env.getStyle());
+        final double drt = env.getTeXFont().getDefaultRuleThickness(env.getStyle());
 
         // cramp the style of the formula to be overlined and create vertical box
-        Box b = (base == null ? new StrutBox(0, 0, 0, 0) : base.createBox(env
-                 .crampStyle()));
-        OverBar ob = new OverBar(b, 3 * drt, drt);
+        final Box b = base == null ? StrutBox.getEmpty() : base.createBox(env.crampStyle());
+        final OverBar ob = new OverBar(b, 3. * drt, drt);
 
         // baseline vertical box = baseline box b
         ob.setDepth(b.getDepth());
-        ob.setHeight(b.getHeight() + 5 * drt);
+        ob.setHeight(b.getHeight() + 5. * drt);
 
         return ob;
+    }
+
+    public int getLeftType() {
+        return base.getLeftType();
+    }
+
+    public int getRightType() {
+        return base.getRightType();
+    }
+
+    public int getLimits() {
+        return base.getLimits();
     }
 }

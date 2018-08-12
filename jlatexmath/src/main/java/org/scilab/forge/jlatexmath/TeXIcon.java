@@ -51,6 +51,7 @@ package org.scilab.forge.jlatexmath;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Insets;
@@ -64,7 +65,7 @@ import javax.swing.Icon;
  * that created it.
  * <p>
  * This class cannot be instantiated directly. It can be constructed from a
- * TeXFormula using the {@link TeXFormula#createTeXIcon(int,float)} method.
+ * TeXFormula using the {@link TeXFormula#createTeXIcon(int,double)} method.
  *
  * @author Kurt Vermeulen
  */
@@ -72,12 +73,12 @@ public class TeXIcon implements Icon {
 
     private static final Color defaultColor = new Color(0, 0, 0);
 
-    public static float defaultSize = -1;
-    public static float magFactor = 0;
+    public static double defaultSize = -1;
+    public static double magFactor = 0;
 
     private Box box;
 
-    private final float size;
+    private final double size;
 
     private Insets insets = new Insets(0, 0, 0, 0);
 
@@ -91,11 +92,11 @@ public class TeXIcon implements Icon {
      * @param b the formula box to be painted
      * @param size the point size
      */
-    protected TeXIcon(Box b, float size) {
+    protected TeXIcon(Box b, double size) {
         this(b, size, false);
     }
 
-    protected TeXIcon(Box b, float size, boolean trueValues) {
+    protected TeXIcon(Box b, double size, boolean trueValues) {
         box = b;
 
         if (defaultSize != -1) {
@@ -112,10 +113,10 @@ public class TeXIcon implements Icon {
            the height and the depth of certains characters.
         */
         if (!trueValues) {
-            insets.top += (int)(0.18f * size);
-            insets.bottom += (int)(0.18f * size);
-            insets.left += (int)(0.18f * size);
-            insets.right += (int)(0.18f * size);
+            insets.top += (int)(0.18 * size);
+            insets.bottom += (int)(0.18 * size);
+            insets.left += (int)(0.18 * size);
+            insets.right += (int)(0.18 * size);
         }
     }
 
@@ -141,10 +142,10 @@ public class TeXIcon implements Icon {
     public void setInsets(Insets insets, boolean trueValues) {
         this.insets = insets;
         if (!trueValues) {
-            this.insets.top += (int)(0.18f * size);
-            this.insets.bottom += (int)(0.18f * size);
-            this.insets.left += (int)(0.18f * size);
-            this.insets.right += (int)(0.18f * size);
+            this.insets.top += (int)(0.18 * size);
+            this.insets.bottom += (int)(0.18 * size);
+            this.insets.left += (int)(0.18 * size);
+            this.insets.right += (int)(0.18 * size);
         }
     }
 
@@ -160,17 +161,18 @@ public class TeXIcon implements Icon {
     /**
      * Change the width of the TeXIcon. The new width must be greater than the current
      * width, otherwise the icon will remain unchanged. The formula will be aligned to the
-     * left ({@linkplain TeXConstants#ALIGN_LEFT}), to the right
-     * ({@linkplain TeXConstants#ALIGN_RIGHT}) or will be centered
-     * in the middle ({@linkplain TeXConstants#ALIGN_CENTER}).
+     * left ({@linkplain TeXConstants.Align.LEFT}), to the right
+     * ({@linkplain TeXConstants.Align.RIGHT}) or will be centered
+     * in the middle ({@linkplain TeXConstants.Align.CENTER}).
      *
      * @param width the new width of the TeXIcon
      * @param alignment a horizontal alignment constant: LEFT, RIGHT or CENTER
      */
-    public void setIconWidth(int width, int alignment) {
-        float diff = width - getIconWidth();
-        if (diff > 0)
+    public void setIconWidth(int width, TeXConstants.Align alignment) {
+        double diff = width - getIconWidth();
+        if (diff > 0) {
             box = new HorizontalBox(box, box.getWidth() + diff, alignment);
+        }
     }
 
     /**
@@ -182,10 +184,11 @@ public class TeXIcon implements Icon {
      * @param height the new height of the TeXIcon
      * @param alignment a vertical alignment constant: TOP, BOTTOM or CENTER
      */
-    public void setIconHeight(int height, int alignment) {
-        float diff = height - getIconHeight();
-        if (diff > 0)
+    public void setIconHeight(int height, TeXConstants.Align alignment) {
+        double diff = height - getIconHeight();
+        if (diff > 0) {
             box = new VerticalBox(box, diff, alignment);
+        }
     }
 
     /**
@@ -210,14 +213,14 @@ public class TeXIcon implements Icon {
         return (int) (box.getWidth() * size + 0.99 + insets.left + insets.right);
     }
 
-    public float getTrueIconHeight() {
+    public double getTrueIconHeight() {
         return (box.getHeight() + box.getDepth()) * size;
     }
 
     /**
      * Get the total height of the TeXIcon. This also includes the insets.
      */
-    public float getTrueIconDepth() {
+    public double getTrueIconDepth() {
         return box.getDepth() * size;
     }
 
@@ -225,13 +228,13 @@ public class TeXIcon implements Icon {
      * Get the total width of the TeXIcon. This also includes the insets.
      */
 
-    public float getTrueIconWidth() {
+    public double getTrueIconWidth() {
         return box.getWidth() * size;
     }
 
-    public float getBaseLine() {
-        return (float)( (box.getHeight() * size + 0.99 + insets.top) /
-                        ((box.getHeight() + box.getDepth()) * size + 0.99 + insets.top + insets.bottom));
+    public double getBaseLine() {
+        return (box.getHeight() * size + 0.99 + insets.top) /
+               ((box.getHeight() + box.getDepth()) * size + 0.99 + insets.top + insets.bottom);
     }
 
     public Box getBox() {
@@ -242,11 +245,12 @@ public class TeXIcon implements Icon {
      * Paint the {@link TeXFormula} that created this icon.
      */
     public void paintIcon(Component c, Graphics g, int x, int y) {
-        Graphics2D g2 = (Graphics2D) g;
+        final Graphics2D g2 = (Graphics2D)g;
         // copy graphics settings
-        RenderingHints oldHints = g2.getRenderingHints();
-        AffineTransform oldAt = g2.getTransform();
-        Color oldColor = g2.getColor();
+        final RenderingHints oldHints = g2.getRenderingHints();
+        final AffineTransform oldAt = g2.getTransform();
+        final Color oldColor = g2.getColor();
+        final Font oldFont = g2.getFont();
 
         // new settings
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
@@ -255,6 +259,8 @@ public class TeXIcon implements Icon {
                             RenderingHints.VALUE_RENDER_QUALITY);
         g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,
                             RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+        g2.setRenderingHint(RenderingHints.KEY_FRACTIONALMETRICS,
+                            RenderingHints.VALUE_FRACTIONALMETRICS_DEFAULT);
 
         g2.scale(size, size); // the point size
         if (fg != null) {
@@ -266,11 +272,12 @@ public class TeXIcon implements Icon {
         }
 
         // draw formula box
-        box.draw(g2, (x + insets.left) / size, (y + insets.top) / size+ box.getHeight());
+        box.draw(g2, (x + insets.left) / size, (y + insets.top) / size + box.getHeight());
 
         // restore graphics settings
         g2.setRenderingHints(oldHints);
         g2.setTransform(oldAt);
         g2.setColor(oldColor);
+        g2.setFont(oldFont);
     }
 }

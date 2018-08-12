@@ -3,7 +3,7 @@
  * This file is originally part of the JMathTeX Library - http://jmathtex.sourceforge.net
  *
  * Copyright (C) 2004-2007 Universiteit Gent
- * Copyright (C) 2009 DENIZET Calixte
+ * Copyright (C) 2009-2018 DENIZET Calixte
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -69,11 +69,21 @@ public abstract class Atom implements Cloneable {
     /**
      * The type of the atom (default value: ordinary atom)
      */
-    public int type = TeXConstants.TYPE_ORDINARY;
-
+    protected int type = TeXConstants.TYPE_ORDINARY;
+    protected boolean mathMode = true;
     public int type_limits = TeXConstants.SCRIPT_NOLIMITS;
 
-    public int alignment = -1;
+    public Atom() {
+
+    }
+
+    protected void setType(final int type) {
+        this.type = type;
+    }
+
+    protected int getType() {
+        return type;
+    }
 
     /**
      * Convert this atom into a {@link Box}, using properties set by "parent"
@@ -100,7 +110,7 @@ public abstract class Atom implements Cloneable {
     /**
      * Get the type of the rightermost child atom. Most atoms have no child atoms,
      * so the "left type" and the "right type" are the same: the atom's type. This
-     * also is the default implementation.
+     * also is the default igmplementation.
      * But Some atoms are composed of child atoms put one after another in a
      * horizontal row. These atoms must override this method.
      *
@@ -116,5 +126,51 @@ public abstract class Atom implements Cloneable {
         } catch (Exception e) {
             return null;
         }
+    }
+
+    public int getLimits() {
+        return type_limits;
+    }
+
+    public Atom changeLimits(final int lim) {
+        this.type_limits = lim;
+        return this;
+    }
+
+    public Atom changeType(final int type) {
+        this.type = type;
+        return this;
+    }
+
+    public TeXConstants.Align getAlignment() {
+        return TeXConstants.Align.NONE;
+    }
+
+    public double getItalic(TeXEnvironment env) {
+        return 0.;
+    }
+
+    public double getXHeight(TeXEnvironment env) {
+        return env.getTeXFont().getDefaultXHeight(env.getStyle());
+    }
+
+    public boolean isMathMode() {
+        return mathMode;
+    }
+
+    public void setMathMode(final boolean mathMode) {
+        this.mathMode = mathMode;
+    }
+
+    public boolean mustAddItalicCorrection() {
+        return false;
+    }
+
+    public boolean setAddItalicCorrection(boolean b) {
+        return false;
+    }
+
+    public Atom getBase() {
+        return this;
     }
 }

@@ -50,6 +50,7 @@ package org.scilab.forge.jlatexmath;
  */
 public class LCaronAtom extends Atom {
 
+    private static final SymbolAtom APOS = SymbolAtom.get("textapos");
     private boolean upper;
 
     public LCaronAtom(boolean upper) {
@@ -57,13 +58,13 @@ public class LCaronAtom extends Atom {
     }
 
     public Box createBox(TeXEnvironment env) {
-        CharBox A = new CharBox(env.getTeXFont().getChar("textapos", env.getStyle()));
+        CharBox A = new CharBox(env.getTeXFont().getChar(APOS.getCf(), env.getStyle()));
         CharBox L = new CharBox(env.getTeXFont().getChar(upper ? 'L' : 'l', "mathnormal", env.getStyle()));
         HorizontalBox hb = new HorizontalBox(L);
         if (upper)
-            hb.add(new SpaceAtom(TeXConstants.UNIT_EM, -0.3f, 0, 0).createBox(env));
+            hb.add(new SpaceAtom(TeXLength.Unit.EM, -0.3, 0, 0).createBox(env));
         else
-            hb.add(new SpaceAtom(TeXConstants.UNIT_EM, -0.13f, 0, 0).createBox(env));
+            hb.add(new SpaceAtom(TeXLength.Unit.EM, -0.13, 0, 0).createBox(env));
         hb.add(A);
         return hb;
     }

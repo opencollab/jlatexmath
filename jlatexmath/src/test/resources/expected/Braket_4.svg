@@ -1,0 +1,68 @@
+<!--
+\Set{ x\in\mathbf{R}^2 | 0<{|x|}<5 }
+-->
+<svg width="137" height="29" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<style type="text/css">
+@font-face {
+font-family: 'jlm_cmex10';
+src: url('fonts/jlm_cmex10.ttf') format('truetype');
+font-style: normal;
+}
+.jlm_cmex10 {
+font-family: 'jlm_cmex10';
+font-size: 133px;
+}
+@font-face {
+font-family: 'jlm_cmbx10';
+src: url('fonts/jlm_cmbx10.ttf') format('truetype');
+font-style: normal;
+}
+.jlm_cmbx10 {
+font-family: 'jlm_cmbx10';
+font-size: 133px;
+}
+@font-face {
+font-family: 'jlm_cmmi10';
+src: url('fonts/jlm_cmmi10.ttf') format('truetype');
+font-style: normal;
+}
+.jlm_cmmi10 {
+font-family: 'jlm_cmmi10';
+font-size: 133px;
+}
+@font-face {
+font-family: 'jlm_cmr10';
+src: url('fonts/jlm_cmr10.ttf') format('truetype');
+font-style: normal;
+}
+.jlm_cmr10 {
+font-family: 'jlm_cmr10';
+font-size: 133px;
+}
+@font-face {
+font-family: 'jlm_cmsy10';
+src: url('fonts/jlm_cmsy10.ttf') format('truetype');
+font-style: normal;
+}
+.jlm_cmsy10 {
+font-family: 'jlm_cmsy10';
+font-size: 133px;
+}
+</style>
+<g stroke="rgb(0,0,0)" fill="rgb(0,0,0)" stroke-width="1.0" stroke-miterlimit="10.0" stroke-linejoin="miter" stroke-linecap="square">
+<text class="jlm_cmex10" transform="matrix(0.1,0.0,0.0,0.1,6.0,6.759189)">©</text>
+<text class="jlm_cmmi10" transform="matrix(0.1,0.0,0.0,0.1,13.777813,17.559282)">x</text>
+<text class="jlm_cmsy10" transform="matrix(0.1,0.0,0.0,0.1,25.101902,17.559282)">2</text>
+<text class="jlm_cmbx10" transform="matrix(0.1,0.0,0.0,0.1,37.69454,17.559282)">R</text>
+<text class="jlm_cmr10" transform="matrix(0.06999999999999999,0.0,0.0,0.07,49.19447,12.014811)">2</text>
+<path transform="matrix(10.0,0.0,0.0,10.0,54.52533,6.225869)" d=" M 0.22265625 -0.02921875 Q 0.19796875 -0.02921875 0.19328125 -0.00125 L 0.19328125 0.80140626 L 0.19328125 1.6014142 Q 0.19859375 1.629383 0.22265625 1.629383 Q 0.24546875 1.629383 0.250625 1.6014142 L 0.250625 0.80140626 L 0.250625 -0.00125 Q 0.24609375 -0.02921875 0.22265625 -0.02921875 Z " stroke="transparent" fill-rule="nonzero"/>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,58.969784,17.559282)">0</text>
+<text class="jlm_cmmi10" transform="matrix(0.1,0.0,0.0,0.1,69.340195,17.559282)">&lt;</text>
+<text class="jlm_cmsy10" transform="matrix(0.1,0.0,0.0,0.1,83.41432,17.559282)">j</text>
+<text class="jlm_cmmi10" transform="matrix(0.1,0.0,0.0,0.1,87.11804,17.559282)">x</text>
+<text class="jlm_cmsy10" transform="matrix(0.1,0.0,0.0,0.1,94.73841,17.559282)">j</text>
+<text class="jlm_cmmi10" transform="matrix(0.1,0.0,0.0,0.1,102.14585,17.559282)">&lt;</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,116.21998,17.559282)">5</text>
+<text class="jlm_cmex10" transform="matrix(0.1,0.0,0.0,0.1,122.88667,6.759189)">ª</text>
+</g>
+</svg>

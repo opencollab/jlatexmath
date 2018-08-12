@@ -57,9 +57,7 @@ package org.scilab.forge.jlatexmath;
 public class Dummy {
 
     private Atom el;
-
     private boolean textSymbol = false;
-
     private int type = -1;
 
     /**
@@ -132,11 +130,13 @@ public class Dummy {
     }
 
     public Box createBox(TeXEnvironment rs) {
-        if (textSymbol)
+        if (textSymbol) {
             ((CharSymbol) el).markAsTextSymbol();
+        }
         Box b = el.createBox(rs);
-        if (textSymbol)
+        if (textSymbol) {
             ((CharSymbol) el).removeMark(); // atom remains unchanged!
+        }
         return b;
     }
 
@@ -152,5 +152,9 @@ public class Dummy {
     public void setPreviousAtom(Dummy prev) {
         if (el instanceof Row)
             ((Row) el).setPreviousAtom(prev);
+    }
+
+    public String toString() {
+        return "Dummy: " + el.toString();
     }
 }

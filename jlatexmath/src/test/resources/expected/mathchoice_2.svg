@@ -1,0 +1,26 @@
+<!--
+$\puzzle{\puzzle\over\puzzle^{\puzzle^\puzzle}}$
+-->
+<svg width="53" height="32" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<style type="text/css">
+@font-face {
+font-family: 'jlm_cmmi10';
+src: url('fonts/jlm_cmmi10.ttf') format('truetype');
+font-style: normal;
+}
+.jlm_cmmi10 {
+font-family: 'jlm_cmmi10';
+font-size: 133px;
+}
+</style>
+<g stroke="rgb(0,0,0)" fill="rgb(0,0,0)" stroke-width="1.0" stroke-miterlimit="10.0" stroke-linejoin="miter" stroke-linecap="square">
+<text class="jlm_cmmi10" transform="matrix(0.1,0.0,0.0,0.1,6.0,17.627525)">T</text>
+<text class="jlm_cmmi10" transform="matrix(0.06999999999999999,0.0,0.0,0.07,29.068415,12.377766)">S</text>
+<path transform="matrix(10.0,0.0,0.0,10.0,0.0,0.0)" d=" M 1.9459798 1.4027532 L 4.493814 1.4027532 L 4.493814 1.4560852 L 1.9459798 1.4560852 L 1.9459798 1.4027532 Z " stroke="transparent" fill-rule="nonzero"/>
+<text class="jlm_cmmi10" transform="matrix(0.06999999999999999,0.0,0.0,0.07,19.459799,25.434923)">S</text>
+<text class="jlm_cmmi10" transform="matrix(0.05,0.0,0.0,0.05,25.720905,21.631212)">S</text>
+<text class="jlm_cmmi10" transform="matrix(0.05,0.0,0.0,0.05,30.193127,21.631212)">S</text>
+<text class="jlm_cmmi10" transform="matrix(0.05,0.0,0.0,0.05,34.665344,19.64972)">S</text>
+<text class="jlm_cmmi10" transform="matrix(0.05,0.0,0.0,0.05,39.137566,19.64972)">S</text>
+</g>
+</svg>

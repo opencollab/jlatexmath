@@ -1,7 +1,6 @@
 <?xml version='1.0'?>
 <SymbolMappings>
   <!-- miscellaneous symbols -->
-
   <SymbolMapping name="comma" ch="59" fontId="jlm_cmmi10_unchanged"/>
   <SymbolMapping name="ldotp" ch="58" fontId="jlm_cmmi10_unchanged"/>
   <SymbolMapping name="cdotp" ch="162" fontId="jlm_cmsy10"/>
@@ -22,7 +21,6 @@
 
   <!-- this symbol is not defined in "TeXSymbols.xml", because it's not meant to be used as a symbol.
        Use "surd" instead. -->
-  <SymbolMapping name="sqrt" ch="112" fontId="jlm_cmsy10"/>
   <SymbolMapping name="textfractionsolidus" ch="47" fontId="jlm_cmr10"/>
   <SymbolMapping name="textminus" ch="45" fontId="jlm_cmr10"/>
   <SymbolMapping name="textendash" ch="123" fontId="jlm_cmr10"/>
@@ -31,11 +29,14 @@
   <SymbolMapping name="faculty" ch="33" fontId="jlm_cmr10"/>
   <SymbolMapping name="question" ch="63" fontId="jlm_cmr10"/>
   <SymbolMapping name="questiondown" ch="62" fontId="jlm_cmr10"/>
-  <SymbolMapping name="jlatexmathsharp" ch="35" fontId="jlm_cmr10"/>
+  <SymbolMapping name="#" ch="35" fontId="jlm_cmr10"/>
   <SymbolMapping name="textdollar" ch="36" fontId="jlm_cmr10"/>
+  <SymbolMapping name="$" ch="36" fontId="jlm_cmr10"/>
   <SymbolMapping name="textpercent" ch="37" fontId="jlm_cmr10"/>
+  <SymbolMapping name="%" ch="37" fontId="jlm_cmr10"/>
   <SymbolMapping name="textampersand" ch="38" fontId="jlm_cmr10"/>
-  <SymbolMapping name="jlatexmatharobase" ch="64" fontId="jlm_cmr10"/>
+  <SymbolMapping name="&amp;" ch="38" fontId="jlm_cmr10"/>
+  <SymbolMapping name="@" ch="64" fontId="jlm_cmr10"/>
   <SymbolMapping name="textapos" ch="39" fontId="jlm_cmr10"/>
   <SymbolMapping name="jlatexmathlapos" ch="96" fontId="jlm_cmr10"/>
   <SymbolMapping name="mathsterling" ch="36" fontId="jlm_cmti10_unchanged"/>
@@ -74,7 +75,6 @@
   <SymbolMapping name="widetilde" ch="101" fontId="jlm_cmex10"/>
 
   <!-- delimiters that can change size -->
-
   <SymbolMapping name="lbrace" ch="102" fontId="jlm_cmsy10"/>
   <SymbolMapping name="rbrace" ch="103" fontId="jlm_cmsy10"/>
   <SymbolMapping name="lbrack" ch="40" fontId="jlm_cmr10"/>
@@ -95,6 +95,7 @@
   <SymbolMapping name="Updownarrow" ch="109" fontId="jlm_cmsy10"/>
   <SymbolMapping name="vert" ch="106" fontId="jlm_cmsy10"/>
   <SymbolMapping name="Vert" ch="107" fontId="jlm_cmsy10"/>
+  <SymbolMapping name="|" ch="107" fontId="jlm_cmsy10"/>
   <SymbolMapping name="slashdel" ch="47" fontId="jlm_cmr10"/>
   <SymbolMapping name="lgroup" ch="58" fontId="jlm_cmex10"/>
   <SymbolMapping name="rgroup" ch="59" fontId="jlm_cmex10"/>
@@ -103,7 +104,6 @@
   <SymbolMapping name="rmoustache" ch="65" fontId="jlm_moustache"/>
 
   <!-- lowercase Greek letters -->
-
   <SymbolMapping name="alpha" ch="174" fontId="jlm_cmmi10_unchanged"/>
   <SymbolMapping name="beta" ch="175" fontId="jlm_cmmi10_unchanged"/>
   <SymbolMapping name="gamma" ch="176" fontId="jlm_cmmi10_unchanged"/>
@@ -123,7 +123,6 @@
 
   <!-- omicron = letter 'o' -->
   <SymbolMapping name="omicron" ch="111" fontId="jlm_cmmi10_unchanged"/>
-
   <SymbolMapping name="pi" ch="188" fontId="jlm_cmmi10_unchanged"/>
   <SymbolMapping name="varpi" ch="36" fontId="jlm_cmmi10_unchanged"/>
   <SymbolMapping name="rho" ch="189" fontId="jlm_cmmi10_unchanged"/>
@@ -139,7 +138,6 @@
   <SymbolMapping name="omega" ch="33" fontId="jlm_cmmi10_unchanged"/>
 
   <!-- uppercase Greek letters -->
-
   <SymbolMapping name="Gamma" ch="161" fontId="jlm_cmr10"/>
   <SymbolMapping name="Delta" ch="162" fontId="jlm_cmr10"/>
   <SymbolMapping name="Theta" ch="163" fontId="jlm_cmr10"/>
@@ -150,7 +148,7 @@
   <SymbolMapping name="Upsilon" ch="168" fontId="jlm_cmr10"/>
   <SymbolMapping name="Phi" ch="169" fontId="jlm_cmr10"/>
   <SymbolMapping name="Psi" ch="170" fontId="jlm_cmr10"/>
-  <SymbolMapping name="Omega" ch="173" fontId="jlm_cmr10"/>
+  <SymbolMapping name="Omega" ch="171" fontId="jlm_cmr10"/>
   <SymbolMapping name="varGamma" ch="161" fontId="jlm_cmmi10"/>
   <SymbolMapping name="varDelta" ch="162" fontId="jlm_cmmi10"/>
   <SymbolMapping name="varTheta" ch="163" fontId="jlm_cmmi10"/>
@@ -161,10 +159,9 @@
   <SymbolMapping name="varUpsilon" ch="168" fontId="jlm_cmmi10"/>
   <SymbolMapping name="varPhi" ch="169" fontId="jlm_cmmi10"/>
   <SymbolMapping name="varPsi" ch="170" fontId="jlm_cmmi10"/>
-  <SymbolMapping name="varOmega" ch="173" fontId="jlm_cmmi10"/>
+  <SymbolMapping name="varOmega" ch="171" fontId="jlm_cmmi10"/>
 
   <!-- miscellaneous symbols of type "ord" -->
-
   <SymbolMapping name="aleph" ch="64" fontId="jlm_cmsy10"/>
   <SymbolMapping name="imath" ch="123" fontId="jlm_cmmi10_unchanged"/>
   <SymbolMapping name="jmath" ch="124" fontId="jlm_cmmi10_unchanged"/>
@@ -180,7 +177,6 @@
   <SymbolMapping name="surdsign" ch="112" fontId="jlm_cmsy10"/>
   <SymbolMapping name="top" ch="62" fontId="jlm_cmsy10"/>
   <SymbolMapping name="bot" ch="63" fontId="jlm_cmsy10"/>
-  <SymbolMapping name="|" ch="107" fontId="jlm_cmsy10"/>
   <SymbolMapping name="triangle" ch="52" fontId="jlm_cmsy10"/>
   <SymbolMapping name="backslash" ch="110" fontId="jlm_cmsy10"/>
   <SymbolMapping name="forall" ch="56" fontId="jlm_cmsy10"/>
@@ -202,8 +198,8 @@
   <SymbolMapping name="lhook" ch="44" fontId="jlm_cmmi10_unchanged"/>
   <SymbolMapping name="rhook" ch="45" fontId="jlm_cmmi10_unchanged"/>
   <SymbolMapping name="mapstochar" ch="55" fontId="jlm_cmsy10"/>
-  <!-- "large" operators -->
 
+  <!-- "large" operators -->
   <SymbolMapping name="bigcap" ch="84" fontId="jlm_cmex10"/>
   <SymbolMapping name="bigcup" ch="83" fontId="jlm_cmex10"/>
   <SymbolMapping name="bigodot" ch="74" fontId="jlm_cmex10"/>
@@ -214,14 +210,13 @@
   <SymbolMapping name="bigvee" ch="87" fontId="jlm_cmex10"/>
   <SymbolMapping name="bigwedge" ch="86" fontId="jlm_cmex10"/>
   <SymbolMapping name="coprod" ch="96" fontId="jlm_cmex10"/>
-  <SymbolMapping name="int" ch="82" fontId="jlm_cmex10"/>
+  <SymbolMapping name="intop" ch="82" fontId="jlm_cmex10"/>
   <SymbolMapping name="oint" ch="72" fontId="jlm_cmex10"/>
   <SymbolMapping name="sum" ch="80" fontId="jlm_cmex10"/>
   <SymbolMapping name="prod" ch="81" fontId="jlm_cmex10"/>
   <SymbolMapping name="smallint" ch="115" fontId="jlm_cmsy10"/>
 
   <!-- binary operations -->
-
   <SymbolMapping name="minus" ch="161" fontId="jlm_cmsy10"/>
   <SymbolMapping name="plus" ch="43" fontId="jlm_cmr10"/>
   <SymbolMapping name="pm" ch="167" fontId="jlm_cmsy10"/>
@@ -244,15 +239,13 @@
   <SymbolMapping name="triangleright" ch="46" fontId="jlm_cmmi10_unchanged"/>
   <SymbolMapping name="wr" ch="111" fontId="jlm_cmsy10"/>
   <SymbolMapping name="bigcirc" ch="176" fontId="jlm_cmsy10"/>
-  <!--SymbolMapping name="bigtriangleup" ch="52" fontId="jlm_cmsy10"/>
-      <SymbolMapping name="bigtriangledown" ch="53" fontId="jlm_cmsy10"/-->
   <SymbolMapping name="vee" ch="95" fontId="jlm_cmsy10"/>
   <SymbolMapping name="lor" ch="95" fontId="jlm_cmsy10"/>
   <SymbolMapping name="wedge" ch="94" fontId="jlm_cmsy10"/>
   <SymbolMapping name="land" ch="94" fontId="jlm_cmsy10"/>
   <SymbolMapping name="oplus" ch="169" fontId="jlm_cmsy10"/>
   <SymbolMapping name="ominus" ch="170" fontId="jlm_cmsy10"/>
-  <SymbolMapping name="otimes" ch="173" fontId="jlm_cmsy10"/>
+  <SymbolMapping name="otimes" ch="171" fontId="jlm_cmsy10"/>
   <SymbolMapping name="oslash" ch="174" fontId="jlm_cmsy10"/>
   <SymbolMapping name="odot" ch="175" fontId="jlm_cmsy10"/>
   <SymbolMapping name="dagger" ch="121" fontId="jlm_cmsy10"/>
@@ -260,7 +253,6 @@
   <SymbolMapping name="amalg" ch="113" fontId="jlm_cmsy10"/>
 
   <!-- relations -->
-
   <SymbolMapping name="equals" ch="61" fontId="jlm_cmr10"/>
   <SymbolMapping name="gt" ch="62" fontId="jlm_cmmi10_unchanged"/>
   <SymbolMapping name="lt" ch="60" fontId="jlm_cmmi10_unchanged"/>
@@ -301,7 +293,6 @@
   <SymbolMapping name="not" ch="54" fontId="jlm_cmsy10"/>
 
   <!-- arrows = pointing relations -->
-
   <SymbolMapping name="colon" ch="58" fontId="jlm_cmr10"/>
   <SymbolMapping name="nearrow" ch="37" fontId="jlm_cmsy10"/>
   <SymbolMapping name="searrow" ch="38" fontId="jlm_cmsy10"/>

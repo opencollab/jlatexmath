@@ -51,17 +51,23 @@ package org.scilab.forge.jlatexmath;
  */
 public class CharFont {
 
-    public char c;
-    public int fontId;
-    public int boldFontId;
+    public final char c;
+    public final int fontId;
 
-    public CharFont(char ch, int f) {
-        this(ch, f, f);
+    public CharFont(final char c, final int f) {
+        this.c = c;
+        this.fontId = f;
     }
 
-    public CharFont(char ch, int f, int bf) {
-        c = ch;
-        fontId = f;
-        boldFontId = bf;
+    public int getFontId() {
+        return fontId;
+    }
+
+    public char getChar() {
+        return c;
+    }
+
+    public String toString() {
+        return "CharFont: \'" + c + "\' : " + (int)c + " : " + fontId + " : " + Configuration.get().getFontInfo(fontId);
     }
 }

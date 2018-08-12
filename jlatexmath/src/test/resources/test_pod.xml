@@ -1,0 +1,42 @@
+<?xml version='1.0'?>
+<tests name="pod">
+  <test>
+    <id name="1"/>
+    <code>
+      <![CDATA[
+               \begin{align}
+               u & \equiv v + 1 \mod{n^2} \\
+               u & \equiv v + 1 \bmod{n^2} \\
+               u & = v + 1 \pmod{n^2} \\
+               u & = v + 1 \pod{n^2} \\
+               \end{align}               
+      ]]>
+    </code>
+    <expected success="true"/>
+  </test>
+  
+  <test>
+    <id name="2"/>
+    <code>
+      <![CDATA[
+               \mbox{The in-text layout: $u = v + 1 \pmod{n^2} $
+      ]]>
+    </code>
+    <expected success="true"/>
+  </test>
+
+  <test>
+    <id name="3"/>
+    <code>
+      <![CDATA[
+               \begin{gather}
+               (m \bmod n) = k^2 \, ; \quad
+               x \equiv y \pmod b \, ;    \\
+               x \equiv y \mod c \, ;  \quad
+               x \equiv y \pod d\, .
+               \end{gather}
+      ]]>
+    </code>
+    <expected success="true"/>
+  </test>
+</tests>

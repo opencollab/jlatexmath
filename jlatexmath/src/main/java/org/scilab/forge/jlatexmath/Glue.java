@@ -49,39 +49,152 @@ package org.scilab.forge.jlatexmath;
 /**
  * Represents glue by its 3 components. Contains the "glue rules".
  */
-public class Glue {
+public final class Glue {
 
-    // the glue components
-    private final float space;
-    private final float stretch;
-    private final float shrink;
+    private static final Glue THIN = new Glue(3., 0., 0.);
+    private static final Glue MED = new Glue(4., 4., 2.);
+    private static final Glue THICK = new Glue(5., 0., 5.);
 
-    private final String name;
+    private static final int ORD = 0;
+    private static final int OP = 1;
+    private static final int BIN = 2;
+    private static final int REL = 3;
+    private static final int OPEN = 4;
+    private static final int CLOSE = 5;
+    private static final int PUNCT = 6;
+    private static final int INNER = 7;
 
-    // contains the different glue types
-    private static Glue[] glueTypes;
+    private static final int DISPLAY = 0;
+    private static final int TEXT = 1;
+    private static final int SCRIPT = 2;
+    private static final int SCRIPT_SCRIPT = 3;
 
-    // the glue table representing the "glue rules" (as in TeX)
-    private static final int[][][] glueTable;
+    // the glue table representing the "glue rules" (as in TeXBook p. 170)
+    private static final Glue[] glues = new Glue[256];
 
     static {
-        GlueSettingsParser parser = new GlueSettingsParser();
-        glueTypes = parser.getGlueTypes();
-        glueTable = parser.createGlueTable();
+        glues[index(ORD, OP, DISPLAY)] = THIN;
+        glues[index(ORD, OP, TEXT)] = THIN;
+        glues[index(ORD, OP, SCRIPT)] = THIN;
+        glues[index(ORD, OP, SCRIPT_SCRIPT)] = THIN;
+
+        glues[index(ORD, BIN, DISPLAY)] = MED;
+        glues[index(ORD, BIN, TEXT)] = MED;
+
+        glues[index(ORD, REL, DISPLAY)] = THICK;
+        glues[index(ORD, REL, TEXT)] = THICK;
+
+        glues[index(ORD, INNER, DISPLAY)] = THIN;
+        glues[index(ORD, INNER, TEXT)] = THIN;
+
+        glues[index(OP, ORD, DISPLAY)] = THIN;
+        glues[index(OP, ORD, TEXT)] = THIN;
+        glues[index(OP, ORD, SCRIPT)] = THIN;
+        glues[index(OP, ORD, SCRIPT_SCRIPT)] = THIN;
+
+        glues[index(OP, OP, DISPLAY)] = THIN;
+        glues[index(OP, OP, TEXT)] = THIN;
+        glues[index(OP, OP, SCRIPT)] = THIN;
+        glues[index(OP, OP, SCRIPT_SCRIPT)] = THIN;
+
+        glues[index(OP, REL, DISPLAY)] = THICK;
+        glues[index(OP, REL, TEXT)] = THICK;
+
+        glues[index(OP, INNER, DISPLAY)] = THIN;
+        glues[index(OP, INNER, TEXT)] = THIN;
+
+        glues[index(BIN, ORD, DISPLAY)] = MED;
+        glues[index(BIN, ORD, TEXT)] = MED;
+
+        glues[index(BIN, OP, DISPLAY)] = MED;
+        glues[index(BIN, OP, TEXT)] = MED;
+
+        glues[index(BIN, OPEN, DISPLAY)] = MED;
+        glues[index(BIN, OPEN, TEXT)] = MED;
+
+        glues[index(BIN, INNER, DISPLAY)] = MED;
+        glues[index(BIN, INNER, TEXT)] = MED;
+
+        glues[index(REL, ORD, DISPLAY)] = THICK;
+        glues[index(REL, ORD, TEXT)] = THICK;
+
+        glues[index(REL, OP, DISPLAY)] = THICK;
+        glues[index(REL, OP, TEXT)] = THICK;
+
+        glues[index(REL, OPEN, DISPLAY)] = THICK;
+        glues[index(REL, OPEN, TEXT)] = THICK;
+
+        glues[index(REL, INNER, DISPLAY)] = THICK;
+        glues[index(REL, INNER, TEXT)] = THICK;
+
+        glues[index(CLOSE, OP, DISPLAY)] = THIN;
+        glues[index(CLOSE, OP, TEXT)] = THIN;
+        glues[index(CLOSE, OP, SCRIPT)] = THIN;
+        glues[index(CLOSE, OP, SCRIPT_SCRIPT)] = THIN;
+
+        glues[index(CLOSE, BIN, DISPLAY)] = THIN;
+        glues[index(CLOSE, BIN, TEXT)] = THIN;
+
+        glues[index(CLOSE, REL, DISPLAY)] = THICK;
+        glues[index(CLOSE, REL, TEXT)] = THICK;
+
+        glues[index(CLOSE, INNER, DISPLAY)] = THIN;
+        glues[index(CLOSE, INNER, TEXT)] = THIN;
+
+        glues[index(PUNCT, ORD, DISPLAY)] = THIN;
+        glues[index(PUNCT, ORD, TEXT)] = THIN;
+
+        glues[index(PUNCT, OP, DISPLAY)] = MED;
+        glues[index(PUNCT, OP, TEXT)] = MED;
+
+        glues[index(PUNCT, REL, DISPLAY)] = THICK;
+        glues[index(PUNCT, REL, TEXT)] = THICK;
+
+        glues[index(PUNCT, OPEN, DISPLAY)] = THIN;
+        glues[index(PUNCT, OPEN, TEXT)] = THIN;
+
+        glues[index(PUNCT, CLOSE, DISPLAY)] = THIN;
+        glues[index(PUNCT, CLOSE, TEXT)] = THIN;
+
+        glues[index(PUNCT, PUNCT, DISPLAY)] = MED;
+        glues[index(PUNCT, PUNCT, TEXT)] = MED;
+
+        glues[index(PUNCT, INNER, DISPLAY)] = THICK;
+        glues[index(PUNCT, INNER, TEXT)] = THICK;
+
+        glues[index(INNER, ORD, DISPLAY)] = THIN;
+        glues[index(INNER, ORD, TEXT)] = THIN;
+
+        glues[index(INNER, OP, DISPLAY)] = THIN;
+        glues[index(INNER, OP, TEXT)] = THIN;
+        glues[index(INNER, OP, SCRIPT)] = THIN;
+        glues[index(INNER, OP, SCRIPT_SCRIPT)] = THIN;
+
+        glues[index(INNER, BIN, DISPLAY)] = MED;
+        glues[index(INNER, BIN, TEXT)] = MED;
+
+        glues[index(INNER, REL, DISPLAY)] = THICK;
+        glues[index(INNER, REL, TEXT)] = THICK;
+
+        glues[index(INNER, OPEN, DISPLAY)] = THIN;
+        glues[index(INNER, OPEN, TEXT)] = THIN;
+
+        glues[index(INNER, PUNCT, DISPLAY)] = THIN;
+        glues[index(INNER, PUNCT, TEXT)] = THIN;
+
+        glues[index(INNER, INNER, DISPLAY)] = THIN;
+        glues[index(INNER, INNER, TEXT)] = THIN;
     }
 
-    public Glue(float space, float stretch, float shrink, String name) {
+    // the glue components
+    private final double space;
+    private final double stretch;
+    private final double shrink;
+
+    private Glue(final double space, final double stretch, final double shrink) {
         this.space = space;
         this.stretch = stretch;
         this.shrink = shrink;
-        this.name = name;
-    }
-
-    /**
-     * Name of this glue object.
-     */
-    public String getName () {
-        return this.name;
     }
 
     /**
@@ -93,22 +206,29 @@ public class Glue {
      * @param env the TeXEnvironment
      * @return a box containing representing the glue
      */
-    public static Box get(int lType, int rType, TeXEnvironment env) {
+    public static Box get(final int lType, final int rType, final TeXEnvironment env) {
         // types > INNER are considered of type ORD for glue calculations
-        int l = (lType > TeXConstants.TYPE_INNER ? TeXConstants.TYPE_ORDINARY : lType);
-        int r = (rType > TeXConstants.TYPE_INNER ? TeXConstants.TYPE_ORDINARY : rType);
+        final int l = (lType > TeXConstants.TYPE_INNER ? TeXConstants.TYPE_ORDINARY : lType);
+        final int r = (rType > TeXConstants.TYPE_INNER ? TeXConstants.TYPE_ORDINARY : rType);
 
         // search right glue-type in "glue-table"
-        int glueType = glueTable[l][r][env.getStyle() / 2];
-
-        return glueTypes[glueType].createBox(env);
+        final Glue g = glues[index(l, r, env.getStyle() >> 1)];
+        return g == null ? null : g.createBox(env);
     }
 
-    private Box createBox(TeXEnvironment env) {
-        TeXFont tf = env.getTeXFont();
+    private Box createBox(final TeXEnvironment env) {
+        final TeXFont tf = env.getTeXFont();
         // use "quad" from a font marked as an "mu font"
-        float quad = tf.getQuad(env.getStyle(), tf.getMuFontId());
+        final double f = tf.getQuad(env.getStyle(), tf.getMuFontId()) / 18.;
 
-        return new GlueBox((space / 18.0f) * quad, (stretch / 18.0f) * quad, (shrink / 18.0f) * quad);
+        return new GlueBox(space * f, stretch * f, shrink * f);
+    }
+
+    private static final int index(final int i, final int j, final int k) {
+        return i | (j << 3) | (k << 6);
+    }
+
+    public String toString() {
+        return "Glue: " + space;
     }
 }

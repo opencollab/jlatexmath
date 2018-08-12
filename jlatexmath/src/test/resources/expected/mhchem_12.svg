@@ -1,0 +1,84 @@
+<!--
+\begin{gather}
+\ce{\mu-Cl} \cr
+\ce{[Pt(\eta^2-C2H4)Cl3]-} \cr
+\ce{\beta +} \cr
+\ce{^40_18Ar + \gamma{} + \nu_e} \cr
+\end{gather}
+-->
+<svg width="116" height="88" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<style type="text/css">
+@font-face {
+font-family: 'jlm_fcmrpg';
+src: url('fonts/jlm_fcmrpg.ttf') format('truetype');
+font-style: normal;
+}
+.jlm_fcmrpg {
+font-family: 'jlm_fcmrpg';
+font-size: 133px;
+}
+@font-face {
+font-family: 'jlm_cmmi10';
+src: url('fonts/jlm_cmmi10.ttf') format('truetype');
+font-style: normal;
+}
+.jlm_cmmi10 {
+font-family: 'jlm_cmmi10';
+font-size: 133px;
+}
+@font-face {
+font-family: 'jlm_cmr10';
+src: url('fonts/jlm_cmr10.ttf') format('truetype');
+font-style: normal;
+}
+.jlm_cmr10 {
+font-family: 'jlm_cmr10';
+font-size: 133px;
+}
+@font-face {
+font-family: 'jlm_cmsy10';
+src: url('fonts/jlm_cmsy10.ttf') format('truetype');
+font-style: normal;
+}
+.jlm_cmsy10 {
+font-family: 'jlm_cmsy10';
+font-size: 133px;
+}
+</style>
+<g stroke="rgb(0,0,0)" fill="rgb(0,0,0)" stroke-width="1.0" stroke-miterlimit="10.0" stroke-linejoin="miter" stroke-linecap="square">
+<text class="jlm_fcmrpg" transform="matrix(0.1,0.0,0.0,0.1,45.33393,15.259267)">μ</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,52.253933,15.259267)">-</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,56.698383,15.259267)">C</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,66.32804,15.259267)">l</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,6.0,35.988895)">[</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,9.70372,35.988895)">P</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,18.777813,35.988895)">t</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,23.963013,35.988895)">(</text>
+<text class="jlm_fcmrpg" transform="matrix(0.1,0.0,0.0,0.1,29.148212,35.988895)">η</text>
+<text class="jlm_cmr10" transform="matrix(0.06999999999999999,0.0,0.0,0.07,35.81488,30.481478)">2</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,41.14574,35.988895)">-</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,45.590195,35.988895)">C</text>
+<text class="jlm_cmr10" transform="matrix(0.06999999999999999,0.0,0.0,0.07,55.21985,37.988895)">2</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,59.88653,35.988895)">H</text>
+<text class="jlm_cmr10" transform="matrix(0.06999999999999999,0.0,0.0,0.07,69.88656,37.988895)">4</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,74.553246,35.988895)">)</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,79.73845,35.988895)">C</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,89.368095,35.988895)">l</text>
+<text class="jlm_cmr10" transform="matrix(0.06999999999999999,0.0,0.0,0.07,93.071815,37.988895)">3</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,97.7385,35.988895)">]</text>
+<text class="jlm_cmsy10" transform="matrix(0.06999999999999999,0.0,0.0,0.07,101.44222,30.481478)">¡</text>
+<text class="jlm_fcmrpg" transform="matrix(0.1,0.0,0.0,0.1,50.38778,56.29483)">β</text>
+<text class="jlm_cmr10" transform="matrix(0.06999999999999999,0.0,0.0,0.07,57.054447,50.787415)">+</text>
+<text class="jlm_cmr10" transform="matrix(0.06999999999999999,0.0,0.0,0.07,19.756989,71.73038)">4</text>
+<text class="jlm_cmr10" transform="matrix(0.06999999999999999,0.0,0.0,0.07,24.423674,71.73038)">0</text>
+<text class="jlm_cmr10" transform="matrix(0.06999999999999999,0.0,0.0,0.07,19.756989,80.53402)">1</text>
+<text class="jlm_cmr10" transform="matrix(0.06999999999999999,0.0,0.0,0.07,24.423674,80.53402)">8</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,29.754536,77.23779)">A</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,39.754562,77.23779)">r</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,47.939774,77.23779)">+</text>
+<text class="jlm_fcmrpg" transform="matrix(0.1,0.0,0.0,0.1,61.27316,77.23779)">γ</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,71.63613,77.23779)">+</text>
+<text class="jlm_fcmrpg" transform="matrix(0.1,0.0,0.0,0.1,84.96951,77.23779)">ν</text>
+<text class="jlm_cmmi10" transform="matrix(0.06999999999999999,0.0,0.0,0.07,91.26285,79.23779)">e</text>
+</g>
+</svg>

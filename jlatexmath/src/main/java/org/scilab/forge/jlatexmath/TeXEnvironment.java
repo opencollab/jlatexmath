@@ -49,6 +49,8 @@
 package org.scilab.forge.jlatexmath;
 
 import java.awt.Color;
+import java.awt.Font;
+
 
 /**
  * Contains the used TeXFont-object, color settings and the current style in which a
@@ -58,7 +60,8 @@ import java.awt.Color;
 public class TeXEnvironment {
 
     // colors
-    private Color background = null, color = null;
+    private Color background = null;
+    private Color color = null;
 
     // current style
     private int style = TeXConstants.STYLE_DISPLAY;
@@ -66,78 +69,83 @@ public class TeXEnvironment {
     // TeXFont used
     private TeXFont tf;
 
+    // Java Font to use
+    private Font javaFont;
+
     // last used font
     private int lastFontId = TeXFont.NO_FONT;
 
-    private float textwidth = Float.POSITIVE_INFINITY;
+    private double textwidth = Double.POSITIVE_INFINITY;
 
-    private String textStyle;
+    private int textStyle = TextStyle.NONE;
     private boolean smallCap;
-    private float scaleFactor = 1;
-    private int interlineUnit;
-    private float interline;
+    private double scaleFactor = 1.;
+    private TeXLength.Unit interlineUnit;
+    private double interline;
 
     public boolean isColored = false;
 
-    public TeXEnvironment(int style, TeXFont tf) {
-        this(style, tf, null, null);
+    public TeXEnvironment(int style, TeXFont tf, int textStyle) {
+        this(style, tf, null, null, textStyle);
     }
 
-    public TeXEnvironment(int style, TeXFont tf, int widthUnit, float textwidth) {
-        this(style, tf, null, null);
-        this.textwidth = textwidth * SpaceAtom.getFactor(widthUnit, this);
+    public TeXEnvironment(int style, TeXFont tf, TeXLength.Unit widthUnit, double textwidth, int textStyle) {
+        this(style, tf, null, null, textStyle);
+        this.textwidth = textwidth * TeXLength.getFactor(widthUnit, this);
     }
 
-    private TeXEnvironment(int style, TeXFont tf, Color bg, Color c) {
+    private TeXEnvironment(int style, TeXFont tf, Color bg, Color c, int textStyle) {
         this.style = style;
         this.tf = tf;
         background = bg;
         color = c;
-        setInterline(TeXConstants.UNIT_EX, 1f);
+        this.textStyle = textStyle;
+        setInterline(TeXLength.Unit.EX, 1.);
     }
 
-    private TeXEnvironment(int style, float scaleFactor, TeXFont tf, Color bg, Color c, String textStyle, boolean smallCap) {
+    private TeXEnvironment(int style, double scaleFactor, TeXFont tf, Color bg, Color c, int textStyle, boolean smallCap, Font javaFont) {
         this.style = style;
         this.scaleFactor = scaleFactor;
         this.tf = tf;
         this.textStyle = textStyle;
         this.smallCap = smallCap;
-        background = bg;
-        color = c;
-        setInterline(TeXConstants.UNIT_EX, 1f);
+        this.javaFont = javaFont;
+        this.background = bg;
+        this.color = c;
+        setInterline(TeXLength.Unit.EX, 1.);
     }
 
-    public void setInterline(int unit, float len) {
+    public void setInterline(TeXLength.Unit unit, double len) {
         this.interline = len;
         this.interlineUnit = unit;
     }
 
-    public float getInterline() {
-        return interline * SpaceAtom.getFactor(interlineUnit, this);
+    public double getInterline() {
+        return interline * TeXLength.getFactor(interlineUnit, this);
     }
 
-    public void setTextwidth(int widthUnit, float textwidth) {
-        this.textwidth = textwidth * SpaceAtom.getFactor(widthUnit, this);
+    public void setTextwidth(TeXLength.Unit widthUnit, double textwidth) {
+        this.textwidth = textwidth * TeXLength.getFactor(widthUnit, this);
     }
 
-    public float getTextwidth() {
+    public double getTextwidth() {
         return textwidth;
     }
 
-    public void setScaleFactor(float f) {
+    public void setScaleFactor(double f) {
         scaleFactor = f;
     }
 
-    public float getScaleFactor() {
+    public double getScaleFactor() {
         return scaleFactor;
     }
 
     protected TeXEnvironment copy() {
-        return new TeXEnvironment(style, scaleFactor, tf, background, color, textStyle, smallCap);
+        return new TeXEnvironment(style, scaleFactor, tf, background, color, textStyle, smallCap, javaFont);
     }
 
     protected TeXEnvironment copy(TeXFont tf) {
-        TeXEnvironment te = new TeXEnvironment(style, scaleFactor, tf, background, color, textStyle, smallCap);
+        TeXEnvironment te = new TeXEnvironment(style, scaleFactor, tf, background, color, textStyle, smallCap, javaFont);
         te.textwidth = textwidth;
         te.interline = interline;
         te.interlineUnit = interlineUnit;
@@ -149,7 +157,7 @@ public class TeXEnvironment {
      */
     public TeXEnvironment crampStyle() {
         TeXEnvironment s = copy();
-        s.style = (style % 2 == 1 ? style : style + 1);
+        s.style = style | 1;
         return s;
     }
 
@@ -159,7 +167,37 @@ public class TeXEnvironment {
      */
     public TeXEnvironment denomStyle() {
         TeXEnvironment s = copy();
-        s.style = 2 * (style / 2) + 1 + 2 - 2 * (style / 6);
+        s.style = style <= 3 ? ((style & 2) + 3) : 7;
+        return s;
+    }
+
+    /**
+     *
+     * @return a copy of the environment, but in numerator style.
+     */
+    public TeXEnvironment numStyle() {
+        TeXEnvironment s = copy();
+        s.style = (style <= 5 ? 2 : 0) + style;
+        return s;
+    }
+
+    /**
+     *
+     * @return a copy of the environment, but in subscript style.
+     */
+    public TeXEnvironment subStyle() {
+        TeXEnvironment s = copy();
+        s.style = style <= 3 ? 5 : 7;
+        return s;
+    }
+
+    /**
+     *
+     * @return a copy of the environment, but in superscript style.
+     */
+    public TeXEnvironment supStyle() {
+        TeXEnvironment s = copy();
+        s.style = (style <= 3 ? 4 : 6) + (style & 1);
         return s;
     }
 
@@ -183,7 +221,7 @@ public class TeXEnvironment {
      *
      * @return the point size of the TeXFont
      */
-    public float getSize() {
+    public double getSize() {
         return tf.getSize();
     }
 
@@ -202,12 +240,23 @@ public class TeXEnvironment {
     /**
      * @return the current textStyle
      */
-    public String getTextStyle() {
+    public int getTextStyle() {
         return textStyle;
     }
 
-    public void setTextStyle(String textStyle) {
+    public void setTextStyle(int textStyle) {
         this.textStyle = textStyle;
+    }
+
+    /**
+     * @return the current java Font
+     */
+    public Font getJavaFont() {
+        return javaFont;
+    }
+
+    public void setJavaFont(Font javaFont) {
+        this.javaFont = javaFont;
     }
 
     /**
@@ -230,20 +279,10 @@ public class TeXEnvironment {
     }
 
     /**
-     *
-     * @return a copy of the environment, but in numerator style.
-     */
-    public TeXEnvironment numStyle() {
-        TeXEnvironment s = copy();
-        s.style = style + 2 - 2 * (style / 6);
-        return s;
-    }
-
-    /**
      * Resets the color settings.
      *
      */
-    public void reset() {
+    public void resetColors() {
         color = null;
         background = null;
     }
@@ -274,27 +313,7 @@ public class TeXEnvironment {
         color = c;
     }
 
-    /**
-     *
-     * @return a copy of the environment, but in subscript style.
-     */
-    public TeXEnvironment subStyle() {
-        TeXEnvironment s = copy();
-        s.style = 2 * (style / 4) + 4 + 1;
-        return s;
-    }
-
-    /**
-     *
-     * @return a copy of the environment, but in superscript style.
-     */
-    public TeXEnvironment supStyle() {
-        TeXEnvironment s = copy();
-        s.style = 2 * (style / 4) + 4 + (style % 2);
-        return s;
-    }
-
-    public float getSpace() {
+    public double getSpace() {
         return tf.getSpace(style) * tf.getScaleFactor();
     }
 

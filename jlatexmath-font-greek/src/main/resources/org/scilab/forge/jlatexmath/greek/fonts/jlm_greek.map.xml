@@ -8,29 +8,54 @@
   <SymbolMapping name="·" ch="903" fontId="jlm_fcmrpg"/>
   <SymbolMapping name="ΐ" ch="912" fontId="jlm_fcmrpg"/>
   <SymbolMapping name="Α" ch="913" fontId="jlm_fcmrpg"/>
+  <SymbolMapping name="Upalpha" ch="913" fontId="jlm_fcmrpg"/>
   <SymbolMapping name="Β" ch="914" fontId="jlm_fcmrpg"/>
+  <SymbolMapping name="Upbeta" ch="914" fontId="jlm_fcmrpg"/>
   <SymbolMapping name="Γ" ch="915" fontId="jlm_fcmrpg"/>
+  <SymbolMapping name="Upgamma" ch="915" fontId="jlm_fcmrpg"/>
   <SymbolMapping name="Δ" ch="916" fontId="jlm_fcmrpg"/>
+  <SymbolMapping name="Updelta" ch="916" fontId="jlm_fcmrpg"/>
   <SymbolMapping name="Ε" ch="917" fontId="jlm_fcmrpg"/>
+  <SymbolMapping name="Upepsilon" ch="917" fontId="jlm_fcmrpg"/>
   <SymbolMapping name="Ζ" ch="918" fontId="jlm_fcmrpg"/>
+  <SymbolMapping name="Upzeta" ch="918" fontId="jlm_fcmrpg"/>
   <SymbolMapping name="Η" ch="919" fontId="jlm_fcmrpg"/>
+  <SymbolMapping name="Upeta" ch="919" fontId="jlm_fcmrpg"/>
   <SymbolMapping name="Θ" ch="920" fontId="jlm_fcmrpg"/>
+  <SymbolMapping name="Uptheta" ch="920" fontId="jlm_fcmrpg"/>
   <SymbolMapping name="Ι" ch="921" fontId="jlm_fcmrpg"/>
+  <SymbolMapping name="Upiota" ch="921" fontId="jlm_fcmrpg"/>
   <SymbolMapping name="Κ" ch="922" fontId="jlm_fcmrpg"/>
+  <SymbolMapping name="Upkappa" ch="922" fontId="jlm_fcmrpg"/>
   <SymbolMapping name="Λ" ch="923" fontId="jlm_fcmrpg"/>
+  <SymbolMapping name="Uplambda" ch="923" fontId="jlm_fcmrpg"/>
   <SymbolMapping name="Μ" ch="924" fontId="jlm_fcmrpg"/>
+  <SymbolMapping name="Upmu" ch="924" fontId="jlm_fcmrpg"/>
   <SymbolMapping name="Ν" ch="925" fontId="jlm_fcmrpg"/>
+  <SymbolMapping name="Upnu" ch="925" fontId="jlm_fcmrpg"/>
   <SymbolMapping name="Ξ" ch="926" fontId="jlm_fcmrpg"/>
+  <SymbolMapping name="Upxi" ch="926" fontId="jlm_fcmrpg"/>
   <SymbolMapping name="Ο" ch="927" fontId="jlm_fcmrpg"/>
+  <SymbolMapping name="Upomicron" ch="927" fontId="jlm_fcmrpg"/>
   <SymbolMapping name="Π" ch="928" fontId="jlm_fcmrpg"/>
+  <SymbolMapping name="Uppi" ch="928" fontId="jlm_fcmrpg"/>
   <SymbolMapping name="Ρ" ch="929" fontId="jlm_fcmrpg"/>
+  <SymbolMapping name="Uprho" ch="929" fontId="jlm_fcmrpg"/>
   <SymbolMapping name="Σ" ch="931" fontId="jlm_fcmrpg"/>
+  <SymbolMapping name="Upsigma" ch="931" fontId="jlm_fcmrpg"/>
   <SymbolMapping name="Τ" ch="932" fontId="jlm_fcmrpg"/>
+  <SymbolMapping name="Uptau" ch="932" fontId="jlm_fcmrpg"/>
   <SymbolMapping name="Υ" ch="933" fontId="jlm_fcmrpg"/>
+  <SymbolMapping name="Upupsilon" ch="933" fontId="jlm_fcmrpg"/>
   <SymbolMapping name="Φ" ch="934" fontId="jlm_fcmrpg"/>
+  <SymbolMapping name="Upphi" ch="934" fontId="jlm_fcmrpg"/>
+  <SymbolMapping name="Upvarphi" ch="934" fontId="jlm_fcmrpg"/>
   <SymbolMapping name="Χ" ch="935" fontId="jlm_fcmrpg"/>
+  <SymbolMapping name="Upchi" ch="935" fontId="jlm_fcmrpg"/>
   <SymbolMapping name="Ψ" ch="936" fontId="jlm_fcmrpg"/>
+  <SymbolMapping name="Uppsi" ch="936" fontId="jlm_fcmrpg"/>
   <SymbolMapping name="Ω" ch="937" fontId="jlm_fcmrpg"/>
+  <SymbolMapping name="Upomega" ch="937" fontId="jlm_fcmrpg"/>
   <SymbolMapping name="Ϊ" ch="938" fontId="jlm_fcmrpg"/>
   <SymbolMapping name="Ϋ" ch="939" fontId="jlm_fcmrpg"/>
   <SymbolMapping name="ά" ch="940" fontId="jlm_fcmrpg"/>
@@ -39,30 +64,56 @@
   <SymbolMapping name="ί" ch="943" fontId="jlm_fcmrpg"/>
   <SymbolMapping name="ΰ" ch="944" fontId="jlm_fcmrpg"/>
   <SymbolMapping name="α" ch="945" fontId="jlm_fcmrpg"/>
+  <SymbolMapping name="upalpha" ch="945" fontId="jlm_fcmrpg"/>
   <SymbolMapping name="β" ch="946" fontId="jlm_fcmrpg"/>
+  <SymbolMapping name="upbeta" ch="946" fontId="jlm_fcmrpg"/>
   <SymbolMapping name="γ" ch="947" fontId="jlm_fcmrpg"/>
+  <SymbolMapping name="upgamma" ch="947" fontId="jlm_fcmrpg"/>
   <SymbolMapping name="δ" ch="948" fontId="jlm_fcmrpg"/>
+  <SymbolMapping name="updelta" ch="948" fontId="jlm_fcmrpg"/>
   <SymbolMapping name="ε" ch="949" fontId="jlm_fcmrpg"/>
+  <SymbolMapping name="upepsilon" ch="949" fontId="jlm_fcmrpg"/>
   <SymbolMapping name="ζ" ch="950" fontId="jlm_fcmrpg"/>
+  <SymbolMapping name="upzeta" ch="950" fontId="jlm_fcmrpg"/>
   <SymbolMapping name="η" ch="951" fontId="jlm_fcmrpg"/>
+  <SymbolMapping name="upeta" ch="951" fontId="jlm_fcmrpg"/>
   <SymbolMapping name="θ" ch="952" fontId="jlm_fcmrpg"/>
+  <SymbolMapping name="uptheta" ch="952" fontId="jlm_fcmrpg"/>
   <SymbolMapping name="ι" ch="953" fontId="jlm_fcmrpg"/>
+  <SymbolMapping name="upiota" ch="953" fontId="jlm_fcmrpg"/>
   <SymbolMapping name="κ" ch="954" fontId="jlm_fcmrpg"/>
+  <SymbolMapping name="upkappa" ch="954" fontId="jlm_fcmrpg"/>
   <SymbolMapping name="λ" ch="955" fontId="jlm_fcmrpg"/>
+  <SymbolMapping name="uplambda" ch="955" fontId="jlm_fcmrpg"/>
   <SymbolMapping name="μ" ch="956" fontId="jlm_fcmrpg"/>
+  <SymbolMapping name="upmu" ch="956" fontId="jlm_fcmrpg"/>
   <SymbolMapping name="ν" ch="957" fontId="jlm_fcmrpg"/>
+  <SymbolMapping name="upnu" ch="957" fontId="jlm_fcmrpg"/>
   <SymbolMapping name="ξ" ch="958" fontId="jlm_fcmrpg"/>
+  <SymbolMapping name="upxi" ch="958" fontId="jlm_fcmrpg"/>
   <SymbolMapping name="ο" ch="959" fontId="jlm_fcmrpg"/>
+  <SymbolMapping name="upomicron" ch="959" fontId="jlm_fcmrpg"/>
   <SymbolMapping name="π" ch="960" fontId="jlm_fcmrpg"/>
+  <SymbolMapping name="uppi" ch="960" fontId="jlm_fcmrpg"/>
   <SymbolMapping name="ρ" ch="961" fontId="jlm_fcmrpg"/>
+  <SymbolMapping name="uprho" ch="961" fontId="jlm_fcmrpg"/>
   <SymbolMapping name="ς" ch="962" fontId="jlm_fcmrpg"/>
+  <SymbolMapping name="upvarsigma" ch="962" fontId="jlm_fcmrpg"/>
   <SymbolMapping name="σ" ch="963" fontId="jlm_fcmrpg"/>
+  <SymbolMapping name="upsigma" ch="963" fontId="jlm_fcmrpg"/>
   <SymbolMapping name="τ" ch="964" fontId="jlm_fcmrpg"/>
+  <SymbolMapping name="uptau" ch="964" fontId="jlm_fcmrpg"/>
   <SymbolMapping name="υ" ch="965" fontId="jlm_fcmrpg"/>
+  <SymbolMapping name="upupsilon" ch="965" fontId="jlm_fcmrpg"/>
   <SymbolMapping name="φ" ch="966" fontId="jlm_fcmrpg"/>
+  <SymbolMapping name="upphi" ch="966" fontId="jlm_fcmrpg"/>
+  <SymbolMapping name="upvarphi" ch="966" fontId="jlm_fcmrpg"/>
   <SymbolMapping name="χ" ch="967" fontId="jlm_fcmrpg"/>
+  <SymbolMapping name="upchi" ch="967" fontId="jlm_fcmrpg"/>
   <SymbolMapping name="ψ" ch="968" fontId="jlm_fcmrpg"/>
+  <SymbolMapping name="uppsi" ch="968" fontId="jlm_fcmrpg"/>
   <SymbolMapping name="ω" ch="969" fontId="jlm_fcmrpg"/>
+  <SymbolMapping name="upomega" ch="969" fontId="jlm_fcmrpg"/>
   <SymbolMapping name="ϊ" ch="970" fontId="jlm_fcmrpg"/>
   <SymbolMapping name="ϋ" ch="971" fontId="jlm_fcmrpg"/>
   <SymbolMapping name="ό" ch="972" fontId="jlm_fcmrpg"/>

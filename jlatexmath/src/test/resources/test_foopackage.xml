@@ -1,0 +1,19 @@
+<?xml version='1.0'?>
+<tests name="foopackage">
+  <test>
+    <id name="1"/>
+    <code>
+      <![CDATA[
+        \usepackage{foo}
+        \begin{array}{l}
+        \fooA{\pi}{C}\\
+        \fooE{\pi}{C}\\
+        \mbox{A red circle }\fooB{75.3}\\
+        \mbox{A red disk }\fooC[abc]{126.7}\\
+        \mbox{An other red circle }\fooD{159.81}[ab]
+        \end{array}
+      ]]>
+    </code>
+    <expected success="true"/>
+  </test>
+</tests>

@@ -56,22 +56,20 @@ public class TypedAtom extends Atom {
     private final int rightType;
 
     // atom for which new types are set
-    private final Atom atom;
+    private final Atom base;
 
     public TypedAtom(int leftType, int rightType, Atom atom) {
         this.leftType = leftType;
         this.rightType = rightType;
-        this.atom = atom;
-        this.type_limits = atom.type_limits;
+        this.base = atom;
     }
 
-    public Atom getBase() {
-        atom.type_limits = type_limits;
-        return atom;
+    public TypedAtom(int lrType, Atom atom) {
+        this(lrType, lrType, atom);
     }
 
     public Box createBox(TeXEnvironment env) {
-        return atom.createBox(env);
+        return base.createBox(env);
     }
 
     public int getLeftType() {
@@ -80,5 +78,25 @@ public class TypedAtom extends Atom {
 
     public int getRightType() {
         return rightType;
+    }
+
+    public boolean isMathMode() {
+        return base.isMathMode();
+    }
+
+    public void setMathMode(final boolean mathMode) {
+        base.setMathMode(mathMode);
+    }
+
+    public boolean mustAddItalicCorrection() {
+        return base.mustAddItalicCorrection();
+    }
+
+    public boolean setAddItalicCorrection(boolean b) {
+        return base.setAddItalicCorrection(b);
+    }
+
+    public Atom getBase() {
+        return base.getBase();
     }
 }

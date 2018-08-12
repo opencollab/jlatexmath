@@ -45,8 +45,10 @@
 
 package org.scilab.forge.jlatexmath;
 
+import java.lang.Character.UnicodeBlock;
 import java.net.URL;
 import java.net.URLClassLoader;
+import java.lang.ClassLoader;
 
 public class URLAlphabetRegistration implements AlphabetRegistration {
 
@@ -62,7 +64,7 @@ public class URLAlphabetRegistration implements AlphabetRegistration {
     }
 
     public static void register(URL url, String language, Character.UnicodeBlock[] blocks) {
-        DefaultTeXFont.registerAlphabet(new URLAlphabetRegistration(url, language, blocks));
+        AlphabetManager.get().registerAlphabet(new URLAlphabetRegistration(url, language, blocks));
     }
 
     public Character.UnicodeBlock[] getUnicodeBlock() {
@@ -89,5 +91,9 @@ public class URLAlphabetRegistration implements AlphabetRegistration {
 
     public String getTeXFontFileName() {
         return pack.getTeXFontFileName();
+    }
+
+    public void initMapping() {
+        pack.initMapping();
     }
 }

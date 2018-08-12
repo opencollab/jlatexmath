@@ -1,0 +1,29 @@
+<!--
+\begin{gather}
+\ce{H2O} \cr
+\ce{Sb2O3} \cr
+\end{gather}
+-->
+<svg width="47" height="42" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<style type="text/css">
+@font-face {
+font-family: 'jlm_cmr10';
+src: url('fonts/jlm_cmr10.ttf') format('truetype');
+font-style: normal;
+}
+.jlm_cmr10 {
+font-family: 'jlm_cmr10';
+font-size: 133px;
+}
+</style>
+<g stroke="rgb(0,0,0)" fill="rgb(0,0,0)" stroke-width="1.0" stroke-miterlimit="10.0" stroke-linejoin="miter" stroke-linecap="square">
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,10.740756,15.1110935)">H</text>
+<text class="jlm_cmr10" transform="matrix(0.06999999999999999,0.0,0.0,0.07,20.740782,17.111094)">2</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,25.407469,15.1110935)">O</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,6.0,32.11109)">S</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,13.407427,32.11109)">b</text>
+<text class="jlm_cmr10" transform="matrix(0.06999999999999999,0.0,0.0,0.07,20.814854,34.11109)">2</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,25.481539,32.11109)">O</text>
+<text class="jlm_cmr10" transform="matrix(0.06999999999999999,0.0,0.0,0.07,35.85195,34.11109)">3</text>
+</g>
+</svg>

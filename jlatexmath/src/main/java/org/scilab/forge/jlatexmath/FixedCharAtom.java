@@ -67,4 +67,7 @@ public class FixedCharAtom extends CharSymbol {
         return new CharBox(c);
     }
 
+    public Char getChar(TeXEnvironment env) {
+        return env.getTeXFont().getChar(cf, env.getStyle());
+    }
 }

@@ -1,0 +1,23 @@
+<?xml version='1.0'?>
+<tests name="mathchoice">
+  <test>
+    <id name="1"/>
+    <code>
+      <![CDATA[
+               \newcommand{\puzzle}{\mathchoice{D}{T}{S}{SS}}
+               \displaystyle \puzzle{\puzzle\over\puzzle^{\puzzle^\puzzle}}
+      ]]>
+    </code>
+    <expected success="true"/>
+  </test>
+  
+  <test>
+    <id name="2"/>
+    <code>
+      <![CDATA[
+               $\puzzle{\puzzle\over\puzzle^{\puzzle^\puzzle}}$
+      ]]>
+    </code>
+    <expected success="true"/>
+  </test>
+</tests>

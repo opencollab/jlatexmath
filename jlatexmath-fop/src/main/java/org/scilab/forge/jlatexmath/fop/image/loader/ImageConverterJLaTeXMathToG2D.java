@@ -52,12 +52,13 @@ package org.scilab.forge.jlatexmath.fop.image.loader;
 
 import java.util.Map;
 
+import org.scilab.forge.jlatexmath.fop.image.ImageJLaTeXMath;
+
 import org.apache.xmlgraphics.image.loader.Image;
 import org.apache.xmlgraphics.image.loader.ImageException;
 import org.apache.xmlgraphics.image.loader.ImageFlavor;
 import org.apache.xmlgraphics.image.loader.impl.AbstractImageConverter;
 import org.apache.xmlgraphics.image.loader.impl.ImageGraphics2D;
-import org.scilab.forge.jlatexmath.fop.image.ImageJLaTeXMath;
 
 /**
  * Convert a LaTeX label to a Graphics2d Painter.

@@ -28,7 +28,7 @@
    <Char code="58" width="0.277779" height="0.105556" />
    <Char code="59" width="0.277779" height="0.105556" depth="0.194445" />
    <Char code="60" width="0.777781" height="0.539098" depth="0.039098" >
-     <NextLarger fontId="jlm_cmex10" code="173" />
+     <NextLarger fontId="jlm_cmex10" code="171" />
    </Char>
    <Char code="61" width="0.500002" height="0.75" depth="0.25" >
       <NextLarger fontId="jlm_cmex10" code="177" />

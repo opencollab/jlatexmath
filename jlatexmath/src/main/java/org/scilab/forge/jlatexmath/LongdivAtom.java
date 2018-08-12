@@ -1,8 +1,8 @@
-/* GraphicsAtom.java
+/* LongdivAtom.java
  * =========================================================================
  * This file is part of the JLaTeXMath Library - http://forge.scilab.org/jlatexmath
  *
- * Copyright (C) 2017 DENIZET Calixte
+ * Copyright (C) 2017-2018 DENIZET Calixte
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -46,23 +46,23 @@
 package org.scilab.forge.jlatexmath;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * An atom representing a long division.
  */
 public class LongdivAtom extends VRowAtom {
 
-    public LongdivAtom(long divisor, long dividend) {
-        setHalign(TeXConstants.ALIGN_RIGHT);
+    public LongdivAtom(long divisor, long dividend, TeXParser tp) {
+        setHalign(TeXConstants.Align.RIGHT);
         setVtop(true);
         String[] res = makeResults(divisor, dividend);
-        Atom rule = new RuleAtom(TeXConstants.UNIT_EX, 0f,
-                                 TeXConstants.UNIT_EX, 2.6f,
-                                 TeXConstants.UNIT_EX, 0.5f);
+        Atom rule = new RuleAtom(new TeXLength(TeXLength.Unit.EX, 0.),
+                                 new TeXLength(TeXLength.Unit.EX, 2.6),
+                                 new TeXLength(TeXLength.Unit.EX, 0.5));
         for (int i = 0; i < res.length; ++i) {
-            Atom num = new TeXFormula(res[i]).root;
             if (i % 2 == 0) {
-                RowAtom ra = new RowAtom(num);
+                final RowAtom ra = TeXParser.getAtomForLatinStr(res[i], new RowAtom(), tp.isMathMode());
                 ra.add(rule);
                 if (i == 0) {
                     append(ra);
@@ -71,23 +71,23 @@ public class LongdivAtom extends VRowAtom {
                 }
             } else if (i == 1) {
                 String div = Long.toString(divisor);
-                SymbolAtom rparen = SymbolAtom.get(TeXFormula.symbolMappings[')']);
+                SymbolAtom rparen = Symbols.RBRACK;
                 Atom big = new BigDelimiterAtom(rparen, 1);
                 Atom ph = new PhantomAtom(big, false, true, true);
                 RowAtom ra = new RowAtom(ph);
                 Atom raised = new RaiseAtom(big,
-                                            TeXConstants.UNIT_X8, 3.5f,
-                                            TeXConstants.UNIT_X8, 0f,
-                                            TeXConstants.UNIT_X8, 0f);
+                                            new TeXLength(TeXLength.Unit.X8, 3.5),
+                                            TeXLength.getZero(),
+                                            TeXLength.getZero());
                 ra.add(new SmashedAtom(raised));
-                ra.add(num);
+                ra.add(TeXParser.getAtomForLatinStr(res[i], tp.isMathMode()));
                 Atom a = new OverlinedAtom(ra);
-                RowAtom ra1 = new RowAtom(new TeXFormula(div).root);
-                ra1.add(new SpaceAtom(TeXConstants.THINMUSKIP));
+                RowAtom ra1 = TeXParser.getAtomForLatinStr(div, new RowAtom(), tp.isMathMode());
+                ra1.add(new SpaceAtom(TeXConstants.Muskip.THIN));
                 ra1.add(a);
                 append(ra1);
             } else {
-                RowAtom ra = new RowAtom(num);
+                final RowAtom ra = TeXParser.getAtomForLatinStr(res[i], new RowAtom(), tp.isMathMode());
                 ra.add(rule);
                 append(ra);
             }
@@ -95,15 +95,16 @@ public class LongdivAtom extends VRowAtom {
     }
 
     private String[] makeResults(long divisor, long dividend) {
-        ArrayList<String> vec = new ArrayList<>();
+        List<String> vec = new ArrayList<>();
         long q = dividend / divisor;
+        final long r = dividend % divisor;
         vec.add(Long.toString(q));
         vec.add(Long.toString(dividend));
 
         while (q != 0) {
-            final double p = (double) Math.floor(Math.log10((double) q));
+            final double p = Math.floor(Math.log10((double)q));
             final double p10 = Math.pow(10., p);
-            final long d = (long) (Math.floor(((double) q) / p10) * p10);
+            final long d = (long) (Math.floor(((double)q) / p10) * p10);
             final long dd = d * divisor;
             vec.add(Long.toString(dd));
             dividend -= dd;

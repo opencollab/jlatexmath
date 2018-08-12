@@ -13,12 +13,14 @@
     <description>only required to prevent example/test modules from being deployed to sonatype</description>
 
     <dependencies>
-        <!-- use dependencies to ensure that is the last module deployed -->
+      <!-- use dependencies to ensure that is the last module deployed -->
+      <!--
         <dependency>
             <groupId>${project.parent.groupId}</groupId>
             <artifactId>jlatexmath-example-export</artifactId>
             <version>${project.parent.version}</version>
-        </dependency>
+            </dependency>
+      -->
         <dependency>
             <groupId>${project.parent.groupId}</groupId>
             <artifactId>jlatexmath-example-giws</artifactId>

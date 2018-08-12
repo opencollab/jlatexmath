@@ -21,7 +21,7 @@ import org.apache.fop.render.ps.EPSTranscoder;
 import org.apache.fop.render.ps.PSTranscoder;
 import org.apache.fop.svg.AbstractFOPTranscoder;
 import org.apache.fop.svg.PDFTranscoder;
-import org.scilab.forge.jlatexmath.DefaultTeXFont;
+import org.scilab.forge.jlatexmath.AlphabetManager;
 import org.scilab.forge.jlatexmath.TeXConstants;
 import org.scilab.forge.jlatexmath.TeXFormula;
 import org.scilab.forge.jlatexmath.TeXIcon;
@@ -44,8 +44,8 @@ public class Convert {
 
         SVGGraphics2D g2 = new SVGGraphics2D(ctx, fontAsShapes);
 
-        DefaultTeXFont.registerAlphabet(new CyrillicRegistration());
-        DefaultTeXFont.registerAlphabet(new GreekRegistration());
+        AlphabetManager.get().registerAlphabet(new CyrillicRegistration());
+        AlphabetManager.get().registerAlphabet(new GreekRegistration());
 
         TeXFormula formula = new TeXFormula(latex);
         TeXIcon icon = formula.createTeXIcon(TeXConstants.STYLE_DISPLAY, 20);

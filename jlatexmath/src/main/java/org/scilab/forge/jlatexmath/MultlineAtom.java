@@ -50,62 +50,70 @@ package org.scilab.forge.jlatexmath;
  */
 public class MultlineAtom extends Atom {
 
-    public static SpaceAtom vsep_in = new SpaceAtom(TeXConstants.UNIT_EX, 0.0f, 1.0f, 0.0f);
+    public static SpaceAtom vsep_in = new SpaceAtom(TeXLength.Unit.EX, 0., 1., 0.);
     public static final int MULTLINE = 0;
     public static final int GATHER = 1;
     public static final int GATHERED = 2;
 
     private ArrayOfAtoms column;
     private int type;
-    private boolean isPartial;
 
-    public MultlineAtom(boolean isPartial, ArrayOfAtoms column, int type) {
-        this.isPartial = isPartial;
+    public MultlineAtom(ArrayOfAtoms column, int type) {
         this.column = column;
         this.type = type;
     }
 
-    public MultlineAtom(ArrayOfAtoms column, int type) {
-        this(false, column, type);
-    }
-
     public Box createBox(TeXEnvironment env) {
-        float tw = env.getTextwidth();
-        if (tw == Float.POSITIVE_INFINITY || type == GATHERED) {
-            return new MatrixAtom(isPartial, column, "").createBox(env);
+        if (type == GATHERED) {
+            return new ArrayAtom(column, ArrayOptions.getEmpty()).createBox(env);
+        }
+        Box[] boxes = new Box[column.row];
+        for (int i = 0; i < column.row; ++i) {
+            boxes[i] = column.get(i, 0).createBox(env);
+        }
+        double tw = env.getTextwidth();
+        if (tw == Double.POSITIVE_INFINITY) {
+            tw = -Double.POSITIVE_INFINITY;
+            for (int i = 0; i < column.row; ++i) {
+                tw = Math.max(tw, boxes[i].getWidth());
+            }
         }
 
-        VerticalBox vb = new VerticalBox();
-        Atom at = column.array.get(0).get(0);
-        int alignment = type == GATHER ? TeXConstants.ALIGN_CENTER : TeXConstants.ALIGN_LEFT;
-        if (at.alignment != -1) {
-            alignment = at.alignment;
+        final VerticalBox vb = new VerticalBox();
+        Atom at = column.get(0, 0);
+        TeXConstants.Align atAlignment = at.getAlignment();
+        TeXConstants.Align alignment;
+        if (atAlignment != TeXConstants.Align.NONE) {
+            alignment = atAlignment;
+        } else {
+            alignment = type == GATHER ? TeXConstants.Align.CENTER : TeXConstants.Align.LEFT;
         }
-        vb.add(new HorizontalBox(at.createBox(env), tw, alignment));
+
+        vb.add(new HorizontalBox(boxes[0], tw, alignment));
         Box Vsep = vsep_in.createBox(env);
         for (int i = 1; i < column.row - 1; i++) {
-            at = column.array.get(i).get(0);
-            alignment = TeXConstants.ALIGN_CENTER;
-            if (at.alignment != -1) {
-                alignment = at.alignment;
-            }
+            at = column.get(i, 0);
+            atAlignment = at.getAlignment();
+            alignment = atAlignment == TeXConstants.Align.NONE ? TeXConstants.Align.CENTER : atAlignment;
             vb.add(Vsep);
-            vb.add(new HorizontalBox(at.createBox(env), tw, alignment));
+            vb.add(new HorizontalBox(boxes[i], tw, alignment));
         }
 
         if (column.row > 1) {
-            at = column.array.get(column.row - 1).get(0);
-            alignment = type == GATHER ? TeXConstants.ALIGN_CENTER : TeXConstants.ALIGN_RIGHT;
-            if (at.alignment != -1) {
-                alignment = at.alignment;
+            at = column.get(column.row - 1, 0);
+            atAlignment = at.getAlignment();
+            if (atAlignment != TeXConstants.Align.NONE) {
+                alignment = atAlignment;
+            } else {
+                alignment = type == GATHER ? TeXConstants.Align.CENTER : TeXConstants.Align.RIGHT;
             }
             vb.add(Vsep);
-            vb.add(new HorizontalBox(at.createBox(env), tw, alignment));
+            vb.add(new HorizontalBox(boxes[column.row - 1], tw, alignment));
         }
 
-        float height = vb.getHeight() + vb.getDepth();
-        vb.setHeight(height / 2);
-        vb.setDepth(height / 2);
+        final double height = vb.getHeight() + vb.getDepth();
+        vb.setHeight(height / 2.);
+        vb.setDepth(height / 2.);
 
         return vb;
     }

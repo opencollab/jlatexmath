@@ -58,45 +58,15 @@ public class TeXConstants {
     // ALIGNMENT CONSTANTS
     // *******************
 
-    /**
-     * Alignment constant: extra space will be added to the right of the formula
-     */
-    public static final int ALIGN_LEFT = 0;
+    public static enum Align {LEFT, RIGHT, CENTER, TOP, BOTTOM, NONE, INVALID};
+    public static enum Muskip {THIN, MED, THICK, NEGTHIN, NEGMED, NEGTHICK, NONE};
+    public static enum Type {ORDINARY, BIG_OPERATOR, BINARY_OPERATOR, RELATION, OPENING, CLOSING, PUNCTUATION, INNER, ACCENT, INTERTEXT, MULTICOLUMN, HLINE, NONE};
 
-    /**
-     * Alignment constant: extra space will be added to the left of the formula
-     */
-    public static final int ALIGN_RIGHT = 1;
 
-    /**
-     * Alignment constant: the formula will be centered in the middle. This constant
-     * can be used for both horizontal and vertical alignment.
-     */
-    public static final int ALIGN_CENTER = 2;
-
-    /**
-     * Alignment constant: extra space will be added under the formula
-     */
-    public static final int ALIGN_TOP = 3;
-
-    /**
-     * Alignment constant: extra space will be added above the formula
-     */
-    public static final int ALIGN_BOTTOM = 4;
-
-    /**
-     * Alignment constant: none
-     */
-    public static final int ALIGN_NONE = 5;
-
-    public static final int THINMUSKIP = 1;
-    public static final int MEDMUSKIP = 2;
-    public static final int THICKMUSKIP = 3;
-    public static final int NEGTHINMUSKIP = -1;
-    public static final int NEGMEDMUSKIP = -2;
-    public static final int NEGTHICKMUSKIP = -3;
-
-    public static final int QUAD = 3;
+    // ******************************************
+    // * Define elements which are a group opener
+    // ******************************************
+    public static enum Opener {NONE, LBRACE, LSQBRACKET, B_LSQBRACKET, B_LBRACKET, BEGIN_MATH};
 
     public static final int SCRIPT_NORMAL = 0;
     public static final int SCRIPT_NOLIMITS = 1;
@@ -258,102 +228,4 @@ public class TeXConstants {
      * The same as the script style, but symbols are rendered in a smaller size.
      */
     public static final int STYLE_SCRIPT_SCRIPT = 6;
-
-    // **************
-    // UNIT CONSTANTS
-    // **************
-
-    /**
-     * Unit constant: em
-     * <p>
-     * 1 em = the width of the capital 'M' in the current font
-     */
-    public static final int UNIT_EM = 0;
-
-    /**
-     * Unit constant: ex
-     * <p>
-     * 1 ex = the height of the character 'x' in the current font
-     */
-    public static final int UNIT_EX = 1;
-
-    /**
-     * Unit constant: pixel
-     */
-    public static final int UNIT_PIXEL = 2;
-
-    /**
-     * Unit constant: postscript point
-     */
-    public static final int UNIT_POINT = 3;
-
-    /**
-     * Unit constant: pica
-     * <p>
-     * 1 pica = 12 point
-     */
-    public static final int UNIT_PICA = 4;
-
-    /**
-     * Unit constant: math unit (mu)
-     * <p>
-     * 1 mu = 1/18 em (em taken from the "mufont")
-     */
-    public static final int UNIT_MU = 5;
-
-    /**
-     * Unit constant: cm
-     * <p>
-     * 1 cm = 28.346456693 point
-     */
-    public static final int UNIT_CM = 6;
-
-    /**
-     * Unit constant: mm
-     * <p>
-     * 1 mm = 2.8346456693 point
-     */
-    public static final int UNIT_MM = 7;
-
-    /**
-     * Unit constant: in
-     * <p>
-     * 1 in = 72 point
-     */
-    public static final int UNIT_IN = 8;
-
-    /**
-     * Unit constant: sp
-     * <p>
-     * 1 sp = 65536 point
-     */
-    public static final int UNIT_SP = 9;
-
-    /**
-     * Unit constant: in
-     * <p>
-     * 1 in = 72.27 pt
-     */
-    public static final int UNIT_PT = 10;
-
-    /**
-     * Unit constant: in
-     * <p>
-     * 1 in = 72 point
-     */
-    public static final int UNIT_DD = 11;
-
-    /**
-     * Unit constant: in
-     * <p>
-     * 1 in = 72 point
-     */
-    public static final int UNIT_CC = 12;
-
-    /**
-     * Unit constant: x8
-     * <p>
-     * 1 s8 = 1 default rule thickness
-     */
-    public static final int UNIT_X8 = 13;
 }

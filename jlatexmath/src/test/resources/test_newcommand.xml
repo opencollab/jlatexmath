@@ -1,0 +1,24 @@
+<?xml version='1.0'?>
+<tests name="newcommand">
+  <test>
+    <id name="1"/>
+    <code>
+      <![CDATA[
+               \newcommand{\comOne}[1]{\frac{#1}{x^{#1}}}
+               \comOne{\sigma}
+      ]]>
+    </code>
+    <expected success="true"/>
+  </test>
+  
+  <test>
+    <id name="2"/>
+    <code>
+      <![CDATA[
+               \newcommand{\comTwo}[2]{\frac{#1 + #2}{x_{#2}^{#1}}}
+               \comTwo{\sigma}{\Omega}
+      ]]>
+    </code>
+    <expected success="true"/>
+  </test>
+</tests>

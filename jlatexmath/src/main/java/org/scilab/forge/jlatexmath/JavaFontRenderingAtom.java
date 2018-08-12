@@ -1,4 +1,4 @@
-/* ScaleAtom.java
+/* JavaFontRenderingAtom.java
  * =========================================================================
  * This file is part of the JLaTeXMath Library - http://forge.scilab.org/jlatexmath
  *
@@ -52,43 +52,66 @@ import java.awt.Font;
  */
 public class JavaFontRenderingAtom extends Atom {
 
-    private String str;
-    private int type;
-    private TeXFormula.FontInfos fontInfos;
+    private final String str;
+    private final int style;
+    private final ExternalFontManager.FontSSSF f;
+    private final Font font;
 
-    public JavaFontRenderingAtom(String str, int type) {
+    private JavaFontRenderingAtom(final String str, final int style, final ExternalFontManager.FontSSSF f, final Font font) {
         this.str = str;
-        this.type = type;
+        this.style = style;
+        this.f = f;
+        this.font = font;
     }
 
-    public JavaFontRenderingAtom(String str, TeXFormula.FontInfos fontInfos) {
-        this(str, 0);
-        this.fontInfos = fontInfos;
+    public JavaFontRenderingAtom(final String str, final int style) {
+        this(str, style, null, null);
+    }
+
+    public JavaFontRenderingAtom(final String str, final ExternalFontManager.FontSSSF f) {
+        this(str, -1, f, null);
+    }
+
+    public JavaFontRenderingAtom(final String str) {
+        this(str, -1, null, null);
+    }
+
+    public JavaFontRenderingAtom(final String str, final Font font) {
+        this(str, -1, null, font);
     }
 
     public Box createBox(TeXEnvironment env) {
-        if (fontInfos == null) {
-            return new JavaFontRenderingBox(str, type, DefaultTeXFont.getSizeFactor(env.getStyle()));
+        final double factor = TeXFont.getSizeFactor(env.getStyle());
+        if (f == null) {
+            if (style == -1) {
+                final TeXFont dtf = env.getTeXFont();
+                int style = dtf.isIt ? Font.ITALIC : Font.PLAIN;
+                style = style | (dtf.isBold ? Font.BOLD : 0);
+                return new JavaFontRenderingBox(str, style, factor, font, dtf.isRoman);
+            } else {
+                return new JavaFontRenderingBox(str, style, factor, font);
+            }
         } else {
-            DefaultTeXFont dtf = (DefaultTeXFont) env.getTeXFont();
-            int type = dtf.isIt ? Font.ITALIC : Font.PLAIN;
-            type = type | (dtf.isBold ? Font.BOLD : 0);
-            boolean kerning = dtf.isRoman;
+            final TeXFont dtf = env.getTeXFont();
+            int style = dtf.isIt ? Font.ITALIC : Font.PLAIN;
+            style = style | (dtf.isBold ? Font.BOLD : 0);
             Font font;
+            final String ss = f.getSS();
+            final String sf = f.getSF();
             if (dtf.isSs) {
-                if (fontInfos.sansserif == null) {
-                    font = new Font(fontInfos.serif, Font.PLAIN, 10);
+                if (ss == null) {
+                    font = new Font(sf, Font.PLAIN, 10);
                 } else {
-                    font = new Font(fontInfos.sansserif, Font.PLAIN, 10);
+                    font = new Font(ss, Font.PLAIN, 10);
                 }
             } else {
-                if (fontInfos.serif == null) {
-                    font = new Font(fontInfos.sansserif, Font.PLAIN, 10);
+                if (sf == null) {
+                    font = new Font(ss, Font.PLAIN, 10);
                 } else {
-                    font = new Font(fontInfos.serif, Font.PLAIN, 10);
+                    font = new Font(sf, Font.PLAIN, 10);
                 }
             }
-            return new JavaFontRenderingBox(str, type, DefaultTeXFont.getSizeFactor(env.getStyle()), font, kerning);
+            return new JavaFontRenderingBox(str, style, factor, font, dtf.isRoman);
         }
     }
 }

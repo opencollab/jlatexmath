@@ -43,6 +43,7 @@
   <SymbolMapping name="therefore" ch="41" fontId="jlm_msam10" />
   <SymbolMapping name="because" ch="42" fontId="jlm_msam10" />
   <SymbolMapping name="doteqdot" ch="43" fontId="jlm_msam10" />
+  <SymbolMapping name="Doteq" ch="43" fontId="jlm_msam10" />
   <SymbolMapping name="triangleq" ch="44" fontId="jlm_msam10" />
   <SymbolMapping name="precsim" ch="45" fontId="jlm_msam10" />
   <SymbolMapping name="lesssim" ch="46" fontId="jlm_msam10" />
@@ -108,6 +109,7 @@
   <SymbolMapping name="ulcorner" ch="112" fontId="jlm_msam10" />
   <SymbolMapping name="urcorner" ch="113" fontId="jlm_msam10" />
   <SymbolMapping name="textregistered" ch="114" fontId="jlm_msam10" />
+  <SymbolMapping name="circledR" ch="114" fontId="jlm_msam10" />
   <SymbolMapping name="circledS" ch="115" fontId="jlm_msam10" />
   <SymbolMapping name="pitchfork" ch="116" fontId="jlm_msam10" />
   <SymbolMapping name="dotplus" ch="117" fontId="jlm_msam10" />
@@ -132,7 +134,7 @@
   <SymbolMapping name="nsucc" ch="168" fontId="jlm_msbm10" />
   <SymbolMapping name="lneqq" ch="169" fontId="jlm_msbm10" />
   <SymbolMapping name="gneqq" ch="170" fontId="jlm_msbm10" />
-  <SymbolMapping name="nleqslant" ch="173" fontId="jlm_msbm10" />
+  <SymbolMapping name="nleqslant" ch="171" fontId="jlm_msbm10" />
   <SymbolMapping name="ngeqslant" ch="174" fontId="jlm_msbm10" />
   <SymbolMapping name="lneq" ch="175" fontId="jlm_msbm10" />
   <SymbolMapping name="gneq" ch="176" fontId="jlm_msbm10" />

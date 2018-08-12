@@ -1,0 +1,12 @@
+<?xml version='1.0'?>
+<tests name="begingroup">
+  <test>
+    <id name="1"/>
+    <code>
+      <![CDATA[
+               \frac\begingroup 1 + 2 + 3 \endgroup \begingroup 4 + 5 \endgroup
+      ]]>
+    </code>
+    <expected success="true"/>
+  </test>
+</tests>

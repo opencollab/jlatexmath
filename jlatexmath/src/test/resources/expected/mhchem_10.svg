@@ -1,0 +1,42 @@
+<!--
+\begin{gather}
+\ce{OCO^{.-}} \cr
+\ce{NO^{(2.)-}} \cr
+\end{gather}
+-->
+<svg width="57" height="42" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<style type="text/css">
+@font-face {
+font-family: 'jlm_cmr10';
+src: url('fonts/jlm_cmr10.ttf') format('truetype');
+font-style: normal;
+}
+.jlm_cmr10 {
+font-family: 'jlm_cmr10';
+font-size: 133px;
+}
+@font-face {
+font-family: 'jlm_cmsy10';
+src: url('fonts/jlm_cmsy10.ttf') format('truetype');
+font-style: normal;
+}
+.jlm_cmsy10 {
+font-family: 'jlm_cmsy10';
+font-size: 133px;
+}
+</style>
+<g stroke="rgb(0,0,0)" fill="rgb(0,0,0)" stroke-width="1.0" stroke-miterlimit="10.0" stroke-linejoin="miter" stroke-linecap="square">
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,6.9629626,16.95187)">O</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,17.333376,16.95187)">C</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,26.96303,16.95187)">O</text>
+<text class="jlm_cmsy10" transform="matrix(0.06999999999999999,0.0,0.0,0.07,37.333443,11.44445)">²</text>
+<text class="jlm_cmsy10" transform="matrix(0.06999999999999999,0.0,0.0,0.07,42.00013,11.44445)">¡</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,6.0,35.20002)">N</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,16.000027,35.20002)">O</text>
+<text class="jlm_cmr10" transform="matrix(0.06999999999999999,0.0,0.0,0.07,26.37044,29.692602)">(</text>
+<text class="jlm_cmr10" transform="matrix(0.06999999999999999,0.0,0.0,0.07,30.00008,29.692602)">2</text>
+<text class="jlm_cmsy10" transform="matrix(0.06999999999999999,0.0,0.0,0.07,34.666767,29.692602)">²</text>
+<text class="jlm_cmr10" transform="matrix(0.06999999999999999,0.0,0.0,0.07,39.33345,29.692602)">)</text>
+<text class="jlm_cmsy10" transform="matrix(0.06999999999999999,0.0,0.0,0.07,42.96309,29.692602)">¡</text>
+</g>
+</svg>

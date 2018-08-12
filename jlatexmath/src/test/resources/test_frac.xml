@@ -1,0 +1,32 @@
+<?xml version='1.0'?>
+<tests name="frac">
+  <test>
+    <id name="1"/>
+    <code>
+      <![CDATA[
+               \frac{1}{2}
+      ]]>
+    </code>
+    <expected success="true"/>
+  </test>
+  
+  <test>
+    <id name="2"/>
+    <code>
+      <![CDATA[
+               \frac23
+      ]]>
+    </code>
+    <expected success="true"/>
+  </test>
+  
+  <test>
+    <id name="3"/>
+    <code>
+      <![CDATA[
+               \frac{\pi}3
+      ]]>
+    </code>
+    <expected success="true"/>
+  </test>
+</tests>

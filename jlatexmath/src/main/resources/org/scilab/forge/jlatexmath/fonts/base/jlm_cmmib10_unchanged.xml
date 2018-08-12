@@ -103,7 +103,7 @@
    <Char code="58" width="0.319443" height="0.155556" />
    <Char code="59" width="0.319443" height="0.155556" depth="0.194445" />
    <Char code="60" width="0.89444" height="0.585556" depth="0.085556" >
-     <NextLarger fontId="jlm_cmex10" code="173" />
+     <NextLarger fontId="jlm_cmex10" code="171" />
    </Char>
    <Char code="61" width="0.574997" height="0.75" depth="0.25" >
       <NextLarger fontId="jlm_cmex10" code="177" />
@@ -124,6 +124,9 @@
       <Kern code="196" val="0.127777"/>
    </Char>
    <Char code="101" width="0.553609" height="0.444445" >
+      <Kern code="196" val="0.063889"/>
+   </Char>
+   <Char code="111" width="0.584719" height="0.444445" >
       <Kern code="196" val="0.063889"/>
    </Char>
    <Char code="123" width="0.393518" height="0.444445" >

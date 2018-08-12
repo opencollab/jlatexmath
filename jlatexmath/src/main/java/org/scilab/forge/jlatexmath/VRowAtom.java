@@ -48,7 +48,9 @@
 
 package org.scilab.forge.jlatexmath;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
+import java.util.BitSet;
+import java.util.List;
 import java.util.ListIterator;
 
 /**
@@ -57,24 +59,40 @@ import java.util.ListIterator;
 public class VRowAtom extends Atom {
 
     // atoms to be displayed horizontally next to eachother
-    protected LinkedList<Atom> elements = new LinkedList<Atom>();
-    private SpaceAtom raise = new SpaceAtom(TeXConstants.UNIT_EX, 0, 0, 0);
+    protected List<Atom> elements;
+    private SpaceAtom raise = new SpaceAtom(TeXLength.Unit.EX, 0, 0, 0);
     protected boolean addInterline = false;
     protected boolean vtop = false;
-    protected int halign = TeXConstants.ALIGN_NONE;
+    protected TeXConstants.Align halign = TeXConstants.Align.NONE;
 
     public VRowAtom() {
-        // empty
+        this.elements = new ArrayList<Atom>();
     }
 
     public VRowAtom(Atom el) {
-        if (el != null) {
-            if (el instanceof VRowAtom)
+        if (el == null) {
+            this.elements = new ArrayList<Atom>();
+        } else  {
+            if (el instanceof VRowAtom) {
+                this.elements = new ArrayList<Atom>(((VRowAtom) el).elements.size());
                 // no need to make an mrow the only element of an mrow
                 elements.addAll(((VRowAtom) el).elements);
-            else
+            } else {
+                this.elements = new ArrayList<Atom>();
                 elements.add(el);
+            }
         }
+    }
+
+    public VRowAtom(Atom... atoms) {
+        this.elements = new ArrayList<Atom>(atoms.length);
+        for (Atom a : atoms) {
+            elements.add(a);
+        }
+    }
+
+    public VRowAtom(ArrayList<Atom> atoms) {
+        this.elements = atoms;
     }
 
     public void setAddInterline(boolean addInterline) {
@@ -85,11 +103,11 @@ public class VRowAtom extends Atom {
         return this.addInterline;
     }
 
-    public void setHalign(int halign) {
+    public void setHalign(TeXConstants.Align halign) {
         this.halign = halign;
     }
 
-    public int getHalign() {
+    public TeXConstants.Align getHalign() {
         return halign;
     }
 
@@ -101,31 +119,38 @@ public class VRowAtom extends Atom {
         return vtop;
     }
 
-    public void setRaise(int unit, float r) {
+    public void setRaise(TeXLength.Unit unit, double r) {
         raise = new SpaceAtom(unit, r, 0, 0);
     }
 
     public Atom getLastAtom() {
-        return elements.removeLast();
+        final int s = elements.size();
+        if (s != 0) {
+            return elements.remove(s - 1);
+        }
+
+        return EmptyAtom.get();
     }
 
     public final void add(Atom el) {
-        if (el != null)
+        if (el != null) {
             elements.add(0, el);
+        }
     }
 
     public final void append(Atom el) {
-        if (el != null)
+        if (el != null) {
             elements.add(el);
+        }
     }
 
     public Box createBox(TeXEnvironment env) {
         VerticalBox vb = new VerticalBox();
-        if (halign != TeXConstants.ALIGN_NONE) {
-            float maxWidth = -Float.POSITIVE_INFINITY;
-            LinkedList<Box> boxes = new LinkedList<>();
-            for (ListIterator<Atom> it = elements.listIterator(); it.hasNext();) {
-                Box b = it.next().createBox(env);
+        if (halign != TeXConstants.Align.NONE) {
+            double maxWidth = -Double.POSITIVE_INFINITY;
+            ArrayList<Box> boxes = new ArrayList<>();
+            for (ListIterator it = elements.listIterator(); it.hasNext();) {
+                Box b = ((Atom)it.next()).createBox(env);
                 boxes.add(b);
                 if (maxWidth < b.getWidth()) {
                     maxWidth = b.getWidth();
@@ -134,8 +159,8 @@ public class VRowAtom extends Atom {
             Box interline = new StrutBox(0, env.getInterline(), 0, 0);
 
             // convert atoms to boxes and add to the horizontal box
-            for (ListIterator<Box> it = boxes.listIterator(); it.hasNext();) {
-                Box b = it.next();
+            for (ListIterator it = boxes.listIterator(); it.hasNext();) {
+                Box b = (Box) it.next();
                 vb.add(new HorizontalBox(b, maxWidth, halign));
                 if (addInterline && it.hasNext()) {
                     vb.add(interline);
@@ -145,8 +170,8 @@ public class VRowAtom extends Atom {
             Box interline = new StrutBox(0, env.getInterline(), 0, 0);
 
             // convert atoms to boxes and add to the horizontal box
-            for (ListIterator<Atom> it = elements.listIterator(); it.hasNext();) {
-                vb.add(it.next().createBox(env));
+            for (ListIterator it = elements.listIterator(); it.hasNext();) {
+                vb.add(((Atom)it.next()).createBox(env));
                 if (addInterline && it.hasNext()) {
                     vb.add(interline);
                 }
@@ -155,11 +180,12 @@ public class VRowAtom extends Atom {
 
         vb.setShift(-raise.createBox(env).getWidth());
         if (vtop) {
-            float t = vb.getSize() == 0 ? 0 : vb.children.getFirst().getHeight();
+            final double t = vb.getSize() == 0 ? 0 : vb.children.get(0).getHeight();
             vb.setHeight(t);
             vb.setDepth(vb.getDepth() + vb.getHeight() - t);
         } else {
-            float t = vb.getSize() == 0 ? 0 : vb.children.getLast().getDepth();
+            final int s = vb.children.size();
+            final double t = vb.getSize() == 0 ? 0 : vb.children.get(s - 1).getDepth();
             vb.setHeight(vb.getDepth() + vb.getHeight() - t);
             vb.setDepth(t);
         }

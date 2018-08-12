@@ -56,14 +56,24 @@ public class RomanAtom extends Atom {
         this.base = base;
     }
 
+    public Atom getTrueBase() {
+        return base;
+    }
+
     public Box createBox(TeXEnvironment env) {
         Box box;
         if (base != null) {
-            env = env.copy(env.getTeXFont().copy());
-            env.getTeXFont().setRoman(true);
-            box = base.createBox(env);
+            final TeXFont tf = env.getTeXFont();
+            final boolean rm = tf.getRoman();
+            if (rm) {
+                box = base.createBox(env);
+            } else {
+                tf.setRoman(true);
+                box = base.createBox(env);
+                tf.setRoman(false);
+            }
         } else {
-            box = new StrutBox(0, 0, 0, 0);
+            box = StrutBox.getEmpty();
         }
 
         return box;

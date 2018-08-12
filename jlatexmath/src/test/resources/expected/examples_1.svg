@@ -1,0 +1,453 @@
+<!--
+\begin{array}{lr}\mbox{\textcolor{Blue}{Russian}}&\mbox{\textcolor{Melon}{Greek}}\\
+               \mbox{ПРИВЕТ МИР}&\mbox{ΓΕΙΆ ΚΌΣΜΟ}\\
+               \mbox{привет мир}&\mbox{γειά κόσμο}\\
+               \mathbf{\mbox{привет мир}}&\mathbf{\mbox{γειά κόσμο}}\\
+               \mathit{\mbox{привет мир}}&\mathit{\mbox{γειά κόσμο}}\\
+               \mathsf{\mbox{привет мир}}&\mathsf{\mbox{γειά κόσμο}}\\
+               \mathtt{\mbox{привет мир}}&\mathtt{\mbox{γειά κόσμο}}\\
+               \mathbf{\mathit{\mbox{привет мир}}}&\mathbf{\mathit{\mbox{γειά κόσμο}}}\\
+               \mathbf{\mathsf{\mbox{привет мир}}}&\mathbf{\mathsf{\mbox{γειά κόσμο}}}\\
+               \mathsf{\mathit{\mbox{привет мир}}}&\mathsf{\mathit{\mbox{γειά κόσμο}}}\\
+               &\\
+               \mbox{\textcolor{Salmon}{Bulgarian}}&\mbox{\textcolor{Tan}{Serbian}}\\
+               \mbox{здравей свят}&\mbox{Хелло уорлд}\\
+               &\\
+               \mbox{\textcolor{Turquoise}{Bielorussian}}&\mbox{\textcolor{LimeGreen}{Ukrainian}}\\
+               \mbox{прывітаньне Свет}&\mbox{привіт світ}\\
+               \end{array}
+-->
+<svg width="237" height="267" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<style type="text/css">
+@font-face {
+font-family: 'jlm_wnbx10';
+src: url('fonts/jlm_wnbx10.ttf') format('truetype');
+font-style: normal;
+}
+.jlm_wnbx10 {
+font-family: 'jlm_wnbx10';
+font-size: 133px;
+}
+@font-face {
+font-family: 'jlm_wntt10';
+src: url('fonts/jlm_wntt10.ttf') format('truetype');
+font-style: normal;
+}
+.jlm_wntt10 {
+font-family: 'jlm_wntt10';
+font-size: 133px;
+}
+@font-face {
+font-family: 'jlm_wnss10';
+src: url('fonts/jlm_wnss10.ttf') format('truetype');
+font-style: normal;
+}
+.jlm_wnss10 {
+font-family: 'jlm_wnss10';
+font-size: 133px;
+}
+@font-face {
+font-family: 'jlm_fcmrpg';
+src: url('fonts/jlm_fcmrpg.ttf') format('truetype');
+font-style: normal;
+}
+.jlm_fcmrpg {
+font-family: 'jlm_fcmrpg';
+font-size: 133px;
+}
+@font-face {
+font-family: 'jlm_fcmbipg';
+src: url('fonts/jlm_fcmbipg.ttf') format('truetype');
+font-style: normal;
+}
+.jlm_fcmbipg {
+font-family: 'jlm_fcmbipg';
+font-size: 133px;
+}
+@font-face {
+font-family: 'jlm_fcsropg';
+src: url('fonts/jlm_fcsropg.ttf') format('truetype');
+font-style: normal;
+}
+.jlm_fcsropg {
+font-family: 'jlm_fcsropg';
+font-size: 133px;
+}
+@font-face {
+font-family: 'jlm_cmr10';
+src: url('fonts/jlm_cmr10.ttf') format('truetype');
+font-style: normal;
+}
+.jlm_cmr10 {
+font-family: 'jlm_cmr10';
+font-size: 133px;
+}
+@font-face {
+font-family: 'jlm_wnssbx10';
+src: url('fonts/jlm_wnssbx10.ttf') format('truetype');
+font-style: normal;
+}
+.jlm_wnssbx10 {
+font-family: 'jlm_wnssbx10';
+font-size: 133px;
+}
+@font-face {
+font-family: 'jlm_wnbxti10';
+src: url('fonts/jlm_wnbxti10.ttf') format('truetype');
+font-style: normal;
+}
+.jlm_wnbxti10 {
+font-family: 'jlm_wnbxti10';
+font-size: 133px;
+}
+@font-face {
+font-family: 'jlm_fctrpg';
+src: url('fonts/jlm_fctrpg.ttf') format('truetype');
+font-style: normal;
+}
+.jlm_fctrpg {
+font-family: 'jlm_fctrpg';
+font-size: 133px;
+}
+@font-face {
+font-family: 'jlm_fcsrpg';
+src: url('fonts/jlm_fcsrpg.ttf') format('truetype');
+font-style: normal;
+}
+.jlm_fcsrpg {
+font-family: 'jlm_fcsrpg';
+font-size: 133px;
+}
+@font-face {
+font-family: 'jlm_fcmripg';
+src: url('fonts/jlm_fcmripg.ttf') format('truetype');
+font-style: normal;
+}
+.jlm_fcmripg {
+font-family: 'jlm_fcmripg';
+font-size: 133px;
+}
+@font-face {
+font-family: 'jlm_fcmbpg';
+src: url('fonts/jlm_fcmbpg.ttf') format('truetype');
+font-style: normal;
+}
+.jlm_fcmbpg {
+font-family: 'jlm_fcmbpg';
+font-size: 133px;
+}
+@font-face {
+font-family: 'jlm_wnti10';
+src: url('fonts/jlm_wnti10.ttf') format('truetype');
+font-style: normal;
+}
+.jlm_wnti10 {
+font-family: 'jlm_wnti10';
+font-size: 133px;
+}
+@font-face {
+font-family: 'jlm_wnr10';
+src: url('fonts/jlm_wnr10.ttf') format('truetype');
+font-style: normal;
+}
+.jlm_wnr10 {
+font-family: 'jlm_wnr10';
+font-size: 133px;
+}
+@font-face {
+font-family: 'jlm_fcsbpg';
+src: url('fonts/jlm_fcsbpg.ttf') format('truetype');
+font-style: normal;
+}
+.jlm_fcsbpg {
+font-family: 'jlm_fcsbpg';
+font-size: 133px;
+}
+@font-face {
+font-family: 'jlm_wnssi10';
+src: url('fonts/jlm_wnssi10.ttf') format('truetype');
+font-style: normal;
+}
+.jlm_wnssi10 {
+font-family: 'jlm_wnssi10';
+font-size: 133px;
+}
+</style>
+<g stroke="rgb(0,0,255)" fill="rgb(0,0,255)" stroke-width="1.0" stroke-miterlimit="10.0" stroke-linejoin="miter" stroke-linecap="square">
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,12.666667,17.55556)">R</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,22.481506,17.55556)">u</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,29.888933,17.55556)">s</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,35.1482,17.55556)">s</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,40.407467,17.55556)">i</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,44.111187,17.55556)">a</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,50.77788,17.55556)">n</text>
+</g>
+<g stroke="rgb(255,138,128)" fill="rgb(255,138,128)" stroke-width="1.0" stroke-miterlimit="10.0" stroke-linejoin="miter" stroke-linecap="square">
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,188.81578,17.55556)">G</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,199.27876,17.55556)">r</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,204.501,17.55556)">e</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,210.42696,17.55556)">e</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,216.3529,17.55556)">k</text>
+</g>
+<g stroke="rgb(0,0,0)" fill="rgb(0,0,0)" stroke-width="1.0" stroke-miterlimit="10.0" stroke-linejoin="miter" stroke-linecap="square">
+<text class="jlm_wnr10" transform="matrix(0.1,0.0,0.0,0.1,12.666667,32.709625)">П</text>
+<text class="jlm_wnr10" transform="matrix(0.1,0.0,0.0,0.1,23.03708,32.709625)">Р</text>
+<text class="jlm_wnr10" transform="matrix(0.1,0.0,0.0,0.1,32.11117,32.709625)">И</text>
+<text class="jlm_wnr10" transform="matrix(0.1,0.0,0.0,0.1,42.481586,32.709625)">В</text>
+<text class="jlm_wnr10" transform="matrix(0.1,0.0,0.0,0.1,51.926067,32.709625)">Е</text>
+<text class="jlm_wnr10" transform="matrix(0.1,0.0,0.0,0.1,61.00016,32.709625)">Т</text>
+<text class="jlm_wnr10" transform="matrix(0.1,0.0,0.0,0.1,75.074265,32.709625)">М</text>
+<text class="jlm_wnr10" transform="matrix(0.1,0.0,0.0,0.1,87.29652,32.709625)">И</text>
+<text class="jlm_wnr10" transform="matrix(0.1,0.0,0.0,0.1,97.66693,32.709625)">Р</text>
+<text class="jlm_fcmrpg" transform="matrix(0.1,0.0,0.0,0.1,134.51886,32.709625)">Γ</text>
+<text class="jlm_fcmrpg" transform="matrix(0.1,0.0,0.0,0.1,142.85219,32.709625)">Ε</text>
+<text class="jlm_fcmrpg" transform="matrix(0.1,0.0,0.0,0.1,151.91885,32.709625)">Ι</text>
+<text class="jlm_fcmrpg" transform="matrix(0.1,0.0,0.0,0.1,157.10551,32.709625)">ʹ</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,155.62106,32.709625)">A</text>
+<text class="jlm_fcmrpg" transform="matrix(0.1,0.0,0.0,0.1,170.06554,32.709625)">Κ</text>
+<text class="jlm_fcmrpg" transform="matrix(0.1,0.0,0.0,0.1,180.81221,32.709625)">ʹ</text>
+<text class="jlm_fcmrpg" transform="matrix(0.1,0.0,0.0,0.1,181.54997,32.709625)">Ο</text>
+<text class="jlm_fcmrpg" transform="matrix(0.1,0.0,0.0,0.1,191.17665,32.709625)">Σ</text>
+<text class="jlm_fcmrpg" transform="matrix(0.1,0.0,0.0,0.1,200.80331,32.709625)">Μ</text>
+<text class="jlm_fcmrpg" transform="matrix(0.1,0.0,0.0,0.1,213.01665,32.709625)">Ο</text>
+<text class="jlm_wnr10" transform="matrix(0.1,0.0,0.0,0.1,12.666667,48.09036)">п</text>
+<text class="jlm_wnr10" transform="matrix(0.1,0.0,0.0,0.1,20.074093,48.09036)">р</text>
+<text class="jlm_wnr10" transform="matrix(0.1,0.0,0.0,0.1,27.48152,48.09036)">и</text>
+<text class="jlm_wnr10" transform="matrix(0.1,0.0,0.0,0.1,34.888947,48.09036)">в</text>
+<text class="jlm_wnr10" transform="matrix(0.1,0.0,0.0,0.1,41.55564,48.09036)">е</text>
+<text class="jlm_wnr10" transform="matrix(0.1,0.0,0.0,0.1,47.481586,48.09036)">т</text>
+<text class="jlm_wnr10" transform="matrix(0.1,0.0,0.0,0.1,58.59273,48.09036)">м</text>
+<text class="jlm_wnr10" transform="matrix(0.1,0.0,0.0,0.1,67.48165,48.09036)">и</text>
+<text class="jlm_wnr10" transform="matrix(0.1,0.0,0.0,0.1,74.88908,48.09036)">р</text>
+<text class="jlm_fcmrpg" transform="matrix(0.1,0.0,0.0,0.1,160.18553,48.09036)">γ</text>
+<text class="jlm_fcmrpg" transform="matrix(0.1,0.0,0.0,0.1,167.58553,48.09036)">ε</text>
+<text class="jlm_fcmrpg" transform="matrix(0.1,0.0,0.0,0.1,173.31886,48.09036)">ι</text>
+<text class="jlm_fcmrpg" transform="matrix(0.1,0.0,0.0,0.1,176.65219,48.09036)">ά</text>
+<text class="jlm_fcmrpg" transform="matrix(0.1,0.0,0.0,0.1,187.76332,48.09036)">κ</text>
+<text class="jlm_fcmrpg" transform="matrix(0.1,0.0,0.0,0.1,194.80331,48.09036)">ό</text>
+<text class="jlm_fcmrpg" transform="matrix(0.1,0.0,0.0,0.1,201.8433,48.09036)">σ</text>
+<text class="jlm_fcmrpg" transform="matrix(0.1,0.0,0.0,0.1,209.42998,48.09036)">μ</text>
+<text class="jlm_fcmrpg" transform="matrix(0.1,0.0,0.0,0.1,216.34998,48.09036)">ο</text>
+<text class="jlm_wnbx10" transform="matrix(0.1,0.0,0.0,0.1,12.666667,66.77776)">п</text>
+<text class="jlm_wnbx10" transform="matrix(0.1,0.0,0.0,0.1,21.18514,66.77776)">р</text>
+<text class="jlm_wnbx10" transform="matrix(0.1,0.0,0.0,0.1,29.703613,66.77776)">и</text>
+<text class="jlm_wnbx10" transform="matrix(0.1,0.0,0.0,0.1,38.222088,66.77776)">в</text>
+<text class="jlm_wnbx10" transform="matrix(0.1,0.0,0.0,0.1,45.888714,66.77776)">е</text>
+<text class="jlm_wnbx10" transform="matrix(0.1,0.0,0.0,0.1,52.916466,66.77776)">т</text>
+<text class="jlm_wnbx10" transform="matrix(0.1,0.0,0.0,0.1,64.62013,66.77776)">м</text>
+<text class="jlm_wnbx10" transform="matrix(0.1,0.0,0.0,0.1,74.84231,66.77776)">и</text>
+<text class="jlm_wnbx10" transform="matrix(0.1,0.0,0.0,0.1,83.36078,66.77776)">р</text>
+<text class="jlm_fcmbpg" transform="matrix(0.1,0.0,0.0,0.1,151.02553,66.77776)">γ</text>
+<text class="jlm_fcmbpg" transform="matrix(0.1,0.0,0.0,0.1,159.54553,66.77776)">ε</text>
+<text class="jlm_fcmbpg" transform="matrix(0.1,0.0,0.0,0.1,166.14552,66.77776)">ι</text>
+<text class="jlm_fcmbpg" transform="matrix(0.1,0.0,0.0,0.1,169.9722,66.77776)">ά</text>
+<text class="jlm_fcmbpg" transform="matrix(0.1,0.0,0.0,0.1,182.08331,66.77776)">κ</text>
+<text class="jlm_fcmbpg" transform="matrix(0.1,0.0,0.0,0.1,190.17665,66.77776)">ό</text>
+<text class="jlm_fcmbpg" transform="matrix(0.1,0.0,0.0,0.1,198.26997,66.77776)">σ</text>
+<text class="jlm_fcmbpg" transform="matrix(0.1,0.0,0.0,0.1,207.00331,66.77776)">μ</text>
+<text class="jlm_fcmbpg" transform="matrix(0.1,0.0,0.0,0.1,215.29665,66.77776)">ο</text>
+<text class="jlm_wnti10" transform="matrix(0.1,0.0,0.0,0.1,12.666667,85.30516)">п</text>
+<text class="jlm_wnti10" transform="matrix(0.1,0.0,0.0,0.1,20.162933,85.30516)">р</text>
+<text class="jlm_wnti10" transform="matrix(0.1,0.0,0.0,0.1,26.90956,85.30516)">и</text>
+<text class="jlm_wnti10" transform="matrix(0.1,0.0,0.0,0.1,34.405827,85.30516)">в</text>
+<text class="jlm_wnti10" transform="matrix(0.1,0.0,0.0,0.1,40.98208,85.30516)">е</text>
+<text class="jlm_wnti10" transform="matrix(0.1,0.0,0.0,0.1,46.876854,85.30516)">т</text>
+<text class="jlm_wnti10" transform="matrix(0.1,0.0,0.0,0.1,62.22496,85.30516)">м</text>
+<text class="jlm_wnti10" transform="matrix(0.1,0.0,0.0,0.1,72.106384,85.30516)">и</text>
+<text class="jlm_wnti10" transform="matrix(0.1,0.0,0.0,0.1,79.60265,85.30516)">р</text>
+<text class="jlm_fcmripg" transform="matrix(0.1,0.0,0.0,0.1,163.77219,85.30516)">γ</text>
+<text class="jlm_fcmripg" transform="matrix(0.1,0.0,0.0,0.1,170.43886,85.30516)">ε</text>
+<text class="jlm_fcmripg" transform="matrix(0.1,0.0,0.0,0.1,175.62553,85.30516)">ι</text>
+<text class="jlm_fcmripg" transform="matrix(0.1,0.0,0.0,0.1,178.95886,85.30516)">ά</text>
+<text class="jlm_fcmripg" transform="matrix(0.1,0.0,0.0,0.1,190.80331,85.30516)">κ</text>
+<text class="jlm_fcmripg" transform="matrix(0.1,0.0,0.0,0.1,197.8433,85.30516)">ό</text>
+<text class="jlm_fcmripg" transform="matrix(0.1,0.0,0.0,0.1,204.13664,85.30516)">σ</text>
+<text class="jlm_fcmripg" transform="matrix(0.1,0.0,0.0,0.1,210.80331,85.30516)">μ</text>
+<text class="jlm_fcmripg" transform="matrix(0.1,0.0,0.0,0.1,217.09665,85.30516)">ο</text>
+<text class="jlm_wnss10" transform="matrix(0.1,0.0,0.0,0.1,12.666667,103.27256)">п</text>
+<text class="jlm_wnss10" transform="matrix(0.1,0.0,0.0,0.1,19.555573,103.27256)">р</text>
+<text class="jlm_wnss10" transform="matrix(0.1,0.0,0.0,0.1,26.44448,103.27256)">и</text>
+<text class="jlm_wnss10" transform="matrix(0.1,0.0,0.0,0.1,33.611187,103.27256)">в</text>
+<text class="jlm_wnss10" transform="matrix(0.1,0.0,0.0,0.1,40.018612,103.27256)">е</text>
+<text class="jlm_wnss10" transform="matrix(0.1,0.0,0.0,0.1,45.94456,103.27256)">т</text>
+<text class="jlm_wnss10" transform="matrix(0.1,0.0,0.0,0.1,56.500134,103.27256)">м</text>
+<text class="jlm_wnss10" transform="matrix(0.1,0.0,0.0,0.1,65.426094,103.27256)">и</text>
+<text class="jlm_wnss10" transform="matrix(0.1,0.0,0.0,0.1,72.5928,103.27256)">р</text>
+<text class="jlm_fcsrpg" transform="matrix(0.1,0.0,0.0,0.1,160.14552,103.27256)">γ</text>
+<text class="jlm_fcsrpg" transform="matrix(0.1,0.0,0.0,0.1,167.54553,103.27256)">ε</text>
+<text class="jlm_fcsrpg" transform="matrix(0.1,0.0,0.0,0.1,173.27885,103.27256)">ι</text>
+<text class="jlm_fcsrpg" transform="matrix(0.1,0.0,0.0,0.1,176.6122,103.27256)">ά</text>
+<text class="jlm_fcsrpg" transform="matrix(0.1,0.0,0.0,0.1,187.72331,103.27256)">κ</text>
+<text class="jlm_fcsrpg" transform="matrix(0.1,0.0,0.0,0.1,194.76332,103.27256)">ό</text>
+<text class="jlm_fcsrpg" transform="matrix(0.1,0.0,0.0,0.1,201.80331,103.27256)">σ</text>
+<text class="jlm_fcsrpg" transform="matrix(0.1,0.0,0.0,0.1,209.38998,103.27256)">μ</text>
+<text class="jlm_fcsrpg" transform="matrix(0.1,0.0,0.0,0.1,216.34998,103.27256)">ο</text>
+<text class="jlm_wntt10" transform="matrix(0.1,0.0,0.0,0.1,12.666667,120.73329)">п</text>
+<text class="jlm_wntt10" transform="matrix(0.1,0.0,0.0,0.1,19.666613,120.73329)">р</text>
+<text class="jlm_wntt10" transform="matrix(0.1,0.0,0.0,0.1,26.66656,120.73329)">и</text>
+<text class="jlm_wntt10" transform="matrix(0.1,0.0,0.0,0.1,33.666508,120.73329)">в</text>
+<text class="jlm_wntt10" transform="matrix(0.1,0.0,0.0,0.1,40.666454,120.73329)">е</text>
+<text class="jlm_wntt10" transform="matrix(0.1,0.0,0.0,0.1,47.6664,120.73329)">т</text>
+<text class="jlm_wntt10" transform="matrix(0.1,0.0,0.0,0.1,59.1108,120.73329)">м</text>
+<text class="jlm_wntt10" transform="matrix(0.1,0.0,0.0,0.1,66.11075,120.73329)">и</text>
+<text class="jlm_wntt10" transform="matrix(0.1,0.0,0.0,0.1,73.110695,120.73329)">р</text>
+<text class="jlm_fctrpg" transform="matrix(0.1,0.0,0.0,0.1,155.94553,120.73329)">γ</text>
+<text class="jlm_fctrpg" transform="matrix(0.1,0.0,0.0,0.1,162.94553,120.73329)">ε</text>
+<text class="jlm_fctrpg" transform="matrix(0.1,0.0,0.0,0.1,169.94553,120.73329)">ι</text>
+<text class="jlm_fctrpg" transform="matrix(0.1,0.0,0.0,0.1,176.94553,120.73329)">ά</text>
+<text class="jlm_fctrpg" transform="matrix(0.1,0.0,0.0,0.1,188.38998,120.73329)">κ</text>
+<text class="jlm_fctrpg" transform="matrix(0.1,0.0,0.0,0.1,195.38998,120.73329)">ό</text>
+<text class="jlm_fctrpg" transform="matrix(0.1,0.0,0.0,0.1,202.38998,120.73329)">σ</text>
+<text class="jlm_fctrpg" transform="matrix(0.1,0.0,0.0,0.1,209.38998,120.73329)">μ</text>
+<text class="jlm_fctrpg" transform="matrix(0.1,0.0,0.0,0.1,216.38998,120.73329)">ο</text>
+<text class="jlm_wnbxti10" transform="matrix(0.1,0.0,0.0,0.1,12.666667,139.02069)">п</text>
+<text class="jlm_wnbxti10" transform="matrix(0.1,0.0,0.0,0.1,21.333254,139.02069)">р</text>
+<text class="jlm_wnbxti10" transform="matrix(0.1,0.0,0.0,0.1,29.136133,139.02069)">и</text>
+<text class="jlm_wnbxti10" transform="matrix(0.1,0.0,0.0,0.1,37.80272,139.02069)">в</text>
+<text class="jlm_wnbxti10" transform="matrix(0.1,0.0,0.0,0.1,45.409306,139.02069)">е</text>
+<text class="jlm_wnbxti10" transform="matrix(0.1,0.0,0.0,0.1,52.23072,139.02069)">т</text>
+<text class="jlm_wnbxti10" transform="matrix(0.1,0.0,0.0,0.1,69.26764,139.02069)">м</text>
+<text class="jlm_wnbxti10" transform="matrix(0.1,0.0,0.0,0.1,80.68236,139.02069)">и</text>
+<text class="jlm_wnbxti10" transform="matrix(0.1,0.0,0.0,0.1,89.348946,139.02069)">р</text>
+<text class="jlm_fcmbipg" transform="matrix(0.1,0.0,0.0,0.1,155.49219,139.02069)">γ</text>
+<text class="jlm_fcmbipg" transform="matrix(0.1,0.0,0.0,0.1,163.15886,139.02069)">ε</text>
+<text class="jlm_fcmbipg" transform="matrix(0.1,0.0,0.0,0.1,169.11887,139.02069)">ι</text>
+<text class="jlm_fcmbipg" transform="matrix(0.1,0.0,0.0,0.1,172.94553,139.02069)">ά</text>
+<text class="jlm_fcmbipg" transform="matrix(0.1,0.0,0.0,0.1,185.90997,139.02069)">κ</text>
+<text class="jlm_fcmbipg" transform="matrix(0.1,0.0,0.0,0.1,194.00331,139.02069)">ό</text>
+<text class="jlm_fcmbipg" transform="matrix(0.1,0.0,0.0,0.1,201.24332,139.02069)">σ</text>
+<text class="jlm_fcmbipg" transform="matrix(0.1,0.0,0.0,0.1,208.90997,139.02069)">μ</text>
+<text class="jlm_fcmbipg" transform="matrix(0.1,0.0,0.0,0.1,216.14998,139.02069)">ο</text>
+<text class="jlm_wnssbx10" transform="matrix(0.1,0.0,0.0,0.1,12.666667,157.16142)">п</text>
+<text class="jlm_wnssbx10" transform="matrix(0.1,0.0,0.0,0.1,20.148186,157.16142)">р</text>
+<text class="jlm_wnssbx10" transform="matrix(0.1,0.0,0.0,0.1,27.629707,157.16142)">и</text>
+<text class="jlm_wnssbx10" transform="matrix(0.1,0.0,0.0,0.1,35.51864,157.16142)">в</text>
+<text class="jlm_wnssbx10" transform="matrix(0.1,0.0,0.0,0.1,42.51868,157.16142)">е</text>
+<text class="jlm_wnssbx10" transform="matrix(0.1,0.0,0.0,0.1,49.333534,157.16142)">т</text>
+<text class="jlm_wnssbx10" transform="matrix(0.1,0.0,0.0,0.1,60.296547,157.16142)">м</text>
+<text class="jlm_wnssbx10" transform="matrix(0.1,0.0,0.0,0.1,70.222534,157.16142)">и</text>
+<text class="jlm_wnssbx10" transform="matrix(0.1,0.0,0.0,0.1,78.111465,157.16142)">р</text>
+<text class="jlm_fcsbpg" transform="matrix(0.1,0.0,0.0,0.1,154.13219,157.16142)">γ</text>
+<text class="jlm_fcsbpg" transform="matrix(0.1,0.0,0.0,0.1,162.27885,157.16142)">ε</text>
+<text class="jlm_fcsbpg" transform="matrix(0.1,0.0,0.0,0.1,168.58553,157.16142)">ι</text>
+<text class="jlm_fcsbpg" transform="matrix(0.1,0.0,0.0,0.1,172.2522,157.16142)">ά</text>
+<text class="jlm_fcsbpg" transform="matrix(0.1,0.0,0.0,0.1,184.02998,157.16142)">κ</text>
+<text class="jlm_fcsbpg" transform="matrix(0.1,0.0,0.0,0.1,191.76332,157.16142)">ό</text>
+<text class="jlm_fcsbpg" transform="matrix(0.1,0.0,0.0,0.1,199.49664,157.16142)">σ</text>
+<text class="jlm_fcsbpg" transform="matrix(0.1,0.0,0.0,0.1,207.8433,157.16142)">μ</text>
+<text class="jlm_fcsbpg" transform="matrix(0.1,0.0,0.0,0.1,215.65665,157.16142)">ο</text>
+<text class="jlm_wnssi10" transform="matrix(0.1,0.0,0.0,0.1,12.666667,175.7155)">п</text>
+<text class="jlm_wnssi10" transform="matrix(0.1,0.0,0.0,0.1,19.555573,175.7155)">р</text>
+<text class="jlm_wnssi10" transform="matrix(0.1,0.0,0.0,0.1,26.44448,175.7155)">и</text>
+<text class="jlm_wnssi10" transform="matrix(0.1,0.0,0.0,0.1,33.611187,175.7155)">в</text>
+<text class="jlm_wnssi10" transform="matrix(0.1,0.0,0.0,0.1,40.018612,175.7155)">е</text>
+<text class="jlm_wnssi10" transform="matrix(0.1,0.0,0.0,0.1,45.94456,175.7155)">т</text>
+<text class="jlm_wnssi10" transform="matrix(0.1,0.0,0.0,0.1,56.500134,175.7155)">м</text>
+<text class="jlm_wnssi10" transform="matrix(0.1,0.0,0.0,0.1,65.426094,175.7155)">и</text>
+<text class="jlm_wnssi10" transform="matrix(0.1,0.0,0.0,0.1,72.5928,175.7155)">р</text>
+<text class="jlm_fcsropg" transform="matrix(0.1,0.0,0.0,0.1,160.14552,175.7155)">γ</text>
+<text class="jlm_fcsropg" transform="matrix(0.1,0.0,0.0,0.1,167.54553,175.7155)">ε</text>
+<text class="jlm_fcsropg" transform="matrix(0.1,0.0,0.0,0.1,173.27885,175.7155)">ι</text>
+<text class="jlm_fcsropg" transform="matrix(0.1,0.0,0.0,0.1,176.6122,175.7155)">ά</text>
+<text class="jlm_fcsropg" transform="matrix(0.1,0.0,0.0,0.1,187.72331,175.7155)">κ</text>
+<text class="jlm_fcsropg" transform="matrix(0.1,0.0,0.0,0.1,194.76332,175.7155)">ό</text>
+<text class="jlm_fcsropg" transform="matrix(0.1,0.0,0.0,0.1,201.80331,175.7155)">σ</text>
+<text class="jlm_fcsropg" transform="matrix(0.1,0.0,0.0,0.1,209.38998,175.7155)">μ</text>
+<text class="jlm_fcsropg" transform="matrix(0.1,0.0,0.0,0.1,216.34998,175.7155)">ο</text>
+</g>
+<g stroke="rgb(255,120,158)" fill="rgb(255,120,158)" stroke-width="1.0" stroke-miterlimit="10.0" stroke-linejoin="miter" stroke-linecap="square">
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,12.666667,200.01622)">B</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,22.111147,200.01622)">u</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,29.518574,200.01622)">l</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,33.222294,200.01622)">g</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,40.07416,200.01622)">a</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,46.740852,200.01622)">r</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,51.963093,200.01622)">i</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,55.666813,200.01622)">a</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,62.333508,200.01622)">n</text>
+</g>
+<g stroke="rgb(219,148,112)" fill="rgb(219,148,112)" stroke-width="1.0" stroke-miterlimit="10.0" stroke-linejoin="miter" stroke-linecap="square">
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,179.6491,200.01622)">S</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,187.05653,200.01622)">e</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,192.98247,200.01622)">r</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,198.20471,200.01622)">b</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,205.61214,200.01622)">i</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,209.31586,200.01622)">a</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,215.98256,200.01622)">n</text>
+</g>
+<g stroke="rgb(0,0,0)" fill="rgb(0,0,0)" stroke-width="1.0" stroke-miterlimit="10.0" stroke-linejoin="miter" stroke-linecap="square">
+<text class="jlm_wnr10" transform="matrix(0.1,0.0,0.0,0.1,12.666667,217.46065)">з</text>
+<text class="jlm_wnr10" transform="matrix(0.1,0.0,0.0,0.1,18.592613,217.46065)">д</text>
+<text class="jlm_wnr10" transform="matrix(0.1,0.0,0.0,0.1,26.00004,217.46065)">р</text>
+<text class="jlm_wnr10" transform="matrix(0.1,0.0,0.0,0.1,33.407467,217.46065)">а</text>
+<text class="jlm_wnr10" transform="matrix(0.1,0.0,0.0,0.1,40.07416,217.46065)">в</text>
+<text class="jlm_wnr10" transform="matrix(0.1,0.0,0.0,0.1,46.740852,217.46065)">е</text>
+<text class="jlm_wnr10" transform="matrix(0.1,0.0,0.0,0.1,52.6668,217.46065)">й</text>
+<text class="jlm_wnr10" transform="matrix(0.1,0.0,0.0,0.1,64.51868,217.46065)">с</text>
+<text class="jlm_wnr10" transform="matrix(0.1,0.0,0.0,0.1,70.444626,217.46065)">в</text>
+<text class="jlm_wnr10" transform="matrix(0.1,0.0,0.0,0.1,77.11132,217.46065)">я</text>
+<text class="jlm_wnr10" transform="matrix(0.1,0.0,0.0,0.1,84.33357,217.46065)">т</text>
+<text class="jlm_wnr10" transform="matrix(0.1,0.0,0.0,0.1,145.98235,217.46065)">Х</text>
+<text class="jlm_wnr10" transform="matrix(0.1,0.0,0.0,0.1,155.98236,217.46065)">е</text>
+<text class="jlm_wnr10" transform="matrix(0.1,0.0,0.0,0.1,161.90831,217.46065)">л</text>
+<text class="jlm_wnr10" transform="matrix(0.1,0.0,0.0,0.1,169.31573,217.46065)">л</text>
+<text class="jlm_wnr10" transform="matrix(0.1,0.0,0.0,0.1,176.72316,217.46065)">о</text>
+<text class="jlm_wnr10" transform="matrix(0.1,0.0,0.0,0.1,187.83432,217.46065)">у</text>
+<text class="jlm_wnr10" transform="matrix(0.1,0.0,0.0,0.1,194.501,217.46065)">о</text>
+<text class="jlm_wnr10" transform="matrix(0.1,0.0,0.0,0.1,201.1677,217.46065)">р</text>
+<text class="jlm_wnr10" transform="matrix(0.1,0.0,0.0,0.1,208.57513,217.46065)">л</text>
+<text class="jlm_wnr10" transform="matrix(0.1,0.0,0.0,0.1,215.98256,217.46065)">д</text>
+</g>
+<g stroke="rgb(38,255,204)" fill="rgb(38,255,204)" stroke-width="1.0" stroke-miterlimit="10.0" stroke-linejoin="miter" stroke-linecap="square">
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,12.666667,240.79399)">B</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,22.111147,240.79399)">i</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,25.814867,240.79399)">e</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,31.740814,240.79399)">l</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,35.444534,240.79399)">o</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,42.111225,240.79399)">r</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,47.333466,240.79399)">u</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,54.740894,240.79399)">s</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,60.00016,240.79399)">s</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,65.25943,240.79399)">i</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,68.96315,240.79399)">a</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,75.62984,240.79399)">n</text>
+</g>
+<g stroke="rgb(128,255,0)" fill="rgb(128,255,0)" stroke-width="1.0" stroke-miterlimit="10.0" stroke-linejoin="miter" stroke-linecap="square">
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,165.57495,240.79399)">U</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,175.57498,240.79399)">k</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,182.61206,240.79399)">r</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,187.8343,240.79399)">a</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,194.50099,240.79399)">i</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,198.20471,240.79399)">n</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,205.61214,240.79399)">i</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,209.31586,240.79399)">a</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,215.98256,240.79399)">n</text>
+</g>
+<g stroke="rgb(0,0,0)" fill="rgb(0,0,0)" stroke-width="1.0" stroke-miterlimit="10.0" stroke-linejoin="miter" stroke-linecap="square">
+<text class="jlm_wnr10" transform="matrix(0.1,0.0,0.0,0.1,12.666667,255.64581)">п</text>
+<text class="jlm_wnr10" transform="matrix(0.1,0.0,0.0,0.1,20.074093,255.64581)">р</text>
+<text class="jlm_wnr10" transform="matrix(0.1,0.0,0.0,0.1,27.48152,255.64581)">ы</text>
+<text class="jlm_wnr10" transform="matrix(0.1,0.0,0.0,0.1,37.11117,255.64581)">в</text>
+<text class="jlm_wnr10" transform="matrix(0.1,0.0,0.0,0.1,43.777866,255.64581)">і</text>
+<text class="jlm_wnr10" transform="matrix(0.1,0.0,0.0,0.1,47.481586,255.64581)">т</text>
+<text class="jlm_wnr10" transform="matrix(0.1,0.0,0.0,0.1,53.777893,255.64581)">а</text>
+<text class="jlm_wnr10" transform="matrix(0.1,0.0,0.0,0.1,60.444588,255.64581)">н</text>
+<text class="jlm_wnr10" transform="matrix(0.1,0.0,0.0,0.1,67.85201,255.64581)">ь</text>
+<text class="jlm_wnr10" transform="matrix(0.1,0.0,0.0,0.1,74.51871,255.64581)">н</text>
+<text class="jlm_wnr10" transform="matrix(0.1,0.0,0.0,0.1,81.92613,255.64581)">е</text>
+<text class="jlm_wnr10" transform="matrix(0.1,0.0,0.0,0.1,92.29653,255.64581)">С</text>
+<text class="jlm_wnr10" transform="matrix(0.1,0.0,0.0,0.1,101.926186,255.64581)">в</text>
+<text class="jlm_wnr10" transform="matrix(0.1,0.0,0.0,0.1,108.59288,255.64581)">е</text>
+<text class="jlm_wnr10" transform="matrix(0.1,0.0,0.0,0.1,114.51883,255.64581)">т</text>
+<text class="jlm_wnr10" transform="matrix(0.1,0.0,0.0,0.1,156.72308,255.64581)">п</text>
+<text class="jlm_wnr10" transform="matrix(0.1,0.0,0.0,0.1,164.13051,255.64581)">р</text>
+<text class="jlm_wnr10" transform="matrix(0.1,0.0,0.0,0.1,171.53793,255.64581)">и</text>
+<text class="jlm_wnr10" transform="matrix(0.1,0.0,0.0,0.1,178.94537,255.64581)">в</text>
+<text class="jlm_wnr10" transform="matrix(0.1,0.0,0.0,0.1,185.61206,255.64581)">і</text>
+<text class="jlm_wnr10" transform="matrix(0.1,0.0,0.0,0.1,189.31578,255.64581)">т</text>
+<text class="jlm_wnr10" transform="matrix(0.1,0.0,0.0,0.1,200.42693,255.64581)">с</text>
+<text class="jlm_wnr10" transform="matrix(0.1,0.0,0.0,0.1,206.35287,255.64581)">в</text>
+<text class="jlm_wnr10" transform="matrix(0.1,0.0,0.0,0.1,213.01956,255.64581)">і</text>
+<text class="jlm_wnr10" transform="matrix(0.1,0.0,0.0,0.1,216.72328,255.64581)">т</text>
+</g>
+</svg>

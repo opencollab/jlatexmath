@@ -3,7 +3,7 @@
  * This file is originally part of the JMathTeX Library - http://jmathtex.sourceforge.net
  *
  * Copyright (C) 2004-2007 Universiteit Gent
- * Copyright (C) 2009 DENIZET Calixte
+ * Copyright (C) 2009-2018 DENIZET Calixte
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -48,102 +48,41 @@
 
 package org.scilab.forge.jlatexmath;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
-import java.util.BitSet;
-import java.util.Map;
+import java.util.List;
 
 /**
  * A box representing a symbol (a non-alphanumeric character).
  */
 public class SymbolAtom extends CharSymbol {
 
-    // whether it's is a delimiter symbol
-    private final boolean delimiter;
-
-    // symbol name
-    private final String name;
-
-    // contains all defined symbols
-    public static Map<String, SymbolAtom> symbols;
-
-    // contains all the possible valid symbol types
-    private static BitSet validSymbolTypes;
-
+    private final CharFont cf;
     private char unicode;
 
-    static {
-        symbols = new TeXSymbolParser().readSymbols();
-
-        // set valid symbol types
-        validSymbolTypes =  new BitSet(16);
-        validSymbolTypes.set(TeXConstants.TYPE_ORDINARY);
-        validSymbolTypes.set(TeXConstants.TYPE_BIG_OPERATOR);
-        validSymbolTypes.set(TeXConstants.TYPE_BINARY_OPERATOR);
-        validSymbolTypes.set(TeXConstants.TYPE_RELATION);
-        validSymbolTypes.set(TeXConstants.TYPE_OPENING);
-        validSymbolTypes.set(TeXConstants.TYPE_CLOSING);
-        validSymbolTypes.set(TeXConstants.TYPE_PUNCTUATION);
-        validSymbolTypes.set(TeXConstants.TYPE_ACCENT);
-    }
-
-    public SymbolAtom(SymbolAtom s, int type) throws InvalidSymbolTypeException {
-        if (!validSymbolTypes.get(type))
-            throw new InvalidSymbolTypeException(
-                "The symbol type was not valid! "
-                + "Use one of the symbol type constants from the class 'TeXConstants'.");
-        name = s.name;
-        this.type = type;
-        if (type == TeXConstants.TYPE_BIG_OPERATOR)
-            this.type_limits = TeXConstants.SCRIPT_NORMAL;
-
-        delimiter = s.delimiter;
-    }
-
     /**
-     * Constructs a new symbol. This used by "TeXSymbolParser" and the symbol
-     * types are guaranteed to be valid.
+     * Constructs a new symbol.
      *
      * @param name symbol name
      * @param type symbol type constant
-     * @param del whether the symbol is a delimiter
      */
-    public SymbolAtom(String name, int type, boolean del) {
-        this.name = name;
+    public SymbolAtom(final CharFont cf, final int type) {
+        this.cf = cf;
         this.type = type;
-        if (type == TeXConstants.TYPE_BIG_OPERATOR)
+        if (type == TeXConstants.TYPE_BIG_OPERATOR) {
             this.type_limits = TeXConstants.SCRIPT_NORMAL;
-
-        delimiter = del;
+        }
     }
 
-    public SymbolAtom setUnicode(char c) {
+    public SymbolAtom(final SymbolAtom s, final int type) {
+        this(s.cf, type);
+    }
+
+    public SymbolAtom(final String name, final int type) {
+        this(SymbolAtom.get(name), type);
+    }
+
+    public SymbolAtom setUnicode(final char c) {
         this.unicode = c;
         return this;
-    }
-
-    public char getUnicode() {
-        return unicode;
-    }
-
-    public static void addSymbolAtom(String file) {
-        FileInputStream in;
-        try {
-            in = new FileInputStream(file);
-        } catch (FileNotFoundException e) {
-            throw new ResourceParseException(file, e);
-        }
-        addSymbolAtom(in, file);
-    }
-
-    public static void addSymbolAtom(InputStream in, String name) {
-        TeXSymbolParser tsp = new TeXSymbolParser(in, name);
-        symbols.putAll(tsp.readSymbols());
-    }
-
-    public static void addSymbolAtom(SymbolAtom sym) {
-        symbols.put(sym.name, sym);
     }
 
     /**
@@ -154,53 +93,123 @@ public class SymbolAtom extends CharSymbol {
      * @return a SymbolAtom representing the found symbol
      * @throws SymbolNotFoundException if no symbol with the given name was found
      */
-    public static SymbolAtom get(String name) throws SymbolNotFoundException {
-        Object obj = symbols.get(name);
-        if (obj == null) // not found
-            throw new SymbolNotFoundException(name);
-        else
-            return (SymbolAtom) obj;
+    public static SymbolAtom get(final String name, final boolean mathMode) {
+        SymbolAtom sa = Configuration.get().getSymbolAtoms().get(name);
+        if (!mathMode && sa != null) {
+            sa = (SymbolAtom)sa.clone();
+            sa.mathMode = false;
+            sa.type = TeXConstants.TYPE_ORDINARY;
+        }
+        return sa;
     }
 
-    /**
-     *
-     * @return true if this symbol can act as a delimiter to embrace formulas
-     */
-    public boolean isDelimiter() {
-        return delimiter;
+    public static boolean put(final TeXParser tp, final String name) {
+        SymbolAtom sa = Configuration.get().getSymbolAtoms().get(name);
+        if (sa == null) {
+            return false;
+        }
+        if (!tp.isMathMode()) {
+            sa = (SymbolAtom)sa.clone();
+            sa.mathMode = false;
+            sa.type = TeXConstants.TYPE_ORDINARY;
+        }
+        tp.addToConsumer(sa);
+        tp.cancelPrevPos();
+
+        return true;
     }
 
-    public String getName() {
-        return name;
+    public static SymbolAtom get(final String name) {
+        return SymbolAtom.get(name, true);
+    }
+
+    public CharFont getCf() {
+        return cf;
+    }
+
+    public Char getChar(TeXEnvironment env) {
+        final TeXFont tf = env.getTeXFont();
+        final int style = env.getStyle();
+        Char c = tf.getChar(getCf(), style);
+        if (getType() == TeXConstants.TYPE_BIG_OPERATOR
+                && style < TeXConstants.STYLE_TEXT
+                && tf.hasNextLarger(c)) {
+            c = tf.getNextLarger(c, style);
+        }
+        return c;
+
+        //return env.getTeXFont().getChar(getCf(), env.getStyle());
+    }
+
+    public Box getNextLarger(TeXEnvironment env, final double width) {
+        final TeXFont tf = env.getTeXFont();
+        final int style = env.getStyle();
+        Char ch = tf.getChar(getCf(), style);
+        while (tf.hasNextLarger(ch)) {
+            final Char larger = tf.getNextLarger(ch, style);
+            if (larger.getWidth() <= width) {
+                ch = larger;
+            } else {
+                break;
+            }
+        }
+        Box b = new CharBox(ch);
+        if (isMathMode() && mustAddItalicCorrection()) {
+            b.addToWidth(ch.getItalic());
+        }
+        return b;
     }
 
     public Box createBox(TeXEnvironment env) {
         TeXFont tf = env.getTeXFont();
         int style = env.getStyle();
-        Char c = tf.getChar(name, style);
+        Char c = getChar(env);
         Box cb = new CharBox(c);
-        if (env.getSmallCap() && unicode != 0 && Character.isLowerCase(unicode)) {
-            try {
-                cb = new ScaleBox(new CharBox(tf.getChar(TeXFormula.symbolTextMappings[Character.toUpperCase(unicode)], style)), 0.8, 0.8);
-            } catch (SymbolMappingNotFoundException e) { }
+
+        if (getType() == TeXConstants.TYPE_BIG_OPERATOR) {
+            final double total = cb.getHeight() + cb.getDepth();
+            cb.setShift(-total / 2. - tf.getAxisHeight(style));
+            cb = new HorizontalBox(cb);
         }
 
-        if (type == TeXConstants.TYPE_BIG_OPERATOR) {
-            if (style < TeXConstants.STYLE_TEXT && tf.hasNextLarger(c))
-                c = tf.getNextLarger(c, style);
-            cb = new CharBox(c);
-            cb.setShift(-(cb.getHeight() + cb.getDepth()) / 2 - env.getTeXFont().getAxisHeight(env.getStyle()));
-            float delta = c.getItalic();
-            HorizontalBox hb = new HorizontalBox(cb);
-            if (delta > TeXFormula.PREC)
-                hb.add(new StrutBox(delta, 0, 0, 0));
-            return hb;
+        if (isMathMode() && mustAddItalicCorrection()) {
+            cb.addToWidth(c.getItalic());
         }
+
         return cb;
     }
 
     public CharFont getCharFont(TeXFont tf) {
         // style doesn't matter here
-        return tf.getChar(name, TeXConstants.STYLE_DISPLAY).getCharFont();
+        return tf.getChar(cf, TeXConstants.STYLE_DISPLAY).getCharFont();
+    }
+
+    public SymbolAtom toTextMode() {
+        final Atom a = this.clone();
+        a.mathMode = false;
+        a.type = TeXConstants.TYPE_ORDINARY;
+        return (SymbolAtom)a;
+    }
+
+    public Atom changeLimits(final int lim) {
+        final Atom a = this.clone();
+        a.type_limits = lim;
+        return a;
+    }
+
+    public Atom changeType(final int type) {
+        final Atom a = this.clone();
+        a.type = type;
+        return a;
+    }
+
+    public String toString() {
+        return "Symbol: " + cf.toString();
+    }
+
+    public static void getAll(final List<String> l) {
+        for (final String k : Configuration.get().getSymbolAtoms().keySet()) {
+            l.add(k);
+        }
     }
 }

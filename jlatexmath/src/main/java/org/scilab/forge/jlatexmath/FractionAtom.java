@@ -51,27 +51,37 @@ package org.scilab.forge.jlatexmath;
  */
 public class FractionAtom extends Atom {
 
-    // whether the default thickness should not be used for the fraction line
-    private boolean noDefault = false;
-
-    // unit used for the thickness of the fraction line
-    private int unit;
-
     // alignment settings for the numerator and denominator
-    private int numAlign = TeXConstants.ALIGN_CENTER,
-                denomAlign = TeXConstants.ALIGN_CENTER;
+    private TeXConstants.Align numAlign = TeXConstants.Align.CENTER;
+    private TeXConstants.Align denomAlign = TeXConstants.Align.CENTER;
 
     // the atoms representing the numerator and denominator
-    private Atom numerator, denominator;
+    protected Atom numerator;
+    protected Atom denominator;
 
     // thickness of the fraction line
-    private float thickness;
+    // unit used for the thickness of the fraction line
+    private TeXLength thickness;
 
-    // thickness of the fraction line relative to the default thickness
-    private float defFactor;
-
-    // whether the "defFactor" value should be used
-    private boolean defFactorSet = false;
+    /**
+     * The thickness of the fraction line is determined by the given value "t" in the
+     * given unit.
+     *
+     * @param num the numerator
+     * @param den the denominator
+     * @param unit a unit constant for the line thickness
+     * @param t the thickness of the fraction line (in the given unit)
+     * @param numAlign alignment of the numerator
+     * @param denomAlign alignment of the denominator
+     */
+    public FractionAtom(Atom num, Atom den, TeXLength t, TeXConstants.Align numAlign, TeXConstants.Align denomAlign) {
+        numerator = num;
+        denominator = den;
+        thickness = t;
+        this.numAlign = numAlign;
+        this.denomAlign = denomAlign;
+        type = TeXConstants.TYPE_INNER;
+    }
 
     /**
      * Uses the default thickness for the fraction line
@@ -80,7 +90,7 @@ public class FractionAtom extends Atom {
      * @param den the denominator
      */
     public FractionAtom(Atom num, Atom den) {
-        this(num, den, true);
+        this(num, den, null, TeXConstants.Align.CENTER, TeXConstants.Align.CENTER);
     }
 
     /**
@@ -91,32 +101,11 @@ public class FractionAtom extends Atom {
      * @param rule whether the fraction line should be drawn
      */
     public FractionAtom(Atom num, Atom den, boolean rule) {
-        this(num, den, !rule, TeXConstants.UNIT_PIXEL, 0f);
+        this(num, den, rule ? null : TeXLength.getZero(), TeXConstants.Align.CENTER, TeXConstants.Align.CENTER);
     }
 
-    /**
-     * Depending on noDef, the given thickness and unit will be used (<-> the default
-     * thickness).
-     *
-     * @param num the numerator
-     * @param den the denominator
-     * @param noDef whether the default thickness should not be used for the fraction line
-     * @param unit a unit constant for the line thickness
-     * @param t the thickness of the fraction line (in the given unit)
-     * @throws InvalidUnitException if the given integer is not a valid unit constant
-     */
-    public FractionAtom(Atom num, Atom den, boolean noDef, int unit, float t)
-    throws InvalidUnitException {
-        // check unit
-        SpaceAtom.checkUnit(unit);
-
-        // unit ok
-        numerator = num;
-        denominator = den;
-        noDefault = noDef;
-        thickness = t;
-        this.unit = unit;
-        type = TeXConstants.TYPE_INNER;
+    public FractionAtom(Atom num, Atom den, TeXLength l) {
+        this(num, den, l, TeXConstants.Align.CENTER, TeXConstants.Align.CENTER);
     }
 
     /**
@@ -128,103 +117,46 @@ public class FractionAtom extends Atom {
      * @param numAlign alignment of the numerator
      * @param denomAlign alignment of the denominator
      */
-    public FractionAtom(Atom num, Atom den, boolean rule, int numAlign,
-                        int denomAlign) {
-        this(num, den, rule);
-        this.numAlign = checkAlignment(numAlign);
-        this.denomAlign = checkAlignment(denomAlign);
-    }
-
-    /**
-     * The thickness of the fraction line will be "defFactor" times the default thickness.
-     *
-     * @param num the numerator
-     * @param den the denominator
-     * @param defFactor the thickness of the fraction line relative to the default thickness
-     * @param numAlign alignment of the numerator
-     * @param denomAlign alignment of the denominator
-     */
-    public FractionAtom(Atom num, Atom den, float defFactor, int numAlign,
-                        int denomAlign) {
-        this(num, den, true, numAlign, denomAlign);
-        this.defFactor = defFactor;
-        defFactorSet = true;
-    }
-
-    /**
-     * The thickness of the fraction line is determined by the given value "t" in the
-     * given unit.
-     *
-     * @param num the numerator
-     * @param den the denominator
-     * @param unit a unit constant for the line thickness
-     * @param t the thickness of the fraction line (in the given unit)
-     * @param numAlign alignment of the numerator
-     * @param denomAlign alignment of the denominator
-     */
-    public FractionAtom(Atom num, Atom den, int unit, float t, int numAlign,
-                        int denomAlign) {
-        this(num, den, unit, t);
-        this.numAlign = checkAlignment(numAlign);
-        this.denomAlign = checkAlignment(denomAlign);
-    }
-
-    /**
-     * The thickness of the fraction line is determined by the given value "t" in the
-     * given unit.
-     *
-     * @param num the numerator
-     * @param den the denominator
-     * @param unit a unit constant for the line thickness
-     * @param t the thickness of the fraction line (in the given unit)
-     */
-    public FractionAtom(Atom num, Atom den, int unit, float t) {
-        this(num, den, true, unit, t);
-    }
-
-    // Checks if the alignment constant is valid.
-    // If not, a default value will be used.
-    private int checkAlignment(int align) {
-        if (align == TeXConstants.ALIGN_LEFT ||
-                align == TeXConstants.ALIGN_RIGHT)
-            return align;
-        else
-            return TeXConstants.ALIGN_CENTER;
+    public FractionAtom(Atom num, Atom den, boolean rule, TeXConstants.Align numAlign, TeXConstants.Align denomAlign) {
+        this(num, den, rule ? null : TeXLength.getZero(), numAlign, denomAlign);
     }
 
     public Box createBox(TeXEnvironment env) {
         TeXFont tf = env.getTeXFont();
         int style = env.getStyle();
         // set thickness to default if default value should be used
-        float drt = tf.getDefaultRuleThickness(style);
-        if (noDefault)
+        final double drt = tf.getDefaultRuleThickness(style);
+        double thn;
+        if (thickness != null) {
             // convert the thickness to pixels
-            thickness *= SpaceAtom.getFactor(unit, env);
-        else
-            thickness = (defFactorSet ? defFactor * drt : drt);
+            thn = thickness.getValue(env);
+        } else {
+            thn = drt;
+        }
 
         // create equal width boxes (in appropriate styles)
-        Box num = (numerator == null ? new StrutBox(0, 0, 0, 0) : numerator
-                   .createBox(env.numStyle()));
-        Box denom = (denominator == null ? new StrutBox(0, 0, 0, 0) : denominator
-                     .createBox(env.denomStyle()));
+        Box num = numerator == null ? StrutBox.getEmpty() : numerator.createBox(env.numStyle());
+        Box denom = denominator == null ? StrutBox.getEmpty() : denominator.createBox(env.denomStyle());
 
-        if (num.getWidth() < denom.getWidth())
+        if (num.getWidth() < denom.getWidth()) {
             num = new HorizontalBox(num, denom.getWidth(), numAlign);
-        else
+        } else {
             denom = new HorizontalBox(denom, num.getWidth(), denomAlign);
+        }
 
         // calculate default shift amounts
-        float shiftUp, shiftDown;
+        double shiftUp;
+        double shiftDown;
         if (style < TeXConstants.STYLE_TEXT) {
             shiftUp = tf.getNum1(style);
             shiftDown = tf.getDenom1(style);
         } else {
             shiftDown = tf.getDenom2(style);
-            if (thickness > 0)
+            if (thn > 0) {
                 shiftUp = tf.getNum2(style);
-            else
+            } else {
                 shiftUp = tf.getNum3(style);
+            }
         }
 
         // upper part of vertical box = numerator
@@ -232,20 +164,20 @@ public class FractionAtom extends Atom {
         vBox.add(num);
 
         // calculate clearance clr, adjust shift amounts and create vertical box
-        float clr, delta, axis = tf.getAxisHeight(style);
+        double clr;
+        double delta;
+        double axis = tf.getAxisHeight(style);
 
-        if (thickness > 0) { // WITH fraction rule
+        if (thn > 0) { // with fraction rule
             // clearance clr
-            if (style < TeXConstants.STYLE_TEXT)
-                clr = 3 * thickness;
-            else
-                clr = thickness;
+            clr = style < TeXConstants.STYLE_TEXT ? 3. * thn : thn;
 
             // adjust shift amounts
-            delta = thickness / 2;
-            float kern1 = shiftUp - num.getDepth() - (axis + delta), kern2 = axis
-                          - delta - (denom.getHeight() - shiftDown);
-            float delta1 = clr - kern1, delta2 = clr - kern2;
+            delta = thn / 2.;
+            double kern1 = shiftUp - num.getDepth() - (axis + delta);
+            double kern2 = axis - delta - (denom.getHeight() - shiftDown);
+            double delta1 = clr - kern1;
+            double delta2 = clr - kern2;
             if (delta1 > 0) {
                 shiftUp += delta1;
                 kern1 += delta1;
@@ -256,28 +188,24 @@ public class FractionAtom extends Atom {
             }
 
             // fill vertical box
-            vBox.add(new StrutBox(0, kern1, 0, 0));
-            vBox.add(new HorizontalRule(thickness, num.getWidth(), 0));
-            vBox.add(new StrutBox(0, kern2, 0, 0));
-        } else { // WITHOUT fraction rule
+            vBox.add(new StrutBox(0., kern1, 0., 0.));
+            vBox.add(new HorizontalRule(thn, num.getWidth(), 0.));
+            vBox.add(new StrutBox(0., kern2, 0., 0.));
+        } else { // without fraction rule
             // clearance clr
-            if (style < TeXConstants.STYLE_TEXT)
-                clr = 7 * drt;
-            else
-                clr = 3 * drt;
+            clr = (style < TeXConstants.STYLE_TEXT ? 7. : 3.) * drt;
 
             // adjust shift amounts
-            float kern = shiftUp - num.getDepth()
-                         - (denom.getHeight() - shiftDown);
-            delta = (clr - kern) / 2;
+            double kern = shiftUp - num.getDepth() - (denom.getHeight() - shiftDown);
+            delta = (clr - kern) / 2.;
             if (delta > 0) {
                 shiftUp += delta;
                 shiftDown += delta;
-                kern += 2 * delta;
+                kern += 2. * delta;
             }
 
             // fill vertical box
-            vBox.add(new StrutBox(0, kern, 0, 0));
+            vBox.add(new StrutBox(0., kern, 0., 0.));
         }
 
         // finish vertical box
@@ -285,9 +213,8 @@ public class FractionAtom extends Atom {
         vBox.setHeight(shiftUp + num.getHeight());
         vBox.setDepth(shiftDown + denom.getDepth());
 
-        // \nulldelimiterspace is set by default to 1.2pt = 0.12em)
-        float f = new SpaceAtom(TeXConstants.UNIT_EM, 0.12f, 0, 0).createBox(env).getWidth();
+        final double f = TeXLength.getLength("nulldelimiterspace", env);
 
-        return new HorizontalBox(vBox, vBox.getWidth() + 2 * f, TeXConstants.ALIGN_CENTER);
+        return new HorizontalBox(vBox, vBox.getWidth() + 2 * f, TeXConstants.Align.CENTER);
     }
 }

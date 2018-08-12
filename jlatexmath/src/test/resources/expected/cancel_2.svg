@@ -1,0 +1,22 @@
+<!--
+\cancel{\pi}
+-->
+<svg width="21" height="18" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<style type="text/css">
+@font-face {
+font-family: 'jlm_cmmi10';
+src: url('fonts/jlm_cmmi10.ttf') format('truetype');
+font-style: normal;
+}
+.jlm_cmmi10 {
+font-family: 'jlm_cmmi10';
+font-size: 133px;
+}
+</style>
+<g stroke="rgb(0,0,0)" fill="rgb(0,0,0)" stroke-width="1.0" stroke-miterlimit="10.0" stroke-linejoin="miter" stroke-linecap="square">
+<text class="jlm_cmmi10" transform="matrix(0.1,0.0,0.0,0.1,6.0,11.740733)">¼</text>
+</g>
+<g stroke="rgb(0,0,0)" fill="rgb(0,0,0)" stroke-width="0.053332" stroke-miterlimit="10.0" stroke-linejoin="miter" stroke-linecap="butt">
+<path transform="matrix(10.0,0.0,0.0,10.0,0.0,0.0)" d=" M 0.39268714 0.46040133 L 1.6151875 1.3136721" fill="transparent"/>
+</g>
+</svg>

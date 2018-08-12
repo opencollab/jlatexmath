@@ -1,0 +1,325 @@
+<?xml version='1.0'?>
+<tests name="mhchem">
+  <test>
+    <id name="1"/>
+    <code>
+      <![CDATA[
+\ce{CO2 + C -> 2 CO}
+      ]]>      
+    </code>
+    <expected success="true"/>
+  </test>
+
+  <test>
+    <id name="2"/>
+    <code>
+      <![CDATA[
+\ce{Hg^2+ ->[I-] HgI2 ->[I-] [Hg^{II}I4]^2-}
+      ]]>      
+    </code>
+    <expected success="true"/>
+  </test>
+
+  <test>
+    <id name="3"/>
+    <code>
+      <![CDATA[
+\begin{gather}
+\ce{H2O} \cr
+\ce{Sb2O3} \cr
+\end{gather}
+      ]]>      
+    </code>
+    <expected success="true"/>
+  </test>
+
+  <test>
+    <id name="4"/>
+    <code>
+      <![CDATA[
+\begin{gather}
+\ce{H+} \cr
+\ce{CrO4^2-} \cr
+\ce{[AgCl2]-} \cr
+\ce{Y^99+} \cr
+\ce{Y^{99+}} \cr
+\end{gather}
+      ]]>      
+    </code>
+    <expected success="true"/>
+  </test>
+  
+  <test>
+    <id name="5"/>
+    <code>
+      <![CDATA[
+\ce{Fe^{II}Fe^{III}2O4}
+      ]]>      
+    </code>
+    <expected success="true"/>
+  </test>
+
+  <test>
+    <id name="6"/>
+    <code>
+      <![CDATA[
+\begin{gather}
+\ce{2H2O} \cr
+\ce{2 H2O} \cr
+\ce{0.5H2O} \cr
+\ce{1/2H2O} \cr
+\ce{(1/2)H2O} \cr
+\ce{$n$H2O} \cr
+\end{gather}
+      ]]>      
+    </code>
+    <expected success="true"/>
+  </test>
+
+  <test>
+    <id name="7"/>
+    <code>
+      <![CDATA[
+\begin{gather}
+\ce{^{227}_{90}Th+} \cr
+\ce{^227_90Th+} \cr
+\ce{^{0}_{-1}n^{-}} \cr
+\ce{^0_-1n-} \cr
+\ce{H{}^3HO} \cr
+\ce{H^3HO} \cr
+\end{gather}
+      ]]>      
+    </code>
+    <expected success="true"/>
+  </test>
+
+  <test>
+    <id name="8"/>
+    <code>
+      <![CDATA[
+\begin{gather}
+\ce{(NH4)2S} \cr
+\ce{[\{(X2)3\}2]^3+} \cr
+\ce{CH4 + 2 $\left( \ce{O2 + 79/21 N2} \right)$} \cr
+\end{gather}
+      ]]>      
+    </code>
+    <expected success="true"/>
+  </test>
+
+  <test>
+    <id name="9"/>
+    <code>
+      <![CDATA[
+\begin{gather}
+\ce{H2(aq)} \cr
+\ce{CO3^2-{}_{(aq)}} \cr
+\ce{NaOH(aq,$\infty$)} \cr
+\end{gather}
+      ]]>      
+    </code>
+    <expected success="true"/>
+  </test>
+
+  <test>
+    <id name="10"/>
+    <code>
+      <![CDATA[
+\begin{gather}
+\ce{OCO^{.-}} \cr
+\ce{NO^{(2.)-}} \cr
+\end{gather}
+      ]]>      
+    </code>
+    <expected success="true"/>
+  </test>
+
+  <test>
+    <id name="11"/>
+    <code>
+      <![CDATA[
+\begin{gather}
+\ce{NO_x} \cr
+\ce{Fe^n+} \cr
+\ce{x Na(NH4)HPO4 ->[\Delta] (NaPO3)_x + x NH3 ^ + x H2O} \cr
+\end{gather}
+      ]]>      
+    </code>
+    <expected success="true"/>
+  </test>
+
+  <test>
+    <id name="12"/>
+    <code>
+      <![CDATA[
+\begin{gather}
+\ce{\mu-Cl} \cr
+\ce{[Pt(\eta^2-C2H4)Cl3]-} \cr
+\ce{\beta +} \cr
+\ce{^40_18Ar + \gamma{} + \nu_e} \cr
+\end{gather}
+      ]]>      
+    </code>
+    <expected success="true"/>
+  </test>
+
+  <test>
+    <id name="13"/>
+    <code>
+      <![CDATA[
+\begin{gather}
+\ce{NaOH(aq,$\infty$)} \cr
+\ce{Fe(CN)_{$\frac{6}{2}$}} \cr
+\ce{NO_$x$} \cr
+\ce{NO_${x}$} \cr
+\ce{$cis${-}[PtCl2(NH3)2]} \cr
+\ce{X_{$i$}^{$x$}} \cr
+\ce{X_$i$^$x$} \cr
+\ce{CuS($hP12$)} \cr
+\end{gather}
+      ]]>      
+    </code>
+    <expected success="true"/>
+  </test>
+
+  <test>
+    <id name="14"/>
+    <code>
+      <![CDATA[
+\begin{gather}
+\ce{{(+)}_589{-}[Co(en)3]Cl3} \cr
+\ce{{Gluconic Acid} + H2O2} \cr
+\ce{X_{{red}}} \cr
+\end{gather}
+      ]]>      
+    </code>
+    <expected success="true"/>
+  </test>
+
+  <test>
+    <id name="15"/>
+    <code>
+      <![CDATA[
+\begin{gather}
+\ce{KCr(SO4)2*12H2O} \cr
+\ce{KCr(SO4)2.12H2O} \cr
+\ce{KCr(SO4)2 * 12 H2O} \cr
+\end{gather}
+      ]]>      
+    </code>
+    <expected success="true"/>
+  </test>
+
+  <test>
+    <id name="16"/>
+    <code>
+      <![CDATA[
+\begin{gather}
+\ce{C6H5-CHO} \cr
+\ce{A-B=C#D} \cr
+\ce{A\bond{-}B\bond{=}C\bond{#}D} \cr
+\ce{A\bond{1}B\bond{2}C\bond{3}D} \cr
+\ce{A\bond{~}B\bond{~-}C} \cr
+\ce{A\bond{~--}B\bond{~=}C\bond{-~-}D} \cr
+\ce{A\bond{...}B\bond{....}C} \cr
+\ce{A\bond{->}B\bond{<-}C} \cr
+\end{gather}
+      ]]>      
+    </code>
+    <expected success="true"/>
+  </test>
+
+  <test>
+    <id name="17"/>
+    <code>
+      <![CDATA[
+\begin{gather}
+\ce{A -> B} \cr
+\ce{A <- B} \cr
+\ce{A <-> B} \cr
+\ce{A <--> B} \cr
+\ce{A <=> B} \cr
+\ce{A <=>> B} \cr
+\ce{A <<=> B} \cr
+\ce{A ->[H2O] B} \cr
+\ce{A ->[{text above}][{text below}] B} \cr
+\ce{A ->[$x$][$x_i$] B} \cr
+\ce{A ->[${x}$] B} \cr
+\end{gather}
+      ]]>      
+    </code>
+    <expected success="true"/>
+  </test>
+
+  <test>
+    <id name="18"/>
+    <code>
+      <![CDATA[
+\begin{gather}
+\ce{A + B} \cr
+\ce{A - B} \cr
+\ce{A = B} \cr
+\ce{A \pm B} \cr
+\end{gather}
+      ]]>      
+    </code>
+    <expected success="true"/>
+  </test>
+
+  <test>
+    <id name="19"/>
+    <code>
+      <![CDATA[
+\begin{gather}
+\ce{SO4^2- + Ba^2+ -> BaSO4 v} \cr
+\ce{A v B (v) -> B ^ B (^)} \cr
+\end{gather}
+      ]]>      
+    </code>
+    <expected success="true"/>
+  </test>
+
+  <test>
+    <id name="20"/>
+    <code>
+      <![CDATA[
+\begin{gather}
+\ce{Zn^2+ <=>[+ 2OH-][+ 2H+] $\underset{\text{amphoteres Hydroxid}}{\ce{Zn(OH)2 v}}$ <=>[+ 2OH-][+ 2H+] $\underset{\text{Hydroxozikat}}{\ce{[Zn(OH)4]^2-}}$} \cr
+$K = \frac{[\ce{Hg^2+}][\ce{Hg}]}{[\ce{Hg2^2+}]}$ \cr
+$K = \ce{\frac{[Hg^2+][Hg]}{[Hg2^2+]}}$ \cr
+\ce{Hg^2+ ->[I-] $\underset{\mathrm{red}}{\ce{HgI2}}$ ->[I-] $\underset{\mathrm{red}}{\ce{[Hg^{II}I4]^2-}}$} \cr
+\end{gather}
+      ]]>      
+    </code>
+    <expected success="true"/>
+  </test>
+
+  <test>
+    <id name="21"/>
+    <code>
+      <![CDATA[
+\begin{gather}
+\ce{ZnS($c$)} \cr
+\ce{ZnS(\ca$c$)} \cr
+\end{gather}
+      ]]>      
+    </code>
+    <expected success="true"/>
+  </test>
+
+  <test>
+    <id name="22"/>
+    <code>
+      <![CDATA[
+\begin{gather}
+\ce{Li^x_{Li,1-2x}Mg^._{Li,x}$V$'_{Li,x}Cl^x_{Cl}} \cr
+\ce{O''_{i,x}} \cr
+\ce{M^{..}_i} \cr
+\ce{$V$^{4'}_{Ti}} \cr
+\ce{V_{V,1}C_{C,0.8}$V$_{C,0.2}} \cr
+\end{gather}
+      ]]>      
+    </code>
+    <expected success="true"/>
+  </test>
+</tests>

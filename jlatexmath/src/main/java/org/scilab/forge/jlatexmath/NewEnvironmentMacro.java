@@ -2,7 +2,7 @@
  * =========================================================================
  * This file is part of the JLaTeXMath Library - http://forge.scilab.org/jlatexmath
  *
- * Copyright (C) 2009 DENIZET Calixte
+ * Copyright (C) 2009-2018 DENIZET Calixte
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -45,20 +45,44 @@
 
 package org.scilab.forge.jlatexmath;
 
-public class NewEnvironmentMacro extends NewCommandMacro {
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
-    public NewEnvironmentMacro() {
+public class NewEnvironmentMacro {
+
+    private static final Map<String, Env> envs = new HashMap<String, Env>();
+
+    public NewEnvironmentMacro() { }
+
+    public static void clear() {
+        envs.clear();
     }
 
-    public static void addNewEnvironment(String name, String begdef, String enddef, int nbArgs) throws ParseException {
-        //if (macrocode.get(name + "@env") != null)
-        //throw new ParseException("Environment " + name + " already exists ! Use renewenvironment instead ...");
-        addNewCommand(name + "@env", begdef + " #" + (nbArgs + 1) + " " + enddef, nbArgs + 1);
+    public static void addNewEnvironment(TeXParser tp, String name, String before, String after, int nbargs, boolean re) throws ParseException {
+        if (envs.get(name) != null && !re) {
+            throw new ParseException(tp, "Environment " + name + " already exists ! Use renewenvironment instead ...");
+        }
+        envs.put(name, new Env(before, after, nbargs));
     }
 
-    public static void addReNewEnvironment(String name, String begdef, String enddef, int nbArgs) throws ParseException {
-        if (macrocode.get(name + "@env") == null)
-            throw new ParseException("Environment " + name + "is not defined ! Use newenvironment instead ...");
-        addReNewCommand(name + "@env", begdef + " #" + (nbArgs + 1) + " " + enddef, nbArgs + 1);
+    public static ArrayList<String> executeBeginEnv(final TeXParser tp, final String name) {
+        final Env env = envs.get(name);
+        if (env == null) {
+            return null;
+        }
+        final int nargs = env.getNArgs();
+        final ArrayList<String> args = tp.getArgsAsStrings(nargs);
+        final String before = env.getBefore(tp, args);
+        tp.addString(before);
+
+        return args;
+    }
+
+    public static void executeEndEnv(final TeXParser tp, final String name, final ArrayList<String> args) {
+        final Env env = envs.get(name);
+        final String after = env.getAfter(tp, args);
+        tp.addString(after, true /* to come back here after the string has been parsed */);
+        tp.parse();
     }
 }

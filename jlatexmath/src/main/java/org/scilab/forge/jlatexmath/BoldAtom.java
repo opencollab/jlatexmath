@@ -59,11 +59,17 @@ public class BoldAtom extends Atom {
     public Box createBox(TeXEnvironment env) {
         Box box;
         if (base != null) {
-            env = env.copy(env.getTeXFont().copy());
-            env.getTeXFont().setBold(true);
-            box = base.createBox(env);
+            final TeXFont tf = env.getTeXFont();
+            final boolean bold = tf.getBold();
+            if (bold) {
+                box = base.createBox(env);
+            } else {
+                tf.setBold(true);
+                box = base.createBox(env);
+                tf.setBold(false);
+            }
         } else {
-            box = new StrutBox(0, 0, 0, 0);
+            box = StrutBox.getEmpty();
         }
 
         return box;

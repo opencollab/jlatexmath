@@ -54,7 +54,9 @@ import org.apache.fop.render.Graphics2DAdapter;
 import org.apache.fop.render.Renderer;
 import org.apache.fop.render.RendererContext;
 import org.apache.fop.render.XMLHandler;
+
 import org.scilab.forge.jlatexmath.fop.image.loader.Graphics2DImagePainterJLaTeXMath;
+
 import org.w3c.dom.Document;
 
 /**

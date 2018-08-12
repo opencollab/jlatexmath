@@ -48,6 +48,7 @@ package org.scilab.forge.jlatexmath.dynamic;
 import org.scilab.forge.jlatexmath.Atom;
 import org.scilab.forge.jlatexmath.Box;
 import org.scilab.forge.jlatexmath.EmptyAtom;
+import org.scilab.forge.jlatexmath.RowAtom;
 import org.scilab.forge.jlatexmath.StrutBox;
 import org.scilab.forge.jlatexmath.TeXEnvironment;
 import org.scilab.forge.jlatexmath.TeXFormula;
@@ -67,14 +68,12 @@ public class DynamicAtom extends Atom {
     private boolean insert;
     private boolean refreshed;
 
-    public DynamicAtom(String externalCode, String option) {
+    public DynamicAtom(String externalCode, char option) {
         this.externalCode = externalCode;
         if (ecFactory != null) {
             this.converter = ecFactory.getExternalConverter();
         }
-        if (option != null && option.equals("i")) {
-            insert = true;
-        }
+        insert = option == 'i';
     }
 
     public static boolean hasAnExternalConverterFactory() {
@@ -95,11 +94,12 @@ public class DynamicAtom extends Atom {
             refreshed = true;
         }
 
-        if (formula.root == null) {
-            return new EmptyAtom();
+        final Atom a = formula.getAtom();
+        if (a == null) {
+            return EmptyAtom.get();
         }
 
-        return formula.root;
+        return a;
     }
 
     public Box createBox(TeXEnvironment env) {
@@ -109,11 +109,9 @@ public class DynamicAtom extends Atom {
             } else {
                 formula.setLaTeX(converter.getLaTeXString(externalCode));
             }
-            if (formula.root != null) {
-                return formula.root.createBox(env);
-            }
+            return formula.createBox(env);
         }
 
-        return new StrutBox(0, 0, 0, 0);
+        return StrutBox.getEmpty();
     }
 }

@@ -45,65 +45,44 @@
 
 package org.scilab.forge.jlatexmath;
 
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.regex.Matcher;
+import java.util.Map;
 
 public class NewCommandMacro {
 
-    protected static HashMap<String, String> macrocode = new HashMap<String, String>();
-    protected static HashMap<String, String> macroreplacement = new HashMap<String, String>();
+    private static final Map<String, Macro> macros = new HashMap<String, Macro>();
 
     public NewCommandMacro() {
     }
 
-    public static void addNewCommand(String name, String code, int nbargs) throws ParseException {
-        //if (macrocode.get(name) != null)
-        //throw new ParseException("Command " + name + " already exists ! Use renewcommand instead ...");
-        macrocode.put(name, code);
-        MacroInfo.Commands.put(name, new MacroInfo("org.scilab.forge.jlatexmath.NewCommandMacro", "executeMacro", nbargs));
+    public static void clear() {
+        macros.clear();
     }
 
-    public static void addNewCommand(String name, String code, int nbargs, String def) throws ParseException {
-        if (macrocode.get(name) != null)
-            throw new ParseException("Command " + name + " already exists ! Use renewcommand instead ...");
-        macrocode.put(name, code);
-        macroreplacement.put(name, def);
-        MacroInfo.Commands.put(name, new MacroInfo("org.scilab.forge.jlatexmath.NewCommandMacro", "executeMacro", nbargs, 1));
-    }
-
-    public static boolean isMacro(String name) {
-        return macrocode.containsKey(name);
-    }
-
-    public static void addReNewCommand(String name, String code, int nbargs) {
-        if (macrocode.get(name) == null)
-            throw new ParseException("Command " + name + " is not defined ! Use newcommand instead ...");
-        macrocode.put(name, code);
-        MacroInfo.Commands.put(name, new MacroInfo("org.scilab.forge.jlatexmath.NewCommandMacro", "executeMacro", nbargs));
-    }
-
-    public String executeMacro(TeXParser tp, String[] args) {
-        String code = macrocode.get(args[0]);
-        String rep;
-        int nbargs = args.length - 11;
-        int dec = 0;
-
-
-        if (args[nbargs + 1] != null) {
-            dec = 1;
-            rep = Matcher.quoteReplacement(args[nbargs + 1]);
-            code = code.replaceAll("#1", rep);
-        } else if (macroreplacement.get(args[0]) != null) {
-            dec = 1;
-            rep = Matcher.quoteReplacement(macroreplacement.get(args[0]));
-            code = code.replaceAll("#1", rep);
+    public static void addNewCommand(TeXParser tp, String name, String code, int nbargs, boolean re) throws ParseException {
+        if (name.equals("CancelColor")) {
+            CancelAtom.handleColor(tp, code);
+            return;
         }
 
-        for (int i = 1; i <= nbargs; i++) {
-            rep = Matcher.quoteReplacement(args[i]);
-            code = code.replaceAll("#" + (i + dec), rep);
+        if (macros.get(name) != null && !re) {
+            throw new ParseException(tp, "Command " + name + " already exists ! Use renewcommand instead ...");
         }
+        macros.put(name, new Macro(code, nbargs));
+    }
 
-        return code;
+    public static boolean exec(final TeXParser tp, final String name) {
+        final Macro mac = macros.get(name);
+        if (mac == null) {
+            return false;
+        }
+        final int nargs = mac.getNArgs();
+        final ArrayList<String> args = tp.getArgsAsStrings(nargs);
+        final String code = mac.get(tp, args);
+        tp.addString(code);
+        tp.cancelPrevPos();
+
+        return true;
     }
 }

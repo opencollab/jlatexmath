@@ -35,18 +35,16 @@
 </SymbolMappings>
 
 <FontDescriptions>
-  <Metrics include="fonts/jlm_wnr10.xml" />
-  <Metrics include="fonts/jlm_wnti10.xml" />
-  <Metrics include="fonts/jlm_wntt10.xml" />
-  <Metrics include="fonts/jlm_wnss10.xml" />
-  <Metrics include="fonts/jlm_wnssi10.xml" />
-  <Metrics include="fonts/jlm_wnssbx10.xml" />
-  <Metrics include="fonts/jlm_wnbx10.xml" />
-  <Metrics include="fonts/jlm_wnbxti10.xml" />
+  <Metrics id="jlm_wnr10" include="fonts/jlm_wnr10.xml" />
+  <Metrics id="jlm_wnti10" include="fonts/jlm_wnti10.xml" />
+  <Metrics id="jlm_wntt10" include="fonts/jlm_wntt10.xml" />
+  <Metrics id="jlm_wnss10" include="fonts/jlm_wnss10.xml" />
+  <Metrics id="jlm_wnssi10" include="fonts/jlm_wnssi10.xml" />
+  <Metrics id="jlm_wnssbx10" include="fonts/jlm_wnssbx10.xml" />
+  <Metrics id="jlm_wnbx10" include="fonts/jlm_wnbx10.xml" />
+  <Metrics id="jlm_wnbxti10" include="fonts/jlm_wnbxti10.xml" />
 </FontDescriptions>
 
 <TeXSymbols include="fonts/symbols_cyrillic.xml" />
-
-<FormulaSettings include="fonts/mappings_cyrillic.xml" />
 
 </TeXFont>

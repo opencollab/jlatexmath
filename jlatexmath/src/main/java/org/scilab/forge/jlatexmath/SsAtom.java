@@ -57,10 +57,20 @@ public class SsAtom extends Atom {
     }
 
     public Box createBox(TeXEnvironment env) {
-        env = env.copy(env.getTeXFont().copy());
-        env.getTeXFont().setSs(true);
-        Box box = base.createBox(env);
-        env.getTeXFont().setSs(false);
+        Box box;
+        if (base != null) {
+            final TeXFont tf = env.getTeXFont();
+            final boolean ss = tf.getSs();
+            if (ss) {
+                box = base.createBox(env);
+            } else {
+                tf.setSs(true);
+                box = base.createBox(env);
+                tf.setSs(false);
+            }
+        } else {
+            box = StrutBox.getEmpty();
+        }
         return box;
     }
 

@@ -1,0 +1,23 @@
+<!--
+\newcommand{\comOne}[1]{\frac{#1}{x^{#1}}}
+               \comOne{\sigma}
+-->
+<svg width="30" height="37" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<style type="text/css">
+@font-face {
+font-family: 'jlm_cmmi10';
+src: url('fonts/jlm_cmmi10.ttf') format('truetype');
+font-style: normal;
+}
+.jlm_cmmi10 {
+font-family: 'jlm_cmmi10';
+font-size: 133px;
+}
+</style>
+<g stroke="rgb(0,0,0)" fill="rgb(0,0,0)" stroke-width="1.0" stroke-miterlimit="10.0" stroke-linejoin="miter" stroke-linecap="square">
+<text class="jlm_cmmi10" transform="matrix(0.1,0.0,0.0,0.1,10.521711,11.740733)">¾</text>
+<path transform="matrix(10.0,0.0,0.0,10.0,0.0,0.0)" d=" M 0.7594022 1.7160847 L 2.154664 1.7160847 L 2.154664 1.7694167 L 0.7594022 1.7694167 L 0.7594022 1.7160847 Z " stroke="transparent" fill-rule="nonzero"/>
+<text class="jlm_cmmi10" transform="matrix(0.1,0.0,0.0,0.1,7.5940223,29.906853)">x</text>
+<text class="jlm_cmmi10" transform="matrix(0.06999999999999999,0.0,0.0,0.07,15.2143955,26.055)">¾</text>
+</g>
+</svg>

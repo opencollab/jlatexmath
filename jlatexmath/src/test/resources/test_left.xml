@@ -1,0 +1,27 @@
+<?xml version='1.0'?>
+<tests name="left">
+  <test>
+    <id name="1"/>
+    <code>
+      <![CDATA[
+               \begin{split}
+               h_j^{i+1}
+               & = h_j^i + \Delta t \left(q_j^i-n\alpha \frac{{(h_{j+1}^i)}^{n-1}+{(h_{j-1}^i)}^{n-1}}{2} \frac{h_{j+1}^i-h_{j-1}^i}{2\Delta x}\right) + \frac{(\Delta t)^2}{2} \frac{q_j^{i+1}-q_j^i}{\Delta t} \\
+               & \quad -\frac{(\Delta t)^2}{2} n\alpha \left[\frac{{(h_{j+1}^i)}^{n+1}+{(h_j^i)}^{n+1}}{2}\left(\frac{q_{j+1}^i+q_j^i}{2}-n\alpha\frac{(h_{j+1}^i)^{n-1}+h_j^i)^{n-1}}{2}\frac{h_{j+1}^i-h_j^i}{\Delta x} \right)\right. \\
+               & \quad -{}\left.\left.\!\!\frac{{(h_{j}^i)}^{n+1}+{(h_{j-1}^i)}^{n+1}}{2}\left(\frac{q_{j}^i+q_{j-1}^i}{2}-n\alpha\frac{(h_{j}^i)^{n-1}+h_{j-1}^i)^{n-1}}{2}\frac{h_{j}^i-h_{j-1}^i}{\Delta x} \right)\right]\middle/{\Delta x}\right.
+               \end{split}
+      ]]>
+    </code>
+    <expected success="true"/>
+  </test>
+  
+  <test>
+    <id name="2"/>
+    <code>
+      <![CDATA[
+               \left(\frac{x \over y}{z^t}\middle|{x^y \over \frac z t}\right\}
+      ]]>
+    </code>
+    <expected success="true"/>
+  </test>
+</tests>

@@ -50,11 +50,19 @@ package org.scilab.forge.jlatexmath;
  */
 public class MiddleAtom extends Atom {
 
-    public Atom base;
-    public Box box = new StrutBox(0, 0, 0, 0);
+    private Atom base;
+    private Box box = StrutBox.getEmpty();
 
     public MiddleAtom(Atom at) {
         base = at;
+    }
+
+    public Atom getBase() {
+        return base;
+    }
+
+    public void setBox(final Box box) {
+        this.box = box;
     }
 
     public Box createBox(TeXEnvironment env) {

@@ -52,11 +52,11 @@ package org.scilab.forge.jlatexmath;
  */
 public class OverBar extends VerticalBox {
 
-    public OverBar(Box b, float kern, float thickness) {
+    public OverBar(final Box b, final double kern, final double thickness) {
         // construct vertical box
-        add(new StrutBox(0, thickness, 0, 0));
-        add(new HorizontalRule(thickness, b.getWidth(), 0));
-        add(new StrutBox(0, kern, 0, 0));
+        add(new StrutBox(0., thickness, 0., 0.));
+        add(new HorizontalRule(thickness, b.getWidth(), 0.));
+        add(new StrutBox(0., kern, 0., 0.));
         add(b);
     }
 }

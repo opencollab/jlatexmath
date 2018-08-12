@@ -48,96 +48,151 @@
 
 package org.scilab.forge.jlatexmath;
 
+import java.util.ArrayList;
+
+import org.scilab.forge.jlatexmath.mhchem.CEEmptyAtom;
+
 /**
  * An atom representing scripts to be attached to another atom.
  */
 public class ScriptsAtom extends Atom {
 
-    // TeX constant: what's the use???
-    private final static SpaceAtom SCRIPT_SPACE = new SpaceAtom(TeXConstants.UNIT_POINT, 0.5f, 0, 0);
-
     // base atom
-    private final Atom base;
+    private Atom base;
 
     // subscript and superscript to be attached to the base (if not null)
-    private final Atom subscript;
-    private final Atom superscript;
-    private int align = TeXConstants.ALIGN_LEFT;
+    private Atom subscript;
+    private Atom superscript;
+    private TeXConstants.Align align;
 
-    public ScriptsAtom(Atom base, Atom sub, Atom sup) {
+    public ScriptsAtom(Atom base, Atom sub, Atom sup, TeXConstants.Align align) {
         this.base = base;
         subscript = sub;
         superscript = sup;
+        this.align = align;
     }
 
     public ScriptsAtom(Atom base, Atom sub, Atom sup, boolean left) {
-        this(base, sub, sup);
-        if (!left)
-            align = TeXConstants.ALIGN_RIGHT;
+        this(base, sub, sup, left ? TeXConstants.Align.LEFT : TeXConstants.Align.RIGHT);
+    }
+
+    public ScriptsAtom(Atom base, Atom sub, Atom sup) {
+        this(base, sub, sup, !(base instanceof CEEmptyAtom));
+    }
+
+    public Atom getTrueBase() {
+        return base;
+    }
+
+    public void setBase(Atom base) {
+        this.base = base;
+    }
+
+    public boolean setSupIfNull(Atom sup) {
+        if (superscript == null) {
+            superscript = sup;
+            return true;
+        }
+        return false;
+    }
+
+    public boolean setSubIfNull(Atom sub) {
+        if (subscript == null) {
+            subscript = sub;
+            return true;
+        }
+        return false;
+    }
+
+    public void setSup(Atom sup) {
+        superscript = sup;
+    }
+
+    public void setSub(Atom sub) {
+        subscript = sub;
+    }
+
+    public void addToSup(Atom a) {
+        if (superscript == null) {
+            superscript = a;
+        } else if (superscript instanceof RowAtom) {
+            ((RowAtom)superscript).add(a);
+        } else {
+            superscript = new RowAtom(superscript, a);
+        }
+    }
+
+    public void addToSub(Atom a) {
+        if (subscript == null) {
+            subscript = a;
+        } else if (subscript instanceof RowAtom) {
+            ((RowAtom)subscript).add(a);
+        } else {
+            subscript = new RowAtom(subscript, a);
+        }
+    }
+
+    public Atom getSup() {
+        return superscript;
+    }
+
+    public Atom getSub() {
+        return subscript;
     }
 
     public Box createBox(TeXEnvironment env) {
-        Box b = (base == null ? new StrutBox(0, 0, 0, 0) : base.createBox(env));
-        Box deltaSymbol = new StrutBox(0, 0, 0, 0);
-        if (subscript == null && superscript == null)
-            return b;
-        else {
-            TeXFont tf = env.getTeXFont();
+        if (subscript == null && superscript == null) {
+            return base.createBox(env);
+        } else {
+            final Atom trueBase = base.getBase();
+            if (trueBase instanceof RowAtom && ((RowAtom)trueBase).lookAtLast()) {
+                return createBoxForRowAtom(env);
+            }
+
             int style = env.getStyle();
 
-            if (base.type_limits == TeXConstants.SCRIPT_LIMITS || (base.type_limits == TeXConstants.SCRIPT_NORMAL && style == TeXConstants.STYLE_DISPLAY))
-                return new UnderOverAtom(new UnderOverAtom(base, subscript, TeXConstants.UNIT_POINT, 0.3f, true, false),
-                                         superscript, TeXConstants.UNIT_POINT, 3.0f, true, true).createBox(env);
+            if (base.type_limits == TeXConstants.SCRIPT_LIMITS
+                    || (base.type_limits == TeXConstants.SCRIPT_NORMAL && style == TeXConstants.STYLE_DISPLAY)) {
+                return new BigOperatorAtom(base, subscript, superscript).createBox(env);
+            }
+
+            final boolean it = base.setAddItalicCorrection(subscript == null);
+            Box b = base.createBox(env);
+            base.setAddItalicCorrection(it);
+
+            Box scriptspace = new StrutBox(TeXLength.getLength("scriptspace", env), 0., 0., 0.);
+            TeXFont tf = env.getTeXFont();
 
             HorizontalBox hor = new HorizontalBox(b);
 
             int lastFontId = b.getLastFontId();
             // if no last font found (whitespace box), use default "mu font"
-            if (lastFontId == TeXFont.NO_FONT)
+            if (lastFontId == TeXFont.NO_FONT) {
                 lastFontId = tf.getMuFontId();
+            }
 
-            TeXEnvironment subStyle = env.subStyle(), supStyle = env.supStyle();
+            TeXEnvironment subStyle = env.subStyle();
+            TeXEnvironment supStyle = env.supStyle();
 
             // set delta and preliminary shift-up and shift-down values
-            float delta = 0, shiftUp, shiftDown;
+            double delta = 0.;
+            double shiftUp;
+            double shiftDown;
 
-            // TODO: use polymorphism?
-            if (base instanceof AccentedAtom) { // special case :
-                // accent. This positions superscripts better next to the accent!
-                Box box = ((AccentedAtom) base).base.createBox(env.crampStyle());
-                shiftUp = box.getHeight() - tf.getSupDrop(supStyle.getStyle());
-                shiftDown = box.getDepth() + tf.getSubDrop(subStyle.getStyle());
-            } else if (base instanceof SymbolAtom
-                       && base.type == TeXConstants.TYPE_BIG_OPERATOR) { // single big operator symbol
-                Char c = tf.getChar(((SymbolAtom) base).getName(), style);
-                if (style < TeXConstants.STYLE_TEXT && tf.hasNextLarger(c)) // display
-                    // style
-                    c = tf.getNextLarger(c, style);
-                Box x = new CharBox(c);
-
-                x.setShift(-(x.getHeight() + x.getDepth()) / 2
-                           - env.getTeXFont().getAxisHeight(env.getStyle()));
-                hor = new HorizontalBox(x);
-
-                // include delta in width or not?
-                delta = c.getItalic();
-                deltaSymbol = new SpaceAtom(TeXConstants.MEDMUSKIP).createBox(env);
-                if (delta > TeXFormula.PREC && subscript == null)
-                    hor.add(new StrutBox(delta, 0, 0, 0));
-
-                shiftUp = hor.getHeight() - tf.getSupDrop(supStyle.getStyle());
-                shiftDown = hor.getDepth() + tf.getSubDrop(subStyle.getStyle());
-            } else if (base instanceof CharSymbol) {
-                shiftUp = shiftDown = 0;
-                CharFont cf = ((CharSymbol) base).getCharFont(tf);
-                if (!((CharSymbol) base).isMarkedAsTextSymbol() || !tf.hasSpace(cf.fontId)) {
+            if (trueBase instanceof CharAtom) {
+                final CharAtom ca = (CharAtom)trueBase;
+                shiftUp = shiftDown = 0.;
+                CharFont cf = ca.getCharFont(tf);
+                if ((!ca.isMarkedAsTextSymbol() || !tf.hasSpace(cf.fontId))
+                        && subscript != null) {
                     delta = tf.getChar(cf, style).getItalic();
                 }
-                if (delta > TeXFormula.PREC && subscript == null) {
-                    hor.add(new StrutBox(delta, 0, 0, 0));
-                    delta = 0;
-                }
             } else {
+                if (trueBase instanceof SymbolAtom && trueBase.getType() == TeXConstants.TYPE_BIG_OPERATOR) {
+                    if (trueBase.isMathMode() && trueBase.mustAddItalicCorrection()) {
+                        delta = trueBase.getItalic(env);
+                    }
+                }
                 shiftUp = b.getHeight() - tf.getSupDrop(supStyle.getStyle());
                 shiftDown = b.getDepth() + tf.getSubDrop(subStyle.getStyle());
             }
@@ -145,31 +200,31 @@ public class ScriptsAtom extends Atom {
             if (superscript == null) { // only subscript
                 Box x = subscript.createBox(subStyle);
                 // calculate and set shift amount
-                x.setShift(Math.max(Math.max(shiftDown, tf.getSub1(style)), x.getHeight() - 4 * Math.abs(tf.getXHeight(style, lastFontId)) / 5));
+                x.setShift(Math.max(Math.max(shiftDown, tf.getSub1(style)), x.getHeight() - 4. * Math.abs(tf.getXHeight(style, lastFontId)) / 5.));
                 hor.add(x);
-                hor.add(deltaSymbol);
 
                 return hor;
             } else {
                 Box x = superscript.createBox(supStyle);
-                float msiz = x.getWidth();
-                if (subscript != null && align == TeXConstants.ALIGN_RIGHT) {
+                double msiz = x.getWidth();
+                if (subscript != null && align == TeXConstants.Align.RIGHT) {
                     msiz = Math.max(msiz, subscript.createBox(subStyle).getWidth());
                 }
 
                 HorizontalBox sup = new HorizontalBox(x, msiz, align);
                 // add scriptspace (constant value!)
-                sup.add(SCRIPT_SPACE.createBox(env));
+                sup.add(scriptspace);
                 // adjust shift-up
-                float p;
-                if (style == TeXConstants.STYLE_DISPLAY)
+                double p;
+                if (style == TeXConstants.STYLE_DISPLAY) {
                     p = tf.getSup1(style);
-                else if (env.crampStyle().getStyle() == style)
+                } else if (env.crampStyle().getStyle() == style) {
                     p = tf.getSup3(style);
-                else
+                } else {
                     p = tf.getSup2(style);
+                }
                 shiftUp = Math.max(Math.max(shiftUp, p), x.getDepth()
-                                   + Math.abs(tf.getXHeight(style, lastFontId)) / 4);
+                                   + Math.abs(tf.getXHeight(style, lastFontId)) / 4.);
 
                 if (subscript == null) { // only superscript
                     sup.setShift(-shiftUp);
@@ -178,23 +233,22 @@ public class ScriptsAtom extends Atom {
                     Box y = subscript.createBox(subStyle);
                     HorizontalBox sub = new HorizontalBox(y, msiz, align);
                     // add scriptspace (constant value!)
-                    sub.add(SCRIPT_SPACE.createBox(env));
+                    sub.add(scriptspace);
                     // adjust shift-down
                     shiftDown = Math.max(shiftDown, tf.getSub2(style));
                     // position both sub- and superscript
-                    float drt = tf.getDefaultRuleThickness(style);
-                    float interSpace = shiftUp - x.getDepth() + shiftDown
-                                       - y.getHeight(); // space between sub- en
+                    double drt = tf.getDefaultRuleThickness(style);
+                    // space between sub- en
+                    double interSpace = shiftUp - x.getDepth() + shiftDown - y.getHeight();
                     // superscript
-                    if (interSpace < 4 * drt) { // too small
-                        shiftUp += 4 * drt - interSpace;
+                    if (interSpace < 4. * drt) { // too small
+                        shiftUp += 4. * drt - interSpace;
                         // set bottom superscript at least 4/5 of X-height
                         // above
                         // baseline
-                        float psi = 4 * Math.abs(tf.getXHeight(style, lastFontId))
-                                    / 5 - (shiftUp - x.getDepth());
+                        double psi = 4. * Math.abs(tf.getXHeight(style, lastFontId)) / 5. - (shiftUp - x.getDepth());
 
-                        if (psi > 0) {
+                        if (psi > 0.) {
                             shiftUp += psi;
                             shiftDown -= psi;
                         }
@@ -206,17 +260,33 @@ public class ScriptsAtom extends Atom {
                     vBox.add(sup);
                     // recalculate interspace
                     interSpace = shiftUp - x.getDepth() + shiftDown - y.getHeight();
-                    vBox.add(new StrutBox(0, interSpace, 0, 0));
+                    vBox.add(new StrutBox(0., interSpace, 0., 0.));
                     vBox.add(sub);
                     vBox.setHeight(shiftUp + x.getHeight());
                     vBox.setDepth(shiftDown + y.getDepth());
                     hor.add(vBox);
                 }
-                hor.add(deltaSymbol);
 
                 return hor;
             }
         }
+    }
+
+    private Box createBoxForRowAtom(TeXEnvironment env) {
+        final Atom trueBase = base.getBase();
+        final RowAtom ra = (RowAtom)trueBase;
+        final Atom last = ra.last();
+        final Box b = new ScriptsAtom(last, subscript, superscript, align).createBox(env);
+        final HorizontalBox hb = new HorizontalBox(base.createBox(env));
+        if (subscript != null) {
+            final double italic = last.getItalic(env);
+            hb.add(new StrutBox(-italic, 0., 0., 0.));
+        }
+        final ArrayList<Box> c = ((HorizontalBox)b).getChildren();
+        for (int i = 1; i < c.size(); ++i) {
+            hb.add(c.get(i));
+        }
+        return hb;
     }
 
     public int getLeftType() {
@@ -225,5 +295,9 @@ public class ScriptsAtom extends Atom {
 
     public int getRightType() {
         return base.getRightType();
+    }
+
+    public int getLimits() {
+        return base.getLimits();
     }
 }

@@ -1,4 +1,4 @@
-/* ShadowAtom.java
+/* OvalAtom.java
  * =========================================================================
  * This file is part of the JLaTeXMath Library - http://forge.scilab.org/jlatexmath
  *
@@ -44,6 +44,8 @@
  */
 
 package org.scilab.forge.jlatexmath;
+
+import java.awt.Color;
 
 /**
  * An atom representing a boxed base atom.

@@ -1,0 +1,44 @@
+<!--
+\begin{gather}
+\ce{A + B} \cr
+\ce{A - B} \cr
+\ce{A = B} \cr
+\ce{A \pm B} \cr
+\end{gather}
+-->
+<svg width="50" height="70" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<style type="text/css">
+@font-face {
+font-family: 'jlm_cmr10';
+src: url('fonts/jlm_cmr10.ttf') format('truetype');
+font-style: normal;
+}
+.jlm_cmr10 {
+font-family: 'jlm_cmr10';
+font-size: 133px;
+}
+@font-face {
+font-family: 'jlm_cmsy10';
+src: url('fonts/jlm_cmsy10.ttf') format('truetype');
+font-style: normal;
+}
+.jlm_cmsy10 {
+font-family: 'jlm_cmsy10';
+font-size: 133px;
+}
+</style>
+<g stroke="rgb(0,0,0)" fill="rgb(0,0,0)" stroke-width="1.0" stroke-miterlimit="10.0" stroke-linejoin="miter" stroke-linecap="square">
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,6.740743,15.1110935)">A</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,19.703741,15.1110935)">+</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,33.03713,15.1110935)">B</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,6.740743,31.07404)">A</text>
+<text class="jlm_cmsy10" transform="matrix(0.1,0.0,0.0,0.1,19.703741,31.07404)">¡</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,33.03713,31.07404)">B</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,6.0,47.036987)">A</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,19.703741,47.036987)">=</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,33.77787,47.036987)">B</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,6.740743,61.888813)">A</text>
+<text class="jlm_cmsy10" transform="matrix(0.1,0.0,0.0,0.1,19.703741,61.888813)">§</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,33.03713,61.888813)">B</text>
+</g>
+</svg>

@@ -1,0 +1,35 @@
+<?xml version='1.0'?>
+<tests name="allsymbols">
+  <test>
+    <id name="1"/>
+    <code>
+      <![CDATA[
+               \begin{array}{}
+               \bigparallel&\Vdash&\smallsmile&\nRightarrow&\wedge&\bigcup&\theta&\triangleq&\bar&\ngeq&\Lbag&\leftarrowtail&\checkmark&\preccurlyeq&\rightsquigarrow&\because&\prime&\#&\ae&\AE&\blacktriangledown&\$&\centerdot&\%&\&&\Lleftarrow&\succnapprox&\swarrow&\textmu&\lbag&\\
+               \Game&\varocircle&\polishlcross&\npreceq&\rightrightarrows&\varodot&\leftrightharpoons&\@&\textpercent&\thickapprox&\questiondown&\surdsign&\O&\P&\textfractionsolidus&\heartsuit&\S&\varLambda&\twoheadrightarrow&\nexists&\backslash&\gtrdot&\nearrow&\eqslantgtr&\varsupsetneqq&\widetilde&\niplus&\Doteq&\forall&\i&\\
+               \subsetplus&\j&\nwarrow&\emptyset&\maltese&\gimel&\setminus&\o&\twoheadleftarrow&\smallsetminus&\shortrightarrow&\underscore&\Delta&\lsqbrack&\rightleftharpoons&\thicksim&\downharpoonright&\amalg&\pitchfork&\jmath&\guilsinglright&\|&\varotimes&\vartriangleright&\urcorner&\ltimes&\nleqq&\propto&\downdownarrows&\intercal&\\
+               \faculty&\div&\tie&\ldotp&\omicron&\bigwedge&\lesssim&\aleph&\sigma&\lbrace&\sqsubset&\ell&\chi&\lacc&\lbrack&\check&\Eulerconst&\geqslant&\succeq&\llcorner&\Yup&\Bbbk&\digamma&\therefore&\fg&\precnsim&\curlywedgedownarrow&\mathring&\rightthreetimes&\nleftarrow&\\
+               \sphericalangle&\sim&\alpha&\bbslash&\ngeqslant&\oplus&\bullet&\varsupsetneq&\Lambda&\ge&\gg&\circledcirc&\approxeq&\lessgtr&\Diamond&\varepsilon&\boxempty&\gt&\llceil&\vartriangleleft&\rhd&\ovee&\textdbend&\circlearrowleft&\rho&\varPsi&\leqslant&\varpropto&\subset&\nabla&\\
+               \leftslice&\eqcirc&\downarrow&\vert&\widehat&\shortdownarrow&\rightarrowtriangle&\blacktriangle&\unrhd&\lessdot&\oint&\approx&\blacktriangleright&\normaldot&\varobslash&\lesseqgtr&\rbrace&\rgroup&\rbrack&\in&\uplus&\leftrightarrows&\varPi&\subseteqq&\looparrowright&\textapos&\gtrless&\circ&\lfloor&\bigoplus&\\
+               \partial&\precnapprox&\Im&\varoast&\simeq&\nless&\textpertenthousand&\dot&\nplus&\varsigma&\Upsilon&\ntrianglerighteqslant&\inplus&\Phi&\lceil&\leftrightarrowtriangle&\curlyveedownarrow&\top&\Relbar&\spadesuit&\boxast&\angle&\ntriangleleft&\mathsterling&\guillemotleft&\boxbslash&\varolessthan&\nLeftarrow&\question&\precapprox&\\
+               \varcurlyvee&\gvertneqq&\fatslash&\divideontimes&\leqq&\Ydown&\nsubseteqq&\eqsim&\sharp&\phi&\obar&\equals&\Vert&\le&\triangledown&\backprime&\curvearrowright&\ll&\lq&\lessapprox&\lt&\textminus&\smile&\Downarrow&\upharpoonleft&\neg&\ntrianglerighteq&\eta&\nsucceq&\sqsupset&\\
+               \eth&\owns&\nsim&\succapprox&\complement&\lneq&\arrownot&\oslash&\mp&\nVdash&\searrow&\shortuparrow&\upuparrows&\upsilon&\mu&\lvertneqq&\sqcup&\Box&\upharpoonright&\gnapprox&\lhook&\plus&\boxbox&\texteuro&\llfloor&\eqslantless&\supset&\varcurlywedge&\supsetpluseq&\boxplus&\\
+               \ni&\bumpeq&\circledast&\boxslash&\ngtr&\Arrownot&\bot&\nu&\rsqbrack&\Finv&\curlyeqprec&\nVDash&\nprec&\backepsilon&\tilde&\varpi&\lnapprox&\Omega&\oblong&\times&\OE&\oe&\og&\beth&\land&\fallingdotseq&\triangleleft&\fatsemi&\backsim&\semicolon&\\
+               \beta&\llparenthesis&\ulcorner&\subsetneqq&\hslash&\curlyeqsucc&\nrightarrow&\equiv&\nsucc&\vartheta&\ogreaterthan&\boxcircle&\subsetpluseq&\nnwarrow&\bigbox&\Updownarrow&\pi&\pm&\varoslash&\rceil&\varphi&\Subset&\supseteq&\minuso&\delta&\rightarrow&\doteqdot&\leftharpoondown&\looparrowleft&\boxdot&\\
+               \lambda&\prec&\supseteqq&\merge&\Pi&\leq&\triangleright&\breve&\obslash&\Cup&\lightning&\updownarrow&\varoplus&\iota&\Rsh&\varbigcirc&\cdot&\leftleftarrows&\varPhi&\sslash&\lnsim&\nsupseteqq&\dbend&\langle&\leftharpoonup&\mho&\barwedge&\nsubseteq&\slashdel&\sqcap&\\
+               \rq&\varnothing&\cup&\minus&\nshortmid&\odot&\mid&\sum&\ddot&\varovee&\supsetneqq&\Rbag&\smallint&\leadsto&\bigcurlywedge&\Re&\bigodot&\interleave&\bigtriangleup&\vartimes&\ssearrow&\ss&\olessthan&\varOmega&\sswarrow&\rbag&\bigstar&\star&\leftrightsquigarrow&\lhd&\\
+               \lozenge&\circlearrowright&\ntrianglelefteq&\succ&\varUpsilon&\rrparenthesis&\Mapsfromchar&\to&\gamma&\rfloor&\gtrapprox&\coprod&\ast&\cdotp&\curvearrowleft&\dashv&\doublebarwedge&\baro&\trianglerighteq&\rightslice&\rrbracket&\hat&\varrho&\hbar&\bigcurlyvee&\rightharpoondown&\supsetneq&\lneqq&\Psi&\trianglelefteq&\\
+               \curlyvee&\blacksquare&\Theta&\bignplus&\succneqq&\ncong&\lmoustache&\doubleacute&\clubsuit&\varominus&\succcurlyeq&\varsubsetneqq&\euro&\psi&\Sigma&\perp&\mapstochar&\varogreaterthan&\textregistered&\bigsqcup&\lesseqqgtr&\vartriangle&\nleqslant&\ngeqq&\not&\varXi&\lnot&\nleq&\wp&\measuredangle&\\
+               \wr&\ntrianglelefteqslant&\zeta&\rhook&\yen&\frown&\lll&\circeq&\xi&\varobar&\subsetneq&\ddagger&\Yleft&\colon&\varsubsetneq&\racc&\ominus&\sqsubseteq&\leftrightarroweq&\nsupseteq&\varowedge&\rtimes&\textemdash&\imath&\moo&\nnearrow&\epsilon&\Xi&\rrfloor&\bigotimes&\\
+               \Vvdash&\succnsim&\between&\fatbslash&\gneqq&\smallfrown&\Leftarrow&\natural&\varkappa&\llbracket&\nmid&\nvDash&\omega&\rightarrowtail&\Uparrow&\Supset&\textdollar&\Yright&\trianglerighteqslant&\curlywedgeuparrow&\nvdash&\shortparallel&\boxtimes&\trianglelefteqslant&\precneqq&\ntriangleright&\bigcirc&\diagdown&\rightharpoonup&\biginterleave&\\
+               \curlywedge&\nparallel&\guilsinglleft&\geqq&\triangle&\lor&\gnsim&\subseteq&\geq&\rightleftarrows&\textperthousand&\flat&\preceq&\bigsqcap&\kappa&\nLeftrightarrow&\prod&\varGamma&\leftthreetimes&\sqsupseteq&\blacklozenge&\varSigma&\risingdotseq&\circleddash&\gtreqless&\gtreqqless&\comma&\boxminus&\exists&\multimap&\\
+               \textnormaldot&\owedge&\Leftrightarrow&\daleth&\ggg&\biguplus&\downharpoonleft&\unlhd&\leftarrow&\circledR&\circledS&\bracevert&\Gamma&\dotplus&\jlatexmathcedilla&\backsimeq&\textendash&\vec&\mapsfromchar&\shortleftarrow&\vee&\Rrightarrow&\guillemotright&\lrcorner&\blacktriangleleft&\Lsh&\rmoustache&\dagger&\bigvee&\vdash&\\
+               \leftrightarrow&\textampersand&\veebar&\tau&\curlyveeuparrow&\uparrow&\varDelta&\square&\Cap&\rangle&\vDash&\precsim&\rrceil&\jlatexmathring&\Rightarrow&\lgroup&\Bumpeq&\acute&\leftarrowtriangle&\bindnasrepma&\gtrsim&\otimes&\supsetplus&\nshortparallel&\cap&\slash&\bigtriangledown&\parallel&\varTheta&\jlatexmathlapos&\\
+               \shortmid&\infty&\diagup&\succsim&\bigcap&\diamondsuit&\gneq&\grave&\boxbar&\asymp&\talloblong&\gets&\int&\diamond&\binampersand&\Mapstochar&\nleftrightarrow&
+               \end{array}
+
+      ]]>
+    </code>
+    <expected success="true"/>
+  </test>
+</tests>

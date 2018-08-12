@@ -53,16 +53,18 @@ import java.awt.Graphics2D;
  */
 public class GlueBox extends Box {
 
-    protected float stretch = 0, shrink = 0;
+    protected final double stretch;
+    protected final double shrink;
 
-    public GlueBox(float space, float stretch, float shrink) {
+    public GlueBox(final double space, final double stretch, final double shrink) {
         this.width = space;
+        this.height = space;
         this.stretch = stretch;
         this.shrink = shrink;
     }
 
-    public void draw(Graphics2D g2, float x, float y) {
-        // no visible effect
+    public void draw(Graphics2D g2, double x, double y) {
+
     }
 
     public int getLastFontId() {

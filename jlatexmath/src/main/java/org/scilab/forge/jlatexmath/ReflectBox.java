@@ -62,13 +62,14 @@ public class ReflectBox extends Box {
         shift = b.shift;
     }
 
-    public void draw(Graphics2D g2, float x, float y) {
-        drawDebug(g2, x, y);
+    public void draw(Graphics2D g2, double x, double y) {
+        startDraw(g2, x, y);
         g2.translate(x, y);
         g2.scale(-1, 1);
         box.draw(g2, -width, 0);
         g2.scale(-1, 1);
         g2.translate(-x, -y);
+        endDraw(g2);
     }
 
     public int getLastFontId() {

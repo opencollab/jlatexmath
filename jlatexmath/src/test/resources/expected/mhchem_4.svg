@@ -1,0 +1,57 @@
+<!--
+\begin{gather}
+\ce{H+} \cr
+\ce{CrO4^2-} \cr
+\ce{[AgCl2]-} \cr
+\ce{Y^99+} \cr
+\ce{Y^{99+}} \cr
+\end{gather}
+-->
+<svg width="63" height="98" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<style type="text/css">
+@font-face {
+font-family: 'jlm_cmr10';
+src: url('fonts/jlm_cmr10.ttf') format('truetype');
+font-style: normal;
+}
+.jlm_cmr10 {
+font-family: 'jlm_cmr10';
+font-size: 133px;
+}
+@font-face {
+font-family: 'jlm_cmsy10';
+src: url('fonts/jlm_cmsy10.ttf') format('truetype');
+font-style: normal;
+}
+.jlm_cmsy10 {
+font-family: 'jlm_cmsy10';
+font-size: 133px;
+}
+</style>
+<g stroke="rgb(0,0,0)" fill="rgb(0,0,0)" stroke-width="1.0" stroke-miterlimit="10.0" stroke-linejoin="miter" stroke-linecap="square">
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,22.129683,16.95187)">H</text>
+<text class="jlm_cmr10" transform="matrix(0.06999999999999999,0.0,0.0,0.07,32.12971,11.44445)">+</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,9.851857,34.214832)">C</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,19.48151,34.214832)">r</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,24.70375,34.214832)">O</text>
+<text class="jlm_cmr10" transform="matrix(0.06999999999999999,0.0,0.0,0.07,35.074165,36.214832)">4</text>
+<text class="jlm_cmr10" transform="matrix(0.06999999999999999,0.0,0.0,0.07,39.74085,28.707413)">2</text>
+<text class="jlm_cmsy10" transform="matrix(0.06999999999999999,0.0,0.0,0.07,44.407536,28.707413)">¡</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,6.0,52.907436)">[</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,9.70372,52.907436)">A</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,19.703747,52.907436)">g</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,26.555613,52.907436)">C</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,36.18527,52.907436)">l</text>
+<text class="jlm_cmr10" transform="matrix(0.06999999999999999,0.0,0.0,0.07,39.88899,54.907436)">2</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,44.55567,52.907436)">]</text>
+<text class="jlm_cmsy10" transform="matrix(0.06999999999999999,0.0,0.0,0.07,48.25939,47.400017)">¡</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,17.296331,73.50373)">Y</text>
+<text class="jlm_cmr10" transform="matrix(0.06999999999999999,0.0,0.0,0.07,27.62969,67.996315)">9</text>
+<text class="jlm_cmr10" transform="matrix(0.06999999999999999,0.0,0.0,0.07,32.296375,67.996315)">9</text>
+<text class="jlm_cmr10" transform="matrix(0.06999999999999999,0.0,0.0,0.07,36.963062,67.996315)">+</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,17.296331,90.76669)">Y</text>
+<text class="jlm_cmr10" transform="matrix(0.06999999999999999,0.0,0.0,0.07,27.62969,85.25928)">9</text>
+<text class="jlm_cmr10" transform="matrix(0.06999999999999999,0.0,0.0,0.07,32.296375,85.25928)">9</text>
+<text class="jlm_cmr10" transform="matrix(0.06999999999999999,0.0,0.0,0.07,36.963062,85.25928)">+</text>
+</g>
+</svg>

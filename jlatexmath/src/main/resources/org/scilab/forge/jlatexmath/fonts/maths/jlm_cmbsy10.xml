@@ -10,7 +10,7 @@
    <Char code="168" width="0.89444" height="0.633331" depth="0.133331" />
    <Char code="169" width="0.89444" height="0.633331" depth="0.133331" />
    <Char code="170" width="0.89444" height="0.633331" depth="0.133331" />
-   <Char code="173" width="0.89444" height="0.633331" depth="0.133331" />
+   <Char code="171" width="0.89444" height="0.633331" depth="0.133331" />
    <Char code="174" width="0.89444" height="0.633331" depth="0.133331" />
    <Char code="175" width="0.89444" height="0.633331" depth="0.133331" />
    <Char code="176" width="1.149994" height="0.694445" depth="0.194445" />
@@ -177,7 +177,7 @@
      <NextLarger fontId="jlm_cmex10" code="170"/>
    </Char>
    <Char code="104" width="0.44722" height="0.75" depth="0.25">
-     <NextLarger fontId="jlm_cmex10" code="173"/>
+     <NextLarger fontId="jlm_cmex10" code="171"/>
    </Char>
    <Char code="105" width="0.44722" height="0.75" depth="0.25">
      <NextLarger fontId="jlm_cmex10" code="174"/>

@@ -50,6 +50,7 @@ package org.scilab.forge.jlatexmath;
  */
 public class OgonekAtom extends Atom {
 
+    private static final SymbolAtom OGONEK = SymbolAtom.get("ogonek");
     private Atom base;
 
     public OgonekAtom(Atom base) {
@@ -60,20 +61,22 @@ public class OgonekAtom extends Atom {
         Box b = base.createBox(env);
         VerticalBox vb = new VerticalBox();
         vb.add(b);
-        Char ch = env.getTeXFont().getChar("ogonek", env.getStyle());
-        float italic = ch.getItalic();
+        Char ch = env.getTeXFont().getChar(OGONEK.getCf(), env.getStyle());
+        double italic = ch.getItalic();
         Box ogonek = new CharBox(ch);
         Box y;
         if (Math.abs(italic) > TeXFormula.PREC) {
-            y = new HorizontalBox(new StrutBox(-italic, 0, 0, 0));
-            y.add(ogonek);
-        } else
+            HorizontalBox hb = new HorizontalBox(new StrutBox(-italic, 0, 0, 0));
+            hb.add(ogonek);
+            y = hb;
+        } else {
             y = ogonek;
+        }
 
-        Box og = new HorizontalBox(y, b.getWidth(), TeXConstants.ALIGN_RIGHT);
+        Box og = new HorizontalBox(y, b.getWidth(), TeXConstants.Align.RIGHT);
         vb.add(new StrutBox(0, -ogonek.getHeight(), 0, 0));
         vb.add(og);
-        float f = vb.getHeight() + vb.getDepth();
+        double f = vb.getHeight() + vb.getDepth();
         vb.setHeight(b.getHeight());
         vb.setDepth(f - b.getHeight());
         return vb;

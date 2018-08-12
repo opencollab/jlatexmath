@@ -50,14 +50,16 @@ package org.scilab.forge.jlatexmath;
  */
 public class tcaronAtom extends Atom {
 
+    private static final SymbolAtom APOS = SymbolAtom.get("textapos");
+
     public tcaronAtom() {
     }
 
     public Box createBox(TeXEnvironment env) {
-        CharBox A = new CharBox(env.getTeXFont().getChar("textapos", env.getStyle()));
+        CharBox A = new CharBox(env.getTeXFont().getChar(APOS.getCf(), env.getStyle()));
         CharBox t = new CharBox(env.getTeXFont().getChar('t', "mathnormal", env.getStyle()));
         HorizontalBox hb = new HorizontalBox(t);
-        hb.add(new SpaceAtom(TeXConstants.UNIT_EM, -0.3f, 0, 0).createBox(env));
+        hb.add(new SpaceAtom(TeXLength.Unit.EM, -0.3, 0, 0).createBox(env));
         hb.add(A);
         return hb;
     }

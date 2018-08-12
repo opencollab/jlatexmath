@@ -45,9 +45,9 @@
 
 package org.scilab.forge.jlatexmath;
 
-import java.awt.BasicStroke;
 import java.awt.Graphics2D;
 import java.awt.Stroke;
+import java.awt.BasicStroke;
 import java.awt.geom.RoundRectangle2D;
 
 /**
@@ -55,19 +55,22 @@ import java.awt.geom.RoundRectangle2D;
  */
 public class OvalBox extends FramedBox {
 
+    private double shadowRule;
+
     public OvalBox(FramedBox fbox) {
         super(fbox.box, fbox.thickness, fbox.space);
     }
 
-    public void draw(Graphics2D g2, float x, float y) {
+    public void draw(Graphics2D g2, double x, double y) {
+        startDraw(g2, x, y);
         box.draw(g2, x + space + thickness, y);
         Stroke st = g2.getStroke();
-        g2.setStroke(new BasicStroke(thickness, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER));
-        float th = thickness / 2;
-        float r = 0.5f * Math.min(width - thickness, height + depth - thickness);
-        g2.draw(new RoundRectangle2D.Float(x + th, y - height + th, width - thickness, height + depth - thickness, r, r));
-        //drawDebug(g2, x, y);
+        g2.setStroke(new BasicStroke((float)thickness, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER));
+        double th = thickness / 2.;
+        double r = 0.5 * Math.min(width - thickness, height + depth - thickness);
+        g2.draw(new RoundRectangle2D.Double(x + th, y - height + th, width - thickness, height + depth - thickness, r, r));
         g2.setStroke(st);
+        endDraw(g2);
     }
 
     public int getLastFontId() {

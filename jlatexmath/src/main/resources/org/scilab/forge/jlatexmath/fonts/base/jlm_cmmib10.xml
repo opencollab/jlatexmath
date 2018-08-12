@@ -41,7 +41,7 @@
       <Kern code="58" val="-0.063889"/>
       <Kern code="196" val="0.063889"/>
    </Char>
-   <Char code="173" width="0.878903" height="0.686111" italic="0.04835" >
+   <Char code="171" width="0.878903" height="0.686111" italic="0.04835" >
       <Kern code="196" val="0.095833"/>
    </Char>
    <Char code="174" width="0.760645" height="0.444445" >
@@ -147,7 +147,7 @@
    <Char code="58" width="0.319443" height="0.155556" />
    <Char code="59" width="0.319443" height="0.155556" depth="0.194445" />
    <Char code="60" width="0.89444" height="0.585556" depth="0.085556" >
-     <NextLarger fontId="jlm_cmex10" code="173" />
+     <NextLarger fontId="jlm_cmex10" code="171" />
    </Char>
    <Char code="61" width="0.574997" height="0.75" depth="0.25" >
       <Kern code="162" val="-0.063889"/>

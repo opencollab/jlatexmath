@@ -1,0 +1,53 @@
+<?xml version='1.0'?>
+<tests name="cancel">
+  <test>
+    <id name="1"/>
+    <code>
+      <![CDATA[
+               x + \cancel{\frac{1 + 2}{3 + 4}} + y
+      ]]>
+    </code>
+    <expected success="true"/>
+  </test>
+  
+  <test>
+    <id name="2"/>
+    <code>
+      <![CDATA[
+               \cancel{\pi}
+      ]]>
+    </code>
+    <expected success="true"/>
+  </test>
+  
+  <test>
+    <id name="3"/>
+    <code>
+      <![CDATA[
+               x + \bcancel{\frac{1 + 2}{3 + 4}} + y
+      ]]>
+    </code>
+    <expected success="true"/>
+  </test>
+  
+  <test>
+    <id name="4"/>
+    <code>
+      <![CDATA[
+               x + \xcancel{\frac{1 + 2}{3 + 4}} + y
+      ]]>
+    </code>
+    <expected success="true"/>
+  </test>
+
+  <test>
+    <id name="5"/>
+    <code>
+      <![CDATA[
+               \renewcommand{\CancelColor}{\color{rgb(0,255,0)}}x + \xcancel{\frac{1 + 2}{3 + 4}} + y
+               \renewcommand{\CancelColor}{} % remove the default color
+      ]]>
+    </code>
+    <expected success="true"/>
+  </test>
+</tests>

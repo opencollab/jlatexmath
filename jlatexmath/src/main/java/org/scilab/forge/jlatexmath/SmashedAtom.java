@@ -53,12 +53,13 @@ public class SmashedAtom extends Atom {
     private Atom at;
     private boolean h = true, d = true;
 
-    public SmashedAtom(Atom at, String opt) {
+    public SmashedAtom(Atom at, char opt) {
         this.at = at;
-        if ("t".equals(opt))
+        if (opt == 't') {
             d = false;
-        else if ("b".equals(opt))
+        } else if (opt == 'b') {
             h = false;
+        }
     }
 
     public SmashedAtom(Atom at) {
@@ -67,10 +68,12 @@ public class SmashedAtom extends Atom {
 
     public Box createBox(TeXEnvironment env) {
         Box b = at.createBox(env);
-        if (h)
-            b.setHeight(0);
-        if (d)
-            b.setDepth(0);
+        if (h) {
+            b.setHeight(0.);
+        }
+        if (d) {
+            b.setDepth(0.);
+        }
         return b;
     }
 }

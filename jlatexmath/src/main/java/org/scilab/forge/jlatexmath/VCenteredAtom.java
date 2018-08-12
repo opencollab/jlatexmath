@@ -53,22 +53,69 @@ package org.scilab.forge.jlatexmath;
 public class VCenteredAtom extends Atom {
 
     // atom to be centered vertically with respect to the axis
-    private final Atom atom;
+    private final Atom base;
+
+    // when we know that the final box will be in an HorizontalBox
+    // then no need to return a HorizontalBox (hbox == false)
+    private final boolean hbox;
+
+    public VCenteredAtom(Atom atom, boolean hbox) {
+        this.base = atom;
+        this.hbox = hbox;
+    }
 
     public VCenteredAtom(Atom atom) {
-        this.atom = atom;
+        this(atom, true);
     }
 
     public Box createBox(TeXEnvironment env) {
-        Box b = atom.createBox(env);
-
-        float total = b.getHeight() + b.getDepth(), axis = env.getTeXFont()
-                      .getAxisHeight(env.getStyle());
+        final Box b = base.createBox(env);
+        final double axis = env.getTeXFont().getAxisHeight(env.getStyle());
 
         // center on axis
-        b.setShift(-(total / 2) - axis);
+        b.setShift((b.getHeight() - b.getDepth()) / 2. - axis);
 
         // put in horizontal box, so shifting will be vertically!
-        return new HorizontalBox(b);
+        return hbox ? new HorizontalBox(b) : b;
+    }
+
+    public int getLeftType() {
+        return base.getLeftType();
+    }
+
+    public int getRightType() {
+        return base.getRightType();
+    }
+
+    public int getLimits() {
+        return base.getLimits();
+    }
+
+    public double getItalic(TeXEnvironment env) {
+        return base.getItalic(env);
+    }
+
+    public double getXHeight(TeXEnvironment env) {
+        return base.getXHeight(env);
+    }
+
+    public boolean isMathMode() {
+        return base.isMathMode();
+    }
+
+    public void setMathMode(final boolean mathMode) {
+        base.setMathMode(mathMode);
+    }
+
+    public boolean mustAddItalicCorrection() {
+        return base.mustAddItalicCorrection();
+    }
+
+    public boolean setAddItalicCorrection(boolean b) {
+        return base.setAddItalicCorrection(b);
+    }
+
+    public Atom getBase() {
+        return base.getBase();
     }
 }

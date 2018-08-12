@@ -1,0 +1,89 @@
+<!--
+\begin{gather}
+\ce{NO_x} \cr
+\ce{Fe^n+} \cr
+\ce{x Na(NH4)HPO4 ->[\Delta] (NaPO3)_x + x NH3 ^ + x H2O} \cr
+\end{gather}
+-->
+<svg width="310" height="64" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<style type="text/css">
+@font-face {
+font-family: 'jlm_fcmrpg';
+src: url('fonts/jlm_fcmrpg.ttf') format('truetype');
+font-style: normal;
+}
+.jlm_fcmrpg {
+font-family: 'jlm_fcmrpg';
+font-size: 133px;
+}
+@font-face {
+font-family: 'jlm_cmmi10';
+src: url('fonts/jlm_cmmi10.ttf') format('truetype');
+font-style: normal;
+}
+.jlm_cmmi10 {
+font-family: 'jlm_cmmi10';
+font-size: 133px;
+}
+@font-face {
+font-family: 'jlm_cmr10';
+src: url('fonts/jlm_cmr10.ttf') format('truetype');
+font-style: normal;
+}
+.jlm_cmr10 {
+font-family: 'jlm_cmr10';
+font-size: 133px;
+}
+@font-face {
+font-family: 'jlm_cmsy10';
+src: url('fonts/jlm_cmsy10.ttf') format('truetype');
+font-style: normal;
+}
+.jlm_cmsy10 {
+font-family: 'jlm_cmsy10';
+font-size: 133px;
+}
+</style>
+<g stroke="rgb(0,0,0)" fill="rgb(0,0,0)" stroke-width="1.0" stroke-miterlimit="10.0" stroke-linejoin="miter" stroke-linecap="square">
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,142.04391,15.1110935)">N</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,152.04395,15.1110935)">O</text>
+<text class="jlm_cmmi10" transform="matrix(0.06999999999999999,0.0,0.0,0.07,162.41437,17.111094)">x</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,141.04207,33.803696)">F</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,148.63469,33.803696)">e</text>
+<text class="jlm_cmmi10" transform="matrix(0.06999999999999999,0.0,0.0,0.07,154.56064,28.296278)">n</text>
+<text class="jlm_cmr10" transform="matrix(0.06999999999999999,0.0,0.0,0.07,160.82701,28.296278)">+</text>
+<text class="jlm_cmmi10" transform="matrix(0.1,0.0,0.0,0.1,6.0,52.84253)">x</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,13.620374,52.84253)">N</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,23.6204,52.84253)">a</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,30.287094,52.84253)">(</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,35.472294,52.84253)">N</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,45.47232,52.84253)">H</text>
+<text class="jlm_cmr10" transform="matrix(0.06999999999999999,0.0,0.0,0.07,55.472347,54.84253)">4</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,60.13903,52.84253)">)</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,65.324234,52.84253)">H</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,75.32426,52.84253)">P</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,84.39835,52.84253)">O</text>
+<text class="jlm_cmr10" transform="matrix(0.06999999999999999,0.0,0.0,0.07,94.76877,54.84253)">4</text>
+<text class="jlm_fcmrpg" transform="matrix(0.06999999999999999,0.0,0.0,0.07,113.67965,46.24576)">Δ</text>
+<path transform="matrix(10.0,0.0,0.0,10.0,104.62065,52.618916)" d=" M 2.3533294 -0.570625 Q 2.3333294 -0.570625 2.3333294 -0.5546875 Q 2.3333294 -0.550625 2.339892 -0.53328127 L 2.341298 -0.53203124 Q 2.3866105 -0.42671874 2.4772356 -0.36 L 1.4519231 -0.36 Q 1.4517504 -0.36 1.4515784 -0.3599996 L 0.0 -0.3599996 L 0.0 -0.3066676 L 1.4533297 -0.3066676 L 1.4533297 -0.30671874 L 2.4772356 -0.30671874 Q 2.4159856 -0.26125 2.371923 -0.19203125 Q 2.3333294 -0.13203125 2.3333294 -0.11203125 Q 2.3333294 -0.0959375 2.3533294 -0.0959375 Q 2.3680167 -0.0959375 2.3745794 -0.109375 Q 2.3759856 -0.11328125 2.3772357 -0.1146875 Q 2.4386418 -0.25203124 2.570673 -0.3146875 Q 2.5745792 -0.31734374 2.5772357 -0.31734374 Q 2.5892668 -0.3240625 2.5892668 -0.33328125 Q 2.5852044 -0.34671876 2.579892 -0.34671876 Q 2.570673 -0.350625 2.5612981 -0.3559375 L 2.559892 -0.3559375 L 2.558642 -0.35734376 L 2.5572355 -0.35734376 Q 2.4345794 -0.42 2.3759856 -0.5520313 Q 2.3680167 -0.570625 2.3533294 -0.570625 Z " stroke="transparent" fill-rule="nonzero"/>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,135.69852,52.84253)">(</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,140.88373,52.84253)">N</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,150.88374,52.84253)">a</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,157.55045,52.84253)">P</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,166.62453,52.84253)">O</text>
+<text class="jlm_cmr10" transform="matrix(0.06999999999999999,0.0,0.0,0.07,176.99495,54.84253)">3</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,181.66164,52.84253)">)</text>
+<text class="jlm_cmmi10" transform="matrix(0.06999999999999999,0.0,0.0,0.07,186.84683,54.84253)">x</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,195.14406,52.84253)">+</text>
+<text class="jlm_cmmi10" transform="matrix(0.1,0.0,0.0,0.1,208.47745,52.84253)">x</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,216.09782,52.84253)">N</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,226.09785,52.84253)">H</text>
+<text class="jlm_cmr10" transform="matrix(0.06999999999999999,0.0,0.0,0.07,236.09789,54.84253)">3</text>
+<text class="jlm_cmsy10" transform="matrix(0.1,0.0,0.0,0.1,244.46828,52.84253)">&quot;</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,257.80167,52.84253)">+</text>
+<text class="jlm_cmmi10" transform="matrix(0.1,0.0,0.0,0.1,271.13504,52.84253)">x</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,278.7554,52.84253)">H</text>
+<text class="jlm_cmr10" transform="matrix(0.06999999999999999,0.0,0.0,0.07,288.75543,54.84253)">2</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,293.42212,52.84253)">O</text>
+</g>
+</svg>

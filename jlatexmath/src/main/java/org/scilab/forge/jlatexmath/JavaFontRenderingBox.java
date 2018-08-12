@@ -1,4 +1,4 @@
-/* ScaleBox.java
+/* JavaFontRenderingBox.java
  * =========================================================================
  * This file is part of the JLaTeXMath Library - http://forge.scilab.org/jlatexmath
  *
@@ -47,28 +47,34 @@ package org.scilab.forge.jlatexmath;
 
 import java.awt.Font;
 import java.awt.Graphics2D;
+import java.awt.RenderingHints;
+import java.awt.font.FontRenderContext;
 import java.awt.font.TextAttribute;
 import java.awt.font.TextLayout;
+import java.awt.geom.AffineTransform;
 import java.awt.geom.Rectangle2D;
-import java.awt.image.BufferedImage;
+import java.lang.reflect.Field;
 import java.util.Hashtable;
 import java.util.Map;
 
 /**
- * A box representing a scaled box.
+ * A box to render text in using a font found on the os.
  */
 public class JavaFontRenderingBox extends Box {
 
-    private static final Graphics2D TEMPGRAPHIC = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB).createGraphics();
+    private static final FontRenderContext FRC = new FontRenderContext(new AffineTransform(),
+            RenderingHints.VALUE_TEXT_ANTIALIAS_ON,
+            RenderingHints.VALUE_FRACTIONALMETRICS_DEFAULT);
 
     private static Font font = new Font("Serif", Font.PLAIN, 10);
-
-    private TextLayout text;
-    private float size;
     private static TextAttribute KERNING;
     private static Integer KERNING_ON;
     private static TextAttribute LIGATURES;
     private static Integer LIGATURES_ON;
+
+    private final String str;
+    private final TextLayout text;
+    private final double size;
 
     static {
         try { // to avoid problems with Java 1.5
@@ -79,41 +85,53 @@ public class JavaFontRenderingBox extends Box {
         } catch (Exception e) { }
     }
 
-    public JavaFontRenderingBox(String str, int type, float size, Font f, boolean kerning) {
+    public JavaFontRenderingBox(final String str, final int style, final double size, Font f, final boolean kerning) {
+        this.str = str;
         this.size = size;
+        if (f == null) {
+            f = font;
+        }
 
-        if (kerning && KERNING != null) {
-            Map<TextAttribute, Object> map = new Hashtable<TextAttribute, Object>();
-            map.put(KERNING, KERNING_ON);
-            map.put(LIGATURES, LIGATURES_ON);
+        if (str.length() > 1 && kerning && KERNING != null) {
+            final Map<TextAttribute, Object> map = new Hashtable<TextAttribute, Object>() {
+                {
+                    put(KERNING, KERNING_ON);
+                    put(LIGATURES, LIGATURES_ON);
+                }
+            };
             f = f.deriveFont(map);
         }
 
-        this.text = new TextLayout(str, f.deriveFont(type), TEMPGRAPHIC.getFontRenderContext());
-        Rectangle2D rect = text.getBounds();
-        this.height = (float) (-rect.getY() * size / 10);
-        this.depth = (float) (rect.getHeight() * size / 10) - this.height;
-        this.width = (float) ((rect.getWidth() + rect.getX() + 0.4f) * size / 10);
+        this.text = new TextLayout(str, f.deriveFont(style), FRC);
+        final Rectangle2D rect = text.getBounds();
+        this.height = -rect.getY() * size / 10.;
+        this.depth = rect.getHeight() * size / 10. - this.height;
+        this.width = (rect.getWidth() + rect.getX() + 0.4) * size / 10.;
     }
 
-    public JavaFontRenderingBox(String str, int type, float size) {
+    public JavaFontRenderingBox(final String str, final int type, final double size, final Font font) {
         this(str, type, size, font, true);
     }
 
-    public static void setFont(String name) {
+    public static void setFont(final String name) {
         font = new Font(name, Font.PLAIN, 10);
     }
 
-    public void draw(Graphics2D g2, float x, float y) {
-        drawDebug(g2, x, y);
+    public void draw(Graphics2D g2, double x, double y) {
+        startDraw(g2, x, y);
+        final AffineTransform old = g2.getTransform();
         g2.translate(x, y);
-        g2.scale(0.1 * size, 0.1 * size);
+        g2.scale(size / 10., size / 10.);
         text.draw(g2, 0, 0);
-        g2.scale(10 / size, 10 / size);
-        g2.translate(-x, -y);
+        g2.setTransform(old);
+        endDraw(g2);
     }
 
     public int getLastFontId() {
         return 0;
+    }
+
+    public String toString() {
+        return "JavaFontRenderingBox: " + super.toString();
     }
 }

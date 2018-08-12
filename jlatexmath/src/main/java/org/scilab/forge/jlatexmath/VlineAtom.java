@@ -50,48 +50,74 @@ package org.scilab.forge.jlatexmath;
  */
 public class VlineAtom extends Atom {
 
-    private float height;
-    private float shift;
+    private final static VlineAtom empty = new VlineAtom(0);
+    private double height;
+    private double shift;
     private int n;
 
     public VlineAtom(int n) {
         this.n = n;
     }
 
-    public void setHeight(float height) {
+    public static VlineAtom getEmpty() {
+        return empty;
+    }
+
+    public void setHeight(double height) {
         this.height = height;
     }
 
-    public void setShift(float shift) {
+    public void setShift(double shift) {
         this.shift = shift;
     }
 
-    public float getWidth(TeXEnvironment env) {
+    public void add(final int n) {
+        this.n += n;
+    }
+
+    public int getNumber() {
+        return n;
+    }
+
+    public double getWidth(TeXEnvironment env) {
         if (n != 0) {
-            float drt = env.getTeXFont().getDefaultRuleThickness(env.getStyle());
-            return drt * (3 * n - 2);
-        } else
-            return 0;
+            final double drt = env.getTeXFont().getDefaultRuleThickness(env.getStyle());
+            return drt * (double)(3 * n - 2);
+        }
+        return 0.;
+    }
+
+    public boolean isEmpty() {
+        return n == 0;
     }
 
     public Box createBox(TeXEnvironment env) {
         if (n != 0) {
-            float drt = env.getTeXFont().getDefaultRuleThickness(env.getStyle());
-            Box b = new HorizontalRule(height, drt, shift);
+            double drt = env.getTeXFont().getDefaultRuleThickness(env.getStyle());
+            /*Box b = new HorizontalRule(height, drt, shift);
             Box sep = new StrutBox(2 * drt, 0, 0, 0);
             HorizontalBox hb = new HorizontalBox();
             for (int i = 0; i < n - 1; i++) {
                 hb.add(b);
                 hb.add(sep);
             }
+            hb.add(b);
 
-            if (n > 0) {
-                hb.add(b);
-            }
-
-            return hb;
+            return hb;*/
+            return new VlineBox(n, drt);
         }
 
-        return new StrutBox(0, 0, 0, 0);
+        return StrutBox.getEmpty();
+    }
+
+    public String toString() {
+        if (n == 0) {
+            return ".";
+        }
+        String s = "";
+        for (int i = 0; i < n; ++i) {
+            s += "|";
+        }
+        return s;
     }
 }

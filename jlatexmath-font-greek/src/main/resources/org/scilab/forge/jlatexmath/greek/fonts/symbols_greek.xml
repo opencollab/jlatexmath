@@ -37,29 +37,54 @@
   <Symbol name="·" type="acc"/>
   <Symbol name="ΐ" type="ord"/>
   <Symbol name="Α" type="ord"/>
+  <Symbol name="Upalpha" type="ord"/>
   <Symbol name="Β" type="ord"/>
+  <Symbol name="Upbeta" type="ord"/>
   <Symbol name="Γ" type="ord"/>
+  <Symbol name="Upgamma" type="ord"/>
   <Symbol name="Δ" type="ord"/>
+  <Symbol name="Updelta" type="ord"/>
   <Symbol name="Ε" type="ord"/>
+  <Symbol name="Upepsilon" type="ord"/>
   <Symbol name="Ζ" type="ord"/>
+  <Symbol name="Upzeta" type="ord"/>
   <Symbol name="Η" type="ord"/>
+  <Symbol name="Upeta" type="ord"/>
   <Symbol name="Θ" type="ord"/>
+  <Symbol name="Uptheta" type="ord"/>
   <Symbol name="Ι" type="ord"/>
+  <Symbol name="Upiota" type="ord"/>
   <Symbol name="Κ" type="ord"/>
+  <Symbol name="Upkappa" type="ord"/>
   <Symbol name="Λ" type="ord"/>
+  <Symbol name="Uplambda" type="ord"/>
   <Symbol name="Μ" type="ord"/>
+  <Symbol name="Upmu" type="ord"/>
   <Symbol name="Ν" type="ord"/>
+  <Symbol name="Upnu" type="ord"/>
   <Symbol name="Ξ" type="ord"/>
+  <Symbol name="Upxi" type="ord"/>
   <Symbol name="Ο" type="ord"/>
+  <Symbol name="Upomicron" type="ord"/>
   <Symbol name="Π" type="ord"/>
+  <Symbol name="Uppi" type="ord"/>
   <Symbol name="Ρ" type="ord"/>
+  <Symbol name="Uprho" type="ord"/>
   <Symbol name="Σ" type="ord"/>
+  <Symbol name="Upsigma" type="ord"/>
   <Symbol name="Τ" type="ord"/>
+  <Symbol name="Uptau" type="ord"/>
   <Symbol name="Υ" type="ord"/>
+  <Symbol name="Upupsilon" type="ord"/>
   <Symbol name="Φ" type="ord"/>
+  <Symbol name="Upphi" type="ord"/>
+  <Symbol name="Upvarphi" type="ord"/>
   <Symbol name="Χ" type="ord"/>
+  <Symbol name="Upchi" type="ord"/>
   <Symbol name="Ψ" type="ord"/>
+  <Symbol name="Uppsi" type="ord"/>
   <Symbol name="Ω" type="ord"/>
+  <Symbol name="Upomega" type="ord"/>
   <Symbol name="Ϊ" type="ord"/>
   <Symbol name="Ϋ" type="ord"/>
   <Symbol name="ά" type="ord"/>
@@ -68,30 +93,56 @@
   <Symbol name="ί" type="ord"/>
   <Symbol name="ΰ" type="ord"/>
   <Symbol name="α" type="ord"/>
+  <Symbol name="upalpha" type="ord"/>
   <Symbol name="β" type="ord"/>
+  <Symbol name="upbeta" type="ord"/>
   <Symbol name="γ" type="ord"/>
+  <Symbol name="upgamma" type="ord"/>
   <Symbol name="δ" type="ord"/>
+  <Symbol name="updelta" type="ord"/>
   <Symbol name="ε" type="ord"/>
+  <Symbol name="upepsilon" type="ord"/>
   <Symbol name="ζ" type="ord"/>
+  <Symbol name="upzeta" type="ord"/>
   <Symbol name="η" type="ord"/>
+  <Symbol name="upeta" type="ord"/>
   <Symbol name="θ" type="ord"/>
+  <Symbol name="uptheta" type="ord"/>
   <Symbol name="ι" type="ord"/>
+  <Symbol name="upiota" type="ord"/>
   <Symbol name="κ" type="ord"/>
+  <Symbol name="upkappa" type="ord"/>
   <Symbol name="λ" type="ord"/>
+  <Symbol name="uplambda" type="ord"/>
   <Symbol name="μ" type="ord"/>
+  <Symbol name="upmu" type="ord"/>
   <Symbol name="ν" type="ord"/>
+  <Symbol name="upnu" type="ord"/>
   <Symbol name="ξ" type="ord"/>
+  <Symbol name="upxi" type="ord"/>
   <Symbol name="ο" type="ord"/>
+  <Symbol name="upomicron" type="ord"/>
   <Symbol name="π" type="ord"/>
+  <Symbol name="uppi" type="ord"/>
   <Symbol name="ρ" type="ord"/>
+  <Symbol name="uprho" type="ord"/>
   <Symbol name="ς" type="ord"/>
+  <Symbol name="upvarsigma" type="ord"/>
   <Symbol name="σ" type="ord"/>
+  <Symbol name="upsigma" type="ord"/>
   <Symbol name="τ" type="ord"/>
+  <Symbol name="uptau" type="ord"/>
   <Symbol name="υ" type="ord"/>
+  <Symbol name="upupsilon" type="ord"/>
   <Symbol name="φ" type="ord"/>
+  <Symbol name="upphi" type="ord"/>
+  <Symbol name="upvarphi" type="ord"/>
   <Symbol name="χ" type="ord"/>
+  <Symbol name="upchi" type="ord"/>
   <Symbol name="ψ" type="ord"/>
+  <Symbol name="uppsi" type="ord"/>
   <Symbol name="ω" type="ord"/>
+  <Symbol name="upomega" type="ord"/>
   <Symbol name="ϊ" type="ord"/>
   <Symbol name="ϋ" type="ord"/>
   <Symbol name="ό" type="ord"/>

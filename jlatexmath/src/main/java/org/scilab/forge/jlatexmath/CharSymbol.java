@@ -56,7 +56,8 @@ public abstract class CharSymbol extends Atom {
      * Mrow will mark certain CharSymbol atoms as a text symbol.
      * Msubsup wil use this property for a certain spacing rule.
      */
-    private boolean textSymbol = false;
+    protected boolean textSymbol = false;
+    protected boolean italic = true;
 
     /**
      * Mark as text symbol (used by Dummy)
@@ -89,4 +90,36 @@ public abstract class CharSymbol extends Atom {
      * @return a CharFont
      */
     public abstract CharFont getCharFont(TeXFont tf);
+
+    /**
+     * Get the Char-object that uniquely identifies the character that is represented
+     * by this atom.
+     *
+     * @param env the TeXEnvironment
+     * @return a Char
+     */
+    public abstract Char getChar(TeXEnvironment env);
+
+    public double getItalic(TeXEnvironment env) {
+        return getChar(env).getItalic();
+    }
+
+    public double getXHeight(TeXEnvironment env) {
+        final TeXFont tf = env.getTeXFont();
+        return tf.getXHeight(env.getStyle(), getCharFont(tf).getFontId());
+    }
+
+    public boolean isCharSymbol() {
+        return true;
+    }
+
+    public boolean mustAddItalicCorrection() {
+        return italic;
+    }
+
+    public boolean setAddItalicCorrection(boolean b) {
+        final boolean bb = italic;
+        italic = b;
+        return bb;
+    }
 }

@@ -2,7 +2,7 @@
  * =========================================================================
  * This file is part of the JLaTeXMath Library - http://forge.scilab.org/jlatexmath
  *
- * Copyright (C) 2009 DENIZET Calixte
+ * Copyright (C) 2009-2018 DENIZET Calixte
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -52,42 +52,41 @@ import java.util.Map;
  */
 public class RotateAtom extends Atom {
 
-    private Atom base;
+    private final Atom base;
     private double angle;
     private int option = -1;
-    private int xunit, yunit;
-    private float x, y;
+    private TeXLength.Unit xunit;
+    private TeXLength.Unit yunit;
+    private double x, y;
 
-    public RotateAtom(Atom base, String angle, String option) {
-        this.type = base.type;
-        this.base = base;
-        this.angle = Double.parseDouble(angle);
-        this.option = RotateBox.getOrigin(option);
-    }
-
-    public RotateAtom(Atom base, double angle, String option) {
-        this.type = base.type;
+    public RotateAtom(Atom base, double angle, Map<String, String> map) {
         this.base = base;
         this.angle = angle;
-        Map<String, String> map = ParseOption.parseMap(option);
         if (map.containsKey("origin")) {
             this.option = RotateBox.getOrigin(map.get("origin"));
         } else {
+            TeXParser tp = null;
             if (map.containsKey("x")) {
-                float[] xinfo = SpaceAtom.getLength(map.get("x"));
-                this.xunit = (int) xinfo[0];
-                this.x = xinfo[1];
+                tp = new TeXParser();
+                tp.setParseString(map.get("x"));
+                final TeXLength lenX = tp.getLength();
+                this.xunit = lenX.getUnit();
+                this.x = lenX.getL();
             } else {
-                this.xunit = TeXConstants.UNIT_POINT;
-                this.x = 0;
+                this.xunit = TeXLength.Unit.POINT;
+                this.x = 0.;
             }
             if (map.containsKey("y")) {
-                float[] yinfo = SpaceAtom.getLength(map.get("y"));
-                this.yunit = (int) yinfo[0];
-                this.y = yinfo[1];
+                if (tp == null) {
+                    tp = new TeXParser();
+                }
+                tp.setParseString(map.get("y"));
+                final TeXLength lenY = tp.getLength();
+                this.xunit = lenY.getUnit();
+                this.x = lenY.getL();
             } else {
-                this.yunit = TeXConstants.UNIT_POINT;
-                this.y = 0;
+                this.yunit = TeXLength.Unit.POINT;
+                this.y = 0.;
             }
         }
     }
@@ -96,7 +95,19 @@ public class RotateAtom extends Atom {
         if (option != -1) {
             return new RotateBox(base.createBox(env), angle, option);
         } else {
-            return new RotateBox(base.createBox(env), angle, x * SpaceAtom.getFactor(xunit, env), y * SpaceAtom.getFactor(yunit, env));
+            return new RotateBox(base.createBox(env), angle, x * TeXLength.getFactor(xunit, env), y * TeXLength.getFactor(yunit, env));
         }
+    }
+
+    public int getLeftType() {
+        return base.getLeftType();
+    }
+
+    public int getRightType() {
+        return base.getRightType();
+    }
+
+    public int getLimits() {
+        return base.getLimits();
     }
 }

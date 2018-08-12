@@ -48,18 +48,26 @@ package org.scilab.forge.jlatexmath;
 
 import java.awt.Font;
 import java.awt.Graphics2D;
+import java.awt.RenderingHints;
+import java.awt.Shape;
+import java.awt.font.FontRenderContext;
 import java.awt.geom.AffineTransform;
+import java.awt.geom.Area;
+import java.awt.geom.Rectangle2D;
 
 /**
  * A box representing a single character.
  */
 public class CharBox extends Box {
 
-    private final CharFont cf;
-    private final float size;
-    private float italic;
+    private static final FontRenderContext FRC = new FontRenderContext(new AffineTransform(),
+            RenderingHints.VALUE_TEXT_ANTIALIAS_ON,
+            RenderingHints.VALUE_FRACTIONALMETRICS_DEFAULT);
 
-    private final char[] arr = new char[1];
+    protected CharFont cf;
+    protected double size;
+
+    protected CharBox() { }
 
     /**
      * Create a new CharBox that will represent the character defined by the given
@@ -73,19 +81,17 @@ public class CharBox extends Box {
         width = c.getWidth();
         height = c.getHeight();
         depth = c.getDepth();
-        italic = c.getItalic();
     }
 
-    public void addItalicCorrectionToWidth() {
-        width += italic;
-        italic = 0;
+    public void addToWidth(final double x) {
+        width += x;
     }
 
-    public void draw(Graphics2D g2, float x, float y) {
-        drawDebug(g2, x, y);
-        AffineTransform at = g2.getTransform();
+    public void draw(Graphics2D g2, double x, double y) {
+        startDraw(g2, x, y);
+        final AffineTransform oldT = g2.getTransform();
         g2.translate(x, y);
-        Font font = FontInfo.getFont(cf.fontId);
+        final Font font = Configuration.get().getFont(cf.fontId);
 
         if (Math.abs(size - TeXFormula.FONT_SCALE_FACTOR) > TeXFormula.PREC) {
             g2.scale(size / TeXFormula.FONT_SCALE_FACTOR,
@@ -96,9 +102,18 @@ public class CharBox extends Box {
             g2.setFont(font);
         }
 
-        arr[0] = cf.c;
-        g2.drawChars(arr, 0, 1, 0, 0);
-        g2.setTransform(at);
+        g2.drawString(String.valueOf(cf.c), 0, 0);
+        g2.setTransform(oldT);
+        endDraw(g2);
+    }
+
+    public Area getArea() {
+        final Font font = Configuration.get().getFont(cf.fontId);
+        final Shape s = font.createGlyphVector(FRC, String.valueOf(cf.c)).getGlyphOutline(0);
+        final Area a = new Area(s);
+        final double x = size / TeXFormula.FONT_SCALE_FACTOR;
+        a.transform(AffineTransform.getScaleInstance(x, x));
+        return a;
     }
 
     public int getLastFontId() {
@@ -106,6 +121,6 @@ public class CharBox extends Box {
     }
 
     public String toString() {
-        return super.toString() + "=" + cf.c;
+        return super.toString() + "; char=" + cf.c;
     }
 }

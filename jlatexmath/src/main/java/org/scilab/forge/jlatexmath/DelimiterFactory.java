@@ -55,20 +55,22 @@ package org.scilab.forge.jlatexmath; // NOPMD
 public class DelimiterFactory {
 
     public static Box create(SymbolAtom symbol, TeXEnvironment env, int size) {
-        if (size > 4)
+        if (size > 4) {
             return symbol.createBox(env);
+        }
 
         TeXFont tf = env.getTeXFont();
         int style = env.getStyle();
-        Char c = tf.getChar(symbol.getName(), style);
+        Char c = tf.getChar(symbol.getCf(), style);
         int i;
 
-        for (i = 1; i <= size && tf.hasNextLarger(c); i++)
+        for (i = 1; i <= size && tf.hasNextLarger(c); i++) {
             c = tf.getNextLarger(c, style);
+        }
 
         if (i <= size && !tf.hasNextLarger(c)) {
-            CharBox A = new CharBox(tf.getChar('A', "mathnormal", style));
-            Box b = create(symbol.getName(), env, size*(A.getHeight() + A.getDepth()));
+            final CharBox A = new CharBox(tf.getChar('A', TextStyle.MATHNORMAL, style));
+            final Box b = create(symbol.getCf(), env, size * (A.getHeight() + A.getDepth()));
             return b;
         }
 
@@ -81,16 +83,16 @@ public class DelimiterFactory {
      * @param env the TeXEnvironment in which to create the delimiter box
      * @param minHeight the minimum required total height of the box (height + depth).
      * @return the box representing the delimiter variant that fits best according to
-     * 			the required minimum size.
+     *          the required minimum size.
      */
-    public static Box create(String symbol, TeXEnvironment env, float minHeight) {
+    public static Box create(CharFont cf, TeXEnvironment env, double minHeight) {
         TeXFont tf = env.getTeXFont();
         int style = env.getStyle();
-        Char c = tf.getChar(symbol, style);
+        Char c = tf.getChar(cf, style);
 
         // start with smallest character
         Metrics m = c.getMetrics();
-        float total = m.getHeight() + m.getDepth();
+        double total = m.getHeight() + m.getDepth();
 
         // try larger versions of the same character until minHeight has been
         // reached
@@ -128,15 +130,17 @@ public class DelimiterFactory {
             while (vBox.getHeight() + vBox.getDepth() <= minHeight) {
                 if (ext.hasTop() && ext.hasBottom()) {
                     vBox.add(1, rep);
-                    if (middle)
+                    if (middle) {
                         vBox.add(vBox.getSize() - 1, rep);
-                } else if (ext.hasBottom())
+                    }
+                } else if (ext.hasBottom()) {
                     vBox.add(0, rep);
-                else
+                } else {
                     vBox.add(rep);
+                }
             }
 
-            return vBox;
+            return ShapeBox.create(vBox);
         } else
             // no extensions, so return tallest possible character
             return new CharBox(c);

@@ -2,7 +2,7 @@
  * =========================================================================
  * This file is part of the JLaTeXMath Library - http://forge.scilab.org/jlatexmath
  *
- * Copyright (C) 2009 DENIZET Calixte
+ * Copyright (C) 2009-2018 DENIZET Calixte
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -50,17 +50,18 @@ package org.scilab.forge.jlatexmath;
  */
 public class MonoScaleAtom extends ScaleAtom {
 
-    private float factor;
+    private final double factor;
 
-    public MonoScaleAtom(Atom base, float factor) {
-        super(base, (double) factor, (double) factor);
+    public MonoScaleAtom(Atom base, double factor) {
+        super(base, factor, factor);
         this.factor = factor;
     }
 
     public Box createBox(TeXEnvironment env) {
-        env = env.copy();
-        float f = env.getScaleFactor();
+        final double f = env.getScaleFactor();
         env.setScaleFactor(factor);
-        return new ScaleBox(base.createBox(env), factor / f);
+        final Box b = new ScaleBox(base.createBox(env), factor / f);
+        env.setScaleFactor(f);
+        return b;
     }
 }

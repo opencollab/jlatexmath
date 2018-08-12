@@ -1,0 +1,60 @@
+<?xml version='1.0'?>
+<tests name="Braket">
+  <test>
+    <id name="1"/>
+    <code>
+      <![CDATA[
+               \Braket{ \phi | \frac{\partial^2}{\partial t^2} | \psi }
+      ]]>      
+    </code>
+    <expected success="true"/>
+  </test>
+  
+  <test>
+    <id name="2"/>
+    <code>
+      <![CDATA[
+               \begin{align}
+               \bra{a}       &= \bra{\frac{a}{1}} \\
+               \ket{a}       &= \ket{\frac{a}{1}} \\
+               \braket{a}{b} &= \braket{\frac{a}{1}}{\frac{b}{1}}
+               \end{align}
+      ]]>      
+    </code>
+    <expected success="true"/>
+  </test>
+
+  <test>
+    <id name="3"/>
+    <code>
+      <![CDATA[
+               \begin{align}
+               \Bra{a}       &= \Bra{\frac{a}{1}} \\
+               \Ket{a}       &= \Ket{\frac{a}{1}} \\
+               \Braket{a}{b} &= \Braket{\frac{a}{1}}{\frac{b}{1}}
+               \end{align}
+      ]]>      
+    </code>
+    <expected success="true"/>
+  </test>
+  
+  <test>
+    <id name="4"/>
+    <code>
+      <![CDATA[
+               \Set{ x\in\mathbf{R}^2 | 0<{|x|}<5 }
+      ]]>      
+    </code>
+    <expected success="true"/>
+  </test>
+
+  <test>
+    <id name="5"/>
+    <code>
+      <![CDATA[
+               \set{ x\in\mathbf{R}^2 | 0<{|x|}<5 }
+      ]]>      
+    </code>
+    <expected success="true"/>
+  </test>
+</tests>

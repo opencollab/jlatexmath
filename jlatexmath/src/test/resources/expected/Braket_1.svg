@@ -1,0 +1,48 @@
+<!--
+\Braket{ \phi | \frac{\partial^2}{\partial t^2} | \psi }
+-->
+<svg width="84" height="46" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<style type="text/css">
+@font-face {
+font-family: 'jlm_cmex10';
+src: url('fonts/jlm_cmex10.ttf') format('truetype');
+font-style: normal;
+}
+.jlm_cmex10 {
+font-family: 'jlm_cmex10';
+font-size: 133px;
+}
+@font-face {
+font-family: 'jlm_cmmi10';
+src: url('fonts/jlm_cmmi10.ttf') format('truetype');
+font-style: normal;
+}
+.jlm_cmmi10 {
+font-family: 'jlm_cmmi10';
+font-size: 133px;
+}
+@font-face {
+font-family: 'jlm_cmr10';
+src: url('fonts/jlm_cmr10.ttf') format('truetype');
+font-style: normal;
+}
+.jlm_cmr10 {
+font-family: 'jlm_cmr10';
+font-size: 133px;
+}
+</style>
+<g stroke="rgb(0,0,0)" fill="rgb(0,0,0)" stroke-width="1.0" stroke-miterlimit="10.0" stroke-linejoin="miter" stroke-linecap="square">
+<text class="jlm_cmex10" transform="matrix(0.1,0.0,0.0,0.1,6.0,7.890336)">¿</text>
+<text class="jlm_cmmi10" transform="matrix(0.1,0.0,0.0,0.1,16.000027,26.69051)">Á</text>
+<path transform="matrix(10.0,0.0,0.0,10.0,23.944494,7.357016)" d=" M 0.22265625 -0.02921875 Q 0.19796875 -0.02921875 0.19328125 -0.00125 L 0.19328125 0.80140626 L 0.19328125 1.6014142 L 0.19328125 2.4014223 L 0.19328125 3.2014303 Q 0.19859375 3.229399 0.22265625 3.229399 Q 0.24546875 3.229399 0.250625 3.2014303 L 0.250625 2.4014223 L 0.250625 1.6014142 L 0.250625 0.80140626 L 0.250625 -0.00125 Q 0.24609375 -0.02921875 0.22265625 -0.02921875 Z " stroke="transparent" fill-rule="nonzero"/>
+<text class="jlm_cmmi10" transform="matrix(0.1,0.0,0.0,0.1,34.612617,17.670403)">@</text>
+<text class="jlm_cmr10" transform="matrix(0.06999999999999999,0.0,0.0,0.07,42.43207,12.014811)">2</text>
+<path transform="matrix(10.0,0.0,0.0,10.0,0.0,0.0)" d=" M 3.2205198 2.3090515 L 5.0170355 2.3090515 L 5.0170355 2.3623836 L 3.2205198 2.3623836 L 3.2205198 2.3090515 Z " stroke="transparent" fill-rule="nonzero"/>
+<text class="jlm_cmmi10" transform="matrix(0.1,0.0,0.0,0.1,32.205196,35.83652)">@</text>
+<text class="jlm_cmmi10" transform="matrix(0.1,0.0,0.0,0.1,40.02465,35.83652)">t</text>
+<text class="jlm_cmr10" transform="matrix(0.06999999999999999,0.0,0.0,0.07,44.839493,31.984669)">2</text>
+<path transform="matrix(10.0,0.0,0.0,10.0,53.986603,7.357016)" d=" M 0.22265625 -0.02921875 Q 0.19796875 -0.02921875 0.19328125 -0.00125 L 0.19328125 0.80140626 L 0.19328125 1.6014142 L 0.19328125 2.4014223 L 0.19328125 3.2014303 Q 0.19859375 3.229399 0.22265625 3.229399 Q 0.24546875 3.229399 0.250625 3.2014303 L 0.250625 2.4014223 L 0.250625 1.6014142 L 0.250625 0.80140626 L 0.250625 -0.00125 Q 0.24609375 -0.02921875 0.22265625 -0.02921875 Z " stroke="transparent" fill-rule="nonzero"/>
+<text class="jlm_cmmi10" transform="matrix(0.1,0.0,0.0,0.1,58.431057,26.69051)">Ã</text>
+<text class="jlm_cmex10" transform="matrix(0.1,0.0,0.0,0.1,67.59467,7.890336)">À</text>
+</g>
+</svg>

@@ -1,0 +1,35 @@
+<!--
+\newcommand{\comTwo}[2]{\frac{#1 + #2}{x_{#2}^{#1}}}
+               \comTwo{\sigma}{\Omega}
+-->
+<svg width="50" height="44" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<style type="text/css">
+@font-face {
+font-family: 'jlm_cmmi10';
+src: url('fonts/jlm_cmmi10.ttf') format('truetype');
+font-style: normal;
+}
+.jlm_cmmi10 {
+font-family: 'jlm_cmmi10';
+font-size: 133px;
+}
+@font-face {
+font-family: 'jlm_cmr10';
+src: url('fonts/jlm_cmr10.ttf') format('truetype');
+font-style: normal;
+}
+.jlm_cmr10 {
+font-family: 'jlm_cmr10';
+font-size: 133px;
+}
+</style>
+<g stroke="rgb(0,0,0)" fill="rgb(0,0,0)" stroke-width="1.0" stroke-miterlimit="10.0" stroke-linejoin="miter" stroke-linecap="square">
+<text class="jlm_cmmi10" transform="matrix(0.1,0.0,0.0,0.1,7.5940223,15.1110935)">¾</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,18.654234,15.1110935)">+</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,31.98762,15.1110935)">«</text>
+<path transform="matrix(10.0,0.0,0.0,10.0,0.0,0.0)" d=" M 0.7594022 2.0531206 L 4.1617274 2.0531206 L 4.1617274 2.1064527 L 0.7594022 2.1064527 L 0.7594022 2.0531206 Z " stroke="transparent" fill-rule="nonzero"/>
+<text class="jlm_cmmi10" transform="matrix(0.1,0.0,0.0,0.1,17.092995,33.277214)">x</text>
+<text class="jlm_cmmi10" transform="matrix(0.06999999999999999,0.0,0.0,0.07,24.713367,28.062395)">¾</text>
+<text class="jlm_cmr10" transform="matrix(0.06999999999999999,0.0,0.0,0.07,24.713367,36.57344)">«</text>
+</g>
+</svg>

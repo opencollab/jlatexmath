@@ -45,6 +45,8 @@
 
 package org.scilab.forge.jlatexmath;
 
+import java.lang.Character.UnicodeBlock;
+
 import org.scilab.forge.jlatexmath.cyrillic.CyrillicRegistration;
 import org.scilab.forge.jlatexmath.greek.GreekRegistration;
 
@@ -58,7 +60,7 @@ public class WebStartAlphabetRegistration implements AlphabetRegistration {
     }
 
     public static void register(Character.UnicodeBlock[] blocks) {
-        DefaultTeXFont.registerAlphabet(new WebStartAlphabetRegistration(blocks));
+        AlphabetManager.get().registerAlphabet(new WebStartAlphabetRegistration(blocks));
     }
 
     public Character.UnicodeBlock[] getUnicodeBlock() {
@@ -78,5 +80,9 @@ public class WebStartAlphabetRegistration implements AlphabetRegistration {
 
     public String getTeXFontFileName() {
         return reg.getTeXFontFileName();
+    }
+
+    public void initMapping() {
+        reg.initMapping();
     }
 }

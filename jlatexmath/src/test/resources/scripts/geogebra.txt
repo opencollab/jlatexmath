@@ -1,0 +1,301 @@
+{\begin{array}{llllll}\alpha&\;\backslash\mbox{alpha}&\xi&\;\backslash\mbox{xi}&\Gamma&\;\backslash\mbox{Gamma} \\ \beta&\;\backslash\mbox{beta}&\pi&\;\backslash\mbox{pi}&\Delta&\;\backslash\mbox{Delta} \\ \gamma&\;\backslash\mbox{gamma}&\varpi&\;\backslash\mbox{varpi}&\Theta&\;\backslash\mbox{Theta} \\ \delta&\;\backslash\mbox{delta}&\rho&\;\backslash\mbox{rho}&\Lambda&\;\backslash\mbox{Lambda} \\ \epsilon&\;\backslash\mbox{epsilon}&\varrho&\;\backslash\mbox{varrho}&\Xi&\;\backslash\mbox{Xi} \\ \varepsilon&\;\backslash\mbox{varepsilon}&\sigma&\;\backslash\mbox{sigma}&\Pi&\;\backslash\mbox{Pi} \\ \zeta&\;\backslash\mbox{zeta}&\varsigma&\;\backslash\mbox{varsigma}&\Sigma&\;\backslash\mbox{Sigma} \\ \eta&\;\backslash\mbox{eta}&\tau&\;\backslash\mbox{tau}&\Upsilon&\;\backslash\mbox{Upsilon} \\ \theta&\;\backslash\mbox{theta}&\upsilon&\;\backslash\mbox{upsilon}&\Phi&\;\backslash\mbox{Phi} \\ \vartheta&\;\backslash\mbox{vartheta}&\phi&\;\backslash\mbox{phi}&\Psi&\;\backslash\mbox{Psi} \\ \gamma&\;\backslash\mbox{gamma}&\varphi&\;\backslash\mbox{varphi}&\Omega&\;\backslash\mbox{Omega} \\ \kappa&\;\backslash\mbox{kappa}&\chi&\;\backslash\mbox{chi}&\;&\; \\ \lambda&\;\backslash\mbox{lambda}&\psi&\;\backslash\mbox{psi}&\;&\; \\ \mu&\;\backslash\mbox{mu}&\omega&\;\backslash\mbox{omega}&\;&\; \\ \nu&\;\backslash\mbox{nu}&\;&\;&\;&\; \\ \end{array}}
+{\begin{array}{llll}\infty&\;\backslash\mbox{infty}&\Re&\;\backslash\mbox{Re} \\ \forall&\;\backslash\mbox{forall}&\Im&\;\backslash\mbox{Im} \\ \exists&\;\backslash\mbox{exists}&\aleph&\;\backslash\mbox{aleph} \\ \neg&\;\backslash\mbox{neg}&\nabla&\;\backslash\mbox{nabla} \\ \hbar&\;\backslash\mbox{hbar}&\partial&\;\backslash\mbox{partial} \\ \imath&\;\backslash\mbox{imath}&\Join&\;\backslash\mbox{Join} \\ \jmath&\;\backslash\mbox{jmath}&\backslash&\;\backslash\mbox{backslash} \\ \ell&\;\backslash\mbox{ell}&\prime&\;\backslash\mbox{prime} \\ \mho&\;\backslash\mbox{mho}&\angle&\;\backslash\mbox{angle} \\ \wp&\;\backslash\mbox{wp}&\triangle&\;\backslash\mbox{triangle} \\ \top&\;\backslash\mbox{top}&& \\ \bot&\;\backslash\mbox{bot}&& \\ \emptyset&\;\backslash\mbox{emptyset}&\;&\; \\ \end{array}}
+{\begin{array}{ll}\acute{a}&\;\backslash\mbox{\acute\{a\}} \\ \bar{a}&\;\backslash\mbox{\bar\{a\}} \\ \dot{a}&\;\backslash\mbox{\dot\{a\}} \\ \ddot{a}&\;\backslash\mbox{\ddot\{a\}} \\ \grave {a}&\;\backslash\mbox{\grave \{a\}} \\ \hat{a}&\;\backslash\mbox{\hat\{a\}} \\ \tilde{a}&\;\backslash\mbox{\tilde\{a\}} \\ \vec{a}&\;\backslash\mbox{\vec\{a\}} \\ \widehat{abc}&\;\backslash\mbox{\widehat\{abc\}} \\ \widetilde{abc}&\;\backslash\mbox{\widetilde\{abc\}} \\ \end{array}}
+{\begin{array}{llll}\rightarrow&\;\backslash\mbox{rightarrow or } \backslash\mbox{to}&\updownarrow&\;\backslash\mbox{updownarrow} \\ \leftarrow&\;\backslash\mbox{leftarrow or }\backslash\mbox{gets}&\Updownarrow&\;\backslash\mbox{Updownarrow} \\ \Rightarrow&\;\backslash\mbox{Rightarrow}&\hookrightarrow&\;\backslash\mbox{hookrightarrow} \\ \Leftarrow&\;\backslash\mbox{Leftarrow}&\leadsto&\;\backslash\mbox{leadsto} \\ \rightharpoonup&\;\backslash\mbox{rightharpoonup}&\mapsto&\;\backslash\mbox{mapsto} \\ \rightharpoondown&\;\backslash\mbox{rightharpoondown}&\hookleftarrow&\;\backslash\mbox{hookleftarrow} \\ \leftharpoonup&\;\backslash\mbox{leftharpoonup}&\nearrow&\;\backslash\mbox{nearrow} \\ \leftharpoondown&\;\backslash\mbox{leftharpoondown}&\searrow&\;\backslash\mbox{searrow} \\ \leftrightarrow&\;\backslash\mbox{leftrightarrow}&\swarrow&\;\backslash\mbox{swarrow} \\ \Leftrightarrow&\;\backslash\mbox{Leftrightarrow}&\nwarrow&\;\backslash\mbox{nwarrow} \\ \rightleftharpoons&\;\backslash\mbox{rightleftharpoons}&\longrightarrow&\;\backslash\mbox{longrightarrow} \\ \uparrow&\;\backslash\mbox{uparrow}&\Longrightarrow&\;\backslash\mbox{Longrightarrow} \\ \Uparrow&\;\backslash\mbox{Uparrow}&\longmapsto&\;\backslash\mbox{longmapsto} \\ \downarrow&\;\backslash\mbox{downarrow}&\;&\; \\ \Downarrow&\;\backslash\mbox{Downarrow}&\;&\; \\ \end{array}}
+{\left[\begin{array}{l}\operatorname{sin} \left( \frac{x}{2} \right) \\ \end{array}\right]}
+{\left(\begin{array}{l}\operatorname{sin} \left( \frac{x}{2} \right) \\ \operatorname{cos} \left( \frac{x}{2} \right) \\ \end{array}\right)}
+{\begin{array}{|lll|}\hline 2&3&4 \\ 3&4&5 \\ 4&5&6 \\ \hline \end{array}}
+{\begin{array}{|l|l|l|}\hline 2&3&4 \\ \hline 3&4&5 \\ \hline 4&5&6 \\ \hline \end{array}}
+{\begin{array}{|c|c|c|c|}\hline -4.2&2&5&7 \\ \hline 3&4&2&-1 \\ \hline \end{array}}
+{\left\{\begin{array}{l}\operatorname{sin} \left( \frac{x}{2} \right) \\ \end{array}\right\}}
+{\begin{array}{|c|c|c|c|}\hline -4.1&2&5&7 \\ \hline 3&4&2&-1 \\ \hline \end{array}}
+{\begin{array}{|c|c|c|c|}\hline -4&2&5&7 \\ \hline 3&4&2&-1 \\ \hline \end{array}}
+{\begin{array}{|c|c|c|c|}\hline -3.9&2&5&7 \\ \hline 3&4&2&-1 \\ \hline \end{array}}
+{\begin{array}{|c|c|c|c|}\hline -3.8&2&5&7 \\ \hline 3&4&2&-1 \\ \hline \end{array}}
+{\begin{array}{|c|c|c|c|}\hline -3.7&2&5&7 \\ \hline 3&4&2&-1 \\ \hline \end{array}}
+m=\frac{y_2-y_1}{x_2-x_1}
+m= \frac{Δy}{Δx}=\frac{y_A-y_B}{x_A-x_B}
+Amount = Principal \cdot \left( 1 + \frac {rate}{periods} \right) ^ {time\; \cdot\; periods}
+a x^2\; +\; b x\; +\; c\; =\; 0
+^2\; +\; p x\; +\; q\; =\; 0
+f(x)\; =\; a(x\; -\; h)^2\; +\; k
+f(x)\; =\; (x\; +\; a)\;(x\; +\; b)
+\; =\; \frac {-b\; \pm\; \sqrt {b^2\; -\; 4ac}}{2a}
+_{1/2}\; =\; \frac {-b\; \pm\; \sqrt {b^2\; -\; 4ac}}{2a}
+_{1/2}\; =\; - \frac{p}{2}{\; \pm\; \sqrt {\left( \frac{p}{2} \right)^2\; -\; q}}
+a x^3\; +\; b x^2\; +\; c x\; +\; d\; =\; 0
+\sin A = \frac {opp}{hyp} = \frac {a}{c} = (a/c)
+f(x)\; =\; a\; \sin\; b\;(x\; -\; h)\; +\; k
+f(x)\; =\; a\; sin\; (B x + C) + k
+b\;(x\; -\; h)\; = B\; \left( x\; -\; \frac {-C}{B} \right)
+h\; = \frac {-C}{B}
+\lim_{x \to \infty} \left( \frac{1}{x} \right)
+\sqrt{x}
+\frac{a}{b+c}
+\left( \frac{a}{b} \right) ^{2}
+^{\textcolor{#FF00FF}{2}}
+=3 \cr y=2
+\text{The quadratic formula is }x = \frac {-b \pm \sqrt {b^2 - 4ac}}{2a}
+\sqrt[3]{3}
+\binom{9}{3}
+\frac{\partial^2U}{\partial x^2} + \frac{\partial^2U}{\partial y^2}
+\lim_{x\to\infty}\frac{1}{x}
+\frac{1+\frac{1}{x}}{3x + 2}
+\cfrac{2}{1+\cfrac{2}{1+\cfrac{2}{1+\cfrac{2}{1}}}}
+\sqrt{x+\frac{1}{2}}
+\cos 90^\circ = 0
+\prod^{5}_{n=1}\frac{n}{n-1}
+\sum^{\infty}_{i=1}\frac{1}{i}
+\textcolor{#FF00FF}{\text{some colored text }} \frac{ \textcolor{red}{a}}{\textcolor{blue}{2}}
+\begin{align} \fgcolor{CD79720}{This \; is \; HEX \;CD79720 \;color } \\  \fgcolor{000000}{This \; is \; HEX \;000000 \;color } \\ \fgcolor{CAAFF}{This \; is \; HEX \;CAAFF \;color } \\  \end{align}
+\begin{align} 1st \; line\\2nd \; line \end{align} \left\{ \begin{align} text  \; inside \\ and\; more \; text \end{align} \right.
+\large Using \; LaTeX \;to \;control \;font \;size: This \; is \; large
+\LARGE Using \; LaTeX \;to \;control \;font \;size: This \; is \; LARGE
+\huge Using \; LaTeX \;to \;control \;font \;size: This \; is \; huge
+\small Using \; LaTeX \;to \;control \;font \;size: This \; is \; small
+\LARGE \text{text non italicized}
+1st \; row
+2nd \; row
+using \; \$ \; symbol 
+\sqrt{\operatorname{sin} \left( \frac{x}{3 - \sqrt{x}} \right)}
+\sqrt{\sin \left( \frac{x}{3 - \sqrt{x}} \right)}
+\sqrt{sin \left( \frac{x}{3 - \sqrt{x}} \right)}
+{\begin{array}{|l|l|}\hline 1&2 \\ \hline 3&4 \\ \hline \end{array}}
+\begin{eqnarray}x^{2}+1&=&10\\x&=&\sqrt{10}\end{eqnarray}
+{\begin{array}{|l|l|}1&3.1 \\ 2&4 \\ \end{array}}
+{\begin{array}{ll}\hline 1&3.1 \\ \hline 2&4 \\ \hline \end{array}}
+{\begin{array}{|c|c|}\hline 1&3.1 \\ \hline 2&4 \\ \hline \end{array}}
+{\begin{array}{|r|r|}\hline 1&3.1 \\ \hline 2&4 \\ \hline \end{array}}
+{\left\{\begin{array}{ll}1&3.1 \\ 2&4 \\ \end{array}\right\}}
+\frac{ 2 }{ 3 } 
+e^{\textcolor{#FF0000}{2}}sin(x^\textcolor{#00FF00}{{a+\textcolor{blue}{4}+b}})
+\arccos(x) \arcsin(x) \arctan(x) \arg(x) \cos(x) \cosh(x) \cot(x) \coth(x) \csc(x) \deg(x) \det(x) \dim(x) \exp(x) \gcd(x) \hom(x) \ker(x) \lg(x) \ln(x) \log(x) \sec(x) \sin(x) \sinh(x) \tan(x) \tanh(x) 
+f \times o + r - m + u \div l + a \text{ some text with spaces}
+\alpha \beta \gamma \delta \epsilon \varepsilon \zeta \eta \theta \vartheta \iota \kappa \lambda \mu \nu \xi \pi \varpi \rho \varrho \sigma \varsigma \tau \upsilon \phi \varphi \chi \psi \omega  \Gamma \Delta \Theta \Lambda \Xi \Pi \Sigma \Upsilon \Phi \Psi \Omega  \sum \prod
+\pm \mp \times \div \cdot \cdots \vdots \ldots \ddots \ast \star \dagger \ddagger \amalg \cap \cup \uplus \sqcap \sqcup \vee \wedge \setminus \wr \circ \bullet \diamond \lhd \rhd \unlhd \unrhd \oslash \odot \bigcirc \Box \Diamond \bigtriangleup \bigtriangledown \triangleleft \triangleright \oplus \ominus \otimes
+\le \leq \ll \subset \subseteq \sqsubset \sqsubseteq \in \vdash \models \ge \geq \gg \supset \supseteq \sqsupset \sqsupseteq \ni \dashv \perp \neq \doteq \approx \cong \equiv \propto \prec \preceq \parallel \sim \simeq \asymp \smile \frown \bowtie \succ \succeq \mid
+\leftarrow \gets \Leftarrow \rightharpoonup \rightarrow \to\rightharpoondown \Rightarrow \leadsto \leftrightarrow \uparrow \Leftrightarrow \Uparrow \mapsto \downarrow \Downarrow \leftharpoonup \updownarrow \leftharpoondown \Updownarrow \rightleftharpoons \nearrow \longleftarrow \searrow \Longleftarrow \swarrow \longrightarrow \nwarrow \Longrightarrow \longleftrightarrow \Longleftrightarrow \longmapsto \hookrightarrow \hookleftarrow
+\aleph \forall \hbar \exists \imath \neg \jmath \flat \ell \natural \wp \sharp \Re \angle \Im \backslash \mho \prime \emptyset \triangle \nabla \clubsuit \diamondsuit \partial \heartsuit \top \spadesuit \bot  \infty 
+\sqrt{-q+\sqrt[3]{q^2+p^3}}
+\acute{a} \bar{a} \dot{a} \ddot{a} \grave{a} \hat{a} \widehat{aaaaa} \tilde{a} \vec{a}
+{\begin{array}{|c|c|c|}\hline Schriftfarbe&Code&Komplementärcode \\ \hline \mathbf{maroon}&#\textcolor{#ff0000}{80}\textcolor{#00ff00}{00    }    \textcolor{#0000ff}{00 }&#\textcolor{#ff0000}{7F}\textcolor{#00ff00}{FF    }    \textcolor{#0000ff}{FF } \\ \hline \;&\textcolor{#7F00FF}{8388608}&\textcolor{#7F00FF}{8388607} \\ \hline \;&\left\{ {\begin{array}{lll}\textcolor{#ff0000}{128}\space ;&\textcolor{#00ff00}{0}\space ; &\textcolor{#0000ff}{0} \\ \end{array}} \right\} &\left\{ {\begin{array}{lll}\textcolor{#ff0000}{127}\space ;&\textcolor{#00ff00}{255}\space ; &\textcolor{#0000ff}{255} \\ \end{array}} \right\}  \\ \hline \;&\left\{ {\begin{array}{lll}\textcolor{#ff0000}{0.5}\space ;&\textcolor{#00ff00}{0}\space ; &\textcolor{#0000ff}{0} \\ \end{array}} \right\} &\left\{ {\begin{array}{lll}\textcolor{#ff0000}{0.5}\space ;&\textcolor{#00ff00}{1}\space ; &\textcolor{#0000ff}{1} \\ \end{array}} \right\}  \\ \hline \end{array}}
+\fgcolor{maroon }{Textfarbe \space  hier \space  mit  \space \backslash{fgcolor} \left\{  maroon \right\}   \space   gesetzt. }\\  \bgcolor{maroon }{Hintergrundfarbe \space   hier \space  mit \space  \backslash{bgcolor}\left\{   maroon \right\} \space  gesetzt .}  \\
+Listentyp \, = \,2 \;\;\;\;\; Index \, = \,8
+\textcolor{#7FFFFF}{ Hintergrund:    \space     maroon  \space   \space  #800000= 8388608\\  Hintergrund:   \space RGB  \left\{128, 0, 0\right\} \space  rgb  \left\{0.5, 0, 0\right\} \\   \space\\  Schriftfarbe: \space    \space  \space   #7FFFFF    =    8388607  \space komplementär\\  Schriftfarbe:    \space RGB\left\{127, 255, 255\right\}    \space  rgb  \left\{0.5, 1, 1\right\}  \\ }
+\fgcolor{#800000}{ Schriftfarbe:    \space     maroon   \space \space #800000= 8388608\\ Schriftfarbe:   \space RGB  \left\{128, 0, 0\right\} \space  rgb  \left\{0.5, 0, 0\right\} \\  \space\\ Hintergrund:   \space    \space   \space  #7FFFFF    =    8388607  \space komplementär\\ Hintergrund:    \space RGB\left\{127, 255, 255\right\}    \space  rgb  \left\{0.5, 1, 1\right\}  \\ }
+\bgcolor{YELLOW  } {\text {Die Befehle 'fgcolor' und 'bgcolor' reagieren auf }}\\ \bgcolor{YELLOW}{ \text {deutlich weniger Farbnamen direkt. }}\\  \bgcolor{YELLOW} {\text {Falls hier ein Farbtext nachfolgt zeigt dieser an, ob  }}\\   \bgcolor{YELLOW}{ \text {der Befehl  fgcolor direkt auf den Farbnamen reagiert:} } \\ 
+Listentyp:  \space 1 \space  ; \space Geogebra-Englisch  \space  ; \space Index:  \space   \space  \space 76 \\ Schriftfarbe:  \space LIME  \space \space    #00FF00\\ Hintergrund: FUCHSIA  \space \space #FF00FF 
+\forall\;\exists \;\bot\; \varnothing\;\top\;\diagup\;\widehat{ABC}\;\overbrace{xyz}\;\in\;\;\notin\mathbb{R}\;\mathcal{C}
+\lim_{x\to +\infty}
+\lim\limits_{\substack{x \rightarrow -2 \\ x>-2}} f(x)
+\circlearrowleft\;\circ\;\wedge
+\cap\;\cup\;\approx\;\geqslant\;\longmapsto\;\to
+M=\left(\begin{array}{ccc}a & b & c\\ d & e & f \\ g& h & i\end{array}\right)
+\int_ {a}^{b}f(t)dt
+\mathit{aa}\mathbf{bb}\LARGE{ab}\large \underline{abx}
+\begin{array}{||c|c}2x +3y &  0.5 \\\hline  5x-8y &  1.8 \\ \end{array}
+\left\{\begin{array}{c}2x +3y= 0.5 \\  5x-8y = 1.8 \\ \end{array}\right.
+\overrightarrow{\;AB\;}
+\dfrac{1}{2}\alpha\overrightarrow{\;AB\;}=\vec{u}
+\binom {a}{b}
+\left( \frac{a}{b}\right)
+\frac{a}{b}
+\mathcal{ \ LaTex\ Schriftgrößen\ }\\ \scriptsize \ Gib\ eine\ Formel\ oder\ Text\ ein:
+\copyright 
+\Huge {Huge}\\ \huge {huge}\\ \LARGE {LARGE}\\ \Large {Large}\\ \large {large}\\ \normalsize \ovalbox{normalsize}\\ \small {small}\\ \footnotesize {footnotesize}\\ \scriptsize {scriptsize}\\ \tiny {tiny}
+\normalsize {\textcolor{0,0.5,0.5}{x\ =\ \sqrt{\frac{a^2+b^2}{4}}\cdot\sqrt{{\frac{1}{c^2+d^2}}}}}
+\normalsize {\textcolor{0,0.5,0.5}{T=2\pi \cdot \sqrt{\frac{m}{D}}}}
+\normalsize {\textcolor{0,0.5,0.5}{N(t)=N_0\cdot e^{-k\cdot t}}}
+\normalsize {\textcolor{0,0.5,0.5}{\int_a^b{f(x)\ dx}=F(b)-F(a)}}
+\normalsize {\textcolor{0,0.5,0.5}{\vec a+\vec b=\left(\begin{array}{} a_x \\ a_y \\ a_z \end{array} \right)+\left(\begin{array}{} b_x \\ b_y \\ b_z \end{array} \right)}}
+Dez: \space 226799999999 \space ≙  \space Hex: \space #34CE555BFF
+Hex: \space # AB796F2fdf \space ≙ \space Dez : \space  736476737503
+{\begin{array}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}\hline ◄&◅&◆&◇&◈&◉&◊&○&◌&◍&◎&●&◐&◑&◒&◓&◔&◕&◖&◗ \\ \hline 9668&9669&9670&9671&9672&9673&9674&9675&9676&9677&9678&9679&9680&9681&9682&9683&9684&9685&9686&9687 \\ \hline ◘&◙&◚&◛&◜&◝&◞&◟&◠&◡&◢&◣&◤&◥&◦&◧&◨&◩&◪&◫ \\ \hline 9688&9689&9690&9691&9692&9693&9694&9695&9696&9697&9698&9699&9700&9701&9702&9703&9704&9705&9706&9707 \\ \hline ◬&◭&◮&◯&◰&◱&◲&◳&◴&◵&◶&◷&◸&◹&◺&◻&◼&◽&◾&◿ \\ \hline 9708&9709&9710&9711&9712&9713&9714&9715&9716&9717&9718&9719&9720&9721&9722&9723&9724&9725&9726&9727 \\ \hline ☀&☁&☂&☃&☄&★&☆&☇&☈&☉&☊&☋&☌&☍&☎&☏&☐&☑&☒&☓ \\ \hline 9728&9729&9730&9731&9732&9733&9734&9735&9736&9737&9738&9739&9740&9741&9742&9743&9744&9745&9746&9747 \\ \hline ☔&☕&☖&☗&☘&☙&☚&☛&☜&☝&☞&☟&☠&☡&☢&☣&☤&☥&☦&☧ \\ \hline 9748&9749&9750&9751&9752&9753&9754&9755&9756&9757&9758&9759&9760&9761&9762&9763&9764&9765&9766&9767 \\ \hline ☨&☩&☪&☫&☬&☭&☮&☯&☰&☱&☲&☳&☴&☵&☶&☷&☸&☹&☺&☻ \\ \hline 9768&9769&9770&9771&9772&9773&9774&9775&9776&9777&9778&9779&9780&9781&9782&9783&9784&9785&9786&9787 \\ \hline ☼&☽&☾&☿&♀&♁&♂&♃&♄&♅&♆&♇&♈&♉&♊&♋&♌&♍&♎&♏ \\ \hline 9788&9789&9790&9791&9792&9793&9794&9795&9796&9797&9798&9799&9800&9801&9802&9803&9804&9805&9806&9807 \\ \hline ♐&♑&♒&♓&♔&♕&♖&♗&♘&♙&♚&♛&♜&♝&♞&♟&♠&♡&♢&♣ \\ \hline 9808&9809&9810&9811&9812&9813&9814&9815&9816&9817&9818&9819&9820&9821&9822&9823&9824&9825&9826&9827 \\ \hline ♤&♥&♦&♧&♨&♩&♪&♫&♬&♭&♮&♯&♰&♱&♲&♳&♴&♵&♶&♷ \\ \hline 9828&9829&9830&9831&9832&9833&9834&9835&9836&9837&9838&9839&9840&9841&9842&9843&9844&9845&9846&9847 \\ \hline ♸&♹&♺&♻&♼&♽&♾&♿&⚀&⚁&⚂&⚃&⚄&⚅&⚆&⚇&⚈&⚉&⚊&⚋ \\ \hline 9848&9849&9850&9851&9852&9853&9854&9855&9856&9857&9858&9859&9860&9861&9862&9863&9864&9865&9866&9867 \\ \hline ⚌&⚍&⚎&⚏&⚐&⚑&⚒&⚓&⚔&⚕&⚖&⚗&⚘&⚙&⚚&⚛&⚜&⚝&⚞&⚟ \\ \hline 9868&9869&9870&9871&9872&9873&9874&9875&9876&9877&9878&9879&9880&9881&9882&9883&9884&9885&9886&9887 \\ \hline \end{array}}
+\overset{A}{=}
+\underset{A}=
+a \atopwithdelims \langle \rangle b
+{a \choose b} 
+{a \brack b}
+{a \brace b}
+{a \bangle b}
+\cancel{ABC} \underrightarrow{ABC} \underleftarrow{ABC} \underleftrightarrow{ABC} \lneq \gneq \lvertneqq \gvertneqq  \thinspace \medspace \thickspace \negthinspace \negmedspace \negthickspace \: \, \; \!  \lmoustache{ABC} \rmoustache{ABC}  \lgroup \rgroup \xleftarrow{ABC} \xrightarrow{ABC} \dddot{ABC} \ddddot{ABC}
+\definecolor{gris}{gray}{0.9}\definecolor{noir}{rgb}{0,0,0}\definecolor{bleu}{rgb}{0,0,1}\newcommand{\pa}{\left|}\begin{array}{c}\JLaTeXMath\\\begin{split} &Тепловой\ поток\ \mathrm{Тепловой\ поток}\ \mathtt{Тепловой\ поток}\\ &\boldsymbol{\mathrm{Тепловой\ поток}}\ \mathsf{Тепловой\ поток}\\|I_2| &= \pa\int_0^T\psi(t)\left\{ u(a,t)-\int_{\gamma(t)}^a \frac{d\theta}{k} (\theta,t) \int_a^\theta c(\xi) u_t (\xi,t)\,d\xi\right\}dt\right|\\&\le C_6 \Bigg|\pa f \int_\Omega \pa\widetilde{S}^{-1,0}_{a,-} W_2(\Omega, \Gamma_1)\right|\ \right|\left| |u|\overset{\circ}{\to} W_2^{\widetilde{A}}(\Omega;\Gamma_r,T)\right|\Bigg|\\&\\&\textcolor{magenta}{\mathrm{Produit\ avec\ Java\ et\ \LaTeX\ par\ }\mathscr{C}\mathcal{A}\mathfrak{L}\mathbf{I}\mathtt{X}\mathbb{T}\mathsf{E}}\\&\begin{pmatrix}\alpha&\beta&\gamma&\delta\\\aleph&\beth&\gimel&\daleth\\\mathfrak{A}&\mathfrak{B}&\mathfrak{C}&\mathfrak{D}\\\boldsymbol{\mathfrak{a}}&\boldsymbol{\mathfrak{b}}&\boldsymbol{\mathfrak{c}}&\boldsymbol{\mathfrak{d}}\end{pmatrix}\quad{(a+b)}^{\frac{n}{2}}=\sqrt{\sum_{k=0}^n\tbinom{n}{k}a^kb^{n-k}}\quad \Biggl(\biggl(\Bigl(\bigl(()\bigr)\Bigr)\biggr)\Biggr)\\&\forall\varepsilon\in\mathbb{R}_+^*\ \exists\eta>0\ |x-x_0|\leq\eta\Longrightarrow|f(x)-f(x_0)|\leq\varepsilon\\&\det\begin{bmatrix}a_{11}&a_{12}&\cdots&a_{1n}\\a_{21}&\ddots&&\vdots\\\vdots&&\ddots&\vdots\\a_{n1}&\cdots&\cdots&a_{nn}\end{bmatrix}\overset{\mathrm{def}}{=}\sum_{\sigma\in\mathfrak{S}_n}\varepsilon(\sigma)\prod_{k=1}^n a_{k\sigma(k)}\\&\Delta f(x,y)=\frac{\partial^2f}{\partial x^2}+\frac{\partial^2f}{\partial y^2}\qquad\qquad \fcolorbox{noir}{gris}{n!\underset{n\rightarrow+\infty}{\sim} {\left(\frac{n}{e}\right)}^n\sqrt{2\pi n}}\\&\sideset{_\alpha^\beta}{_\gamma^\delta}{\begin{pmatrix}a&b\\c&d\end{pmatrix}}\xrightarrow[T]{n\pm i-j}\sideset{^t}{}A\xleftarrow{\overrightarrow{u}\wedge\overrightarrow{v}}\underleftrightarrow{\iint_{\mathds{R}^2}e^{-\left(x^2+y^2\right)}\,\mathrm{d}x\mathrm{d}y}\end{split}\\\rotatebox{30}{\sum_{n=1}^{+\infty}}\quad\mbox{Mirror rorriM}\reflectbox{\mbox{Mirror rorriM}}\end{array}
+\begin{array}{lr}\mbox{\textcolor{Blue}{Russian}}&\mbox{\textcolor{Melon}{Greek}}\\\mbox{ПРИВЕТ МИР}&\mbox{ΓΕΙΆ ΚΌΣΜΟ}\\\mbox{привет мир}&\mbox{γειά κόσμο}\\\mathbf{\mbox{привет мир}}&\mathbf{\mbox{γειά κόσμο}}\\\mathit{\mbox{привет мир}}&\mathit{\mbox{γειά κόσμο}}\\\mathsf{\mbox{привет мир}}&\mathsf{\mbox{γειά κόσμο}}\\\mathtt{\mbox{привет мир}}&\mathtt{\mbox{γειά κόσμο}}\\\mathbf{\mathit{\mbox{привет мир}}}&\mathbf{\mathit{\mbox{γειά κόσμο}}}\\\mathbf{\mathsf{\mbox{привет мир}}}&\mathbf{\mathsf{\mbox{γειά κόσμο}}}\\\mathsf{\mathit{\mbox{привет мир}}}&\mathsf{\mathit{\mbox{γειά κόσμο}}}\\&\\\mbox{\textcolor{Salmon}{Bulgarian}}&\mbox{\textcolor{Tan}{Serbian}}\\\mbox{здравей свят}&\mbox{Хелло уорлд}\\&\\\mbox{\textcolor{Turquoise}{Bielorussian}}&\mbox{\textcolor{LimeGreen}{Ukrainian}}\\\mbox{прывітаньне Свет}&\mbox{привіт світ}\\\end{array}
+\begin{array}{l}\forall\varepsilon\in\mathbb{R}_+^*\ \exists\eta>0\ |x-x_0|\leq\eta\Longrightarrow|f(x)-f(x_0)|\leq\varepsilon\\\det\begin{bmatrix}a_{11}&a_{12}&\cdots&a_{1n}\\a_{21}&\ddots&&\vdots\\\vdots&&\ddots&\vdots\\a_{n1}&\cdots&\cdots&a_{nn}\end{bmatrix}\overset{\mathrm{def}}{=}\sum_{\sigma\in\mathfrak{S}_n}\varepsilon(\sigma)\prod_{k=1}^n a_{k\sigma(k)}\\\sideset{_\alpha^\beta}{_\gamma^\delta}{\begin{pmatrix}a&b\\c&d\end{pmatrix}}\\\int_0^\infty{x^{2n} e^{-a x^2}\,dx} = \frac{2n-1}{2a} \int_0^\infty{x^{2(n-1)} e^{-a x^2}\,dx} = \frac{(2n-1)!!}{2^{n+1}} \sqrt{\frac{\pi}{a^{2n+1}}}\\\int_a^b{f(x)\,dx} = (b - a) \sum\limits_{n = 1}^\infty  {\sum\limits_{m = 1}^{2^n  - 1} {\left( { - 1} \right)^{m + 1} } } 2^{ - n} f(a + m\left( {b - a} \right)2^{-n} )\\\int_{-\pi}^{\pi} \sin(\alpha x) \sin^n(\beta x) dx = \textstyle{\left \{ \begin{array}{cc} (-1)^{(n+1)/2} (-1)^m \frac{2 \pi}{2^n} \binom{n}{m} & n \mbox{ odd},\ \alpha = \beta (2m-n) \\ 0 & \mbox{otherwise} \\ \end{array} \right .}\\L = \int_a^b \sqrt{ \left|\sum_{i,j=1}^ng_{ij}(\gamma(t))\left(\frac{d}{dt}x^i\circ\gamma(t)\right)\left(\frac{d}{dt}x^j\circ\gamma(t)\right)\right|}\,dt\\\begin{array}{rl} s &= \int_a^b\left\|\frac{d}{dt}\vec{r}\,(u(t),v(t))\right\|\,dt \\ &= \int_a^b \sqrt{u'(t)^2\,\vec{r}_u\cdot\vec{r}_u + 2u'(t)v'(t)\, \vec{r}_u\cdot\vec{r}_v+ v'(t)^2\,\vec{r}_v\cdot\vec{r}_v}\,\,\, dt. \end{array}\\\end{array}
+\begin{array}{|c|l|||r|c|}\hline\text{Matrix}&\multicolumn{2}{|c|}{\text{Multicolumns}}&\text{Font sizes commands}\cr\hline\begin{pmatrix}\alpha_{11}&\cdots&\alpha_{1n}\cr\hdotsfor{3}\cr\alpha_{n1}&\cdots&\alpha_{nn}\end{pmatrix}&\Large \text{Large Right}&\small \text{small Left}&\tiny \text{tiny Tiny}\cr\hline\multicolumn{4}{|c|}{\Huge \text{Huge Multicolumns}}\cr\hline\end{array}
+\begin{array}{cc}\fbox{\text{A framed box with \textdbend}}&\shadowbox{\text{A shadowed box}}\cr\doublebox{\text{A double framed box}}&\ovalbox{\text{An oval framed box}}\cr\end{array}
+\mbox{abc abc abc abc abc abc abc abc abc abc abc abc abc abc\\abc abc abc abc abc abc abc\\abc abc abc abc abc abc abc}\\1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1
+{\begin{tabular}{ll}\begin{array}{r|lllllllllll}1&2&5& & & & & & & &  \\ 2&2&3&5&6& & & & & &  \\ 3&3&5& & & & & & & &  \\ 4&1&3&3&3&4&4&5&6&6&8 \\ 5&3&4&5&9&9& & & & &  \\ 6&3&4&4&9& & & & & &  \\ 7&2&9& & & & & & & &  \\ 8&2& & & & & & & & &  \\ \end{array} \\ \fbox{\text{Key: 3|1 means 31}} \\ \end{tabular}}
+{\begin{tabular}{ll}\begin{array}{r|lllllllllll}1&2&5& & & & & & & &  \\ 2&2&3&5&6& & & & & &  \\ 3&3&5& & & & & & & &  \\ 4&1&3&3&3&4&4&5&6&6&8 \\ 5&3&4&5&9&9& & & & &  \\ 6&3&4&4&9& & & & & &  \\ 7&2&9& & & & & & & &  \\ 8&2& & & & & & & & &  \\ \end{array} \\ \text{high: 200} \\ \fbox{\text{Key: 3|1 means 31}} \\ \end{tabular}}
+{\begin{tabular}{ll}\text{low: -10} \\ \begin{array}{r|lllllllllll}1&2&5& & & & & & & &  \\ 2&2&3&5&6& & & & & &  \\ 3&3&5& & & & & & & &  \\ 4&1&3&3&3&4&4&5&6&6&8 \\ 5&3&4&5&9&9& & & & &  \\ 6&3&4&4&9& & & & & &  \\ 7&2&9& & & & & & & &  \\ 8&2& & & & & & & & &  \\ \end{array} \\ \fbox{\text{Key: 3|1 means 31}} \\ \end{tabular}}
+{\begin{tabular}{ll}\begin{array}{r|lllllllllllllllllllllllllllllll}0&1&2&2&2&3&3&3&4&4&4&4&4&4&4&5&5&5&5&5&5&6&6&6&6&6&6&7&7&8&8 \\ \end{array} \\ \text{high: 200} \\ \fbox{\text{Key: 3|1 means 310}} \\ \end{tabular}}
+{\begin{tabular}{ll}\begin{array}{r|lllllllllllllllllllllllllllllll}0&1&2&2&2&3&3&3&4&4&4&4&4&4&4&5&5&5&5&5&5&6&6&6&6&6&6&7&7&8&8 \\ \end{array} \\ \fbox{\text{Key: 3|1 means 310}} \\ \end{tabular}}
+{\begin{tabular}{ll}\text{low: -10} \\ \begin{array}{r|lllllllllllllllllllllllllllllll}0&1&2&2&2&3&3&3&4&4&4&4&4&4&4&5&5&5&5&5&5&6&6&6&6&6&6&7&7&8&8 \\ \end{array} \\ \fbox{\text{Key: 3|1 means 310}} \\ \end{tabular}}
+{\begin{tabular}{ll}\begin{array}{r|llll}12&0& &  \\ 13& & &  \\ 14& & &  \\ 15&0& &  \\ 16& & &  \\ 17& & &  \\ 18& & &  \\ 19& & &  \\ 20& & &  \\ 21& & &  \\ 22&0& &  \\ 23&0& &  \\ 24& & &  \\ 25&0& &  \\ 26&0& &  \\ 27& & &  \\ 28& & &  \\ 29& & &  \\ 30& & &  \\ 31& & &  \\ 32& & &  \\ 33&0& &  \\ 34& & &  \\ 35&0& &  \\ 36& & &  \\ 37& & &  \\ 38& & &  \\ 39& & &  \\ 40& & &  \\ 41&0& &  \\ 42& & &  \\ 43&0&0&0 \\ 44&0&0&  \\ 45&0& &  \\ 46&0&0&  \\ 47& & &  \\ 48&0& &  \\ 49& & &  \\ 50& & &  \\ 51& & &  \\ 52& & &  \\ 53&0& &  \\ 54&0& &  \\ 55&0& &  \\ 56& & &  \\ 57& & &  \\ 58& & &  \\ 59&0&0&  \\ 60& & &  \\ 61& & &  \\ 62& & &  \\ 63&0& &  \\ 64&0&0&  \\ 65& & &  \\ 66& & &  \\ 67& & &  \\ 68& & &  \\ 69&0& &  \\ 70& & &  \\ 71& & &  \\ 72&0& &  \\ 73& & &  \\ 74& & &  \\ 75& & &  \\ 76& & &  \\ 77& & &  \\ 78& & &  \\ 79&0& &  \\ 80& & &  \\ 81& & &  \\ 82&0& &  \\ \end{array} \\ \fbox{\text{3|1 means 3.1}} \\ \end{tabular}}
+\fbox{\text{3|1 means 3.1}}
+{\begin{array}{|l|l|l|l|}\hline -3.2&2&5&7 \\ \hline 3&4&2&-1 \\ \hline \end{array}}
+{\begin{array}{|lllll|}\hline 1&1&1&1&1 \\ 2&2&2&2&2 \\ 3&3&3&3&3 \\ 4&4&4&4&4 \\ \hline \end{array}}
+{\begin{array}{|llll|}\hline 1&2&3&4 \\ 1&2&3&4 \\ 1&2&3&4 \\ 1&2&3&4 \\ 1&2&3&4 \\ \hline \end{array}}
+{\begin{array}{|l|lll|}\hline 1&2&3&4 \\ \hline 1&2&3&4 \\ 1&2&3&4 \\ 1&2&3&4 \\ 1&2&3&4 \\ \hline \end{array}}
+{\left|\begin{array}{llllll}x²&\text{x y}&y²&x&y&1 \\ Ax²&\text{Ax Ay}&Ay²&Ax&Ay&1 \\ Bx²&\text{Bx By}&By²&Bx&By&1 \\ Cx²&\text{Cx Cy}&Cy²&Cx&Cy&1 \\ Dx²&\text{Dx Dy}&Dy²&Dx&Dy&1 \\ Ex²&ExEy&Ey²&Ex&Ey&1 \\ \end{array}\right|}=0
+{\left|\begin{array}{llllll}x²&\text{x y}&y²&x&y&1 \\ 1&-2&4&-1&2&1 \\ 1&4&16&1&4&1 \\ 9&9&9&3&3&1 \\ 4&0&0&2&0&1 \\ 16&4&1&4&1&1 \\ \end{array}\right|}=0
+{\left(\begin{array}{|l|l}1&4 \\ 2&5 \\ 3&6 \\ \end{array}\right\}}
+{\left[\begin{array}{ll}\hline 1&4 \\ \hline 2&5 \\ 3&6 \\ \hline \end{array}\right.}
+{\left(\begin{array}{l|l}1&4 \\ \hline 2&5 \\ 3&6 \\ \end{array}\right\}}
+{\left\{\begin{array}{l|ll}1&2&3 \\ \hline 4&5&6 \\ \end{array}\right.}
+{\begin{array}{|l|l|}\hline \textcolor{#FF0000}{red}&\cellcolor{#33FFCC}{\textcolor{#0000CC}{blue}} \\ \hline \textcolor{#00FF00}{green}&\textcolor{#FF9900}{orange} \\ \hline \end{array}}
+{\begin{array}{|l|l|l|}\hline \;&\textcolor{#7F00FF}{Area}&\cellcolor{#BFFF00}{\textcolor{#FF9900}{Percent}} \\ \hline \textcolor{#66FF00}{Total}&\textcolor{#33FFCC}{\text{23 cm²}}&\textcolor{#0000CC}{11\%} \\ \hline \textcolor{#FF6699}{Inside}&\textcolor{#993300}{\text{42 cm²}}&\textcolor{#99FF99}{22\%} \\ \hline \textcolor{#00CC00}{Middle}&\textcolor{#3333FF}{\text{21 cm²}}&\textcolor{#FF6699}{54\%} \\ \hline Outside&\textcolor{#66CCFF}{\text{11 cm²}}&\textcolor{#333300}{12\%} \\ \hline \end{array}}
+{\begin{array}{|l|l|}\hline \cellcolor{#FF0000}{\textcolor{#666666}{x}}&\cellcolor{#00FF00}{\textcolor{#CC0000}{x + 1}} \\ \hline \cellcolor{#00FF00}{\textcolor{#993300}{\frac{1}{x}}}&\cellcolor{#FF0000}{\textcolor{#0000FF}{x + 1 + 1 + 1 + 1}} \\ \hline \cellcolor{#FF0000}{\textcolor{#006400}{\sqrt{x}}}&\cellcolor{#00FF00}{\textcolor{#FF5500}{x}} \\ \hline \end{array}}
+{\begin{array}{|l|l|l|l|}\hline \cellcolor{#BFFF00}{1}&4&\cellcolor{#BCD4E6}{7}&\cellcolor{#FFC0CB}{10} \\ \hline 2&\cellcolor{#0000FF}{5}&8&11 \\ \hline \cellcolor{#A0A0A0}{3}&6&\cellcolor{#FF7F00}{9}&\cellcolor{#BFFF00}{12} \\ \hline \end{array}}
+{\begin{array}{|l|}\hline \cellcolor{#BFFF00}{1} \\ \hline 2 \\ \hline \cellcolor{#A0A0A0}{3} \\ \hline \end{array}}
+f(x)=\left\{\begin{array}{ll} x + 1& : x < 1\\ -x + 1& : x > 1\\ 1& : \text{otherwise} \end{array}\right. 
+{\left\{\begin{array}{lll}x+1&:&x<1 \\ 1&:&x=1 \\ -x+1&:&x>1 \\ \end{array}\right.}
+f(x)={\left\{\begin{array}{lll}x+1&:&x<1 \\ 1&:&x=1 \\ -x+1&:&x>1 \\ \end{array}\right.}
+p \, = \,\left(\hspace{-0.4em} \begin{tabular}{r}1 \\ 0 \\ \end{tabular}\hspace{-0.4em} \right)
+q \, = \,\left(\hspace{-0.4em} \begin{tabular}{r}0 \\ 1 \\ \end{tabular}\hspace{-0.4em} \right)
+a \, = \,A_x \; p + A_y \; q
+vv \, = \,\left(\hspace{-0.4em} \begin{tabular}{r}xx \\ yy \\ \end{tabular}\hspace{-0.4em} \right)
+vv \, = \,\left(\hspace{-0.4em} \begin{tabular}{r}1 \\ 2 \\ \end{tabular}\hspace{-0.4em} \right)
+a \, = \,\left(\hspace{-0.4em} \begin{tabular}{r}3 \\ 2 \\ \end{tabular}\hspace{-0.4em} \right)
+\sqrt{\frac{x}{2} + 1}
+\left(\begin{array}{rr}1&2\\3&4\\ \end{array}\right)
+\left(\begin{array}{rr}xx&yy\\3&4\\ \end{array}\right)
+\left\{\begin{array}{ll} \sqrt{x}& : x < 3\\ \frac{1}{x}& : \text{otherwise} \end{array}\right. 
+\frac{\mathit{AA}}{\mathit{BB}}
+3+\frac{1}{7+\frac{1}{15+\cdots}}
+\sqrt{3+\frac{1}{7+\frac{1}{15+\cdots}}}
+\sqrt{1 + \frac{1}{\sqrt{x + 3}}}
+\text{very small }\tiny\sqrt{\frac{x^{2}}{x+3}}
+\text{extra small }\scriptsize\sqrt{\frac{x^{2}}{x+3}}
+\text{small }\small\sqrt{\frac{x^{2}}{x+3}}
+\text{medium }\large\sqrt{\frac{x^{2}}{x+3}}
+\text{large }\Large\sqrt{\frac{x^{2}}{x+3}}
+\text{very large }\huge\sqrt{\frac{x^{2}}{x+3}}
+\text{extra large }\Huge\sqrt{\frac{x^{2}}{x+3}}
+\text{serif }\sf\sqrt{\frac{x^{2}}{x+3}}
+Angle \;  CPB = \arccos \left( \frac{c.b}{|c| |b|} \right) = 131.6°
+Angle \; APC = \arccos \left( \frac{a.c}{|a| |c|} \right) = 110.2°
+Angle \; APB = \arccos \left( \frac{a.b}{|a| |b|} \right) = 118.2°
+P_c
+\sqrt{\frac{n}{n+1}}\approx 1\text{ }?
+\begin{array}{|l|r|r|r||r|}\hline \text{\text{Frequency}}&\text{Short}&\text{Medium}&\text{Long}&\text{Total}\\\text{\text{Expected Count}}&\;&\;&\;&\;\\\text{\text{Χ² Contribution}}&\;&\;&\;&\;\\\hline \text{A}&25&30&25&80\\\;&24&40&16&\;\\\;&0.0417&2.5&5.0625&\;\\\hline \text{B}&30&71&19&120\\\;&36&60&24&\;\\\;&1&2.0167&1.0417&\;\\\hline \text{S}&35&49&16&100\\\;&30&50&20&\;\\\;&0.8333&0.02&0.8&\;\\\hline \hline \text{Total}&90&150&60&300\\\hline \end{array}\\ \text{ChiSquared Test}\\\begin{array}{|r|r|r|r|} \hline df&\text{χ²}&\text{P}\\\hline 4&13.3158&0.0098\\\hline \end{array}
+\text{Hello World} Hello \space World
+latex = \sqrt{\frac{x}{y+3}}
+\sqrt{\sqrt{\frac{x + 1}{x + 2} + 1}}
+\LaTeX \text{ fixed to point } \sqrt{\frac{x}{2}+1}
+\text{simple latex set to serif in ggb} \sqrt{x^2}
+\text{simple latex set to sans-serif in ggb} \sqrt{x^2}
+\text{backslash mathsf set to serif in ggb} \mathsf{\sqrt{x^2}}
+\text{backslash mathsf set to sans-serif in ggb} \mathsf{\sqrt{x^2}}
+\text{text inside backslash text set to sans-serif in ggb}
+\text{text inside backslash text set to serif in ggb}
+\textsf{text  inside backslash textsf set to sans-serif in ggb}
+\textsf{text inside backslash textsf set to serif in GGB}
+\text{serif }\sqrt{\frac{x}{2}+1}
+\text{sans serif }\sqrt{\frac{x}{2}+1}
+\text{serif bold }\sqrt{\frac{x}{2}+1}
+\text{sans serif bold }\sqrt{\frac{x}{2}+1}
+\text{serif italic }\sqrt{\frac{x}{2}+1}
+\text{sans serif italic }\sqrt{\frac{x}{2}+1}
+\text{serif bold italic }\sqrt{\frac{x}{2}+1}
+\text{sans-serif bold italic }\sqrt{\frac{x}{2}+1}
+\rotatebox{90}{ \text{serif bold italic }\sqrt{\frac{x}{2}+1} }
+\rotatebox{90}{ \text{ vertical text }  }
+\rotatebox{310}{ \text{ rotated text }  }
+\rotatebox{90}{ \text{ Num1 }  }
+\rotatebox{90}{ \text{ Num2 }  }
+\rotatebox{90}{ \text{ Num3 }  }
+\rotatebox{90}{ \text{ vertical text on point }  }
+\rotatebox{310}{ \text{ \sqrt{\frac{x}{3}-2} }  }
+{\begin{array}{|l|l|l|}\hline A&彌&彌 \\ \hline B&彌&彌 \\ \hline C&彌&彌 \\ \hline 彌&彌&彌 \\ \hline 彌&彌&彌 \\ \hline \end{array}}
+{\begin{array}{|l|l|}\hline 彌&彌 \\ \hline 彌&彌 \\ \hline \end{array}}
+\left\{x \over y \right\}
+\bgcolor{#FF00FF}{bgcolor;is;working}
+\underline{北京}\text{\;在\;}\underline{香港}\text{\;的北方。}
+{\begin{array}{|l|l|l|}\hline A&彌&彌 \\ \hline B&彌&彌 \\ \hline C&\underline{彌}&彌 \\ \hline 彌&彌&彌 \\ \hline 彌&彌&彌 \\ \hline \end{array}}
+\mathbf{b^{\frac{n}{m}}}
+y − 5 = −5(x + 5)
+slope = -1
+-2 − 4y = 3x
+slope =  \frac{ -3 }{ 4 } 
+\rotatebox{90}{ \text{ \mathbf{Price(}£\mathbf{)} }  }
+\rotatebox{90}{ \text{ \mathbf{Price(£)} }  }
+=1+\frac{7}{8}
+=1
+\frac{15}{8} 
+27x^{10}
+12x⁵
+12x^{10}
+27x^{25}
+\text{\scalebox{0.9}{Simplify} }9x⁵+3x⁵\text{ .}
+\text{Marks (Level 1) = 0\\Marks (Level 2) = 0}
+\frac{1}{10}+\frac{1}{2}
+\text{Problem with fractions with Chinese：}\\ =\frac{\text{分子}}{\text{分母}}\\ =\frac{\text{Numerator}}{\text{Denumerator}}
+$\frac{1}{10}$
+$\text{Drop-down list}$
+$\frac{1}{2}$
+\sqrt{x+\frac{1}{0.1}}
+\frac{1+\frac{1}{x}}{0.1x + 2}
+\dfrac{2}{1+\dfrac{2}{1+\dfrac{2}{1+\dfrac{2}{1}}}}
+\sqrt{x+\frac{1}{0.2}}
+\frac{1+\frac{1}{x}}{0.2x + 2}
+\sqrt{x+\frac{1}{0.3}}
+\frac{1+\frac{1}{x}}{0.3x + 2}
+\sqrt{x+\frac{1}{0.4}}
+\frac{1+\frac{1}{x}}{0.4x + 2}
+\sqrt{x+\frac{1}{0.5}}
+\frac{1+\frac{1}{x}}{0.5x + 2}
+\sqrt{x+\frac{1}{0.6}}
+\frac{1+\frac{1}{x}}{0.6x + 2}
+\sqrt{x+\frac{1}{0.7}}
+\frac{1+\frac{1}{x}}{0.7x + 2}
+\sqrt{x+\frac{1}{0.8}}
+\frac{1+\frac{1}{x}}{0.8x + 2}
+\sqrt{x+\frac{1}{0.9}}
+\frac{1+\frac{1}{x}}{0.9x + 2}
+\sqrt{x+\frac{1}{1}}
+\frac{1+\frac{1}{x}}{1x + 2}
+\sqrt{x+\frac{1}{1.1}}
+\frac{1+\frac{1}{x}}{1.1x + 2}
+\sqrt{x+\frac{1}{1.2}}
+\frac{1+\frac{1}{x}}{1.2x + 2}
+\sqrt{x+\frac{1}{1.3}}
+\frac{1+\frac{1}{x}}{1.3x + 2}
+\sqrt{x+\frac{1}{1.4}}
+\frac{1+\frac{1}{x}}{1.4x + 2}
+{\begin{array}{llllllllllllllllllll}\yen&\copyright&\ll&\neg&\pm&\mu&\cdotp&\frac 14&\frac 12&\frac 34&\AE&\times&\ss&\ae&\eth&\div&\grave x&\acute x&\hat x&\tilde x \\ \bar x&\breve x&\dot x&\ddot x&\check x&\not x&\widehat x&\Gamma&\Delta&\Theta&\Lambda&\Xi&\Pi&\Sigma&\Phi&\Psi&\Omega&\alpha&\beta&\gamma \\ \delta&\varepsilon&\zeta&\eta&\theta&\iota&\kappa&\lambda&\mu&\nu&\xi&\pi&\rho&\varsigma&\sigma&\tau&\upsilon&\phi&\chi&\psi \\ \omega&\Upsilon&\varphi&\varpi&\varkappa&\varrho&\quad&\thickspace&\thinspace&\Vert&\lq&\rq&\dagger&\dagger&\ddagger&\ddagger&\dots&\prime&\backprime&\overleftarrow x \\ \vec x&\dddot x&\ddddot x&\overleftrightarrow x&\hslash&\Im&\ell&\wp&\Re&\mho&\AA&\Finv&\aleph&\beth&\gimel&\daleth&\leftarrow&\uparrow&\rightarrow&\downarrow \\ \leftrightarrow&\updownarrow&\nwarrow&\nearrow&\searrow&\swarrow&\nleftarrow&\nrightarrow&\rightsquigarrow&\twoheadleftarrow&\twoheadrightarrow&\leftarrowtail&\rightarrowtail&\mapsfrom&\mapsto&\hookleftarrow&\hookrightarrow&\looparrowleft&\looparrowright&\leftrightsquigarrow \\ \nleftrightarrow&\Lsh&\Rsh&\curvearrowleft&\curvearrowright&\leftharpoonup&\leftharpoondown&\upharpoonleft&\upharpoonright&\rightharpoonup&\rightharpoondown&\downharpoonright&\downharpoonleft&\rightleftarrows&\leftrightarrows&\leftleftarrows&\upuparrows&\rightrightarrows&\downdownarrows&\leftrightharpoons \\ \rightleftharpoons&\nLeftarrow&\nleftrightarrow&\nRightarrow&\Leftarrow&\Uparrow&\Rightarrow&\Downarrow&\Leftrightarrow&\Updownarrow&\Lleftarrow&\Rrightarrow&\forall&\complement&\partial&\exists&\nexists&\varnothing&\triangle&\nabla \\ \in&\notin&\in&\ni&\prod&\coprod&\sum&\minus&\mp&\dotplus&\slash&\setminus&\ast&\circ&\bullet&\surd&\propto&\infty&\angle&\measuredangle \\ \sphericalangle&\mid&\nmid&\parallel&\nparallel&\wedge&\vee&\cap&\cup&\int&\iint&\iiint&\oint&\therefore&\because&\dotminus&\sim&\backsim&\wr&\eqsim \\ \simeq&\cong&\ncong&\approx&\approxeq&\asymp&\Bumpeq&\bumpeq&\doteq&\Doteq&\fallingdotseq&\risingdotseq&\eqcirc&\circeq&\triangleq&\questeq&\ne&\equiv&\le&\ge \\ \leqq&\geqq&\lneqq&\gneqq&\ll&\gg&\between&\nless&\ngtr&\nleqslant&\ngeqslant&\lesssim&\gtrsim&\lessgtr&\gtrless&\prec&\succ&\preccurlyeq&\succcurlyeq&\precsim \\ \succsim&\nprec&\nsucc&\subset&\supset&\subseteq&\supseteq&\nsubseteq&\nsupseteq&\subsetneq&\supsetneq&\uplus&\sqsubset&\sqsupset&\sqsubseteq&\sqsupseteq&\sqcap&\sqcup&\oplus&\ominus \\ \otimes&\oslash&\odot&\circledcirc&\circledast&\circleddash&\boxplus&\boxminus&\boxtimes&\boxdot&\vdash&\dashv&\top&\perp&\models&\vDash&\Vdash&\Vvdash&\nvdash&\nvDash \\ \nVdash&\nVDash&\vartriangleleft&\vartriangleright&\trianglelefteq&\trianglerighteq&\multimap&\intercal&\veebar&\barwedge&\bigwedge&\bigvee&\bigcap&\bigcup&\diamond&\cdot&\star&\divideontimes&\bowtie&\ltimes \\ \rtimes&\leftthreetimes&\rightthreetimes&\backsimeq&\curlyvee&\curlywedge&\Subset&\Supset&\Cap&\Cup&\pitchfork&\lessdot&\gtrdot&\ggg&\lesseqgtr&\gtreqless&\curlyeqprec&\curlyeqsucc&\lnsim&\gnsim \\ \ntriangleleft&\ntriangleright&\ntrianglelefteq&\ntrianglerighteq&\vdots&\cdots&\ddots&\doublebarwedge&\lceil&\rceil&\lfloor&\rfloor&\ulcorner&\urcorner&\llcorner&\lrcorner&\frown&\smile&\langle&\rangle \\ \circledS&\blacksquare&\blacksquare&\square&\square&\bigtriangleup&\blacktriangle&\vartriangle&\blacktriangleright&\triangleright&\bigtriangledown&\blacktriangledown&\triangledown&\blacktriangleleft&\triangleleft&\lozenge&\bigcirc&\bigstar&\spadesuit&\heartsuit \\ \diamondsuit&\clubsuit&\flat&\natural&\sharp&\checkmark&\maltese&\Longleftarrow&\longleftarrow&\Longleftrightarrow&\longleftrightarrow&\Longrightarrow&\longrightarrow&\longmapsto&\rightarrowtriangle&\leftarrowtriangle&\amalg&\bigodot&\bigoplus&\bigotimes \\ \bigsqcup&\biguplus&\boxbslash&\rmoustache&\lmoustache&\gnapprox&\gneq&\gvertneqq&\lnapprox&\lneq&\lvertneqq&\ngeqq&\ngeq&\nleq&\nleqq&\nshortmid&\nshortparallel&\nsubseteqq&\nsupseteqq&\precnapprox \\ \precneqq&\succnapprox&\succneqq&\subsetneqq&\supsetneqq&\varsubsetneqq&\varsubsetneq&\varsupsetneq&\varsupsetneqq&\jmath&\hbar&\gtrapprox&\gtreqqless&\geqslant&\lessapprox&\lesseqqgtr&\leqslant&\precapprox&\preceq&\succapprox \\ \succeq&\shortmid&\shortparallel&\smallsmile&\subseteqq&\supseteqq&\thickapprox&\digamma&\bot&\iff&\iiiint&\circlearrowleft&\circlearrowright&\eqslantless&\npreceq&\eqslantgtr&\nsucceq&\emptyset&\epsilon&\imath \\ \bigsqcap&\thicksim&\backepsilon&\Bbbk&\blacklozenge&\boxast&\boxbar&\boxcircle&\diagdown&\diagup&\Game&\interleave&\longmapsfrom&\Longmapsfrom&\Longmapsto&\Mapsfrom&\obar&\obslash&\smallfrown&\smallsetminus \\ \varpropto&\widetilde&\;&\;&\;&\;&\;&\;&\;&\;&\;&\;&\;&\;&\;&\;&\;&\;&\;&\; \\ \end{array}}
+f(x, y) = \sqrt{y^2 + 4} +\sqrt{x^2 +y^2-4x-4y+8}+\sqrt{x^2-8x+17}\\  \; \; \;\; \; \; \; \; \; \; \;  \; \; =\; \sqrt{(2-0)^2+(y-0)^2} +\sqrt{(x-2)^2 +(2 -y)^2}+\sqrt{(4-x)^2+(3-2)^2}\\  \; \; \;\; \; \; \; \; \; \; \;  \; \; =\; d(A, B)\;  +\;  d(B, C) \; +\;  d(C, D)
+f_x(x, y) =     \frac{(x-2)\sqrt{x^2-8x+17}+(x-4)\sqrt{x^2+y^2-4x-4y+8}}{\sqrt{x^2+y^2-4x-4y+8}\sqrt{x^2-8x+17}}
+f_y(x,y) = \frac{y\sqrt{x^2+y^2-4x-4y+8}+(y-2)\sqrt{y^2+4}}{\sqrt{x^2+y^2-4x-4y+8}\sqrt{y^2+4}}
+= 3\\ y = 1
+{\left(\begin{array}{rrrrr}\texttt{11.10000}&\texttt{322.00000}&\texttt{3.11000}&& \\ \texttt{4.00000}&\texttt{55.00000}&\texttt{666.00000}&\texttt{7777.00000}&\texttt{88888.00000} \\ \texttt{6.10000}&\texttt{7.99900}&\texttt{8.01200}&\texttt{9.81440}& \\ \texttt{(1, 2)}&&&& \\ \end{array}\right)}
+{\left(\begin{array}{rrrrr}\texttt{11.1}&\texttt{322.0}&\texttt{3.1}&& \\ \texttt{4.0}&\texttt{55.0}&\texttt{666.0}&\texttt{7777.0}&\texttt{88888.0} \\ \texttt{6.1}&\texttt{8.0}&\texttt{8.0}&\texttt{9.8}& \\ \texttt{(1, 2)}&&&& \\ \end{array}\right)}
+{\left(\begin{array}{rrrrr}\texttt{11.1\phantom{\texttt{0000}}}&\texttt{322\phantom{\texttt{.00000}}}&\texttt{3.11\phantom{\texttt{000}}}&& \\ \texttt{4\phantom{\texttt{.00000}}}&\texttt{55\phantom{\texttt{.00000}}}&\texttt{666\phantom{\texttt{.00000}}}&\texttt{7777\phantom{\texttt{.00000}}}&\texttt{88888\phantom{\texttt{.00000}}} \\ \texttt{6.1\phantom{\texttt{0000}}}&\texttt{7.999\phantom{\texttt{00}}}&\texttt{8.012\phantom{\texttt{00}}}&\texttt{9.8144\phantom{\texttt{0}}}& \\ \texttt{(1, 2)\phantom{\texttt{.00}}}&&&& \\ \end{array}\right)}
+{\left(\begin{array}{rrrrr}\texttt{11.10}&\texttt{322.00}&\texttt{3.11}&& \\ \texttt{4.00}&\texttt{55.00}&\texttt{666.00}&\texttt{7777.00}&\texttt{88888.00} \\ \texttt{6.10}&\texttt{8.00}&\texttt{8.01}&\texttt{9.81}& \\ \texttt{(1, 2)}&&&& \\ \end{array}\right)}
+{\left(\begin{array}{rrrrr}\texttt{11.1}&\texttt{322\phantom{\texttt{.0}}}&\texttt{3.1}&& \\ \texttt{4\phantom{\texttt{.0}}}&\texttt{55\phantom{\texttt{.0}}}&\texttt{666\phantom{\texttt{.0}}}&\texttt{7777\phantom{\texttt{.0}}}&\texttt{88888\phantom{\texttt{.0}}} \\ \texttt{6.1}&\texttt{8\phantom{\texttt{.0}}}&\texttt{8\phantom{\texttt{.0}}}&\texttt{9.8}& \\ \texttt{(1, 2)\phantom{\texttt{.00}}}&&&& \\ \end{array}\right)}
+{\left(\begin{array}{rrrrr}\texttt{11.1\phantom{\texttt{0}}}&\texttt{322\phantom{\texttt{.00}}}&\texttt{3.11}&& \\ \texttt{4\phantom{\texttt{.00}}}&\texttt{55\phantom{\texttt{.00}}}&\texttt{666\phantom{\texttt{.00}}}&\texttt{7777\phantom{\texttt{.00}}}&\texttt{88888\phantom{\texttt{.00}}} \\ \texttt{6.1\phantom{\texttt{0}}}&\texttt{8\phantom{\texttt{.00}}}&\texttt{8.01}&\texttt{9.81}& \\ \texttt{(1, 2)\phantom{\texttt{.00}}}&&&& \\ \end{array}\right)}
+{\begin{array}{r}\texttt{1.20} \\ \texttt{33.00} \\ \texttt{0.33} \\ \texttt{0.00} \\ \texttt{} \\ \end{array}}
+{\begin{array}{r}\texttt{10\%} \\ \texttt{2.22\%} \\ \texttt{3.1\%} \\ \texttt{55.5555\%} \\ \texttt{0.01\%} \\ \end{array}}
+{\begin{array}{r}\texttt{100\%\phantom{\texttt{.00}}} \\ \texttt{30\%\phantom{\texttt{.00}}} \\ \texttt{44.4\%\phantom{\texttt{0}}} \\ \texttt{150\%\phantom{\texttt{.00}}} \\ \texttt{3300\%\phantom{\texttt{.00}}} \\ \texttt{1\%\phantom{\texttt{.00}}} \\ \texttt{0.1\%\phantom{\texttt{0}}} \\ \texttt{12.35\%} \\ 100 \\ \text{100 } \\ \text{100  } \\ \end{array}}
+{\begin{array}{r}\texttt{100.00\%} \\ \texttt{30.00\%} \\ \texttt{44.40\%} \\ \texttt{150.00\%} \\ \texttt{3300.00\%} \\ \texttt{1.00\%} \\ \texttt{0.10\%} \\ \texttt{12.35\%} \\ 100 \\ \text{100 } \\ \text{100  } \\ \end{array}}
+{\begin{array}{l}f \left(x \right) \, = \,\operatorname{sech} \left( x \right) \\ f_1 \left(x \right) \, = \,\operatorname{acosh} \left( x \right) \\ g \left(x \right) \, = \,\operatorname{csch} \left( x \right) \\ g_1 \left(x \right) \, = \,\operatorname{asinh} \left( x \right) \\ h \left(x \right) \, = \,\operatorname{erf} \left(x \right) \\ h_1 \left(x \right) \, = \,\operatorname{atanh} \left( x \right) \\ p \left(x \right) \, = \,\operatorname{sgn} \left(x \right) \\ p_1 \left(x \right) \, = \,\operatorname{real} \left( x \right) \\ q \left(x \right) \, = \,\operatorname{round} \left( x \right) \\ q_1 \left(x \right) \, = \,\operatorname{imaginary} \left( x \right) \\ r \left(x \right) \, = \,\operatorname{Si} \left( x \right) \\ r_1 \left(x \right) \, = \,\operatorname{fractionalPart} \left( x \right) \\ s \left(x \right) \, = \,\operatorname{Ci} \left( x \right) \\ s_1 \left(x \right) \, = \,\zeta\left( x \right) \\ t \left(x \right) \, = \,\operatorname{Ei} \left( x \right) \\ \end{array}}
+\newcommand{\blue}[1]{\textcolor{blue}{#1}}\text{Nei grafici 1 e 2 vi sono due linee trifasi alle quali\cr devono essere collegati rispettivamente, un carico\cr \textcolor{}{Z_Y} ed un carico \textcolor{}{Z_Δ} con potenza \blue{P=2000 W}\; e \cr \blue{cos(ρ)=0.8}.\cr La tensione di targa del carico è \blue{230\;V}.\cr Determinare le tensioni di linea delle \cr due terne trifasi e le correnti assorbite dai\cr rispettivi carichi. \cr}
+V_{AB}=230\;[V]
+\fbox{Confronto\;fra \;collegamento\; a \;Y\; e\;Δ\cr {}\cr V_Y=\frac{V_L}{\sqrt{3}}→→→I_Y=I_L\cr V_f=V_{AB}→→→I_f=\frac{I_{LΔ}}{\sqrt{3}}}
+\fbox{Carico\; collegato\; a\; Δ\cr P=\sqrt{3}·V_L·I_{LΔ}.cos(φ)·→\cr  I_{LΔ}=\frac{P}{(\sqrt{3}·V_{targa}·cos(φ)}=6.5\;[A]\;→ I_f=I_{LΔ}=3.8\;[A]\cr Q=1673.3\;[VAR]}
+\fbox{\text{Il carico di fig1, essendo collegato a Y, dovrà essere\cr collegato ad una linea trifase con tensione tra le fasi \textcolor{}{(V_{AB},V_{BC},V_{CA}})\cr \textcolor{}{V_f}=\sqrt{3}·\textcolor{}{V_Y}=1.7·230=398.4\;[V]\;(\textcolor{}{V_Y=V_{AO},V_{BO},V_{CO}=230[V]})\cr \textcolor{}{I_L}=\frac{P}{\sqrt{3}·V_f·cos(φ)}=\frac{2000}{529.2 }=3.8\;[A]→R=\frac{P}{I_L^2}=140\;[Ω]\cr Q=sqrt(3) ·\textcolor{}{V_f·I_L }·sin(φ)=1673.3\;[VAR]→\textcolor{}{X_L}=\frac{Q}{I_L^2}=117.2\;[Ω]}}
+\rotatebox{90}{ \text{ Esetek }  }
+\int_{0}^{12.03} 2 \; \sqrt{x}\cdot dx = 55.66
+(TVY)
+{\begin{array}{llllllllllllllllllllllllllllllll}аа&аб&ав&аг&ад&ае&аж&аз&аи&ай&ак&ал&ам&ан&ао&ап&ар&ас&ат&ау&аф&ах&ац&ач&аш&ащ&аъ&аы&аь&аэ&аю&ая \\ ба&бб&бв&бг&бд&бе&бж&бз&би&бй&бк&бл&бм&бн&бо&бп&бр&бс&бт&бу&бф&бх&бц&бч&бш&бщ&бъ&бы&бь&бэ&бю&бя \\ ва&вб&вв&вг&вд&ве&вж&вз&ви&вй&вк&вл&вм&вн&во&вп&вр&вс&вт&ву&вф&вх&вц&вч&вш&вщ&въ&вы&вь&вэ&вю&вя \\ га&гб&гв&гг&гд&ге&гж&гз&ги&гй&гк&гл&гм&гн&го&гп&гр&гс&гт&гу&гф&гх&гц&гч&гш&гщ&гъ&гы&гь&гэ&гю&гя \\ да&дб&дв&дг&дд&де&дж&дз&ди&дй&дк&дл&дм&дн&до&дп&др&дс&дт&ду&дф&дх&дц&дч&дш&дщ&дъ&ды&дь&дэ&дю&дя \\ еа&еб&ев&ег&ед&ее&еж&ез&еи&ей&ек&ел&ем&ен&ео&еп&ер&ес&ет&еу&еф&ех&ец&еч&еш&ещ&еъ&еы&еь&еэ&ею&ея \\ жа&жб&жв&жг&жд&же&жж&жз&жи&жй&жк&жл&жм&жн&жо&жп&жр&жс&жт&жу&жф&жх&жц&жч&жш&жщ&жъ&жы&жь&жэ&жю&жя \\ за&зб&зв&зг&зд&зе&зж&зз&зи&зй&зк&зл&зм&зн&зо&зп&зр&зс&зт&зу&зф&зх&зц&зч&зш&зщ&зъ&зы&зь&зэ&зю&зя \\ иа&иб&ив&иг&ид&ие&иж&из&ии&ий&ик&ил&им&ин&ио&ип&ир&ис&ит&иу&иф&их&иц&ич&иш&ищ&иъ&иы&иь&иэ&ию&ия \\ йа&йб&йв&йг&йд&йе&йж&йз&йи&йй&йк&йл&йм&йн&йо&йп&йр&йс&йт&йу&йф&йх&йц&йч&йш&йщ&йъ&йы&йь&йэ&йю&йя \\ ка&кб&кв&кг&кд&ке&кж&кз&ки&кй&кк&кл&км&кн&ко&кп&кр&кс&кт&ку&кф&кх&кц&кч&кш&кщ&къ&кы&кь&кэ&кю&кя \\ ла&лб&лв&лг&лд&ле&лж&лз&ли&лй&лк&лл&лм&лн&ло&лп&лр&лс&лт&лу&лф&лх&лц&лч&лш&лщ&лъ&лы&ль&лэ&лю&ля \\ ма&мб&мв&мг&мд&ме&мж&мз&ми&мй&мк&мл&мм&мн&мо&мп&мр&мс&мт&му&мф&мх&мц&мч&мш&мщ&мъ&мы&мь&мэ&мю&мя \\ на&нб&нв&нг&нд&не&нж&нз&ни&нй&нк&нл&нм&нн&но&нп&нр&нс&нт&ну&нф&нх&нц&нч&нш&нщ&нъ&ны&нь&нэ&ню&ня \\ оа&об&ов&ог&од&ое&ож&оз&ои&ой&ок&ол&ом&он&оо&оп&ор&ос&от&оу&оф&ох&оц&оч&ош&ощ&оъ&оы&оь&оэ&ою&оя \\ па&пб&пв&пг&пд&пе&пж&пз&пи&пй&пк&пл&пм&пн&по&пп&пр&пс&пт&пу&пф&пх&пц&пч&пш&пщ&пъ&пы&пь&пэ&пю&пя \\ ра&рб&рв&рг&рд&ре&рж&рз&ри&рй&рк&рл&рм&рн&ро&рп&рр&рс&рт&ру&рф&рх&рц&рч&рш&рщ&ръ&ры&рь&рэ&рю&ря \\ са&сб&св&сг&сд&се&сж&сз&си&сй&ск&сл&см&сн&со&сп&ср&сс&ст&су&сф&сх&сц&сч&сш&сщ&съ&сы&сь&сэ&сю&ся \\ та&тб&тв&тг&тд&те&тж&тз&ти&тй&тк&тл&тм&тн&то&тп&тр&тс&тт&ту&тф&тх&тц&тч&тш&тщ&тъ&ты&ть&тэ&тю&тя \\ уа&уб&ув&уг&уд&уе&уж&уз&уи&уй&ук&ул&ум&ун&уо&уп&ур&ус&ут&уу&уф&ух&уц&уч&уш&ущ&уъ&уы&уь&уэ&ую&уя \\ фа&фб&фв&фг&фд&фе&фж&фз&фи&фй&фк&фл&фм&фн&фо&фп&фр&фс&фт&фу&фф&фх&фц&фч&фш&фщ&фъ&фы&фь&фэ&фю&фя \\ ха&хб&хв&хг&хд&хе&хж&хз&хи&хй&хк&хл&хм&хн&хо&хп&хр&хс&хт&ху&хф&хх&хц&хч&хш&хщ&хъ&хы&хь&хэ&хю&хя \\ ца&цб&цв&цг&цд&це&цж&цз&ци&цй&цк&цл&цм&цн&цо&цп&цр&цс&цт&цу&цф&цх&цц&цч&цш&цщ&цъ&цы&ць&цэ&цю&ця \\ ча&чб&чв&чг&чд&че&чж&чз&чи&чй&чк&чл&чм&чн&чо&чп&чр&чс&чт&чу&чф&чх&чц&чч&чш&чщ&чъ&чы&чь&чэ&чю&чя \\ ша&шб&шв&шг&шд&ше&шж&шз&ши&шй&шк&шл&шм&шн&шо&шп&шр&шс&шт&шу&шф&шх&шц&шч&шш&шщ&шъ&шы&шь&шэ&шю&шя \\ ща&щб&щв&щг&щд&ще&щж&щз&щи&щй&щк&щл&щм&щн&що&щп&щр&щс&щт&щу&щф&щх&щц&щч&щш&щщ&щъ&щы&щь&щэ&щю&щя \\ ъа&ъб&ъв&ъг&ъд&ъе&ъж&ъз&ъи&ъй&ък&ъл&ъм&ън&ъо&ъп&ър&ъс&ът&ъу&ъф&ъх&ъц&ъч&ъш&ъщ&ъъ&ъы&ъь&ъэ&ъю&ъя \\ ыа&ыб&ыв&ыг&ыд&ые&ыж&ыз&ыи&ый&ык&ыл&ым&ын&ыо&ып&ыр&ыс&ыт&ыу&ыф&ых&ыц&ыч&ыш&ыщ&ыъ&ыы&ыь&ыэ&ыю&ыя \\ ьа&ьб&ьв&ьг&ьд&ье&ьж&ьз&ьи&ьй&ьк&ьл&ьм&ьн&ьо&ьп&ьр&ьс&ьт&ьу&ьф&ьх&ьц&ьч&ьш&ьщ&ьъ&ьы&ьь&ьэ&ью&ья \\ эа&эб&эв&эг&эд&эе&эж&эз&эи&эй&эк&эл&эм&эн&эо&эп&эр&эс&эт&эу&эф&эх&эц&эч&эш&эщ&эъ&эы&эь&ээ&эю&эя \\ юа&юб&юв&юг&юд&юе&юж&юз&юи&юй&юк&юл&юм&юн&юо&юп&юр&юс&ют&юу&юф&юх&юц&юч&юш&ющ&юъ&юы&юь&юэ&юю&юя \\ яа&яб&яв&яг&яд&яе&яж&яз&яи&яй&як&ял&ям&ян&яо&яп&яр&яс&ят&яу&яф&ях&яц&яч&яш&ящ&яъ&яы&яь&яэ&яю&яя \\ \end{array}}
+{\begin{array}{llllllllllllllllllllllllllllllll}иа&иб&ив&иг&ид&ие&иж&из&ии&ий&ик&ил&им&ин&ио&ип&ир&ис&ит&иу&иф&их&иц&ич&иш&ищ&иъ&иы&иь&иэ&ию&ия \\ \end{array}}
+шц
+тс
+{\begin{array}{llllllllllllllllllllllllllllllll}аи&би&ви&ги&ди&еи&жи&зи&ии&йи&ки&ли&ми&ни&ои&пи&ри&си&ти&уи&фи&хи&ци&чи&ши&щи&ъи&ыи&ьи&эи&юи&яи \\ \end{array}}
+\scalebox{0.7}{{\begin{array}{lllllllllllllllllllll}1&&&&&&&&&&&&&&&&&&&& \\ 1&1&&&&&&&&&&&&&&&&&&& \\ 1&2&1&&&&&&&&&&&&&&&&&& \\ 1&3&3&1&&&&&&&&&&&&&&&&& \\ 1&4&6&4&1&&&&&&&&&&&&&&&& \\ 1&5&10&10&5&1&&&&&&&&&&&&&&& \\ 1&6&15&20&15&6&1&&&&&&&&&&&&&& \\ 1&7&21&35&35&21&7&1&&&&&&&&&&&&& \\ 1&8&28&56&70&56&28&8&1&&&&&&&&&&&& \\ 1&9&36&84&126&126&84&36&9&1&&&&&&&&&&& \\ 1&10&45&120&210&252&210&120&45&10&1&&&&&&&&&& \\ 1&11&55&165&330&462&462&330&165&55&11&1&&&&&&&&& \\ 1&12&66&220&495&792&924&792&495&220&66&12&1&&&&&&&& \\ 1&13&78&286&715&1287&1716&1716&1287&715&286&78&13&1&&&&&&& \\ 1&14&91&364&1001&2002&3003&3432&3003&2002&1001&364&91&14&1&&&&&& \\ 1&15&105&455&1365&3003&5005&6435&6435&5005&3003&1365&455&105&15&1&&&&& \\ 1&16&120&560&1820&4368&8008&11440&12870&11440&8008&4368&1820&560&120&16&1&&&& \\ 1&17&136&680&2380&6188&12376&19448&24310&24310&19448&12376&6188&2380&680&136&17&1&&& \\ 1&18&153&816&3060&8568&18564&31824&\textcolor{red}{\ovalbox{43758}}&48620&43758&31824&18564&8568&3060&816&153&18&1&& \\ 1&19&171&969&3876&11628&27132&50388&75582&92378&92378&75582&50388&27132&11628&3876&969&171&19&1& \\ 1&20&190&1140&4845&15504&38760&77520&125970&167960&184756&167960&125970&77520&38760&15504&4845&1140&190&20&1 \\ \end{array}}}
+TableText\ \ [\ When\ max>50,\ move\ sliders\ only\ by\ \scalebox{1.3}{\bold{←\ →}}\ \   !\ ]
+\copyright\ Matthias\ Hornof
+\left( \begin{array}{} n  \\ k  \end{array}  \right)=\left( \begin{array}{} 18 \\ 8 \end{array}  \right)
+\begin{array}{|l|r|r||r|}\hline \text{\text{Frequency}}&\text{Right-handed}&\text{Left-handed}&\text{Total}\\\text{\text{Row \%}}&\;&\;&\;\\\text{\text{Total \%}}&\;&\;&\;\\\text{\text{Expected Count}}&\;&\;&\;\\\text{\text{Χ² Contribution}}&\;&\;&\;\\\hline \text{Males}&43&9&52\\\;&82.69&17.31&\;\\\;&43&9&\;\\\;&45.24&6.76&\;\\\;&0.11&0.74&\;\\\hline \text{Females}&44&4&48\\\;&91.67&8.33&\;\\\;&44&4&\;\\\;&41.76&6.24&\;\\\;&0.12&0.8&\;\\\hline \hline \text{Total}&87&13&100\\\;&87&13&\;\\\hline \end{array}\\ \text{ChiSquared Test}\\\begin{array}{|r|r|r|r|} \hline df&\text{χ²}&\text{P}\\\hline 1&1.78&0.18\\\hline \end{array}
+{\begin{tabular}{ll}\begin{array}{r|lllll}0&1&1&1&1 \\ 1&2&2& &  \\ 2& & & &  \\ 3&3&5& &  \\ 4&2& & &  \\ 5& & & &  \\ 6&3&3&6&  \\ \end{array} \\ \fbox{\text{Key: 3|1 means 31}} \\ \end{tabular}}
+\text{LaTeX full width comma，left-bracket（right-bracket）no-spaces}

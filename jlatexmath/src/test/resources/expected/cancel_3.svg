@@ -1,0 +1,43 @@
+<!--
+x + \bcancel{\frac{1 + 2}{3 + 4}} + y
+-->
+<svg width="93" height="41" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<style type="text/css">
+@font-face {
+font-family: 'jlm_cmmi10';
+src: url('fonts/jlm_cmmi10.ttf') format('truetype');
+font-style: normal;
+}
+.jlm_cmmi10 {
+font-family: 'jlm_cmmi10';
+font-size: 133px;
+}
+@font-face {
+font-family: 'jlm_cmr10';
+src: url('fonts/jlm_cmr10.ttf') format('truetype');
+font-style: normal;
+}
+.jlm_cmr10 {
+font-family: 'jlm_cmr10';
+font-size: 133px;
+}
+</style>
+<g stroke="rgb(0,0,0)" fill="rgb(0,0,0)" stroke-width="1.0" stroke-miterlimit="10.0" stroke-linejoin="miter" stroke-linecap="square">
+<text class="jlm_cmmi10" transform="matrix(0.1,0.0,0.0,0.1,6.0,23.612694)">x</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,16.583345,23.612694)">+</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,31.510754,14.5925865)">1</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,41.14042,14.5925865)">+</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,54.473804,14.5925865)">2</text>
+<path transform="matrix(10.0,0.0,0.0,10.0,0.0,0.0)" d=" M 3.1510754 2.00127 L 6.1140494 2.00127 L 6.1140494 2.054602 L 3.1510754 2.054602 L 3.1510754 2.00127 Z " stroke="transparent" fill-rule="nonzero"/>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,31.510754,32.758705)">3</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,41.14042,32.758705)">+</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,54.473804,32.758705)">4</text>
+</g>
+<g stroke="rgb(0,0,0)" fill="rgb(0,0,0)" stroke-width="0.053332" stroke-miterlimit="10.0" stroke-linejoin="miter" stroke-linecap="butt">
+<path transform="matrix(10.0,0.0,0.0,10.0,0.0,0.0)" d=" M 2.7995512 3.477736 L 6.465574 0.5092467" fill="transparent"/>
+</g>
+<g stroke="rgb(0,0,0)" fill="rgb(0,0,0)" stroke-width="1.0" stroke-miterlimit="10.0" stroke-linejoin="miter" stroke-linecap="square">
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,65.697495,23.612694)">+</text>
+<text class="jlm_cmmi10" transform="matrix(0.1,0.0,0.0,0.1,79.030876,23.612694)">y</text>
+</g>
+</svg>

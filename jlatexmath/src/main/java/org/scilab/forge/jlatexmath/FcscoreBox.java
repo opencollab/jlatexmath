@@ -45,9 +45,9 @@
 
 package org.scilab.forge.jlatexmath;
 
-import java.awt.BasicStroke;
 import java.awt.Graphics2D;
 import java.awt.Stroke;
+import java.awt.BasicStroke;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Line2D;
 
@@ -58,12 +58,12 @@ public class FcscoreBox extends Box {
 
     private int N;
     private boolean strike;
-    private float space;
-    private float thickness;
+    private double space;
+    private double thickness;
 
-    public FcscoreBox(int N, float h, float thickness, float space, boolean strike) {
+    public FcscoreBox(int N, double h, double thickness, double space, boolean strike) {
         this.N = N;
-        this.width = N * (thickness + space) + 2 * space;
+        this.width = N * (thickness + space) + 2. * space;
         this.height = h;
         this.depth = 0;
         this.strike = strike;
@@ -71,28 +71,29 @@ public class FcscoreBox extends Box {
         this.thickness = thickness;
     }
 
-    public void draw(Graphics2D g2, float x, float y) {
+    public void draw(Graphics2D g2, double x, double y) {
+        startDraw(g2, x, y);
         AffineTransform transf = g2.getTransform();
         Stroke oldStroke = g2.getStroke();
 
         final double sx = transf.getScaleX();
         final double sy = transf.getScaleY();
-        double s = 1;
+        double s = 1.;
         if (sx == sy) {
             // There are rounding problems due to scale factor: lines could have different
             // spacing...
-            // So the increment (space+thickness) is done in using integer.
+            // So the increment (space + thickness) is done in using integer.
             s = sx;
             AffineTransform t = (AffineTransform) transf.clone();
-            t.scale(1 / sx, 1 / sy);
+            t.scale(1. / sx, 1. / sy);
             g2.setTransform(t);
         }
 
-        g2.setStroke(new BasicStroke((float) (s * thickness), BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER));
-        float th = thickness / 2.f;
-        final Line2D.Float line = new Line2D.Float();
-        float xx = x + space;
-        xx = (float) (xx * s + (space / 2.f) * s);
+        g2.setStroke(new BasicStroke((float)(s * thickness), BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER));
+        double th = thickness / 2.;
+        final Line2D.Double line = new Line2D.Double();
+        double xx = x + space;
+        xx = xx * s + (space / 2.) * s;
         final int inc = (int) Math.round((space + thickness) * s);
 
         for (int i = 0; i < N; i++) {
@@ -103,12 +104,13 @@ public class FcscoreBox extends Box {
 
         if (strike) {
 
-            line.setLine((x + space) * s, (y - height / 2.f) * s, xx - s * space / 2, (y - height / 2.f) * s);
+            line.setLine((x + space) * s, (y - height / 2.) * s, xx - s * space / 2., (y - height / 2.) * s);
             g2.draw(line);
         }
 
         g2.setTransform(transf);
         g2.setStroke(oldStroke);
+        endDraw(g2);
     }
 
     public int getLastFontId() {

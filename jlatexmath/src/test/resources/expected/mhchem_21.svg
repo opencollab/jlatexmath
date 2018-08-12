@@ -1,0 +1,52 @@
+<!--
+\begin{gather}
+\ce{ZnS($c$)} \cr
+\ce{ZnS(\ca$c$)} \cr
+\end{gather}
+-->
+<svg width="62" height="46" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<style type="text/css">
+@font-face {
+font-family: 'jlm_cmmi10';
+src: url('fonts/jlm_cmmi10.ttf') format('truetype');
+font-style: normal;
+}
+.jlm_cmmi10 {
+font-family: 'jlm_cmmi10';
+font-size: 133px;
+}
+@font-face {
+font-family: 'jlm_cmr10';
+src: url('fonts/jlm_cmr10.ttf') format('truetype');
+font-style: normal;
+}
+.jlm_cmr10 {
+font-family: 'jlm_cmr10';
+font-size: 133px;
+}
+@font-face {
+font-family: 'jlm_cmsy10';
+src: url('fonts/jlm_cmsy10.ttf') format('truetype');
+font-style: normal;
+}
+.jlm_cmsy10 {
+font-family: 'jlm_cmsy10';
+font-size: 133px;
+}
+</style>
+<g stroke="rgb(0,0,0)" fill="rgb(0,0,0)" stroke-width="1.0" stroke-miterlimit="10.0" stroke-linejoin="miter" stroke-linecap="square">
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,11.185206,16.0)">Z</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,19.33338,16.0)">n</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,26.740807,16.0)">S</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,34.14823,16.0)">(</text>
+<text class="jlm_cmmi10" transform="matrix(0.1,0.0,0.0,0.1,39.333435,16.0)">c</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,45.10351,16.0)">)</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,6.0,35.074066)">Z</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,14.148173,35.074066)">n</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,21.5556,35.074066)">S</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,28.963026,35.074066)">(</text>
+<text class="jlm_cmsy10" transform="matrix(0.1,0.0,0.0,0.1,34.148228,35.074066)">»</text>
+<text class="jlm_cmmi10" transform="matrix(0.1,0.0,0.0,0.1,44.51864,35.074066)">c</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,50.28872,35.074066)">)</text>
+</g>
+</svg>

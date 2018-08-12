@@ -46,216 +46,429 @@
 
 package org.scilab.forge.jlatexmath;
 
+import java.awt.Font;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.List;
+import java.util.ArrayList;
+import java.lang.Character.UnicodeBlock;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.io.FileNotFoundException;
+
 /**
- * An interface representing a "TeXFont", which is responsible for all the necessary
- * fonts and font information.
- *
- * @author Kurt Vermeulen
+ * The default implementation of the TeXFont-interface. All font information is read
+ * from an xml-file.
  */
-public interface TeXFont {
+public final class TeXFont {
 
     public static final int NO_FONT = -1;
+    public static final int SERIF = 0;
+    public static final int SANSSERIF = 1;
+    public static final int BOLD = 2;
+    public static final int ITALIC = 4;
+    public static final int ROMAN = 8;
+    public static final int TYPEWRITER = 16;
 
-    /**
-     * Derives a new {@link TeXFont} object with the given point size
-     *
-     * @param pointSize the new size (in points) of the derived {@link TeXFont}
-     * @return a <b>copy</b> of this {@link TeXFont} with the new size
-     */
-    public TeXFont deriveFont(float pointSize);
+    private final static int[] OFFSETS = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15,
+                                          16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31,
+                                          32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47,
+                                          0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 58, 59, 60, 61, 62, 63,
+                                          64, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,
+                                          15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 91, 92, 93, 94, 95,
+                                          96, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,
+                                          15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25
+                                         };
+    private final static int[] KINDS = {3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
+                                        3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
+                                        3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
+                                        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 3, 3, 3, 3,
+                                        3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+                                        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 3, 3, 3, 3,
+                                        3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+                                        2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2
+                                       };
 
-    public TeXFont scaleFont(float factor);
+    private static boolean magnificationEnable = true;
 
-    public float getScaleFactor();
+    protected static final char NONE = '\0';
+    protected static final int TOP = 0, MID = 1, REP = 2, BOT = 3;
+    protected static final int WIDTH = 0, HEIGHT = 1, DEPTH = 2, IT = 3;
 
-    public float getAxisHeight(int style);
+    private static final double TEXT_FACTOR = 1.;
+    private static final double SCRIPT_FACTOR = 0.7;
+    private static final double SCRIPTSCRIPT_FACTOR = 0.5;
 
-    public float getBigOpSpacing1(int style);
+    private static final double AXISHEIGHT = 0.25;
+    private static final double BIGOPSPACING1 = 0.111112;
+    private static final double BIGOPSPACING2 = 0.166667;
+    private static final double BIGOPSPACING3 = 0.2;
+    private static final double BIGOPSPACING4 = 0.6;
+    private static final double BIGOPSPACING5 = 0.1;
+    private static final double DEFAULTRULETHICKNESS = 0.039999;
+    private static final double DENOM1 = 0.685951;
+    private static final double DENOM2 = 0.344841;
+    private static final double NUM1 = 0.676508;
+    private static final double NUM2 = 0.393732;
+    private static final double NUM3 = 0.443731;
+    private static final double SUB1 = 0.15;
+    private static final double SUB2 = 0.247217;
+    private static final double SUBDROP = 0.05;
+    private static final double SUP1 = 0.412892;
+    private static final double SUP2 = 0.362892;
+    private static final double SUP3 = 0.288889;
+    private static final double SUPDROP = 0.386108;
 
-    public float getBigOpSpacing2(int style);
+    private static final int muFontId = Configuration.get().getFontId("jlm_cmsy10");
+    private static final int spaceFontId = Configuration.get().getFontId("jlm_cmr10");
 
-    public float getBigOpSpacing3(int style);
+    private final double size; // standard size
+    private double factor = 1.;
+    public boolean isBold = false;
+    public boolean isRoman = false;
+    public boolean isSs = false;
+    public boolean isTt = false;
+    public boolean isIt = false;
 
-    public float getBigOpSpacing4(int style);
+    public TeXFont(final double pointSize) {
+        size = pointSize;
+    }
 
-    public float getBigOpSpacing5(int style);
+    public TeXFont(final double pointSize, final boolean b, final boolean rm, final boolean ss, final boolean tt, final boolean it) {
+        this(pointSize, 1, b, rm, ss, tt, it);
+    }
 
-    /**
-     * Get a Char-object specifying the given character in the given text style with
-     * metric information depending on the given "style".
-     *
-     * @param c alphanumeric character
-     * @param textStyle the text style in which the character should be drawn
-     * @param style the style in which the atom should be drawn
-     * @return the Char-object specifying the given character in the given text style
-     * @throws TextStyleMappingNotFoundException if there's no text style defined with
-     * 		the given name
-     */
-    public Char getChar(char c, String textStyle, int style)
-    throws TextStyleMappingNotFoundException;
+    public TeXFont(final double pointSize, final double f, final boolean b, final boolean rm, final boolean ss, final boolean tt, final boolean it) {
+        size = pointSize;
+        factor = f;
+        isBold = b;
+        isRoman = rm;
+        isSs = ss;
+        isTt = tt;
+        isIt = it;
+    }
 
-    /**
-     * Get a Char-object for this specific character containing the metric information
-     *
-     * @param cf CharFont-object determining a specific character of a specific font
-     * @param style the style in which the atom should be drawn
-     * @return the Char-object for this character containing metric information
-     */
-    public Char getChar(CharFont cf, int style);
+    public FontInfo getFontInfo(final int i) {
+        return Configuration.get().getFontInfo(i);
+    }
 
-    /**
-     * Get a Char-object for the given symbol with metric information depending on
-     * "style".
-     *
-     * @param name the symbol name
-     * @param style the style in which the atom should be drawn
-     * @return a Char-object for this symbol with metric information
-     * @throws SymbolMappingNotFoundException if there's no symbol defined with the given
-     * 			name
-     */
-    public Char getChar(String name, int style)
-    throws SymbolMappingNotFoundException;
+    public TeXFont copy() {
+        return new TeXFont(size, factor, isBold, isRoman, isSs, isTt, isIt);
+    }
 
-    /**
-     * Get a Char-object specifying the given character in the default text style with
-     * metric information depending on the given "style".
-     *
-     * @param c alphanumeric character
-     * @param style the style in which the atom should be drawn
-     * @return the Char-object specifying the given character in the default text style
-     */
-    public Char getDefaultChar(char c, int style);
+    public TeXFont deriveFont(final double size) {
+        return new TeXFont(size, factor, isBold, isRoman, isSs, isTt, isIt);
+    }
 
-    public float getDefaultRuleThickness(int style);
+    public TeXFont scaleFont(final double factor) {
+        return new TeXFont(size, factor, isBold, isRoman, isSs, isTt, isIt);
+    }
 
-    public float getDenom1(int style);
+    public double getScaleFactor() {
+        return factor;
+    }
 
-    public float getDenom2(int style);
+    public double getAxisHeight(int style) {
+        return AXISHEIGHT * getSizeFactor(style) * TeXFormula.PIXELS_PER_POINT;
+    }
 
-    /**
-     * Get an Extension-object for the given Char containing the 4 possible parts to
-     * build an arbitrary large variant. This will only be called if isExtensionChar(Char)
-     * returns true.
-     *
-     * @param c a Char-object for a specific character
-     * @param style the style in which the atom should be drawn
-     * @return an Extension object containing the 4 possible parts
-     */
-    public Extension getExtension(Char c, int style);
+    public double getBigOpSpacing1(int style) {
+        return BIGOPSPACING1 * getSizeFactor(style) * TeXFormula.PIXELS_PER_POINT;
+    }
 
-    /**
-     * Get the kern value to be inserted between the given characters in the given style.
-     *
-     * @param left left character
-     * @param right right character
-     * @param style the style in which the atom should be drawn
-     * @return the kern value between both characters (default 0)
-     */
-    public float getKern(CharFont left, CharFont right, int style);
+    public double getBigOpSpacing2(int style) {
+        return BIGOPSPACING2 * getSizeFactor(style) * TeXFormula.PIXELS_PER_POINT;
+    }
 
-    /**
-     * Get the ligature that replaces both characters (if any).
-     *
-     * @param left left character
-     * @param right right character
-     * @return a ligature replacing both characters (or null: no ligature)
-     */
-    public CharFont getLigature(CharFont left, CharFont right);
+    public double getBigOpSpacing3(int style) {
+        return BIGOPSPACING3 * getSizeFactor(style) * TeXFormula.PIXELS_PER_POINT;
+    }
 
-    public int getMuFontId();
+    public double getBigOpSpacing4(int style) {
+        return BIGOPSPACING4 * getSizeFactor(style) * TeXFormula.PIXELS_PER_POINT;
+    }
 
-    /**
-     * Get the next larger version of the given character. This is only called if
-     * hasNextLarger(Char) returns true.
-     *
-     * @param c character
-     * @param style the style in which the atom should be drawn
-     * @return the next larger version of this character
-     */
-    public Char getNextLarger(Char c, int style);
+    public double getBigOpSpacing5(int style) {
+        return BIGOPSPACING5 * getSizeFactor(style) * TeXFormula.PIXELS_PER_POINT;
+    }
 
-    public float getNum1(int style);
+    public double getDefaultRuleThickness(int style) {
+        return DEFAULTRULETHICKNESS * getSizeFactor(style) * TeXFormula.PIXELS_PER_POINT;
+    }
 
-    public float getNum2(int style);
+    public double getDenom1(int style) {
+        return DENOM1 * getSizeFactor(style) * TeXFormula.PIXELS_PER_POINT;
+    }
 
-    public float getNum3(int style);
+    public double getDenom2(int style) {
+        return DENOM2 * getSizeFactor(style) * TeXFormula.PIXELS_PER_POINT;
+    }
 
-    public float getQuad(int style, int fontCode);
+    public double getNum1(int style) {
+        return NUM1 * getSizeFactor(style) * TeXFormula.PIXELS_PER_POINT;
+    }
 
-    /**
-     *
-     * @return the point size of this TeXFont
-     */
-    public float getSize();
+    public double getNum2(int style) {
+        return NUM2 * getSizeFactor(style) * TeXFormula.PIXELS_PER_POINT;
+    }
 
-    /**
-     * Get the kern amount of the character defined by the given CharFont followed by the
-     * "skewchar" of it's font. This is used in the algorithm for placing an accent above
-     * a single character.
-     *
-     * @param cf the character and it's font above which an accent has to be placed
-     * @param style the render style
-     * @return the kern amount of the character defined by cf followed by the
-     * "skewchar" of it's font.
-     */
-    public float getSkew(CharFont cf, int style);
+    public double getNum3(int style) {
+        return NUM3 * getSizeFactor(style) * TeXFormula.PIXELS_PER_POINT;
+    }
 
-    public float getSpace(int style);
+    public double getSub1(int style) {
+        return SUB1 * getSizeFactor(style) * TeXFormula.PIXELS_PER_POINT;
+    }
 
-    public float getSub1(int style);
+    public double getSub2(int style) {
+        return SUB2 * getSizeFactor(style) * TeXFormula.PIXELS_PER_POINT;
+    }
 
-    public float getSub2(int style);
+    public double getSubDrop(int style) {
+        return SUBDROP * getSizeFactor(style) * TeXFormula.PIXELS_PER_POINT;
+    }
 
-    public float getSubDrop(int style);
+    public double getSup1(int style) {
+        return SUP1 * getSizeFactor(style) * TeXFormula.PIXELS_PER_POINT;
+    }
 
-    public float getSup1(int style);
+    public double getSup2(int style) {
+        return SUP2 * getSizeFactor(style) * TeXFormula.PIXELS_PER_POINT;
+    }
 
-    public float getSup2(int style);
+    public double getSup3(int style) {
+        return SUP3 * getSizeFactor(style) * TeXFormula.PIXELS_PER_POINT;
+    }
 
-    public float getSup3(int style);
+    public double getSupDrop(int style) {
+        return SUPDROP * getSizeFactor(style) * TeXFormula.PIXELS_PER_POINT;
+    }
 
-    public float getSupDrop(int style);
+    private Char getChar(char c, TextStyle[] styles, int style) {
+        int kind, offset;
+        if (c < OFFSETS.length) {
+            kind = KINDS[c];
+            offset = OFFSETS[c];
+        } else {
+            kind = TextStyle.UNICODE;
+            offset = c;
+        }
 
-    public float getXHeight(int style, int fontCode);
+        // if the mapping for the character's range, then use the default style
+        if (styles[kind] == null) {
+            styles = TextStyle.getDefault();
+        }
+        return getChar(new CharFont((char)(styles[kind].getStart() + offset), styles[kind].getFontId()), style);
+    }
 
-    public float getEM(int style);
+    public Char getChar(char c, String textStyle, int style) {
+        return getChar(c, TextStyle.get(textStyle), style);
+    }
 
-    /**
-     *
-     * @param c a character
-     * @return true if the given character has a larger version, false otherwise
-     */
-    public boolean hasNextLarger(Char c);
+    public Char getChar(char c, int textStyle, int style) {
+        return getChar(c, TextStyle.get(textStyle), style);
+    }
 
-    public boolean hasSpace(int font);
+    public Char getChar(CharFont cf, int style) {
+        int id = cf.fontId;
+        FontInfo info = getFontInfo(id);
 
-    public void setBold(boolean bold);
+        if (isBold) {
+            id = info.getBoldId();
+            info = getFontInfo(id);
+        }
+        if (isRoman) {
+            id = info.getRomanId();
+            info = getFontInfo(id);
+        }
+        if (isSs) {
+            id = info.getSsId();
+            info = getFontInfo(id);
+        }
+        if (isTt) {
+            id = info.getTtId();
+            info = getFontInfo(id);
+        }
+        if (isIt) {
+            id = info.getItId();
+            info = getFontInfo(id);
+        }
+        return new Char(cf.c, info.getFont(), id, getMetrics(info, cf.c, factor * getSizeFactor(style)));
+    }
 
-    public boolean getBold();
+    public Char getDefaultChar(char c, int style) {
+        return getChar(c, TextStyle.getDefault(), style);
+    }
 
-    public void setRoman(boolean rm);
+    public Extension getExtension(Char c, int style) {
+        final Font f = c.getFont();
+        final int fc = c.getFontCode();
+        final double s = getSizeFactor(style);
 
-    public boolean getRoman();
+        // construct Char for every part
+        final FontInfo fi = getFontInfo(fc);
+        final char[] ext = fi.getExtension(c.getChar());
+        final Char top = ext[0] == NONE ? null : new Char(ext[0], f, fc, getMetrics(fi, ext[0], s));
+        final Char mid = ext[1] == NONE ? null : new Char(ext[1], f, fc, getMetrics(fi, ext[1], s));
+        final Char rep = ext[2] == NONE ? null : new Char(ext[2], f, fc, getMetrics(fi, ext[2], s));
+        final Char bot = ext[3] == NONE ? null : new Char(ext[3], f, fc, getMetrics(fi, ext[3], s));
 
-    public void setTt(boolean tt);
+        return new Extension(top, mid, rep, bot);
+    }
 
-    public boolean getTt();
+    public double getKern(CharFont left, CharFont right, int style) {
+        if (left.fontId == right.fontId) {
+            return getFontInfo(left.fontId).getKern(left.c, right.c, getSizeFactor(style) * TeXFormula.PIXELS_PER_POINT);
+        }
+        return 0.;
+    }
 
-    public void setIt(boolean it);
+    public CharFont getLigature(CharFont left, CharFont right) {
+        if (left.fontId == right.fontId) {
+            return getFontInfo(left.fontId).getLigature(left.c, right.c);
+        }
+        return null;
+    }
 
-    public boolean getIt();
+    private Metrics getMetrics(CharFont cf, double size) {
+        return getMetrics(cf.fontId, cf.c, size);
+    }
 
-    public void setSs(boolean ss);
+    private Metrics getMetrics(int fontId, char c, double size) {
+        return getMetrics(getFontInfo(fontId), c, size);
+    }
 
-    public boolean getSs();
+    private Metrics getMetrics(FontInfo fi, char c, double size) {
+        final double[] m = fi.getMetrics(c);
+        return new Metrics(m[WIDTH], m[HEIGHT], m[DEPTH], m[IT], size * TeXFormula.PIXELS_PER_POINT, size);
+    }
 
-    /**
-     *
-     * @param c a character
-     * @return true if the given character contains extension information to buid
-     * 			an arbitrary large version of this character.
-     */
-    public boolean isExtensionChar(Char c);
+    public int getMuFontId() {
+        return muFontId;
+    }
 
-    public TeXFont copy();
+    public Char getNextLarger(Char c, int style) {
+        final CharFont ch = getFontInfo(c.getFontCode()).getNextLarger(c.getChar());
+        final FontInfo newInfo = getFontInfo(ch.fontId);
+        return new Char(ch.c, newInfo.getFont(), ch.fontId, getMetrics(ch, getSizeFactor(style)));
+    }
+
+    public double getQuad(int style, int fontCode) {
+        return getFontInfo(fontCode).getQuad(getSizeFactor(style) * TeXFormula.PIXELS_PER_POINT);
+    }
+
+    public double getQuad(int style) {
+        return getQuad(style, getMuFontId());
+    }
+
+    public double getSize() {
+        return size;
+    }
+
+    public double getSkew(final CharFont cf, final int style) {
+        return getFontInfo(cf.fontId).getSkew(cf.c, getSizeFactor(style) * TeXFormula.PIXELS_PER_POINT);
+    }
+
+    public double getSpace(int style) {
+        return getFontInfo(spaceFontId).getSpace(getSizeFactor(style) * TeXFormula.PIXELS_PER_POINT);
+    }
+
+    public double getXHeight(int style, int fontCode) {
+        return getFontInfo(fontCode).getXHeight(getSizeFactor(style) * TeXFormula.PIXELS_PER_POINT);
+    }
+
+    public double getDefaultXHeight(int style) {
+        return getFontInfo(spaceFontId).getXHeight(getSizeFactor(style) * TeXFormula.PIXELS_PER_POINT);
+    }
+
+    public double getMHeight(int style) {
+        return getFontInfo(TextStyle.getDefault(TextStyle.CAPITALS).getFontId()).getHeight('M') * getSizeFactor(style) * TeXFormula.PIXELS_PER_POINT;
+    }
+
+    public double getEM(int style) {
+        return getSizeFactor(style) * TeXFormula.PIXELS_PER_POINT;
+    }
+
+    public boolean hasNextLarger(Char c) {
+        return getFontInfo(c.getFontCode()).getNextLarger(c.getChar()) != null;
+    }
+
+    public void setBold(boolean bold) {
+        isBold = bold;
+    }
+
+    public boolean getBold() {
+        return isBold;
+    }
+
+    public void setRoman(boolean rm) {
+        isRoman = rm;
+    }
+
+    public boolean getRoman() {
+        return isRoman;
+    }
+
+    public void setTt(boolean tt) {
+        isTt = tt;
+    }
+
+    public boolean getTt() {
+        return isTt;
+    }
+
+    public void setIt(boolean it) {
+        isIt = it;
+    }
+
+    public boolean getIt() {
+        return isIt;
+    }
+
+    public void setSs(boolean ss) {
+        isSs = ss;
+    }
+
+    public boolean getSs() {
+        return isSs;
+    }
+
+    public boolean hasSpace(int font) {
+        return getFontInfo(font).hasSpace();
+    }
+
+    public boolean isExtensionChar(Char c) {
+        return getFontInfo(c.getFontCode()).getExtension(c.getChar()) != null;
+    }
+
+    public static void setMathSizes(double ds, double ts, double ss, double sss) {
+        /*if (magnificationEnable) {
+            generalSettings.put("scriptfactor", Math.abs(ss / ds));
+            generalSettings.put("scriptscriptfactor", Math.abs(sss / ds));
+            generalSettings.put("textfactor", Math.abs(ts / ds));
+            TeXIcon.defaultSize = Math.abs(ds);
+            }*/
+    }
+
+    public static void setMagnification(double mag) {
+        if (magnificationEnable) {
+            TeXIcon.magFactor = mag / 1000.;
+        }
+    }
+
+    public static void enableMagnification(boolean b) {
+        magnificationEnable = b;
+    }
+
+    public final static double getSizeFactor(int style) {
+        if (style < TeXConstants.STYLE_SCRIPT) {
+            return TEXT_FACTOR;
+        }
+
+        if (style < TeXConstants.STYLE_SCRIPT_SCRIPT) {
+            return SCRIPT_FACTOR;
+        }
+
+        return SCRIPTSCRIPT_FACTOR;
+    }
 }

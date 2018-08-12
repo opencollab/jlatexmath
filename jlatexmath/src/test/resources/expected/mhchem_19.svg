@@ -1,0 +1,56 @@
+<!--
+\begin{gather}
+\ce{SO4^2- + Ba^2+ -> BaSO4 v} \cr
+\ce{A v B (v) -> B ^ B (^)} \cr
+\end{gather}
+-->
+<svg width="178" height="44" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<style type="text/css">
+@font-face {
+font-family: 'jlm_cmr10';
+src: url('fonts/jlm_cmr10.ttf') format('truetype');
+font-style: normal;
+}
+.jlm_cmr10 {
+font-family: 'jlm_cmr10';
+font-size: 133px;
+}
+@font-face {
+font-family: 'jlm_cmsy10';
+src: url('fonts/jlm_cmsy10.ttf') format('truetype');
+font-style: normal;
+}
+.jlm_cmsy10 {
+font-family: 'jlm_cmsy10';
+font-size: 133px;
+}
+</style>
+<g stroke="rgb(0,0,0)" fill="rgb(0,0,0)" stroke-width="1.0" stroke-miterlimit="10.0" stroke-linejoin="miter" stroke-linecap="square">
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,6.0,17.52223)">S</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,13.407427,17.52223)">O</text>
+<text class="jlm_cmr10" transform="matrix(0.06999999999999999,0.0,0.0,0.07,23.77784,19.52223)">4</text>
+<text class="jlm_cmr10" transform="matrix(0.06999999999999999,0.0,0.0,0.07,28.444525,12.014811)">2</text>
+<text class="jlm_cmsy10" transform="matrix(0.06999999999999999,0.0,0.0,0.07,33.11121,12.014811)">¡</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,43.997646,17.52223)">+</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,57.33103,17.52223)">B</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,66.77551,17.52223)">a</text>
+<text class="jlm_cmr10" transform="matrix(0.06999999999999999,0.0,0.0,0.07,73.44221,12.014811)">2</text>
+<text class="jlm_cmr10" transform="matrix(0.06999999999999999,0.0,0.0,0.07,78.108894,12.014811)">+</text>
+<path transform="matrix(10.0,0.0,0.0,10.0,91.21756,17.298615)" d=" M 2.3533294 -0.570625 Q 2.3333294 -0.570625 2.3333294 -0.5546875 Q 2.3333294 -0.550625 2.339892 -0.53328127 L 2.341298 -0.53203124 Q 2.3866105 -0.42671874 2.4772356 -0.36 L 1.4519231 -0.36 Q 1.4517504 -0.36 1.4515784 -0.3599996 L 0.0 -0.3599996 L 0.0 -0.3066676 L 1.4533297 -0.3066676 L 1.4533297 -0.30671874 L 2.4772356 -0.30671874 Q 2.4159856 -0.26125 2.371923 -0.19203125 Q 2.3333294 -0.13203125 2.3333294 -0.11203125 Q 2.3333294 -0.0959375 2.3533294 -0.0959375 Q 2.3680167 -0.0959375 2.3745794 -0.109375 Q 2.3759856 -0.11328125 2.3772357 -0.1146875 Q 2.4386418 -0.25203124 2.570673 -0.3146875 Q 2.5745792 -0.31734374 2.5772357 -0.31734374 Q 2.5892668 -0.3240625 2.5892668 -0.33328125 Q 2.5852044 -0.34671876 2.579892 -0.34671876 Q 2.570673 -0.350625 2.5612981 -0.3559375 L 2.559892 -0.3559375 L 2.558642 -0.35734376 L 2.5572355 -0.35734376 Q 2.4345794 -0.42 2.3759856 -0.5520313 Q 2.3680167 -0.570625 2.3533294 -0.570625 Z " stroke="transparent" fill-rule="nonzero"/>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,122.295425,17.52223)">B</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,131.73991,17.52223)">a</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,138.4066,17.52223)">S</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,145.81403,17.52223)">O</text>
+<text class="jlm_cmr10" transform="matrix(0.06999999999999999,0.0,0.0,0.07,156.18443,19.52223)">4</text>
+<text class="jlm_cmsy10" transform="matrix(0.1,0.0,0.0,0.1,164.55484,17.52223)">#</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,28.719826,35.114803)">A</text>
+<text class="jlm_cmsy10" transform="matrix(0.1,0.0,0.0,0.1,42.423565,35.114803)">#</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,52.793976,35.114803)">B</text>
+<text class="jlm_cmsy10" transform="matrix(0.1,0.0,0.0,0.1,65.94217,35.114803)">#</text>
+<path transform="matrix(10.0,0.0,0.0,10.0,74.09035,34.89119)" d=" M 2.3533294 -0.570625 Q 2.3333294 -0.570625 2.3333294 -0.5546875 Q 2.3333294 -0.550625 2.339892 -0.53328127 L 2.341298 -0.53203124 Q 2.3866105 -0.42671874 2.4772356 -0.36 L 1.4519231 -0.36 Q 1.4517504 -0.36 1.4515784 -0.3599996 L 0.0 -0.3599996 L 0.0 -0.3066676 L 1.4533297 -0.3066676 L 1.4533297 -0.30671874 L 2.4772356 -0.30671874 Q 2.4159856 -0.26125 2.371923 -0.19203125 Q 2.3333294 -0.13203125 2.3333294 -0.11203125 Q 2.3333294 -0.0959375 2.3533294 -0.0959375 Q 2.3680167 -0.0959375 2.3745794 -0.109375 Q 2.3759856 -0.11328125 2.3772357 -0.1146875 Q 2.4386418 -0.25203124 2.570673 -0.3146875 Q 2.5745792 -0.31734374 2.5772357 -0.31734374 Q 2.5892668 -0.3240625 2.5892668 -0.33328125 Q 2.5852044 -0.34671876 2.579892 -0.34671876 Q 2.570673 -0.350625 2.5612981 -0.3559375 L 2.559892 -0.3559375 L 2.558642 -0.35734376 L 2.5572355 -0.35734376 Q 2.4345794 -0.42 2.3759856 -0.5520313 Q 2.3680167 -0.570625 2.3533294 -0.570625 Z " stroke="transparent" fill-rule="nonzero"/>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,105.16822,35.114803)">B</text>
+<text class="jlm_cmsy10" transform="matrix(0.1,0.0,0.0,0.1,118.316414,35.114803)">&quot;</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,128.68681,35.114803)">B</text>
+<text class="jlm_cmsy10" transform="matrix(0.1,0.0,0.0,0.1,141.83502,35.114803)">&quot;</text>
+</g>
+</svg>

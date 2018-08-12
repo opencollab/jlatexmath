@@ -1,0 +1,13 @@
+<?xml version='1.0'?>
+<tests name="DeclareMathOperator">
+  <test>
+    <id name="1"/>
+    <code>
+      <![CDATA[
+               \DeclareMathOperator{\myop}{helloWorld}
+               \myop^{+\infty}_0 {x \over y}
+      ]]>
+    </code>
+    <expected success="true"/>
+  </test>
+</tests>

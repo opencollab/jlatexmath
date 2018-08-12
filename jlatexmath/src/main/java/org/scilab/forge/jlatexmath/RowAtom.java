@@ -48,8 +48,10 @@
 
 package org.scilab.forge.jlatexmath;
 
+import java.awt.Font;
+import java.util.ArrayList;
 import java.util.BitSet;
-import java.util.LinkedList;
+import java.util.List;
 import java.util.ListIterator;
 
 import org.scilab.forge.jlatexmath.dynamic.DynamicAtom;
@@ -61,65 +63,122 @@ import org.scilab.forge.jlatexmath.dynamic.DynamicAtom;
 public class RowAtom extends Atom implements Row {
 
     // atoms to be displayed horizontally next to eachother
-    protected LinkedList<Atom> elements = new LinkedList<Atom>();
+    protected final ArrayList<Atom> elements;
 
     public boolean lookAtLastAtom = false;
 
     // previous atom (for nested Row atoms)
     private Dummy previousAtom = null;
 
+    private boolean shape = false;
+
     // set of atom types that make a previous bin atom change to ord
-    private static BitSet binSet;
+    private final static BitSet BIN_SET = new BitSet(16) {
+        {
+            set(TeXConstants.TYPE_BINARY_OPERATOR);
+            set(TeXConstants.TYPE_BIG_OPERATOR);
+            set(TeXConstants.TYPE_RELATION);
+            set(TeXConstants.TYPE_OPENING);
+            set(TeXConstants.TYPE_PUNCTUATION);
+        }
+    };
 
     // set of atom types that can possibly need a kern or, together with the
     // previous atom, be replaced by a ligature
-    private static BitSet ligKernSet;
-
-    static {
-        // fill binSet
-        binSet = new BitSet (16);
-        binSet.set(TeXConstants.TYPE_BINARY_OPERATOR);
-        binSet.set(TeXConstants.TYPE_BIG_OPERATOR);
-        binSet.set(TeXConstants.TYPE_RELATION);
-        binSet.set(TeXConstants.TYPE_OPENING);
-        binSet.set(TeXConstants.TYPE_PUNCTUATION);
-
-        // fill ligKernSet
-        ligKernSet = new BitSet (16);
-        ligKernSet.set(TeXConstants.TYPE_ORDINARY);
-        ligKernSet.set(TeXConstants.TYPE_BIG_OPERATOR);
-        ligKernSet.set(TeXConstants.TYPE_BINARY_OPERATOR);
-        ligKernSet.set(TeXConstants.TYPE_RELATION);
-        ligKernSet.set(TeXConstants.TYPE_OPENING);
-        ligKernSet.set(TeXConstants.TYPE_CLOSING);
-        ligKernSet.set(TeXConstants.TYPE_PUNCTUATION);
-    }
+    private final static BitSet LIG_KERN_SET = new BitSet(16) {
+        {
+            set(TeXConstants.TYPE_ORDINARY);
+            set(TeXConstants.TYPE_BIG_OPERATOR);
+            set(TeXConstants.TYPE_BINARY_OPERATOR);
+            set(TeXConstants.TYPE_RELATION);
+            set(TeXConstants.TYPE_OPENING);
+            set(TeXConstants.TYPE_CLOSING);
+            set(TeXConstants.TYPE_PUNCTUATION);
+        }
+    };
 
     protected RowAtom() {
-        // empty
+        this.elements = new ArrayList<Atom>();
+    }
+
+    protected RowAtom(final ArrayList<Atom> elements) {
+        this.elements = elements;
+    }
+
+    protected RowAtom(final int size) {
+        this.elements = new ArrayList<Atom>(size);
     }
 
     public RowAtom(Atom el) {
-        if (el != null) {
-            if (el instanceof RowAtom)
+        if (el == null) {
+            this.elements = new ArrayList<Atom>();
+        } else {
+            if (el instanceof RowAtom) {
+                this.elements = new ArrayList<Atom>(((RowAtom) el).elements.size());
                 // no need to make an mrow the only element of an mrow
                 elements.addAll(((RowAtom) el).elements);
-            else
+            } else {
+                this.elements = new ArrayList<Atom>(1);
                 elements.add(el);
+            }
         }
+    }
+
+    public RowAtom(Atom... atoms) {
+        this.elements = new ArrayList<Atom>(atoms.length);
+        for (Atom a : atoms) {
+            elements.add(a);
+        }
+    }
+
+    public void append(final RowAtom ra) {
+        elements.addAll(ra.elements);
+    }
+
+    public void setShape(final boolean shape) {
+        this.shape = shape;
     }
 
     public Atom getLastAtom() {
-        if (elements.size() != 0) {
-            return elements.removeLast();
+        final int s = elements.size();
+        if (s != 0) {
+            return elements.remove(s - 1);
         }
 
-        return new SpaceAtom(TeXConstants.UNIT_POINT, 0.0f, 0.0f, 0.0f);
+        return EmptyAtom.get();
     }
 
-    public final void add(Atom el) {
-        if (el != null) {
-            elements.add(el);
+    public Atom last() {
+        final int s = elements.size();
+        if (s != 0) {
+            return elements.get(s - 1);
+        }
+        return null;
+    }
+
+    public final int size() {
+        return elements.size();
+    }
+
+    public void substitute(final Substitution subst) {
+        final int N = elements.size();
+        for (int i = 0; i < N; ++i) {
+            elements.set(i, subst.get(elements.get(i)));
+        }
+    }
+
+    public final void add(Atom... atoms) {
+        for (Atom a : atoms) {
+            if (a != null) {
+                elements.add(a);
+                if (a instanceof TypedAtom) {
+                    // TODO: check this stuff (added for back comp)
+                    final int rtype = a.getRightType();
+                    if (rtype == TeXConstants.TYPE_BINARY_OPERATOR || rtype == TeXConstants.TYPE_RELATION) {
+                        elements.add(BreakMarkAtom.get());
+                    }
+                }
+            }
         }
     }
 
@@ -131,8 +190,9 @@ public class RowAtom extends Atom implements Row {
      *           previous atom
      */
     private void changeToOrd(Dummy cur, Dummy prev, Atom next) {
+        // TeXBook p. 438
         int type = cur.getLeftType();
-        if (type == TeXConstants.TYPE_BINARY_OPERATOR && ((prev == null || binSet.get(prev.getRightType())) || next == null)) {
+        if (type == TeXConstants.TYPE_BINARY_OPERATOR && ((prev == null || BIN_SET.get(prev.getRightType())) || next == null)) {
             cur.setType(TeXConstants.TYPE_ORDINARY);
         } else if (next != null && cur.getRightType() == TeXConstants.TYPE_BINARY_OPERATOR) {
             int nextType = next.getLeftType();
@@ -145,94 +205,95 @@ public class RowAtom extends Atom implements Row {
     public Box createBox(TeXEnvironment env) {
         TeXFont tf = env.getTeXFont();
         HorizontalBox hBox = new HorizontalBox(env.getColor(), env.getBackground());
-        int position = 0;
-        env.reset();
+        int N = elements.size();
 
-        // convert atoms to boxes and add to the horizontal box
-        for (ListIterator<Atom> it = elements.listIterator(); it.hasNext();) {
-            Atom at = it.next();
-            position++;
+        env.resetColors();
 
+        Dummy prevAtom = null;
+        Box prevBox = null;
+
+        for (int i = 0; i < N; ++i) {
+            Atom at = elements.get(i);
             boolean markAdded = false;
-            while (at instanceof BreakMarkAtom) {
-                if (!markAdded) {
-                    markAdded = true;
-                }
-                if (it.hasNext()) {
-                    at = it.next();
-                    position++;
-                } else {
-                    break;
-                }
-            }
-
-            if (at instanceof DynamicAtom && ((DynamicAtom) at).getInsertMode()) {
-                Atom a = ((DynamicAtom) at).getAtom();
-                if (a instanceof RowAtom) {
-                    elements.remove(position - 1);
-                    elements.addAll(position - 1, ((RowAtom) a).elements);
-                    it = elements.listIterator(position - 1);
-                    at = it.next();
-                } else {
-                    at = a;
+            if (at instanceof BreakMarkAtom) {
+                // skip the BreakMarkAtoms
+                markAdded = true;
+                ++i;
+                for (; i < N; ++i) {
+                    at = elements.get(i);
+                    if (!(at instanceof BreakMarkAtom)) {
+                        break;
+                    }
                 }
             }
 
-            Dummy atom = new Dummy(at);
-
-            // if necessary, change BIN type to ORD
-            Atom nextAtom = null;
-            if (it.hasNext()) {
-                nextAtom = it.next();
-                it.previous();
+            if (at instanceof DynamicAtom) {
+                // TODO: ecrire des tests pr ce truc
+                // mettre le jlmDynamic au debut, au milieu et a la fin
+                final DynamicAtom da = (DynamicAtom)at;
+                if (da.getInsertMode()) {
+                    final Atom a = da.getAtom();
+                    if (a instanceof RowAtom) {
+                        final ArrayList<Atom> els = ((RowAtom)a).getElements();
+                        if (!els.isEmpty()) {
+                            at = els.get(0);
+                            elements.addAll(i + 1, els.subList(1, els.size()));
+                            N += els.size() - 1;
+                        }
+                    } else {
+                        at = a;
+                    }
+                }
             }
-            changeToOrd(atom, previousAtom, nextAtom);
 
-            // check for ligatures or kerning
-            float kern = 0;
-            // Calixte : I put a while to handle the case where there are
-            // several ligatures as in ffi or ffl
-            while (it.hasNext() && atom.getRightType() == TeXConstants.TYPE_ORDINARY && atom.isCharSymbol()) {
-                Atom next = it.next();
-                position++;
-                if (next instanceof CharSymbol && ligKernSet.get(next.getLeftType())) {
-                    atom.markAsTextSymbol();
-                    CharFont l = atom.getCharFont(tf), r = ((CharSymbol) next).getCharFont(tf);
-                    CharFont lig = tf.getLigature(l, r);
+            if (at instanceof MathchoiceAtom) {
+                at = ((MathchoiceAtom)at).chose(env);
+            }
+
+            Dummy curAtom = new Dummy(at);
+            Atom nextAtom = i + 1 < N ? elements.get(i + 1) : null;
+            double kern = 0.;
+
+            changeToOrd(curAtom, prevAtom, nextAtom);
+
+            for (int j = i + 1; j < N; ++j) {
+                nextAtom = elements.get(j);
+                if (nextAtom != null &&
+                        curAtom.isCharSymbol() &&
+                        (nextAtom instanceof CharSymbol) &&
+                        curAtom.getRightType() == TeXConstants.TYPE_ORDINARY &&
+                        LIG_KERN_SET.get(nextAtom.getLeftType())) {
+
+                    curAtom.markAsTextSymbol();
+                    final CharFont l = curAtom.getCharFont(tf);
+                    final CharFont r = ((CharSymbol)nextAtom).getCharFont(tf);
+                    final CharFont lig = tf.getLigature(l, r);
                     if (lig == null) {
                         kern = tf.getKern(l, r, env.getStyle());
-                        it.previous();
-                        position--;
-                        break; // iterator remains unchanged (no ligature!)
-                    } else { // ligature
-                        atom.changeAtom(new FixedCharAtom(lig)); // go on with the
-                        // ligature
+                        break;
+                    } else {
+                        i = j;
+                        curAtom.changeAtom(new FixedCharAtom(lig));
                     }
                 } else {
-                    it.previous();
-                    position--;
                     break;
-                }// iterator remains unchanged
+                }
             }
 
             // insert glue, unless it's the first element of the row
             // OR this element or the next is a Kern.
-            if (it.previousIndex() != 0 && previousAtom != null && !previousAtom.isKern() && !atom.isKern()) {
-                hBox.add(Glue.get(previousAtom.getRightType(), atom.getLeftType(), env));
+            if (prevAtom != null && !prevAtom.isKern() && !curAtom.isKern()) {
+                final Box glue = Glue.get(prevAtom.getRightType(), curAtom.getLeftType(), env);
+                if (glue != null) {
+                    hBox.add(glue);
+                }
             }
 
-            // insert atom's box
-            atom.setPreviousAtom(previousAtom);
-            Box b = atom.createBox(env);
-            if (atom.isCharInMathMode() && b instanceof CharBox) {
-                // When we've a single char, we need to add italic correction
-                // As an example: (TVY) looks crappy...
-                CharBox cb = (CharBox) b;
-                cb.addItalicCorrectionToWidth();
-            }
             if (markAdded || (at instanceof CharAtom && Character.isDigit(((CharAtom) at).getCharacter()))) {
                 hBox.addBreakPosition(hBox.children.size());
             }
+
+            final Box b = curAtom.createBox(env);
             hBox.add(b);
 
             // set last used fontId (for next atom)
@@ -240,16 +301,19 @@ public class RowAtom extends Atom implements Row {
 
             // insert kern
             if (Math.abs(kern) > TeXFormula.PREC) {
-                hBox.add(new StrutBox(kern, 0, 0, 0));
+                hBox.add(new StrutBox(kern, 0., 0., 0.));
             }
 
             // kerns do not interfere with the normal glue-rules without kerns
-            if (!atom.isKern()) {
-                previousAtom = atom;
+            if (!curAtom.isKern()) {
+                prevAtom = curAtom;
+                prevBox = b;
             }
         }
-        // reset previousAtom
-        previousAtom = null;
+
+        if (shape) {
+            return ShapeBox.create(hBox);
+        }
 
         return hBox;
     }
@@ -258,19 +322,38 @@ public class RowAtom extends Atom implements Row {
         previousAtom = prev;
     }
 
-    public int getLeftType() {
-        if (elements.size() == 0) {
-            return TeXConstants.TYPE_ORDINARY;
-        } else {
-            return (elements.get(0)).getLeftType();
-        }
+    public boolean lookAtLast() {
+        return lookAtLastAtom;
     }
 
-    public int getRightType() {
-        if (elements.size() == 0) {
-            return TeXConstants.TYPE_ORDINARY;
-        } else {
-            return (elements.get(elements.size() - 1)).getRightType();
+    public void lookAtLast(final boolean b) {
+        lookAtLastAtom = b;
+    }
+
+    public final Atom simplify() {
+        final int s = elements.size();
+        if (s == 0) {
+            return EmptyAtom.get();
+        } else if (s == 1) {
+            return elements.get(0);
         }
+        return this;
+    }
+
+    public final boolean isEmpty() {
+        return elements.isEmpty();
+    }
+
+    public ArrayList<Atom> getElements() {
+        return elements;
+    }
+
+    public String toString() {
+        String s = "RowAtom {";
+        for (Atom e : elements) {
+            s += e + "; ";
+        }
+        s += "}";
+        return s;
     }
 }

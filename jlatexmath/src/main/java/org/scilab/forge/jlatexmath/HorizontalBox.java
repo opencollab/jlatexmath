@@ -48,6 +48,8 @@ package org.scilab.forge.jlatexmath;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.geom.AffineTransform;
+import java.awt.geom.Area;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
@@ -57,23 +59,25 @@ import java.util.ListIterator;
  */
 public class HorizontalBox extends Box {
 
-    private float curPos = 0; // NOPMD
+    private double curPos = 0; // NOPMD
     protected List<Integer> breakPositions;
+    protected ArrayList<Box> children = new ArrayList<Box>();
 
-    public HorizontalBox(Box b, float w, int alignment) {
-        if (w != Float.POSITIVE_INFINITY) {
-            float rest = w - b.getWidth();
+    public HorizontalBox(Box b, double w, TeXConstants.Align alignment) {
+        children = new ArrayList<Box>();
+        if (w != Double.POSITIVE_INFINITY) {
+            double rest = w - b.getWidth();
             if (rest > 0) {
-                if (alignment == TeXConstants.ALIGN_CENTER || alignment == TeXConstants.ALIGN_NONE) {
-                    StrutBox s = new StrutBox(rest / 2, 0, 0, 0);
+                if (alignment == TeXConstants.Align.CENTER || alignment == TeXConstants.Align.NONE) {
+                    StrutBox s = new StrutBox(rest / 2, 0., 0., 0.);
                     add(s);
                     add(b);
                     add(s);
-                } else if (alignment == TeXConstants.ALIGN_LEFT) {
+                } else if (alignment == TeXConstants.Align.LEFT) {
                     add(b);
-                    add(new StrutBox(rest, 0, 0, 0));
-                } else if (alignment == TeXConstants.ALIGN_RIGHT) {
-                    add(new StrutBox(rest, 0, 0, 0));
+                    add(new StrutBox(rest, 0., 0., 0.));
+                } else if (alignment == TeXConstants.Align.RIGHT) {
+                    add(new StrutBox(rest, 0., 0., 0.));
                     add(b);
                 } else {
                     add(b);
@@ -90,6 +94,10 @@ public class HorizontalBox extends Box {
         add(b);
     }
 
+    public HorizontalBox(int n) {
+        children = new ArrayList<Box>(n);
+    }
+
     public HorizontalBox() {
         // basic horizontal box
     }
@@ -98,36 +106,61 @@ public class HorizontalBox extends Box {
         super(fg, bg);
     }
 
-    public HorizontalBox cloneBox() {
+    private HorizontalBox cloneBox() {
         HorizontalBox b = new HorizontalBox(foreground, background);
         b.shift = shift;
 
         return b;
     }
 
-    public void draw(Graphics2D g2, float x, float y) {
+    public void draw(Graphics2D g2, double x, double y) {
         startDraw(g2, x, y);
-        float xPos = x;
-        for (Box box: children) {
+        double xPos = x;
+        for (Box box : children) {
             /*int i = children.indexOf(box);
               if (breakPositions != null && breakPositions.indexOf(i) != -1) {
               box.markForDEBUG = java.awt.Color.BLUE;
               }*/
-
+            if (box instanceof HVruleBox) {
+                ((HVruleBox)box).setWHD(width, height, depth);
+            }
             box.draw(g2, xPos, y + box.shift);
             xPos += box.getWidth();
         }
         endDraw(g2);
     }
 
+    public Area getArea() {
+        final Area area = new Area();
+        final AffineTransform af = new AffineTransform();
+        for (final Box b : children) {
+            if (b instanceof StrutBox) {
+                af.translate(b.getWidth(), 0.);
+            } else {
+                final Area a = b.getArea();
+                if (a == null) {
+                    return null;
+                }
+                a.transform(af);
+                area.add(a);
+                af.translate(b.getWidth(), 0.);//0.05);
+            }
+        }
+        return area;
+    }
+
     public final void add(Box b) {
         recalculate(b);
-        super.add(b);
+        children.add(b);
+        b.parent = this;
+        b.elderParent = elderParent;
     }
 
     public final void add(int pos, Box b) {
         recalculate(b);
-        super.add(pos, b);
+        children.add(pos, b);
+        b.parent = this;
+        b.elderParent = elderParent;
     }
 
     private void recalculate(Box b) {
@@ -136,15 +169,15 @@ public class HorizontalBox extends Box {
         //curPos += b.getWidth();
         //width = Math.max(width, curPos);
         width += b.getWidth();
-        height = Math.max((children.size() == 0 ? Float.NEGATIVE_INFINITY : height), b.height - b.shift);
-        depth = Math.max((children.size() == 0 ? Float.NEGATIVE_INFINITY : depth), b.depth + b.shift);
+        height = Math.max((children.isEmpty() ? Double.NEGATIVE_INFINITY : height), b.height - b.shift);
+        depth = Math.max((children.isEmpty() ? Double.NEGATIVE_INFINITY : depth), b.depth + b.shift);
     }
 
     public int getLastFontId() {
-        // iterate from the last child box to the first untill a font id is found
+        // iterate from the last child box to the first until a font id is found
         // that's not equal to NO_FONT
         int fontId = TeXFont.NO_FONT;
-        for (ListIterator<Box> it = children.listIterator(children.size()); fontId == TeXFont.NO_FONT && it.hasPrevious();)
+        for (ListIterator it = children.listIterator(children.size()); fontId == TeXFont.NO_FONT && it.hasPrevious();)
             fontId = ((Box) it.previous()).getLastFontId();
 
         return fontId;
@@ -166,8 +199,8 @@ public class HorizontalBox extends Box {
     }
 
     private HorizontalBox[] split(int position, int shift) {
-        HorizontalBox hb1 = cloneBox();
-        HorizontalBox hb2 = cloneBox();
+        final HorizontalBox hb1 = cloneBox();
+        final HorizontalBox hb2 = cloneBox();
         for (int i = 0; i <= position; i++) {
             hb1.add(children.get(i));
         }
@@ -185,5 +218,9 @@ public class HorizontalBox extends Box {
         }
 
         return new HorizontalBox[] {hb1, hb2};
+    }
+
+    ArrayList<Box> getChildren() {
+        return children;
     }
 }

@@ -58,7 +58,7 @@
         <module>jlatexmath</module>
         <module>jlatexmath-fop</module>
         <module>jlatexmath-example-giws</module>
-        <module>jlatexmath-example-export</module>
+        <!-- <module>jlatexmath-example-export</module> -->
         <!-- require a dummy artifact so can ignore deployment of previous two example modules -->
         <!-- see https://issues.sonatype.org/browse/NEXUS-9138 -->
         <module>jlatexmath-ignore</module>
