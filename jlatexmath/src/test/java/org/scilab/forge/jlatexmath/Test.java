@@ -103,9 +103,10 @@ public class Test {
                 if (!svg.equals(prev)) {
                     final Path path = getFailedPath();
                     Files.write(path, svg.getBytes());
-                    assertTrue("SVG outputs for test " + baseName + "_" + id + " are differents.\nThe failing svg can be found at " + path, false);
-                    System.err.println(svg);
-                    System.err.println("========================================================================");
+                    String err = "SVG outputs for test " + baseName + "_" + id + " are differents.\nThe failing svg can be found at " + path;
+                    err += "\n" + svg + "\n";
+                    err += "========================================================================";
+                    assertTrue(err, false);
                 }
             }
         } catch (IOException e) {
