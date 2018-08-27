@@ -118,7 +118,7 @@ public class TeXLength {
     }
 
     public static TeXLength getNone() {
-        return zero;
+        return none;
     }
 
     public static double getFactor(Unit unit, TeXEnvironment env) {

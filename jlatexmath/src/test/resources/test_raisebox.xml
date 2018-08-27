@@ -1,0 +1,22 @@
+<?xml version='1.0'?>
+<tests name="raisebox">
+  <test>
+    <id name="1"/>
+    <code>
+      <![CDATA[
+\fbox{\raisebox{0pt}[0pt][0pt]{\Large \textbf{Aaaa\raisebox{-0.3ex}{a} \raisebox{-0.7ex}{aa} \raisebox{-1.2ex}{r} \raisebox{-2.2ex}{g} \raisebox{-4.5ex}{h}}}}\tfrac{3}{5}      
+      ]]>      
+    </code>
+    <expected success="true"/>
+  </test>
+
+ <test>
+  <id name="2"/>
+    <code>
+      <![CDATA[
+\fbox{\raisebox{0pt}{\Large \textbf{Aaaa\raisebox{-0.3ex}{a} \raisebox{-0.7ex}{aa} \raisebox{-1.2ex}{r} \raisebox{-2.2ex}{g} \raisebox{-4.5ex}{h}}}}\tfrac{3}{5}      
+      ]]>      
+    </code>
+    <expected success="true"/>
+  </test>
+</tests>

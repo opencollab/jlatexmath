@@ -1,0 +1,43 @@
+<!--
+\fbox{\raisebox{0pt}{\Large \textbf{Aaaa\raisebox{-0.3ex}{a} \raisebox{-0.7ex}{aa} \raisebox{-1.2ex}{r} \raisebox{-2.2ex}{g} \raisebox{-4.5ex}{h}}}}\tfrac{3}{5}
+-->
+<svg width="165" height="71" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<style type="text/css">
+@font-face {
+font-family: 'jlm_cmbx10';
+src: url('fonts/jlm_cmbx10.ttf') format('truetype');
+font-style: normal;
+}
+.jlm_cmbx10 {
+font-family: 'jlm_cmbx10';
+font-size: 133px;
+}
+@font-face {
+font-family: 'jlm_cmr10';
+src: url('fonts/jlm_cmr10.ttf') format('truetype');
+font-style: normal;
+}
+.jlm_cmr10 {
+font-family: 'jlm_cmr10';
+font-size: 133px;
+}
+</style>
+<g stroke="rgb(0,0,0)" fill="rgb(0,0,0)" stroke-width="0.053332" stroke-miterlimit="10.0" stroke-linejoin="miter" stroke-linecap="butt">
+<path transform="matrix(10.0,0.0,0.0,10.0,0.0,0.0)" d=" M 0.626666 0.626666 L 15.029729 0.626666 L 15.029729 6.3744116 L 0.626666 6.3744116 L 0.626666 0.626666 Z " fill="transparent"/>
+</g>
+<g stroke="rgb(0,0,0)" fill="rgb(0,0,0)" stroke-width="1.0" stroke-miterlimit="10.0" stroke-linejoin="miter" stroke-linecap="square">
+<text class="jlm_cmbx10" transform="matrix(0.14,0.0,0.0,0.14,10.518376,23.32578)">A</text>
+<text class="jlm_cmbx10" transform="matrix(0.14,0.0,0.0,0.14,26.747923,23.32578)">a</text>
+<text class="jlm_cmbx10" transform="matrix(0.14,0.0,0.0,0.14,37.183037,23.32578)">a</text>
+<text class="jlm_cmbx10" transform="matrix(0.14,0.0,0.0,0.14,47.618153,23.32578)">a</text>
+<text class="jlm_cmbx10" transform="matrix(0.14,0.0,0.0,0.14,58.05327,25.814672)">a</text>
+<text class="jlm_cmbx10" transform="matrix(0.14,0.0,0.0,0.14,74.71062,29.133196)">a</text>
+<text class="jlm_cmbx10" transform="matrix(0.14,0.0,0.0,0.14,85.14573,29.133196)">a</text>
+<text class="jlm_cmbx10" transform="matrix(0.14,0.0,0.0,0.14,101.80308,32.970215)">r</text>
+<text class="jlm_cmbx10" transform="matrix(0.14,0.0,0.0,0.14,116.866035,41.00724)">g</text>
+<text class="jlm_cmbx10" transform="matrix(0.14,0.0,0.0,0.14,134.1197,59.4924)">h</text>
+<text class="jlm_cmr10" transform="matrix(0.06999999999999999,0.0,0.0,0.07,152.15797,18.076021)">3</text>
+<path transform="matrix(10.0,0.0,0.0,10.0,0.0,0.0)" d=" M 15.215797 1.9725788 L 15.682466 1.9725788 L 15.682466 2.0259109 L 15.215797 2.0259109 L 15.215797 1.9725788 Z " stroke="transparent" fill-rule="nonzero"/>
+<text class="jlm_cmr10" transform="matrix(0.06999999999999999,0.0,0.0,0.07,152.15797,27.923662)">5</text>
+</g>
+</svg>

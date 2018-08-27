@@ -46,7 +46,7 @@
 package org.scilab.forge.jlatexmath;
 
 /**
- * An atom representing a scaled Atom.
+ * An atom representing a raised Atom.
  */
 public class RaiseAtom extends Atom {
 
@@ -58,27 +58,19 @@ public class RaiseAtom extends Atom {
     public RaiseAtom(Atom base, TeXLength r, TeXLength h, TeXLength d) {
         this.base = base;
         this.r = r;
-        this.h = h == null ? TeXLength.getNone() : h;
-        this.d = d == null ? TeXLength.getNone() : d;
+        this.h = h;
+        this.d = d;
     }
 
     public Box createBox(TeXEnvironment env) {
         final Box bbox = base.createBox(env);
-        if (r.isNone()) {
-            bbox.setShift(0.);
-        } else {
-            bbox.setShift(-r.getValue(env));
-        }
-
-        if (h.isNone()) {
-            return bbox;
-        }
-
+        bbox.setShift(-r.getValue(env));
+            
         final HorizontalBox hbox = new HorizontalBox(bbox);
-        hbox.setHeight(h.getValue(env));
-        if (d.isNone()) {
-            hbox.setDepth(0.);
-        } else {
+        if (h != null) {
+            hbox.setHeight(h.getValue(env));
+        }
+        if (d != null) {
             hbox.setDepth(d.getValue(env));
         }
 
