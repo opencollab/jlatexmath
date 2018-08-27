@@ -59,7 +59,6 @@ public class XArrowAtom extends XAtom {
                              LeftHarpoonDown,
                              RightHarpoonUp,
                              RightHarpoonDown,
-                             LeftRightHarpoonUp,
                              LeftRightHarpoons,
                              RightLeftHarpoons,
                              RightSmallLeftHarpoons,
