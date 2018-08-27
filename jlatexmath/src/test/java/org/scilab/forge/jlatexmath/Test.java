@@ -85,6 +85,7 @@ public class Test {
     }
 
     public void exec() {
+        JavaFontRenderingBox.disable();
         TeXFormula.setDPITarget(96);
         final TeXFormula tf = new TeXFormula(code);
         final TeXIcon icon = tf.new TeXIconBuilder()

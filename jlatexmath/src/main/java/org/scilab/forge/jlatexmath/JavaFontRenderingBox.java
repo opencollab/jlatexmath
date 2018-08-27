@@ -71,6 +71,7 @@ public class JavaFontRenderingBox extends Box {
     private static Integer KERNING_ON;
     private static TextAttribute LIGATURES;
     private static Integer LIGATURES_ON;
+    private static boolean enabled = true;
 
     private final String str;
     private final TextLayout text;
@@ -86,27 +87,36 @@ public class JavaFontRenderingBox extends Box {
     }
 
     public JavaFontRenderingBox(final String str, final int style, final double size, Font f, final boolean kerning) {
-        this.str = str;
-        this.size = size;
-        if (f == null) {
-            f = font;
+        if (JavaFontRenderingBox.enabled) {
+            this.str = str;
+            this.size = size;
+            if (f == null) {
+                f = font;
+            }
+            
+            if (str.length() > 1 && kerning && KERNING != null) {
+                final Map<TextAttribute, Object> map = new Hashtable<TextAttribute, Object>() {
+                            {
+                                put(KERNING, KERNING_ON);
+                                put(LIGATURES, LIGATURES_ON);
+                            }
+                    };
+                f = f.deriveFont(map);
+            }
+            
+            this.text = new TextLayout(str, f.deriveFont(style), FRC);
+            final Rectangle2D rect = text.getBounds();
+            this.height = -rect.getY() * size / 10.;
+            this.depth = rect.getHeight() * size / 10. - this.height;
+            this.width = (rect.getWidth() + rect.getX() + 0.4) * size / 10.;
+        } else {
+            this.str = null;
+            this.text = null;
+            this.size = 0.;
+            this.height = 0.;
+            this.depth = 0.;
+            this.width = 0.;
         }
-
-        if (str.length() > 1 && kerning && KERNING != null) {
-            final Map<TextAttribute, Object> map = new Hashtable<TextAttribute, Object>() {
-                {
-                    put(KERNING, KERNING_ON);
-                    put(LIGATURES, LIGATURES_ON);
-                }
-            };
-            f = f.deriveFont(map);
-        }
-
-        this.text = new TextLayout(str, f.deriveFont(style), FRC);
-        final Rectangle2D rect = text.getBounds();
-        this.height = -rect.getY() * size / 10.;
-        this.depth = rect.getHeight() * size / 10. - this.height;
-        this.width = (rect.getWidth() + rect.getX() + 0.4) * size / 10.;
     }
 
     public JavaFontRenderingBox(final String str, final int type, final double size, final Font font) {
@@ -118,13 +128,15 @@ public class JavaFontRenderingBox extends Box {
     }
 
     public void draw(Graphics2D g2, double x, double y) {
-        startDraw(g2, x, y);
-        final AffineTransform old = g2.getTransform();
-        g2.translate(x, y);
-        g2.scale(size / 10., size / 10.);
-        text.draw(g2, 0, 0);
-        g2.setTransform(old);
-        endDraw(g2);
+        if (JavaFontRenderingBox.enabled) {
+            startDraw(g2, x, y);
+            final AffineTransform old = g2.getTransform();
+            g2.translate(x, y);
+            g2.scale(size / 10., size / 10.);
+            text.draw(g2, 0, 0);
+            g2.setTransform(old);
+            endDraw(g2);
+        }
     }
 
     public int getLastFontId() {
@@ -133,5 +145,9 @@ public class JavaFontRenderingBox extends Box {
 
     public String toString() {
         return "JavaFontRenderingBox: " + super.toString();
+    }
+
+    public static void disable() {
+        JavaFontRenderingBox.enabled = false;
     }
 }
