@@ -1539,9 +1539,9 @@ public class TeXParser {
                                 return new Color((Ri << 16) | (Gi << 8) | Bi);
                             }
 
-                            final int Rf = (int)(255. * clamp(R.f) + 0.5);
-                            final int Gf = (int)(255. * clamp(G.f) + 0.5);
-                            final int Bf = (int)(255. * clamp(B.f) + 0.5);
+                            final int Rf = (int)(255. * clamp(R.getDouble()) + 0.5);
+                            final int Gf = (int)(255. * clamp(G.getDouble()) + 0.5);
+                            final int Bf = (int)(255. * clamp(B.getDouble()) + 0.5);
 
                             cancelPrevPos();
                             return new Color((Rf << 16) | (Gf << 8) | Bf);
@@ -1657,13 +1657,13 @@ public class TeXParser {
                         } else if (ncomp == 4) {
                             ++pos;
                             // we've #RGBA and we want #RRGGBBAA
-                            // RRGGBBAA = R0G0B0A << 4 | R0G0B0A
+                            // AARRGGBB = 0AR0G0B << 4 | 0AR0G0B
                             final int R = acc & 0xF000;
                             final int G = acc & 0x0F00;
                             final int B = acc & 0x00F0;
                             final int A = acc & 0x000F;
-                            final int R0G0B0A = (R << 12) | (G << 8) | (B << 4) | A;
-                            return new Color((R0G0B0A << 4) | R0G0B0A, true);
+                            final int OAOROGOB = (A << 24) | (R << 4) | G | (B >> 4);
+                            return new Color((OAOROGOB << 4) | OAOROGOB, true);
                         }
                         throw new ParseException(this, "An hexadecimal number #RGB or #RRGGBB expected");
                     }
@@ -1769,17 +1769,17 @@ public class TeXParser {
                             final int Bi = clamp(B.i);
                             RGB = (Ri << 16) | (Gi << 8) | Bi;
                         } else {
-                            final int Rf = (int)(255. * clamp(R.f) + 0.5);
-                            final int Gf = (int)(255. * clamp(G.f) + 0.5);
-                            final int Bf = (int)(255. * clamp(B.f) + 0.5);
+                            final int Rf = (int)(255. * clamp(R.getDouble()) + 0.5);
+                            final int Gf = (int)(255. * clamp(G.getDouble()) + 0.5);
+                            final int Bf = (int)(255. * clamp(B.getDouble()) + 0.5);
                             RGB = (Rf << 16) | (Gf << 8) | Bf;
                         }
 
-                        if (ncomp == 3) {
-                            return new Color(RGB);
-                        } else {
-                            final int A = (int)(255. * clamp(arr.get(3).getDouble() + 0.5));
+                        if (rgba) {
+                            final int A = (int)(255. * clamp(arr.get(3).getDouble()) + 0.5);
                             return new Color((A << 24) | RGB, true);
+                        } else {
+                            return new Color(RGB);
                         }
                     }
                 }

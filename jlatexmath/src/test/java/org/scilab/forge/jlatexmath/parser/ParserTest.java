@@ -85,6 +85,10 @@ public class ParserTest {
             }
             r = start + r * (end - start);
             final String fl = Float.toString(r);
+            if (fl.contains("E")) {
+                --i;
+                continue;
+            }
             compareDecimal(fl);
         }
 
@@ -287,13 +291,21 @@ public class ParserTest {
         }
     }
 
+    public static Color getAlphaColor(Color c, String a) {
+        return new Color(c.getRed(), c.getGreen(), c.getBlue(), Integer.parseInt(a, 16));
+    }
+
     @Test
     public void getColor() {
         Map<String, Color> map = new HashMap<>();
         map.put("#010203}A", Color.decode("#010203"));
         map.put("#AaBb37}A", Color.decode("#AaBb37"));
+        map.put("#010203AB}A", getAlphaColor(Color.decode("#010203"), "AB"));
+        map.put("#AaBb371c}A", getAlphaColor(Color.decode("#AaBb37"), "1C"));
         map.put("#F9a}A", Color.decode("#FF99AA"));
         map.put("#7eB}A", Color.decode("#77EEBB"));
+        map.put("#7eBf}A", getAlphaColor(Color.decode("#77EEBB"), "FF"));
+        map.put("#d41C}A", getAlphaColor(Color.decode("#DD4411"), "CC"));
         map.put("7}A", Color.decode("#7"));
         map.put("789}A", Color.decode("#789"));
         map.put("1234AB}A", Color.decode("#1234AB"));
@@ -308,11 +320,17 @@ public class ParserTest {
         map.put("0.34,-0.56,0.78}A", new Color(0.34f, 0.f, 0.78f));
         map.put("1.34;-0.001;0.96}A", new Color(1.f, 0.f, 0.96f));
         map.put("0.34 , 0.56,   0.78, 0.678  }A", Colors.conv(0.34f, 0.56f, 0.78f, 0.678f));
+        map.put("0 , 1,   1  }A", new Color(0, 1, 1));
+        map.put("0. , 1,   1  }A", new Color(0f, 1f, 1f));
+        map.put("rgb(0 , 1,   1  )}A", new Color(0, 1, 1));
+        map.put("rgb(0. , 1,   1  )}A", new Color(0f, 1f, 1f));
+        map.put("rgba(0 , 1,   1, 0.123  )}A", new Color(0f, 1f / 255f, 1f / 255f, 0.123f));
+        map.put("rgba(0. , 1,   1, 0.456  )}A", new Color(0f, 1f, 1f, 0.456f));
 
         for (Map.Entry<String, Color> e : map.entrySet()) {
             TeXParser tp = new TeXParser(e.getKey());
             Color c = tp.getColor('}');
-            assertTrue("Expect to get " + e.getValue() + " and got: " + c + " for " + e.getKey(), c.equals(e.getValue()));
+            assertTrue("Expect to get " + e.getValue() + "(Alpha: " + e.getValue().getAlpha() +  ") and got: " + c + "(Alpha: " + c.getAlpha() + ") for " + e.getKey(), c.equals(e.getValue()));
             assertTrue("Expect pos to point after '}'", tp.getChar() == 'A');
         }
     }
