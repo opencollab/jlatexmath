@@ -65,7 +65,7 @@ public class RaiseAtom extends Atom {
     public Box createBox(TeXEnvironment env) {
         final Box bbox = base.createBox(env);
         bbox.setShift(-r.getValue(env));
-            
+
         final HorizontalBox hbox = new HorizontalBox(bbox);
         if (h != null) {
             hbox.setHeight(h.getValue(env));

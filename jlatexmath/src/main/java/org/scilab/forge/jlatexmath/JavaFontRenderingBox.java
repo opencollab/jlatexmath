@@ -93,17 +93,17 @@ public class JavaFontRenderingBox extends Box {
             if (f == null) {
                 f = font;
             }
-            
+
             if (str.length() > 1 && kerning && KERNING != null) {
                 final Map<TextAttribute, Object> map = new Hashtable<TextAttribute, Object>() {
-                            {
-                                put(KERNING, KERNING_ON);
-                                put(LIGATURES, LIGATURES_ON);
-                            }
-                    };
+                    {
+                        put(KERNING, KERNING_ON);
+                        put(LIGATURES, LIGATURES_ON);
+                    }
+                };
                 f = f.deriveFont(map);
             }
-            
+
             this.text = new TextLayout(str, f.deriveFont(style), FRC);
             final Rectangle2D rect = text.getBounds();
             this.height = -rect.getY() * size / 10.;
