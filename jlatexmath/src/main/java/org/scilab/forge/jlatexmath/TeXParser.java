@@ -2843,6 +2843,37 @@ public class TeXParser {
         }
     }
 
+    public Atom getAtomFromUnicode(char c, final boolean oneChar) {
+        if ((c >= '0' && c <= '9') || (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z')) {
+            return convertASCIICharToAtom(c, oneChar);
+        }
+        Atom a = charMapping.getAtom(c, isMathMode());
+        if (a == null) {
+            final Character.UnicodeBlock block = UnicodeMapping.get(c);
+            a = charMapping.getAtom(c, isMathMode());
+            if (a == null) {
+                String r;
+                if (oneChar) {
+                    r = Character.toString(c);
+                } else {
+                    final int start = pos - 1;
+                    while (pos < len) {
+                        c = parseString.charAt(pos);
+                        if ((c != ' ' && !UnicodeMapping.get(c).equals(block)) || charMapping.hasMapping(c)) {
+                            break;
+                        }
+                        ++pos;
+                    }
+                    r = parseString.substring(start, pos);
+                }
+
+                final ExternalFontManager.FontSSSF f = ExternalFontManager.get().getExternalFont(block);
+                a = new JavaFontRenderingAtom(r, f);
+            }
+        }
+        return a;
+    }
+
     public ArrayOptions getArrayOptions() {
         skipPureWhites();
         if (pos < len) {
