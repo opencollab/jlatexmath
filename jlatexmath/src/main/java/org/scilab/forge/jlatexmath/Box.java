@@ -55,7 +55,6 @@ import java.awt.BasicStroke;
 import java.awt.geom.Area;
 import java.awt.geom.Rectangle2D;
 
-
 /**
  * An abstract graphical representation of a formula, that can be painted. All characters, font
  * sizes, positions are fixed. Only special Glue boxes could possibly stretch or shrink.
@@ -121,6 +120,7 @@ public abstract class Box {
     protected Box parent;
     protected Box elderParent;
     protected Color markForDEBUG;
+    protected Atom atom;
 
     /**
      * Creates an empty box (no children) with all dimensions set to 0 and no
@@ -343,5 +343,13 @@ public abstract class Box {
 
     public String toString() {
         return super.toString() + ": w=" + width + ";h=" + height + ";d=" + depth + ";s=" + shift;
+    }
+
+    public void setAtom(final Atom atom) {
+        this.atom = atom;
+    }
+
+    public Atom getAtom() {
+        return this.atom;
     }
 }
