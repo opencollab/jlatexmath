@@ -50,16 +50,17 @@ package org.scilab.forge.jlatexmath;
  */
 public class UnderscoreAtom extends Atom {
 
-    public static SpaceAtom w = new SpaceAtom(TeXLength.Unit.EM, 0.7, 0, 0);
-    public static SpaceAtom s = new SpaceAtom(TeXLength.Unit.EM, 0.06, 0, 0);
+
+    private final static TeXLength w = new TeXLength(TeXLength.Unit.EM, 0.6);
+    private final static Atom s = new SpaceAtom(new TeXLength(TeXLength.Unit.EM, 0.06));
 
     public UnderscoreAtom() {
     }
 
     public Box createBox(TeXEnvironment env) {
-        double drt = env.getTeXFont().getDefaultRuleThickness(env.getStyle());
-        HorizontalBox hb = new HorizontalBox(s.createBox(env));
-        hb.add(new HorizontalRule(drt, w.createBox(env).getWidth(), 0));
+        final double drt = env.getTeXFont().getDefaultRuleThickness(env.getStyle());
+        final HorizontalBox hb = new HorizontalBox(s.createBox(env));
+        hb.add(new VerticalBox(new HorizontalRule(drt, w.getValue(env), 0.)));
         return hb;
     }
 }
