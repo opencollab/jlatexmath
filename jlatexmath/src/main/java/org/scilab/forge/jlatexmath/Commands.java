@@ -2345,6 +2345,17 @@ public class Commands {
                 return new RowAtom(new StyleAtom(TeXConstants.STYLE_DISPLAY, a));
             }
         });
+        map.put("setlength", new Command0AImpl() {
+            public boolean init(TeXParser tp) {
+                final String name = tp.getArgAsCommand(true);
+                TeXLength newLength = tp.getArgAsLength();
+                if (newLength == null) {
+                    throw new ParseException(tp, "Invalid length in \\setlength");
+                }
+                tp.addToConsumer(new SetLengthAtom(newLength, name));
+                return false;
+            }
+        });
         map.put("rule", new Command0AImpl() {
             public boolean init(TeXParser tp) {
                 TeXLength r = tp.getOptionAsLength();

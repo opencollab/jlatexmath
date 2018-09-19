@@ -1461,6 +1461,10 @@ public class TeXParser {
     }
 
     public String getArgAsCommand() {
+        return getArgAsCommand(false);
+    }
+
+    public String getArgAsCommand(boolean isLength) {
         skipPureWhites();
         if (pos < len) {
             char c = parseString.charAt(pos);
@@ -1477,16 +1481,17 @@ public class TeXParser {
                                 ++pos;
                                 return command;
                             }
+                            throw new ParseException(this, "A closing '}' expected");
                         }
-                        throw new ParseException(this, "A closing '}' expected");
+                        return command;
                     }
                 }
-                throw new ParseException(this, "Not a command name");
+                throw new ParseException(this, "Not a " + (isLength ? "length" : "command") + "name");
             } else if (c == '\\') {
                 return getCommand();
             }
         }
-        throw new ParseException(this, "Not a command name");
+        throw new ParseException(this, "Not a " + (isLength ? "length" : "command") + "name");
     }
 
     public Color getColor(final char stop) {
