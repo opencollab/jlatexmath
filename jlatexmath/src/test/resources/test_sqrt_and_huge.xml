@@ -1,0 +1,15 @@
+<?xml version='1.0'?>
+<tests name="sqrt_and_huge">
+  <test>
+    <id name="1"/>
+    <code>
+      <![CDATA[
+               \begin{tabular}{l}
+               \sqrt{x} \cr
+               \Huge {Huge}\\ \huge {huge}\\ \LARGE {LARGE}\\ \Large {Large}\\ \large {large}\\ \normalsize \ovalbox{normalsize}\\ \small {small}\\ \footnotesize {footnotesize}\\ \scriptsize {scriptsize}\\ \tiny {tiny}
+               \end{tabular}
+      ]]>      
+    </code>
+    <expected success="true"/>
+  </test>
+</tests>

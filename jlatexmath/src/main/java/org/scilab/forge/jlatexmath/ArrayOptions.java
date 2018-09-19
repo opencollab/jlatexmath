@@ -135,7 +135,7 @@ public final class ArrayOptions {
         for (final Option opt : options)  {
             Atom a = opt.getSeparator();
             if (a == null) {
-                boxes.add(StrutBox.getEmpty());
+                boxes.add(null);
             } else {
                 boxes.add(a.createBox(env));
             }

@@ -50,12 +50,10 @@ package org.scilab.forge.jlatexmath;
  */
 public class EmptyAtom extends Atom {
 
-    private static EmptyAtom instance = new EmptyAtom();
-
     public EmptyAtom() { }
 
     public static EmptyAtom get() {
-        return instance;
+        return new EmptyAtom();
     }
 
     public Box createBox(TeXEnvironment env) {

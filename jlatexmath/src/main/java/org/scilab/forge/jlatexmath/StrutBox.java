@@ -53,8 +53,6 @@ import java.awt.Graphics2D;
  */
 public class StrutBox extends Box {
 
-    private static StrutBox empty = new StrutBox();
-
     public StrutBox() {
         this(0., 0., 0., 0.);
     }
@@ -67,7 +65,7 @@ public class StrutBox extends Box {
     }
 
     public static StrutBox getEmpty() {
-        return empty;
+        return new StrutBox();
     }
 
     public void draw(Graphics2D g2, double x, double y) {
@@ -77,22 +75,6 @@ public class StrutBox extends Box {
     public int getLastFontId() {
         return TeXFont.NO_FONT;
     }
-
-    /*public void setWidth(double w) {
-        throw new ParseException("StrutBox.setWidth");
-    }
-
-    public void setDepth(double d) {
-        throw new ParseException("StrutBox.setDepth");
-    }
-
-    public void setHeight(double h) {
-        throw new ParseException("StrutBox.setHeight");
-    }
-
-    public void setShift(double s) {
-        throw new ParseException("StrutBox.setShift");
-    }*/
 
     public String toString() {
         return "StrutBox: " + width + ":" + height + ":" + depth + ":" + shift;

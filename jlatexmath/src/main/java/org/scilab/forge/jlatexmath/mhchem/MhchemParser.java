@@ -180,7 +180,7 @@ public class MhchemParser extends TeXParser {
     public MhchemParser(final String parseString) {
         super(parseString);
         addConsumer(new GroupConsumer(TeXConstants.Opener.NONE));
-        addToConsumer(CEEmptyAtom.get());
+        addToConsumer(new CEEmptyAtom());
     }
 
     private CharMapping getExponentCM() {
@@ -604,7 +604,7 @@ public class MhchemParser extends TeXParser {
             if (cc == ' ') {
                 ++pos;
                 addToConsumer(new MathCharAtom(c, true));
-                addToConsumer(CEEmptyAtom.get());
+                addToConsumer(new CEEmptyAtom());
                 return;
             }
         }
@@ -971,7 +971,7 @@ public class MhchemParser extends TeXParser {
                         pos += 2;
                         skipPureWhites();
                         addToConsumer(SymbolAtom.get("downarrow"));
-                        addToConsumer(CEEmptyAtom.get());
+                        addToConsumer(new CEEmptyAtom());
                         return;
                     }
                 } else {
@@ -987,7 +987,7 @@ public class MhchemParser extends TeXParser {
                         pos += 2;
                         skipPureWhites();
                         addToConsumer(SymbolAtom.get("uparrow"));
-                        addToConsumer(CEEmptyAtom.get());
+                        addToConsumer(new CEEmptyAtom());
                         return;
                     }
                 } else {
@@ -1007,7 +1007,7 @@ public class MhchemParser extends TeXParser {
                         pos += 2;
                         skipPureWhites();
                         addToConsumer(Symbols.MINUS);
-                        addToConsumer(CEEmptyAtom.get());
+                        addToConsumer(new CEEmptyAtom());
                     } else if (cc == '>') {
                         pos += 2;
                         handleArrow(Arrow.right);
@@ -1036,7 +1036,7 @@ public class MhchemParser extends TeXParser {
                 }
             }
         }
-        addToConsumer(CEEmptyAtom.get());
+        addToConsumer(new CEEmptyAtom());
     }
 
     public boolean handleArrow(final char c) {

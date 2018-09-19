@@ -56,14 +56,8 @@ import org.scilab.forge.jlatexmath.TeXConstants;
  */
 public class CEEmptyAtom extends Atom {
 
-    private static CEEmptyAtom instance = new CEEmptyAtom();
-
     public CEEmptyAtom() {
         type = TeXConstants.TYPE_ORDINARY;
-    }
-
-    public static CEEmptyAtom get() {
-        return instance;
     }
 
     public Box createBox(TeXEnvironment env) {
