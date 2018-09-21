@@ -492,9 +492,6 @@ public class TeXParser {
                 processDollar();
                 break;
             case '%':
-                ++line;
-                col = pos++;
-
                 // We've a comment
                 ++pos;
                 skipUntilCr();
