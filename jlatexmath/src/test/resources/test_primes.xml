@@ -1,0 +1,19 @@
+<?xml version='1.0'?>
+<tests name="primes">
+  <test>
+    <id name="1"/>
+    <code>
+      <![CDATA[
+               \begin{gather}
+               ``hello''\cr
+               \text{``hello''}\cr
+               `hello'\cr
+               \text{`hello'}\cr
+               “hello”\cr
+               \text{“hello”}\cr
+               \end{gather}
+      ]]>      
+    </code>
+    <expected success="true"/>
+  </test>
+</tests>

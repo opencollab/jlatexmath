@@ -1003,7 +1003,7 @@ public final class CharMapping {
         put('‴', new FormulaMapping("\'\'\'"));
         put('⃛', new FormulaMapping("\'\'"));
         put('‘', new FormulaMapping("`"));
-        put('“', new FormulaMapping("``"));
+        put('“', new FormulaMapping("\\text{``}"));
         put('’', new SymbolMapping('’', "textapos"));
         put('‚', new FormulaMapping(","));
         put('”', new FormulaMapping("{\\textapos\\textapos}"));
