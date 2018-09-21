@@ -606,12 +606,7 @@ public class TeXParser {
                 break;
             case '`':
                 ++pos;
-                if (isTextMode()) {
-                    charMapping.replaceUnsafe('`', this);
-                } else {
-                    // For this kind of syms, need to modify SubSupCom
-                    cumSupSymbols(Symbols.BACKPRIME);
-                }
+                charMapping.replaceUnsafe('`', this);
                 break;
             case 'a':
             case 'b':
