@@ -1001,7 +1001,7 @@ public final class CharMapping {
         put('›', new SymbolMapping('›', "guilsinglright"));
         put('≄', new FormulaMapping("{\\not\\simeq}"));
         put('‴', new FormulaMapping("\'\'\'"));
-        put('⃛', new FormulaMapping("\'\'"));
+        put('⃛', new FormulaMapping("\\dddot"));
         put('‘', new FormulaMapping("`"));
         put('“', new FormulaMapping("\\text{``}"));
         put('’', new SymbolMapping('’', "textapos"));
