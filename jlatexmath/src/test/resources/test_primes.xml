@@ -11,6 +11,13 @@
                \text{`hello'}\cr
                “hello”\cr
                \text{“hello”}\cr
+               \char{0x201C}hello\char{0x201D}\cr
+               \char{x201C}hello\char{x201D}\cr
+               \char{X201C}hello\char{X201D}\cr
+               \char{0x201c}hello\char{0x201d}\cr
+               \text{\char{0x201C}hello\char{0x201D}}\cr
+               \char{8220}hello\char{8221}\cr
+               \text{\char{8220}hello\char{8221}}\cr
                \end{gather}
       ]]>      
     </code>
