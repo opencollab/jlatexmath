@@ -1,0 +1,64 @@
+<!--
+\begin{tabular}{rrrr}
+               \hspace{1em} & \hspace{1.8em} & \hspace{3.5em} & \hspace{5.5em} \\
+               \rule{0pt}{17pt}-1 & 1 & \raisebox{20pt}{ } & \raisebox{40pt}{ } \\
+               \rule{0pt}{32pt}0 & 0 & \raisebox{20pt}{-1} & \raisebox{40pt}{ } \\
+               \rule{0pt}{30pt}1 & -1 & \raisebox{20pt}{ -1} & \raisebox{40pt}{ 0} \\
+               \rule{0pt}{32pt}2 & -2 & \raisebox{20pt}{ -1} & \raisebox{40pt}{ 0} \\
+               \rule{0pt}{34pt}3 & -3 & \raisebox{20pt}{ -1} & \raisebox{40pt}{ 0}
+               \end{tabular}
+-->
+<svg width="233" height="342" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<style type="text/css">
+@font-face {
+font-family: 'jlm_cmr10';
+src: url('fonts/jlm_cmr10.ttf') format('truetype');
+font-style: normal;
+}
+.jlm_cmr10 {
+font-family: 'jlm_cmr10';
+font-size: 133px;
+}
+@font-face {
+font-family: 'jlm_cmsy10';
+src: url('fonts/jlm_cmsy10.ttf') format('truetype');
+font-style: normal;
+}
+.jlm_cmsy10 {
+font-family: 'jlm_cmsy10';
+font-size: 133px;
+}
+</style>
+<g stroke="rgb(0,0,0)" fill="rgb(0,0,0)" stroke-width="1.0" stroke-miterlimit="10.0" stroke-linejoin="miter" stroke-linecap="square">
+<path transform="matrix(10.0,0.0,0.0,10.0,0.0,0.0)" d=" M 1.2666667 4.4589124 L 1.2666667 4.4589124 L 1.2666667 6.7171106 L 1.2666667 6.7171106 L 1.2666667 4.4589124 Z " stroke="transparent" fill-rule="nonzero"/>
+<text class="jlm_cmsy10" transform="matrix(0.1,0.0,0.0,0.1,15.629639,67.171104)">¡</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,28.963024,67.171104)">1</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,66.29636,67.171104)">1</text>
+<path transform="matrix(10.0,0.0,0.0,10.0,0.0,0.0)" d=" M 2.8963025 8.464977 L 2.8963025 8.464977 L 2.8963025 12.715704 L 2.8963025 12.715704 L 2.8963025 8.464977 Z " stroke="transparent" fill-rule="nonzero"/>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,28.963024,127.15704)">0</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,66.29636,127.15704)">0</text>
+<text class="jlm_cmsy10" transform="matrix(0.1,0.0,0.0,0.1,115.92594,100.590004)">¡</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,126.29636,100.590004)">1</text>
+<path transform="matrix(10.0,0.0,0.0,10.0,0.0,0.0)" d=" M 2.8963025 15.477388 L 2.8963025 15.477388 L 2.8963025 19.462444 L 2.8963025 19.462444 L 2.8963025 15.477388 Z " stroke="transparent" fill-rule="nonzero"/>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,28.963024,194.62444)">1</text>
+<text class="jlm_cmsy10" transform="matrix(0.1,0.0,0.0,0.1,55.925945,194.62444)">¡</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,66.29636,194.62444)">1</text>
+<text class="jlm_cmsy10" transform="matrix(0.1,0.0,0.0,0.1,115.92594,168.0574)">¡</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,126.29636,168.0574)">1</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,212.96303,141.49036)">0</text>
+<path transform="matrix(10.0,0.0,0.0,10.0,0.0,0.0)" d=" M 2.8963025 22.06957 L 2.8963025 22.06957 L 2.8963025 26.320295 L 2.8963025 26.320295 L 2.8963025 22.06957 Z " stroke="transparent" fill-rule="nonzero"/>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,28.963024,263.20297)">2</text>
+<text class="jlm_cmsy10" transform="matrix(0.1,0.0,0.0,0.1,55.925945,263.20297)">¡</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,66.29636,263.20297)">2</text>
+<text class="jlm_cmsy10" transform="matrix(0.1,0.0,0.0,0.1,115.92594,236.63593)">¡</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,126.29636,236.63593)">1</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,212.96303,210.06888)">0</text>
+<path transform="matrix(10.0,0.0,0.0,10.0,0.0,0.0)" d=" M 2.8963025 28.66175 L 2.8963025 28.66175 L 2.8963025 33.178146 L 2.8963025 33.178146 L 2.8963025 28.66175 Z " stroke="transparent" fill-rule="nonzero"/>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,28.963024,331.7815)">3</text>
+<text class="jlm_cmsy10" transform="matrix(0.1,0.0,0.0,0.1,55.925945,331.7815)">¡</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,66.29636,331.7815)">3</text>
+<text class="jlm_cmsy10" transform="matrix(0.1,0.0,0.0,0.1,115.92594,305.21445)">¡</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,126.29636,305.21445)">1</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,212.96303,278.6474)">0</text>
+</g>
+</svg>

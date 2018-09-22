@@ -67,9 +67,11 @@ public class RaiseAtom extends Atom {
         bbox.setShift(-r.getValue(env));
 
         final HorizontalBox hbox = new HorizontalBox(bbox);
-        if (h != null) {
-            hbox.setHeight(h.getValue(env));
+        if (h == null) {
+            return hbox;
         }
+        
+        hbox.setHeight(h.getValue(env));
         if (d != null) {
             hbox.setDepth(d.getValue(env));
         }

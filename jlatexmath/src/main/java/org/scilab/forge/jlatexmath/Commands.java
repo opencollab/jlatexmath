@@ -1213,8 +1213,8 @@ public class Commands {
 
             public boolean init(TeXParser tp) {
                 raise = tp.getArgAsLength();
-                height = tp.getOptionAsLength();
-                depth = tp.getOptionAsLength();
+                height = tp.getOptionAsLength(null);
+                depth = tp.getOptionAsLength(null);
                 return true;
             }
 
@@ -2358,10 +2358,7 @@ public class Commands {
         });
         map.put("rule", new Command0AImpl() {
             public boolean init(TeXParser tp) {
-                TeXLength r = tp.getOptionAsLength();
-                if (r == null) {
-                    r = new TeXLength();
-                }
+                TeXLength r = tp.getOptionAsLength(TeXLength.getZero());
                 TeXLength w = tp.getArgAsLength();
                 if (w == null) {
                     throw new ParseException(tp, "Invalid length in \\rule");

@@ -2229,7 +2229,7 @@ public class TeXParser {
                     c = parseString.charAt(pos);
                     if (c == '}') {
                         ++pos;
-                        return Double.isNaN(l.getL()) ? null : l;
+                        return Double.isNaN(l.getL()) ? TeXLength.getZero() : l;
                     }
                     throw new ParseException(this, "A closing '}' expected");
                 }
@@ -2281,22 +2281,22 @@ public class TeXParser {
         throw new ParseException(this, "A length expected");
     }
 
-    public TeXLength getOptionAsLength() {
+    public TeXLength getOptionAsLength(TeXLength def) {
         skipPureWhites();
         if (pos < len) {
             char c = parseString.charAt(pos);
             if (c == '[') {
                 ++pos;
-                TeXLength l = getLength();
+                final TeXLength l = getLength();
                 if (Double.isNaN(l.getL())) {
                     if (pos < len) {
                         c = parseString.charAt(pos);
                         if (c == ']') {
                             ++pos;
-                            return null;
+                            return def;
                         }
                     }
-                    throw new ParseException(this, "A closing '}' expected");
+                    throw new ParseException(this, "A closing ']' expected");
                 }
                 if (pos < len) {
                     c = parseString.charAt(pos);
@@ -2308,7 +2308,7 @@ public class TeXParser {
                 }
             }
         }
-        return null;
+        return def;
     }
 
     public char getOptionAsChar() {
