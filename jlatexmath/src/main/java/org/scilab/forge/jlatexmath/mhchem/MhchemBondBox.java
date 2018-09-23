@@ -49,6 +49,7 @@ import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
 
 import org.scilab.forge.jlatexmath.Box;
+import org.scilab.forge.jlatexmath.FontInfo;
 
 /**
  * An atom to represent a bond (used in mhchem)
@@ -86,7 +87,7 @@ public class MhchemBondBox extends Box {
         }
     }
 
-    public int getLastFontId() {
-        return 0;
+    public FontInfo getLastFont() {
+        return null;
     }
 }

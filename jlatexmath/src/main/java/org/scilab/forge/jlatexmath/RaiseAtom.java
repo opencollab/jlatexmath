@@ -68,9 +68,10 @@ public class RaiseAtom extends Atom {
 
         final HorizontalBox hbox = new HorizontalBox(bbox);
         if (h == null) {
+            // TODO: in jlm1 it returned bbox
             return hbox;
         }
-        
+
         hbox.setHeight(h.getValue(env));
         if (d != null) {
             hbox.setDepth(d.getValue(env));

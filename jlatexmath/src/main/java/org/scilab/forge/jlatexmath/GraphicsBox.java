@@ -101,7 +101,7 @@ public class GraphicsBox extends Box {
         }
     }
 
-    public int getLastFontId() {
-        return 0;
+    public FontInfo getLastFont() {
+        return null;
     }
 }

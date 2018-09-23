@@ -52,22 +52,22 @@ package org.scilab.forge.jlatexmath;
 public class CharFont {
 
     public final char c;
-    public final int fontId;
+    public final FontInfo font;
 
-    public CharFont(final char c, final int f) {
+    public CharFont(final char c, final FontInfo font) {
         this.c = c;
-        this.fontId = f;
-    }
-
-    public int getFontId() {
-        return fontId;
+        this.font = font;
     }
 
     public char getChar() {
         return c;
     }
 
+    public FontInfo getFont() {
+        return font;
+    }
+
     public String toString() {
-        return "CharFont: \'" + c + "\' : " + (int)c + " : " + fontId + " : " + Configuration.get().getFontInfo(fontId);
+        return "CharFont: \'" + c + "\' : " + (int)c + " : " + font;
     }
 }

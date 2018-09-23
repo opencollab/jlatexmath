@@ -45,226 +45,33 @@
 
 package org.scilab.forge.jlatexmath;
 
-import java.awt.Font;
-import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.HashMap;
 import java.util.Map;
-import java.util.TreeMap;
-import org.xml.sax.SAXException;
 
 public final class Configuration {
 
-    private static class Pair {
-        final Object o;
-        final String path;
+    private final TeXFonts fonts;
+    private final TeXSymbols symbols;
 
-        Pair(final Object o, final String path) {
-            this.o = o;
-            this.path = path;
-        }
-    }
-
-    private final FontIDs ids = new FontIDs();
-    private final ArrayList<FontInfo> fontinfo = new ArrayList<>();
-    private final Map<String, SymbolAtom> symbolAtoms = new HashMap<>();
-    private final ArrayList<Pair> metricFiles = new ArrayList<>();
-
-    private static final String DEFAULT_TEX_FONT = "DefaultTeXFont.xml";
     private static final Configuration instance = new Configuration();
 
     private Configuration() {
-        loadTeXFont(this, DEFAULT_TEX_FONT);
+        fonts = new TeXFonts();
+        symbols = new TeXSymbols(fonts);
     }
 
     public static Configuration get() {
         return instance;
     }
 
-    public Map<String, SymbolAtom> getSymbolAtoms() {
-        return symbolAtoms;
+    public static TeXFonts getFonts() {
+        return instance.fonts;
     }
 
-    public FontInfo[] getFontInfo() {
-        return fontinfo.toArray(new FontInfo[fontinfo.size()]);
+    public static SymbolAtom getSym(final String name) {
+        return instance.symbols.get(name);
     }
 
-    public FontInfo getFontInfo(final int id) {
-        FontInfo fi = fontinfo.get(id);
-        if (fi == null) {
-            final Pair p = metricFiles.get(id);
-            loadMetrics(p.o, p.path);
-            metricFiles.set(id, null);
-            fi = fontinfo.get(id);
-        }
-        return fi;
-    }
-
-    public Font getFont(final int id) {
-        return fontinfo.get(id).getFont();
-    }
-
-    public int getFontId(final String id) {
-        return ids.get(id);
-    }
-
-    public void loadTeXFont(final String path) {
-        loadTeXFont(null, path);
-    }
-
-    public void loadTeXFont(final Object o, final String path) {
-        final List<String> symbols = new ArrayList<>();
-        final List<String> texsymbols = new ArrayList<>();
-        final Map<Integer, String> metrics = new TreeMap<>();
-        InputStream in = null;
-        try {
-            if (o == null) {
-                in = new BufferedInputStream(new FileInputStream(new File(path)));
-            } else {
-                in = o.getClass().getResourceAsStream(path);
-            }
-            XMLTeXFont.get(ids, in, path, metrics, symbols, texsymbols);
-            setMetrics(o, metrics);
-            final Map<String, CharFont> cfs = loadSymbols(o, symbols);
-            loadTeXSymbols(o, texsymbols, cfs);
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (in != null) {
-                try {
-                    in.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    }
-
-    private void setMetrics(final Object o, final Map<Integer, String> metrics) {
-        int maxId = -1;
-        for (final int i : metrics.keySet()) {
-            maxId = i > maxId ? i : maxId;
-        }
-        ++maxId;
-        fontinfo.ensureCapacity(maxId);
-        metricFiles.ensureCapacity(maxId);
-        for (int i = fontinfo.size(); i < maxId; ++i) {
-            fontinfo.add(null);
-            metricFiles.add(null);
-        }
-        for (final Map.Entry<Integer, String> e : metrics.entrySet()) {
-            final int id = e.getKey().intValue();
-            final String path = e.getValue();
-            metricFiles.set(id, new Pair(o, path));
-        }
-    }
-
-    public void loadMetrics(final String path) {
-        loadMetrics(null, path);
-    }
-
-    public void loadMetrics(final Object o, final String path) {
-        InputStream in = null;
-        try {
-            if (o == null) {
-                in = new BufferedInputStream(new FileInputStream(new File(path)));
-            } else {
-                in = o.getClass().getResourceAsStream(path);
-            }
-            final FontInfo fi = XMLFontMetrics.get(ids, o, in, path);
-            fontinfo.set(fi.getId(), fi);
-        } catch (SAXException e) {
-            System.err.println(e);
-        } catch (FileNotFoundException e) {
-            System.err.println(e);
-        } finally {
-            if (in != null) {
-                try {
-                    in.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    }
-
-    public void loadSymbols(final Object o, final String path) {
-        loadSymbols(o, new ArrayList<String>() {
-            {
-                add(path);
-            }
-        });
-    }
-
-    public void loadSymbols(final String path) {
-        loadSymbols(null, new ArrayList<String>() {
-            {
-                add(path);
-            }
-        });
-    }
-
-    public void loadSymbols(final List<String> paths) {
-        loadSymbols(null, paths);
-    }
-
-    public Map<String, CharFont> loadSymbols(final Object o, final List<String> paths) {
-        final Map<String, CharFont> map = new HashMap<String, CharFont>();
-        for (final String path : paths) {
-            InputStream in = null;
-            try {
-                if (o == null) {
-                    in = new BufferedInputStream(new FileInputStream(new File(path)));
-                } else {
-                    in = o.getClass().getResourceAsStream(path);
-                }
-                XMLSymbols.get(ids, map, in, path);
-            } catch (SAXException e) {
-                System.err.println(e);
-            } catch (FileNotFoundException e) {
-                System.err.println(e);
-            } finally {
-                if (in != null) {
-                    try {
-                        in.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        }
-        return map;
-    }
-
-    public void loadTeXSymbols(final Object o, final List<String> paths, Map<String, CharFont> map) {
-        for (final String path : paths) {
-            InputStream in = null;
-            try {
-                if (o == null) {
-                    in = new BufferedInputStream(new FileInputStream(new File(path)));
-                } else {
-                    in = o.getClass().getResourceAsStream(path);
-                }
-                XMLTeXSymbols.get(symbolAtoms, map, in, path);
-            } catch (SAXException e) {
-                System.err.println(e);
-            } catch (FileNotFoundException e) {
-                System.err.println(e);
-            } finally {
-                if (in != null) {
-                    try {
-                        in.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        }
+    public static Map<String, SymbolAtom> getAllSym() {
+        return instance.symbols.getAll();
     }
 }

@@ -70,24 +70,6 @@ public class VlineBox extends Box {
         return b;
     }
 
-    /*public Box createBox(TeXEnvironment env) {
-        if (n != 0) {
-            double drt = env.getTeXFont().getDefaultRuleThickness(env.getStyle());
-            Box b = new HorizontalRule(height, drt, shift);
-            Box sep = new StrutBox(2 * drt, 0, 0, 0);
-            HorizontalBox hb = new HorizontalBox();
-            for (int i = 0; i < n - 1; i++) {
-                hb.add(b);
-                hb.add(sep);
-            }
-            hb.add(b);
-
-            return hb;
-        }
-
-        return StrutBox.getEmpty();
-        }*/
-
     public void draw(Graphics2D g2, double x, double y) {
         double t = 0.;
         for (int i = 0; i < n; ++i) {
@@ -96,7 +78,7 @@ public class VlineBox extends Box {
         }
     }
 
-    public int getLastFontId() {
-        return TeXFont.NO_FONT;
+    public FontInfo getLastFont() {
+        return null;
     }
 }

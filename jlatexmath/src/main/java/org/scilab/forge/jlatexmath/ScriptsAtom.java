@@ -165,10 +165,10 @@ public class ScriptsAtom extends Atom {
 
             HorizontalBox hor = new HorizontalBox(b);
 
-            int lastFontId = b.getLastFontId();
+            FontInfo lastFont = b.getLastFont();
             // if no last font found (whitespace box), use default "mu font"
-            if (lastFontId == TeXFont.NO_FONT) {
-                lastFontId = tf.getMuFontId();
+            if (lastFont == null) {
+                lastFont = tf.getMuFont();
             }
 
             TeXEnvironment subStyle = env.subStyle();
@@ -183,7 +183,7 @@ public class ScriptsAtom extends Atom {
                 final CharAtom ca = (CharAtom)trueBase;
                 shiftUp = shiftDown = 0.;
                 CharFont cf = ca.getCharFont(tf);
-                if ((!ca.isMarkedAsTextSymbol() || !tf.hasSpace(cf.fontId))
+                if ((!ca.isMarkedAsTextSymbol() || !tf.hasSpace(cf.getFont()))
                         && subscript != null) {
                     delta = tf.getChar(cf, style).getItalic();
                 }
@@ -200,7 +200,7 @@ public class ScriptsAtom extends Atom {
             if (superscript == null) { // only subscript
                 Box x = subscript.createBox(subStyle);
                 // calculate and set shift amount
-                x.setShift(Math.max(Math.max(shiftDown, tf.getSub1(style)), x.getHeight() - 4. * Math.abs(tf.getXHeight(style, lastFontId)) / 5.));
+                x.setShift(Math.max(Math.max(shiftDown, tf.getSub1(style)), x.getHeight() - 4. * Math.abs(tf.getXHeight(style, lastFont)) / 5.));
                 hor.add(x);
 
                 return hor;
@@ -224,7 +224,7 @@ public class ScriptsAtom extends Atom {
                     p = tf.getSup2(style);
                 }
                 shiftUp = Math.max(Math.max(shiftUp, p), x.getDepth()
-                                   + Math.abs(tf.getXHeight(style, lastFontId)) / 4.);
+                                   + Math.abs(tf.getXHeight(style, lastFont)) / 4.);
 
                 if (subscript == null) { // only superscript
                     sup.setShift(-shiftUp);
@@ -246,7 +246,7 @@ public class ScriptsAtom extends Atom {
                         // set bottom superscript at least 4/5 of X-height
                         // above
                         // baseline
-                        double psi = 4. * Math.abs(tf.getXHeight(style, lastFontId)) / 5. - (shiftUp - x.getDepth());
+                        double psi = 4. * Math.abs(tf.getXHeight(style, lastFont)) / 5. - (shiftUp - x.getDepth());
 
                         if (psi > 0.) {
                             shiftUp += psi;

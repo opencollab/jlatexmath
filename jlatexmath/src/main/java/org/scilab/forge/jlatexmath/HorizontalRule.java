@@ -84,7 +84,7 @@ public class HorizontalRule extends Box {
         return new Area(new Rectangle2D.Double(0., -height + speShift, width, height));
     }
 
-    public int getLastFontId() {
-        return TeXFont.NO_FONT;
+    public FontInfo getLastFont() {
+        return null;
     }
 }

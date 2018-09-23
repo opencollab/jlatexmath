@@ -72,6 +72,10 @@ public class SymbolAtom extends CharSymbol {
         }
     }
 
+    public SymbolAtom(final char c, final FontInfo font, final int type) {
+        this(new CharFont(c, font), type);
+    }
+
     public SymbolAtom(final SymbolAtom s, final int type) {
         this(s.cf, type);
     }
@@ -94,7 +98,7 @@ public class SymbolAtom extends CharSymbol {
      * @throws SymbolNotFoundException if no symbol with the given name was found
      */
     public static SymbolAtom get(final String name, final boolean mathMode) {
-        SymbolAtom sa = Configuration.get().getSymbolAtoms().get(name);
+        SymbolAtom sa = Configuration.getSym(name);
         if (!mathMode && sa != null) {
             sa = (SymbolAtom)sa.clone();
             sa.mathMode = false;
@@ -104,7 +108,7 @@ public class SymbolAtom extends CharSymbol {
     }
 
     public static boolean put(final TeXParser tp, final String name) {
-        SymbolAtom sa = Configuration.get().getSymbolAtoms().get(name);
+        SymbolAtom sa = Configuration.getSym(name);
         if (sa == null) {
             return false;
         }
@@ -208,7 +212,7 @@ public class SymbolAtom extends CharSymbol {
     }
 
     public static void getAll(final List<String> l) {
-        for (final String k : Configuration.get().getSymbolAtoms().keySet()) {
+        for (final String k : Configuration.getAllSym().keySet()) {
             l.add(k);
         }
     }

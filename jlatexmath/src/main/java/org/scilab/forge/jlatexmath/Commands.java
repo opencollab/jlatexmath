@@ -2106,13 +2106,10 @@ public class Commands {
         });
         map.put("cyrddot", new Command1A() {
             public Atom newI(TeXParser tp, Atom a) {
-                // just load the cyrillic fonts
-                AlphabetManager.get().addBlock(Character.UnicodeBlock.CYRILLIC);
                 return new AccentedAtom(a, "cyrddot");
             }
 
             public boolean close(TeXParser tp) {
-                AlphabetManager.get().addBlock(Character.UnicodeBlock.CYRILLIC);
                 tp.closeConsumer(SymbolAtom.get("cyrddot"));
                 return true;
             }
@@ -2190,7 +2187,6 @@ public class Commands {
         });
         map.put("U", new Command1A() {
             public Atom newI(TeXParser tp, Atom a) {
-                AlphabetManager.get().addBlock(Character.UnicodeBlock.CYRILLIC);
                 return new AccentedAtom(a, "cyrbreve");
             }
         });

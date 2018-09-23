@@ -56,7 +56,6 @@ public final class UnicodeMapping {
         if (u == null) {
             u = Character.UnicodeBlock.of(c);
             map[c] = u;
-            AlphabetManager.get().addBlock(u);
         }
         return u;
     }

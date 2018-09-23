@@ -48,7 +48,6 @@ package org.scilab.forge.jlatexmath.mhchem;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.scilab.forge.jlatexmath.AlphabetManager;
 import org.scilab.forge.jlatexmath.Atom;
 import org.scilab.forge.jlatexmath.CharAtom;
 import org.scilab.forge.jlatexmath.CharMapping;
@@ -246,12 +245,7 @@ public class MhchemParser extends TeXParser {
     }
 
     public Atom getGreek(final String com) {
-        final Atom a = SymbolAtom.get(com);
-        if (a == null) {
-            AlphabetManager.get().addBlock(Character.UnicodeBlock.GREEK);
-            return SymbolAtom.get(com);
-        }
-        return a;
+        return SymbolAtom.get(com);
     }
 
     public Atom handleGreek(char c, boolean upLower) {

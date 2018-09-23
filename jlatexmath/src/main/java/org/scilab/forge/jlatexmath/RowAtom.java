@@ -297,7 +297,7 @@ public class RowAtom extends Atom implements Row {
             hBox.add(b);
 
             // set last used fontId (for next atom)
-            env.setLastFontId(b.getLastFontId());
+            env.setLastFont(b.getLastFont());
 
             // insert kern
             if (Math.abs(kern) > TeXFormula.PREC) {

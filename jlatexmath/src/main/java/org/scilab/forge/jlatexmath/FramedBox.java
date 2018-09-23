@@ -100,7 +100,7 @@ public class FramedBox extends Box {
         box.draw(g2, x + space + thickness, y);
     }
 
-    public int getLastFontId() {
-        return box.getLastFontId();
+    public FontInfo getLastFont() {
+        return box.getLastFont();
     }
 }

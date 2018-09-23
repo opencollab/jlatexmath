@@ -91,7 +91,7 @@ public class CharBox extends Box {
         startDraw(g2, x, y);
         final AffineTransform oldT = g2.getTransform();
         g2.translate(x, y);
-        final Font font = Configuration.get().getFont(cf.fontId);
+        final Font font = cf.getFont().getFont();
 
         if (Math.abs(size - TeXFormula.FONT_SCALE_FACTOR) > TeXFormula.PREC) {
             g2.scale(size / TeXFormula.FONT_SCALE_FACTOR,
@@ -108,7 +108,7 @@ public class CharBox extends Box {
     }
 
     public Area getArea() {
-        final Font font = Configuration.get().getFont(cf.fontId);
+        final Font font = cf.getFont().getFont();
         final Shape s = font.createGlyphVector(FRC, String.valueOf(cf.c)).getGlyphOutline(0);
         final Area a = new Area(s);
         final double x = size / TeXFormula.FONT_SCALE_FACTOR;
@@ -116,8 +116,8 @@ public class CharBox extends Box {
         return a;
     }
 
-    public int getLastFontId() {
-        return cf.fontId;
+    public FontInfo getLastFont() {
+        return cf.getFont();
     }
 
     public String toString() {

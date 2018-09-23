@@ -126,7 +126,7 @@ public class TeXLength {
         case EM:
             return env.getTeXFont().getEM(env.getStyle());
         case EX:
-            return env.getTeXFont().getXHeight(env.getStyle(), env.getLastFontId());
+            return env.getTeXFont().getXHeight(env.getStyle(), env.getLastFont());
         case PIXEL:
             return 1. / env.getSize();
         case POINT:
@@ -135,7 +135,7 @@ public class TeXLength {
             return (12. * TeXFormula.PIXELS_PER_POINT) / env.getSize();
         case MU:
             final TeXFont tf = env.getTeXFont();
-            return tf.getQuad(env.getStyle(), tf.getMuFontId()) / 18.;
+            return tf.getQuad(env.getStyle(), tf.getMuFont()) / 18.;
         case CM:
             return (28.346456693 * TeXFormula.PIXELS_PER_POINT) / env.getSize();
         case MM:

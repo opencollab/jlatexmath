@@ -93,7 +93,7 @@ public class HVruleBox extends Box {
         return new Area(new Rectangle2D.Double(0., -h, w, h + d));
     }
 
-    public int getLastFontId() {
-        return TeXFont.NO_FONT;
+    public FontInfo getLastFont() {
+        return null;
     }
 }

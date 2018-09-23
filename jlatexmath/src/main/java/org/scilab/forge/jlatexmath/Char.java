@@ -54,19 +54,17 @@ import java.awt.Font;
 public class Char {
 
     private final char c;
-    private final Font font;
     private final Metrics m;
-    private final int fontCode;
+    private final FontInfo info;
 
-    public Char(char c, Font f, int fc, Metrics m) {
-        font = f;
-        fontCode = fc;
+    public Char(char c, FontInfo info, Metrics m) {
+        this.info = info;
         this.c = c;
         this.m = m;
     }
 
     public CharFont getCharFont() {
-        return new CharFont(c, fontCode);
+        return new CharFont(c, info);
     }
 
     public char getChar() {
@@ -74,11 +72,11 @@ public class Char {
     }
 
     public Font getFont() {
-        return font;
+        return info.getFont();
     }
 
-    public int getFontCode() {
-        return fontCode;
+    public FontInfo getFontInfo() {
+        return info;
     }
 
     public double getWidth() {

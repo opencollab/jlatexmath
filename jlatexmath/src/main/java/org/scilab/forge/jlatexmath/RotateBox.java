@@ -232,7 +232,7 @@ public class RotateBox extends Box {
         endDraw(g2);
     }
 
-    public int getLastFontId() {
-        return box.getLastFontId();
+    public FontInfo getLastFont() {
+        return box.getLastFont();
     }
 }

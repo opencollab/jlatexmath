@@ -1917,18 +1917,6 @@ public class TeXParser {
                 if (SymbolAtom.put(this, command)) {
                     return;
                 }
-            } else if (command.startsWith("CYR") || command.startsWith("cyr")) {
-                // Maybe we've a cyrillic
-                AlphabetManager.get().addBlock(Character.UnicodeBlock.CYRILLIC);
-                if (SymbolAtom.put(this, command)) {
-                    return;
-                }
-            } else if (command.startsWith("up") || command.startsWith("Up")) {
-                // Maybe we've a greek symbol
-                AlphabetManager.get().addBlock(Character.UnicodeBlock.GREEK);
-                if (SymbolAtom.put(this, command)) {
-                    return;
-                }
             } else if (setLength(command)) {
                 return;
             }
@@ -1938,7 +1926,6 @@ public class TeXParser {
     }
 
     public static List<String> getAllCommands() {
-        //AlphabetManager.get().addBlock(Character.UnicodeBlock.CYRILLIC);
         final List<String> all = new ArrayList<String>();
         Commands.getAll(all);
         SymbolAtom.getAll(all);

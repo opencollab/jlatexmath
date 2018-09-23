@@ -219,7 +219,7 @@ public final class Glue {
     private Box createBox(final TeXEnvironment env) {
         final TeXFont tf = env.getTeXFont();
         // use "quad" from a font marked as an "mu font"
-        final double f = tf.getQuad(env.getStyle(), tf.getMuFontId()) / 18.;
+        final double f = tf.getQuad(env.getStyle(), tf.getMuFont()) / 18.;
 
         return new GlueBox(space * f, stretch * f, shrink * f);
     }

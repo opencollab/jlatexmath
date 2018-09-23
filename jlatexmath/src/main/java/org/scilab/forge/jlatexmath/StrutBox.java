@@ -72,8 +72,8 @@ public class StrutBox extends Box {
         // no visual effect
     }
 
-    public int getLastFontId() {
-        return TeXFont.NO_FONT;
+    public FontInfo getLastFont() {
+        return null;
     }
 
     public String toString() {

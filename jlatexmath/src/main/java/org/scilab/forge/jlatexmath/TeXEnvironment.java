@@ -73,7 +73,7 @@ public class TeXEnvironment {
     private Font javaFont;
 
     // last used font
-    private int lastFontId = TeXFont.NO_FONT;
+    private FontInfo lastFont = null;
 
     private double textwidth = Double.POSITIVE_INFINITY;
 
@@ -317,12 +317,12 @@ public class TeXEnvironment {
         return tf.getSpace(style) * tf.getScaleFactor();
     }
 
-    public void setLastFontId(int id) {
-        lastFontId = id;
+    public void setLastFont(FontInfo font) {
+        lastFont = font;
     }
 
-    public int getLastFontId() {
-        // if there was no last font id (whitespace boxes only), use default "mu font"
-        return (lastFontId == TeXFont.NO_FONT ? tf.getMuFontId() : lastFontId);
+    public FontInfo getLastFont() {
+        // if there was no last font (whitespace boxes only), use default "mu font"
+        return lastFont == null ? tf.getMuFont() : lastFont;
     }
 }

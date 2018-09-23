@@ -72,7 +72,7 @@ public class NthRoot extends Atom {
         double clr;
         final double drt = tf.getDefaultRuleThickness(style);
         if (style < TeXConstants.STYLE_TEXT) {
-            clr = tf.getXHeight(style, tf.getChar(Symbols.SQRT.getCf(), style).getFontCode());
+            clr = tf.getXHeight(style, tf.getChar(Symbols.SQRT.getCf(), style).getFontInfo());
         } else {
             clr = drt;
         }

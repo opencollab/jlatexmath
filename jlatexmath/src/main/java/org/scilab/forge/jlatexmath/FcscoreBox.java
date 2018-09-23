@@ -113,7 +113,7 @@ public class FcscoreBox extends Box {
         endDraw(g2);
     }
 
-    public int getLastFontId() {
-        return TeXFont.NO_FONT;
+    public FontInfo getLastFont() {
+        return null;
     }
 }

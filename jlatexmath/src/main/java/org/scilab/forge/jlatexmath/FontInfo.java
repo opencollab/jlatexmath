@@ -60,15 +60,11 @@ public class FontInfo {
      */
     private static final int NUMBER_OF_CHAR_CODES = 256;
 
-    // ID
-    protected final int fontId;
-
     // font
     protected Font font;
-    protected final Object base;
     protected final int size;
     protected final String path;
-    protected final String fontName;
+    protected boolean loaded = false;
 
     protected final double[][] metrics;
 
@@ -79,33 +75,34 @@ public class FontInfo {
     protected final double xHeight;
     protected final double space;
     protected final double quad;
-    protected final int boldId;
-    protected final int romanId;
-    protected final int ssId;
-    protected final int ttId;
-    protected final int itId;
+
+    protected FontInfo bold;
+    protected FontInfo roman;
+    protected FontInfo ss;
+    protected FontInfo tt;
+    protected FontInfo it;
 
     protected CharFont[][] lig;
     protected double[][] kern;
     protected CharFont[] nextLarger;
     protected char[][] extensions;
 
-    public FontInfo(int fontId, int size, Object base, String path, String fontName, double xHeight, double space, double quad, char skewChar, int boldId, int romanId, int ssId, int ttId, int itId) {
-        this.fontId = fontId;
-        this.base = base;
+    public FontInfo(int size, String path, double xHeight, double space, double quad, char skewChar) {
         this.path = path;
-        this.fontName = fontName;
         this.xHeight = xHeight;
         this.space = space;
         this.quad = quad;
         this.skewChar = skewChar;
-        this.boldId = boldId == -1 ? fontId : boldId;
-        this.romanId = romanId == -1 ? fontId : romanId;
-        this.ssId = ssId == -1 ? fontId : ssId;
-        this.ttId = ttId == -1 ? fontId : ttId;
-        this.itId = itId == -1 ? fontId : itId;
-        this.size = size == -1 ? NUMBER_OF_CHAR_CODES : size;
+        this.size = size == 0 ? NUMBER_OF_CHAR_CODES : size;
         this.metrics = new double[this.size][];
+    }
+
+    public void setDependencies(FontInfo bold, FontInfo roman, FontInfo ss, FontInfo tt, FontInfo it) {
+        this.bold = bold == null ? this : bold;
+        this.roman = roman == null ? this : roman;
+        this.ss = ss == null ? this : ss;
+        this.tt = tt == null ? this : tt;
+        this.it = it == null ? this : it;
     }
 
     /**
@@ -142,10 +139,11 @@ public class FontInfo {
         if (lig[left] == null) {
             lig[left] = new CharFont[size];
         }
-        lig[left][right] = new CharFont(ligChar, fontId);
+        lig[left][right] = new CharFont(ligChar, this);
     }
 
     public char[] getExtension(final char c) {
+        init();
         if (extensions == null) {
             return null;
         }
@@ -153,6 +151,7 @@ public class FontInfo {
     }
 
     public double getKern(final char left, final char right, final double factor) {
+        init();
         if (kern == null || kern[left] == null) {
             return 0.;
         }
@@ -161,6 +160,7 @@ public class FontInfo {
     }
 
     public CharFont getLigature(final char left, final char right) {
+        init();
         if (lig == null || lig[left] == null) {
             return null;
         }
@@ -168,26 +168,32 @@ public class FontInfo {
     }
 
     public double[] getMetrics(final char c) {
+        init();
         return metrics[c];
     }
 
     public double getWidth(final char c) {
+        init();
         return metrics[c][0];
     }
 
     public double getHeight(final char c) {
+        init();
         return metrics[c][1];
     }
 
     public double getDepth(final char c) {
+        init();
         return metrics[c][2];
     }
 
     public double getItalic(final char c) {
+        init();
         return metrics[c][3];
     }
 
     public CharFont getNextLarger(final char c) {
+        init();
         if (nextLarger == null) {
             return null;
         }
@@ -199,6 +205,7 @@ public class FontInfo {
      *         accents)
      */
     public double getSkew(final char c, final double factor) {
+        init();
         if (skewChar != '\0') {
             return getKern(c, skewChar, factor);
         }
@@ -216,11 +223,41 @@ public class FontInfo {
         metrics[c] = arr;
     }
 
-    public void setNextLarger(final char c, final char larger, final int fontLarger) {
+    public void setNextLarger(final char c, final char larger, final FontInfo fontLarger) {
         if (nextLarger == null) {
             nextLarger = new CharFont[size];
         }
         nextLarger[c] = new CharFont(larger, fontLarger);
+    }
+
+    public void setInfo(char c, double[] metrics, char[] ligatures, char[] kernCode, double[] kernValue, FontInfo nextLarger, char nextLargerChar, char[] extension) {
+        setMetrics(c, metrics);
+        if (ligatures != null) {
+            for (int i = 0; i < ligatures.length; i+= 2) {
+                addLigature(c, ligatures[i], ligatures[i + 1]);
+            }
+        }
+        if (kernCode != null) {
+            for (int i = 0; i < kernCode.length; ++i) {
+                addKern(c, kernCode[i], kernValue[i]);
+            }
+        }
+        if (nextLarger != null) {
+            setNextLarger(c, nextLargerChar, nextLarger);
+        }
+        if (extension != null) {
+            setExtension(c, extension);
+        }
+    }
+
+    protected final void init() {
+        if (!loaded) {
+            initMetrics();
+            loaded = true;
+        }
+    }
+
+    protected void initMetrics() {
     }
 
     public double getQuad(final double factor) {
@@ -243,38 +280,34 @@ public class FontInfo {
         return skewChar;
     }
 
-    public final int getId() {
-        return fontId;
+    public final FontInfo getBold() {
+        return bold;
     }
 
-    public final int getBoldId() {
-        return boldId;
+    public final FontInfo getRoman() {
+        return roman;
     }
 
-    public final int getRomanId() {
-        return romanId;
+    public final FontInfo getTt() {
+        return tt;
     }
 
-    public final int getTtId() {
-        return ttId;
+    public final FontInfo getIt() {
+        return it;
     }
 
-    public final int getItId() {
-        return itId;
-    }
-
-    public final int getSsId() {
-        return ssId;
+    public final FontInfo getSs() {
+        return ss;
     }
 
     public final Font getFont() {
         if (font == null) {
-            font = FontLoader.createFont(base, path);
+            font = FontLoader.createFont(this, path);
         }
         return font;
     }
 
     public String toString() {
-        return "FontInfo: " + fontId + "::" + path + "::" +fontName;
+        return "FontInfo: " + path;
     }
 }

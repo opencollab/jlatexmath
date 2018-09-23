@@ -75,7 +75,7 @@ public class OoalignBox extends Box {
         endDraw(g2);
     }
 
-    public int getLastFontId() {
-        return boxes.get(boxes.size() - 1).getLastFontId();
+    public FontInfo getLastFont() {
+        return boxes.get(boxes.size() - 1).getLastFont();
     }
 }

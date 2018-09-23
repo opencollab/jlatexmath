@@ -61,6 +61,7 @@ public class FontIDs {
             if (i == null) {
                 final int r = map.size();
                 map.put(id, r);
+                System.out.println(id+"::"+r);
                 return r;
             }
             return i.intValue();

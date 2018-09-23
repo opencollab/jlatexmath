@@ -1,9 +1,8 @@
 /* UniFontInfo.java
  * =========================================================================
- * This file is originally part of the JMathTeX Library - http://jmathtex.sourceforge.net
+ * This file is part of the JLaTeXMath Library - http://forge.scilab.org/jlatexmath
  *
- * Copyright (C) 2004-2007 Universiteit Gent
- * Copyright (C) 2009 DENIZET Calixte
+ * Copyright (C) 2018 DENIZET Calixte
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -46,19 +45,18 @@
 
 package org.scilab.forge.jlatexmath;
 
-import java.awt.Font;
 import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Contains all the font information for 1 font.
+ * Contains all the font information for a font.
  */
 public class UniFontInfo extends FontInfo {
 
     private final Map<Character, Character> unicode;
 
-    public UniFontInfo(int fontId, int size, Object base, String path, String fontName, double xHeight, double space, double quad, char skewChar, int boldId, int romanId, int ssId, int ttId, int itId) {
-        super(fontId, size, base, path, fontName, xHeight, space, quad, skewChar, boldId, romanId, ssId, ttId, itId);
+    public UniFontInfo(int size, String path, double xHeight, double space, double quad, char skewChar) {
+        super(size, path, xHeight, space, quad, skewChar);
         this.unicode = new HashMap<Character, Character>(size);
     }
 
@@ -67,6 +65,7 @@ public class UniFontInfo extends FontInfo {
     }
 
     public double getKern(final char left, final char right, final double factor) {
+        init();
         if (kern == null) {
             return 0.;
         }
@@ -82,6 +81,7 @@ public class UniFontInfo extends FontInfo {
     }
 
     public CharFont getLigature(final char left, final char right) {
+        init();
         if (lig == null) {
             return null;
         }
@@ -93,6 +93,7 @@ public class UniFontInfo extends FontInfo {
     }
 
     public char[] getExtension(final char c) {
+        init();
         if (extensions == null) {
             return null;
         }
@@ -100,26 +101,32 @@ public class UniFontInfo extends FontInfo {
     }
 
     public double[] getMetrics(final char c) {
+        init();
         return metrics[unicode.get(c)];
     }
 
     public double getWidth(final char c) {
+        init();
         return metrics[unicode.get(c)][0];
     }
 
     public double getHeight(final char c) {
+        init();
         return metrics[unicode.get(c)][1];
     }
 
     public double getDepth(final char c) {
+        init();
         return metrics[unicode.get(c)][2];
     }
 
     public double getItalic(final char c) {
+        init();
         return metrics[unicode.get(c)][3];
     }
 
     public CharFont getNextLarger(final char c) {
+        init();
         if (nextLarger == null) {
             return null;
         }
@@ -134,12 +141,12 @@ public class UniFontInfo extends FontInfo {
         super.setMetrics(get(c), arr);
     }
 
-    public void setNextLarger(final char c, final char larger, final int fontLarger) {
+    public void setNextLarger(final char c, final char larger, final FontInfo fontLarger) {
         super.setNextLarger(get(c), larger, fontLarger);
     }
 
     public String toString() {
-        return "UniFontInfo: " + fontId + "::" + path + "::" +fontName;
+        return "UniFontInfo: " + path;
     }
 
     private char get(final char c) {

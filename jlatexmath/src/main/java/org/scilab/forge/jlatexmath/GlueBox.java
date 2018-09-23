@@ -67,7 +67,7 @@ public class GlueBox extends Box {
 
     }
 
-    public int getLastFontId() {
-        return TeXFont.NO_FONT;
+    public FontInfo getLastFont() {
+        return null;
     }
 }

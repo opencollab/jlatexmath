@@ -13,16 +13,6 @@
 
   <dependencies>
     <dependency>
-      <groupId>${project.parent.groupId}</groupId>
-      <artifactId>jlatexmath-font-greek</artifactId>
-      <version>${project.parent.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>${project.parent.groupId}</groupId>
-      <artifactId>jlatexmath-font-cyrillic</artifactId>
-      <version>${project.parent.version}</version>
-    </dependency>
-    <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <version>${junit.version}</version>

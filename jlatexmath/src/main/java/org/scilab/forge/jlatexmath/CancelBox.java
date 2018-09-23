@@ -110,7 +110,7 @@ public class CancelBox extends Box {
         endDraw(g2);
     }
 
-    public int getLastFontId() {
-        return b.getLastFontId();
+    public FontInfo getLastFont() {
+        return b.getLastFont();
     }
 }

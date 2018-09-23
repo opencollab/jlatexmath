@@ -131,7 +131,7 @@ public class OverUnderBox extends Box {
         endDraw(g2);
     }
 
-    public int getLastFontId() {
-        return base.getLastFontId();
+    public FontInfo getLastFont() {
+        return base.getLastFont();
     }
 }

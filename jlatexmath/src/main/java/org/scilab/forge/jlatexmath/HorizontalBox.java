@@ -173,14 +173,14 @@ public class HorizontalBox extends Box {
         depth = Math.max((children.isEmpty() ? Double.NEGATIVE_INFINITY : depth), b.depth + b.shift);
     }
 
-    public int getLastFontId() {
+    public FontInfo getLastFont() {
         // iterate from the last child box to the first until a font id is found
         // that's not equal to NO_FONT
-        int fontId = TeXFont.NO_FONT;
-        for (ListIterator it = children.listIterator(children.size()); fontId == TeXFont.NO_FONT && it.hasPrevious();)
-            fontId = ((Box) it.previous()).getLastFontId();
+        FontInfo font = null;
+        for (ListIterator it = children.listIterator(children.size()); font == null && it.hasPrevious();)
+            font = ((Box) it.previous()).getLastFont();
 
-        return fontId;
+        return font;
     }
 
     public void addBreakPosition(int pos) {

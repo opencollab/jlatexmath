@@ -56,6 +56,7 @@ import org.scilab.forge.jlatexmath.TeXParser;
 import org.scilab.forge.jlatexmath.TeXEnvironment;
 import org.scilab.forge.jlatexmath.SpaceAtom;
 import org.scilab.forge.jlatexmath.Box;
+import org.scilab.forge.jlatexmath.FontInfo;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
@@ -196,8 +197,8 @@ public class FooPackage extends JLMPackage {
             g2.setTransform(oldAt);
         }
 
-        public int getLastFontId() {
-            return 0;
+        public FontInfo getLastFont() {
+            return null;
         }
     }
 }

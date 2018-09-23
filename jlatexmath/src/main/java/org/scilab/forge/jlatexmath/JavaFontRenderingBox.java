@@ -139,8 +139,8 @@ public class JavaFontRenderingBox extends Box {
         }
     }
 
-    public int getLastFontId() {
-        return 0;
+    public FontInfo getLastFont() {
+        return null;
     }
 
     public String toString() {
