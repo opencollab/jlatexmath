@@ -407,28 +407,50 @@ public class ParserTest {
 
     @Test
     public void getCharFromCode() {
-        for (int i = 0; i < 65536; ++i) {
+        final int max = 0x10FFFF;
+        for (int i = 0; i <= max; ++i) {
             String s = Integer.toOctalString(i);
             TeXParser tp = new TeXParser("0" + s + "\\");
-            char c = tp.getCharFromCode();
-            assertTrue("Expect " + s + " and got " + Integer.toOctalString((int)c), (int)c == i);
+            int c = tp.getCharFromCode();
+            assertTrue("Expect " + s + " and got " + Integer.toOctalString(c), c == i);
             assertTrue("Expect pos to point on \\", tp.getChar() == '\\');
         }
 
-        for (int i = 0; i < 65536; ++i) {
+        for (int i = 0; i <= max; ++i) {
             String s = Integer.toHexString(i);
             TeXParser tp = new TeXParser("0x" + s + "\\");
-            char c = tp.getCharFromCode();
-            assertTrue("Expect " + s + " and got " + Integer.toHexString((int)c), (int)c == i);
+            int c = tp.getCharFromCode();
+            assertTrue("Expect " + s + " and got " + Integer.toHexString(c), c == i);
             assertTrue("Expect pos to point on \\", tp.getChar() == '\\');
         }
 
-        for (int i = 0; i < 65536; ++i) {
+        for (int i = 0; i <= max; ++i) {
             String s = Integer.toString(i);
             TeXParser tp = new TeXParser(s + "\\");
-            char c = tp.getCharFromCode();
-            assertTrue("Expect " + s + " and got " + Integer.toString((int)c), (int)c == i);
+            int c = tp.getCharFromCode();
+            assertTrue("Expect " + s + " and got " + Integer.toString(c), c == i);
             assertTrue("Expect pos to point on \\", tp.getChar() == '\\');
         }
+    }
+
+    @Test
+    public void getCharFromCodeWithZeros() {
+        final int max = 0x10FFFF;
+        for (int i = 0; i <= max; ++i) {
+            String s = Integer.toOctalString(i);
+            TeXParser tp = new TeXParser("0000" + s + "\\");
+            int c = tp.getCharFromCode();
+            assertTrue("Expect " + s + " and got " + Integer.toOctalString(c), c == i);
+            assertTrue("Expect pos to point on \\", tp.getChar() == '\\');
+        }
+
+        for (int i = 0; i <= max; ++i) {
+            String s = Integer.toHexString(i);
+            TeXParser tp = new TeXParser("0x000" + s + "\\");
+            int c = tp.getCharFromCode();
+            assertTrue("Expect " + s + " and got " + Integer.toHexString(c), c == i);
+            assertTrue("Expect pos to point on \\", tp.getChar() == '\\');
+        }
+        // no test for decimal since a starting '0' will be interpreted as octal
     }
 }
