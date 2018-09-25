@@ -92,10 +92,10 @@ public class CancelBox extends Box {
 
         switch (ctype) {
         case SLASH:
-            g2.draw(new Line2D.Double(x + th - a, y - height + th - b, x + width - th + a, y + depth - th + b));
+            g2.draw(new Line2D.Double(x + th - a, y + depth - th + b, x + width - th + a, y - height + th - b));
             break;
         case BACKSLASH:
-            g2.draw(new Line2D.Double(x + th - a, y + depth - th + b, x + width - th + a, y - height + th - b));
+            g2.draw(new Line2D.Double(x + th - a, y - height + th - b, x + width - th + a, y + depth - th + b));
             break;
         case X:
             g2.draw(new Line2D.Double(x + th - a, y - height + th - b, x + width - th + a, y + depth - th + b));

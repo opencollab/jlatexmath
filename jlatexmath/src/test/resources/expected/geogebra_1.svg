@@ -6442,7 +6442,7 @@ font-size: 133px;
 <text class="jlm_cmmi10" transform="matrix(0.3,0.0,0.0,0.3,89.94736,16882.346)">C</text>
 </g>
 <g stroke="rgb(0,0,0)" fill="rgb(0,0,0)" stroke-width="0.053332" stroke-miterlimit="10.0" stroke-linejoin="miter" stroke-linecap="butt">
-<path transform="matrix(30.0,0.0,0.0,30.0,6.0,28047.434)" d=" M 0.4710903 -373.13434 L 4.095486 -372.11597" fill="transparent"/>
+<path transform="matrix(30.0,0.0,0.0,30.0,6.0,28047.434)" d=" M 0.4710903 -372.11597 L 4.095486 -373.13434" fill="transparent"/>
 </g>
 <g stroke="rgb(0,0,0)" fill="rgb(0,0,0)" stroke-width="1.0" stroke-miterlimit="10.0" stroke-linejoin="miter" stroke-linecap="square">
 <text class="jlm_cmmi10" transform="matrix(0.3,0.0,0.0,0.3,121.39734,16882.346)">A</text>

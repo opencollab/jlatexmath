@@ -17,6 +17,6 @@ font-size: 133px;
 <text class="jlm_cmmi10" transform="matrix(0.1,0.0,0.0,0.1,6.0,11.740733)">¼</text>
 </g>
 <g stroke="rgb(0,0,0)" fill="rgb(0,0,0)" stroke-width="0.053332" stroke-miterlimit="10.0" stroke-linejoin="miter" stroke-linecap="butt">
-<path transform="matrix(10.0,0.0,0.0,10.0,0.0,0.0)" d=" M 0.39268714 0.46040133 L 1.6151875 1.3136721" fill="transparent"/>
+<path transform="matrix(10.0,0.0,0.0,10.0,0.0,0.0)" d=" M 0.39268714 1.3136721 L 1.6151875 0.46040133" fill="transparent"/>
 </g>
 </svg>

@@ -34,7 +34,7 @@ font-size: 133px;
 <text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,54.473804,32.758705)">4</text>
 </g>
 <g stroke="rgb(0,0,0)" fill="rgb(0,0,0)" stroke-width="0.053332" stroke-miterlimit="10.0" stroke-linejoin="miter" stroke-linecap="butt">
-<path transform="matrix(10.0,0.0,0.0,10.0,0.0,0.0)" d=" M 2.7995512 0.5092467 L 6.465574 3.477736" fill="transparent"/>
+<path transform="matrix(10.0,0.0,0.0,10.0,0.0,0.0)" d=" M 2.7995512 3.477736 L 6.465574 0.5092467" fill="transparent"/>
 </g>
 <g stroke="rgb(0,0,0)" fill="rgb(0,0,0)" stroke-width="1.0" stroke-miterlimit="10.0" stroke-linejoin="miter" stroke-linecap="square">
 <text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,65.697495,23.612694)">+</text>
