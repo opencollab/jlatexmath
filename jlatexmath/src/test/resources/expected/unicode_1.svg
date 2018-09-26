@@ -1,0 +1,43 @@
+<!--
+\begin{array}{l}
+               \unicode{65}=A\cr
+               \unicode{x41}=A\cr
+               \unicode[Verdana]{65}=A\cr
+               \fbox{\unicode[2em,2em][Verdana]{65}}
+               \end{array}
+-->
+<svg width="60" height="125" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<style type="text/css">
+@font-face {
+font-family: 'jlm_cmmi10';
+src: url('fonts/jlm_cmmi10.ttf') format('truetype');
+font-style: normal;
+}
+.jlm_cmmi10 {
+font-family: 'jlm_cmmi10';
+font-size: 133px;
+}
+@font-face {
+font-family: 'jlm_cmr10';
+src: url('fonts/jlm_cmr10.ttf') format('truetype');
+font-style: normal;
+}
+.jlm_cmr10 {
+font-family: 'jlm_cmr10';
+font-size: 133px;
+}
+</style>
+<g stroke="rgb(0,0,0)" fill="rgb(0,0,0)" stroke-width="1.0" stroke-miterlimit="10.0" stroke-linejoin="miter" stroke-linecap="square">
+<text class="jlm_cmmi10" transform="matrix(0.1,0.0,0.0,0.1,12.666667,17.407387)">A</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,26.370409,17.407387)">=</text>
+<text class="jlm_cmmi10" transform="matrix(0.1,0.0,0.0,0.1,40.44454,17.407387)">A</text>
+<text class="jlm_cmmi10" transform="matrix(0.1,0.0,0.0,0.1,12.666667,32.259212)">A</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,26.370409,32.259212)">=</text>
+<text class="jlm_cmmi10" transform="matrix(0.1,0.0,0.0,0.1,40.44454,32.259212)">A</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,16.370382,47.11104)">=</text>
+<text class="jlm_cmmi10" transform="matrix(0.1,0.0,0.0,0.1,30.44451,47.11104)">A</text>
+</g>
+<g stroke="rgb(0,0,0)" fill="rgb(0,0,0)" stroke-width="0.053332" stroke-miterlimit="10.0" stroke-linejoin="miter" stroke-linecap="butt">
+<path transform="matrix(10.0,0.0,0.0,10.0,0.0,0.0)" d=" M 1.2933327 5.3118434 L 2.1436758 5.3118434 L 2.1436758 11.49552 L 1.2933327 11.49552 L 1.2933327 5.3118434 Z " fill="transparent"/>
+</g>
+</svg>

@@ -1,0 +1,17 @@
+<?xml version='1.0'?>
+<tests name="unicode">
+  <test>
+    <id name="1"/>
+    <code>
+      <![CDATA[
+               \begin{array}{l}
+               \unicode{65}=A\cr
+               \unicode{x41}=A\cr
+               \unicode[Verdana]{65}=A\cr
+               \fbox{\unicode[2em,2em][Verdana]{65}}
+               \end{array}
+      ]]>      
+    </code>
+    <expected success="true"/>
+  </test>
+</tests>

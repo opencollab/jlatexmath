@@ -275,6 +275,17 @@ public final class CharMapping {
         return null;
     }
 
+    public Atom getAtom(final int c, final boolean mathMode) {
+        final TeXParser tp = new TeXParser(true);
+        final SingleAtomConsumer cons = new SingleAtomConsumer();
+        tp.addConsumer(cons);
+        if (replace(c, tp, mathMode)) {
+            tp.parse();
+            return cons.get();
+        }
+        return null;
+    }
+
     public void replaceUnsafe(final char c, final TeXParser tp) {
         mapToSym[c].map(tp, tp.isMathMode());
     }

@@ -860,7 +860,10 @@ public class Commands {
         map.put("char", new Command0AImpl() {
             public boolean init(TeXParser tp) {
                 final int c = tp.getArgAsCharFromCode();
-                if (c <= 65535) {
+                if (c == 0) {
+                    throw new ParseException(tp, "Invalid character in \\char: 0.");
+                }
+                if (c <= 0xFFFF) {
                     final char cc = (char)c;
                     if ((cc >= '0' && cc <= '9') || (cc >= 'a' && cc <= 'z') || (cc >= 'A' && cc <= 'Z')) {
                         tp.convertASCIIChar(cc, true);

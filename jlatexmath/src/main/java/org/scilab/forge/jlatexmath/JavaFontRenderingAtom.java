@@ -114,4 +114,8 @@ public class JavaFontRenderingAtom extends Atom {
             return new JavaFontRenderingBox(str, style, factor, font, dtf.isRoman);
         }
     }
+
+    public String toString() {
+        return "JavaFontRenderingAtom: " + str + ", font=" + font;
+    }
 }
