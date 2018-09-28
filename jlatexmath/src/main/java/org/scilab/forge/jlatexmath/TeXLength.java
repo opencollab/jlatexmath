@@ -70,6 +70,7 @@ public class TeXLength {
     private static final Map<String, TeXLength> map = new HashMap<String, TeXLength>() {
         {
             put("fboxsep", new TeXLength(Unit.PT, 3.));
+            put("fboxrule", new TeXLength(Unit.PT, 0.4));
             put("scriptspace", new TeXLength(Unit.PT, 0.5));
             put("nulldelimiterspace", new TeXLength(Unit.PT, 1.2));
             put("delimitershortfall", new TeXLength(Unit.PT, 5.));

@@ -125,7 +125,7 @@ public class CommandUnicode extends Command {
         } else {
             s = new String(new int[] { c }, 0, 1);
         }
-        Atom a = new JavaFontRenderingAtom(s , font);
+        Atom a = new JavaFontRenderingAtom(s, font);
         if (hd != null) {
             a = new HeightDepthAtom(hd[0], hd[1], a);
         }

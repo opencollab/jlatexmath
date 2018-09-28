@@ -37,7 +37,7 @@ font-size: 133px;
 <text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,16.370382,47.11104)">=</text>
 <text class="jlm_cmmi10" transform="matrix(0.1,0.0,0.0,0.1,30.44451,47.11104)">A</text>
 </g>
-<g stroke="rgb(0,0,0)" fill="rgb(0,0,0)" stroke-width="0.053332" stroke-miterlimit="10.0" stroke-linejoin="miter" stroke-linecap="butt">
-<path transform="matrix(10.0,0.0,0.0,10.0,0.0,0.0)" d=" M 1.2933327 5.3118434 L 2.1436758 5.3118434 L 2.1436758 11.49552 L 1.2933327 11.49552 L 1.2933327 5.3118434 Z " fill="transparent"/>
+<g stroke="rgb(0,0,0)" fill="rgb(0,0,0)" stroke-width="0.05313408" stroke-miterlimit="10.0" stroke-linejoin="miter" stroke-linecap="butt">
+<path transform="matrix(10.0,0.0,0.0,10.0,0.0,0.0)" d=" M 1.2932338 5.311744 L 2.143379 5.311744 L 2.143379 11.495223 L 1.2932338 11.495223 L 1.2932338 5.311744 Z " fill="transparent"/>
 </g>
 </svg>

@@ -22,22 +22,22 @@ font-family: 'jlm_cmr10';
 font-size: 133px;
 }
 </style>
-<g stroke="rgb(0,0,0)" fill="rgb(0,0,0)" stroke-width="0.053332" stroke-miterlimit="10.0" stroke-linejoin="miter" stroke-linecap="butt">
-<path transform="matrix(10.0,0.0,0.0,10.0,0.0,0.0)" d=" M 0.626666 0.626666 L 14.999912 0.626666 L 14.999912 6.3744116 L 0.626666 6.3744116 L 0.626666 0.626666 Z " fill="transparent"/>
+<g stroke="rgb(0,0,0)" fill="rgb(0,0,0)" stroke-width="0.05313408" stroke-miterlimit="10.0" stroke-linejoin="miter" stroke-linecap="butt">
+<path transform="matrix(10.0,0.0,0.0,10.0,0.0,0.0)" d=" M 0.62656707 0.62656707 L 14.999616 0.62656707 L 14.999616 6.374115 L 0.62656707 6.374115 L 0.62656707 0.62656707 Z " fill="transparent"/>
 </g>
 <g stroke="rgb(0,0,0)" fill="rgb(0,0,0)" stroke-width="1.0" stroke-miterlimit="10.0" stroke-linejoin="miter" stroke-linecap="square">
-<text class="jlm_cmbx10" transform="matrix(0.14,0.0,0.0,0.14,10.518376,23.32578)">A</text>
-<text class="jlm_cmbx10" transform="matrix(0.14,0.0,0.0,0.14,26.747923,23.32578)">a</text>
-<text class="jlm_cmbx10" transform="matrix(0.14,0.0,0.0,0.14,37.183037,23.32578)">a</text>
-<text class="jlm_cmbx10" transform="matrix(0.14,0.0,0.0,0.14,47.618153,23.32578)">a</text>
-<text class="jlm_cmbx10" transform="matrix(0.14,0.0,0.0,0.14,58.05327,25.814672)">a</text>
-<text class="jlm_cmbx10" transform="matrix(0.14,0.0,0.0,0.14,74.71062,29.133196)">a</text>
-<text class="jlm_cmbx10" transform="matrix(0.14,0.0,0.0,0.14,85.14573,29.133196)">a</text>
-<text class="jlm_cmbx10" transform="matrix(0.14,0.0,0.0,0.14,101.80308,32.970215)">r</text>
-<text class="jlm_cmbx10" transform="matrix(0.14,0.0,0.0,0.14,116.866035,41.00724)">g</text>
-<text class="jlm_cmbx10" transform="matrix(0.14,0.0,0.0,0.14,133.82155,59.4924)">h</text>
-<text class="jlm_cmr10" transform="matrix(0.06999999999999999,0.0,0.0,0.07,151.8598,18.076021)">3</text>
-<path transform="matrix(10.0,0.0,0.0,10.0,0.0,0.0)" d=" M 15.185981 1.9725788 L 15.652649 1.9725788 L 15.652649 2.0259109 L 15.185981 2.0259109 L 15.185981 1.9725788 Z " stroke="transparent" fill-rule="nonzero"/>
-<text class="jlm_cmr10" transform="matrix(0.06999999999999999,0.0,0.0,0.07,151.8598,27.923662)">5</text>
+<text class="jlm_cmbx10" transform="matrix(0.14,0.0,0.0,0.14,10.5163965,23.323803)">A</text>
+<text class="jlm_cmbx10" transform="matrix(0.14,0.0,0.0,0.14,26.745943,23.323803)">a</text>
+<text class="jlm_cmbx10" transform="matrix(0.14,0.0,0.0,0.14,37.181057,23.323803)">a</text>
+<text class="jlm_cmbx10" transform="matrix(0.14,0.0,0.0,0.14,47.616173,23.323803)">a</text>
+<text class="jlm_cmbx10" transform="matrix(0.14,0.0,0.0,0.14,58.05129,25.812695)">a</text>
+<text class="jlm_cmbx10" transform="matrix(0.14,0.0,0.0,0.14,74.70863,29.131216)">a</text>
+<text class="jlm_cmbx10" transform="matrix(0.14,0.0,0.0,0.14,85.14375,29.131216)">a</text>
+<text class="jlm_cmbx10" transform="matrix(0.14,0.0,0.0,0.14,101.8011,32.968235)">r</text>
+<text class="jlm_cmbx10" transform="matrix(0.14,0.0,0.0,0.14,116.86405,41.00526)">g</text>
+<text class="jlm_cmbx10" transform="matrix(0.14,0.0,0.0,0.14,133.81956,59.49042)">h</text>
+<text class="jlm_cmr10" transform="matrix(0.06999999999999999,0.0,0.0,0.07,151.85585,18.074041)">3</text>
+<path transform="matrix(10.0,0.0,0.0,10.0,0.0,0.0)" d=" M 15.185585 1.9723809 L 15.652253 1.9723809 L 15.652253 2.025713 L 15.185585 2.025713 L 15.185585 1.9723809 Z " stroke="transparent" fill-rule="nonzero"/>
+<text class="jlm_cmr10" transform="matrix(0.06999999999999999,0.0,0.0,0.07,151.85585,27.921682)">5</text>
 </g>
 </svg>

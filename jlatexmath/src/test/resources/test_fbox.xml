@@ -1,0 +1,16 @@
+<?xml version='1.0'?>
+<tests name="fbox">
+  <test>
+    <id name="1"/>
+    <code>
+      <![CDATA[
+               \begin{array}{c}
+               \fbox{\sum_{n=1}^{+\infty}}\cr
+               \setlength{\fboxrule}{5pt}\fbox{\sum_{n=1}^{+\infty}}\\
+               \setlength{\fboxrule}{0.4pt}
+               \end{array}
+      ]]>      
+    </code>
+    <expected success="true"/>
+  </test>
+</tests>
