@@ -22,9 +22,11 @@
                \grave{X}\cr
                \=x\cr
                \bar{X}\cr
+               \k{a}\cr
+               \text{\k{a}}\cr
                \end{gather}
 -->
-<svg width="66" height="404" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg width="66" height="432" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <style type="text/css">
 @font-face {
 font-family: 'jlm_cmex10';
@@ -133,5 +135,9 @@ font-size: 133px;
 <text class="jlm_cmmi10" transform="matrix(0.1,0.0,0.0,0.1,28.832903,380.56717)">x</text>
 <text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,30.42089,393.87827)">¹</text>
 <text class="jlm_cmmi10" transform="matrix(0.1,0.0,0.0,0.1,26.59679,397.24863)">X</text>
+<text class="jlm_cmmi10" transform="matrix(0.1,0.0,0.0,0.1,29.119156,408.7301)">a</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,32.464222,408.7301)">Å</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,29.309744,422.83823)">a</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,32.273636,422.83823)">Å</text>
 </g>
 </svg>

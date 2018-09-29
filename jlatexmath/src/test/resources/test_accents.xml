@@ -27,6 +27,8 @@
                \grave{X}\cr
                \=x\cr
                \bar{X}\cr
+               \k{a}\cr
+               \text{\k{a}}\cr
                \end{gather}
       ]]>      
     </code>

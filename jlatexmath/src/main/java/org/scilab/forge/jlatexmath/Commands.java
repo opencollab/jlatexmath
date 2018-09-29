@@ -1910,6 +1910,11 @@ public class Commands {
                 return new OgonekAtom(a);
             }
         });
+        map.put("k", new Command1A() {
+            public Atom newI(TeXParser tp, Atom a) {
+                return new OgonekAtom(a);
+            }
+        });
         map.put("tcaron", new Command0A() {
             public Atom newI(TeXParser tp) {
                 return new tcaronAtom();
