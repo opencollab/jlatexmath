@@ -56,8 +56,6 @@ public class CommandBigg extends Command {
     public void add(TeXParser tp, Atom a) {
         if (a instanceof SymbolAtom) {
             a = new BigDelimiterAtom((SymbolAtom) a, size);
-        } else {
-            throw new ParseException(tp, "A symbol expected");
         }
         tp.closeConsumer(a);
     }
