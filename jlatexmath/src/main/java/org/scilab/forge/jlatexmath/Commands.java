@@ -826,6 +826,11 @@ public class Commands {
                 return new SpaceAtom(TeXLength.Unit.EM, 0.5, 0., 0.);
             }
         });
+        map.put("enskip", new Command0A() {
+            public Atom newI(TeXParser tp) {
+                return new SpaceAtom(TeXLength.Unit.EM, 0.5, 0., 0.);
+            }
+        });
         map.put("quad", new Command0A() {
             public Atom newI(TeXParser tp) {
                 return new SpaceAtom(TeXLength.Unit.EM, 1., 0., 0.);
