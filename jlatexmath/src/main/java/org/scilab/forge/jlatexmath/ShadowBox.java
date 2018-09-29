@@ -71,10 +71,9 @@ public class ShadowBox extends FramedBox {
         Stroke st = g2.getStroke();
         g2.setStroke(new BasicStroke((float)thickness, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER));
         g2.draw(new Rectangle2D.Double(x + th, y - height + th, width - shadowRule - thickness, height + depth - shadowRule - thickness));
-        final double penth = Math.abs(1. / g2.getTransform().getScaleX());
-        g2.setStroke(new BasicStroke((float)penth, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER));
-        g2.fill(new Rectangle2D.Double(x + shadowRule - penth, y + depth - shadowRule - penth, width - shadowRule, shadowRule));
-        g2.fill(new Rectangle2D.Double(x + width - shadowRule - penth, y - height + th + shadowRule, shadowRule, depth + height - 2 * shadowRule - th));
+        g2.setStroke(new BasicStroke(0f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER));
+        g2.fill(new Rectangle2D.Double(x + shadowRule, y + depth - shadowRule - th, width - shadowRule, shadowRule + th));
+        g2.fill(new Rectangle2D.Double(x + width - shadowRule - th, y - height + shadowRule, shadowRule + th, depth + height - 2 * shadowRule));
         g2.setStroke(st);
         endDraw(g2);
     }
@@ -83,20 +82,3 @@ public class ShadowBox extends FramedBox {
         return box.getLastFont();
     }
 }
-/*
-
-  public void draw(Graphics2D g2, double x, double y) {
-  double th = thickness / 2;
-  double sh = shadowRule / 2;
-  box.draw(g2, x + space + thickness, y);
-  Stroke st = g2.getStroke();
-  g2.setStroke(new BasicStroke(shadowRule, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER));
-  g2.draw(new Line2D.Double(x + shadowRule, y + depth - sh, x + width, y +  depth - sh));
-  g2.draw(new Line2D.Double(x + width - sh, y - height + shadowRule, x + width - sh, y + depth - shadowRule));
-  g2.setStroke(new BasicStroke(thickness, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER));
-  g2.draw(new Rectangle2D.Double(x + th, y - height + th, width - shadowRule - thickness, height + depth - shadowRule - thickness));
-  //drawDebug(g2, x, y);
-  g2.setStroke(st);
-  }
-
-*/

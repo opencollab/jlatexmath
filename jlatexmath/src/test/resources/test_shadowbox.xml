@@ -1,0 +1,18 @@
+<?xml version='1.0'?>
+<tests name="shadowbox">
+  <test>
+    <id name="1"/>
+    <code>
+      <![CDATA[
+               \begin{array}{c}
+               \shadowbox{\sum_{n=1}^{+\infty}}\cr
+               \setlength{\fboxrule}{5pt}\shadowbox{\sum_{n=1}^{+\infty}}\\
+               \setlength{\fboxrule}{0.4pt}
+               \setlength{\shadowsize}{2pt}\shadowbox{\sum_{n=1}^{+\infty}}\\
+               \setlength{\shadowsize}{4pt}
+               \end{array}
+      ]]>      
+    </code>
+    <expected success="true"/>
+  </test>
+</tests>
