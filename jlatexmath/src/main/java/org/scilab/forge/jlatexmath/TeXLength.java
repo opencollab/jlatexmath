@@ -186,7 +186,82 @@ public class TeXLength {
         return map.containsKey(name);
     }
 
+    public static Atom getLength(final String name) {
+        return map.get(name).toAtom();
+    }
+
+    public String unitToString() {
+        switch(unit) {
+        case EM:
+            return "em";
+        case EX:
+            return "ex";
+        case PIXEL:
+            return "pixel";
+        case POINT:
+            return "bp";
+        case PICA:
+            return "pica";
+        case MU:
+            return "mu";
+        case CM:
+            return "cm";
+        case MM:
+            return "mm";
+        case IN:
+            return "in";
+        case SP:
+            return "sp";
+        case PT:
+            return "pt";
+        case DD:
+            return "dd";
+        case CC:
+            return "cc";
+        case X8:
+            return "x8";
+        default:
+            return "";
+        }
+    }
+
     public String toString() {
-        return l + "_" + unit;
+        return Double.toString(getL()) + unitToString();
+    }
+
+    private static int getIntPart(double x) {
+        return (int)(x >= 0. ? Math.floor(x) : -Math.floor(-x));
+    }
+
+    private static int getDecPart(double x) {
+        final double frac = Math.abs(x - getIntPart(x));
+        int part = (int)Math.round(frac * Math.pow(10, TeXParser.MAX_DEC));
+        while (part != 0 && (part % 10 == 0)) {
+            part /= 10;
+        }
+        return part;
+    }
+
+    public Atom toAtom() {
+        RowAtom ra = new RowAtom();
+        final double l = getL();
+        final int frac = TeXLength.getDecPart(l);
+        final int inte = TeXLength.getIntPart(l);
+        if (inte < 0) {
+            ra.add(Symbols.MINUS);
+            TeXParser.getAtomForNumber(-inte, ra, true);
+        } else {
+            TeXParser.getAtomForNumber(inte, ra, true);
+        }
+        if (frac != 0) {
+            ra.add(Symbols.NORMALDOT);
+            TeXParser.getAtomForNumber(frac, ra, true);
+        }
+        final String u = unitToString();
+        if (!u.isEmpty()) {
+            ra.add(new RomanAtom(TeXParser.getAtomForLatinStr(u, false)));
+        }
+        return ra;
     }
 }
+

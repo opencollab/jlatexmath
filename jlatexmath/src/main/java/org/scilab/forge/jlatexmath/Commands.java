@@ -2349,6 +2349,13 @@ public class Commands {
                 return new RowAtom(new StyleAtom(TeXConstants.STYLE_DISPLAY, a));
             }
         });
+        map.put("the", new Command0AImpl() {
+            public boolean init(TeXParser tp) {
+                final String name = tp.getArgAsCommand(true);
+                tp.addToConsumer(new TheAtom(name));
+                return false;
+            }
+        });
         map.put("setlength", new Command0AImpl() {
             public boolean init(TeXParser tp) {
                 final String name = tp.getArgAsCommand(true);

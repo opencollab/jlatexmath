@@ -337,7 +337,7 @@ public final class CharMapping {
         put(SUBRPAR, new SubSupMapping(')', false));
         put('@', new SymbolMapping('@', "@"));
         put('+', new SymbolMapping('+', "plus"));
-        put('-', new SymbolMapping('-', "minus", "textminus"));
+        put('-', new SymbolMapping('-', Symbols.MINUS, "textminus"));
         put('/', new SymbolMapping('/', "slash", "textfractionsolidus"));
         put('*', new SymbolMapping('*', "ast"));
         put('(', new SymbolMapping('(', "lbrack"));

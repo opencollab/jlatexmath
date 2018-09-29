@@ -1,0 +1,43 @@
+<?xml version='1.0'?>
+<tests name="the">
+  <test>
+    <id name="1"/>
+    <code>
+      <![CDATA[
+               \begin{array}{l}
+               \the\fboxsep\cr
+               \the\fboxrule\cr
+               \the\scriptspace\cr
+               \the\nulldelimiterspace\cr
+               \the\delimitershortfall\cr
+               \the\delimiterfactor\cr
+               \setlength{\foo}{1.234em}\the\foo\cr
+               \setlength{\foo}{-1.234em}\the\foo\cr
+               \setlength{\foo}{1.234ex}\the\foo\cr
+               \setlength{\foo}{-1.234ex}\the\foo\cr
+               \setlength{\foo}{12.345pica}\the\foo\cr
+               \setlength{\foo}{-12.345pica}\the\foo\cr
+               \setlength{\foo}{1.234pixel}\the\foo\cr
+               \setlength{\foo}{-1.234pixel}\the\foo\cr
+               \setlength{\foo}{1.234bp}\the\foo\cr
+               \setlength{\foo}{-1.234bp}\the\foo\cr
+               \setlength{\foo}{1.234mu}\the\foo\cr
+               \setlength{\foo}{-1.234mu}\the\foo\cr
+               \setlength{\foo}{1.234cm}\the\foo\cr
+               \setlength{\foo}{-1.234cm}\the\foo\cr
+               \setlength{\foo}{1.234mm}\the\foo\cr
+               \setlength{\foo}{-1.234mm}\the\foo\cr
+               \setlength{\foo}{1.234in}\the\foo\cr
+               \setlength{\foo}{-1.234in}\the\foo\cr
+               \setlength{\foo}{1.234sp}\the\foo\cr
+               \setlength{\foo}{-1.234sp}\the\foo\cr
+               \setlength{\foo}{1.234pt}\the\foo\cr
+               \setlength{\foo}{-1.234pt}\the\foo\cr
+               \setlength{\foo}{1.234cc}\the\foo\cr
+               \setlength{\foo}{-1.234cc}\the\foo\cr
+               \end{array}
+      ]]>      
+    </code>
+    <expected success="true"/>
+  </test>
+</tests>

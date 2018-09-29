@@ -1,4 +1,4 @@
-/* SetLengthAtom.java
+/* TheAtom.java
  * =========================================================================
  * This file is part of the JLaTeXMath Library - http://forge.scilab.org/jlatexmath
  *
@@ -48,18 +48,18 @@ package org.scilab.forge.jlatexmath;
 /**
  * An atom representing a boxed base atom.
  */
-public class SetLengthAtom extends Atom {
+public class TheAtom extends Atom {
 
-    protected final TeXLength l;
     protected final String name;
 
-    public SetLengthAtom(TeXLength l, String name) {
-        this.l = l;
+    public TheAtom(String name) {
         this.name = name;
     }
 
     public Box createBox(TeXEnvironment env) {
-        TeXLength.setLength(name, l);
-        return StrutBox.getEmpty();
+        if (TeXLength.isLengthName(name)) {
+            return TeXLength.getLength(name).createBox(env);
+        }
+        throw new ParseException("Invalid length name in \\the: " + name);
     }
 }

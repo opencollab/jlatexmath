@@ -702,6 +702,38 @@ public class TeXParser {
         return ra.simplify();
     }
 
+    public static RowAtom getAtomForNumber(int n, final RowAtom ra, final boolean mathMode) {
+        final ExternalFontManager.FontSSSF f = ExternalFontManager.get().getFont(Character.UnicodeBlock.BASIC_LATIN);
+        if (f != null) {
+            ra.add(new JavaFontRenderingAtom(Integer.toString(n), f));
+            return ra;
+        }
+
+        final int zero = (int)'0';
+        if (n <= 99) {
+            final int unit = n % 10;
+            if (n <= 9) {
+                ra.add(new CharAtom((char)(zero + unit), mathMode));
+                return ra;
+            }
+            final int ten = n / 10;
+            ra.add(new CharAtom((char)(zero + ten), mathMode),
+                   new CharAtom((char)(zero + unit), mathMode));
+            return ra;
+        }
+
+        char[] digits = new char[(int)Math.ceil(Math.log10((double)n))];
+        for (int i = digits.length - 1; i >= 0; --i) {
+            digits[i] = (char)(zero + (n % 10));
+            n /= 10;
+        }
+        for (int i = 0; i < digits.length; ++i) {
+            ra.add(new CharAtom(digits[i], mathMode));
+        }
+
+        return ra;
+    }
+
     public int getNumberOf(final char c) {
         int n = 1;
         while (++pos < len) {

@@ -57,7 +57,7 @@ public class ParseException extends JMathTeXException {
         super(str, cause);
     }
 
-    private ParseException(String str) {
+    public ParseException(String str) {
         super(str);
     }
 
