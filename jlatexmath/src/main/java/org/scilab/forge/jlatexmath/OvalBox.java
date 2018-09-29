@@ -55,10 +55,11 @@ import java.awt.geom.RoundRectangle2D;
  */
 public class OvalBox extends FramedBox {
 
-    private double shadowRule;
-
-    public OvalBox(FramedBox fbox) {
+    final double cornersize;
+    
+    public OvalBox(FramedBox fbox, double cornersize) {
         super(fbox.box, fbox.thickness, fbox.space);
+        this.cornersize = cornersize;
     }
 
     public void draw(Graphics2D g2, double x, double y) {
@@ -67,7 +68,7 @@ public class OvalBox extends FramedBox {
         Stroke st = g2.getStroke();
         g2.setStroke(new BasicStroke((float)thickness, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER));
         double th = thickness / 2.;
-        double r = 0.5 * Math.min(width - thickness, height + depth - thickness);
+        double r = cornersize * Math.min(width - 2 * thickness, height + depth - 2 * thickness);
         g2.draw(new RoundRectangle2D.Double(x + th, y - height + th, width - thickness, height + depth - thickness, r, r));
         g2.setStroke(st);
         endDraw(g2);

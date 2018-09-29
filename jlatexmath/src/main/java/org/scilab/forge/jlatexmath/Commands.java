@@ -1218,6 +1218,13 @@ public class Commands {
                 return new OvalAtom(a);
             }
         });
+        map.put("cornersize", new Command0AImpl() {
+            public boolean init(TeXParser tp) {
+                final double cs = tp.getArgAsDecimal();
+                tp.addToConsumer(new SetLengthAtom(new TeXLength(TeXLength.Unit.NONE, cs), "cornersize"));
+                return false;
+            }
+        });
         map.put("shadowbox", new Command1A() {
             public Atom newI(TeXParser tp, Atom a) {
                 return new ShadowAtom(a);

@@ -78,6 +78,7 @@ public class TeXLength {
             put("dashlength", new TeXLength(Unit.PT, 6.));
             put("dashdash", new TeXLength(Unit.PT, 3.));
             put("shadowsize", new TeXLength(Unit.PT, 4.));
+            put("cornersize", new TeXLength(Unit.NONE, 0.5));
             //put("textwidth", new TeXLength(Unit.NONE, Double.POSITIVE_INFINITY));
         }
     };

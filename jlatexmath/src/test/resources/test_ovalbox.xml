@@ -1,0 +1,17 @@
+<?xml version='1.0'?>
+<tests name="ovalbox">
+  <test>
+    <id name="1"/>
+    <code>
+      <![CDATA[
+               \begin{array}{c}
+               \ovalbox{\sum_{n=1}^{+\infty}}\cr
+               \cornersize{1}\ovalbox{\sum_{n=1}^{+\infty}}\\
+               \cornersize{2}\ovalbox{\sum_{n=1}^{+\infty}}\\
+               \cornersize{0.3}\ovalbox{\sum_{n=1}^{+\infty}}\cornersize{0.5}\\
+               \end{array}
+      ]]>      
+    </code>
+    <expected success="true"/>
+  </test>
+</tests>

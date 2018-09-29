@@ -1,0 +1,92 @@
+<!--
+\begin{array}{c}
+               \ovalbox{\sum_{n=1}^{+\infty}}\cr
+               \cornersize{1}\ovalbox{\sum_{n=1}^{+\infty}}\\
+               \cornersize{2}\ovalbox{\sum_{n=1}^{+\infty}}\\
+               \cornersize{0.3}\ovalbox{\sum_{n=1}^{+\infty}}\cornersize{0.5}\\
+               \end{array}
+-->
+<svg width="51" height="232" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<style type="text/css">
+@font-face {
+font-family: 'jlm_cmex10';
+src: url('fonts/jlm_cmex10.ttf') format('truetype');
+font-style: normal;
+}
+.jlm_cmex10 {
+font-family: 'jlm_cmex10';
+font-size: 133px;
+}
+@font-face {
+font-family: 'jlm_cmmi10';
+src: url('fonts/jlm_cmmi10.ttf') format('truetype');
+font-style: normal;
+}
+.jlm_cmmi10 {
+font-family: 'jlm_cmmi10';
+font-size: 133px;
+}
+@font-face {
+font-family: 'jlm_cmr10';
+src: url('fonts/jlm_cmr10.ttf') format('truetype');
+font-style: normal;
+}
+.jlm_cmr10 {
+font-family: 'jlm_cmr10';
+font-size: 133px;
+}
+@font-face {
+font-family: 'jlm_cmsy10';
+src: url('fonts/jlm_cmsy10.ttf') format('truetype');
+font-style: normal;
+}
+.jlm_cmsy10 {
+font-family: 'jlm_cmsy10';
+font-size: 133px;
+}
+</style>
+<g stroke="rgb(0,0,0)" fill="rgb(0,0,0)" stroke-width="1.0" stroke-miterlimit="10.0" stroke-linejoin="miter" stroke-linecap="square">
+<text class="jlm_cmr10" transform="matrix(0.06999999999999999,0.0,0.0,0.07,18.516392,19.590475)">+</text>
+<text class="jlm_cmsy10" transform="matrix(0.06999999999999999,0.0,0.0,0.07,25.77568,19.590475)">1</text>
+<text class="jlm_cmex10" transform="matrix(0.1,0.0,0.0,0.1,17.183064,23.590488)">X</text>
+<text class="jlm_cmmi10" transform="matrix(0.06999999999999999,0.0,0.0,0.07,18.048634,51.827686)">n</text>
+<text class="jlm_cmr10" transform="matrix(0.06999999999999999,0.0,0.0,0.07,23.650826,51.827686)">=</text>
+<text class="jlm_cmr10" transform="matrix(0.06999999999999999,0.0,0.0,0.07,30.910116,51.827686)">1</text>
+</g>
+<g stroke="rgb(0,0,0)" fill="rgb(0,0,0)" stroke-width="0.05313408" stroke-miterlimit="10.0" stroke-linejoin="miter" stroke-linecap="butt">
+<path transform="matrix(10.0,0.0,0.0,10.0,0.0,0.0)" d=" M 1.2932338 1.5369319 L 1.2932338 5.060439 C 1.2932338 5.436399 1.5980093 5.7411747 1.9739692 5.7411747 L 3.3885741 5.7411747 C 3.764534 5.7411747 4.0693097 5.436399 4.0693097 5.060439 L 4.0693097 1.5369319 C 4.0693097 1.160972 3.764534 0.85619634 3.3885741 0.85619634 L 1.9739692 0.85619634 C 1.5980093 0.85619634 1.2932338 1.160972 1.2932338 1.5369319 Z " fill="transparent"/>
+</g>
+<g stroke="rgb(0,0,0)" fill="rgb(0,0,0)" stroke-width="1.0" stroke-miterlimit="10.0" stroke-linejoin="miter" stroke-linecap="square">
+<text class="jlm_cmr10" transform="matrix(0.06999999999999999,0.0,0.0,0.07,18.516392,74.712326)">+</text>
+<text class="jlm_cmsy10" transform="matrix(0.06999999999999999,0.0,0.0,0.07,25.77568,74.712326)">1</text>
+<text class="jlm_cmex10" transform="matrix(0.1,0.0,0.0,0.1,17.183064,78.71234)">X</text>
+<text class="jlm_cmmi10" transform="matrix(0.06999999999999999,0.0,0.0,0.07,18.048634,106.94954)">n</text>
+<text class="jlm_cmr10" transform="matrix(0.06999999999999999,0.0,0.0,0.07,23.650826,106.94954)">=</text>
+<text class="jlm_cmr10" transform="matrix(0.06999999999999999,0.0,0.0,0.07,30.910116,106.94954)">1</text>
+</g>
+<g stroke="rgb(0,0,0)" fill="rgb(0,0,0)" stroke-width="0.05313408" stroke-miterlimit="10.0" stroke-linejoin="miter" stroke-linecap="butt">
+<path transform="matrix(10.0,0.0,0.0,10.0,0.0,0.0)" d=" M 1.2932338 7.7298527 L 1.2932338 9.891889 C 1.2932338 10.643808 1.9027851 11.25336 2.6547046 11.25336 L 2.7078388 11.25336 C 3.4597583 11.25336 4.0693097 10.643808 4.0693097 9.891889 L 4.0693097 7.7298527 C 4.0693097 6.9779334 3.4597583 6.368382 2.7078388 6.368382 L 2.6547046 6.368382 C 1.9027851 6.368382 1.2932338 6.9779334 1.2932338 7.7298527 Z " fill="transparent"/>
+</g>
+<g stroke="rgb(0,0,0)" fill="rgb(0,0,0)" stroke-width="1.0" stroke-miterlimit="10.0" stroke-linejoin="miter" stroke-linecap="square">
+<text class="jlm_cmr10" transform="matrix(0.06999999999999999,0.0,0.0,0.07,18.516392,129.83418)">+</text>
+<text class="jlm_cmsy10" transform="matrix(0.06999999999999999,0.0,0.0,0.07,25.77568,129.83418)">1</text>
+<text class="jlm_cmex10" transform="matrix(0.1,0.0,0.0,0.1,17.183064,133.8342)">X</text>
+<text class="jlm_cmmi10" transform="matrix(0.06999999999999999,0.0,0.0,0.07,18.048634,162.0714)">n</text>
+<text class="jlm_cmr10" transform="matrix(0.06999999999999999,0.0,0.0,0.07,23.650826,162.0714)">=</text>
+<text class="jlm_cmr10" transform="matrix(0.06999999999999999,0.0,0.0,0.07,30.910116,162.0714)">1</text>
+</g>
+<g stroke="rgb(0,0,0)" fill="rgb(0,0,0)" stroke-width="0.05313408" stroke-miterlimit="10.0" stroke-linejoin="miter" stroke-linecap="butt">
+<path transform="matrix(10.0,0.0,0.0,10.0,0.0,0.0)" d=" M 1.2932338 14.323056 L 1.2932338 14.323056 C 1.2932338 15.672006 1.9146795 16.765545 2.6812718 16.765545 L 2.6812718 16.765545 C 3.4478638 16.765545 4.0693097 15.672006 4.0693097 14.323056 L 4.0693097 14.323056 C 4.0693097 12.974107 3.4478638 11.880568 2.6812718 11.880568 L 2.6812718 11.880568 C 1.9146795 11.880568 1.2932338 12.974107 1.2932338 14.323056 Z " fill="transparent"/>
+</g>
+<g stroke="rgb(0,0,0)" fill="rgb(0,0,0)" stroke-width="1.0" stroke-miterlimit="10.0" stroke-linejoin="miter" stroke-linecap="square">
+<text class="jlm_cmr10" transform="matrix(0.06999999999999999,0.0,0.0,0.07,18.516392,184.95604)">+</text>
+<text class="jlm_cmsy10" transform="matrix(0.06999999999999999,0.0,0.0,0.07,25.77568,184.95604)">1</text>
+<text class="jlm_cmex10" transform="matrix(0.1,0.0,0.0,0.1,17.183064,188.95605)">X</text>
+<text class="jlm_cmmi10" transform="matrix(0.06999999999999999,0.0,0.0,0.07,18.048634,217.19325)">n</text>
+<text class="jlm_cmr10" transform="matrix(0.06999999999999999,0.0,0.0,0.07,23.650826,217.19325)">=</text>
+<text class="jlm_cmr10" transform="matrix(0.06999999999999999,0.0,0.0,0.07,30.910116,217.19325)">1</text>
+</g>
+<g stroke="rgb(0,0,0)" fill="rgb(0,0,0)" stroke-width="0.05313408" stroke-miterlimit="10.0" stroke-linejoin="miter" stroke-linecap="butt">
+<path transform="matrix(10.0,0.0,0.0,10.0,0.0,0.0)" d=" M 1.2932338 17.801193 L 1.2932338 21.86929 C 1.2932338 22.094866 1.4760991 22.27773 1.7016749 22.27773 L 3.6608684 22.27773 C 3.8864443 22.27773 4.0693097 22.094866 4.0693097 21.86929 L 4.0693097 17.801193 C 4.0693097 17.575619 3.8864443 17.392754 3.6608684 17.392754 L 1.7016749 17.392754 C 1.4760991 17.392754 1.2932338 17.575619 1.2932338 17.801193 Z " fill="transparent"/>
+</g>
+</svg>
