@@ -64,46 +64,46 @@ font-size: 133px;
 <path transform="matrix(10.0,0.0,0.0,10.0,0.0,0.0)" d=" M 18.141363 4.239675 L 28.607632 4.239675 L 28.607632 4.7975826 L 18.141363 4.7975826 L 18.141363 4.239675 Z " stroke="transparent" fill-rule="nonzero"/>
 <path transform="matrix(10.0,0.0,0.0,10.0,0.0,0.0)" d=" M 28.049723 2.9683769 L 28.607632 2.9683769 L 28.607632 4.266242 L 28.049723 4.266242 L 28.049723 2.9683769 Z " stroke="transparent" fill-rule="nonzero"/>
 </g>
-<g stroke="rgb(0,0,0)" fill="rgb(0,0,0)" stroke-width="0.079998" stroke-miterlimit="10.0" stroke-linejoin="miter" stroke-linecap="butt">
-<path transform="matrix(10.0,0.0,0.0,10.0,0.0,0.0)" d=" M 1.6117288 5.411655 L 15.199142 5.411655 L 15.199142 7.5879183 L 1.6117288 7.5879183 L 1.6117288 5.411655 Z " fill="transparent"/>
+<g stroke="rgb(0,0,0)" fill="rgb(0,0,0)" stroke-width="0.07970112" stroke-miterlimit="10.0" stroke-linejoin="miter" stroke-linecap="butt">
+<path transform="matrix(10.0,0.0,0.0,10.0,0.0,0.0)" d=" M 1.6123224 5.4115067 L 15.198549 5.4115067 L 15.198549 7.5865827 L 1.6123224 7.5865827 L 1.6123224 5.4115067 Z " fill="transparent"/>
 </g>
-<g stroke="rgb(0,0,0)" fill="rgb(0,0,0)" stroke-width="0.039999" stroke-miterlimit="10.0" stroke-linejoin="miter" stroke-linecap="butt">
-<path transform="matrix(10.0,0.0,0.0,10.0,0.0,0.0)" d=" M 1.8183919 5.6183186 L 14.992479 5.6183186 L 14.992479 7.381255 L 1.8183919 7.381255 L 1.8183919 5.6183186 Z " fill="transparent"/>
+<g stroke="rgb(0,0,0)" fill="rgb(0,0,0)" stroke-width="0.03985056" stroke-miterlimit="10.0" stroke-linejoin="miter" stroke-linecap="butt">
+<path transform="matrix(10.0,0.0,0.0,10.0,0.0,0.0)" d=" M 1.8184662 5.6176505 L 14.992405 5.6176505 L 14.992405 7.380439 L 1.8184662 7.380439 L 1.8184662 5.6176505 Z " fill="transparent"/>
 </g>
 <g stroke="rgb(0,0,0)" fill="rgb(0,0,0)" stroke-width="1.0" stroke-miterlimit="10.0" stroke-linejoin="miter" stroke-linecap="square">
-<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,22.36897,69.6275)">A</text>
-<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,36.81345,69.6275)">d</text>
-<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,44.22088,69.6275)">o</text>
-<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,50.88757,69.6275)">u</text>
-<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,58.295,69.6275)">b</text>
-<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,65.70242,69.6275)">l</text>
-<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,69.40614,69.6275)">e</text>
-<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,79.77654,69.6275)">f</text>
-<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,83.85064,69.6275)">r</text>
-<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,89.072876,69.6275)">a</text>
-<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,95.73957,69.6275)">m</text>
-<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,106.850716,69.6275)">e</text>
-<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,112.776665,69.6275)">d</text>
-<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,124.62854,69.6275)">b</text>
-<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,132.40636,69.6275)">o</text>
-<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,138.70267,69.6275)">x</text>
-<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,173.29178,69.6275)">A</text>
-<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,183.29181,69.6275)">n</text>
-<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,195.14368,69.6275)">o</text>
-<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,201.43999,69.6275)">v</text>
-<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,208.10669,69.6275)">a</text>
-<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,214.77338,69.6275)">l</text>
-<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,222.92155,69.6275)">f</text>
-<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,226.99565,69.6275)">r</text>
-<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,232.21788,69.6275)">a</text>
-<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,238.88458,69.6275)">m</text>
-<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,249.99573,69.6275)">e</text>
-<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,255.92168,69.6275)">d</text>
-<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,267.77356,69.6275)">b</text>
-<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,275.55136,69.6275)">o</text>
-<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,281.84766,69.6275)">x</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,22.36897,69.62008)">A</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,36.81345,69.62008)">d</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,44.22088,69.62008)">o</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,50.88757,69.62008)">u</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,58.295,69.62008)">b</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,65.70242,69.62008)">l</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,69.40614,69.62008)">e</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,79.77654,69.62008)">f</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,83.85064,69.62008)">r</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,89.072876,69.62008)">a</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,95.73957,69.62008)">m</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,106.850716,69.62008)">e</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,112.776665,69.62008)">d</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,124.62854,69.62008)">b</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,132.40636,69.62008)">o</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,138.70267,69.62008)">x</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,173.29178,69.62008)">A</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,183.29181,69.62008)">n</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,195.14368,69.62008)">o</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,201.43999,69.62008)">v</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,208.10669,69.62008)">a</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,214.77338,69.62008)">l</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,222.92155,69.62008)">f</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,226.99565,69.62008)">r</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,232.21788,69.62008)">a</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,238.88458,69.62008)">m</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,249.99573,69.62008)">e</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,255.92168,69.62008)">d</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,267.77356,69.62008)">b</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,275.55136,69.62008)">o</text>
+<text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,281.84766,69.62008)">x</text>
 </g>
 <g stroke="rgb(0,0,0)" fill="rgb(0,0,0)" stroke-width="0.05313408" stroke-miterlimit="10.0" stroke-linejoin="miter" stroke-linecap="butt">
-<path transform="matrix(10.0,0.0,0.0,10.0,0.0,0.0)" d=" M 16.904104 6.055769 L 16.904104 6.9438047 C 16.904104 7.189029 17.1029 7.3878226 17.348124 7.3878226 L 28.86953 7.3878226 C 29.114754 7.3878226 29.313547 7.189029 29.313547 6.9438047 L 29.313547 6.055769 C 29.313547 5.8105445 29.114754 5.6117506 28.86953 5.6117506 L 17.348124 5.6117506 C 17.1029 5.6117506 16.904104 5.8105445 16.904104 6.055769 Z " fill="transparent"/>
+<path transform="matrix(10.0,0.0,0.0,10.0,0.0,0.0)" d=" M 16.904104 6.0550265 L 16.904104 6.943063 C 16.904104 7.188287 17.1029 7.3870807 17.348124 7.3870807 L 28.86953 7.3870807 C 29.114754 7.3870807 29.313547 7.188287 29.313547 6.943063 L 29.313547 6.0550265 C 29.313547 5.809802 29.114754 5.6110086 28.86953 5.6110086 L 17.348124 5.6110086 C 17.1029 5.6110086 16.904104 5.809802 16.904104 6.0550265 Z " fill="transparent"/>
 </g>
 </svg>
