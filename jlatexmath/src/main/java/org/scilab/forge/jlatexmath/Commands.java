@@ -630,8 +630,7 @@ public class Commands {
         map.put("end@cases", new EnvArray.End("cases") {
             public Atom newI(TeXParser tp, EnvArray.Begin beg) {
                 final SymbolAtom op = Symbols.LBRACE;
-                final SymbolAtom cl = Symbols.RBRACE;
-                return new FencedAtom(super.newI(tp, beg), op, null, cl);
+                return new FencedAtom(super.newI(tp, beg), op, null, null);
             }
         });
         map.put("matrix", new CommandMatrix() {
