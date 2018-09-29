@@ -1,0 +1,19 @@
+<?xml version='1.0'?>
+<tests name="dbox">
+  <test>
+    <id name="1"/>
+    <code>
+      <![CDATA[
+               \begin{array}{c}
+               \dbox{\sum_{n=1}^{+\infty}}\cr
+               \setlength{\fboxrule}{5pt}\dbox{\sum_{n=1}^{+\infty}}\\
+               \setlength{\fboxrule}{0.4pt}\\
+               \setlength{\dashlength}{2pt}\setlength{\dashdash}{1pt}
+               \dbox{\sum_{n=1}^{+\infty}}
+               \setlength{\dashlength}{6pt}\setlength{\dashdash}{3pt}
+               \end{array}
+      ]]>      
+    </code>
+    <expected success="true"/>
+  </test>
+</tests>

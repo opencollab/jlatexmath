@@ -1135,6 +1135,11 @@ public class Commands {
                 return new FBoxAtom(a);
             }
         });
+        map.put("dbox", new Command1A() {
+            public Atom newI(TeXParser tp, Atom a) {
+                return new DBoxAtom(a);
+            }
+        });
         map.put("boxed", new Command1A() {
             public Atom newI(TeXParser tp, Atom a) {
                 return new FBoxAtom(new MathAtom(a, TeXConstants.STYLE_DISPLAY));

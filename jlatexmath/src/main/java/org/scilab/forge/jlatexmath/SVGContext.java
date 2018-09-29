@@ -275,6 +275,15 @@ public class SVGContext {
             sb.append("square");
             break;
         }
+
+        float[] dashes = stroke.getDashArray();
+        if (dashes != null && dashes.length != 0) {
+            sb.append("\" stroke-dasharray=\"");
+            for (int i = 0; i < dashes.length - 1; ++i) {
+                sb.append(dashes[i]).append(",");
+            }
+            sb.append(dashes[dashes.length - 1]);
+        }
         sb.append("\"");
     }
 
