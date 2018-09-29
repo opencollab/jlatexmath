@@ -79,7 +79,8 @@ public class TeXLength {
             put("dashdash", new TeXLength(Unit.PT, 3.));
             put("shadowsize", new TeXLength(Unit.PT, 4.));
             put("cornersize", new TeXLength(Unit.NONE, 0.5));
-            //put("textwidth", new TeXLength(Unit.NONE, Double.POSITIVE_INFINITY));
+            put("baselineskip", new TeXLength(Unit.EX, 1.));
+            put("textwidth", new TeXLength(Unit.NONE, Double.POSITIVE_INFINITY));
         }
     };
 
@@ -192,6 +193,10 @@ public class TeXLength {
 
     public static Atom getLength(final String name) {
         return map.get(name).toAtom();
+    }
+
+    public static double getTextwidth(TeXEnvironment env) {
+        return TeXLength.getLength("textwidth", env);
     }
 
     public String unitToString() {

@@ -50,17 +50,17 @@ import java.util.Stack;
 
 public final class BreakFormula {
 
-    public static Box split(Box box, double width, double interline) {
+    public static Box split(Box box, double width, double interline, TeXConstants.Align align) {
         if (box instanceof HorizontalBox) {
-            return split((HorizontalBox) box, width, interline);
+            return split((HorizontalBox) box, width, interline, align);
         } else if (box instanceof VerticalBox) {
-            return split((VerticalBox) box, width, interline);
+            return split((VerticalBox) box, width, interline, align);
         } else {
             return box;
         }
     }
 
-    public static Box split(HorizontalBox hbox, double width, double interline) {
+    public static Box split(HorizontalBox hbox, double width, double interline, TeXConstants.Align align) {
         VerticalBox vbox = new VerticalBox();
         HorizontalBox first;
         HorizontalBox second = null;
@@ -79,22 +79,30 @@ public final class BreakFormula {
                 first = hboxes[0];
                 second = hboxes[1];
             }
-            vbox.add(first, interline);
+            if (align != TeXConstants.Align.NONE) {
+                vbox.add(new HorizontalBox(first, width, align), interline);
+            } else {
+                vbox.add(first, interline);
+            }
             hbox = second;
         }
 
         if (second != null) {
-            vbox.add(second, interline);
+            if (align != TeXConstants.Align.NONE) {
+                vbox.add(new HorizontalBox(second, width, align), interline);
+            } else {
+                vbox.add(second, interline);
+            }
             return vbox;
         }
 
         return hbox;
     }
 
-    private static Box split(VerticalBox vbox, double width, double interline) {
+    private static Box split(VerticalBox vbox, double width, double interline, TeXConstants.Align align) {
         VerticalBox newBox = new VerticalBox();
-        for (Box box:vbox.children) {
-            newBox.add(split(box, width, interline));
+        for (Box box : vbox.children) {
+            newBox.add(split(box, width, interline, align));
         }
 
         return newBox;

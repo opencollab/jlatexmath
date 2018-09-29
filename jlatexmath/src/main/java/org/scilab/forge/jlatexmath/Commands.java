@@ -790,6 +790,21 @@ public class Commands {
                 return new SpaceAtom(TeXConstants.Muskip.THIN);
             }
         });
+        /*map.put("raggedleft", new Command0AImpl() {
+                public boolean init(TeXParser tp) {
+                    return false;
+                }
+        });
+        map.put("raggedright", new Command0AImpl() {
+                public boolean init(TeXParser tp) {
+                    return false;
+                }
+        });
+        map.put("raggedcenter", new Command0AImpl() {
+                public boolean init(TeXParser tp) {
+                    return false;
+                }
+                });*/
         map.put("thinspace", map.get(","));
         map.put(":", new Command0A() {
             public Atom newI(TeXParser tp) {

@@ -464,9 +464,12 @@ public class TeXParser {
             case ' ':
                 ++pos;
                 if (isTextMode()) { // We are in a mbox
-                    // TODO: erreur ici: il faut ajouter l'un puis l'autre (meme flux)
-                    // faire attention a bien avoir un rowatom ou truc du genre...
-                    addToConsumer(new RowAtom(new SpaceAtom(), BreakMarkAtom.get()));
+                    if (peek() instanceof GroupConsumer) {
+                        addToConsumer(new SpaceAtom());
+                        addToConsumer(BreakMarkAtom.get());
+                    } else {
+                        addToConsumer(new SpaceAtom());
+                    }
                     skipPureWhites();
                 }
                 break;

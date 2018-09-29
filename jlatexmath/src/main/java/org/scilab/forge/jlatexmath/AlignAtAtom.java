@@ -59,7 +59,7 @@ public class AlignAtAtom extends AlignAtom {
         final int row = matrix.row;
         final int col = matrix.col;
         final double[] seps = new double[col + 1];
-        final double w = aligned ? Double.POSITIVE_INFINITY : env.getTextwidth();
+        final double w = aligned ? Double.POSITIVE_INFINITY : TeXLength.getTextwidth(env);
 
         //Alignat env. : hsep=(textwidth-matWidth)/2 and hsep elem ... elem hsep
         final double alignW = align.createBox(env).getWidth();

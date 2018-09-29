@@ -56,7 +56,7 @@ import java.awt.geom.RoundRectangle2D;
 public class OvalBox extends FramedBox {
 
     final double cornersize;
-    
+
     public OvalBox(FramedBox fbox, double cornersize) {
         super(fbox.box, fbox.thickness, fbox.space);
         this.cornersize = cornersize;

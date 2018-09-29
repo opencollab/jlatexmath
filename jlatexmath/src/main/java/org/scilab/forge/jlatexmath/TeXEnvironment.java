@@ -75,23 +75,13 @@ public class TeXEnvironment {
     // last used font
     private FontInfo lastFont = null;
 
-    private double textwidth = Double.POSITIVE_INFINITY;
-
     private int textStyle = TextStyle.NONE;
     private boolean smallCap;
     private double scaleFactor = 1.;
-    private TeXLength.Unit interlineUnit;
-    private double interline;
-
     public boolean isColored = false;
 
     public TeXEnvironment(int style, TeXFont tf, int textStyle) {
         this(style, tf, null, null, textStyle);
-    }
-
-    public TeXEnvironment(int style, TeXFont tf, TeXLength.Unit widthUnit, double textwidth, int textStyle) {
-        this(style, tf, null, null, textStyle);
-        this.textwidth = textwidth * TeXLength.getFactor(widthUnit, this);
     }
 
     private TeXEnvironment(int style, TeXFont tf, Color bg, Color c, int textStyle) {
@@ -100,7 +90,6 @@ public class TeXEnvironment {
         background = bg;
         color = c;
         this.textStyle = textStyle;
-        setInterline(TeXLength.Unit.EX, 1.);
     }
 
     private TeXEnvironment(int style, double scaleFactor, TeXFont tf, Color bg, Color c, int textStyle, boolean smallCap, Font javaFont) {
@@ -112,24 +101,6 @@ public class TeXEnvironment {
         this.javaFont = javaFont;
         this.background = bg;
         this.color = c;
-        setInterline(TeXLength.Unit.EX, 1.);
-    }
-
-    public void setInterline(TeXLength.Unit unit, double len) {
-        this.interline = len;
-        this.interlineUnit = unit;
-    }
-
-    public double getInterline() {
-        return interline * TeXLength.getFactor(interlineUnit, this);
-    }
-
-    public void setTextwidth(TeXLength.Unit widthUnit, double textwidth) {
-        this.textwidth = textwidth * TeXLength.getFactor(widthUnit, this);
-    }
-
-    public double getTextwidth() {
-        return textwidth;
     }
 
     public void setScaleFactor(double f) {
@@ -146,9 +117,6 @@ public class TeXEnvironment {
 
     protected TeXEnvironment copy(TeXFont tf) {
         TeXEnvironment te = new TeXEnvironment(style, scaleFactor, tf, background, color, textStyle, smallCap, javaFont);
-        te.textwidth = textwidth;
-        te.interline = interline;
-        te.interlineUnit = interlineUnit;
         return te;
     }
 
