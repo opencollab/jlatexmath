@@ -5,14 +5,14 @@
     <code>
       <![CDATA[
                \begin{tabular}{l}
-               \fcolorbox{black}{#e6e6e6}{\text{\backslash fboxsep=3pt (default)}} \cr
-               \setlength\fboxsep{4pt}\fcolorbox{black}{#e6e6e6}{\text{\backslash fboxsep=4pt}} \cr
-               \setlength\fboxsep{5pt}\fcolorbox{black}{#e6e6e6}{\text{\backslash fboxsep=5pt}} \cr
-               \setlength\fboxsep{6pt}\fcolorbox{black}{#e6e6e6}{\text{\backslash fboxsep=6pt}} \cr
-               \setlength\fboxsep{7pt}\fcolorbox{black}{#e6e6e6}{\text{\backslash fboxsep=7pt}} \cr
-               \setlength\fboxsep{1em}\fcolorbox{black}{#e6e6e6}{\text{\backslash fboxsep=1em}} \cr
-               \setlength\fboxsep{2.5em}\fcolorbox{black}{#e6e6e6}{\text{\backslash fboxsep=2.5em}} \cr
-               \setlength\fboxsep{3pt}\fcolorbox{black}{#e6e6e6}{\text{\backslash fboxsep=3pt}}
+               \fcolorbox{black}{#e6e6e6}{\text{\backslash{}fboxsep=3pt (default)}} \cr
+               \setlength\fboxsep{4pt}\fcolorbox{black}{#e6e6e6}{\text{\backslash{}fboxsep=4pt}} \cr
+               \setlength\fboxsep{5pt}\fcolorbox{black}{#e6e6e6}{\text{\backslash{}fboxsep=5pt}} \cr
+               \setlength\fboxsep{6pt}\fcolorbox{black}{#e6e6e6}{\text{\backslash{}fboxsep=6pt}} \cr
+               \setlength\fboxsep{7pt}\fcolorbox{black}{#e6e6e6}{\text{\backslash{}fboxsep=7pt}} \cr
+               \setlength\fboxsep{1em}\fcolorbox{black}{#e6e6e6}{\text{\backslash{}fboxsep=1em}} \cr
+               \setlength\fboxsep{2.5em}\fcolorbox{black}{#e6e6e6}{\text{\backslash{}fboxsep=2.5em}} \cr
+               \setlength\fboxsep{3pt}\fcolorbox{black}{#e6e6e6}{\text{\backslash{}fboxsep=3pt}}
                \end{tabular}
       ]]>      
     </code>

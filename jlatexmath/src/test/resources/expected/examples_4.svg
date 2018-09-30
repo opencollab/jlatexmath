@@ -1,10 +1,10 @@
 <!--
 \scalebox{2}{\begin{array}{|c|c|c|c|}
-	           \multicolumn{4}{c}{\shadowbox{\text{\Huge An image from the \LaTeX3 project}}}\cr
+	           \multicolumn{4}{c}{\shadowbox{\text{\Huge{}An image from the \LaTeX3 project}}}\cr
 	           \hline
 	           \text{Left}\includegraphics{src/test/resources/lion.png}\text{Right} & \text{Left}\includegraphics[width=3cm,interpolation=bicubic]{src/test/resources/lion.png}\text{Right} & \text{Left}\includegraphics[angle=45,width=3cm]{src/test/resources/lion.png}\text{Right} & \text{Left}\includegraphics[angle=160]{src/test/resources/lion.png}\text{Right} \cr
 	           \hline
-	           \text{\backslash includegraphics\{src/test/resources/lion.png\}} & \text{\backslash includegraphics[width=3cm,interpolation=bicubic]\{lion.png\}} & \text{\backslash{}includegraphics[angle=45,width=3cm]\{lion.png\}} & \text{\backslash{}includegraphics[angle=160]\{lion.png\}}\cr
+	           \text{\backslash{}includegraphics\{src/test/resources/lion.png\}} & \text{\backslash{}includegraphics[width=3cm,interpolation=bicubic]\{lion.png\}} & \text{\backslash{}includegraphics[angle=45,width=3cm]\{lion.png\}} & \text{\backslash{}includegraphics[angle=160]\{lion.png\}}\cr
 	           \hline
 	           \end{array}}
 -->

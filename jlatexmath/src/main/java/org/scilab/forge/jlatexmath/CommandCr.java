@@ -54,14 +54,15 @@ public class CommandCr extends Command {
     }
 
     public boolean init(TeXParser tp) {
+        if (cmd.equals("cr")) {
+            tp.eatWhite();
+        }
         if (!tp.isColumn()) {
             tp.close();
         }
         if (tp.isArrayMode()) {
             tp.addToConsumer(EnvArray.RowSep.get());
         } else {
-            if (false)//true)
-                throw new ParseException(tp, "The macro \\" + cmd + " must be used in an array");
             final RowAtom ra = tp.steal();
             if (ra == null) {
                 throw new ParseException(tp, "The macro \\" + cmd + " must be used in an array");
