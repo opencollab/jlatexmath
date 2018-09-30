@@ -1579,7 +1579,7 @@ public class TeXParser {
                         case 1:
                             final DoubleOrInt n = arr.get(0);
                             if (n.isdouble) {
-                                final int g = (int)(255. * clamp(n.f) + 0.5) * 0x010101;
+                                final int g = (int)(255. * Colors.clamp(n.f) + 0.5) * 0x010101;
                                 cancelPrevPos();
                                 return new Color(g);
                             }
@@ -1593,25 +1593,25 @@ public class TeXParser {
                             final DoubleOrInt G = arr.get(1);
                             final DoubleOrInt B = arr.get(2);
                             if (!R.isdouble && !G.isdouble && !B.isdouble) {
-                                final int Ri = clamp(R.i);
-                                final int Gi = clamp(G.i);
-                                final int Bi = clamp(B.i);
+                                final int Ri = Colors.clamp(R.i);
+                                final int Gi = Colors.clamp(G.i);
+                                final int Bi = Colors.clamp(B.i);
 
                                 cancelPrevPos();
                                 return new Color((Ri << 16) | (Gi << 8) | Bi);
                             }
 
-                            final int Rf = (int)(255. * clamp(R.getDouble()) + 0.5);
-                            final int Gf = (int)(255. * clamp(G.getDouble()) + 0.5);
-                            final int Bf = (int)(255. * clamp(B.getDouble()) + 0.5);
+                            final int Rf = (int)(255. * Colors.clamp(R.getDouble()) + 0.5);
+                            final int Gf = (int)(255. * Colors.clamp(G.getDouble()) + 0.5);
+                            final int Bf = (int)(255. * Colors.clamp(B.getDouble()) + 0.5);
 
                             cancelPrevPos();
                             return new Color((Rf << 16) | (Gf << 8) | Bf);
                         case 4:
-                            final double C = clamp(arr.get(0).getDouble());
-                            final double M = clamp(arr.get(1).getDouble());
-                            final double Y = clamp(arr.get(2).getDouble());
-                            final double K = clamp(arr.get(3).getDouble());
+                            final double C = Colors.clamp(arr.get(0).getDouble());
+                            final double M = Colors.clamp(arr.get(1).getDouble());
+                            final double Y = Colors.clamp(arr.get(2).getDouble());
+                            final double K = Colors.clamp(arr.get(3).getDouble());
 
                             cancelPrevPos();
                             return Colors.conv(C, M, Y, K);
@@ -1826,19 +1826,19 @@ public class TeXParser {
                         final DoubleOrInt B = arr.get(2);
                         int RGB;
                         if (!R.isdouble && !G.isdouble && !B.isdouble) {
-                            final int Ri = clamp(R.i);
-                            final int Gi = clamp(G.i);
-                            final int Bi = clamp(B.i);
+                            final int Ri = Colors.clamp(R.i);
+                            final int Gi = Colors.clamp(G.i);
+                            final int Bi = Colors.clamp(B.i);
                             RGB = (Ri << 16) | (Gi << 8) | Bi;
                         } else {
-                            final int Rf = (int)(255. * clamp(R.getDouble()) + 0.5);
-                            final int Gf = (int)(255. * clamp(G.getDouble()) + 0.5);
-                            final int Bf = (int)(255. * clamp(B.getDouble()) + 0.5);
+                            final int Rf = (int)(255. * Colors.clamp(R.getDouble()) + 0.5);
+                            final int Gf = (int)(255. * Colors.clamp(G.getDouble()) + 0.5);
+                            final int Bf = (int)(255. * Colors.clamp(B.getDouble()) + 0.5);
                             RGB = (Rf << 16) | (Gf << 8) | Bf;
                         }
 
                         if (rgba) {
-                            final int A = (int)(255. * clamp(arr.get(3).getDouble()) + 0.5);
+                            final int A = (int)(255. * Colors.clamp(arr.get(3).getDouble()) + 0.5);
                             return new Color((A << 24) | RGB, true);
                         } else {
                             return new Color(RGB);
@@ -1864,13 +1864,13 @@ public class TeXParser {
                         ++pos;
                         final ArrayList<DoubleOrInt> arr = getComponentsAsNum(ncomp, ncomp, stop);
                         final double H = arr.get(0).getDouble();
-                        final double S = clamp(arr.get(1).getDouble());
-                        final double L = clamp(arr.get(2).getDouble());
+                        final double S = Colors.clamp(arr.get(1).getDouble());
+                        final double L = Colors.clamp(arr.get(2).getDouble());
 
                         if (ncomp == 3) {
                             return Colors.convHSL(H, S, L);
                         } else {
-                            final double A = clamp(arr.get(3).getDouble());
+                            final double A = Colors.clamp(arr.get(3).getDouble());
                             return Colors.convHSL(H, S, L, A);
                         }
                     }
@@ -1917,14 +1917,6 @@ public class TeXParser {
         }
 
         return acc;
-    }
-
-    private static int clamp(final int n) {
-        return Math.min(255, Math.max(n, 0));
-    }
-
-    private static double clamp(final double n) {
-        return Math.min(1., Math.max(n, 0.));
     }
 
     private static int getHex(final char c) {
