@@ -182,7 +182,7 @@ font-size: 133px;
 <text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,44.111187,17.55556)">a</text>
 <text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,50.77788,17.55556)">n</text>
 </g>
-<g stroke="rgb(255,138,128)" fill="rgb(255,138,128)" stroke-width="1.0" stroke-miterlimit="10.0" stroke-linejoin="miter" stroke-linecap="square">
+<g stroke="rgb(248,158,123)" fill="rgb(248,158,123)" stroke-width="1.0" stroke-miterlimit="10.0" stroke-linejoin="miter" stroke-linecap="square">
 <text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,188.81578,17.55556)">G</text>
 <text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,199.27876,17.55556)">r</text>
 <text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,204.501,17.55556)">e</text>
@@ -355,7 +355,7 @@ font-size: 133px;
 <text class="jlm_fcsropg" transform="matrix(0.1,0.0,0.0,0.1,209.38998,175.7155)">μ</text>
 <text class="jlm_fcsropg" transform="matrix(0.1,0.0,0.0,0.1,216.34998,175.7155)">ο</text>
 </g>
-<g stroke="rgb(255,120,158)" fill="rgb(255,120,158)" stroke-width="1.0" stroke-miterlimit="10.0" stroke-linejoin="miter" stroke-linecap="square">
+<g stroke="rgb(246,146,137)" fill="rgb(246,146,137)" stroke-width="1.0" stroke-miterlimit="10.0" stroke-linejoin="miter" stroke-linecap="square">
 <text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,12.666667,200.01622)">B</text>
 <text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,22.111147,200.01622)">u</text>
 <text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,29.518574,200.01622)">l</text>
@@ -366,7 +366,7 @@ font-size: 133px;
 <text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,55.48164,200.01622)">a</text>
 <text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,62.148335,200.01622)">n</text>
 </g>
-<g stroke="rgb(219,148,112)" fill="rgb(219,148,112)" stroke-width="1.0" stroke-miterlimit="10.0" stroke-linejoin="miter" stroke-linecap="square">
+<g stroke="rgb(210,180,140)" fill="rgb(210,180,140)" stroke-width="1.0" stroke-miterlimit="10.0" stroke-linejoin="miter" stroke-linecap="square">
 <text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,179.6491,200.01622)">S</text>
 <text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,187.05653,200.01622)">e</text>
 <text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,192.98247,200.01622)">r</text>
@@ -398,7 +398,7 @@ font-size: 133px;
 <text class="jlm_wnr10" transform="matrix(0.1,0.0,0.0,0.1,208.57513,217.46065)">л</text>
 <text class="jlm_wnr10" transform="matrix(0.1,0.0,0.0,0.1,215.98256,217.46065)">д</text>
 </g>
-<g stroke="rgb(38,255,204)" fill="rgb(38,255,204)" stroke-width="1.0" stroke-miterlimit="10.0" stroke-linejoin="miter" stroke-linecap="square">
+<g stroke="rgb(0,180,206)" fill="rgb(0,180,206)" stroke-width="1.0" stroke-miterlimit="10.0" stroke-linejoin="miter" stroke-linecap="square">
 <text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,12.666667,240.79399)">B</text>
 <text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,22.111147,240.79399)">i</text>
 <text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,25.814867,240.79399)">e</text>
@@ -412,7 +412,7 @@ font-size: 133px;
 <text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,68.96315,240.79399)">a</text>
 <text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,75.62984,240.79399)">n</text>
 </g>
-<g stroke="rgb(128,255,0)" fill="rgb(128,255,0)" stroke-width="1.0" stroke-miterlimit="10.0" stroke-linejoin="miter" stroke-linecap="square">
+<g stroke="rgb(141,199,62)" fill="rgb(141,199,62)" stroke-width="1.0" stroke-miterlimit="10.0" stroke-linejoin="miter" stroke-linecap="square">
 <text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,165.57495,240.79399)">U</text>
 <text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,175.57498,240.79399)">k</text>
 <text class="jlm_cmr10" transform="matrix(0.1,0.0,0.0,0.1,182.61206,240.79399)">r</text>
