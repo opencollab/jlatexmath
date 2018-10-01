@@ -51,9 +51,9 @@ package org.scilab.forge.jlatexmath;
  */
 public abstract class XAtom extends Atom {
 
-	private final Atom over;
-	private final Atom under;
-	private final TeXLength minW;
+	protected final Atom over;
+	protected final Atom under;
+	protected final TeXLength minW;
 
 	public XAtom(Atom over, Atom under, TeXLength minW) {
 		this.type = TeXConstants.TYPE_RELATION;

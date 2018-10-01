@@ -45,6 +45,9 @@
 
 package org.scilab.forge.jlatexmath;
 
+import org.scilab.forge.jlatexmath.xarrows.XHookLeftArrow;
+import org.scilab.forge.jlatexmath.xarrows.XHookRightArrow;
+
 /**
  * An atom representing an extensible left or right arrow to handle xleftarrow
  * and xrightarrow commands in LaTeX.
@@ -52,6 +55,11 @@ package org.scilab.forge.jlatexmath;
 public class XHookAtom extends XAtom {
 
 	private final boolean left;
+
+//	@Override
+//	public Atom duplicate() {
+//		return setFields(new XHookAtom(over, under, left));
+//	}
 
 	public XHookAtom(Atom over, Atom under, boolean left) {
 		super(over, under);
@@ -61,33 +69,10 @@ public class XHookAtom extends XAtom {
 	@Override
 	public Box createExtension(TeXEnvironment env, double width) {
 		if (left) {
-			final CharBox left = (CharBox) Symbols.LEFTARROW.createBox(env);
-			final double leftLB = 0.057;
-			final double leftW = 0.853;
-			final double bodyLW = 0.769;
-			final double roundLW = 0.033;
-			final CharBox right = (CharBox) Symbols.RHOOK.createBox(env);
-			final double rightLB = 0.055;
-			final double rightW = 0.142;
-			final double bodyRW = 0.;
-			final double roundRW = 0.026;
-
-			return XFactory.createExtension(env, left, leftLB, leftW, bodyLW, roundLW, right, rightLB, rightW, bodyRW,
-					roundRW, width);
+			return new XHookLeftArrow(width);
 		} else {
-			final CharBox left = (CharBox) Symbols.LHOOK.createBox(env);
-			final double leftLB = 0.055;
-			final double leftW = 0.142;
-			final double bodyLW = 0.;
-			final double roundLW = 0.026;
-			final CharBox right = (CharBox) Symbols.RIGHTARROW.createBox(env);
-			final double rightLB = 0.057;
-			final double rightW = 0.853;
-			final double bodyRW = 0.769;
-			final double roundRW = 0.033;
-
-			return XFactory.createExtension(env, left, leftLB, leftW, bodyLW, roundLW, right, rightLB, rightW, bodyRW,
-					roundRW, width);
+			return new XHookRightArrow(width);
 		}
 	}
+
 }

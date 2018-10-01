@@ -45,6 +45,8 @@
 
 package org.scilab.forge.jlatexmath;
 
+import org.scilab.forge.jlatexmath.xarrows.XLongEqual;
+
 /**
  * An atom representing an extensible left or right arrow to handle xleftarrow
  * and xrightarrow commands in LaTeX.
@@ -57,6 +59,11 @@ public class XLongequalAtom extends XAtom {
 
 	@Override
 	public Box createExtension(TeXEnvironment env, double width) {
-		return XFactory.createXEqual(env, width);
+		return new XLongEqual(width);
 	}
+
+//	@Override
+//	public Atom duplicate() {
+//		return setFields(new XLongequalAtom(over, under));
+//	}
 }
