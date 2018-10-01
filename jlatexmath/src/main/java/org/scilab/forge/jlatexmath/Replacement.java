@@ -62,7 +62,7 @@ public final class Replacement extends Command {
 	}
 
 	@Override
-	public Object clone() {
+	public Command duplicate() {
 		// No need to clone it since with a 0 args command we can't have
 		// \foo{\foo...
 		return this;

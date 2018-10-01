@@ -85,7 +85,8 @@ public class CommandCr extends Command {
 	}
 
 	@Override
-	public Object clone() {
-		return this;
+	public Command duplicate() {
+		return new CommandCr(cmd);
+
 	}
 }

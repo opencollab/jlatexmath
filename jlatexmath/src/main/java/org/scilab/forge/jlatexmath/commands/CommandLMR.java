@@ -110,6 +110,18 @@ public class CommandLMR {
 
 			tp.closeConsumer(a);
 		}
+
+		@Override
+		public Command duplicate() {
+			CommandLeft ret = new CommandLeft();
+			ret.left = left;
+			ret.middles = middles;
+			ret.base = base;
+
+			return ret;
+
+		}
+
 	}
 
 	public static class CommandMiddle extends Command {
@@ -129,6 +141,15 @@ public class CommandLMR {
 			}
 			ac.add(tp, new MiddleAtom(middle));
 		}
+
+		@Override
+		public Command duplicate() {
+			CommandMiddle ret = new CommandMiddle();
+
+			return ret;
+
+		}
+
 	}
 
 	public static class CommandRight extends Command {
@@ -147,6 +168,14 @@ public class CommandLMR {
 				throw new ParseException(tp, "\\right doesn't match \\left");
 			}
 			((CommandLeft) ac).close(tp, close);
+		}
+
+		@Override
+		public Command duplicate() {
+			CommandRight ret = new CommandRight();
+
+			return ret;
+
 		}
 	}
 }

@@ -166,4 +166,12 @@ public class CommandUnicode extends Command {
 
 		return hd;
 	}
+
+	@Override
+	public Command duplicate() {
+		CommandUnicode ret = new CommandUnicode();
+
+		return ret;
+
+	}
 }

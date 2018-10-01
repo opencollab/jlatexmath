@@ -50,7 +50,7 @@ import org.scilab.forge.jlatexmath.AtomConsumer;
 import org.scilab.forge.jlatexmath.RowAtom;
 import org.scilab.forge.jlatexmath.TeXParser;
 
-public abstract class Command implements AtomConsumer, Cloneable {
+public abstract class Command implements AtomConsumer /* ,Cloneable */ {
 
 	@Override
 	public boolean init(TeXParser tp) {
@@ -59,15 +59,6 @@ public abstract class Command implements AtomConsumer, Cloneable {
 
 	@Override
 	public void add(TeXParser tp, Atom a) {
-	}
-
-	public Command duplicate() {
-		try {
-			return (Command) super.clone();
-		} catch (CloneNotSupportedException cnse) {
-			cnse.printStackTrace(System.err);
-		}
-		return null;
 	}
 
 	@Override
@@ -112,4 +103,7 @@ public abstract class Command implements AtomConsumer, Cloneable {
 	@Override
 	public void rbrace(TeXParser tp) {
 	}
+
+	public abstract Command duplicate();
+
 }

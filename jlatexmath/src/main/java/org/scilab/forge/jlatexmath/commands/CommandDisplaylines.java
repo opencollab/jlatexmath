@@ -67,4 +67,16 @@ public class CommandDisplaylines extends CommandMatrix {
 
 		return new MultlineAtom(aoa, MultlineAtom.GATHER);
 	}
+
+	@Override
+	public Command duplicate() {
+		CommandDisplaylines ret = new CommandDisplaylines();
+
+		ret.hasLBrace = hasLBrace;
+		ret.aoa = aoa;
+
+		return ret;
+
+	}
+
 }

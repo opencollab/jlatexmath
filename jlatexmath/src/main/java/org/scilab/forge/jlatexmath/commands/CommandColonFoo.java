@@ -74,6 +74,12 @@ public class CommandColonFoo {
 
 			return false;
 		}
+
+		@Override
+		public Command duplicate() {
+			return new ColonFoo(sym);
+
+		}
 	}
 
 	public static class FooColon extends Command {
@@ -91,6 +97,13 @@ public class CommandColonFoo {
 
 			return false;
 		}
+
+		@Override
+		public Command duplicate() {
+			return new FooColon(sym);
+
+		}
+
 	}
 
 	public static class ColonColonFoo extends Command {
@@ -115,6 +128,13 @@ public class CommandColonFoo {
 
 			return false;
 		}
+
+		@Override
+		public Command duplicate() {
+			return new ColonColonFoo(sym);
+
+		}
+
 	}
 
 	public static class FooColonColon extends Command {
@@ -132,5 +152,12 @@ public class CommandColonFoo {
 
 			return false;
 		}
+
+		@Override
+		public Command duplicate() {
+			return new FooColonColon(sym);
+
+		}
+
 	}
 }

@@ -49,11 +49,12 @@ import org.scilab.forge.jlatexmath.Atom;
 import org.scilab.forge.jlatexmath.BigDelimiterAtom;
 import org.scilab.forge.jlatexmath.EmptyAtom;
 import org.scilab.forge.jlatexmath.FencedAtom;
+import org.scilab.forge.jlatexmath.FractionAtom;
 import org.scilab.forge.jlatexmath.RowAtom;
 import org.scilab.forge.jlatexmath.SymbolAtom;
 import org.scilab.forge.jlatexmath.TeXParser;
 
-public abstract class CommandOverwithdelims extends Command {
+public class CommandOverwithdelims extends Command {
 
 	protected Atom num;
 	protected RowAtom den;
@@ -119,5 +120,21 @@ public abstract class CommandOverwithdelims extends Command {
 		return true;
 	}
 
-	public abstract Atom newI(TeXParser tp, Atom num, Atom den);
+	public Atom newI(TeXParser tp, Atom num, Atom den) {
+		return new FractionAtom(num, den, true);
+	}
+
+	@Override
+	public Command duplicate() {
+		CommandOverwithdelims ret = new CommandOverwithdelims();
+
+		ret.num = num;
+		ret.den = den;
+		ret.left = left;
+		ret.right = right;
+
+		return ret;
+
+	}
+
 }

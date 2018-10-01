@@ -49,9 +49,10 @@ import org.scilab.forge.jlatexmath.ArrayAtom;
 import org.scilab.forge.jlatexmath.ArrayOfAtoms;
 import org.scilab.forge.jlatexmath.Atom;
 import org.scilab.forge.jlatexmath.RowAtom;
+import org.scilab.forge.jlatexmath.SMatrixAtom;
 import org.scilab.forge.jlatexmath.TeXParser;
 
-public abstract class CommandMatrix extends Command {
+public class CommandMatrix extends Command {
 
 	protected ArrayOfAtoms aoa;
 	protected boolean hasLBrace = false;
@@ -106,5 +107,18 @@ public abstract class CommandMatrix extends Command {
 		tp.closeConsumer(newI(tp));
 	}
 
-	public abstract Atom newI(TeXParser tp);
+	public Atom newI(TeXParser tp) {
+		return new SMatrixAtom(aoa, false);
+	}
+
+	@Override
+	public Command duplicate() {
+		CommandMatrix ret = new CommandMatrix();
+
+		ret.hasLBrace = hasLBrace;
+		ret.aoa = aoa;
+
+		return ret;
+
+	}
 }

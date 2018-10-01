@@ -98,4 +98,16 @@ public class CommandTextStyleTeX extends Command {
 
 		return true;
 	}
+
+	@Override
+	public Command duplicate() {
+		CommandTextStyleTeX ret = new CommandTextStyleTeX(style);
+
+		ret.f = f;
+		ret.ts = ts;
+
+		return ret;
+
+	}
+
 }

@@ -187,7 +187,7 @@ public class TeXParser {
 		this.xmlMap = map;
 	}
 
-	Map<String, String> getXMLMap() {
+	public Map<String, String> getXMLMap() {
 		return xmlMap;
 	}
 

@@ -62,6 +62,18 @@ public class CommandGenfrac extends Command {
 	private int style;
 	private Atom num;
 
+	public CommandGenfrac(Atom left, Atom right, TeXLength l, int style, Atom num) {
+		this.left = left;
+		this.right = right;
+		this.l = l;
+		this.style = style;
+		this.num = num;
+	}
+
+	public CommandGenfrac() {
+		//
+	}
+
 	@Override
 	public void add(TeXParser tp, Atom a) {
 		if (left == null) {
@@ -97,4 +109,10 @@ public class CommandGenfrac extends Command {
 		final Atom a = new FractionAtom(num, den, l);
 		return new StyleAtom(style * 2, new FencedAtom(a, left, right));
 	}
+
+	@Override
+	public Command duplicate() {
+		return new CommandGenfrac(left, right, l, style, num);
+	}
+
 }

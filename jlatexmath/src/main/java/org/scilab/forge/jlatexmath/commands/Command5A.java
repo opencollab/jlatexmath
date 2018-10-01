@@ -50,10 +50,10 @@ import org.scilab.forge.jlatexmath.TeXParser;
 
 public abstract class Command5A extends Command {
 
-	private Atom atom1;
-	private Atom atom2;
-	private Atom atom3;
-	private Atom atom4;
+	protected Atom atom1;
+	protected Atom atom2;
+	protected Atom atom3;
+	protected Atom atom4;
 
 	@Override
 	public void add(TeXParser tp, Atom a) {
@@ -71,4 +71,5 @@ public abstract class Command5A extends Command {
 	}
 
 	public abstract Atom newI(Atom a, Atom b, Atom c, Atom d, Atom e);
+
 }

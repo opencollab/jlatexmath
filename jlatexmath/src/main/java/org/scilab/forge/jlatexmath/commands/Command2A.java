@@ -50,7 +50,7 @@ import org.scilab.forge.jlatexmath.TeXParser;
 
 public abstract class Command2A extends Command {
 
-	private Atom atom;
+	protected Atom atom;
 
 	@Override
 	public void add(TeXParser tp, Atom a) {

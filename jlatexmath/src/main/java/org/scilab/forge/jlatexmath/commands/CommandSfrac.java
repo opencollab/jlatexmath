@@ -80,4 +80,12 @@ public class CommandSfrac extends Command2A {
 		return new RowAtom(snum, new SpaceAtom(TeXLength.Unit.EM, shiftL, 0., 0.), slash,
 				new SpaceAtom(TeXLength.Unit.EM, shiftR, 0., 0.), new ScaleAtom(b, scaleX, scaleY));
 	}
+
+	@Override
+	public Command duplicate() {
+		CommandSfrac ret = new CommandSfrac();
+		ret.atom = atom;
+		return ret;
+	}
+
 }

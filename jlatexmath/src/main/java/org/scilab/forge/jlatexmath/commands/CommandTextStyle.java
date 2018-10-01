@@ -76,4 +76,15 @@ public class CommandTextStyle extends Command {
 
 		tp.closeConsumer(new TextStyleAtom(a, style));
 	}
+
+	@Override
+	public Command duplicate() {
+		CommandTextStyleTeX ret = new CommandTextStyleTeX(style);
+
+		ret.f = f;
+
+		return ret;
+
+	}
+
 }

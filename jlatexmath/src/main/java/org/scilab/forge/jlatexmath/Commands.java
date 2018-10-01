@@ -51,44 +51,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.scilab.forge.jlatexmath.commands.Command;
-import org.scilab.forge.jlatexmath.commands.Command0A;
-import org.scilab.forge.jlatexmath.commands.Command0AImpl;
-import org.scilab.forge.jlatexmath.commands.Command1A;
-import org.scilab.forge.jlatexmath.commands.Command1O1A;
-import org.scilab.forge.jlatexmath.commands.Command1O2A;
-import org.scilab.forge.jlatexmath.commands.Command2A;
-import org.scilab.forge.jlatexmath.commands.Command3A;
-import org.scilab.forge.jlatexmath.commands.Command4A;
-import org.scilab.forge.jlatexmath.commands.CommandBE;
-import org.scilab.forge.jlatexmath.commands.CommandBigg;
-import org.scilab.forge.jlatexmath.commands.CommandBigr;
-import org.scilab.forge.jlatexmath.commands.CommandBra;
-import org.scilab.forge.jlatexmath.commands.CommandChoose;
-import org.scilab.forge.jlatexmath.commands.CommandColonFoo;
-import org.scilab.forge.jlatexmath.commands.CommandCr;
-import org.scilab.forge.jlatexmath.commands.CommandDefinecolor;
-import org.scilab.forge.jlatexmath.commands.CommandDisplaylines;
-import org.scilab.forge.jlatexmath.commands.CommandDollars;
-import org.scilab.forge.jlatexmath.commands.CommandGenfrac;
-import org.scilab.forge.jlatexmath.commands.CommandLMR;
-import org.scilab.forge.jlatexmath.commands.CommandMathStyles;
-import org.scilab.forge.jlatexmath.commands.CommandMatrix;
-import org.scilab.forge.jlatexmath.commands.CommandOoalign;
-import org.scilab.forge.jlatexmath.commands.CommandOpName;
-import org.scilab.forge.jlatexmath.commands.CommandOver;
-import org.scilab.forge.jlatexmath.commands.CommandOverwithdelims;
-import org.scilab.forge.jlatexmath.commands.CommandRomNum;
-import org.scilab.forge.jlatexmath.commands.CommandSfrac;
-import org.scilab.forge.jlatexmath.commands.CommandSubstack;
-import org.scilab.forge.jlatexmath.commands.CommandText;
-import org.scilab.forge.jlatexmath.commands.CommandTextStyle;
-import org.scilab.forge.jlatexmath.commands.CommandTextStyleTeX;
-import org.scilab.forge.jlatexmath.commands.CommandTiny;
-import org.scilab.forge.jlatexmath.commands.CommandUnicode;
+import org.scilab.forge.jlatexmath.commands.*;
 import org.scilab.forge.jlatexmath.dynamic.DynamicAtom;
-import org.scilab.forge.jlatexmath.mhchem.MhchemBondParser;
-import org.scilab.forge.jlatexmath.mhchem.MhchemParser;
 
 public class Commands {
 
@@ -98,77 +62,24 @@ public class Commands {
 	private static final Command dollardollar = new CommandDollars.Dollar(false, TeXConstants.STYLE_DISPLAY);
 
 	static {
-		map.put("usepackage", new Command() {
-			@Override
-			public boolean init(TeXParser tp) {
-				final String name = tp.getArgAsString();
-				JLMPackage.usePackage(name);
-				return false;
-			}
+		map.put("usepackage", new CommandUsePackage());
 
-			@Override
-			public Object clone() {
-				return this;
-			}
-		});
-		map.put("ce", new Command() {
-			@Override
-			public boolean init(TeXParser tp) {
-				final String code = tp.getGroupAsArgument();
-				final MhchemParser mp = new MhchemParser(code);
-				mp.parse();
-				tp.addToConsumer(new RomanAtom(mp.get()));
-				return false;
-			}
-		});
-		map.put("bond", new Command() {
-			@Override
-			public boolean init(TeXParser tp) {
-				final String code = tp.getGroupAsArgument();
-				final MhchemBondParser mbp = new MhchemBondParser(code);
-				tp.addToConsumer(mbp.get());
-				return false;
-			}
-		});
-		map.put("hbox", new Command1A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				if (a instanceof RowAtom) {
-					return a;
-				}
-				return new RowAtom(a);
-			}
-		});
-		map.put("cancel", new Command1A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new CancelAtom(a, CancelAtom.Type.SLASH);
-			}
-		});
-		map.put("bcancel", new Command1A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new CancelAtom(a, CancelAtom.Type.BACKSLASH);
-			}
-		});
-		map.put("xcancel", new Command1A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new CancelAtom(a, CancelAtom.Type.X);
-			}
-		});
-		map.put("mathchoice", new Command4A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a, Atom b, Atom c, Atom d) {
-				return new MathchoiceAtom(a, b, c, d);
-			}
-		});
-		map.put("pod", new Command1A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new PodAtom(a, 8., true);
-			}
-		});
+		map.put("ce", new CommandCE());
+
+		map.put("bond", new CommandBond());
+
+		map.put("hbox", new CommandHBox());
+
+		map.put("cancel", new CommandCancel());
+
+		map.put("bcancel", new CommandBCancel());
+
+		map.put("xcancel", new CommandXCancel());
+
+		map.put("mathchoice", new CommandMathChoice());
+
+		map.put("pod", new CommandPod());
+
 		map.put("bmod", new Command0A() {
 			@Override
 			public Atom newI(TeXParser tp) {
@@ -178,130 +89,46 @@ public class Commands {
 				return ra;
 			}
 		});
-		map.put("pmod", new Command1A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				final RowAtom ra = new RowAtom(3);
-				ra.add(new RomanAtom(TeXParser.getAtomForLatinStr("mod", true)));
-				ra.add(new SpaceAtom(TeXLength.Unit.MU, 6.));
-				ra.add(a);
-				return new PodAtom(ra, 8., true);
-			}
-		});
-		map.put("mod", new Command1A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				final RowAtom ra = new RowAtom(4);
-				final Atom sp = new SpaceAtom(TeXConstants.Muskip.THIN);
-				ra.add(new RomanAtom(TeXParser.getAtomForLatinStr("mod", true)));
-				ra.add(sp);
-				ra.add(sp);
-				ra.add(a);
-				return new PodAtom(ra, 12., false);
-			}
-		});
-		map.put("begingroup", new Command() {
-			@Override
-			public boolean init(TeXParser tp) {
-				tp.processLBrace();
-				return false;
-			}
-		});
-		map.put("endgroup", new Command() {
-			@Override
-			public boolean init(TeXParser tp) {
-				tp.processRBrace();
-				return false;
-			}
-		});
-		map.put("DeclareMathOperator", new Command() {
-			@Override
-			public boolean init(TeXParser tp) {
-				final String name = tp.getArgAsCommand();
-				final String base = tp.getGroupAsArgument();
-				final String code = "\\mathop{\\mathrm{" + base + "}}\\nolimits";
-				NewCommandMacro.addNewCommand(tp, name, code, 0, false);
-				return false;
-			}
-		});
-		map.put("newcommand", new Command() {
-			@Override
-			public boolean init(TeXParser tp) {
-				final String name = tp.getArgAsCommand();
-				final int nbargs = tp.getOptionAsPositiveInteger(0);
-				final String code = tp.getGroupAsArgument();
-				NewCommandMacro.addNewCommand(tp, name, code, nbargs, false);
-				return false;
-			}
-		});
-		map.put("renewcommand", new Command() {
-			@Override
-			public boolean init(TeXParser tp) {
-				final String name = tp.getArgAsCommand();
-				final int nbargs = tp.getOptionAsPositiveInteger(0);
-				final String code = tp.getGroupAsArgument();
-				NewCommandMacro.addNewCommand(tp, name, code, nbargs, true);
-				return false;
-			}
-		});
-		map.put("newenvironment", new Command() {
-			@Override
-			public boolean init(TeXParser tp) {
-				final String name = tp.getArgAsString();
-				final int nbargs = tp.getOptionAsPositiveInteger(0);
-				final String before = tp.getArgAsString();
-				final String after = tp.getArgAsString();
-				NewEnvironmentMacro.addNewEnvironment(tp, name, before, after, nbargs, false);
-				return false;
-			}
-		});
-		map.put("renewenvironment", new Command() {
-			@Override
-			public boolean init(TeXParser tp) {
-				final String name = tp.getArgAsString();
-				final int nbargs = tp.getOptionAsPositiveInteger(0);
-				final String before = tp.getArgAsString();
-				final String after = tp.getArgAsString();
-				NewEnvironmentMacro.addNewEnvironment(tp, name, before, after, nbargs, true);
-				return false;
-			}
-		});
+		map.put("pmod", new CommandPMod());
+
+		map.put("mod", new CommandMod());
+
+		map.put("begingroup", new CommandBeginGroup());
+
+		map.put("endgroup", new CommandEndGroup());
+
+		map.put("DeclareMathOperator", new CommandDeclareMathOperator());
+
+		map.put("newcommand", new CommandNewCommand());
+
+		map.put("renewcommand", new CommandRenewCommand());
+
+		map.put("newenvironment", new CommandNewEnvironment());
+
+		map.put("renewenvironment", new CommandRenewEnvironment());
+
 		map.put("left", new CommandLMR.CommandLeft());
 		map.put("right", new CommandLMR.CommandRight());
 		map.put("middle", new CommandLMR.CommandMiddle());
+
+		// stretchy versions
 		map.put("Braket", new CommandBra(Symbols.LANGLE, Symbols.RANGLE));
 		map.put("Bra", new CommandBra(Symbols.LANGLE, Symbols.VERT));
 		map.put("Ket", new CommandBra(Symbols.VERT, Symbols.RANGLE));
 		map.put("Set", new CommandBra(Symbols.LBRACE, Symbols.RBRACE));
-		map.put("braket", new Command1A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new RowAtom(Symbols.LANGLE, a, Symbols.RANGLE);
-			}
-		});
-		map.put("bra", new Command1A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new RowAtom(Symbols.LANGLE, a, Symbols.VERT);
-			}
-		});
-		map.put("ket", new Command1A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new RowAtom(Symbols.VERT, a, Symbols.RANGLE);
-			}
-		});
-		map.put("set", new Command1A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new RowAtom(Symbols.LBRACE, a, Symbols.RBRACE);
-			}
-		});
+		map.put("braket", new CommandBraKet());
+
+		// non-stretchy versions
+		map.put("bra", new CommandBra2());
+		map.put("ket", new CommandKet());
+		map.put("set", new CommandSet());
+
 		map.put("hookrightarrow", new Command0A() {
 			@Override
 			public Atom newI(TeXParser tp) {
 				final RowAtom ra = new RowAtom(3);
-				ra.add(Symbols.LHOOK, new SpaceAtom(TeXLength.Unit.EM, -0.169), Symbols.RIGHTARROW);
+				// XXX was -0.169
+				ra.add(Symbols.LHOOK, new SpaceAtom(TeXLength.Unit.EM, -0.43), Symbols.RIGHTARROW);
 				ra.setShape(true);
 				return new TypedAtom(TeXConstants.TYPE_RELATION, ra);
 			}
@@ -310,7 +137,9 @@ public class Commands {
 			@Override
 			public Atom newI(TeXParser tp) {
 				final RowAtom ra = new RowAtom(3);
-				ra.add(Symbols.LEFTARROW, new SpaceAtom(TeXLength.Unit.EM, -0.169), Symbols.RHOOK);
+				ra.add(Symbols.LEFTARROW,
+						// XXX was -0.169
+						new SpaceAtom(TeXLength.Unit.EM, -0.43), Symbols.RHOOK);
 				ra.setShape(true);
 				return new TypedAtom(TeXConstants.TYPE_RELATION, ra);
 			}
@@ -428,12 +257,8 @@ public class Commands {
 				return new VCenteredAtom(SymbolAtom.get("surdsign"));
 			}
 		});
-		map.put("vcenter", new Command1A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new VCenteredAtom(a);
-			}
-		});
+		map.put("vcenter", new CommandVCenter());
+
 		map.put("int", new Command0A() {
 			@Override
 			public Atom newI(TeXParser tp) {
@@ -522,129 +347,36 @@ public class Commands {
 				return BreakMarkAtom.get();
 			}
 		});
-		map.put("frac", new Command2A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a, Atom b) {
-				return new FractionAtom(a, b);
-			}
-		});
+		map.put("frac", new CommandFrac());
+
 		map.put("genfrac", new CommandGenfrac());
-		map.put("dfrac", new Command2A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a, Atom b) {
-				return CommandGenfrac.get(null, a, b, null, null, 0);
-			}
-		});
-		map.put("tfrac", new Command2A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a, Atom b) {
-				return CommandGenfrac.get(null, a, b, null, null, 1);
-			}
-		});
-		map.put("dbinom", new Command2A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a, Atom b) {
-				final SymbolAtom left = Symbols.LBRACK;
-				final SymbolAtom right = Symbols.RBRACK;
-				return CommandGenfrac.get(left, a, b, right, TeXLength.getZero(), 0);
-			}
-		});
-		map.put("tbinom", new Command2A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a, Atom b) {
-				final SymbolAtom left = Symbols.LBRACK;
-				final SymbolAtom right = Symbols.RBRACK;
-				return CommandGenfrac.get(left, a, b, right, TeXLength.getZero(), 1);
-			}
-		});
-		map.put("binom", new Command2A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a, Atom b) {
-				final SymbolAtom left = Symbols.LBRACK;
-				final SymbolAtom right = Symbols.RBRACK;
-				return new FencedAtom(new FractionAtom(a, b, false), left, right);
-			}
-		});
-		map.put("over", new CommandOver() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a, Atom b) {
-				return new OverAtom(a, b);
-			}
-		});
-		map.put("buildrel", new CommandTiny() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				if (a instanceof OverAtom) {
-					final Atom over = ((OverAtom) a).getNum();
-					final Atom base = ((OverAtom) a).getDen();
-					return new BuildrelAtom(base, over);
-				}
-				return a;
-			}
-		});
+
+		map.put("dfrac", new CommandDFrac());
+
+		map.put("tfrac", new CommandTFrac());
+		map.put("dbinom", new CommandDBinom());
+
+		map.put("tbinom", new CommandTBinom());
+
+		map.put("binom", new CommandBinom());
+
+		map.put("over", new CommandOver());
+
+		map.put("buildrel", new CommandBuildRel());
+
 		map.put("choose", new CommandChoose(Symbols.LBRACK, Symbols.RBRACK));
 		map.put("brace", new CommandChoose(Symbols.LBRACE, Symbols.RBRACE));
 		map.put("bangle", new CommandChoose(Symbols.LANGLE, Symbols.RANGLE));
 		map.put("brack", new CommandChoose(Symbols.LSQBRACK, Symbols.RSQBRACK));
-		map.put("overwithdelims", new CommandOverwithdelims() {
-			@Override
-			public Atom newI(TeXParser tp, Atom num, Atom den) {
-				return new FractionAtom(num, den, true);
-			}
-		});
-		map.put("atopwithdelims", new CommandOverwithdelims() {
-			@Override
-			public Atom newI(TeXParser tp, Atom num, Atom den) {
-				return new FractionAtom(num, den, false);
-			}
-		});
-		map.put("abovewithdelims", new CommandOverwithdelims() {
-			TeXLength l;
 
-			@Override
-			public void add(TeXParser tp, Atom a) {
-				if (left == null) {
-					left = a;
-				} else if (right == null) {
-					right = a;
-					l = tp.getArgAsLength();
-				} else {
-					den.add(a);
-				}
-			}
+		map.put("overwithdelims", new CommandOverwithdelims());
+		map.put("atopwithdelims", new CommandATopwithdelims());
+		map.put("abovewithdelims", new CommandAbovewithdelims());
 
-			@Override
-			public Atom newI(TeXParser tp, Atom num, Atom den) {
-				return new FractionAtom(num, den, l);
-			}
-		});
-		map.put("above", new CommandOver() {
-			TeXLength len;
+		map.put("above", new CommandAbove());
+		map.put("atop", new CommandATop());
+		map.put("sqrt", new CommandSqrt());
 
-			@Override
-			public boolean init(TeXParser tp) {
-				super.init(tp);
-				len = tp.getArgAsLength();
-				return false;
-			}
-
-			@Override
-			public Atom newI(TeXParser tp, Atom a, Atom b) {
-				return new FractionAtom(a, b, len);
-			}
-		});
-		map.put("atop", new CommandOver() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a, Atom b) {
-				return new FractionAtom(a, b, false);
-			}
-		});
-		map.put("sqrt", new Command1O1A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a, Atom b) {
-				return new NthRoot(b, a);
-			}
-		});
 		map.put("fcscore", new Command0AImpl() {
 			@Override
 			public boolean init(TeXParser tp) {
@@ -662,12 +394,8 @@ public class Commands {
 				return false;
 			}
 		});
-		map.put("st", new Command1A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new StrikeThroughAtom(a);
-			}
-		});
+		map.put("st", new CommandSt());
+
 		map.put("includegraphics", new Command0AImpl() {
 			@Override
 			public boolean init(TeXParser tp) {
@@ -677,24 +405,12 @@ public class Commands {
 				return false;
 			}
 		});
-		map.put("clap", new Command1A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new LapedAtom(a, 'c');
-			}
-		});
-		map.put("rlap", new Command1A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new LapedAtom(a, 'r');
-			}
-		});
-		map.put("llap", new Command1A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new LapedAtom(a, 'l');
-			}
-		});
+		map.put("clap", new CommandClap());
+
+		map.put("rlap", new CommandRLap());
+
+		map.put("llap", new CommandLLap());
+
 		map.put("mathclap", map.get("clap"));
 		map.put("mathrlap", map.get("rlap"));
 		map.put("mathllap", map.get("llap"));
@@ -719,176 +435,37 @@ public class Commands {
 						new ArrayOptions(3).addAlignment(TeXConstants.Align.LEFT)
 								.addSeparator(new SpaceAtom(TeXConstants.Muskip.NEGTHIN))
 								.addAlignment(TeXConstants.Align.LEFT).close()));
-		map.put("end@cases", new EnvArray.End("cases") {
-			@Override
-			public Atom newI(TeXParser tp, EnvArray.Begin beg) {
-				final SymbolAtom op = Symbols.LBRACE;
-				return new FencedAtom(super.newI(tp, beg), op, null, null);
-			}
-		});
+		map.put("end@cases", new EnvArray.End("cases"));
 		map.put("matrix", new CommandMatrix() {
-			@Override
-			public Atom newI(TeXParser tp) {
-				return new SMatrixAtom(aoa, false);
-			}
 		});
 		map.put("array", map.get("matrix"));
 		map.put("ooalign", new CommandOoalign());
-		map.put("pmatrix", new CommandMatrix() {
-			@Override
-			public Atom newI(TeXParser tp) {
-				return new FencedAtom(new SMatrixAtom(aoa, false), Symbols.LBRACK, Symbols.RBRACK);
-			}
-		});
+		map.put("pmatrix", new CommandPMatrix());
+
 		map.put("begin@matrix", new EnvArray.Begin("matrix", ArrayAtom.MATRIX, ArrayOptions.getEmpty()));
-		map.put("end@matrix", new EnvArray.End("matrix") {
-			@Override
-			public Atom newI(TeXParser tp, EnvArray.Begin beg) {
-				return new SMatrixAtom(beg.aoa, false);
-			}
-		});
+		map.put("end@matrix", new EnvArray.End("matrix"));
 		map.put("begin@smallmatrix", new EnvArray.Begin("smallmatrix", ArrayAtom.SMALLMATRIX, ArrayOptions.getEmpty()));
-		map.put("end@smallmatrix", new EnvArray.End("smallmatrix") {
-			@Override
-			public Atom newI(TeXParser tp, EnvArray.Begin beg) {
-				return new SMatrixAtom(beg.aoa, true);
-			}
-		});
+		map.put("end@smallmatrix", new EnvArray.End("smallmatrix"));
 		map.put("begin@align", new EnvArray.Begin("align", ArrayAtom.ALIGN, ArrayOptions.getEmpty()));
-		map.put("end@align", new EnvArray.End("align") {
-			@Override
-			public Atom newI(TeXParser tp, EnvArray.Begin beg) {
-				return new AlignAtom(beg.aoa, false);
-			}
-		});
+		map.put("end@align", new EnvArray.End("align"));
 		map.put("begin@aligned", new EnvArray.Begin("aligned", ArrayAtom.ALIGNED, ArrayOptions.getEmpty()));
-		map.put("end@aligned", new EnvArray.End("aligned") {
-			@Override
-			public Atom newI(TeXParser tp, EnvArray.Begin beg) {
-				return new AlignAtom(beg.aoa, true);
-			}
-		});
+		map.put("end@aligned", new EnvArray.End("aligned"));
 		map.put("begin@flalign", new EnvArray.Begin("flalign", ArrayAtom.FLALIGN, ArrayOptions.getEmpty()));
-		map.put("end@flalign", new EnvArray.End("flalign") {
-			@Override
-			public Atom newI(TeXParser tp, EnvArray.Begin beg) {
-				return new FlalignAtom(beg.aoa);
-			}
-		});
-		map.put("begin@alignat", new EnvArray.Begin("alignat", ArrayAtom.ALIGNAT, ArrayOptions.getEmpty()) {
-			@Override
-			public boolean init(TeXParser tp) {
-				n = tp.getArgAsPositiveInteger();
-				if (n <= 0) {
-					throw new ParseException(tp, "Invalid argument in alignat environment");
-				}
-				aoa = new ArrayOfAtoms(ArrayAtom.ALIGNAT);
-				tp.addConsumer(this);
-				tp.addConsumer(aoa);
-				return false;
-			}
-		});
-		map.put("end@alignat", new EnvArray.End("alignat") {
-			@Override
-			public Atom newI(TeXParser tp, EnvArray.Begin beg) {
-				if (2 * beg.n != beg.aoa.col) {
-					throw new ParseException(tp, "Bad number of equations in alignat environment !");
-				}
-				return new AlignAtAtom(beg.aoa, false);
-			}
-		});
-		map.put("begin@alignedat", new EnvArray.Begin("alignedat", ArrayAtom.ALIGNEDAT, ArrayOptions.getEmpty()) {
-			@Override
-			public boolean init(TeXParser tp) {
-				n = tp.getArgAsPositiveInteger();
-				if (n <= 0) {
-					throw new ParseException(tp, "Invalid argument in alignedat environment");
-				}
-				aoa = new ArrayOfAtoms(ArrayAtom.ALIGNEDAT);
-				tp.addConsumer(this);
-				tp.addConsumer(aoa);
-				return false;
-			}
-		});
-		map.put("end@alignedat", new EnvArray.End("alignedat") {
-			@Override
-			public Atom newI(TeXParser tp, EnvArray.Begin beg) {
-				if (2 * beg.n != beg.aoa.col) {
-					throw new ParseException(tp, "Bad number of equations in alignedat environment !");
-				}
-				return new AlignAtAtom(beg.aoa, true);
-			}
-		});
-		map.put("begin@multline", new EnvArray.Begin("multline", -1, ArrayOptions.getEmpty()) {
-			@Override
-			public boolean init(TeXParser tp) {
-				final boolean r = super.init(tp);
-				aoa.setOneColumn(true);
-				return false;
-			}
-		});
-		map.put("end@multline", new EnvArray.End("multline") {
-			@Override
-			public Atom newI(TeXParser tp, EnvArray.Begin beg) {
-				if (beg.aoa.col == 0) {
-					return EmptyAtom.get();
-				}
-				return new MultlineAtom(beg.aoa, MultlineAtom.MULTLINE);
-			}
-		});
-		map.put("begin@subarray", new EnvArray.Begin("subarray", -1) {
-			@Override
-			public boolean init(TeXParser tp) {
-				final boolean r = super.init(tp);
-				aoa.setOneColumn(true);
-				return false;
-			}
-		});
-		map.put("end@subarray", new EnvArray.End("subarray") {
-			@Override
-			public Atom newI(TeXParser tp, EnvArray.Begin beg) {
-				if (beg.aoa.col == 0) {
-					return EmptyAtom.get();
-				}
-				return new SubarrayAtom(beg.getAOA(), beg.getOptions());
-			}
-		});
+		map.put("end@flalign", new EnvArray.End("flalign"));
+		map.put("begin@alignat", new EnvArray.Begin("alignat", ArrayAtom.ALIGNAT, ArrayOptions.getEmpty()));
+		map.put("end@alignat", new EnvArray.End("alignat"));
+		map.put("begin@alignedat", new EnvArray.Begin("alignedat", ArrayAtom.ALIGNEDAT, ArrayOptions.getEmpty()));
+		map.put("end@alignedat", new EnvArray.End("alignedat"));
+		map.put("begin@multline", new EnvArray.Begin("multline", -1, ArrayOptions.getEmpty()));
+		map.put("end@multline", new EnvArray.End("multline"));
+		map.put("begin@subarray", new EnvArray.Begin("subarray", -1));
+		map.put("end@subarray", new EnvArray.End("subarray"));
 		map.put("substack", new CommandSubstack());
 		map.put("displaylines", new CommandDisplaylines());
-		map.put("begin@gather", new EnvArray.Begin("gather", -1, ArrayOptions.getEmpty()) {
-			@Override
-			public boolean init(TeXParser tp) {
-				final boolean r = super.init(tp);
-				aoa.setOneColumn(true);
-				return false;
-			}
-		});
-		map.put("end@gather", new EnvArray.End("gather") {
-			@Override
-			public Atom newI(TeXParser tp, EnvArray.Begin beg) {
-				if (beg.aoa.col == 0) {
-					return EmptyAtom.get();
-				}
-				return new MultlineAtom(beg.aoa, MultlineAtom.GATHER);
-			}
-		});
-		map.put("begin@gathered", new EnvArray.Begin("gathered", -1, ArrayOptions.getEmpty()) {
-			@Override
-			public boolean init(TeXParser tp) {
-				final boolean r = super.init(tp);
-				aoa.setOneColumn(true);
-				return false;
-			}
-		});
-		map.put("end@gathered", new EnvArray.End("gathered") {
-			@Override
-			public Atom newI(TeXParser tp, EnvArray.Begin beg) {
-				if (beg.aoa.col == 0) {
-					return EmptyAtom.get();
-				}
-				return new MultlineAtom(beg.aoa, MultlineAtom.GATHERED);
-			}
-		});
+		map.put("begin@gather", new EnvArray.Begin("gather", -1, ArrayOptions.getEmpty()));
+		map.put("end@gather", new EnvArray.End("gather"));
+		map.put("begin@gathered", new EnvArray.Begin("gathered", -1, ArrayOptions.getEmpty()));
+		map.put("end@gathered", new EnvArray.End("gathered"));
 		map.put("begin@pmatrix", new EnvArray.Begin("pmatrix", ArrayAtom.MATRIX, ArrayOptions.getEmpty()));
 		map.put("end@pmatrix", new EnvArray.End("pmatrix", "lbrack", "rbrack"));
 		map.put("begin@bmatrix", new EnvArray.Begin("bmatrix", ArrayAtom.MATRIX, ArrayOptions.getEmpty()));
@@ -903,13 +480,6 @@ public class Commands {
 				return new SpaceAtom(TeXConstants.Muskip.THIN);
 			}
 		});
-		/*
-		 * map.put("raggedleft", new Command0AImpl() { public boolean
-		 * init(TeXParser tp) { return false; } }); map.put("raggedright", new
-		 * Command0AImpl() { public boolean init(TeXParser tp) { return false; }
-		 * }); map.put("raggedcenter", new Command0AImpl() { public boolean
-		 * init(TeXParser tp) { return false; } });
-		 */
 		map.put("thinspace", map.get(","));
 		map.put(":", new Command0A() {
 			@Override
@@ -975,24 +545,12 @@ public class Commands {
 				return new SpaceAtom(TeXLength.Unit.EM, 3., 0., 0.);
 			}
 		});
-		map.put("textcircled", new Command1A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new TextCircledAtom(new RomanAtom(a));
-			}
-		});
+		map.put("textcircled", new CommandTextCircled());
+
 		map.put("romannumeral", new CommandRomNum(false));
 		map.put("Romannumeral", new CommandRomNum(true));
-		map.put("T", new Command1A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new RotateAtom(a, 180., new HashMap<String, String>() {
-					{
-						put("origin", "cc");
-					}
-				});
-			}
-		});
+		map.put("T", new CommandT());
+
 		map.put("char", new Command0AImpl() {
 			@Override
 			public boolean init(TeXParser tp) {
@@ -1114,78 +672,30 @@ public class Commands {
 				return at.changeType(TeXConstants.TYPE_BINARY_OPERATOR);
 			}
 		});
-		map.put("tiny", new CommandTiny() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new MonoScaleAtom(a, 0.5);
-			}
-		});
-		map.put("Tiny", new CommandTiny() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new MonoScaleAtom(a, 0.6);
-			}
-		});
-		map.put("scriptsize", new CommandTiny() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new MonoScaleAtom(a, 0.7);
-			}
-		});
-		map.put("footnotesize", new CommandTiny() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new MonoScaleAtom(a, 0.8);
-			}
-		});
-		map.put("small", new CommandTiny() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new MonoScaleAtom(a, 0.9);
-			}
-		});
-		map.put("normalsize", new CommandTiny() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new MonoScaleAtom(a, 1.);
-			}
-		});
-		map.put("large", new CommandTiny() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new MonoScaleAtom(a, 1.2);
-			}
-		});
-		map.put("Large", new CommandTiny() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new MonoScaleAtom(a, 1.4);
-			}
-		});
-		map.put("LARGE", new CommandTiny() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new MonoScaleAtom(a, 1.8);
-			}
-		});
-		map.put("huge", new CommandTiny() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new MonoScaleAtom(a, 2.);
-			}
-		});
-		map.put("Huge", new CommandTiny() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new MonoScaleAtom(a, 2.5);
-			}
-		});
-		map.put("sc", new CommandTiny() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new SmallCapAtom(a);
-			}
-		});
+		map.put("tiny", new CommandTiny1());
+
+		map.put("Tiny", new CommandTiny2());
+
+		map.put("scriptsize", new CommandScriptSize());
+
+		map.put("footnotesize", new CommandFootnoteSize());
+
+		map.put("small", new CommandSmall());
+
+		map.put("normalsize", new CommandNormalSize());
+
+		map.put("large", new CommandLarge());
+
+		map.put("Large", new CommandLarge2());
+
+		map.put("LARGE", new CommandLarge3());
+
+		map.put("huge", new CommandHuge1());
+
+		map.put("Huge", new CommandHuge2());
+
+		map.put("sc", new CommandSc());
+
 		map.put("hline", new Command0A() {
 			@Override
 			public Atom newI(TeXParser tp) {
@@ -1287,110 +797,29 @@ public class Commands {
 				return vra.changeType(TeXConstants.TYPE_RELATION);
 			}
 		});
-		map.put("fbox", new Command1A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new FBoxAtom(a);
-			}
-		});
-		map.put("dbox", new Command1A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new DBoxAtom(a);
-			}
-		});
-		map.put("boxed", new Command1A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new FBoxAtom(new MathAtom(a, TeXConstants.STYLE_DISPLAY));
-			}
-		});
-		map.put("fcolorbox", new Command1A() {
-			Color frame;
-			Color bg;
+		map.put("fbox", new CommandFBox());
 
-			@Override
-			public boolean init(TeXParser tp) {
-				frame = tp.getArgAsColor();
-				bg = tp.getArgAsColor();
-				return true;
-			}
+		map.put("boxed", new CommandBoxed());
 
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new FBoxAtom(a, bg, frame);
-			}
-		});
-		map.put("colorbox", new Command1A() {
-			Color bg;
+		map.put("dbox", new CommandDBox());
 
-			@Override
-			public boolean init(TeXParser tp) {
-				bg = CommandDefinecolor.getColor(tp);
-				return true;
-			}
+		map.put("fcolorbox", new CommandFColorBox());
 
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new FBoxAtom(a, bg, bg);
-			}
-		});
-		map.put("textcolor", new Command1A() {
-			Color fg;
+		map.put("colorbox", new CommandColorBox());
 
-			@Override
-			public boolean init(TeXParser tp) {
-				fg = CommandDefinecolor.getColor(tp);
-				return true;
-			}
+		map.put("textcolor", new CommandTextColor());
 
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new ColorAtom(a, null, fg);
-			}
-		});
-		map.put("color", new CommandTiny() {
-			Color fg;
+		map.put("color", new CommandColor());
 
-			@Override
-			public boolean init(TeXParser tp) {
-				fg = CommandDefinecolor.getColor(tp);
-				return super.init(tp);
-			}
+		map.put("bgcolor", new CommandBGColor());
 
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new ColorAtom(a, null, fg);
-			}
-		});
-		map.put("bgcolor", new Command1A() {
-			Color bg;
-
-			@Override
-			public boolean init(TeXParser tp) {
-				bg = CommandDefinecolor.getColor(tp);
-				return true;
-			}
-
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new ColorAtom(a, bg, null);
-			}
-		});
 		map.put("fgcolor", map.get("textcolor"));
 		map.put("definecolor", new CommandDefinecolor());
-		map.put("doublebox", new Command1A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new DoubleFramedAtom(a);
-			}
-		});
-		map.put("ovalbox", new Command1A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new OvalAtom(a);
-			}
-		});
+
+		map.put("doublebox", new CommandDoubleBox());
+
+		map.put("ovalbox", new CommandOvalBox());
+
 		map.put("cornersize", new Command0AImpl() {
 			@Override
 			public boolean init(TeXParser tp) {
@@ -1399,164 +828,35 @@ public class Commands {
 				return false;
 			}
 		});
-		map.put("shadowbox", new Command1A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new ShadowAtom(a);
-			}
-		});
-		map.put("raisebox", new Command1A() {
-			TeXLength raise;
-			TeXLength height;
-			TeXLength depth;
 
-			@Override
-			public boolean init(TeXParser tp) {
-				raise = tp.getArgAsLength();
-				height = tp.getOptionAsLength(null);
-				depth = tp.getOptionAsLength(null);
-				return true;
-			}
+		map.put("shadowbox", new CommandShadowBox());
 
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new RaiseAtom(a, raise, height, depth);
-			}
-		});
-		map.put("raise", new Command1A() {
-			TeXLength raise;
+		map.put("raisebox", new CommandRaiseBox());
 
-			@Override
-			public boolean init(TeXParser tp) {
-				raise = tp.getArgAsLength();
-				return true;
-			}
+		map.put("raise", new CommandRaise());
 
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new RaiseAtom(a, raise, null, null);
-			}
-		});
-		map.put("lower", new Command1A() {
-			TeXLength lower;
+		map.put("lower", new CommandLower());
 
-			@Override
-			public boolean init(TeXParser tp) {
-				lower = tp.getArgAsLength();
-				return true;
-			}
+		map.put("moveleft", new CommandMoveLeft());
 
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new RaiseAtom(a, lower.scale(-1.), null, null);
-			}
-		});
-		map.put("moveleft", new Command1A() {
-			TeXLength left;
+		map.put("moveright", new CommandMoveRight());
 
-			@Override
-			public boolean init(TeXParser tp) {
-				left = tp.getArgAsLength();
-				return true;
-			}
+		map.put("resizebox", new CommandResizeBox());
 
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new RowAtom(new SpaceAtom(left.scale(-1.)), a);
-			}
-		});
-		map.put("moveright", new Command1A() {
-			TeXLength right;
+		map.put("scalebox", new CommandScaleBox());
 
-			@Override
-			public boolean init(TeXParser tp) {
-				right = tp.getArgAsLength();
-				return true;
-			}
+		map.put("reflectbox", new CommandReflectBox());
 
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new RowAtom(new SpaceAtom(right), a);
-			}
-		});
-		map.put("resizebox", new Command1A() {
-			TeXLength width;
-			TeXLength height;
+		map.put("rotatebox", new CommandRotateBox());
 
-			@Override
-			public boolean init(TeXParser tp) {
-				width = tp.getArgAsLengthOrExcl();
-				height = tp.getArgAsLengthOrExcl();
-				return true;
-			}
+		map.put("scriptscriptstyle", new CommandScriptScriptStyle());
 
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new ResizeAtom(a, width, height);
-			}
-		});
-		map.put("scalebox", new Command1A() {
-			double hscale;
-			double vscale;
+		map.put("textstyle", new CommandTextStyle2());
 
-			@Override
-			public boolean init(TeXParser tp) {
-				hscale = tp.getArgAsDecimal();
-				vscale = tp.getOptionAsDecimal(hscale);
-				return true;
-			}
+		map.put("scriptstyle", new CommandScriptStyle());
 
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new ScaleAtom(a, hscale, vscale);
-			}
-		});
-		map.put("reflectbox", new Command1A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new ReflectAtom(a);
-			}
-		});
-		map.put("rotatebox", new Command1A() {
-			double angle;
-			Map<String, String> options;
+		map.put("displaystyle", new CommandDisplayStyle());
 
-			@Override
-			public boolean init(TeXParser tp) {
-				options = tp.getOptionAsMap();
-				angle = tp.getArgAsDecimal();
-				return true;
-			}
-
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new RotateAtom(a, angle, options);
-			}
-		});
-		map.put("scriptscriptstyle", new CommandTiny() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new StyleAtom(TeXConstants.STYLE_SCRIPT_SCRIPT, a);
-			}
-		});
-		map.put("textstyle", new CommandTiny() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new StyleAtom(TeXConstants.STYLE_TEXT, a);
-			}
-		});
-		map.put("scriptstyle", new CommandTiny() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new StyleAtom(TeXConstants.STYLE_SCRIPT, a);
-			}
-		});
-		map.put("displaystyle", new CommandTiny() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new StyleAtom(TeXConstants.STYLE_DISPLAY, a);
-			}
-		});
 		map.put("Biggr", new CommandBigr(TeXConstants.TYPE_CLOSING, 4));
 		map.put("biggr", new CommandBigr(TeXConstants.TYPE_CLOSING, 3));
 		map.put("Bigr", new CommandBigr(TeXConstants.TYPE_CLOSING, 2));
@@ -1579,24 +879,12 @@ public class Commands {
 				return new PhantomAtom(Symbols.LBRACK.changeType(TeXConstants.TYPE_ORDINARY), false, true, true);
 			}
 		});
-		map.put("phantom", new Command1A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new PhantomAtom(a, true, true, true);
-			}
-		});
-		map.put("vphantom", new Command1A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new PhantomAtom(a, false, true, true);
-			}
-		});
-		map.put("hphantom", new Command1A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new PhantomAtom(a, true, false, false);
-			}
-		});
+		map.put("phantom", new CommandPhantom());
+
+		map.put("vphantom", new CommandVPhantom());
+
+		map.put("hphantom", new CommandHPhantom());
+
 		map.put("LaTeX", new Command0A() {
 			@Override
 			public Atom newI(TeXParser tp) {
@@ -1613,138 +901,48 @@ public class Commands {
 		map.put("scr", new CommandTextStyleTeX(TextStyle.MATHSCR));
 		map.put("mathds", new CommandTextStyle(TextStyle.MATHDS));
 		map.put("oldstylenums", new CommandTextStyle(TextStyle.OLDSTYLENUMS));
-		map.put("mathsf", new Command1A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new SsAtom(a);
-			}
-		});
-		map.put("sf", new CommandTiny() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new SsAtom(a);
-			}
-		});
-		map.put("mathrm", new Command1A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new RomanAtom(a);
-			}
-		});
-		map.put("rm", new CommandTiny() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new RomanAtom(a);
-			}
-		});
-		map.put("mathit", new Command1A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new ItAtom(a);
-			}
-		});
+
+		map.put("mathsf", new CommandMathSf());
+
+		map.put("sf", new CommandSf());
+
+		map.put("mathrm", new CommandMathRm());
+
+		map.put("rm", new CommandRm());
+
+		map.put("mathit", new CommandMathIt());
+
 		map.put("mit", map.get("mathit"));
-		map.put("it", new CommandTiny() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new ItAtom(a);
-			}
-		});
-		map.put("mathtt", new Command1A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new TtAtom(a);
-			}
-		});
-		map.put("tt", new CommandTiny() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new TtAtom(a);
-			}
-		});
-		map.put("mathbf", new Command1A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new BoldAtom(new RomanAtom(a));
-			}
-		});
-		map.put("bf", new CommandTiny() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new BoldAtom(new RomanAtom(a));
-			}
-		});
-		map.put("bold", new Command1A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new BoldAtom(a);
-			}
-		});
+
+		map.put("it", new CommandIt());
+
+		map.put("mathtt", new CommandMathTt());
+
+		map.put("tt", new CommandTt());
+
+		map.put("mathbf", new CommandMathBf());
+
+		map.put("bf", new CommandBf());
+
+		map.put("bold", new CommandBold());
+
 		map.put("boldsymbol", map.get("bold"));
-		map.put("undertilde", new Command1A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new UnderOverAtom(a, new AccentedAtom(new PhantomAtom(a, true, false, false), Symbols.WIDETILDE),
-						new TeXLength(TeXLength.Unit.MU, 0.3), true, false);
-			}
-		});
-		map.put("b", new Command1A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new UnderOverAtom(a, Symbols.BAR, new TeXLength(TeXLength.Unit.MU, 0.1), false, false);
-			}
-		});
-		map.put("underaccent", new Command2A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a, Atom b) {
-				// TODO: take into account the italic correction
-				// \\underaccent{\\hat}{x}\\underaccent{\\bar}{\\gamma}
-				// TODO: verifier que le 0.3 ds undertilde est correct
-				// Ca marche pas ce truc parce que \\hat est une command a 1
-				// arg...
-				return new UnderOverAtom(b, a, new TeXLength(TeXLength.Unit.MU, 0.1), false, false);
-			}
-		});
-		map.put("accentset", new Command2A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a, Atom b) {
-				if (a instanceof SymbolAtom) {
-					return new AccentedAtom(b, (SymbolAtom) a);
-				} else {
-					return new AccentSetAtom(b, a);
-				}
-			}
-		});
-		map.put("underset", new Command2A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a, Atom b) {
-				final Atom at = new UnderOverAtom(b, a, new TeXLength(TeXLength.Unit.MU, 0.2), true, false);
-				return at.changeType(TeXConstants.TYPE_RELATION);
-			}
-		});
-		map.put("overset", new Command2A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a, Atom b) {
-				final Atom at = new UnderOverAtom(b, a, new TeXLength(TeXLength.Unit.MU, 2.5), true, true);
-				return at.changeType(TeXConstants.TYPE_RELATION);
-			}
-		});
-		map.put("stackbin", new Command1O2A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a, Atom b, Atom c) {
-				final Atom at = new UnderOverAtom(c, a, new TeXLength(TeXLength.Unit.MU, 3.5), true, b,
-						new TeXLength(TeXLength.Unit.MU, 3.), true);
-				return at.changeType(TeXConstants.TYPE_BINARY_OPERATOR);
-			}
-		});
-		map.put("stackrel", new Command1O2A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a, Atom b, Atom c) {
-				final Atom at = new UnderOverAtom(c, a, new TeXLength(TeXLength.Unit.MU, 3.5), true, b,
-						new TeXLength(TeXLength.Unit.MU, 3.), true);
-				return at.changeType(TeXConstants.TYPE_RELATION);
-			}
-		});
+		map.put("undertilde", new CommandUnderTilde());
+
+		map.put("b", new CommandB());
+
+		map.put("underaccent", new CommandUnderAccent());
+
+		map.put("accentset", new CommandAccentSet());
+
+		map.put("underset", new CommandUnderSet());
+
+		map.put("overset", new CommandOverSet());
+
+		map.put("stackbin", new CommandStackBin());
+
+		map.put("stackrel", new CommandStackRel());
+
 		map.put("questeq", new Command0A() {
 			@Override
 			public Atom newI(TeXParser tp) {
@@ -1759,18 +957,9 @@ public class Commands {
 				return new BuildrelAtom(Symbols.EQUALS, new RomanAtom(TeXParser.getAtomForLatinStr("def", true)));
 			}
 		});
-		map.put("shoveleft", new Command1A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new AlignedAtom(a, TeXConstants.Align.LEFT);
-			}
-		});
-		map.put("shoveright", new Command1A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new AlignedAtom(a, TeXConstants.Align.RIGHT);
-			}
-		});
+		map.put("shoveleft", new CommandShoveLeft());
+		map.put("shoveright", new CommandShoveRight());
+
 		map.put("hdotsfor", new Command0AImpl() {
 			@Override
 			public boolean init(TeXParser tp) {
@@ -1786,48 +975,10 @@ public class Commands {
 				return false;
 			}
 		});
-		map.put("multicolumn", new Command1A() {
-			int n;
-			ArrayOptions options;
+		map.put("multicolumn", new CommandMulticolumn());
 
-			@Override
-			public boolean init(TeXParser tp) {
-				if (!tp.isArrayMode()) {
-					throw new ParseException(tp, "The macro \\multicolumn is only available in array mode !");
-				}
-				n = tp.getArgAsPositiveInteger();
-				if (n == -1) {
-					throw new ParseException(tp, "The macro \\multicolumn requires a positive integer");
-				}
-				options = tp.getArrayOptions();
-				return true;
-			}
+		map.put("intertext", new CommandInterText());
 
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new MulticolumnAtom(n, options, a);
-			}
-		});
-		map.put("intertext", new Command() {
-			boolean mode;
-
-			@Override
-			public boolean init(TeXParser tp) {
-				if (!tp.isArrayMode()) {
-					throw new ParseException(tp, "The macro \\intertext is only available in array mode !");
-				}
-				mode = tp.setTextMode();
-				return true;
-			}
-
-			@Override
-			public void add(TeXParser tp, Atom a) {
-				tp.setMathMode(mode);
-				a = new TextStyleAtom(a, TextStyle.MATHNORMAL);
-				a = new StyleAtom(TeXConstants.STYLE_TEXT, new RomanAtom(a));
-				tp.closeConsumer(a.changeType(TeXConstants.TYPE_INTERTEXT));
-			}
-		});
 		map.put("cr", new CommandCr("cr"));
 		map.put("newline", new Command0AImpl() {
 			@Override
@@ -1846,21 +997,15 @@ public class Commands {
 		map.put("[", new CommandMathStyles.OpenBracket(TeXConstants.Opener.B_LSQBRACKET));
 		map.put("]", new CommandMathStyles.CloseBracket(TeXConstants.Opener.B_LSQBRACKET, TeXConstants.STYLE_DISPLAY,
 				"The command \\] doesn't match any \\["));
-		map.put("displaymath", new Command1A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new MathAtom(a, TeXConstants.STYLE_DISPLAY);
-			}
-		});
+
+		map.put("displaymath", new CommandDisplayMath());
+
 		map.put("(", new CommandMathStyles.OpenBracket(TeXConstants.Opener.B_LBRACKET));
 		map.put(")", new CommandMathStyles.CloseBracket(TeXConstants.Opener.B_LBRACKET, TeXConstants.STYLE_TEXT,
 				"The command \\) doesn't match any \\("));
-		map.put("math", new Command1A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new MathAtom(a, TeXConstants.STYLE_TEXT);
-			}
-		});
+
+		map.put("math", new CommandMath());
+
 		map.put("iddots", new Command0A() {
 			@Override
 			public Atom newI(TeXParser tp) {
@@ -1879,298 +1024,99 @@ public class Commands {
 				return new VdotsAtom();
 			}
 		});
-		map.put("smash", new Command1A() {
-			char opt;
+		map.put("smash", new CommandSmash());
 
-			@Override
-			public boolean init(TeXParser tp) {
-				opt = tp.getOptionAsChar();
-				if (opt != 't' && opt != 'b' && opt != '\0') {
-					throw new ParseException(tp, "Invalid option in \\smash");
-				}
-				return true;
-			}
-
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new SmashedAtom(a, opt);
-			}
-		});
 		map.put("joinrel", new Command0A() {
 			@Override
 			public Atom newI(TeXParser tp) {
 				return new SpaceAtom(TeXLength.Unit.MU, -3, 0, 0).changeType(TeXConstants.TYPE_RELATION);
 			}
 		});
-		map.put("mathclose", new Command1A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new TypedAtom(TeXConstants.TYPE_CLOSING, a);
-			}
-		});
-		map.put("mathopen", new Command1A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new TypedAtom(TeXConstants.TYPE_OPENING, a);
-			}
-		});
-		map.put("mathbin", new Command1A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new TypedAtom(TeXConstants.TYPE_BINARY_OPERATOR, a);
-			}
-		});
-		map.put("mathinner", new Command1A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new TypedAtom(TeXConstants.TYPE_INNER, a);
-			}
-		});
-		map.put("mathord", new Command1A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new TypedAtom(TeXConstants.TYPE_ORDINARY, a);
-			}
-		});
-		map.put("mathpunct", new Command1A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new TypedAtom(TeXConstants.TYPE_PUNCTUATION, a);
-			}
-		});
-		map.put("mathop", new Command1A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				a = new TypedAtom(TeXConstants.TYPE_BIG_OPERATOR, a);
-				a.type_limits = TeXConstants.SCRIPT_NORMAL;
-				return a;
-			}
-		});
-		map.put("mathrel", new Command1A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new TypedAtom(TeXConstants.TYPE_RELATION, a);
-			}
-		});
-		map.put("underline", new Command1A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new UnderlinedAtom(a);
-			}
-		});
-		map.put("overline", new Command1A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new OverlinedAtom(a);
-			}
-		});
-		map.put("overparen", new Command1A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new OverUnderDelimiter(a, null, Symbols.LBRACK, TeXLength.Unit.EX, 0, true);
-			}
-		});
-		map.put("underparen", new Command1A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new OverUnderDelimiter(a, null, Symbols.RBRACK, TeXLength.Unit.EX, 0, false);
-			}
-		});
-		map.put("overbrack", new Command1A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new OverUnderDelimiter(a, null, Symbols.LSQBRACK, TeXLength.Unit.EX, 0, true);
-			}
-		});
-		map.put("underbrack", new Command1A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new OverUnderDelimiter(a, null, Symbols.RSQBRACK, TeXLength.Unit.EX, 0, false);
-			}
-		});
-		map.put("overbrace", new Command1A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new OverUnderDelimiter(a, null, Symbols.LBRACE, TeXLength.Unit.EX, 0, true);
-			}
-		});
-		map.put("underbrace", new Command1A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new OverUnderDelimiter(a, null, Symbols.RBRACE, TeXLength.Unit.EX, 0, false);
-			}
-		});
-		map.put("prescript", new Command3A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a, Atom b, Atom c) {
-				final RowAtom ra = new RowAtom(new ScriptsAtom(new PhantomAtom(c, false, true, true), b, a, false),
-						new SpaceAtom(TeXLength.Unit.MU, -0.3, 0., 0.), c.changeType(TeXConstants.TYPE_ORDINARY));
-				ra.lookAtLast(true);
-				return ra;
-			}
-		});
-		map.put("sideset", new Command3A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a, Atom b, Atom c) {
-				final RowAtom ra = new RowAtom();
-				c = c.changeLimits(TeXConstants.SCRIPT_NOLIMITS);
-				if (a instanceof ScriptsAtom) {
-					((ScriptsAtom) a).setBase(new PhantomAtom(c, false, true, true));
-				} else if (a instanceof BigOperatorAtom) {
-					((BigOperatorAtom) a).setBase(new PhantomAtom(c, false, true, true));
-				}
-				ra.add(new TypedAtom(TeXConstants.TYPE_ORDINARY, a));
+		map.put("mathclose", new CommandMathClose());
 
-				if (b instanceof ScriptsAtom) {
-					((ScriptsAtom) b).setBase(c);
-				} else if (b instanceof BigOperatorAtom) {
-					((BigOperatorAtom) b).setBase(c);
-				} else {
-					ra.add(c);
-				}
-				ra.add(new TypedAtom(TeXConstants.TYPE_ORDINARY, b));
+		map.put("mathopen", new CommandMathOpen());
 
-				return ra;
-			}
-		});
-		map.put("xmapsto", new Command1O1A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a, Atom b) {
-				return new XMapstoAtom(b, a);
-			}
-		});
-		map.put("xlongequal", new Command1O1A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a, Atom b) {
-				return new XLongequalAtom(b, a);
-			}
-		});
-		map.put("xrightarrow", new Command1O1A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a, Atom b) {
-				return new XArrowAtom(b, a, XArrowAtom.Kind.Right);
-			}
-		});
-		map.put("xleftarrow", new Command1O1A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a, Atom b) {
-				return new XArrowAtom(b, a, XArrowAtom.Kind.Left);
-			}
-		});
-		map.put("xhookleftarrow", new Command1O1A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a, Atom b) {
-				return new XHookAtom(b, a, true);
-			}
-		});
-		map.put("xhookrightarrow", new Command1O1A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a, Atom b) {
-				return new XHookAtom(b, a, false);
-			}
-		});
-		map.put("xleftrightarrow", new Command1O1A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a, Atom b) {
-				return new XArrowAtom(b, a, XArrowAtom.Kind.LR);
-			}
-		});
-		map.put("xrightharpoondown", new Command1O1A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a, Atom b) {
-				return new XArrowAtom(b, a, XArrowAtom.Kind.RightHarpoonDown);
-			}
-		});
-		map.put("xrightharpoonup", new Command1O1A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a, Atom b) {
-				return new XArrowAtom(b, a, XArrowAtom.Kind.RightHarpoonUp);
-			}
-		});
-		map.put("xleftharpoondown", new Command1O1A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a, Atom b) {
-				return new XArrowAtom(b, a, XArrowAtom.Kind.LeftHarpoonDown);
-			}
-		});
-		map.put("xleftharpoonup", new Command1O1A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a, Atom b) {
-				return new XArrowAtom(b, a, XArrowAtom.Kind.LeftHarpoonUp);
-			}
-		});
-		map.put("xleftrightharpoons", new Command1O1A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a, Atom b) {
-				return new XArrowAtom(b, a, XArrowAtom.Kind.LeftRightHarpoons);
-			}
-		});
-		map.put("xrightleftharpoons", new Command1O1A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a, Atom b) {
-				return new XArrowAtom(b, a, XArrowAtom.Kind.RightLeftHarpoons);
-			}
-		});
-		map.put("xleftrightarrows", new Command1O1A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a, Atom b) {
-				return new XArrowAtom(b, a, XArrowAtom.Kind.LeftAndRight);
-			}
-		});
-		map.put("xrightleftarrows", new Command1O1A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a, Atom b) {
-				return new XArrowAtom(b, a, XArrowAtom.Kind.RightAndLeft);
-			}
-		});
-		map.put("underleftrightarrow", new Command1A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new UnderOverArrowAtom(a, false);
-			}
-		});
-		map.put("underleftarrow", new Command1A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new UnderOverArrowAtom(a, true, false);
-			}
-		});
-		map.put("underrightarrow", new Command1A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new UnderOverArrowAtom(a, false, false);
-			}
-		});
-		map.put("overleftrightarrow", new Command1A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new UnderOverArrowAtom(a, true);
-			}
-		});
-		map.put("overleftarrow", new Command1A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new UnderOverArrowAtom(a, true, true);
-			}
-		});
-		map.put("overrightarrow", new Command1A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new UnderOverArrowAtom(a, false, true);
-			}
-		});
-		map.put("ogonek", new Command1A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new OgonekAtom(a);
-			}
-		});
-		map.put("k", new Command1A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new OgonekAtom(a);
-			}
-		});
+		map.put("mathbin", new CommandMathBin());
+
+		map.put("mathinner", new CommandMathInner());
+
+		map.put("mathord", new CommandMathOrd());
+
+		map.put("mathpunct", new CommandMathPunct());
+
+		map.put("mathop", new CommandMathOp());
+
+		map.put("mathrel", new CommandMathRel());
+
+		map.put("underline", new CommandUnderline());
+
+		map.put("overline", new CommandOverline());
+
+		map.put("overparen", new CommandOverParen());
+
+		map.put("underparen", new CommandUnderParen());
+
+		map.put("overbrack", new CommandOverBrack());
+
+		map.put("underbrack", new CommandUnderBrack());
+
+		map.put("overbrace", new CommandOverBrace());
+
+		map.put("underbrace", new CommandUnderBrace());
+
+		map.put("prescript", new CommandPreScript());
+
+		map.put("sideset", new CommandSideSet());
+
+		map.put("xmapsto", new CommandXMapsTo());
+
+		map.put("xlongequal", new CommandXLongEqual());
+
+		map.put("xrightarrow", new CommandXRightArrow());
+
+		map.put("xleftarrow", new CommandXLeftArrow());
+
+		map.put("xhookleftarrow", new CommandXHookLeftArrow());
+
+		map.put("xhookrightarrow", new CommandXHookRightArrow());
+
+		map.put("xleftrightarrow", new CommandXLeftRightArrow());
+
+		map.put("xrightharpoondown", new CommandXRightHarpoonDown());
+
+		map.put("xrightharpoonup", new CommandXRightHarpoonUp());
+
+		map.put("xleftharpoondown", new CommandXLeftHarpoonDown());
+
+		map.put("xleftharpoonup", new CommandXLeftHarpoonUp());
+
+		map.put("xleftrightharpoons", new CommandXLeftRightHarpoons());
+
+		map.put("xrightleftharpoons", new CommandXRightLeftHarpoons());
+
+		map.put("xrightsmallleftharpoons", new CommandXRightSmallLeftHarpoons());
+
+		map.put("xsmallrightleftharpoons", new CommandXSmallRightLeftHarpoons());
+
+		map.put("xleftrightarrows", new CommandXLeftRightArrows());
+
+		map.put("xrightleftarrows", new CommandXRightLeftArrows());
+
+		map.put("underleftrightarrow", new CommandUnderLeftRightArrow());
+
+		map.put("underleftarrow", new CommandUnderLeftArrow());
+
+		map.put("underrightarrow", new CommandUnderRightArrow());
+
+		map.put("overleftrightarrow", new CommandOverLeftRightArrow());
+
+		map.put("overleftarrow", new CommandOverLeftArrow());
+
+		map.put("overrightarrow", new CommandOverRightArrow());
+
+		map.put("ogonek", new CommandOgonek());
+		map.put("k", new CommandOgonek());
+
 		map.put("tcaron", new Command0A() {
 			@Override
 			public Atom newI(TeXParser tp) {
@@ -2213,378 +1159,73 @@ public class Commands {
 				return new IJAtom(false);
 			}
 		});
-		map.put("cedilla", new Command1A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new CedillaAtom(a);
-			}
-		});
-		map.put("~", new Command1A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new AccentedAtom(a, Symbols.TILDE);
-			}
-		});
-		map.put("tilde", new Command1A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new AccentedAtom(a, Symbols.TILDE);
-			}
+		map.put("cedilla", new CommandCedilla());
+		map.put("c", new CommandCedilla());
 
-			@Override
-			public boolean close(TeXParser tp) {
-				tp.closeConsumer(Symbols.TILDE);
-				return true;
-			}
+		map.put("~", new CommandTilde1());
 
-			@Override
-			public boolean isClosable() {
-				return true;
-			}
-		});
-		map.put("widetilde", new Command1A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new AccentedAtom(a, Symbols.WIDETILDE);
-			}
+		map.put("tilde", new CommandTilde2());
 
-			@Override
-			public boolean close(TeXParser tp) {
-				tp.closeConsumer(Symbols.WIDETILDE);
-				return true;
-			}
+		map.put("widetilde", new CommandWideTilde());
 
-			@Override
-			public boolean isClosable() {
-				return true;
-			}
-		});
-		map.put("'", new Command1A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new AccentedAtom(a, Symbols.ACUTE);
-			}
-		});
-		map.put("acute", new Command1A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new AccentedAtom(a, Symbols.ACUTE);
-			}
+		map.put("'", new CommandAcute1());
 
-			@Override
-			public boolean close(TeXParser tp) {
-				tp.closeConsumer(Symbols.ACUTE);
-				return true;
-			}
+		map.put("acute", new CommandAcute2());
 
-			@Override
-			public boolean isClosable() {
-				return true;
-			}
-		});
-		map.put("skew", new Command() {
-			private double skew;
+		map.put("skew", new CommandSkew());
 
-			@Override
-			public boolean init(TeXParser tp) {
-				skew = tp.getArgAsDecimal();
-				return true;
-			}
+		map.put("^", new CommandHat1());
 
-			@Override
-			public void add(TeXParser tp, Atom a) {
-				if (a instanceof AccentedAtom) {
-					((AccentedAtom) a).setSkew(skew);
-					tp.closeConsumer(a);
-					return;
-				}
-				throw new ParseException(tp, "skew command is only working with an accent as second argument");
-			}
-		});
-		map.put("^", new Command1A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new AccentedAtom(a, Symbols.HAT);
-			}
-		});
-		map.put("hat", new Command1A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new AccentedAtom(a, Symbols.HAT);
-			}
+		map.put("hat", new CommandHat2());
 
-			@Override
-			public boolean close(TeXParser tp) {
-				tp.closeConsumer(Symbols.HAT);
-				return true;
-			}
+		map.put("widehat", new CommandWideHat());
 
-			@Override
-			public boolean isClosable() {
-				return true;
-			}
-		});
-		map.put("widehat", new Command1A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new AccentedAtom(a, Symbols.WIDEHAT);
-			}
+		map.put("\"", new CommandQuotes());
 
-			@Override
-			public boolean close(TeXParser tp) {
-				tp.closeConsumer(Symbols.WIDEHAT);
-				return true;
-			}
+		map.put("ddot", new CommandDDot());
 
-			@Override
-			public boolean isClosable() {
-				return true;
-			}
-		});
-		map.put("\"", new Command1A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new AccentedAtom(a, Symbols.DDOT);
-			}
-		});
-		map.put("ddot", new Command1A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new AccentedAtom(a, Symbols.DDOT);
-			}
+		map.put("dddot", new CommandDDDot());
 
-			@Override
-			public boolean close(TeXParser tp) {
-				tp.closeConsumer(Symbols.DDOT);
-				return true;
-			}
+		map.put("ddddot", new CommandDDDDot());
 
-			@Override
-			public boolean isClosable() {
-				return true;
-			}
-		});
-		map.put("dddot", new Command1A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new BuildrelAtom(a,
-						new RowAtom(Symbols.TEXTNORMALDOT, Symbols.TEXTNORMALDOT, Symbols.TEXTNORMALDOT));
-			}
-		});
-		map.put("ddddot", new Command1A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new BuildrelAtom(a, new RowAtom(Symbols.TEXTNORMALDOT, Symbols.TEXTNORMALDOT,
-						Symbols.TEXTNORMALDOT, Symbols.TEXTNORMALDOT));
-			}
-		});
-		map.put("`", new Command1A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new AccentedAtom(a, Symbols.GRAVE);
-			}
-		});
-		map.put("grave", new Command1A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new AccentedAtom(a, Symbols.GRAVE);
-			}
+		map.put("`", new CommandGrave1());
 
-			@Override
-			public boolean close(TeXParser tp) {
-				tp.closeConsumer(Symbols.GRAVE);
-				return true;
-			}
+		map.put("grave", new CommandGrave2());
 
-			@Override
-			public boolean isClosable() {
-				return true;
-			}
-		});
-		map.put("=", new Command1A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new AccentedAtom(a, Symbols.BAR);
-			}
-		});
-		map.put("bar", new Command1A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new AccentedAtom(a, Symbols.BAR);
-			}
+		map.put("=", new CommandEquals());
 
-			@Override
-			public boolean close(TeXParser tp) {
-				tp.closeConsumer(Symbols.BAR);
-				return true;
-			}
+		map.put("bar", new CommandBar());
 
-			@Override
-			public boolean isClosable() {
-				return true;
-			}
-		});
-		map.put(".", new Command1A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new AccentedAtom(a, Symbols.DOT);
-			}
-		});
-		map.put("dot", new Command1A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new AccentedAtom(a, Symbols.DOT);
-			}
+		map.put(".", new CommandDot1());
 
-			@Override
-			public boolean close(TeXParser tp) {
-				tp.closeConsumer(Symbols.DOT);
-				return true;
-			}
+		map.put("dot", new CommandDot2());
 
-			@Override
-			public boolean isClosable() {
-				return true;
-			}
-		});
-		map.put("cyrddot", new Command1A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new AccentedAtom(a, "cyrddot");
-			}
+		map.put("cyrddot", new CommandCyrDDot());
 
-			@Override
-			public boolean close(TeXParser tp) {
-				tp.closeConsumer(SymbolAtom.get("cyrddot"));
-				return true;
-			}
+		map.put("u", new CommandBreve1());
 
-			@Override
-			public boolean isClosable() {
-				return true;
-			}
-		});
-		map.put("u", new Command1A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new AccentedAtom(a, Symbols.BREVE);
-			}
-		});
-		map.put("breve", new Command1A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new AccentedAtom(a, Symbols.BREVE);
-			}
+		map.put("breve", new CommandBreve2());
 
-			@Override
-			public boolean close(TeXParser tp) {
-				tp.closeConsumer(Symbols.BREVE);
-				return true;
-			}
+		map.put("v", new CommandCheck());
 
-			@Override
-			public boolean isClosable() {
-				return true;
-			}
-		});
-		map.put("v", new Command1A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new AccentedAtom(a, Symbols.CHECK);
-			}
-		});
-		map.put("check", new Command1A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new AccentedAtom(a, Symbols.CHECK);
-			}
+		map.put("check", new CommandMap());
 
-			@Override
-			public boolean close(TeXParser tp) {
-				tp.closeConsumer(Symbols.CHECK);
-				return true;
-			}
+		map.put("H", new CommandH());
 
-			@Override
-			public boolean isClosable() {
-				return true;
-			}
-		});
-		map.put("H", new Command1A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new AccentedAtom(a, "doubleacute");
-			}
-		});
-		map.put("t", new Command1A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new AccentedAtom(a, "tie");
-			}
-		});
-		map.put("r", new Command1A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new AccentedAtom(a, Symbols.MATHRING);
-			}
-		});
-		map.put("mathring", new Command1A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new AccentedAtom(a, Symbols.MATHRING);
-			}
+		map.put("t", new CommandT2());
 
-			@Override
-			public boolean close(TeXParser tp) {
-				tp.closeConsumer(Symbols.MATHRING);
-				return true;
-			}
+		map.put("r", new CommandR());
 
-			@Override
-			public boolean isClosable() {
-				return true;
-			}
-		});
-		map.put("U", new Command1A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new AccentedAtom(a, "cyrbreve");
-			}
-		});
-		map.put("vec", new Command1A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new AccentedAtom(a, Symbols.VEC);
-			}
+		map.put("mathring", new CommandMathRing());
 
-			@Override
-			public boolean close(TeXParser tp) {
-				tp.closeConsumer(Symbols.VEC);
-				return true;
-			}
+		map.put("U", new CommandU());
 
-			@Override
-			public boolean isClosable() {
-				return true;
-			}
-		});
-		map.put("accent", new Command2A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a, Atom b) {
-				if (a instanceof SymbolAtom) {
-					return new AccentedAtom(b, (SymbolAtom) a);
-				} else {
-					return new AccentSetAtom(b, a);
-				}
-			}
-		});
-		map.put("grkaccent", new Command2A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a, Atom b) {
-				// TODO: instanceof
-				return new AccentedAtom(b, (SymbolAtom) a);
-			}
-		});
+		map.put("vec", new CommandVec());
+
+		map.put("accent", new CommandAccent());
+
+		map.put("grkaccent", new CommandGrkAccent());
+
 		map.put("underscore", new Command0A() {
 			@Override
 			public Atom newI(TeXParser tp) {
@@ -2592,141 +1233,35 @@ public class Commands {
 			}
 		});
 		map.put("_", map.get("underscore"));
-		map.put("mbox", new Command() {
-			boolean mode;
 
-			@Override
-			public boolean init(TeXParser tp) {
-				mode = tp.setTextMode();
-				return true;
-			}
+		map.put("mbox", new CommandMBox());
 
-			@Override
-			public void add(TeXParser tp, Atom a) {
-				tp.setMathMode(mode);
-				a = new TextStyleAtom(a, TextStyle.MATHNORMAL);
-				tp.closeConsumer(new StyleAtom(TeXConstants.STYLE_TEXT, new RomanAtom(a)));
-			}
-		});
-		map.put("textsuperscript", new Command() {
-			boolean mode;
+		map.put("textsuperscript", new CommandTextSuperscript());
 
-			@Override
-			public boolean init(TeXParser tp) {
-				mode = tp.setTextMode();
-				return true;
-			}
+		map.put("textsubscript", new CommandTextSubscript());
 
-			@Override
-			public void add(TeXParser tp, Atom a) {
-				tp.setMathMode(mode);
-				a = new TextStyleAtom(a, TextStyle.MATHNORMAL);
-				tp.closeConsumer(SubSupCom.get(MHeightAtom.get(), null,
-						new StyleAtom(TeXConstants.STYLE_TEXT, new RomanAtom(a))));
-			}
-		});
-		map.put("textsubscript", new Command() {
-			boolean mode;
+		map.put("text", new CommandText2());
 
-			@Override
-			public boolean init(TeXParser tp) {
-				mode = tp.setTextMode();
-				return true;
-			}
+		map.put("pmb", new CommandPMB());
 
-			@Override
-			public void add(TeXParser tp, Atom a) {
-				tp.setMathMode(mode);
-				a = new TextStyleAtom(a, TextStyle.MATHNORMAL);
-				tp.closeConsumer(
-						SubSupCom.get(EmptyAtom.get(), new StyleAtom(TeXConstants.STYLE_TEXT, new RomanAtom(a)), null));
-			}
-		});
-		map.put("text", new CommandText() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return a;
-			}
-		});
-		map.put("pmb", new Command1A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new OoalignAtom(a, new RowAtom(new SpaceAtom(TeXLength.Unit.MU, 0.4), a));
-			}
-		});
-		map.put("textbf", new CommandText() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new BoldAtom(a);
-			}
-		});
-		map.put("textit", new CommandText() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new ItAtom(a);
-			}
-		});
-		map.put("textrm", new CommandText() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new RomanAtom(a);
-			}
-		});
-		map.put("textsf", new CommandText() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new SsAtom(a);
-			}
-		});
-		map.put("texttt", new CommandText() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new TtAtom(a);
-			}
-		});
-		map.put("textsc", new CommandText() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				return new SmallCapAtom(a);
-			}
-		});
+		map.put("textbf", new CommandTextBf());
 
-		map.put("operatorname", new Command1A() {
-			@Override
-			public Atom newI(TeXParser tp, Atom a) {
-				a = new RomanAtom(a).changeType(TeXConstants.TYPE_BIG_OPERATOR);
-				a.type_limits = TeXConstants.SCRIPT_NOLIMITS;
-				return a;
-			}
-		});
+		map.put("textit", new CommandTextIt());
+
+		map.put("textrm", new CommandTextRm());
+
+		map.put("textsf", new CommandTextSf());
+
+		map.put("texttt", new CommandTextTt());
+
+		map.put("textsc", new CommandTextSc());
+
+		map.put("operatorname", new CommandOperatorName());
+
 		map.put("sfrac", new CommandSfrac());
-		map.put("cfrac", new Command2A() {
-			char opt;
 
-			@Override
-			public boolean init(TeXParser tp) {
-				opt = tp.getOptionAsChar();
-				if (opt != 'c' && opt != 'r' && opt != 'l' && opt != '\0') {
-					throw new ParseException(tp, "Invalid option in \\cfrac");
-				}
-				return true;
-			}
+		map.put("cfrac", new CommandCFrac());
 
-			@Override
-			public Atom newI(TeXParser tp, Atom a, Atom b) {
-				TeXConstants.Align align;
-				if (opt == 'l') {
-					align = TeXConstants.Align.LEFT;
-				} else if (opt == 'r') {
-					align = TeXConstants.Align.RIGHT;
-				} else {
-					align = TeXConstants.Align.CENTER;
-				}
-
-				a = new FractionAtom(a, b, true, align, TeXConstants.Align.CENTER);
-				return new RowAtom(new StyleAtom(TeXConstants.STYLE_DISPLAY, a));
-			}
-		});
 		map.put("the", new Command0AImpl() {
 			@Override
 			public boolean init(TeXParser tp) {
@@ -2735,6 +1270,7 @@ public class Commands {
 				return false;
 			}
 		});
+
 		map.put("setlength", new Command0AImpl() {
 			@Override
 			public boolean init(TeXParser tp) {
@@ -2751,6 +1287,9 @@ public class Commands {
 			@Override
 			public boolean init(TeXParser tp) {
 				TeXLength r = tp.getOptionAsLength(TeXLength.getZero());
+				if (r == null) {
+					r = new TeXLength();
+				}
 				TeXLength w = tp.getArgAsLength();
 				if (w == null) {
 					throw new ParseException(tp, "Invalid length in \\rule");
@@ -3199,42 +1738,24 @@ public class Commands {
 		map.put("geneuro", new Replacement("\\texteuro"));
 		map.put("geneuronarrow", map.get("geneuro"));
 		map.put("geneurowide", map.get("geneuro"));
-		map.put("jlmXML", new Command() {
-			// TODO: check if this is useful or not
-			@Override
-			public boolean init(TeXParser tp) {
-				final Map<String, String> map = tp.getXMLMap();
-				String str = tp.getArgAsString();
-				final StringBuffer buffer = new StringBuffer();
-				int start = 0;
-				int pos;
-				while ((pos = str.indexOf("$")) != -1) {
-					if (pos < str.length() - 1) {
-						start = pos;
-						while (++start < str.length() && Character.isLetter(str.charAt(start)))
-							;
-						String key = str.substring(pos + 1, start);
-						String value = map.get(key);
-						if (value != null) {
-							buffer.append(str.substring(0, pos));
-							buffer.append(value);
-						} else {
-							buffer.append(str.substring(0, start));
-						}
-						str = str.substring(start);
-					} else {
-						buffer.append(str);
-						str = "";
-					}
-				}
-				buffer.append(str);
-				str = buffer.toString();
 
-				tp.addString(str);
+		// TODO: check if this is useful or not
+		map.put("jlmXML", new CommandJlmXML());
 
-				return false;
-			}
-		});
+		// caret for the editor
+		//map.put("jlmcursor", new CommandJlmCursor());
+		// for the editor
+		//map.put("jlmselection", new CommandJlmSelection());
+
+		// eg
+		// \imagebasesixtyfour{40}{36}{data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAkCAIAAAB0Xu9BAAAAKUlEQVR42u3NMQEAAAwCIPuX1hbbAwVIn0QsFovFYrFYLBaLxWKx+M4AoNrQEWa6zscAAAAASUVORK5CYII=}
+		//map.put("imagebasesixtyfour", new CommandImageBase64());
+
+		map.put("&", new Replacement("\\textampersand"));
+		map.put("%", new Replacement("\\textpercent"));
+		map.put("$", new Replacement("\\textdollar"));
+		map.put("dollar", map.get("$"));
+
 	}
 
 	public static AtomConsumer get(final String name) {

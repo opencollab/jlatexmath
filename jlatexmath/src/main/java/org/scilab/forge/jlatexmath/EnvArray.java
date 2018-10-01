@@ -52,25 +52,34 @@ import org.scilab.forge.jlatexmath.commands.Command;
 public class EnvArray {
 
 	public static final class ColSep extends EmptyAtom {
-		private static ColSep instance = new ColSep();
 
 		private ColSep() {
 		}
 
 		public static ColSep get() {
-			return instance;
+			return new ColSep();
 		}
+
+//		@Override
+//		public Atom duplicate() {
+//			return setFields(new ColSep());
+//		}
 	}
 
 	public static final class RowSep extends EmptyAtom {
-		private static RowSep instance = new RowSep();
 
 		private RowSep() {
 		}
 
 		public static RowSep get() {
-			return instance;
+			return new RowSep();
 		}
+
+//		@Override
+//		public Atom duplicate() {
+//			return setFields(new RowSep());
+//		}
+
 	}
 
 	public static final class CellColor extends EmptyAtom {
@@ -83,6 +92,12 @@ public class EnvArray {
 		public Color getColor() {
 			return c;
 		}
+
+//		@Override
+//		public Atom duplicate() {
+//			return setFields(new CellColor(c));
+//		}
+
 	}
 
 	public static final class RowColor extends EmptyAtom {
@@ -95,6 +110,12 @@ public class EnvArray {
 		public Color getColor() {
 			return c;
 		}
+
+//		@Override
+//		public Atom duplicate() {
+//			return setFields(new RowColor(c));
+//		}
+
 	}
 
 	public static class Begin extends Command {
@@ -118,14 +139,39 @@ public class EnvArray {
 		}
 
 		@Override
-		public boolean init(TeXParser tp) {
+		final public boolean init(TeXParser tp) {
+
+			if ("alignedat".equals(name) || "alignat".equals(name)) {
+				n = tp.getArgAsPositiveInteger();
+				if (n <= 0) {
+					throw new ParseException(tp, "Invalid argument in " + name + " environment");
+				}
+				aoa = new ArrayOfAtoms("alignedat".equals(name) ? ArrayAtom.ALIGNEDAT : ArrayAtom.ALIGNAT);
+				tp.addConsumer(this);
+				tp.addConsumer(aoa);
+				return false;
+			}
+
 			if (opt == null) {
 				opt = tp.getArrayOptions();
 			}
 			aoa = new ArrayOfAtoms(type);
 			tp.addConsumer(this);
 			tp.addConsumer(aoa);
-			return false;
+			switch (name) {
+			default:
+
+				return false;
+
+			case "multiline":
+			case "subarray":
+			case "gather":
+			case "gathered":
+				aoa.setOneColumn(true);
+				return false;
+
+			}
+
 		}
 
 		public final String getName() {
@@ -138,6 +184,14 @@ public class EnvArray {
 
 		public ArrayOfAtoms getAOA() {
 			return aoa;
+		}
+
+		@Override
+		public Command duplicate() {
+			Begin ret = new Begin(name, type, opt);
+			ret.aoa = aoa;
+			ret.n = n;
+			return ret;
 		}
 	}
 
@@ -166,7 +220,7 @@ public class EnvArray {
 		}
 
 		@Override
-		public boolean init(TeXParser tp) {
+		final public boolean init(TeXParser tp) {
 			tp.close();
 			final AtomConsumer ac = tp.pop();
 			if (ac instanceof ArrayOfAtoms) {
@@ -199,8 +253,73 @@ public class EnvArray {
 			return new FencedAtom(mat, op, cl);
 		}
 
-		public Atom newI(TeXParser tp, Begin beg) {
-			return new ArrayAtom(beg.aoa, beg.opt, true);
+		final public Atom newI(TeXParser tp, Begin beg) {
+			switch (name) {
+			case "align":
+				return new AlignAtom(beg.aoa, false);
+			case "cases":
+				final SymbolAtom op1 = Symbols.LBRACE;
+
+				// XXX check
+				return new FencedAtom(new ArrayAtom(beg.aoa, beg.opt, true), op1, null, null);
+			// return new FencedAtom(super.newI(tp, beg), op, null, cl);
+
+			case "matrix":
+				return new SMatrixAtom(beg.aoa, false);
+
+			case "smallmatrix":
+				return new SMatrixAtom(beg.aoa, true);
+
+			case "aligned":
+				return new AlignAtom(beg.aoa, true);
+
+			case "flalign":
+				return new FlalignAtom(beg.aoa);
+
+			case "alignat":
+				if (2 * beg.n != beg.aoa.col) {
+					throw new ParseException(tp, "Bad number of equations in alignat environment !");
+				}
+				return new AlignAtAtom(beg.aoa, false);
+
+			case "alignedat":
+				if (2 * beg.n != beg.aoa.col) {
+					throw new ParseException(tp, "Bad number of equations in alignedat environment !");
+				}
+				return new AlignAtAtom(beg.aoa, true);
+
+			case "multiline":
+				if (beg.aoa.col == 0) {
+					return EmptyAtom.get();
+				}
+				return new MultlineAtom(beg.aoa, MultlineAtom.MULTLINE);
+
+			case "subarray":
+				if (beg.aoa.col == 0) {
+					return EmptyAtom.get();
+				}
+				return new SubarrayAtom(beg.getAOA(), beg.getOptions());
+
+			case "gather":
+				if (beg.aoa.col == 0) {
+					return EmptyAtom.get();
+				}
+				return new MultlineAtom(beg.aoa, MultlineAtom.GATHER);
+
+			case "gathered":
+				if (beg.aoa.col == 0) {
+					return EmptyAtom.get();
+				}
+				return new MultlineAtom(beg.aoa, MultlineAtom.GATHERED);
+
+			default:
+				return new ArrayAtom(beg.aoa, beg.opt, true);
+			}
+		}
+
+		@Override
+		public Command duplicate() {
+			return new EnvArray.End(name, op, cl);
 		}
 	}
 }

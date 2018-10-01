@@ -51,6 +51,19 @@ public class Column extends Command {
 
 	protected ArrayOfAtoms aoa;
 
+	public Column() {
+		//
+	}
+
+	public Column(ArrayOfAtoms aoa2) {
+		this.aoa = aoa2;
+	}
+
+	@Override
+	public Command duplicate() {
+		return new Column(aoa);
+	}
+
 	@Override
 	public boolean init(TeXParser tp) {
 		aoa = new ArrayOfAtoms(ArrayAtom.MATRIX);

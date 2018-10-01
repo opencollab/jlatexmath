@@ -84,4 +84,13 @@ public class CommandOpName extends Command {
 
 		return false;
 	}
+
+	@Override
+	public Command duplicate() {
+		CommandOpName ret = new CommandOpName(name, post, limits == TeXConstants.SCRIPT_LIMITS);
+
+		return ret;
+
+	}
+
 }

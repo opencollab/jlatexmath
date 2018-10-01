@@ -66,4 +66,16 @@ public class CommandOoalign extends CommandMatrix {
 		}
 		return new OoalignAtom(aoa);
 	}
+
+	@Override
+	public Command duplicate() {
+		CommandOoalign ret = new CommandOoalign();
+
+		ret.hasLBrace = hasLBrace;
+		ret.aoa = aoa;
+
+		return ret;
+
+	}
+
 }

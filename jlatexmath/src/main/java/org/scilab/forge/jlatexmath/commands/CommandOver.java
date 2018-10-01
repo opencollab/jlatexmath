@@ -47,10 +47,11 @@ package org.scilab.forge.jlatexmath.commands;
 
 import org.scilab.forge.jlatexmath.Atom;
 import org.scilab.forge.jlatexmath.EmptyAtom;
+import org.scilab.forge.jlatexmath.OverAtom;
 import org.scilab.forge.jlatexmath.RowAtom;
 import org.scilab.forge.jlatexmath.TeXParser;
 
-public abstract class CommandOver extends Command {
+public class CommandOver extends Command {
 
 	protected Atom num;
 	protected RowAtom den;
@@ -91,5 +92,17 @@ public abstract class CommandOver extends Command {
 		return true;
 	}
 
-	public abstract Atom newI(TeXParser tp, Atom a, Atom b);
+	public Atom newI(TeXParser tp, Atom a, Atom b) {
+		return new OverAtom(a, b);
+	}
+
+	@Override
+	public Command duplicate() {
+		CommandOver ret = new CommandOver();
+		ret.den = den;
+		ret.num = num;
+		return ret;
+
+	}
+
 }

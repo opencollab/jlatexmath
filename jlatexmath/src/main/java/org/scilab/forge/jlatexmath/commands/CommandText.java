@@ -53,7 +53,7 @@ import org.scilab.forge.jlatexmath.TextStyleAtom;
 
 public abstract class CommandText extends Command1A {
 
-	private boolean mode;
+	protected boolean mode;
 
 	@Override
 	public boolean init(TeXParser tp) {
@@ -67,4 +67,5 @@ public abstract class CommandText extends Command1A {
 		a = new TextStyleAtom(a, TextStyle.MATHNORMAL);
 		tp.closeConsumer(newI(tp, new RomanAtom(a)));
 	}
+
 }
