@@ -48,8 +48,8 @@ package org.scilab.forge.jlatexmath.mhchem;
 import org.scilab.forge.jlatexmath.Atom;
 import org.scilab.forge.jlatexmath.Box;
 import org.scilab.forge.jlatexmath.StrutBox;
-import org.scilab.forge.jlatexmath.TeXEnvironment;
 import org.scilab.forge.jlatexmath.TeXConstants;
+import org.scilab.forge.jlatexmath.TeXEnvironment;
 
 /**
  * An empty atom used in mhchem.

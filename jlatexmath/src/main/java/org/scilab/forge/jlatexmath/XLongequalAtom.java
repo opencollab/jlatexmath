@@ -62,8 +62,8 @@ public class XLongequalAtom extends XAtom {
 		return new XLongEqual(width);
 	}
 
-//	@Override
-//	public Atom duplicate() {
-//		return setFields(new XLongequalAtom(over, under));
-//	}
+	// @Override
+	// public Atom duplicate() {
+	// return setFields(new XLongequalAtom(over, under));
+	// }
 }

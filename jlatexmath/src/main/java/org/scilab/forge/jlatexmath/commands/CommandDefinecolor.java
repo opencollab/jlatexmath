@@ -75,92 +75,87 @@ public class CommandDefinecolor extends Command {
 	}
 
 	private static Map<String, Converter> converters = new HashMap<String, Converter>(11) {
-        {
-            put("gray", new Converter() {
-                public Color to(TeXParser tp) {
-                    final float gray = (float)Colors.clamp(tp.getArgAsDecimal());
-                    return new Color(gray, gray, gray);
-                }
-            });
-            put("wave", new Converter() {
-                public Color to(TeXParser tp) {
-                    final double waveLen = tp.getArgAsDecimal();
-                    return Colors.convWave(waveLen);
-                }
-            });
-            put("rgb", new Converter() {
-                public Color to(TeXParser tp) {
-                    tp.getArgAsDecimals(doubles, 3);
-                    clampf(3);
-                    return new Color((float)doubles[0],
-                                     (float)doubles[1],
-                                     (float)doubles[2]);
-                }
-            });
-            put("RGB", new Converter() {
-                public Color to(TeXParser tp) {
-                    tp.getArgAsPositiveIntegers(ints, 3);
-                    clampi(3);
-                    return new Color(ints[0], ints[1], ints[2]);
-                }
-            });
-            put("rgba", new Converter() {
-                public Color to(TeXParser tp) {
-                    tp.getArgAsDecimals(doubles, 4);
-                    clampf(4);
-                    return new Color((float)doubles[0],
-                                     (float)doubles[1],
-                                     (float)doubles[2],
-                                     (float)doubles[3]);
-                }
-            });
-            put("RGBA", new Converter() {
-                public Color to(TeXParser tp) {
-                    tp.getArgAsPositiveIntegers(ints, 4);
-                    clampi(4);
-                    return new Color(ints[0], ints[1], ints[2], ints[3]);
-                }
-            });
-            put("cmyk", new Converter() {
-                public Color to(TeXParser tp) {
-                    tp.getArgAsDecimals(doubles, 4);
-                    clampf(4);
-                    return Colors.conv(doubles[0], doubles[1], doubles[2], doubles[3]);
-                }
-            });
-            put("hsl", new Converter() {
-                public Color to(TeXParser tp) {
-                    tp.getArgAsDecimals(doubles, 3);
-                    doubles[1] = Colors.clamp(doubles[1]);
-                    doubles[2] = Colors.clamp(doubles[2]);
-                    return Colors.convHSL(doubles[0], doubles[1], doubles[2]);
-                }
-            });
-            put("hsla", new Converter() {
-                public Color to(TeXParser tp) {
-                    tp.getArgAsDecimals(doubles, 3);
-                    doubles[1] = Colors.clamp(doubles[1]);
-                    doubles[2] = Colors.clamp(doubles[2]);
-                    doubles[3] = Colors.clamp(doubles[3]);
-                    return Colors.convHSL(doubles[0], doubles[1], doubles[2], doubles[3]);
-                }
-            });
-            put("hsb", new Converter() {
-                public Color to(TeXParser tp) {
-                    tp.getArgAsDecimals(doubles, 3);
-                    doubles[1] = Colors.clamp(doubles[1]);
-                    doubles[2] = Colors.clamp(doubles[2]);
-                    return Colors.convHSB(doubles[0], doubles[1], doubles[2]);
-                }
-            });
-            put("HTML", new Converter() {
-                public Color to(TeXParser tp) {
-                    final int c = tp.getArgAsHexNumber(6);
-                    return new Color(c);
-                }
-            });
-        }
-    };
+		{
+			put("gray", new Converter() {
+				public Color to(TeXParser tp) {
+					final float gray = (float) Colors.clamp(tp.getArgAsDecimal());
+					return new Color(gray, gray, gray);
+				}
+			});
+			put("wave", new Converter() {
+				public Color to(TeXParser tp) {
+					final double waveLen = tp.getArgAsDecimal();
+					return Colors.convWave(waveLen);
+				}
+			});
+			put("rgb", new Converter() {
+				public Color to(TeXParser tp) {
+					tp.getArgAsDecimals(doubles, 3);
+					clampf(3);
+					return new Color((float) doubles[0], (float) doubles[1], (float) doubles[2]);
+				}
+			});
+			put("RGB", new Converter() {
+				public Color to(TeXParser tp) {
+					tp.getArgAsPositiveIntegers(ints, 3);
+					clampi(3);
+					return new Color(ints[0], ints[1], ints[2]);
+				}
+			});
+			put("rgba", new Converter() {
+				public Color to(TeXParser tp) {
+					tp.getArgAsDecimals(doubles, 4);
+					clampf(4);
+					return new Color((float) doubles[0], (float) doubles[1], (float) doubles[2], (float) doubles[3]);
+				}
+			});
+			put("RGBA", new Converter() {
+				public Color to(TeXParser tp) {
+					tp.getArgAsPositiveIntegers(ints, 4);
+					clampi(4);
+					return new Color(ints[0], ints[1], ints[2], ints[3]);
+				}
+			});
+			put("cmyk", new Converter() {
+				public Color to(TeXParser tp) {
+					tp.getArgAsDecimals(doubles, 4);
+					clampf(4);
+					return Colors.conv(doubles[0], doubles[1], doubles[2], doubles[3]);
+				}
+			});
+			put("hsl", new Converter() {
+				public Color to(TeXParser tp) {
+					tp.getArgAsDecimals(doubles, 3);
+					doubles[1] = Colors.clamp(doubles[1]);
+					doubles[2] = Colors.clamp(doubles[2]);
+					return Colors.convHSL(doubles[0], doubles[1], doubles[2]);
+				}
+			});
+			put("hsla", new Converter() {
+				public Color to(TeXParser tp) {
+					tp.getArgAsDecimals(doubles, 3);
+					doubles[1] = Colors.clamp(doubles[1]);
+					doubles[2] = Colors.clamp(doubles[2]);
+					doubles[3] = Colors.clamp(doubles[3]);
+					return Colors.convHSL(doubles[0], doubles[1], doubles[2], doubles[3]);
+				}
+			});
+			put("hsb", new Converter() {
+				public Color to(TeXParser tp) {
+					tp.getArgAsDecimals(doubles, 3);
+					doubles[1] = Colors.clamp(doubles[1]);
+					doubles[2] = Colors.clamp(doubles[2]);
+					return Colors.convHSB(doubles[0], doubles[1], doubles[2]);
+				}
+			});
+			put("HTML", new Converter() {
+				public Color to(TeXParser tp) {
+					final int c = tp.getArgAsHexNumber(6);
+					return new Color(c);
+				}
+			});
+		}
+	};
 
 	public static Color getColor(TeXParser tp) {
 		final String model = tp.getOptionAsString().trim();

@@ -48,17 +48,17 @@
 
 package org.scilab.forge.jlatexmath;
 
-import java.util.Map;
-import java.io.File;
-import java.io.IOException;
-
 import java.awt.Color;
 import java.awt.Graphics2D;
-import java.awt.Insets;
-import java.awt.image.BufferedImage;
 import java.awt.GraphicsEnvironment;
 import java.awt.Image;
+import java.awt.Insets;
 import java.awt.Toolkit;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.Map;
+
 import javax.imageio.ImageIO;
 import javax.imageio.stream.FileImageOutputStream;
 

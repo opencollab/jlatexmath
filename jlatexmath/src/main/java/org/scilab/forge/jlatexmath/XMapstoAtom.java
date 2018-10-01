@@ -62,8 +62,8 @@ public class XMapstoAtom extends XAtom {
 		return new XMapsTo(width);
 	}
 
-//	@Override
-//	public Atom duplicate() {
-//		return setFields(new XMapstoAtom(over, under));
-//	}
+	// @Override
+	// public Atom duplicate() {
+	// return setFields(new XMapstoAtom(over, under));
+	// }
 }

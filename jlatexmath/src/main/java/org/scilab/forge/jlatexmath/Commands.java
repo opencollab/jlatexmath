@@ -1743,13 +1743,13 @@ public class Commands {
 		map.put("jlmXML", new CommandJlmXML());
 
 		// caret for the editor
-		//map.put("jlmcursor", new CommandJlmCursor());
+		// map.put("jlmcursor", new CommandJlmCursor());
 		// for the editor
-		//map.put("jlmselection", new CommandJlmSelection());
+		// map.put("jlmselection", new CommandJlmSelection());
 
 		// eg
 		// \imagebasesixtyfour{40}{36}{data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAkCAIAAAB0Xu9BAAAAKUlEQVR42u3NMQEAAAwCIPuX1hbbAwVIn0QsFovFYrFYLBaLxWKx+M4AoNrQEWa6zscAAAAASUVORK5CYII=}
-		//map.put("imagebasesixtyfour", new CommandImageBase64());
+		// map.put("imagebasesixtyfour", new CommandImageBase64());
 
 		map.put("&", new Replacement("\\textampersand"));
 		map.put("%", new Replacement("\\textpercent"));

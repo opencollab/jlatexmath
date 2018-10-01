@@ -45,7 +45,6 @@
 
 package org.scilab.forge.jlatexmath;
 
-import java.lang.StringBuffer;
 import java.util.ArrayList;
 
 public class Macro {

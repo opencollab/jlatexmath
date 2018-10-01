@@ -60,10 +60,10 @@ public class EnvArray {
 			return new ColSep();
 		}
 
-//		@Override
-//		public Atom duplicate() {
-//			return setFields(new ColSep());
-//		}
+		// @Override
+		// public Atom duplicate() {
+		// return setFields(new ColSep());
+		// }
 	}
 
 	public static final class RowSep extends EmptyAtom {
@@ -75,10 +75,10 @@ public class EnvArray {
 			return new RowSep();
 		}
 
-//		@Override
-//		public Atom duplicate() {
-//			return setFields(new RowSep());
-//		}
+		// @Override
+		// public Atom duplicate() {
+		// return setFields(new RowSep());
+		// }
 
 	}
 
@@ -93,10 +93,10 @@ public class EnvArray {
 			return c;
 		}
 
-//		@Override
-//		public Atom duplicate() {
-//			return setFields(new CellColor(c));
-//		}
+		// @Override
+		// public Atom duplicate() {
+		// return setFields(new CellColor(c));
+		// }
 
 	}
 
@@ -111,10 +111,10 @@ public class EnvArray {
 			return c;
 		}
 
-//		@Override
-//		public Atom duplicate() {
-//			return setFields(new RowColor(c));
-//		}
+		// @Override
+		// public Atom duplicate() {
+		// return setFields(new RowColor(c));
+		// }
 
 	}
 

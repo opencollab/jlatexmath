@@ -50,6 +50,7 @@ package org.scilab.forge.jlatexmath;
 
 import java.util.ArrayList;
 import java.util.BitSet;
+
 import org.scilab.forge.jlatexmath.dynamic.DynamicAtom;
 
 /**

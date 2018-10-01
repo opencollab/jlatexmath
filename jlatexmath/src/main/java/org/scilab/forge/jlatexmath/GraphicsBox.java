@@ -46,9 +46,9 @@
 package org.scilab.forge.jlatexmath;
 
 import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
-import java.awt.RenderingHints;
 
 /**
  * A box representing a box containing a graphics.

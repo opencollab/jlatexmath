@@ -55,8 +55,8 @@ import org.scilab.forge.jlatexmath.EnvArray;
 import org.scilab.forge.jlatexmath.ExternalFontManager;
 import org.scilab.forge.jlatexmath.FractionAtom;
 import org.scilab.forge.jlatexmath.GroupConsumer;
-import org.scilab.forge.jlatexmath.MathCharAtom;
 import org.scilab.forge.jlatexmath.MHeightAtom;
+import org.scilab.forge.jlatexmath.MathCharAtom;
 import org.scilab.forge.jlatexmath.ParseException;
 import org.scilab.forge.jlatexmath.RowAtom;
 import org.scilab.forge.jlatexmath.ScriptsAtom;
@@ -64,10 +64,10 @@ import org.scilab.forge.jlatexmath.SpaceAtom;
 import org.scilab.forge.jlatexmath.SubSupCom;
 import org.scilab.forge.jlatexmath.SymbolAtom;
 import org.scilab.forge.jlatexmath.Symbols;
-import org.scilab.forge.jlatexmath.TextStyle;
-import org.scilab.forge.jlatexmath.TextStyleAtom;
 import org.scilab.forge.jlatexmath.TeXConstants;
 import org.scilab.forge.jlatexmath.TeXParser;
+import org.scilab.forge.jlatexmath.TextStyle;
+import org.scilab.forge.jlatexmath.TextStyleAtom;
 
 public class MhchemParser extends TeXParser {
 

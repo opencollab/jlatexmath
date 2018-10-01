@@ -56,6 +56,7 @@ import java.io.IOException;
 import java.util.Base64;
 import java.util.HashSet;
 import java.util.Set;
+
 import javax.imageio.ImageIO;
 
 public class SVGContext {

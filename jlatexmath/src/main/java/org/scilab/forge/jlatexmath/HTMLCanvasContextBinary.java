@@ -51,8 +51,8 @@ import java.awt.Stroke;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.PathIterator;
 import java.nio.ByteBuffer;
-import java.nio.FloatBuffer;
 import java.nio.ByteOrder;
+import java.nio.FloatBuffer;
 import java.util.ArrayList;
 import java.util.Base64;
 

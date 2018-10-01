@@ -45,8 +45,6 @@
 
 package org.scilab.forge.jlatexmath;
 
-import org.scilab.forge.jlatexmath.SymbolAtom;
-
 public final class Symbols {
 
 	public static final SymbolAtom LBRACK = new SymbolAtom("lbrack", TeXConstants.TYPE_OPENING);

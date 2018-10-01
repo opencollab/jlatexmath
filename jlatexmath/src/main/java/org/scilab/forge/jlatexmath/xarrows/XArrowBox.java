@@ -2,7 +2,6 @@ package org.scilab.forge.jlatexmath.xarrows;
 
 import java.awt.BasicStroke;
 import java.awt.Graphics2D;
-import java.awt.Stroke;
 import java.awt.geom.GeneralPath;
 
 import org.scilab.forge.jlatexmath.Box;
@@ -12,7 +11,7 @@ public abstract class XArrowBox extends Box {
 
 	protected String commands;
 	protected double[] data;
-	
+
 	GeneralPath path = new GeneralPath();
 
 	@Override
@@ -24,7 +23,7 @@ public abstract class XArrowBox extends Box {
 		startDraw(g2, x, y);
 		g2.translate(x, y);
 
-		//g2.startDrawing();
+		// g2.startDrawing();
 		path.reset();
 		int j = 0;
 		for (char c : commands.toCharArray()) {
@@ -49,7 +48,7 @@ public abstract class XArrowBox extends Box {
 		}
 		g2.setStroke(new BasicStroke(1));
 		g2.fill(path);
-		//g2.finishDrawing();
+		// g2.finishDrawing();
 
 		g2.translate(-x, -y);
 		endDraw(g2);

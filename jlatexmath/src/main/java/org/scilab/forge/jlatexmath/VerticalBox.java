@@ -49,8 +49,8 @@ package org.scilab.forge.jlatexmath;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Area;
-import java.util.ListIterator;
 import java.util.ArrayList;
+import java.util.ListIterator;
 
 /**
  * A box composed of other boxes, put one above the other.
