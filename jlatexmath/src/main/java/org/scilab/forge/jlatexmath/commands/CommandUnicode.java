@@ -53,7 +53,6 @@ import org.scilab.forge.jlatexmath.JavaFontRenderingAtom;
 import org.scilab.forge.jlatexmath.ParseException;
 import org.scilab.forge.jlatexmath.TeXLength;
 import org.scilab.forge.jlatexmath.TeXParser;
-import org.scilab.forge.jlatexmath.TeXLength.Unit;
 
 public class CommandUnicode extends Command {
 

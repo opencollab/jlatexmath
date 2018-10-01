@@ -51,7 +51,6 @@ import org.scilab.forge.jlatexmath.RowAtom;
 import org.scilab.forge.jlatexmath.SpaceAtom;
 import org.scilab.forge.jlatexmath.TeXConstants;
 import org.scilab.forge.jlatexmath.TeXParser;
-import org.scilab.forge.jlatexmath.TeXConstants.Muskip;
 
 public class CommandOpName extends Command {
 

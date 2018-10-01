@@ -52,7 +52,6 @@ import org.scilab.forge.jlatexmath.Env;
 import org.scilab.forge.jlatexmath.NewEnvironmentMacro;
 import org.scilab.forge.jlatexmath.ParseException;
 import org.scilab.forge.jlatexmath.TeXParser;
-import org.scilab.forge.jlatexmath.Env.Begin;
 
 public class CommandBE {
 

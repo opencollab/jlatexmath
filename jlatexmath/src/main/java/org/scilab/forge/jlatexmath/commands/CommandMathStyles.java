@@ -52,7 +52,6 @@ import org.scilab.forge.jlatexmath.ParseException;
 import org.scilab.forge.jlatexmath.RowAtom;
 import org.scilab.forge.jlatexmath.TeXConstants;
 import org.scilab.forge.jlatexmath.TeXParser;
-import org.scilab.forge.jlatexmath.TeXConstants.Opener;
 
 public class CommandMathStyles {
 

@@ -73,7 +73,7 @@ class PackagedCommand extends Command {
 
 	@Override
 	public Command duplicate() {
-		return new PackagedCommand((Command) com.duplicate(), pack);
+		return new PackagedCommand(com.duplicate(), pack);
 	}
 
 	@Override

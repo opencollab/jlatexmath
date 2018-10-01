@@ -50,7 +50,6 @@ import org.scilab.forge.jlatexmath.ExternalFontManager;
 import org.scilab.forge.jlatexmath.RowAtom;
 import org.scilab.forge.jlatexmath.TeXParser;
 import org.scilab.forge.jlatexmath.TextStyleAtom;
-import org.scilab.forge.jlatexmath.ExternalFontManager.FontSSSF;
 
 public class CommandTextStyleTeX extends Command {
 

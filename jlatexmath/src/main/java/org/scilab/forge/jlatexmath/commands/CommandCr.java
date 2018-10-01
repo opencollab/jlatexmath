@@ -50,7 +50,6 @@ import org.scilab.forge.jlatexmath.EnvArray;
 import org.scilab.forge.jlatexmath.ParseException;
 import org.scilab.forge.jlatexmath.RowAtom;
 import org.scilab.forge.jlatexmath.TeXParser;
-import org.scilab.forge.jlatexmath.EnvArray.RowSep;
 
 public class CommandCr extends Command {
 

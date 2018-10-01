@@ -49,7 +49,6 @@ import org.scilab.forge.jlatexmath.Atom;
 import org.scilab.forge.jlatexmath.GroupConsumer;
 import org.scilab.forge.jlatexmath.TeXConstants;
 import org.scilab.forge.jlatexmath.TeXParser;
-import org.scilab.forge.jlatexmath.TeXConstants.Opener;
 
 public abstract class Command1O1A extends Command {
 

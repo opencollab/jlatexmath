@@ -51,7 +51,6 @@ import org.scilab.forge.jlatexmath.EmptyAtom;
 import org.scilab.forge.jlatexmath.SubarrayAtom;
 import org.scilab.forge.jlatexmath.TeXConstants;
 import org.scilab.forge.jlatexmath.TeXParser;
-import org.scilab.forge.jlatexmath.TeXConstants.Align;
 
 public class CommandSubstack extends CommandMatrix {
 

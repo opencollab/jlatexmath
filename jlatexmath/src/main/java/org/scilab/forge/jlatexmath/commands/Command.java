@@ -61,7 +61,6 @@ public abstract class Command implements AtomConsumer, Cloneable {
 	public void add(TeXParser tp, Atom a) {
 	}
 
-	
 	public Command duplicate() {
 		try {
 			return (Command) super.clone();

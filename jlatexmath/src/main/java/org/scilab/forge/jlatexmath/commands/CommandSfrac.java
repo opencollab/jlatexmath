@@ -53,7 +53,6 @@ import org.scilab.forge.jlatexmath.Symbols;
 import org.scilab.forge.jlatexmath.TeXLength;
 import org.scilab.forge.jlatexmath.TeXParser;
 import org.scilab.forge.jlatexmath.VRowAtom;
-import org.scilab.forge.jlatexmath.TeXLength.Unit;
 
 public class CommandSfrac extends Command2A {
 

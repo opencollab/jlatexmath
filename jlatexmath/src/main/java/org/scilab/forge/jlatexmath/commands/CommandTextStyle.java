@@ -49,7 +49,6 @@ import org.scilab.forge.jlatexmath.Atom;
 import org.scilab.forge.jlatexmath.ExternalFontManager;
 import org.scilab.forge.jlatexmath.TeXParser;
 import org.scilab.forge.jlatexmath.TextStyleAtom;
-import org.scilab.forge.jlatexmath.ExternalFontManager.FontSSSF;
 
 public class CommandTextStyle extends Command {
 
