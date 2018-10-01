@@ -64,14 +64,14 @@ public class EmptyAtom extends Atom {
 
 	@Override
 	public Atom changeLimits(final int lim) {
-		Atom a = this.clone();
+		Atom a = this.duplicate();
 		a.type_limits = lim;
 		return a;
 	}
 
 	@Override
 	public Atom changeType(final int type) {
-		final Atom a = this.clone();
+		final Atom a = this.duplicate();
 		a.type = type;
 		return a;
 	}

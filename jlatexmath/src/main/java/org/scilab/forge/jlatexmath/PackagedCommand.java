@@ -72,8 +72,8 @@ class PackagedCommand extends Command {
 	}
 
 	@Override
-	public Object clone() {
-		return new PackagedCommand((Command) com.clone(), pack);
+	public Command duplicate() {
+		return new PackagedCommand((Command) com.duplicate(), pack);
 	}
 
 	@Override

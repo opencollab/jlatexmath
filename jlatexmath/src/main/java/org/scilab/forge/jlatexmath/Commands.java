@@ -3240,7 +3240,7 @@ public class Commands {
 	public static AtomConsumer get(final String name) {
 		final Command c = map.get(name);
 		if (c != null) {
-			return (AtomConsumer) c.clone();
+			return (AtomConsumer) c.duplicate();
 		}
 
 		return null;
@@ -3250,7 +3250,7 @@ public class Commands {
 		final Command c = map.get(name);
 		if (c != null) {
 			tp.cancelPrevPos();
-			final AtomConsumer cons = (AtomConsumer) c.clone();
+			final AtomConsumer cons = (AtomConsumer) c.duplicate();
 			if (cons.init(tp)) {
 				tp.addConsumer(cons);
 			}

@@ -104,7 +104,7 @@ public class SymbolAtom extends CharSymbol {
 	public static SymbolAtom get(final String name, final boolean mathMode) {
 		SymbolAtom sa = Configuration.getSym(name);
 		if (!mathMode && sa != null) {
-			sa = (SymbolAtom) sa.clone();
+			sa = (SymbolAtom) sa.duplicate();
 			sa.mathMode = false;
 			sa.type = TeXConstants.TYPE_ORDINARY;
 		}
@@ -117,7 +117,7 @@ public class SymbolAtom extends CharSymbol {
 			return false;
 		}
 		if (!tp.isMathMode()) {
-			sa = (SymbolAtom) sa.clone();
+			sa = (SymbolAtom) sa.duplicate();
 			sa.mathMode = false;
 			sa.type = TeXConstants.TYPE_ORDINARY;
 		}
@@ -194,7 +194,7 @@ public class SymbolAtom extends CharSymbol {
 	}
 
 	public SymbolAtom toTextMode() {
-		final Atom a = this.clone();
+		final Atom a = this.duplicate();
 		a.mathMode = false;
 		a.type = TeXConstants.TYPE_ORDINARY;
 		return (SymbolAtom) a;
@@ -202,14 +202,14 @@ public class SymbolAtom extends CharSymbol {
 
 	@Override
 	public Atom changeLimits(final int lim) {
-		final Atom a = this.clone();
+		final Atom a = this.duplicate();
 		a.type_limits = lim;
 		return a;
 	}
 
 	@Override
 	public Atom changeType(final int type) {
-		final Atom a = this.clone();
+		final Atom a = this.duplicate();
 		a.type = type;
 		return a;
 	}
