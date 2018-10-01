@@ -50,18 +50,19 @@ package org.scilab.forge.jlatexmath;
  */
 public class IJAtom extends Atom {
 
-    private boolean upper;
+	private boolean upper;
 
-    public IJAtom(boolean upper) {
-        this.upper = upper;
-    }
+	public IJAtom(boolean upper) {
+		this.upper = upper;
+	}
 
-    public Box createBox(TeXEnvironment env) {
-        CharBox I = new CharBox(env.getTeXFont().getChar(upper ? 'I' : 'i', "mathnormal", env.getStyle()));
-        CharBox J = new CharBox(env.getTeXFont().getChar(upper ? 'J' : 'j', "mathnormal", env.getStyle()));
-        HorizontalBox hb = new HorizontalBox(I);
-        hb.add(new SpaceAtom(TeXLength.Unit.EM, -0.065, 0, 0).createBox(env));
-        hb.add(J);
-        return hb;
-    }
+	@Override
+	public Box createBox(TeXEnvironment env) {
+		CharBox I = new CharBox(env.getTeXFont().getChar(upper ? 'I' : 'i', "mathnormal", env.getStyle()));
+		CharBox J = new CharBox(env.getTeXFont().getChar(upper ? 'J' : 'j', "mathnormal", env.getStyle()));
+		HorizontalBox hb = new HorizontalBox(I);
+		hb.add(new SpaceAtom(TeXLength.Unit.EM, -0.065, 0, 0).createBox(env));
+		hb.add(J);
+		return hb;
+	}
 }

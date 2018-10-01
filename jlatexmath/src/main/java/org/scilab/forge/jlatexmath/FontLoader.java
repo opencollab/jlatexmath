@@ -59,71 +59,73 @@ import java.util.Map;
 
 public class FontLoader {
 
-    private static boolean registerFontExceptionDisplayed = false;
-    private static boolean shouldRegisterFonts = true;
-    private static Map<Font, String> paths = new HashMap<>();
+	private static boolean registerFontExceptionDisplayed = false;
+	private static boolean shouldRegisterFonts = true;
+	private static Map<Font, String> paths = new HashMap<>();
 
-    public static void registerFonts(boolean b) {
-        shouldRegisterFonts = b;
-    }
+	public static void registerFonts(boolean b) {
+		shouldRegisterFonts = b;
+	}
 
-    public static Font createFont(String name) {
-        return createFont(null, name);
-    }
+	public static Font createFont(String name) {
+		return createFont(null, name);
+	}
 
-    public static Font createFont(Object o, String name) {
-        try {
-            InputStream in;
-            if (o == null) {
-                in = new BufferedInputStream(new FileInputStream(new File(name)));
-            } else {
-                in = o.getClass().getResourceAsStream(name);
-            }
-            return createFont(in, name);
-        }  catch (FileNotFoundException e) {
-            System.err.println(e);
-        }
-        return null;
-    }
+	public static Font createFont(Object o, String name) {
+		try {
+			InputStream in;
+			if (o == null) {
+				in = new BufferedInputStream(new FileInputStream(new File(name)));
+			} else {
+				in = o.getClass().getResourceAsStream(name);
+			}
+			return createFont(in, name);
+		} catch (FileNotFoundException e) {
+			System.err.println(e);
+		}
+		return null;
+	}
 
-    public static Font createFont(InputStream fontIn, String name) {
-        try {
-            final Font f = Font.createFont(Font.TRUETYPE_FONT, fontIn).deriveFont((float)(TeXFormula.PIXELS_PER_POINT * TeXFormula.FONT_SCALE_FACTOR));
-            GraphicsEnvironment graphicEnv = GraphicsEnvironment.getLocalGraphicsEnvironment();
-            /**
-             * The following fails under java 1.5
-             * graphicEnv.registerFont(f);
-             * dynamic load then
-             */
-            if (shouldRegisterFonts) {
-                try {
-                    Method registerFontMethod = graphicEnv.getClass().getMethod("registerFont", new Class[] { Font.class });
-                    if ((Boolean) registerFontMethod.invoke(graphicEnv, new Object[] { f }) == Boolean.FALSE) {
-                        System.err.println("Cannot register the font " + f.getFontName());
-                    }
-                } catch (Exception ex) {
-                    if (!registerFontExceptionDisplayed) {
-                        System.err.println("Warning: Jlatexmath: Could not access to registerFont. Please update to java 6");
-                        registerFontExceptionDisplayed = true;
-                    }
-                }
-            }
-            paths.put(f, name);
-            return f;
-        } catch (Exception e) {
-            System.err.println("Cannot create the font: " + name);
-            e.printStackTrace();
-        } finally {
-            try {
-                if (fontIn != null) {
-                    fontIn.close();
-                }
-            } catch (IOException ioex) {
-                throw new RuntimeException("Close threw exception", ioex);
-            }
-        }
+	public static Font createFont(InputStream fontIn, String name) {
+		try {
+			final Font f = Font.createFont(Font.TRUETYPE_FONT, fontIn)
+					.deriveFont((float) (TeXFormula.PIXELS_PER_POINT * TeXFormula.FONT_SCALE_FACTOR));
+			GraphicsEnvironment graphicEnv = GraphicsEnvironment.getLocalGraphicsEnvironment();
+			/**
+			 * The following fails under java 1.5 graphicEnv.registerFont(f);
+			 * dynamic load then
+			 */
+			if (shouldRegisterFonts) {
+				try {
+					Method registerFontMethod = graphicEnv.getClass().getMethod("registerFont",
+							new Class[] { Font.class });
+					if ((Boolean) registerFontMethod.invoke(graphicEnv, new Object[] { f }) == Boolean.FALSE) {
+						System.err.println("Cannot register the font " + f.getFontName());
+					}
+				} catch (Exception ex) {
+					if (!registerFontExceptionDisplayed) {
+						System.err.println(
+								"Warning: Jlatexmath: Could not access to registerFont. Please update to java 6");
+						registerFontExceptionDisplayed = true;
+					}
+				}
+			}
+			paths.put(f, name);
+			return f;
+		} catch (Exception e) {
+			System.err.println("Cannot create the font: " + name);
+			e.printStackTrace();
+		} finally {
+			try {
+				if (fontIn != null) {
+					fontIn.close();
+				}
+			} catch (IOException ioex) {
+				throw new RuntimeException("Close threw exception", ioex);
+			}
+		}
 
-        return null;
-    }
+		return null;
+	}
 
 }

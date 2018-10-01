@@ -55,184 +55,188 @@ import java.util.Map;
  */
 public class RotateBox extends Box {
 
-    private static final int BL = 0;
-    private static final int BC = 1;
-    private static final int BR = 2;
-    private static final int TL = 3;
-    private static final int TC = 4;
-    private static final int TR = 5;
-    private static final int BBL = 6;
-    private static final int BBR = 7;
-    private static final int BBC = 8;
-    private static final int CL = 9;
-    private static final int CC = 10;
-    private static final int CR = 11;
+	private static final int BL = 0;
+	private static final int BC = 1;
+	private static final int BR = 2;
+	private static final int TL = 3;
+	private static final int TC = 4;
+	private static final int TR = 5;
+	private static final int BBL = 6;
+	private static final int BBR = 7;
+	private static final int BBC = 8;
+	private static final int CL = 9;
+	private static final int CC = 10;
+	private static final int CR = 11;
 
-    private static final Map<String, Integer> map = new HashMap<String, Integer>() {
-        {
-            put("bl", BL);
-            put("lb", BL);
-            put("bc", BC);
-            put("cb", BC);
-            put("br", BR);
-            put("rb", BR);
-            put("cl", CL);
-            put("lc", CL);
-            put("cc", CC);
-            put("cr", CR);
-            put("rc", CR);
-            put("tl", TL);
-            put("lt", TL);
-            put("tc", TC);
-            put("ct", TC);
-            put("tr", TR);
-            put("rt", TR);
-            put("Bl", BBL);
-            put("lB", BBL);
-            put("Bc", BBC);
-            put("cB", BBC);
-            put("Br", BBR);
-            put("rB", BBR);
-        }
-    };
+	private static final Map<String, Integer> map = new HashMap<String, Integer>() {
+		{
+			put("bl", BL);
+			put("lb", BL);
+			put("bc", BC);
+			put("cb", BC);
+			put("br", BR);
+			put("rb", BR);
+			put("cl", CL);
+			put("lc", CL);
+			put("cc", CC);
+			put("cr", CR);
+			put("rc", CR);
+			put("tl", TL);
+			put("lt", TL);
+			put("tc", TC);
+			put("ct", TC);
+			put("tr", TR);
+			put("rt", TR);
+			put("Bl", BBL);
+			put("lB", BBL);
+			put("Bc", BBC);
+			put("cB", BBC);
+			put("Br", BBR);
+			put("rB", BBR);
+		}
+	};
 
-    protected double angle = 0.;
-    private Box box;
-    private double xmax, xmin, ymax, ymin;
-    private int option;
+	protected double angle = 0.;
+	private Box box;
+	private double xmax, xmin, ymax, ymin;
+	private int option;
 
-    private double shiftX;
-    private double shiftY;
+	private double shiftX;
+	private double shiftY;
 
-    public RotateBox(Box b, double angle, double x, double y) {
-        this.box = b;
-        this.angle = angle * Math.PI / 180.;
-        height = b.height;
-        depth = b.depth;
-        width = b.width;
+	public RotateBox(Box b, double angle, double x, double y) {
+		this.box = b;
+		this.angle = angle * Math.PI / 180.;
+		height = b.height;
+		depth = b.depth;
+		width = b.width;
 
-        final double s = Math.sin(this.angle);
-        final double c = Math.cos(this.angle);
-        shiftX = x * (1 - c) + y * s;
-        shiftY = y * (1 - c) - x * s;
-        xmax = Math.max(-height * s, Math.max(depth * s, Math.max(width * c + depth * s, width * c - height * s))) + shiftX;
-        xmin = Math.min(-height * s, Math.min(depth * s, Math.min(width * c + depth * s, width * c - height * s))) + shiftX;
-        ymax = Math.max(height * c, Math.max(-depth * c, Math.max(width * s - depth * c, width * s + height * c)));
-        ymin = Math.min(height * c, Math.min(-depth * c, Math.min(width * s - depth * c, width * s + height * c)));
-        width = xmax - xmin;
-        height = ymax + shiftY;
-        depth = -ymin - shiftY;
-    }
+		final double s = Math.sin(this.angle);
+		final double c = Math.cos(this.angle);
+		shiftX = x * (1 - c) + y * s;
+		shiftY = y * (1 - c) - x * s;
+		xmax = Math.max(-height * s, Math.max(depth * s, Math.max(width * c + depth * s, width * c - height * s)))
+				+ shiftX;
+		xmin = Math.min(-height * s, Math.min(depth * s, Math.min(width * c + depth * s, width * c - height * s)))
+				+ shiftX;
+		ymax = Math.max(height * c, Math.max(-depth * c, Math.max(width * s - depth * c, width * s + height * c)));
+		ymin = Math.min(height * c, Math.min(-depth * c, Math.min(width * s - depth * c, width * s + height * c)));
+		width = xmax - xmin;
+		height = ymax + shiftY;
+		depth = -ymin - shiftY;
+	}
 
-    public RotateBox(Box b, double angle, Point2D.Double origin) {
-        this(b, angle, origin.x, origin.y);
-    }
+	public RotateBox(Box b, double angle, Point2D.Double origin) {
+		this(b, angle, origin.x, origin.y);
+	}
 
-    public RotateBox(Box b, double angle, int option) {
-        this(b, angle, calculateShift(b, option));
-    }
+	public RotateBox(Box b, double angle, int option) {
+		this(b, angle, calculateShift(b, option));
+	}
 
-    public static int getOrigin(final String option) {
-        if (option == null || option.isEmpty() || option.length() >= 3) {
-            return BBL;
-        }
+	public static int getOrigin(final String option) {
+		if (option == null || option.isEmpty() || option.length() >= 3) {
+			return BBL;
+		}
 
-        if (option.length() == 1) {
-            switch (option.charAt(0)) {
-            case 'b':
-                return BC;
-            case 'c':
-                return CC;
-            case 'l':
-                return CL;
-            case 'r':
-                return CR;
-            case 't':
-                return TC;
-            case 'B':
-                return BBC;
-            default:
-                return BBL;
-            }
-        }
+		if (option.length() == 1) {
+			switch (option.charAt(0)) {
+			case 'b':
+				return BC;
+			case 'c':
+				return CC;
+			case 'l':
+				return CL;
+			case 'r':
+				return CR;
+			case 't':
+				return TC;
+			case 'B':
+				return BBC;
+			default:
+				return BBL;
+			}
+		}
 
-        final Integer v = map.get(option);
-        if (v != null) {
-            return v.intValue();
-        }
-        return BBL;
-    }
+		final Integer v = map.get(option);
+		if (v != null) {
+			return v.intValue();
+		}
+		return BBL;
+	}
 
-    private static Point2D.Double calculateShift(Box b, int option) {
-        Point2D.Double p = new Point2D.Double(0, -b.depth);
-        switch (option) {
-        case BL :
-            p.x = 0.;
-            p.y = -b.depth;
-            break;
-        case BR :
-            p.x = b.width;
-            p.y = -b.depth;
-            break;
-        case BC :
-            p.x = b.width / 2.;
-            p.y = -b.depth;
-            break;
-        case TL :
-            p.x = 0.;
-            p.y = b.height;
-            break;
-        case TR :
-            p.x = b.width;
-            p.y = b.height;
-            break;
-        case TC :
-            p.x = b.width / 2.;
-            p.y = b.height;
-            break;
-        case BBL :
-            p.x = 0.;
-            p.y = 0.;
-            break;
-        case BBR :
-            p.x = b.width;
-            p.y = 0.;
-            break;
-        case BBC :
-            p.x = b.width / 2.;
-            p.y = 0.;
-            break;
-        case CL :
-            p.x = 0.;
-            p.y = (b.height - b.depth) / 2.;
-            break;
-        case CR :
-            p.x = b.width;
-            p.y = (b.height - b.depth) / 2.;
-            break;
-        case CC :
-            p.x = b.width / 2.;
-            p.y = (b.height - b.depth) / 2.;
-            break;
-        default :
-        }
+	private static Point2D.Double calculateShift(Box b, int option) {
+		Point2D.Double p = new Point2D.Double(0, -b.depth);
+		switch (option) {
+		case BL:
+			p.x = 0.;
+			p.y = -b.depth;
+			break;
+		case BR:
+			p.x = b.width;
+			p.y = -b.depth;
+			break;
+		case BC:
+			p.x = b.width / 2.;
+			p.y = -b.depth;
+			break;
+		case TL:
+			p.x = 0.;
+			p.y = b.height;
+			break;
+		case TR:
+			p.x = b.width;
+			p.y = b.height;
+			break;
+		case TC:
+			p.x = b.width / 2.;
+			p.y = b.height;
+			break;
+		case BBL:
+			p.x = 0.;
+			p.y = 0.;
+			break;
+		case BBR:
+			p.x = b.width;
+			p.y = 0.;
+			break;
+		case BBC:
+			p.x = b.width / 2.;
+			p.y = 0.;
+			break;
+		case CL:
+			p.x = 0.;
+			p.y = (b.height - b.depth) / 2.;
+			break;
+		case CR:
+			p.x = b.width;
+			p.y = (b.height - b.depth) / 2.;
+			break;
+		case CC:
+			p.x = b.width / 2.;
+			p.y = (b.height - b.depth) / 2.;
+			break;
+		default:
+		}
 
-        return p;
-    }
+		return p;
+	}
 
-    public void draw(Graphics2D g2, double x, double y) {
-        startDraw(g2, x, y);
-        box.drawDebug(g2, x, y, true);
-        y -= shiftY;
-        x += shiftX - xmin;
-        g2.rotate(-angle, x, y);
-        box.draw(g2, x, y);
-        box.drawDebug(g2, x, y, true);
-        g2.rotate(angle, x, y);
-        endDraw(g2);
-    }
+	@Override
+	public void draw(Graphics2D g2, double x, double y) {
+		startDraw(g2, x, y);
+		box.drawDebug(g2, x, y, true);
+		y -= shiftY;
+		x += shiftX - xmin;
+		g2.rotate(-angle, x, y);
+		box.draw(g2, x, y);
+		box.drawDebug(g2, x, y, true);
+		g2.rotate(angle, x, y);
+		endDraw(g2);
+	}
 
-    public FontInfo getLastFont() {
-        return box.getLastFont();
-    }
+	@Override
+	public FontInfo getLastFont() {
+		return box.getLastFont();
+	}
 }

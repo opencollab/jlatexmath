@@ -50,17 +50,18 @@ package org.scilab.forge.jlatexmath;
  */
 public class SmallCapAtom extends Atom {
 
-    protected Atom base;
+	protected Atom base;
 
-    public SmallCapAtom(Atom base) {
-        this.base = base;
-    }
+	public SmallCapAtom(Atom base) {
+		this.base = base;
+	}
 
-    public Box createBox(TeXEnvironment env) {
-        boolean prev = env.getSmallCap();
-        env.setSmallCap(true);
-        Box box = base.createBox(env);
-        env.setSmallCap(prev);
-        return box;
-    }
+	@Override
+	public Box createBox(TeXEnvironment env) {
+		boolean prev = env.getSmallCap();
+		env.setSmallCap(true);
+		Box box = base.createBox(env);
+		env.setSmallCap(prev);
+		return box;
+	}
 }

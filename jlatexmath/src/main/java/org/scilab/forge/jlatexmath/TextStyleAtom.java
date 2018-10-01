@@ -46,23 +46,25 @@
 package org.scilab.forge.jlatexmath;
 
 /**
- * An atom representing a modification of style in a formula (e.g. textstyle or displaystyle).
+ * An atom representing a modification of style in a formula (e.g. textstyle or
+ * displaystyle).
  */
 public class TextStyleAtom extends Atom {
 
-    private int style;
-    private Atom at;
+	private int style;
+	private Atom at;
 
-    public TextStyleAtom(Atom at, int style) {
-        this.style = style;
-        this.at = at;
-    }
+	public TextStyleAtom(Atom at, int style) {
+		this.style = style;
+		this.at = at;
+	}
 
-    public Box createBox(TeXEnvironment env) {
-        final int prevStyle = env.getTextStyle();
-        env.setTextStyle(style);
-        final Box box = at.createBox(env);
-        env.setTextStyle(prevStyle);
-        return box;
-    }
+	@Override
+	public Box createBox(TeXEnvironment env) {
+		final int prevStyle = env.getTextStyle();
+		env.setTextStyle(style);
+		final Box box = at.createBox(env);
+		env.setTextStyle(prevStyle);
+		return box;
+	}
 }

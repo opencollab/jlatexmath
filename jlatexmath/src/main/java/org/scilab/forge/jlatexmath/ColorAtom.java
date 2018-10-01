@@ -52,83 +52,97 @@ import java.awt.Color;
  */
 public class ColorAtom extends Atom {
 
-    // background color
-    private final Color bg;
+	// background color
+	private final Color bg;
 
-    // foreground color
-    private final Color fg;
+	// foreground color
+	private final Color fg;
 
-    // Atom for which the colorsettings apply
-    private final Atom base;
+	// Atom for which the colorsettings apply
+	private final Atom base;
 
-    /**
-     * Creates a new ColorAtom that sets the given colors for the given atom.
-     * Null for a color means: no specific color set for this atom.
-     *
-     * @param atom the atom for which the given colors have to be set
-     * @param bg the background color
-     * @param c the foreground color
-     */
-    public ColorAtom(Atom base, Color bg, Color fg) {
-        this.base = base;
-        this.bg = bg;
-        this.fg = fg;
-    }
+	/**
+	 * Creates a new ColorAtom that sets the given colors for the given atom.
+	 * Null for a color means: no specific color set for this atom.
+	 *
+	 * @param atom
+	 *            the atom for which the given colors have to be set
+	 * @param bg
+	 *            the background color
+	 * @param c
+	 *            the foreground color
+	 */
+	public ColorAtom(Atom base, Color bg, Color fg) {
+		this.base = base;
+		this.bg = bg;
+		this.fg = fg;
+	}
 
-    public Box createBox(TeXEnvironment env) {
-        env.isColored = true;
-        final Box b = base.createBox(env);
-        b.setBg(bg);
-        b.setFg(fg);
+	@Override
+	public Box createBox(TeXEnvironment env) {
+		env.isColored = true;
+		final Box b = base.createBox(env);
+		b.setBg(bg);
+		b.setFg(fg);
 
-        return b;
-    }
+		return b;
+	}
 
-    public Color getFg() {
-        return fg;
-    }
+	public Color getFg() {
+		return fg;
+	}
 
-    public Color getBg() {
-        return bg;
-    }
+	public Color getBg() {
+		return bg;
+	}
 
-    public int getLeftType() {
-        return base.getLeftType();
-    }
+	@Override
+	public int getLeftType() {
+		return base.getLeftType();
+	}
 
-    public int getRightType() {
-        return base.getRightType();
-    }
+	@Override
+	public int getRightType() {
+		return base.getRightType();
+	}
 
-    public int getLimits() {
-        return base.getLimits();
-    }
+	@Override
+	public int getLimits() {
+		return base.getLimits();
+	}
 
-    public double getItalic(TeXEnvironment env) {
-        return base.getItalic(env);
-    }
+	@Override
+	public double getItalic(TeXEnvironment env) {
+		return base.getItalic(env);
+	}
 
-    public double getXHeight(TeXEnvironment env) {
-        return base.getXHeight(env);
-    }
+	@Override
+	public double getXHeight(TeXEnvironment env) {
+		return base.getXHeight(env);
+	}
 
-    public boolean isMathMode() {
-        return base.isMathMode();
-    }
+	@Override
+	public boolean isMathMode() {
+		return base.isMathMode();
+	}
 
-    public void setMathMode(final boolean mathMode) {
-        base.setMathMode(mathMode);
-    }
+	@Override
+	public void setMathMode(final boolean mathMode) {
+		base.setMathMode(mathMode);
+	}
 
-    public boolean mustAddItalicCorrection() {
-        return base.mustAddItalicCorrection();
-    }
+	@Override
+	public boolean mustAddItalicCorrection() {
+		return base.mustAddItalicCorrection();
+	}
 
-    public boolean setAddItalicCorrection(boolean b) {
-        return base.setAddItalicCorrection(b);
-    }
+	@Override
+	public boolean setAddItalicCorrection(boolean b) {
+		return base.setAddItalicCorrection(b);
+	}
 
-    public Atom getBase() {
-        return base.getBase();
-    }
+	@Override
+	public Atom getBase() {
+		return base.getBase();
+	}
 }

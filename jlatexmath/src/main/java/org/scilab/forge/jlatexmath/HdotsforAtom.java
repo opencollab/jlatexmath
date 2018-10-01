@@ -50,36 +50,38 @@ package org.scilab.forge.jlatexmath;
  */
 public class HdotsforAtom extends MulticolumnAtom {
 
-    private static final Atom thin = new SpaceAtom(TeXConstants.Muskip.THIN);
-    private double coeff;
+	private static final Atom thin = new SpaceAtom(TeXConstants.Muskip.THIN);
+	private double coeff;
 
-    public HdotsforAtom(int n, double coeff) {
-        super(n, new ArrayOptions(1).addAlignment(TeXConstants.Align.CENTER), Symbols.LDOTP);
-        this.coeff = coeff;
-    }
+	public HdotsforAtom(int n, double coeff) {
+		super(n, new ArrayOptions(1).addAlignment(TeXConstants.Align.CENTER), Symbols.LDOTP);
+		this.coeff = coeff;
+	}
 
-    public boolean mustBeRecreated() {
-        return true;
-    }
+	@Override
+	public boolean mustBeRecreated() {
+		return true;
+	}
 
-    public Box createBox(TeXEnvironment env) {
-        Box sp = new StrutBox(coeff * thin.createBox(env).getWidth(), 0, 0, 0);
-        HorizontalBox db = new HorizontalBox(sp);
-        db.add(Symbols.LDOTP.createBox(env));
-        db.add(sp);
-        Box b;
-        if (w != 0.) {
-            double dw = db.getWidth();
-            HorizontalBox hb = new HorizontalBox(db);
-            while (hb.getWidth() < w) {
-                hb.add(db);
-            }
-            b = new HorizontalBox(hb, w, TeXConstants.Align.CENTER);
-        } else {
-            b = db;
-        }
+	@Override
+	public Box createBox(TeXEnvironment env) {
+		Box sp = new StrutBox(coeff * thin.createBox(env).getWidth(), 0, 0, 0);
+		HorizontalBox db = new HorizontalBox(sp);
+		db.add(Symbols.LDOTP.createBox(env));
+		db.add(sp);
+		Box b;
+		if (w != 0.) {
+			double dw = db.getWidth();
+			HorizontalBox hb = new HorizontalBox(db);
+			while (hb.getWidth() < w) {
+				hb.add(db);
+			}
+			b = new HorizontalBox(hb, w, TeXConstants.Align.CENTER);
+		} else {
+			b = db;
+		}
 
-        b.type = TeXConstants.TYPE_MULTICOLUMN;
-        return b;
-    }
+		b.type = TeXConstants.TYPE_MULTICOLUMN;
+		return b;
+	}
 }

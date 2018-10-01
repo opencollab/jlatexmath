@@ -53,30 +53,33 @@ import java.awt.Graphics2D;
  */
 public class StrutBox extends Box {
 
-    public StrutBox() {
-        this(0., 0., 0., 0.);
-    }
+	public StrutBox() {
+		this(0., 0., 0., 0.);
+	}
 
-    public StrutBox(final double w, final double h, final double d, final double s) {
-        width = w;
-        height = h;
-        depth = d;
-        shift = s;
-    }
+	public StrutBox(final double w, final double h, final double d, final double s) {
+		width = w;
+		height = h;
+		depth = d;
+		shift = s;
+	}
 
-    public static StrutBox getEmpty() {
-        return new StrutBox();
-    }
+	public static StrutBox getEmpty() {
+		return new StrutBox();
+	}
 
-    public void draw(Graphics2D g2, double x, double y) {
-        // no visual effect
-    }
+	@Override
+	public void draw(Graphics2D g2, double x, double y) {
+		// no visual effect
+	}
 
-    public FontInfo getLastFont() {
-        return null;
-    }
+	@Override
+	public FontInfo getLastFont() {
+		return null;
+	}
 
-    public String toString() {
-        return "StrutBox: " + width + ":" + height + ":" + depth + ":" + shift;
-    }
+	@Override
+	public String toString() {
+		return "StrutBox: " + width + ":" + height + ":" + depth + ":" + shift;
+	}
 }

@@ -47,44 +47,45 @@ package org.scilab.forge.jlatexmath;
 
 public class CommandGenfrac extends Command {
 
-    private Atom left;
-    private Atom right;
-    private TeXLength l;
-    private int style;
-    private Atom num;
+	private Atom left;
+	private Atom right;
+	private TeXLength l;
+	private int style;
+	private Atom num;
 
-    public void add(TeXParser tp, Atom a) {
-        if (left == null) {
-            left = a;
-        } else if (right == null) {
-            right = a;
-            l = tp.getArgAsLength();
-            style = Math.max(0, (int)tp.getArgAsPositiveInteger());
-        } else if (num == null) {
-            num = a;
-        } else {
-            SymbolAtom L, R;
-            if (left instanceof SymbolAtom) {
-                L = (SymbolAtom)left;
-            } else if (left instanceof BigDelimiterAtom) {
-                L = ((BigDelimiterAtom)left).delim;
-            } else {
-                L = null;
-            }
+	@Override
+	public void add(TeXParser tp, Atom a) {
+		if (left == null) {
+			left = a;
+		} else if (right == null) {
+			right = a;
+			l = tp.getArgAsLength();
+			style = Math.max(0, tp.getArgAsPositiveInteger());
+		} else if (num == null) {
+			num = a;
+		} else {
+			SymbolAtom L, R;
+			if (left instanceof SymbolAtom) {
+				L = (SymbolAtom) left;
+			} else if (left instanceof BigDelimiterAtom) {
+				L = ((BigDelimiterAtom) left).delim;
+			} else {
+				L = null;
+			}
 
-            if (right instanceof SymbolAtom) {
-                R = (SymbolAtom)right;
-            } else if (right instanceof BigDelimiterAtom) {
-                R = ((BigDelimiterAtom)right).delim;
-            } else {
-                R = null;
-            }
-            tp.closeConsumer(CommandGenfrac.get(L, num, a, R, l, style));
-        }
-    }
+			if (right instanceof SymbolAtom) {
+				R = (SymbolAtom) right;
+			} else if (right instanceof BigDelimiterAtom) {
+				R = ((BigDelimiterAtom) right).delim;
+			} else {
+				R = null;
+			}
+			tp.closeConsumer(CommandGenfrac.get(L, num, a, R, l, style));
+		}
+	}
 
-    public static Atom get(SymbolAtom left, Atom num, Atom den, SymbolAtom right, TeXLength l, int style) {
-        final Atom a = new FractionAtom(num, den, l);
-        return new StyleAtom(style * 2, new FencedAtom(a, left, right));
-    }
+	public static Atom get(SymbolAtom left, Atom num, Atom den, SymbolAtom right, TeXLength l, int style) {
+		final Atom a = new FractionAtom(num, den, l);
+		return new StyleAtom(style * 2, new FencedAtom(a, left, right));
+	}
 }

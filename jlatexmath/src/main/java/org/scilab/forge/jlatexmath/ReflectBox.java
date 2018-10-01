@@ -52,27 +52,29 @@ import java.awt.Graphics2D;
  */
 public class ReflectBox extends Box {
 
-    private Box box;
+	private Box box;
 
-    public ReflectBox(Box b) {
-        this.box = b;
-        width = b.width;
-        height = b.height;
-        depth = b.depth;
-        shift = b.shift;
-    }
+	public ReflectBox(Box b) {
+		this.box = b;
+		width = b.width;
+		height = b.height;
+		depth = b.depth;
+		shift = b.shift;
+	}
 
-    public void draw(Graphics2D g2, double x, double y) {
-        startDraw(g2, x, y);
-        g2.translate(x, y);
-        g2.scale(-1, 1);
-        box.draw(g2, -width, 0);
-        g2.scale(-1, 1);
-        g2.translate(-x, -y);
-        endDraw(g2);
-    }
+	@Override
+	public void draw(Graphics2D g2, double x, double y) {
+		startDraw(g2, x, y);
+		g2.translate(x, y);
+		g2.scale(-1, 1);
+		box.draw(g2, -width, 0);
+		g2.scale(-1, 1);
+		g2.translate(-x, -y);
+		endDraw(g2);
+	}
 
-    public FontInfo getLastFont() {
-        return box.getLastFont();
-    }
+	@Override
+	public FontInfo getLastFont() {
+		return box.getLastFont();
+	}
 }

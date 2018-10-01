@@ -47,22 +47,24 @@ package org.scilab.forge.jlatexmath;
 
 public abstract class Command1O2A extends Command1O1A {
 
-    Atom atom;
+	Atom atom;
 
-    public void add(TeXParser tp, Atom a) {
-        if (hasopt) {
-            option = a;
-            hasopt = false;
-        } else if (atom == null) {
-            atom = a;
-        } else {
-            tp.closeConsumer(newI(tp, option, atom, a));
-        }
-    }
+	@Override
+	public void add(TeXParser tp, Atom a) {
+		if (hasopt) {
+			option = a;
+			hasopt = false;
+		} else if (atom == null) {
+			atom = a;
+		} else {
+			tp.closeConsumer(newI(tp, option, atom, a));
+		}
+	}
 
-    public Atom newI(TeXParser tp, Atom a, Atom b) {
-        return null;
-    }
+	@Override
+	public Atom newI(TeXParser tp, Atom a, Atom b) {
+		return null;
+	}
 
-    public abstract Atom newI(TeXParser tp, Atom a, Atom b, Atom c);
+	public abstract Atom newI(TeXParser tp, Atom a, Atom b, Atom c);
 }

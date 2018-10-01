@@ -50,19 +50,18 @@ package org.scilab.forge.jlatexmath;
  */
 public class RuleAtom extends Atom {
 
-    private final TeXLength width;
-    private final TeXLength height;
-    private final TeXLength raise;
+	private final TeXLength width;
+	private final TeXLength height;
+	private final TeXLength raise;
 
-    public RuleAtom(TeXLength width, TeXLength height, TeXLength raise) {
-        this.width = width;
-        this.height = height;
-        this.raise = raise;
-    }
+	public RuleAtom(TeXLength width, TeXLength height, TeXLength raise) {
+		this.width = width;
+		this.height = height;
+		this.raise = raise;
+	}
 
-    public Box createBox(TeXEnvironment env) {
-        return new HorizontalRule(height.getValue(env),
-                                  width.getValue(env),
-                                  -raise.getValue(env));
-    }
+	@Override
+	public Box createBox(TeXEnvironment env) {
+		return new HorizontalRule(height.getValue(env), width.getValue(env), -raise.getValue(env));
+	}
 }

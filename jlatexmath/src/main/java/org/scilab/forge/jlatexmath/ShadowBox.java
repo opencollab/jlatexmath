@@ -55,30 +55,35 @@ import java.awt.geom.Rectangle2D;
  */
 public class ShadowBox extends FramedBox {
 
-    private double shadowRule;
+	private double shadowRule;
 
-    public ShadowBox(FramedBox fbox, double shadowRule) {
-        super(fbox.box, fbox.thickness, fbox.space);
-        this.shadowRule = shadowRule;
-        depth += shadowRule;
-        width += shadowRule;
-    }
+	public ShadowBox(FramedBox fbox, double shadowRule) {
+		super(fbox.box, fbox.thickness, fbox.space);
+		this.shadowRule = shadowRule;
+		depth += shadowRule;
+		width += shadowRule;
+	}
 
-    public void draw(Graphics2D g2, double x, double y) {
-        startDraw(g2, x, y);
-        double th = thickness / 2.;
-        box.draw(g2, x + space + thickness, y);
-        Stroke st = g2.getStroke();
-        g2.setStroke(new BasicStroke((float)thickness, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER));
-        g2.draw(new Rectangle2D.Double(x + th, y - height + th, width - shadowRule - thickness, height + depth - shadowRule - thickness));
-        g2.setStroke(new BasicStroke(0f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER));
-        g2.fill(new Rectangle2D.Double(x + shadowRule, y + depth - shadowRule - th, width - shadowRule, shadowRule + th));
-        g2.fill(new Rectangle2D.Double(x + width - shadowRule - th, y - height + shadowRule, shadowRule + th, depth + height - 2 * shadowRule));
-        g2.setStroke(st);
-        endDraw(g2);
-    }
+	@Override
+	public void draw(Graphics2D g2, double x, double y) {
+		startDraw(g2, x, y);
+		double th = thickness / 2.;
+		box.draw(g2, x + space + thickness, y);
+		Stroke st = g2.getStroke();
+		g2.setStroke(new BasicStroke((float) thickness, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER));
+		g2.draw(new Rectangle2D.Double(x + th, y - height + th, width - shadowRule - thickness,
+				height + depth - shadowRule - thickness));
+		g2.setStroke(new BasicStroke(0f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER));
+		g2.fill(new Rectangle2D.Double(x + shadowRule, y + depth - shadowRule - th, width - shadowRule,
+				shadowRule + th));
+		g2.fill(new Rectangle2D.Double(x + width - shadowRule - th, y - height + shadowRule, shadowRule + th,
+				depth + height - 2 * shadowRule));
+		g2.setStroke(st);
+		endDraw(g2);
+	}
 
-    public FontInfo getLastFont() {
-        return box.getLastFont();
-    }
+	@Override
+	public FontInfo getLastFont() {
+		return box.getLastFont();
+	}
 }

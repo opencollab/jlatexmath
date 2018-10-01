@@ -52,70 +52,73 @@ import java.awt.Font;
  */
 public class JavaFontRenderingAtom extends Atom {
 
-    private final String str;
-    private final int style;
-    private final ExternalFontManager.FontSSSF f;
-    private final Font font;
+	private final String str;
+	private final int style;
+	private final ExternalFontManager.FontSSSF f;
+	private final Font font;
 
-    private JavaFontRenderingAtom(final String str, final int style, final ExternalFontManager.FontSSSF f, final Font font) {
-        this.str = str;
-        this.style = style;
-        this.f = f;
-        this.font = font;
-    }
+	private JavaFontRenderingAtom(final String str, final int style, final ExternalFontManager.FontSSSF f,
+			final Font font) {
+		this.str = str;
+		this.style = style;
+		this.f = f;
+		this.font = font;
+	}
 
-    public JavaFontRenderingAtom(final String str, final int style) {
-        this(str, style, null, null);
-    }
+	public JavaFontRenderingAtom(final String str, final int style) {
+		this(str, style, null, null);
+	}
 
-    public JavaFontRenderingAtom(final String str, final ExternalFontManager.FontSSSF f) {
-        this(str, -1, f, null);
-    }
+	public JavaFontRenderingAtom(final String str, final ExternalFontManager.FontSSSF f) {
+		this(str, -1, f, null);
+	}
 
-    public JavaFontRenderingAtom(final String str) {
-        this(str, -1, null, null);
-    }
+	public JavaFontRenderingAtom(final String str) {
+		this(str, -1, null, null);
+	}
 
-    public JavaFontRenderingAtom(final String str, final Font font) {
-        this(str, -1, null, font);
-    }
+	public JavaFontRenderingAtom(final String str, final Font font) {
+		this(str, -1, null, font);
+	}
 
-    public Box createBox(TeXEnvironment env) {
-        final double factor = TeXFont.getSizeFactor(env.getStyle());
-        if (f == null) {
-            if (style == -1) {
-                final TeXFont dtf = env.getTeXFont();
-                int style = dtf.isIt ? Font.ITALIC : Font.PLAIN;
-                style = style | (dtf.isBold ? Font.BOLD : 0);
-                return new JavaFontRenderingBox(str, style, factor, font, dtf.isRoman);
-            } else {
-                return new JavaFontRenderingBox(str, style, factor, font);
-            }
-        } else {
-            final TeXFont dtf = env.getTeXFont();
-            int style = dtf.isIt ? Font.ITALIC : Font.PLAIN;
-            style = style | (dtf.isBold ? Font.BOLD : 0);
-            Font font;
-            final String ss = f.getSS();
-            final String sf = f.getSF();
-            if (dtf.isSs) {
-                if (ss == null) {
-                    font = new Font(sf, Font.PLAIN, 10);
-                } else {
-                    font = new Font(ss, Font.PLAIN, 10);
-                }
-            } else {
-                if (sf == null) {
-                    font = new Font(ss, Font.PLAIN, 10);
-                } else {
-                    font = new Font(sf, Font.PLAIN, 10);
-                }
-            }
-            return new JavaFontRenderingBox(str, style, factor, font, dtf.isRoman);
-        }
-    }
+	@Override
+	public Box createBox(TeXEnvironment env) {
+		final double factor = TeXFont.getSizeFactor(env.getStyle());
+		if (f == null) {
+			if (style == -1) {
+				final TeXFont dtf = env.getTeXFont();
+				int style = dtf.isIt ? Font.ITALIC : Font.PLAIN;
+				style = style | (dtf.isBold ? Font.BOLD : 0);
+				return new JavaFontRenderingBox(str, style, factor, font, dtf.isRoman);
+			} else {
+				return new JavaFontRenderingBox(str, style, factor, font);
+			}
+		} else {
+			final TeXFont dtf = env.getTeXFont();
+			int style = dtf.isIt ? Font.ITALIC : Font.PLAIN;
+			style = style | (dtf.isBold ? Font.BOLD : 0);
+			Font font;
+			final String ss = f.getSS();
+			final String sf = f.getSF();
+			if (dtf.isSs) {
+				if (ss == null) {
+					font = new Font(sf, Font.PLAIN, 10);
+				} else {
+					font = new Font(ss, Font.PLAIN, 10);
+				}
+			} else {
+				if (sf == null) {
+					font = new Font(ss, Font.PLAIN, 10);
+				} else {
+					font = new Font(sf, Font.PLAIN, 10);
+				}
+			}
+			return new JavaFontRenderingBox(str, style, factor, font, dtf.isRoman);
+		}
+	}
 
-    public String toString() {
-        return "JavaFontRenderingAtom: " + str + ", font=" + font;
-    }
+	@Override
+	public String toString() {
+		return "JavaFontRenderingAtom: " + str + ", font=" + font;
+	}
 }

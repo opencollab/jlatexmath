@@ -47,26 +47,28 @@ package org.scilab.forge.jlatexmath;
 
 public class CommandTextStyle extends Command {
 
-    final int style;
-    ExternalFontManager.FontSSSF f;
+	final int style;
+	ExternalFontManager.FontSSSF f;
 
-    public CommandTextStyle(final int style) {
-        this.style = style;
-    }
+	public CommandTextStyle(final int style) {
+		this.style = style;
+	}
 
-    public boolean init(TeXParser tp) {
-        f = ExternalFontManager.get().getFont(Character.UnicodeBlock.BASIC_LATIN);
-        if (f != null) {
-            ExternalFontManager.get().put(Character.UnicodeBlock.BASIC_LATIN, null);
-        }
-        return true;
-    }
+	@Override
+	public boolean init(TeXParser tp) {
+		f = ExternalFontManager.get().getFont(Character.UnicodeBlock.BASIC_LATIN);
+		if (f != null) {
+			ExternalFontManager.get().put(Character.UnicodeBlock.BASIC_LATIN, null);
+		}
+		return true;
+	}
 
-    public void add(TeXParser tp, Atom a) {
-        if (f != null) {
-            ExternalFontManager.get().put(Character.UnicodeBlock.BASIC_LATIN, f);
-        }
+	@Override
+	public void add(TeXParser tp, Atom a) {
+		if (f != null) {
+			ExternalFontManager.get().put(Character.UnicodeBlock.BASIC_LATIN, f);
+		}
 
-        tp.closeConsumer(new TextStyleAtom(a, style));
-    }
+		tp.closeConsumer(new TextStyleAtom(a, style));
+	}
 }

@@ -50,88 +50,88 @@ import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 
 /**
- * A box representing another box with a delimiter box and a script box above or under it,
- * with script and delimiter seperated by a kern.
+ * A box representing another box with a delimiter box and a script box above or
+ * under it, with script and delimiter seperated by a kern.
  */
 public class OverUnderBox extends Box {
 
-    // base, delimiter and script atom
-    private final Box base;
-    private final Box del;
-    private final Box script;
+	// base, delimiter and script atom
+	private final Box base;
+	private final Box del;
+	private final Box script;
 
-    // kern amount between the delimiter and the script
-    private final double kern;
+	// kern amount between the delimiter and the script
+	private final double kern;
 
-    // whether the delimiter should be drawn over (<-> under) the base atom
-    private final boolean over;
+	// whether the delimiter should be drawn over (<-> under) the base atom
+	private final boolean over;
 
-    /**
-     * the parameter boxes must have an equal width!!
-     *
-     * @param b
-     *           base box to be drawn on the baseline
-     * @param d
-     *           delimiter box
-     * @param script
-     *           subscript or superscript box
-     * @param over
-     *           true : draws delimiter and script box above the base box, false : under the
-     *           base box
-     */
-    public OverUnderBox(Box b, Box d, Box script, double kern, boolean over) {
-        base = b;
-        del = d;
-        this.script = script;
-        this.kern = kern;
-        this.over = over;
+	/**
+	 * the parameter boxes must have an equal width!!
+	 *
+	 * @param b
+	 *            base box to be drawn on the baseline
+	 * @param d
+	 *            delimiter box
+	 * @param script
+	 *            subscript or superscript box
+	 * @param over
+	 *            true : draws delimiter and script box above the base box,
+	 *            false : under the base box
+	 */
+	public OverUnderBox(Box b, Box d, Box script, double kern, boolean over) {
+		base = b;
+		del = d;
+		this.script = script;
+		this.kern = kern;
+		this.over = over;
 
-        // calculate metrics of the box
-        width = b.getWidth();
-        height = b.height
-                 + (over ? d.getWidth() : 0)
-                 + (over && script != null ? script.height + script.depth + kern : 0);
-        depth = b.depth
-                + (over ? 0 : d.getWidth())
-                + (!over && script != null ? script.height + script.depth + kern : 0);
-    }
+		// calculate metrics of the box
+		width = b.getWidth();
+		height = b.height + (over ? d.getWidth() : 0)
+				+ (over && script != null ? script.height + script.depth + kern : 0);
+		depth = b.depth + (over ? 0 : d.getWidth())
+				+ (!over && script != null ? script.height + script.depth + kern : 0);
+	}
 
-    public void draw(Graphics2D g2, double x, double y) {
-        startDraw(g2, x, y);
-        base.draw(g2, x, y);
+	@Override
+	public void draw(Graphics2D g2, double x, double y) {
+		startDraw(g2, x, y);
+		base.draw(g2, x, y);
 
-        final AffineTransform oldAt = g2.getTransform();
-        final double transX = x + del.getDepth();
-        del.setDepth(del.getHeight() + del.getDepth());
-        del.setHeight(0.);
+		final AffineTransform oldAt = g2.getTransform();
+		final double transX = x + del.getDepth();
+		del.setDepth(del.getHeight() + del.getDepth());
+		del.setHeight(0.);
 
-        if (over) { // draw delimiter and script above base box
-            final double transY = y - base.getHeight() - del.getWidth();
-            g2.translate(transX, transY);
-            g2.rotate(Math.PI / 2.);
-            del.draw(g2, 0, 0);
-            g2.setTransform(oldAt);
+		if (over) { // draw delimiter and script above base box
+			final double transY = y - base.getHeight() - del.getWidth();
+			g2.translate(transX, transY);
+			g2.rotate(Math.PI / 2.);
+			del.draw(g2, 0, 0);
+			g2.setTransform(oldAt);
 
-            // draw superscript
-            if (script != null) {
-                script.draw(g2, x, transY - kern - script.getDepth());
-            }
-        } else { // draw delimiter and script under base box
-            final double transY = y + base.getDepth();
-            g2.translate(transX, transY);
-            g2.rotate(Math.PI / 2.);
-            del.draw(g2, 0, 0);
-            g2.setTransform(oldAt);
+			// draw superscript
+			if (script != null) {
+				script.draw(g2, x, transY - kern - script.getDepth());
+			}
+		} else { // draw delimiter and script under base box
+			final double transY = y + base.getDepth();
+			g2.translate(transX, transY);
+			g2.rotate(Math.PI / 2.);
+			del.draw(g2, 0, 0);
+			g2.setTransform(oldAt);
 
-            // draw subscript
-            if (script != null) {
-                script.draw(g2, x, transY + del.getWidth() + kern + script.getHeight());
-            }
-        }
-        endDraw(g2);
-    }
+			// draw subscript
+			if (script != null) {
+				script.draw(g2, x, transY + del.getWidth() + kern + script.getHeight());
+			}
+		}
+		endDraw(g2);
+	}
 
-    public FontInfo getLastFont() {
-        return base.getLastFont();
-    }
+	@Override
+	public FontInfo getLastFont() {
+		return base.getLastFont();
+	}
 }

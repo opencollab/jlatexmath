@@ -50,67 +50,69 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Stroke;
 import java.awt.geom.Line2D;
-import java.util.List;
 
 /**
  * A box representing a rotated box.
  */
 public class CancelBox extends Box {
 
-    private final Box b;
-    private final CancelAtom.Type ctype;
-    private final double thickness;
-    private final double extra;
-    private final Color color;
+	private final Box b;
+	private final CancelAtom.Type ctype;
+	private final double thickness;
+	private final double extra;
+	private final Color color;
 
-    public CancelBox(final Box b, final CancelAtom.Type ctype, final double thickness, final double extra, Color color) {
-        this.b = b;
-        this.ctype = ctype;
-        this.thickness = thickness;
-        this.extra = extra;
-        this.color = color;
-        this.width = b.width;
-        this.height = b.height;
-        this.depth = b.depth;
-        this.shift = b.shift;
-    }
+	public CancelBox(final Box b, final CancelAtom.Type ctype, final double thickness, final double extra,
+			Color color) {
+		this.b = b;
+		this.ctype = ctype;
+		this.thickness = thickness;
+		this.extra = extra;
+		this.color = color;
+		this.width = b.width;
+		this.height = b.height;
+		this.depth = b.depth;
+		this.shift = b.shift;
+	}
 
-    public void draw(Graphics2D g2, double x, double y) {
-        b.draw(g2, x, y);
-        startDraw(g2, x, y);
-        final Stroke oldStroke = g2.getStroke();
-        g2.setStroke(new BasicStroke((float)thickness, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER));
-        final double th = thickness / 2.;
-        final double hyp = Math.hypot(width, height + depth);
-        final double a = extra * width / hyp;
-        final double b = extra * height / hyp;
-        Color oldColor = null;
-        if (color != null) {
-            oldColor = g2.getColor();
-            g2.setColor(color);
-        }
+	@Override
+	public void draw(Graphics2D g2, double x, double y) {
+		b.draw(g2, x, y);
+		startDraw(g2, x, y);
+		final Stroke oldStroke = g2.getStroke();
+		g2.setStroke(new BasicStroke((float) thickness, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER));
+		final double th = thickness / 2.;
+		final double hyp = Math.hypot(width, height + depth);
+		final double a = extra * width / hyp;
+		final double b = extra * height / hyp;
+		Color oldColor = null;
+		if (color != null) {
+			oldColor = g2.getColor();
+			g2.setColor(color);
+		}
 
-        switch (ctype) {
-        case SLASH:
-            g2.draw(new Line2D.Double(x + th - a, y + depth - th + b, x + width - th + a, y - height + th - b));
-            break;
-        case BACKSLASH:
-            g2.draw(new Line2D.Double(x + th - a, y - height + th - b, x + width - th + a, y + depth - th + b));
-            break;
-        case X:
-            g2.draw(new Line2D.Double(x + th - a, y - height + th - b, x + width - th + a, y + depth - th + b));
-            g2.draw(new Line2D.Double(x + th - a, y + depth - th + b, x + width - th + a, y - height + th - b));
-            break;
-        }
-        g2.setStroke(oldStroke);
-        if (color != null) {
-            g2.setColor(oldColor);
-        }
+		switch (ctype) {
+		case SLASH:
+			g2.draw(new Line2D.Double(x + th - a, y + depth - th + b, x + width - th + a, y - height + th - b));
+			break;
+		case BACKSLASH:
+			g2.draw(new Line2D.Double(x + th - a, y - height + th - b, x + width - th + a, y + depth - th + b));
+			break;
+		case X:
+			g2.draw(new Line2D.Double(x + th - a, y - height + th - b, x + width - th + a, y + depth - th + b));
+			g2.draw(new Line2D.Double(x + th - a, y + depth - th + b, x + width - th + a, y - height + th - b));
+			break;
+		}
+		g2.setStroke(oldStroke);
+		if (color != null) {
+			g2.setColor(oldColor);
+		}
 
-        endDraw(g2);
-    }
+		endDraw(g2);
+	}
 
-    public FontInfo getLastFont() {
-        return b.getLastFont();
-    }
+	@Override
+	public FontInfo getLastFont() {
+		return b.getLastFont();
+	}
 }

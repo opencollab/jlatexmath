@@ -46,55 +46,57 @@
 package org.scilab.forge.jlatexmath;
 
 /**
- * An atom representing an other atom with an extensible arrow or doublearrow over or under it.
+ * An atom representing an other atom with an extensible arrow or doublearrow
+ * over or under it.
  */
 public class UnderOverArrowAtom extends Atom {
 
-    private Atom base;
-    private boolean over, left = false, dble = false;
+	private Atom base;
+	private boolean over, left = false, dble = false;
 
-    public UnderOverArrowAtom(Atom base, boolean left, boolean over) {
-        this.base = base;
-        this.left = left;
-        this.over = over;
-    }
+	public UnderOverArrowAtom(Atom base, boolean left, boolean over) {
+		this.base = base;
+		this.left = left;
+		this.over = over;
+	}
 
-    public UnderOverArrowAtom(Atom base, boolean over) {
-        this.base = base;
-        this.over = over;
-        this.dble = true;
-    }
+	public UnderOverArrowAtom(Atom base, boolean over) {
+		this.base = base;
+		this.over = over;
+		this.dble = true;
+	}
 
-    public Box createBox(TeXEnvironment env) {
-        Box b = base != null ? base.createBox(env) : StrutBox.getEmpty();
-        double sep = new SpaceAtom(TeXLength.Unit.EX, 0.15, 0, 0).createBox(env).getWidth();
-        Box arrow;
+	@Override
+	public Box createBox(TeXEnvironment env) {
+		Box b = base != null ? base.createBox(env) : StrutBox.getEmpty();
+		double sep = new SpaceAtom(TeXLength.Unit.EX, 0.15, 0, 0).createBox(env).getWidth();
+		Box arrow;
 
-        if (dble) {
-            arrow = XFactory.createLeftRightArrow(env, b.getWidth());
-            sep = 4. * sep;
-        } else {
-            arrow = XFactory.createArrow(left, env, b.getWidth());
-            //sep = sep;
-        }
+		if (dble) {
+			arrow = XFactory.createLeftRightArrow(env, b.getWidth());
+			sep = 4. * sep;
+		} else {
+			arrow = XFactory.createArrow(left, env, b.getWidth());
+			// sep = sep;
+		}
 
-        VerticalBox vb = new VerticalBox();
-        if (over) {
-            vb.add(arrow);
-            vb.add(new HorizontalBox(b, arrow.getWidth(), TeXConstants.Align.CENTER));
-            double h = vb.getDepth() + vb.getHeight();
-            vb.setDepth(b.getDepth());
-            vb.setHeight(h - b.getDepth());
-        } else {
-            vb.add(new HorizontalBox(b, arrow.getWidth(), TeXConstants.Align.CENTER));
-            vb.add(new StrutBox(0, sep, 0, 0));
-            vb.add(arrow);
-            double h = vb.getDepth() + vb.getHeight();
-            vb.setDepth(h - b.getHeight());
-            vb.setHeight(b.getHeight());
-        }
+		VerticalBox vb = new VerticalBox();
+		if (over) {
+			vb.add(arrow);
+			vb.add(new HorizontalBox(b, arrow.getWidth(), TeXConstants.Align.CENTER));
+			double h = vb.getDepth() + vb.getHeight();
+			vb.setDepth(b.getDepth());
+			vb.setHeight(h - b.getDepth());
+		} else {
+			vb.add(new HorizontalBox(b, arrow.getWidth(), TeXConstants.Align.CENTER));
+			vb.add(new StrutBox(0, sep, 0, 0));
+			vb.add(arrow);
+			double h = vb.getDepth() + vb.getHeight();
+			vb.setDepth(h - b.getHeight());
+			vb.setHeight(b.getHeight());
+		}
 
-        return vb;
+		return vb;
 
-    }
+	}
 }

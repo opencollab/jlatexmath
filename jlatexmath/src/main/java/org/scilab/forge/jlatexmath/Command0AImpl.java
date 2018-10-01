@@ -47,12 +47,14 @@ package org.scilab.forge.jlatexmath;
 
 public class Command0AImpl extends Command0A {
 
-    public boolean init(TeXParser tp) {
-        tp.addToConsumer(newI(tp));
-        return false;
-    }
+	@Override
+	public boolean init(TeXParser tp) {
+		tp.addToConsumer(newI(tp));
+		return false;
+	}
 
-    public Atom newI(TeXParser tp) {
-        return null;
-    }
+	@Override
+	public Atom newI(TeXParser tp) {
+		return null;
+	}
 }

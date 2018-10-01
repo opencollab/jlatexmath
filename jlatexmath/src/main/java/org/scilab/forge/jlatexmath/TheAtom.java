@@ -50,16 +50,17 @@ package org.scilab.forge.jlatexmath;
  */
 public class TheAtom extends Atom {
 
-    protected final String name;
+	protected final String name;
 
-    public TheAtom(String name) {
-        this.name = name;
-    }
+	public TheAtom(String name) {
+		this.name = name;
+	}
 
-    public Box createBox(TeXEnvironment env) {
-        if (TeXLength.isLengthName(name)) {
-            return TeXLength.getLength(name).createBox(env);
-        }
-        throw new ParseException("Invalid length name in \\the: " + name);
-    }
+	@Override
+	public Box createBox(TeXEnvironment env) {
+		if (TeXLength.isLengthName(name)) {
+			return TeXLength.getLength(name).createBox(env);
+		}
+		throw new ParseException("Invalid length name in \\the: " + name);
+	}
 }

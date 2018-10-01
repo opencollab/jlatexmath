@@ -52,31 +52,32 @@ import java.awt.Color;
  */
 public class DBoxAtom extends Atom {
 
-    protected final Atom base;
-    protected final Color bg;
-    protected final Color line;
+	protected final Atom base;
+	protected final Color bg;
+	protected final Color line;
 
-    public DBoxAtom(Atom base, Color bg, Color line) {
-        this.base = base;
-        this.bg = bg;
-        this.line = line;
-    }
+	public DBoxAtom(Atom base, Color bg, Color line) {
+		this.base = base;
+		this.bg = bg;
+		this.line = line;
+	}
 
-    public DBoxAtom(Atom base) {
-        this(base, null, null);
-    }
+	public DBoxAtom(Atom base) {
+		this(base, null, null);
+	}
 
-    public Box createBox(TeXEnvironment env) {
-        final Box bbase = base.createBox(env);
-        final double drt = TeXLength.getLength("fboxrule", env);
-        final double space = TeXLength.getLength("fboxsep", env);
-        final double dl = TeXLength.getLength("dashlength", env);
-        final double dd = TeXLength.getLength("dashdash", env);
-        if (bg == null) {
-            return new FramedBox(bbase, drt, space, dl, dd);
-        }
+	@Override
+	public Box createBox(TeXEnvironment env) {
+		final Box bbase = base.createBox(env);
+		final double drt = TeXLength.getLength("fboxrule", env);
+		final double space = TeXLength.getLength("fboxsep", env);
+		final double dl = TeXLength.getLength("dashlength", env);
+		final double dd = TeXLength.getLength("dashdash", env);
+		if (bg == null) {
+			return new FramedBox(bbase, drt, space, dl, dd);
+		}
 
-        env.isColored = true;
-        return new FramedBox(bbase, drt, space, line, bg, dl, dd);
-    }
+		env.isColored = true;
+		return new FramedBox(bbase, drt, space, line, bg, dl, dd);
+	}
 }

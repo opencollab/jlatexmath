@@ -47,59 +47,84 @@ package org.scilab.forge.jlatexmath;
 
 final class MOUSTACHE extends FontInfo {
 
-    MOUSTACHE(final String ttfPath) {
-        super(0, ttfPath, 0.430555, 0.0, 1.000003, '\u0000');
-    }
+	MOUSTACHE(final String ttfPath) {
+		super(0, ttfPath, 0.430555, 0.0, 1.000003, '\u0000');
+	}
 
-    protected final void initMetrics() {
-        setInfo('\u0038', // char code: 56
-                new double[] {0.888891, 0., 0.900009, 0.}, // metrics: width, height, depth, italic
-                null, // ligatures
-                null, // kern codes
-                null, // kern values
-                null, '\0', // next larger
-                null); // extension: top, mid, rep, bot
-        setInfo('\u0039', // char code: 57
-                new double[] {0.888891, 0., 0.900009, 0.}, // metrics: width, height, depth, italic
-                null, // ligatures
-                null, // kern codes
-                null, // kern values
-                null, '\0', // next larger
-                null); // extension: top, mid, rep, bot
-        setInfo('\u003A', // char code: 58
-                new double[] {0.888891, 0., 0.900009, 0.}, // metrics: width, height, depth, italic
-                null, // ligatures
-                null, // kern codes
-                null, // kern values
-                null, '\0', // next larger
-                null); // extension: top, mid, rep, bot
-        setInfo('\u003B', // char code: 59
-                new double[] {0.888891, 0., 0.900009, 0.}, // metrics: width, height, depth, italic
-                null, // ligatures
-                null, // kern codes
-                null, // kern values
-                null, '\0', // next larger
-                null); // extension: top, mid, rep, bot
-        setInfo('\u003E', // char code: 62
-                new double[] {0.888891, 0., 0.300003, 0.}, // metrics: width, height, depth, italic
-                null, // ligatures
-                null, // kern codes
-                null, // kern values
-                null, '\0', // next larger
-                new char[] {TeXFont.NONE, TeXFont.NONE, '\u003E', TeXFont.NONE}); // extension: top, mid, rep, bot
-        setInfo('\u0040', // char code: 64
-                new double[] {0.458336, 0, 0, 0.}, // metrics: width, height, depth, italic
-                null, // ligatures
-                null, // kern codes
-                null, // kern values
-                null, '\0', // next larger
-                new char[] {'\u0038', TeXFont.NONE, '\u003E', '\u003B'}); // extension: top, mid, rep, bot
-        setInfo('\u0041', // char code: 65
-                new double[] {0.875003, 0, 0, 0.}, // metrics: width, height, depth, italic
-                null, // ligatures
-                null, // kern codes
-                null, // kern values
-                null, '\0', // next larger
-                new char[] {'\u0039', TeXFont.NONE, '\u003E', '\u003A'}); // extension: top, mid, rep, bot
-    }
+	@Override
+	protected final void initMetrics() {
+		setInfo('\u0038', // char code: 56
+				new double[] { 0.888891, 0., 0.900009, 0. }, // metrics: width,
+																// height,
+																// depth, italic
+				null, // ligatures
+				null, // kern codes
+				null, // kern values
+				null, '\0', // next larger
+				null); // extension: top, mid, rep, bot
+		setInfo('\u0039', // char code: 57
+				new double[] { 0.888891, 0., 0.900009, 0. }, // metrics: width,
+																// height,
+																// depth, italic
+				null, // ligatures
+				null, // kern codes
+				null, // kern values
+				null, '\0', // next larger
+				null); // extension: top, mid, rep, bot
+		setInfo('\u003A', // char code: 58
+				new double[] { 0.888891, 0., 0.900009, 0. }, // metrics: width,
+																// height,
+																// depth, italic
+				null, // ligatures
+				null, // kern codes
+				null, // kern values
+				null, '\0', // next larger
+				null); // extension: top, mid, rep, bot
+		setInfo('\u003B', // char code: 59
+				new double[] { 0.888891, 0., 0.900009, 0. }, // metrics: width,
+																// height,
+																// depth, italic
+				null, // ligatures
+				null, // kern codes
+				null, // kern values
+				null, '\0', // next larger
+				null); // extension: top, mid, rep, bot
+		setInfo('\u003E', // char code: 62
+				new double[] { 0.888891, 0., 0.300003, 0. }, // metrics: width,
+																// height,
+																// depth, italic
+				null, // ligatures
+				null, // kern codes
+				null, // kern values
+				null, '\0', // next larger
+				new char[] { TeXFont.NONE, TeXFont.NONE, '\u003E', TeXFont.NONE }); // extension:
+																					// top,
+																					// mid,
+																					// rep,
+																					// bot
+		setInfo('\u0040', // char code: 64
+				new double[] { 0.458336, 0, 0, 0. }, // metrics: width, height,
+														// depth, italic
+				null, // ligatures
+				null, // kern codes
+				null, // kern values
+				null, '\0', // next larger
+				new char[] { '\u0038', TeXFont.NONE, '\u003E', '\u003B' }); // extension:
+																			// top,
+																			// mid,
+																			// rep,
+																			// bot
+		setInfo('\u0041', // char code: 65
+				new double[] { 0.875003, 0, 0, 0. }, // metrics: width, height,
+														// depth, italic
+				null, // ligatures
+				null, // kern codes
+				null, // kern values
+				null, '\0', // next larger
+				new char[] { '\u0039', TeXFont.NONE, '\u003E', '\u003A' }); // extension:
+																			// top,
+																			// mid,
+																			// rep,
+																			// bot
+	}
 }

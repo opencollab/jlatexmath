@@ -47,17 +47,18 @@
 package org.scilab.forge.jlatexmath;
 
 /**
- * Superclass of all the possible (public) exceptions that can be thrown in this package.
+ * Superclass of all the possible (public) exceptions that can be thrown in this
+ * package.
  *
  * @author Kurt Vermeulen
  */
 public class JMathTeXException extends RuntimeException {
 
-    protected JMathTeXException(String msg) {
-        super(msg);
-    }
+	protected JMathTeXException(String msg) {
+		super(msg);
+	}
 
-    protected JMathTeXException(String msg, Throwable cause) {
-        super(msg, cause);
-    }
+	protected JMathTeXException(String msg, Throwable cause) {
+		super(msg, cause);
+	}
 }

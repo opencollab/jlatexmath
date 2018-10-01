@@ -47,5 +47,5 @@ package org.scilab.forge.jlatexmath;
 
 public interface Substitution {
 
-    Atom get(Atom a);
+	Atom get(Atom a);
 }

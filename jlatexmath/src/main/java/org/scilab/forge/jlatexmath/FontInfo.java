@@ -47,267 +47,267 @@
 package org.scilab.forge.jlatexmath;
 
 import java.awt.Font;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Contains all the font information for 1 font.
  */
 public class FontInfo {
 
-    /**
-     * Maximum number of character codes in a TeX font.
-     */
-    private static final int NUMBER_OF_CHAR_CODES = 256;
+	/**
+	 * Maximum number of character codes in a TeX font.
+	 */
+	private static final int NUMBER_OF_CHAR_CODES = 256;
 
-    // font
-    protected Font font;
-    protected final int size;
-    protected final String path;
-    protected boolean loaded = false;
+	// font
+	protected Font font;
+	protected final int size;
+	protected final String path;
+	protected boolean loaded = false;
 
-    protected final double[][] metrics;
+	protected final double[][] metrics;
 
-    // skew character of the font (used for positioning accents)
-    protected final char skewChar;
+	// skew character of the font (used for positioning accents)
+	protected final char skewChar;
 
-    // general parameters for this font
-    protected final double xHeight;
-    protected final double space;
-    protected final double quad;
+	// general parameters for this font
+	protected final double xHeight;
+	protected final double space;
+	protected final double quad;
 
-    protected FontInfo bold;
-    protected FontInfo roman;
-    protected FontInfo ss;
-    protected FontInfo tt;
-    protected FontInfo it;
+	protected FontInfo bold;
+	protected FontInfo roman;
+	protected FontInfo ss;
+	protected FontInfo tt;
+	protected FontInfo it;
 
-    protected CharFont[][] lig;
-    protected double[][] kern;
-    protected CharFont[] nextLarger;
-    protected char[][] extensions;
+	protected CharFont[][] lig;
+	protected double[][] kern;
+	protected CharFont[] nextLarger;
+	protected char[][] extensions;
 
-    public FontInfo(int size, String path, double xHeight, double space, double quad, char skewChar) {
-        this.path = path;
-        this.xHeight = xHeight;
-        this.space = space;
-        this.quad = quad;
-        this.skewChar = skewChar;
-        this.size = size == 0 ? NUMBER_OF_CHAR_CODES : size;
-        this.metrics = new double[this.size][];
-    }
+	public FontInfo(int size, String path, double xHeight, double space, double quad, char skewChar) {
+		this.path = path;
+		this.xHeight = xHeight;
+		this.space = space;
+		this.quad = quad;
+		this.skewChar = skewChar;
+		this.size = size == 0 ? NUMBER_OF_CHAR_CODES : size;
+		this.metrics = new double[this.size][];
+	}
 
-    public void setDependencies(FontInfo bold, FontInfo roman, FontInfo ss, FontInfo tt, FontInfo it) {
-        this.bold = bold == null ? this : bold;
-        this.roman = roman == null ? this : roman;
-        this.ss = ss == null ? this : ss;
-        this.tt = tt == null ? this : tt;
-        this.it = it == null ? this : it;
-    }
+	public void setDependencies(FontInfo bold, FontInfo roman, FontInfo ss, FontInfo tt, FontInfo it) {
+		this.bold = bold == null ? this : bold;
+		this.roman = roman == null ? this : roman;
+		this.ss = ss == null ? this : ss;
+		this.tt = tt == null ? this : tt;
+		this.it = it == null ? this : it;
+	}
 
-    /**
-     *
-     * @param left
-     *           left character
-     * @param right
-     *           right character
-     * @param k
-     *           kern value
-     */
-    public void addKern(final char left, final char right, final double k) {
-        if (kern == null) {
-            kern = new double[size][];
-        }
-        if (kern[left] == null) {
-            kern[left] = new double[size];
-        }
-        kern[left][right] = k;
-    }
+	/**
+	 *
+	 * @param left
+	 *            left character
+	 * @param right
+	 *            right character
+	 * @param k
+	 *            kern value
+	 */
+	public void addKern(final char left, final char right, final double k) {
+		if (kern == null) {
+			kern = new double[size][];
+		}
+		if (kern[left] == null) {
+			kern[left] = new double[size];
+		}
+		kern[left][right] = k;
+	}
 
-    /**
-     * @param left
-     *           left character
-     * @param right
-     *           right character
-     * @param ligChar
-     *           ligature to replace left and right character
-     */
-    public void addLigature(final char left, final char right, final char ligChar) {
-        if (lig == null) {
-            lig = new CharFont[size][];
-        }
-        if (lig[left] == null) {
-            lig[left] = new CharFont[size];
-        }
-        lig[left][right] = new CharFont(ligChar, this);
-    }
+	/**
+	 * @param left
+	 *            left character
+	 * @param right
+	 *            right character
+	 * @param ligChar
+	 *            ligature to replace left and right character
+	 */
+	public void addLigature(final char left, final char right, final char ligChar) {
+		if (lig == null) {
+			lig = new CharFont[size][];
+		}
+		if (lig[left] == null) {
+			lig[left] = new CharFont[size];
+		}
+		lig[left][right] = new CharFont(ligChar, this);
+	}
 
-    public char[] getExtension(final char c) {
-        init();
-        if (extensions == null) {
-            return null;
-        }
-        return extensions[c];
-    }
+	public char[] getExtension(final char c) {
+		init();
+		if (extensions == null) {
+			return null;
+		}
+		return extensions[c];
+	}
 
-    public double getKern(final char left, final char right, final double factor) {
-        init();
-        if (kern == null || kern[left] == null) {
-            return 0.;
-        }
+	public double getKern(final char left, final char right, final double factor) {
+		init();
+		if (kern == null || kern[left] == null) {
+			return 0.;
+		}
 
-        return kern[left][right] * factor;
-    }
+		return kern[left][right] * factor;
+	}
 
-    public CharFont getLigature(final char left, final char right) {
-        init();
-        if (lig == null || lig[left] == null) {
-            return null;
-        }
-        return lig[left][right];
-    }
+	public CharFont getLigature(final char left, final char right) {
+		init();
+		if (lig == null || lig[left] == null) {
+			return null;
+		}
+		return lig[left][right];
+	}
 
-    public double[] getMetrics(final char c) {
-        init();
-        return metrics[c];
-    }
+	public double[] getMetrics(final char c) {
+		init();
+		return metrics[c];
+	}
 
-    public double getWidth(final char c) {
-        init();
-        return metrics[c][0];
-    }
+	public double getWidth(final char c) {
+		init();
+		return metrics[c][0];
+	}
 
-    public double getHeight(final char c) {
-        init();
-        return metrics[c][1];
-    }
+	public double getHeight(final char c) {
+		init();
+		return metrics[c][1];
+	}
 
-    public double getDepth(final char c) {
-        init();
-        return metrics[c][2];
-    }
+	public double getDepth(final char c) {
+		init();
+		return metrics[c][2];
+	}
 
-    public double getItalic(final char c) {
-        init();
-        return metrics[c][3];
-    }
+	public double getItalic(final char c) {
+		init();
+		return metrics[c][3];
+	}
 
-    public CharFont getNextLarger(final char c) {
-        init();
-        if (nextLarger == null) {
-            return null;
-        }
-        return nextLarger[c];
-    }
+	public CharFont getNextLarger(final char c) {
+		init();
+		if (nextLarger == null) {
+			return null;
+		}
+		return nextLarger[c];
+	}
 
-    /**
-     * @return the skew character of the font (for the correct positioning of
-     *         accents)
-     */
-    public double getSkew(final char c, final double factor) {
-        init();
-        if (skewChar != '\0') {
-            return getKern(c, skewChar, factor);
-        }
-        return 0.;
-    }
+	/**
+	 * @return the skew character of the font (for the correct positioning of
+	 *         accents)
+	 */
+	public double getSkew(final char c, final double factor) {
+		init();
+		if (skewChar != '\0') {
+			return getKern(c, skewChar, factor);
+		}
+		return 0.;
+	}
 
-    public void setExtension(final char c, final char[] ext) {
-        if (extensions == null) {
-            extensions = new char[size][];
-        }
-        extensions[c] = ext;
-    }
+	public void setExtension(final char c, final char[] ext) {
+		if (extensions == null) {
+			extensions = new char[size][];
+		}
+		extensions[c] = ext;
+	}
 
-    public void setMetrics(char c, double[] arr) {
-        metrics[c] = arr;
-    }
+	public void setMetrics(char c, double[] arr) {
+		metrics[c] = arr;
+	}
 
-    public void setNextLarger(final char c, final char larger, final FontInfo fontLarger) {
-        if (nextLarger == null) {
-            nextLarger = new CharFont[size];
-        }
-        nextLarger[c] = new CharFont(larger, fontLarger);
-    }
+	public void setNextLarger(final char c, final char larger, final FontInfo fontLarger) {
+		if (nextLarger == null) {
+			nextLarger = new CharFont[size];
+		}
+		nextLarger[c] = new CharFont(larger, fontLarger);
+	}
 
-    public void setInfo(char c, double[] metrics, char[] ligatures, char[] kernCode, double[] kernValue, FontInfo nextLarger, char nextLargerChar, char[] extension) {
-        setMetrics(c, metrics);
-        if (ligatures != null) {
-            for (int i = 0; i < ligatures.length; i+= 2) {
-                addLigature(c, ligatures[i], ligatures[i + 1]);
-            }
-        }
-        if (kernCode != null) {
-            for (int i = 0; i < kernCode.length; ++i) {
-                addKern(c, kernCode[i], kernValue[i]);
-            }
-        }
-        if (nextLarger != null) {
-            setNextLarger(c, nextLargerChar, nextLarger);
-        }
-        if (extension != null) {
-            setExtension(c, extension);
-        }
-    }
+	public void setInfo(char c, double[] metrics, char[] ligatures, char[] kernCode, double[] kernValue,
+			FontInfo nextLarger, char nextLargerChar, char[] extension) {
+		setMetrics(c, metrics);
+		if (ligatures != null) {
+			for (int i = 0; i < ligatures.length; i += 2) {
+				addLigature(c, ligatures[i], ligatures[i + 1]);
+			}
+		}
+		if (kernCode != null) {
+			for (int i = 0; i < kernCode.length; ++i) {
+				addKern(c, kernCode[i], kernValue[i]);
+			}
+		}
+		if (nextLarger != null) {
+			setNextLarger(c, nextLargerChar, nextLarger);
+		}
+		if (extension != null) {
+			setExtension(c, extension);
+		}
+	}
 
-    protected final void init() {
-        if (!loaded) {
-            initMetrics();
-            loaded = true;
-        }
-    }
+	protected final void init() {
+		if (!loaded) {
+			initMetrics();
+			loaded = true;
+		}
+	}
 
-    protected void initMetrics() {
-    }
+	protected void initMetrics() {
+	}
 
-    public double getQuad(final double factor) {
-        return quad * factor;
-    }
+	public double getQuad(final double factor) {
+		return quad * factor;
+	}
 
-    public final double getSpace(final double factor) {
-        return space * factor;
-    }
+	public final double getSpace(final double factor) {
+		return space * factor;
+	}
 
-    public final double getXHeight(final double factor) {
-        return xHeight * factor;
-    }
+	public final double getXHeight(final double factor) {
+		return xHeight * factor;
+	}
 
-    public final boolean hasSpace() {
-        return space > TeXFormula.PREC;
-    }
+	public final boolean hasSpace() {
+		return space > TeXFormula.PREC;
+	}
 
-    public final char getSkewChar() {
-        return skewChar;
-    }
+	public final char getSkewChar() {
+		return skewChar;
+	}
 
-    public final FontInfo getBold() {
-        return bold;
-    }
+	public final FontInfo getBold() {
+		return bold;
+	}
 
-    public final FontInfo getRoman() {
-        return roman;
-    }
+	public final FontInfo getRoman() {
+		return roman;
+	}
 
-    public final FontInfo getTt() {
-        return tt;
-    }
+	public final FontInfo getTt() {
+		return tt;
+	}
 
-    public final FontInfo getIt() {
-        return it;
-    }
+	public final FontInfo getIt() {
+		return it;
+	}
 
-    public final FontInfo getSs() {
-        return ss;
-    }
+	public final FontInfo getSs() {
+		return ss;
+	}
 
-    public final Font getFont() {
-        if (font == null) {
-            font = FontLoader.createFont(this, path);
-        }
-        return font;
-    }
+	public final Font getFont() {
+		if (font == null) {
+			font = FontLoader.createFont(this, path);
+		}
+		return font;
+	}
 
-    public String toString() {
-        return "FontInfo: " + path;
-    }
+	@Override
+	public String toString() {
+		return "FontInfo: " + path;
+	}
 }

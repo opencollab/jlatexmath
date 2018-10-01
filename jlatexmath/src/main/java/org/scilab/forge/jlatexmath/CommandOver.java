@@ -47,38 +47,44 @@ package org.scilab.forge.jlatexmath;
 
 public abstract class CommandOver extends Command {
 
-    protected Atom num;
-    protected RowAtom den;
+	protected Atom num;
+	protected RowAtom den;
 
-    public boolean init(TeXParser tp) {
-        final RowAtom at = tp.steal();
-        this.num = at != null ? at.simplify() : EmptyAtom.get();
-        den = new RowAtom();
-        return true;
-    }
+	@Override
+	public boolean init(TeXParser tp) {
+		final RowAtom at = tp.steal();
+		this.num = at != null ? at.simplify() : EmptyAtom.get();
+		den = new RowAtom();
+		return true;
+	}
 
-    public void add(TeXParser tp, Atom a) {
-        den.add(a);
-    }
+	@Override
+	public void add(TeXParser tp, Atom a) {
+		den.add(a);
+	}
 
-    public Atom getLastAtom() {
-        return den.getLastAtom();
-    }
+	@Override
+	public Atom getLastAtom() {
+		return den.getLastAtom();
+	}
 
-    public RowAtom steal(TeXParser tp) {
-        final RowAtom ra = den;
-        den = new RowAtom();
-        return ra;
-    }
+	@Override
+	public RowAtom steal(TeXParser tp) {
+		final RowAtom ra = den;
+		den = new RowAtom();
+		return ra;
+	}
 
-    public boolean close(TeXParser tp) {
-        tp.closeConsumer(newI(tp, this.num, this.den.simplify()));
-        return true;
-    }
+	@Override
+	public boolean close(TeXParser tp) {
+		tp.closeConsumer(newI(tp, this.num, this.den.simplify()));
+		return true;
+	}
 
-    public boolean isClosable() {
-        return true;
-    }
+	@Override
+	public boolean isClosable() {
+		return true;
+	}
 
-    public abstract Atom newI(TeXParser tp, Atom a, Atom b);
+	public abstract Atom newI(TeXParser tp, Atom a, Atom b);
 }

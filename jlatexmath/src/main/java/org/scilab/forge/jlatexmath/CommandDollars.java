@@ -47,44 +47,48 @@ package org.scilab.forge.jlatexmath;
 
 public class CommandDollars {
 
-    public static class Dollar extends Command {
+	public static class Dollar extends Command {
 
-        private final boolean dollar;
-        private final int style;
-        private RowAtom ra;
+		private final boolean dollar;
+		private final int style;
+		private RowAtom ra;
 
-        public Dollar(final boolean dollar, final int style) {
-            this.dollar = dollar;
-            this.style = style;
-        }
+		public Dollar(final boolean dollar, final int style) {
+			this.dollar = dollar;
+			this.style = style;
+		}
 
-        public boolean init(TeXParser tp) {
-            tp.close();
-            final AtomConsumer ac = tp.peek();
-            if ((ac instanceof Dollar) && ((Dollar)ac).dollar == dollar) {
-                // we're closing
-                tp.popMode();
-                tp.closeConsumer(new MathAtom(ra.simplify(), style));
-                return false;
-            }
-            // we're opening
-            tp.pushMode(TeXParser.MATH_MODE);
-            ra = new RowAtom();
-            return true;
-        }
+		@Override
+		public boolean init(TeXParser tp) {
+			tp.close();
+			final AtomConsumer ac = tp.peek();
+			if ((ac instanceof Dollar) && ((Dollar) ac).dollar == dollar) {
+				// we're closing
+				tp.popMode();
+				tp.closeConsumer(new MathAtom(ra.simplify(), style));
+				return false;
+			}
+			// we're opening
+			tp.pushMode(TeXParser.MATH_MODE);
+			ra = new RowAtom();
+			return true;
+		}
 
-        public void add(TeXParser tp, Atom a) {
-            ra.add(a);
-        }
+		@Override
+		public void add(TeXParser tp, Atom a) {
+			ra.add(a);
+		}
 
-        public Atom getLastAtom() {
-            return ra.getLastAtom();
-        }
+		@Override
+		public Atom getLastAtom() {
+			return ra.getLastAtom();
+		}
 
-        public RowAtom steal(TeXParser tp) {
-            final RowAtom _ra = ra;
-            ra = new RowAtom();
-            return _ra;
-        }
-    }
+		@Override
+		public RowAtom steal(TeXParser tp) {
+			final RowAtom _ra = ra;
+			ra = new RowAtom();
+			return _ra;
+		}
+	}
 }

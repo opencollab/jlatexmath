@@ -47,17 +47,19 @@ package org.scilab.forge.jlatexmath;
 
 public class CommandDisplaylines extends CommandMatrix {
 
-    public boolean init(TeXParser tp) {
-        super.init(tp);
-        aoa.setOneColumn(true);
-        return true;
-    }
+	@Override
+	public boolean init(TeXParser tp) {
+		super.init(tp);
+		aoa.setOneColumn(true);
+		return true;
+	}
 
-    public Atom newI(TeXParser tp) {
-        if (aoa.col == 0) {
-            return EmptyAtom.get();
-        }
+	@Override
+	public Atom newI(TeXParser tp) {
+		if (aoa.col == 0) {
+			return EmptyAtom.get();
+		}
 
-        return new MultlineAtom(aoa, MultlineAtom.GATHER);
-    }
+		return new MultlineAtom(aoa, MultlineAtom.GATHER);
+	}
 }

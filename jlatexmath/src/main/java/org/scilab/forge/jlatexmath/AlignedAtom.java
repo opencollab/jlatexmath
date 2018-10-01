@@ -50,19 +50,21 @@ package org.scilab.forge.jlatexmath;
  */
 public class AlignedAtom extends Atom {
 
-    private final Atom base;
-    private final TeXConstants.Align alignment;
+	private final Atom base;
+	private final TeXConstants.Align alignment;
 
-    public AlignedAtom(final Atom base, final TeXConstants.Align alignment) {
-        this.base = base;
-        this.alignment = alignment;
-    }
+	public AlignedAtom(final Atom base, final TeXConstants.Align alignment) {
+		this.base = base;
+		this.alignment = alignment;
+	}
 
-    public TeXConstants.Align getAlignment() {
-        return alignment;
-    }
+	@Override
+	public TeXConstants.Align getAlignment() {
+		return alignment;
+	}
 
-    public Box createBox(TeXEnvironment env) {
-        return base.createBox(env);
-    }
+	@Override
+	public Box createBox(TeXEnvironment env) {
+		return base.createBox(env);
+	}
 }

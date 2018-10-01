@@ -47,37 +47,40 @@ package org.scilab.forge.jlatexmath;
 
 public class SMatrixAtom extends ArrayAtom {
 
-    protected boolean small;
+	protected boolean small;
 
-    /**
-     * Creates an empty matrix
-     *
-     */
-    public SMatrixAtom(ArrayOfAtoms array, final boolean small) {
-        super(array, new ArrayOptions(array.col), false);
-        this.small = small;
-    }
+	/**
+	 * Creates an empty matrix
+	 *
+	 */
+	public SMatrixAtom(ArrayOfAtoms array, final boolean small) {
+		super(array, new ArrayOptions(array.col), false);
+		this.small = small;
+	}
 
-    public double[] getColumnSep(TeXEnvironment env, double width) {
-        final int row = matrix.row;
-        final int col = matrix.col;
-        final double[] seps = new double[col + 1];
+	@Override
+	public double[] getColumnSep(TeXEnvironment env, double width) {
+		final int row = matrix.row;
+		final int col = matrix.col;
+		final double[] seps = new double[col + 1];
 
-        //Simple matrix : (hsep_col/2 or 0) elem hsep_col elem hsep_col ... hsep_col elem (hsep_col/2 or 0)
-        seps[0] = seps[col] = 0.;
-        final double hw = hsep.createBox(env).getWidth();
-        for (int i = 1; i < col; ++i) {
-            seps[i] = hw;
-        }
+		// Simple matrix : (hsep_col/2 or 0) elem hsep_col elem hsep_col ...
+		// hsep_col elem (hsep_col/2 or 0)
+		seps[0] = seps[col] = 0.;
+		final double hw = hsep.createBox(env).getWidth();
+		for (int i = 1; i < col; ++i) {
+			seps[i] = hw;
+		}
 
-        return seps;
-    }
+		return seps;
+	}
 
-    public Box createBox(TeXEnvironment env) {
-        if (small) {
-            env = env.copy();
-            env.setStyle(TeXConstants.STYLE_SCRIPT);
-        }
-        return super.createBox(env);
-    }
+	@Override
+	public Box createBox(TeXEnvironment env) {
+		if (small) {
+			env = env.copy();
+			env.setStyle(TeXConstants.STYLE_SCRIPT);
+		}
+		return super.createBox(env);
+	}
 }

@@ -47,15 +47,18 @@ package org.scilab.forge.jlatexmath;
 
 public abstract class Command0A extends Command {
 
-    public boolean init(TeXParser tp) {
-        tp.addToConsumer(newI(tp));
-        return false;
-    }
+	@Override
+	public boolean init(TeXParser tp) {
+		tp.addToConsumer(newI(tp));
+		return false;
+	}
 
-    public abstract Atom newI(TeXParser tp);
+	public abstract Atom newI(TeXParser tp);
 
-    public Object clone() {
-        // No need to clone it since with a 0 args command we can't have \foo{\foo...
-        return this;
-    }
+	@Override
+	public Object clone() {
+		// No need to clone it since with a 0 args command we can't have
+		// \foo{\foo...
+		return this;
+	}
 }

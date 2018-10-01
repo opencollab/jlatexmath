@@ -55,165 +55,173 @@ import java.util.List;
  */
 public class SymbolAtom extends CharSymbol {
 
-    private final CharFont cf;
-    private char unicode;
+	private final CharFont cf;
+	private char unicode;
 
-    /**
-     * Constructs a new symbol.
-     *
-     * @param name symbol name
-     * @param type symbol type constant
-     */
-    public SymbolAtom(final CharFont cf, final int type) {
-        this.cf = cf;
-        this.type = type;
-        if (type == TeXConstants.TYPE_BIG_OPERATOR) {
-            this.type_limits = TeXConstants.SCRIPT_NORMAL;
-        }
-    }
+	/**
+	 * Constructs a new symbol.
+	 *
+	 * @param name
+	 *            symbol name
+	 * @param type
+	 *            symbol type constant
+	 */
+	public SymbolAtom(final CharFont cf, final int type) {
+		this.cf = cf;
+		this.type = type;
+		if (type == TeXConstants.TYPE_BIG_OPERATOR) {
+			this.type_limits = TeXConstants.SCRIPT_NORMAL;
+		}
+	}
 
-    public SymbolAtom(final char c, final FontInfo font, final int type) {
-        this(new CharFont(c, font), type);
-    }
+	public SymbolAtom(final char c, final FontInfo font, final int type) {
+		this(new CharFont(c, font), type);
+	}
 
-    public SymbolAtom(final SymbolAtom s, final int type) {
-        this(s.cf, type);
-    }
+	public SymbolAtom(final SymbolAtom s, final int type) {
+		this(s.cf, type);
+	}
 
-    public SymbolAtom(final String name, final int type) {
-        this(SymbolAtom.get(name), type);
-    }
+	public SymbolAtom(final String name, final int type) {
+		this(SymbolAtom.get(name), type);
+	}
 
-    public SymbolAtom setUnicode(final char c) {
-        this.unicode = c;
-        return this;
-    }
+	public SymbolAtom setUnicode(final char c) {
+		this.unicode = c;
+		return this;
+	}
 
-    /**
-     * Looks up the name in the table and returns the corresponding SymbolAtom representing
-     * the symbol (if it's found).
-     *
-     * @param name the name of the symbol
-     * @return a SymbolAtom representing the found symbol
-     * @throws SymbolNotFoundException if no symbol with the given name was found
-     */
-    public static SymbolAtom get(final String name, final boolean mathMode) {
-        SymbolAtom sa = Configuration.getSym(name);
-        if (!mathMode && sa != null) {
-            sa = (SymbolAtom)sa.clone();
-            sa.mathMode = false;
-            sa.type = TeXConstants.TYPE_ORDINARY;
-        }
-        return sa;
-    }
+	/**
+	 * Looks up the name in the table and returns the corresponding SymbolAtom
+	 * representing the symbol (if it's found).
+	 *
+	 * @param name
+	 *            the name of the symbol
+	 * @return a SymbolAtom representing the found symbol
+	 * @throws SymbolNotFoundException
+	 *             if no symbol with the given name was found
+	 */
+	public static SymbolAtom get(final String name, final boolean mathMode) {
+		SymbolAtom sa = Configuration.getSym(name);
+		if (!mathMode && sa != null) {
+			sa = (SymbolAtom) sa.clone();
+			sa.mathMode = false;
+			sa.type = TeXConstants.TYPE_ORDINARY;
+		}
+		return sa;
+	}
 
-    public static boolean put(final TeXParser tp, final String name) {
-        SymbolAtom sa = Configuration.getSym(name);
-        if (sa == null) {
-            return false;
-        }
-        if (!tp.isMathMode()) {
-            sa = (SymbolAtom)sa.clone();
-            sa.mathMode = false;
-            sa.type = TeXConstants.TYPE_ORDINARY;
-        }
-        tp.addToConsumer(sa);
-        tp.cancelPrevPos();
+	public static boolean put(final TeXParser tp, final String name) {
+		SymbolAtom sa = Configuration.getSym(name);
+		if (sa == null) {
+			return false;
+		}
+		if (!tp.isMathMode()) {
+			sa = (SymbolAtom) sa.clone();
+			sa.mathMode = false;
+			sa.type = TeXConstants.TYPE_ORDINARY;
+		}
+		tp.addToConsumer(sa);
+		tp.cancelPrevPos();
 
-        return true;
-    }
+		return true;
+	}
 
-    public static SymbolAtom get(final String name) {
-        return SymbolAtom.get(name, true);
-    }
+	public static SymbolAtom get(final String name) {
+		return SymbolAtom.get(name, true);
+	}
 
-    public CharFont getCf() {
-        return cf;
-    }
+	public CharFont getCf() {
+		return cf;
+	}
 
-    public Char getChar(TeXEnvironment env) {
-        final TeXFont tf = env.getTeXFont();
-        final int style = env.getStyle();
-        Char c = tf.getChar(getCf(), style);
-        if (getType() == TeXConstants.TYPE_BIG_OPERATOR
-                && style < TeXConstants.STYLE_TEXT
-                && tf.hasNextLarger(c)) {
-            c = tf.getNextLarger(c, style);
-        }
-        return c;
+	@Override
+	public Char getChar(TeXEnvironment env) {
+		final TeXFont tf = env.getTeXFont();
+		final int style = env.getStyle();
+		Char c = tf.getChar(getCf(), style);
+		if (getType() == TeXConstants.TYPE_BIG_OPERATOR && style < TeXConstants.STYLE_TEXT && tf.hasNextLarger(c)) {
+			c = tf.getNextLarger(c, style);
+		}
+		return c;
 
-        //return env.getTeXFont().getChar(getCf(), env.getStyle());
-    }
+		// return env.getTeXFont().getChar(getCf(), env.getStyle());
+	}
 
-    public Box getNextLarger(TeXEnvironment env, final double width) {
-        final TeXFont tf = env.getTeXFont();
-        final int style = env.getStyle();
-        Char ch = tf.getChar(getCf(), style);
-        while (tf.hasNextLarger(ch)) {
-            final Char larger = tf.getNextLarger(ch, style);
-            if (larger.getWidth() <= width) {
-                ch = larger;
-            } else {
-                break;
-            }
-        }
-        Box b = new CharBox(ch);
-        if (isMathMode() && mustAddItalicCorrection()) {
-            b.addToWidth(ch.getItalic());
-        }
-        return b;
-    }
+	public Box getNextLarger(TeXEnvironment env, final double width) {
+		final TeXFont tf = env.getTeXFont();
+		final int style = env.getStyle();
+		Char ch = tf.getChar(getCf(), style);
+		while (tf.hasNextLarger(ch)) {
+			final Char larger = tf.getNextLarger(ch, style);
+			if (larger.getWidth() <= width) {
+				ch = larger;
+			} else {
+				break;
+			}
+		}
+		Box b = new CharBox(ch);
+		if (isMathMode() && mustAddItalicCorrection()) {
+			b.addToWidth(ch.getItalic());
+		}
+		return b;
+	}
 
-    public Box createBox(TeXEnvironment env) {
-        TeXFont tf = env.getTeXFont();
-        int style = env.getStyle();
-        Char c = getChar(env);
-        Box cb = new CharBox(c);
+	@Override
+	public Box createBox(TeXEnvironment env) {
+		TeXFont tf = env.getTeXFont();
+		int style = env.getStyle();
+		Char c = getChar(env);
+		Box cb = new CharBox(c);
 
-        if (getType() == TeXConstants.TYPE_BIG_OPERATOR) {
-            final double total = cb.getHeight() + cb.getDepth();
-            cb.setShift(-total / 2. - tf.getAxisHeight(style));
-            cb = new HorizontalBox(cb);
-        }
+		if (getType() == TeXConstants.TYPE_BIG_OPERATOR) {
+			final double total = cb.getHeight() + cb.getDepth();
+			cb.setShift(-total / 2. - tf.getAxisHeight(style));
+			cb = new HorizontalBox(cb);
+		}
 
-        if (isMathMode() && mustAddItalicCorrection()) {
-            cb.addToWidth(c.getItalic());
-        }
+		if (isMathMode() && mustAddItalicCorrection()) {
+			cb.addToWidth(c.getItalic());
+		}
 
-        return cb;
-    }
+		return cb;
+	}
 
-    public CharFont getCharFont(TeXFont tf) {
-        // style doesn't matter here
-        return tf.getChar(cf, TeXConstants.STYLE_DISPLAY).getCharFont();
-    }
+	@Override
+	public CharFont getCharFont(TeXFont tf) {
+		// style doesn't matter here
+		return tf.getChar(cf, TeXConstants.STYLE_DISPLAY).getCharFont();
+	}
 
-    public SymbolAtom toTextMode() {
-        final Atom a = this.clone();
-        a.mathMode = false;
-        a.type = TeXConstants.TYPE_ORDINARY;
-        return (SymbolAtom)a;
-    }
+	public SymbolAtom toTextMode() {
+		final Atom a = this.clone();
+		a.mathMode = false;
+		a.type = TeXConstants.TYPE_ORDINARY;
+		return (SymbolAtom) a;
+	}
 
-    public Atom changeLimits(final int lim) {
-        final Atom a = this.clone();
-        a.type_limits = lim;
-        return a;
-    }
+	@Override
+	public Atom changeLimits(final int lim) {
+		final Atom a = this.clone();
+		a.type_limits = lim;
+		return a;
+	}
 
-    public Atom changeType(final int type) {
-        final Atom a = this.clone();
-        a.type = type;
-        return a;
-    }
+	@Override
+	public Atom changeType(final int type) {
+		final Atom a = this.clone();
+		a.type = type;
+		return a;
+	}
 
-    public String toString() {
-        return "Symbol: " + cf.toString();
-    }
+	@Override
+	public String toString() {
+		return "Symbol: " + cf.toString();
+	}
 
-    public static void getAll(final List<String> l) {
-        for (final String k : Configuration.getAllSym().keySet()) {
-            l.add(k);
-        }
-    }
+	public static void getAll(final List<String> l) {
+		for (final String k : Configuration.getAllSym().keySet()) {
+			l.add(k);
+		}
+	}
 }

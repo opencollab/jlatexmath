@@ -53,7 +53,7 @@ package org.scilab.forge.jlatexmath;
  */
 public class InvalidTeXFormulaException extends JMathTeXException {
 
-    protected InvalidTeXFormulaException(String msg) {
-        super(msg);
-    }
+	protected InvalidTeXFormulaException(String msg) {
+		super(msg);
+	}
 }

@@ -53,74 +53,78 @@ import java.awt.Shape;
 import java.awt.font.FontRenderContext;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Area;
-import java.awt.geom.Rectangle2D;
 
 /**
  * A box representing a single character.
  */
 public class CharBox extends Box {
 
-    private static final FontRenderContext FRC = new FontRenderContext(new AffineTransform(),
-            RenderingHints.VALUE_TEXT_ANTIALIAS_ON,
-            RenderingHints.VALUE_FRACTIONALMETRICS_DEFAULT);
+	private static final FontRenderContext FRC = new FontRenderContext(new AffineTransform(),
+			RenderingHints.VALUE_TEXT_ANTIALIAS_ON, RenderingHints.VALUE_FRACTIONALMETRICS_DEFAULT);
 
-    protected CharFont cf;
-    protected double size;
+	protected CharFont cf;
+	protected double size;
 
-    protected CharBox() { }
+	protected CharBox() {
+	}
 
-    /**
-     * Create a new CharBox that will represent the character defined by the given
-     * Char-object.
-     *
-     * @param c a Char-object containing the character's font information.
-     */
-    public CharBox(Char c) {
-        cf = c.getCharFont();
-        size = c.getMetrics().getSize();
-        width = c.getWidth();
-        height = c.getHeight();
-        depth = c.getDepth();
-    }
+	/**
+	 * Create a new CharBox that will represent the character defined by the
+	 * given Char-object.
+	 *
+	 * @param c
+	 *            a Char-object containing the character's font information.
+	 */
+	public CharBox(Char c) {
+		cf = c.getCharFont();
+		size = c.getMetrics().getSize();
+		width = c.getWidth();
+		height = c.getHeight();
+		depth = c.getDepth();
+	}
 
-    public void addToWidth(final double x) {
-        width += x;
-    }
+	@Override
+	public void addToWidth(final double x) {
+		width += x;
+	}
 
-    public void draw(Graphics2D g2, double x, double y) {
-        startDraw(g2, x, y);
-        final AffineTransform oldT = g2.getTransform();
-        g2.translate(x, y);
-        final Font font = cf.getFont().getFont();
+	@Override
+	public void draw(Graphics2D g2, double x, double y) {
+		startDraw(g2, x, y);
+		final AffineTransform oldT = g2.getTransform();
+		g2.translate(x, y);
+		final Font font = cf.getFont().getFont();
 
-        if (Math.abs(size - TeXFormula.FONT_SCALE_FACTOR) > TeXFormula.PREC) {
-            g2.scale(size / TeXFormula.FONT_SCALE_FACTOR,
-                     size / TeXFormula.FONT_SCALE_FACTOR);
-        }
+		if (Math.abs(size - TeXFormula.FONT_SCALE_FACTOR) > TeXFormula.PREC) {
+			g2.scale(size / TeXFormula.FONT_SCALE_FACTOR, size / TeXFormula.FONT_SCALE_FACTOR);
+		}
 
-        if (g2.getFont() != font) {
-            g2.setFont(font);
-        }
+		if (g2.getFont() != font) {
+			g2.setFont(font);
+		}
 
-        g2.drawString(String.valueOf(cf.c), 0, 0);
-        g2.setTransform(oldT);
-        endDraw(g2);
-    }
+		g2.drawString(String.valueOf(cf.c), 0, 0);
+		g2.setTransform(oldT);
+		endDraw(g2);
+	}
 
-    public Area getArea() {
-        final Font font = cf.getFont().getFont();
-        final Shape s = font.createGlyphVector(FRC, String.valueOf(cf.c)).getGlyphOutline(0);
-        final Area a = new Area(s);
-        final double x = size / TeXFormula.FONT_SCALE_FACTOR;
-        a.transform(AffineTransform.getScaleInstance(x, x));
-        return a;
-    }
+	@Override
+	public Area getArea() {
+		final Font font = cf.getFont().getFont();
+		final Shape s = font.createGlyphVector(FRC, String.valueOf(cf.c)).getGlyphOutline(0);
+		final Area a = new Area(s);
+		final double x = size / TeXFormula.FONT_SCALE_FACTOR;
+		a.transform(AffineTransform.getScaleInstance(x, x));
+		return a;
+	}
 
-    public FontInfo getLastFont() {
-        return cf.getFont();
-    }
+	@Override
+	public FontInfo getLastFont() {
+		return cf.getFont();
+	}
 
-    public String toString() {
-        return super.toString() + "; char=" + cf.c;
-    }
+	@Override
+	public String toString() {
+		return super.toString() + "; char=" + cf.c;
+	}
 }

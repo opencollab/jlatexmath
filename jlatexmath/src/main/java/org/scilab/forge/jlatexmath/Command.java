@@ -47,53 +47,65 @@ package org.scilab.forge.jlatexmath;
 
 public abstract class Command implements AtomConsumer, Cloneable {
 
-    public boolean init(TeXParser tp) {
-        return true;
-    }
+	@Override
+	public boolean init(TeXParser tp) {
+		return true;
+	}
 
-    public void add(TeXParser tp, Atom a) {
-    }
+	@Override
+	public void add(TeXParser tp, Atom a) {
+	}
 
-    public Object clone() {
-        try {
-            return super.clone();
-        } catch(CloneNotSupportedException cnse) {
-            cnse.printStackTrace(System.err);
-        }
-        return null;
-    }
+	@Override
+	public Object clone() {
+		try {
+			return super.clone();
+		} catch (CloneNotSupportedException cnse) {
+			cnse.printStackTrace(System.err);
+		}
+		return null;
+	}
 
-    public Atom getLastAtom() {
-        return null;
-    }
+	@Override
+	public Atom getLastAtom() {
+		return null;
+	}
 
-    public boolean close(TeXParser tp) {
-        return false;
-    }
+	@Override
+	public boolean close(TeXParser tp) {
+		return false;
+	}
 
-    public boolean isClosable() {
-        return false;
-    }
+	@Override
+	public boolean isClosable() {
+		return false;
+	}
 
-    public RowAtom steal(TeXParser tp) {
-        return null;
-    }
+	@Override
+	public RowAtom steal(TeXParser tp) {
+		return null;
+	}
 
-    public boolean isArray() {
-        return false;
-    }
+	@Override
+	public boolean isArray() {
+		return false;
+	}
 
-    public boolean isAmpersandAllowed() {
-        return false;
-    }
+	@Override
+	public boolean isAmpersandAllowed() {
+		return false;
+	}
 
-    public boolean isHandlingArg() {
-        return false;
-    }
+	@Override
+	public boolean isHandlingArg() {
+		return false;
+	}
 
-    public void lbrace(TeXParser tp) {
-    }
+	@Override
+	public void lbrace(TeXParser tp) {
+	}
 
-    public void rbrace(TeXParser tp) {
-    }
+	@Override
+	public void rbrace(TeXParser tp) {
+	}
 }

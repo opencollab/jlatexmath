@@ -48,113 +48,118 @@ package org.scilab.forge.jlatexmath;
 
 /**
  * Used by RowAtom. The "textSymbol"-property and the type of an atom can change
- * (according to the TeX-algorithms used). Or this atom can be replaced by a ligature,
- * (if it was a CharAtom). But atoms cannot be changed, otherwise
- * different boxes could be made from the same TeXFormula, and that is not desired!
- * This "dummy atom" makes sure that changes to an atom (during the createBox-method of
- * a RowAtom) will be reset.
+ * (according to the TeX-algorithms used). Or this atom can be replaced by a
+ * ligature, (if it was a CharAtom). But atoms cannot be changed, otherwise
+ * different boxes could be made from the same TeXFormula, and that is not
+ * desired! This "dummy atom" makes sure that changes to an atom (during the
+ * createBox-method of a RowAtom) will be reset.
  */
 public class Dummy {
 
-    private Atom el;
-    private boolean textSymbol = false;
-    private int type = -1;
+	private Atom el;
+	private boolean textSymbol = false;
+	private int type = -1;
 
-    /**
-     * Creates a new Dummy for the given atom.
-     *
-     * @param a an atom
-     */
-    public Dummy(Atom a) {
-        el = a;
-    }
+	/**
+	 * Creates a new Dummy for the given atom.
+	 *
+	 * @param a
+	 *            an atom
+	 */
+	public Dummy(Atom a) {
+		el = a;
+	}
 
-    /**
-     * Changes the type of the atom
-     *
-     * @param t the new type
-     */
-    public void setType(int t) {
-        type = t;
-    }
+	/**
+	 * Changes the type of the atom
+	 *
+	 * @param t
+	 *            the new type
+	 */
+	public void setType(int t) {
+		type = t;
+	}
 
-    /**
-     * Changes the type of the atom
-     *
-     * @param t the new type
-     */
-    public int getType() {
-        return type;
-    }
+	/**
+	 * Changes the type of the atom
+	 *
+	 * @param t
+	 *            the new type
+	 */
+	public int getType() {
+		return type;
+	}
 
-    /**
-     *
-     * @return the changed type, or the old left type if it hasn't been changed
-     */
-    public int getLeftType() {
-        return (type >= 0 ? type : el.getLeftType());
-    }
+	/**
+	 *
+	 * @return the changed type, or the old left type if it hasn't been changed
+	 */
+	public int getLeftType() {
+		return (type >= 0 ? type : el.getLeftType());
+	}
 
-    /**
-     *
-     * @return the changed type, or the old right type if it hasn't been changed
-     */
-    public int getRightType() {
-        return (type >= 0 ? type : el.getRightType());
-    }
+	/**
+	 *
+	 * @return the changed type, or the old right type if it hasn't been changed
+	 */
+	public int getRightType() {
+		return (type >= 0 ? type : el.getRightType());
+	}
 
-    public boolean isCharSymbol() {
-        return el instanceof CharSymbol;
-    }
+	public boolean isCharSymbol() {
+		return el instanceof CharSymbol;
+	}
 
-    public boolean isCharInMathMode() {
-        return el instanceof CharAtom && ((CharAtom) el).isMathMode();
-    }
+	public boolean isCharInMathMode() {
+		return el instanceof CharAtom && ((CharAtom) el).isMathMode();
+	}
 
-    /**
-     * This method will only be called if isCharSymbol returns true.
-     */
-    public CharFont getCharFont(TeXFont tf) {
-        return ((CharSymbol) el).getCharFont(tf);
-    }
+	/**
+	 * This method will only be called if isCharSymbol returns true.
+	 */
+	public CharFont getCharFont(TeXFont tf) {
+		return ((CharSymbol) el).getCharFont(tf);
+	}
 
-    /**
-     * Changes this atom into the given "ligature atom".
-     *
-     * @param a the ligature atom
-     */
-    public void changeAtom(FixedCharAtom a) {
-        textSymbol = false;
-        type = -1;
-        el = a;
-    }
+	/**
+	 * Changes this atom into the given "ligature atom".
+	 *
+	 * @param a
+	 *            the ligature atom
+	 */
+	public void changeAtom(FixedCharAtom a) {
+		textSymbol = false;
+		type = -1;
+		el = a;
+	}
 
-    public Box createBox(TeXEnvironment rs) {
-        if (textSymbol) {
-            ((CharSymbol) el).markAsTextSymbol();
-        }
-        Box b = el.createBox(rs);
-        if (textSymbol) {
-            ((CharSymbol) el).removeMark(); // atom remains unchanged!
-        }
-        return b;
-    }
+	public Box createBox(TeXEnvironment rs) {
+		if (textSymbol) {
+			((CharSymbol) el).markAsTextSymbol();
+		}
+		Box b = el.createBox(rs);
+		if (textSymbol) {
+			((CharSymbol) el).removeMark(); // atom remains unchanged!
+		}
+		return b;
+	}
 
-    public void markAsTextSymbol() {
-        textSymbol = true;
-    }
+	public void markAsTextSymbol() {
+		textSymbol = true;
+	}
 
-    public boolean isKern() {
-        return el instanceof SpaceAtom;
-    }
+	public boolean isKern() {
+		return el instanceof SpaceAtom;
+	}
 
-    // only for Row-elements
-    public void setPreviousAtom(Dummy prev) {
-        if (el instanceof Row)
-            ((Row) el).setPreviousAtom(prev);
-    }
+	// only for Row-elements
+	public void setPreviousAtom(Dummy prev) {
+		if (el instanceof Row)
+			((Row) el).setPreviousAtom(prev);
+	}
 
-    public String toString() {
-        return "Dummy: " + el.toString();
-    }
+	@Override
+	public String toString() {
+		return "Dummy: " + el.toString();
+	}
 }

@@ -50,7 +50,7 @@ package org.scilab.forge.jlatexmath;
  */
 public class AlphabetRegistrationException extends Exception {
 
-    protected AlphabetRegistrationException(String str) {
-        super(str);
-    }
+	protected AlphabetRegistrationException(String str) {
+		super(str);
+	}
 }

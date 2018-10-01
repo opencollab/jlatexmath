@@ -47,28 +47,29 @@ package org.scilab.forge.jlatexmath;
 
 public class PodAtom extends Atom {
 
-    private final Atom a;
-    private final double x;
-    private final boolean lrpar;
+	private final Atom a;
+	private final double x;
+	private final boolean lrpar;
 
-    public PodAtom(final Atom a, final double x, final boolean lrpar) {
-        this.a = a;
-        this.x = x;
-        this.lrpar = lrpar;
-    }
+	public PodAtom(final Atom a, final double x, final boolean lrpar) {
+		this.a = a;
+		this.x = x;
+		this.lrpar = lrpar;
+	}
 
-    public Box createBox(TeXEnvironment env) {
-        final HorizontalBox hb = new HorizontalBox(lrpar ? 4 : 2);
-        final double l = env.getStyle() == TeXConstants.STYLE_DISPLAY ? 18. : x;
-        hb.add(new StrutBox(TeXLength.getFactor(TeXLength.Unit.MU, env) * l, 0., 0., 0.));
-        if (lrpar) {
-            hb.add(Symbols.LBRACK.createBox(env));
-            hb.add(a.createBox(env));
-            hb.add(Symbols.RBRACK.createBox(env));
-        } else {
-            hb.add(a.createBox(env));
-        }
+	@Override
+	public Box createBox(TeXEnvironment env) {
+		final HorizontalBox hb = new HorizontalBox(lrpar ? 4 : 2);
+		final double l = env.getStyle() == TeXConstants.STYLE_DISPLAY ? 18. : x;
+		hb.add(new StrutBox(TeXLength.getFactor(TeXLength.Unit.MU, env) * l, 0., 0., 0.));
+		if (lrpar) {
+			hb.add(Symbols.LBRACK.createBox(env));
+			hb.add(a.createBox(env));
+			hb.add(Symbols.RBRACK.createBox(env));
+		} else {
+			hb.add(a.createBox(env));
+		}
 
-        return hb;
-    }
+		return hb;
+	}
 }

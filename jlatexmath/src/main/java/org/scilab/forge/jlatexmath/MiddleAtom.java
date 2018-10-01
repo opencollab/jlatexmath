@@ -46,26 +46,29 @@
 package org.scilab.forge.jlatexmath;
 
 /**
- * An atom representing a middle atom which must be rounded by a left and right delimiter.
+ * An atom representing a middle atom which must be rounded by a left and right
+ * delimiter.
  */
 public class MiddleAtom extends Atom {
 
-    private Atom base;
-    private Box box = StrutBox.getEmpty();
+	private Atom base;
+	private Box box = StrutBox.getEmpty();
 
-    public MiddleAtom(Atom at) {
-        base = at;
-    }
+	public MiddleAtom(Atom at) {
+		base = at;
+	}
 
-    public Atom getBase() {
-        return base;
-    }
+	@Override
+	public Atom getBase() {
+		return base;
+	}
 
-    public void setBox(final Box box) {
-        this.box = box;
-    }
+	public void setBox(final Box box) {
+		this.box = box;
+	}
 
-    public Box createBox(TeXEnvironment env) {
-        return box;
-    }
+	@Override
+	public Box createBox(TeXEnvironment env) {
+		return box;
+	}
 }

@@ -49,87 +49,94 @@ import java.util.ArrayList;
 
 public class CommandLMR {
 
-    public static class CommandLeft extends Command {
+	public static class CommandLeft extends Command {
 
-        Atom left;
-        ArrayList<MiddleAtom> middles;
-        RowAtom base;
+		Atom left;
+		ArrayList<MiddleAtom> middles;
+		RowAtom base;
 
-        public void add(TeXParser tp, Atom a) {
-            if (left == null) {
-                left = a;
-                base = new RowAtom();
-            } else {
-                base.add(a);
-                if (a instanceof MiddleAtom) {
-                    if (middles == null) {
-                        middles = new ArrayList<>();
-                    }
-                    middles.add((MiddleAtom)a);
-                }
-            }
-        }
+		@Override
+		public void add(TeXParser tp, Atom a) {
+			if (left == null) {
+				left = a;
+				base = new RowAtom();
+			} else {
+				base.add(a);
+				if (a instanceof MiddleAtom) {
+					if (middles == null) {
+						middles = new ArrayList<>();
+					}
+					middles.add((MiddleAtom) a);
+				}
+			}
+		}
 
-        public RowAtom steal(TeXParser tp) {
-            final RowAtom ra = base;
-            base = new RowAtom();
-            return ra;
-        }
+		@Override
+		public RowAtom steal(TeXParser tp) {
+			final RowAtom ra = base;
+			base = new RowAtom();
+			return ra;
+		}
 
-        public Atom getLastAtom() {
-            return base.getLastAtom();
-        }
+		@Override
+		public Atom getLastAtom() {
+			return base.getLastAtom();
+		}
 
-        void close(TeXParser tp, Atom right) {
-            if (left instanceof BigDelimiterAtom) {
-                left = ((BigDelimiterAtom)left).delim;
-            }
-            if (right instanceof BigDelimiterAtom) {
-                right = ((BigDelimiterAtom)right).delim;
-            }
+		void close(TeXParser tp, Atom right) {
+			if (left instanceof BigDelimiterAtom) {
+				left = ((BigDelimiterAtom) left).delim;
+			}
+			if (right instanceof BigDelimiterAtom) {
+				right = ((BigDelimiterAtom) right).delim;
+			}
 
-            Atom a;
-            if ((left instanceof SymbolAtom) && (right instanceof SymbolAtom)) {
-                a = new FencedAtom(base.simplify(), (SymbolAtom)left, middles, (SymbolAtom)right);
-            } else {
-                a = new RowAtom(left, base.simplify(), right);
-            }
+			Atom a;
+			if ((left instanceof SymbolAtom) && (right instanceof SymbolAtom)) {
+				a = new FencedAtom(base.simplify(), (SymbolAtom) left, middles, (SymbolAtom) right);
+			} else {
+				a = new RowAtom(left, base.simplify(), right);
+			}
 
-            tp.closeConsumer(a);
-        }
-    }
+			tp.closeConsumer(a);
+		}
+	}
 
-    public static class CommandMiddle extends Command {
+	public static class CommandMiddle extends Command {
 
-        public boolean init(TeXParser tp) {
-            tp.close();
-            return true;
-        }
+		@Override
+		public boolean init(TeXParser tp) {
+			tp.close();
+			return true;
+		}
 
-        public void add(TeXParser tp, Atom middle) {
-            tp.pop(); // remove this from the stack
-            final AtomConsumer ac = tp.peek();
-            if (!(ac instanceof CommandLeft)) {
-                throw new ParseException(tp, "\\middle doesn't match \\left");
-            }
-            ac.add(tp, new MiddleAtom(middle));
-        }
-    }
+		@Override
+		public void add(TeXParser tp, Atom middle) {
+			tp.pop(); // remove this from the stack
+			final AtomConsumer ac = tp.peek();
+			if (!(ac instanceof CommandLeft)) {
+				throw new ParseException(tp, "\\middle doesn't match \\left");
+			}
+			ac.add(tp, new MiddleAtom(middle));
+		}
+	}
 
-    public static class CommandRight extends Command {
+	public static class CommandRight extends Command {
 
-        public boolean init(TeXParser tp) {
-            tp.close();
-            return true;
-        }
+		@Override
+		public boolean init(TeXParser tp) {
+			tp.close();
+			return true;
+		}
 
-        public void add(TeXParser tp, Atom close) {
-            tp.pop(); // remove this from the stack
-            final AtomConsumer ac = tp.peek();
-            if (!(ac instanceof CommandLeft)) {
-                throw new ParseException(tp, "\\right doesn't match \\left");
-            }
-            ((CommandLeft)ac).close(tp, close);
-        }
-    }
+		@Override
+		public void add(TeXParser tp, Atom close) {
+			tp.pop(); // remove this from the stack
+			final AtomConsumer ac = tp.peek();
+			if (!(ac instanceof CommandLeft)) {
+				throw new ParseException(tp, "\\right doesn't match \\left");
+			}
+			((CommandLeft) ac).close(tp, close);
+		}
+	}
 }

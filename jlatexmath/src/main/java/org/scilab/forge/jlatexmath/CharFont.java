@@ -47,27 +47,29 @@
 package org.scilab.forge.jlatexmath;
 
 /**
- * Represents a specific character in a specific font (identified by its font ID).
+ * Represents a specific character in a specific font (identified by its font
+ * ID).
  */
 public class CharFont {
 
-    public final char c;
-    public final FontInfo font;
+	public final char c;
+	public final FontInfo font;
 
-    public CharFont(final char c, final FontInfo font) {
-        this.c = c;
-        this.font = font;
-    }
+	public CharFont(final char c, final FontInfo font) {
+		this.c = c;
+		this.font = font;
+	}
 
-    public char getChar() {
-        return c;
-    }
+	public char getChar() {
+		return c;
+	}
 
-    public FontInfo getFont() {
-        return font;
-    }
+	public FontInfo getFont() {
+		return font;
+	}
 
-    public String toString() {
-        return "CharFont: \'" + c + "\' : " + (int)c + " : " + font;
-    }
+	@Override
+	public String toString() {
+		return "CharFont: \'" + c + "\' : " + (int) c + " : " + font;
+	}
 }

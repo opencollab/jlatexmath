@@ -49,86 +49,88 @@
 package org.scilab.forge.jlatexmath;
 
 /**
- * An atom representing whitespace. The dimension values can be set using different
- * unit types.
+ * An atom representing whitespace. The dimension values can be set using
+ * different unit types.
  */
 public class SpaceAtom extends Atom {
 
-    // whether a hard space should be represented
-    private boolean blankSpace;
+	// whether a hard space should be represented
+	private boolean blankSpace;
 
-    // thinmuskip, medmuskip, thickmuskip
-    private TeXConstants.Muskip blankType = TeXConstants.Muskip.NONE;
+	// thinmuskip, medmuskip, thickmuskip
+	private TeXConstants.Muskip blankType = TeXConstants.Muskip.NONE;
 
-    // dimensions
-    private double width;
-    private double height;
-    private double depth;
+	// dimensions
+	private double width;
+	private double height;
+	private double depth;
 
-    // units for the dimensions
-    private TeXLength.Unit unit;
+	// units for the dimensions
+	private TeXLength.Unit unit;
 
-    public SpaceAtom() {
-        blankSpace = true;
-    }
+	public SpaceAtom() {
+		blankSpace = true;
+	}
 
-    public SpaceAtom(TeXConstants.Muskip type) {
-        blankSpace = true;
-        blankType = type;
-    }
+	public SpaceAtom(TeXConstants.Muskip type) {
+		blankSpace = true;
+		blankType = type;
+	}
 
-    public SpaceAtom(TeXLength.Unit unit, double width, double height, double depth) {
-        this.unit = unit;
-        this.width = width;
-        this.height = height;
-        this.depth = depth;
-    }
+	public SpaceAtom(TeXLength.Unit unit, double width, double height, double depth) {
+		this.unit = unit;
+		this.width = width;
+		this.height = height;
+		this.depth = depth;
+	}
 
-    public SpaceAtom(TeXLength.Unit unit, double width) {
-        this.unit = unit;
-        this.width = width;
-        this.height = 0.;
-        this.depth = 0.;
-    }
+	public SpaceAtom(TeXLength.Unit unit, double width) {
+		this.unit = unit;
+		this.width = width;
+		this.height = 0.;
+		this.depth = 0.;
+	}
 
-    public SpaceAtom(TeXLength l) {
-        this.unit = l.getUnit();
-        this.width = l.getL();
-        this.height = 0.;
-        this.depth = 0.;
-    }
+	public SpaceAtom(TeXLength l) {
+		this.unit = l.getUnit();
+		this.width = l.getL();
+		this.height = 0.;
+		this.depth = 0.;
+	}
 
-    public static boolean isNegative(TeXConstants.Muskip skip) {
-        return skip == TeXConstants.Muskip.NEGTHIN || skip == TeXConstants.Muskip.NEGMED || skip == TeXConstants.Muskip.NEGTHICK;
-    }
+	public static boolean isNegative(TeXConstants.Muskip skip) {
+		return skip == TeXConstants.Muskip.NEGTHIN || skip == TeXConstants.Muskip.NEGMED
+				|| skip == TeXConstants.Muskip.NEGTHICK;
+	}
 
-    public Box createBox(TeXEnvironment env) {
-        if (blankSpace) {
-            if (blankType == TeXConstants.Muskip.NONE) {
-                return new StrutBox(env.getSpace(), 0., 0., 0.);
-            } else {
-                Box b;
-                if (blankType == TeXConstants.Muskip.THIN || blankType == TeXConstants.Muskip.NEGTHIN) {
-                    b = Glue.get(TeXConstants.TYPE_INNER, TeXConstants.TYPE_BIG_OPERATOR, env);
-                } else if (blankType == TeXConstants.Muskip.MED || blankType == TeXConstants.Muskip.NEGMED) {
-                    b = Glue.get(TeXConstants.TYPE_BINARY_OPERATOR, TeXConstants.TYPE_BIG_OPERATOR, env);
-                } else {
-                    b = Glue.get(TeXConstants.TYPE_RELATION, TeXConstants.TYPE_BIG_OPERATOR, env);
-                }
-                if (b == null) {
-                    b = StrutBox.getEmpty();
-                }
-                if (SpaceAtom.isNegative(blankType)) {
-                    b.negWidth();
-                }
-                return b;
-            }
-        } else {
-            return new StrutBox(conv(width, unit, env), conv(height, unit, env), conv(depth, unit, env), 0.);
-        }
-    }
+	@Override
+	public Box createBox(TeXEnvironment env) {
+		if (blankSpace) {
+			if (blankType == TeXConstants.Muskip.NONE) {
+				return new StrutBox(env.getSpace(), 0., 0., 0.);
+			} else {
+				Box b;
+				if (blankType == TeXConstants.Muskip.THIN || blankType == TeXConstants.Muskip.NEGTHIN) {
+					b = Glue.get(TeXConstants.TYPE_INNER, TeXConstants.TYPE_BIG_OPERATOR, env);
+				} else if (blankType == TeXConstants.Muskip.MED || blankType == TeXConstants.Muskip.NEGMED) {
+					b = Glue.get(TeXConstants.TYPE_BINARY_OPERATOR, TeXConstants.TYPE_BIG_OPERATOR, env);
+				} else {
+					b = Glue.get(TeXConstants.TYPE_RELATION, TeXConstants.TYPE_BIG_OPERATOR, env);
+				}
+				if (b == null) {
+					b = StrutBox.getEmpty();
+				}
+				if (SpaceAtom.isNegative(blankType)) {
+					b.negWidth();
+				}
+				return b;
+			}
+		} else {
+			return new StrutBox(conv(width, unit, env), conv(height, unit, env), conv(depth, unit, env), 0.);
+		}
+	}
 
-    private final double conv(final double x, final TeXLength.Unit unit, final TeXEnvironment env) {
-        return x == 0. ? 0. : x * TeXLength.getFactor(unit, env);
-    }
+	private final double conv(final double x, final TeXLength.Unit unit, final TeXEnvironment env) {
+		return x == 0. ? 0. : x * TeXLength.getFactor(unit, env);
+	}
 }

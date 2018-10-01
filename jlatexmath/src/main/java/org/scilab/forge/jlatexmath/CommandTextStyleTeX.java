@@ -47,44 +47,49 @@ package org.scilab.forge.jlatexmath;
 
 public class CommandTextStyleTeX extends Command {
 
-    final int style;
-    ExternalFontManager.FontSSSF f;
-    RowAtom ts;
+	final int style;
+	ExternalFontManager.FontSSSF f;
+	RowAtom ts;
 
-    public CommandTextStyleTeX(final int style) {
-        this.style = style;
-    }
+	public CommandTextStyleTeX(final int style) {
+		this.style = style;
+	}
 
-    public boolean init(TeXParser tp) {
-        f = ExternalFontManager.get().getFont(Character.UnicodeBlock.BASIC_LATIN);
-        if (f != null) {
-            ExternalFontManager.get().put(Character.UnicodeBlock.BASIC_LATIN, null);
-        }
-        ts = new RowAtom();
-        return true;
-    }
+	@Override
+	public boolean init(TeXParser tp) {
+		f = ExternalFontManager.get().getFont(Character.UnicodeBlock.BASIC_LATIN);
+		if (f != null) {
+			ExternalFontManager.get().put(Character.UnicodeBlock.BASIC_LATIN, null);
+		}
+		ts = new RowAtom();
+		return true;
+	}
 
-    public void add(TeXParser tp, Atom a) {
-        ts.add(a);
-    }
+	@Override
+	public void add(TeXParser tp, Atom a) {
+		ts.add(a);
+	}
 
-    public RowAtom steal(TeXParser tp) {
-        final RowAtom ra = ts;
-        ts = new RowAtom();
-        return ra;
-    }
+	@Override
+	public RowAtom steal(TeXParser tp) {
+		final RowAtom ra = ts;
+		ts = new RowAtom();
+		return ra;
+	}
 
-    public Atom getLastAtom() {
-        return ts.getLastAtom();
-    }
+	@Override
+	public Atom getLastAtom() {
+		return ts.getLastAtom();
+	}
 
-    public boolean close(TeXParser tp) {
-        if (f != null) {
-            ExternalFontManager.get().put(Character.UnicodeBlock.BASIC_LATIN, f);
-        }
+	@Override
+	public boolean close(TeXParser tp) {
+		if (f != null) {
+			ExternalFontManager.get().put(Character.UnicodeBlock.BASIC_LATIN, f);
+		}
 
-        tp.closeConsumer(new TextStyleAtom(ts.simplify(), style));
+		tp.closeConsumer(new TextStyleAtom(ts.simplify(), style));
 
-        return true;
-    }
+		return true;
+	}
 }

@@ -53,7 +53,7 @@ package org.scilab.forge.jlatexmath;
  */
 public class SymbolMappingNotFoundException extends JMathTeXException {
 
-    protected SymbolMappingNotFoundException(String symbolName) {
-        super("No mapping found for the symbol '" + symbolName + "'! ");
-    }
+	protected SymbolMappingNotFoundException(String symbolName) {
+		super("No mapping found for the symbol '" + symbolName + "'! ");
+	}
 }

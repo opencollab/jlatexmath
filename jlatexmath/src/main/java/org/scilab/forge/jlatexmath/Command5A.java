@@ -47,24 +47,25 @@ package org.scilab.forge.jlatexmath;
 
 public abstract class Command5A extends Command {
 
-    private Atom atom1;
-    private Atom atom2;
-    private Atom atom3;
-    private Atom atom4;
+	private Atom atom1;
+	private Atom atom2;
+	private Atom atom3;
+	private Atom atom4;
 
-    public void add(TeXParser tp, Atom a) {
-        if (atom1 == null) {
-            atom1 = a;
-        } else if (atom2 == null) {
-            atom2 = a;
-        } else if (atom3 == null) {
-            atom3 = a;
-        } else if (atom4 == null) {
-            atom4 = a;
-        } else {
-            tp.closeConsumer(newI(atom1, atom2, atom3, atom4, a));
-        }
-    }
+	@Override
+	public void add(TeXParser tp, Atom a) {
+		if (atom1 == null) {
+			atom1 = a;
+		} else if (atom2 == null) {
+			atom2 = a;
+		} else if (atom3 == null) {
+			atom3 = a;
+		} else if (atom4 == null) {
+			atom4 = a;
+		} else {
+			tp.closeConsumer(newI(atom1, atom2, atom3, atom4, a));
+		}
+	}
 
-    public abstract Atom newI(Atom a, Atom b, Atom c, Atom d, Atom e);
+	public abstract Atom newI(Atom a, Atom b, Atom c, Atom d, Atom e);
 }

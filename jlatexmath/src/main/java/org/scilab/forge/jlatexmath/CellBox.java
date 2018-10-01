@@ -46,46 +46,45 @@
 package org.scilab.forge.jlatexmath;
 
 import java.awt.Graphics2D;
-import java.awt.Stroke;
-import java.awt.BasicStroke;
-import java.awt.geom.Rectangle2D;
-import java.awt.Color;
 
 /**
  * A box representing a rotated box.
  */
 public class CellBox extends Box {
 
-    private Box box;
-    private double left;
+	private Box box;
+	private double left;
 
-    public CellBox(Box box, double height, double depth, double left, double right, double colW, TeXConstants.Align alignment) {
-        this.width = left + colW + right;
-        this.height = height;
-        this.depth = depth;
-        this.box = box;
-        switch (alignment) {
-        case LEFT:
-            this.left = left;
-            break;
-        case RIGHT:
-            this.left = left + colW - box.width;
-            break;
-        case CENTER:
-            this.left = left + (colW - box.width) / 2.;
-            break;
-        default:
-            this.left = left;
-        }
-    }
+	public CellBox(Box box, double height, double depth, double left, double right, double colW,
+			TeXConstants.Align alignment) {
+		this.width = left + colW + right;
+		this.height = height;
+		this.depth = depth;
+		this.box = box;
+		switch (alignment) {
+		case LEFT:
+			this.left = left;
+			break;
+		case RIGHT:
+			this.left = left + colW - box.width;
+			break;
+		case CENTER:
+			this.left = left + (colW - box.width) / 2.;
+			break;
+		default:
+			this.left = left;
+		}
+	}
 
-    public void draw(Graphics2D g2, double x, double y) {
-        startDraw(g2, x, y);
-        box.draw(g2, x + left, y);
-        endDraw(g2);
-    }
+	@Override
+	public void draw(Graphics2D g2, double x, double y) {
+		startDraw(g2, x, y);
+		box.draw(g2, x + left, y);
+		endDraw(g2);
+	}
 
-    public FontInfo getLastFont() {
-        return box.getLastFont();
-    }
+	@Override
+	public FontInfo getLastFont() {
+		return box.getLastFont();
+	}
 }

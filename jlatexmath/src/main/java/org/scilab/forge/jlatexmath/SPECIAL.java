@@ -47,31 +47,36 @@ package org.scilab.forge.jlatexmath;
 
 final class SPECIAL extends FontInfo {
 
-    SPECIAL(final String ttfPath) {
-        super(0, ttfPath, 0.233333, 0.0, 1.000003, '\u0000');
-    }
+	SPECIAL(final String ttfPath) {
+		super(0, ttfPath, 0.233333, 0.0, 1.000003, '\u0000');
+	}
 
-    protected final void initMetrics() {
-        setInfo('\u0045', // char code: 69
-                new double[] {0.705, 0.700, 0.015, 0.}, // metrics: width, height, depth, italic
-                null, // ligatures
-                null, // kern codes
-                null, // kern values
-                null, '\0', // next larger
-                null); // extension: top, mid, rep, bot
-        setInfo('\u0065', // char code: 101
-                new double[] {0.5, 0.680, 0.013, 0.}, // metrics: width, height, depth, italic
-                null, // ligatures
-                null, // kern codes
-                null, // kern values
-                null, '\0', // next larger
-                null); // extension: top, mid, rep, bot
-        setInfo('\u006D', // char code: 109
-                new double[] {0.5, 0.450, 0.2, 0.}, // metrics: width, height, depth, italic
-                null, // ligatures
-                null, // kern codes
-                null, // kern values
-                null, '\0', // next larger
-                null); // extension: top, mid, rep, bot
-    }
+	@Override
+	protected final void initMetrics() {
+		setInfo('\u0045', // char code: 69
+				new double[] { 0.705, 0.700, 0.015, 0. }, // metrics: width,
+															// height, depth,
+															// italic
+				null, // ligatures
+				null, // kern codes
+				null, // kern values
+				null, '\0', // next larger
+				null); // extension: top, mid, rep, bot
+		setInfo('\u0065', // char code: 101
+				new double[] { 0.5, 0.680, 0.013, 0. }, // metrics: width,
+														// height, depth, italic
+				null, // ligatures
+				null, // kern codes
+				null, // kern values
+				null, '\0', // next larger
+				null); // extension: top, mid, rep, bot
+		setInfo('\u006D', // char code: 109
+				new double[] { 0.5, 0.450, 0.2, 0. }, // metrics: width, height,
+														// depth, italic
+				null, // ligatures
+				null, // kern codes
+				null, // kern values
+				null, '\0', // next larger
+				null); // extension: top, mid, rep, bot
+	}
 }

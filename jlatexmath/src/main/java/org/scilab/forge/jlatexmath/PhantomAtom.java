@@ -51,71 +51,83 @@ package org.scilab.forge.jlatexmath;
  */
 public class PhantomAtom extends Atom {
 
-    private final Atom base;
+	private final Atom base;
 
-    // dimensions to be taken into account
-    private boolean w;
-    private boolean h;
-    private boolean d;
+	// dimensions to be taken into account
+	private boolean w;
+	private boolean h;
+	private boolean d;
 
-    public PhantomAtom(Atom base, boolean width, boolean height, boolean depth) {
-        this.base = base;
-        w = width;
-        h = height;
-        d = depth;
-    }
+	public PhantomAtom(Atom base, boolean width, boolean height, boolean depth) {
+		this.base = base;
+		w = width;
+		h = height;
+		d = depth;
+	}
 
-    public PhantomAtom(Atom base) {
-        this(base, true, true, true);
-    }
+	public PhantomAtom(Atom base) {
+		this(base, true, true, true);
+	}
 
-    public Box createBox(TeXEnvironment env) {
-        final Box res = base.createBox(env);
-        return new StrutBox((w ? res.getWidth() : 0.), (h ? res.getHeight() : 0.),
-                            (d ? res.getDepth() : 0.), res.getShift());
-    }
+	@Override
+	public Box createBox(TeXEnvironment env) {
+		final Box res = base.createBox(env);
+		return new StrutBox((w ? res.getWidth() : 0.), (h ? res.getHeight() : 0.), (d ? res.getDepth() : 0.),
+				res.getShift());
+	}
 
-    public int getLeftType() {
-        return base.getLeftType();
-    }
+	@Override
+	public int getLeftType() {
+		return base.getLeftType();
+	}
 
-    public int getRightType() {
-        return base.getRightType();
-    }
+	@Override
+	public int getRightType() {
+		return base.getRightType();
+	}
 
-    public int getLimits() {
-        return base.getLimits();
-    }
+	@Override
+	public int getLimits() {
+		return base.getLimits();
+	}
 
-    public double getItalic(TeXEnvironment env) {
-        return base.getItalic(env);
-    }
+	@Override
+	public double getItalic(TeXEnvironment env) {
+		return base.getItalic(env);
+	}
 
-    public double getXHeight(TeXEnvironment env) {
-        return base.getXHeight(env);
-    }
+	@Override
+	public double getXHeight(TeXEnvironment env) {
+		return base.getXHeight(env);
+	}
 
-    public boolean isMathMode() {
-        return base.isMathMode();
-    }
+	@Override
+	public boolean isMathMode() {
+		return base.isMathMode();
+	}
 
-    public void setMathMode(final boolean mathMode) {
-        base.setMathMode(mathMode);
-    }
+	@Override
+	public void setMathMode(final boolean mathMode) {
+		base.setMathMode(mathMode);
+	}
 
-    public boolean mustAddItalicCorrection() {
-        return base.mustAddItalicCorrection();
-    }
+	@Override
+	public boolean mustAddItalicCorrection() {
+		return base.mustAddItalicCorrection();
+	}
 
-    public boolean setAddItalicCorrection(boolean b) {
-        return base.setAddItalicCorrection(b);
-    }
+	@Override
+	public boolean setAddItalicCorrection(boolean b) {
+		return base.setAddItalicCorrection(b);
+	}
 
-    public Atom getBase() {
-        return base.getBase();
-    }
+	@Override
+	public Atom getBase() {
+		return base.getBase();
+	}
 
-    public String toString() {
-        return "PhantomAtom: " + base;
-    }
+	@Override
+	public String toString() {
+		return "PhantomAtom: " + base;
+	}
 }

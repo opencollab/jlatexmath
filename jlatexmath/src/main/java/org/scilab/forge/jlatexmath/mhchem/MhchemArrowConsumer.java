@@ -57,96 +57,106 @@ import org.scilab.forge.jlatexmath.XArrowAtom;
 
 public class MhchemArrowConsumer implements AtomConsumer {
 
-    private final MhchemParser.Arrow arrow;
-    private Atom sup;
-    private Atom sub;
+	private final MhchemParser.Arrow arrow;
+	private Atom sup;
+	private Atom sub;
 
-    public MhchemArrowConsumer(MhchemParser.Arrow arrow) {
-        this.arrow = arrow;
-    }
+	public MhchemArrowConsumer(MhchemParser.Arrow arrow) {
+		this.arrow = arrow;
+	}
 
-    public boolean init(TeXParser tp) {
-        if (tp.hasOptionNoWhites()) {
-            tp.addConsumer(this);
-            tp.addConsumer(new GroupConsumer(TeXConstants.Opener.LSQBRACKET));
-        } else {
-            tp.addToConsumer(get());
-        }
-        return false;
-    }
+	@Override
+	public boolean init(TeXParser tp) {
+		if (tp.hasOptionNoWhites()) {
+			tp.addConsumer(this);
+			tp.addConsumer(new GroupConsumer(TeXConstants.Opener.LSQBRACKET));
+		} else {
+			tp.addToConsumer(get());
+		}
+		return false;
+	}
 
-    public void add(TeXParser tp, Atom a) {
-        if (sup == null) {
-            sup = a;
-            if (tp.hasOptionNoWhites()) {
-                tp.addConsumer(new GroupConsumer(TeXConstants.Opener.LSQBRACKET));
-                return;
-            }
-        } else {
-            sub = a;
-        }
-        tp.closeConsumer(get());
-    }
+	@Override
+	public void add(TeXParser tp, Atom a) {
+		if (sup == null) {
+			sup = a;
+			if (tp.hasOptionNoWhites()) {
+				tp.addConsumer(new GroupConsumer(TeXConstants.Opener.LSQBRACKET));
+				return;
+			}
+		} else {
+			sub = a;
+		}
+		tp.closeConsumer(get());
+	}
 
-    public Atom get() {
-        final Atom top = sup == null ? EmptyAtom.get() : sup;
-        final Atom bot = sub == null ? EmptyAtom.get() : sub;
-        final TeXLength minW = new TeXLength(TeXLength.Unit.EM, 2.);
+	public Atom get() {
+		final Atom top = sup == null ? EmptyAtom.get() : sup;
+		final Atom bot = sub == null ? EmptyAtom.get() : sub;
+		final TeXLength minW = new TeXLength(TeXLength.Unit.EM, 2.);
 
-        switch (arrow) {
-        case left: // <-
-            return new XArrowAtom(top, bot, minW, XArrowAtom.Kind.Left);
-        case right: // ->
-            return new XArrowAtom(top, bot, minW, XArrowAtom.Kind.Right);
-        case leftright: // <->
-            return new XArrowAtom(top, bot, minW, XArrowAtom.Kind.LR);
-        case LeftRight: // <-->
-            return new XArrowAtom(top, bot, minW, XArrowAtom.Kind.RightAndLeft);
-        case leftrightHarpoon: // <=>
-            return new XArrowAtom(top, bot, minW, XArrowAtom.Kind.RightLeftHarpoons);
-        case leftrightSmallHarpoon: // <=>>
-            return new XArrowAtom(top, bot, minW, XArrowAtom.Kind.RightSmallLeftHarpoons);
-        case leftSmallHarpoonRight: // <<=>
-            return new XArrowAtom(top, bot, minW, XArrowAtom.Kind.SmallRightLeftHarpoons);
-        }
+		switch (arrow) {
+		case left: // <-
+			return new XArrowAtom(top, bot, minW, XArrowAtom.Kind.Left);
+		case right: // ->
+			return new XArrowAtom(top, bot, minW, XArrowAtom.Kind.Right);
+		case leftright: // <->
+			return new XArrowAtom(top, bot, minW, XArrowAtom.Kind.LR);
+		case LeftRight: // <-->
+			return new XArrowAtom(top, bot, minW, XArrowAtom.Kind.RightAndLeft);
+		case leftrightHarpoon: // <=>
+			return new XArrowAtom(top, bot, minW, XArrowAtom.Kind.RightLeftHarpoons);
+		case leftrightSmallHarpoon: // <=>>
+			return new XArrowAtom(top, bot, minW, XArrowAtom.Kind.RightSmallLeftHarpoons);
+		case leftSmallHarpoonRight: // <<=>
+			return new XArrowAtom(top, bot, minW, XArrowAtom.Kind.SmallRightLeftHarpoons);
+		}
 
-        return null;
-    }
+		return null;
+	}
 
-    public Atom getLastAtom() {
-        return null;
-    }
+	@Override
+	public Atom getLastAtom() {
+		return null;
+	}
 
-    public boolean close(TeXParser tp) {
-        tp.closeConsumer(get());
-        return true;
-    }
+	@Override
+	public boolean close(TeXParser tp) {
+		tp.closeConsumer(get());
+		return true;
+	}
 
-    public boolean isClosable() {
-        return true;
-    }
+	@Override
+	public boolean isClosable() {
+		return true;
+	}
 
-    public RowAtom steal(TeXParser tp) {
-        close(tp);
-        return tp.steal();
-    }
+	@Override
+	public RowAtom steal(TeXParser tp) {
+		close(tp);
+		return tp.steal();
+	}
 
-    public boolean isArray() {
-        return false;
-    }
+	@Override
+	public boolean isArray() {
+		return false;
+	}
 
-    public boolean isAmpersandAllowed() {
-        return false;
-    }
+	@Override
+	public boolean isAmpersandAllowed() {
+		return false;
+	}
 
-    public boolean isHandlingArg() {
-        return false;
-    }
+	@Override
+	public boolean isHandlingArg() {
+		return false;
+	}
 
-    public void lbrace(TeXParser tp) {
-    }
+	@Override
+	public void lbrace(TeXParser tp) {
+	}
 
-    public void rbrace(TeXParser tp) {
-    }
+	@Override
+	public void rbrace(TeXParser tp) {
+	}
 }
-

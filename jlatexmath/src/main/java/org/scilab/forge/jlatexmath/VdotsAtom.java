@@ -50,22 +50,23 @@ package org.scilab.forge.jlatexmath;
  */
 public class VdotsAtom extends Atom {
 
-    public VdotsAtom() {
-        this.type = TeXConstants.TYPE_RELATION;
-    }
+	public VdotsAtom() {
+		this.type = TeXConstants.TYPE_RELATION;
+	}
 
-    public Box createBox(TeXEnvironment env) {
-        final Box dot = Symbols.LDOTP.createBox(env);
-        final VerticalBox vb = new VerticalBox(dot, 0, TeXConstants.Align.BOTTOM);
-        final Box b = new SpaceAtom(TeXLength.Unit.MU, 0., 4., 0.).createBox(env);
-        vb.add(b);
-        vb.add(dot);
-        vb.add(b);
-        vb.add(dot);
-        final double dh = vb.getDepth() + vb.getHeight();
-        vb.setDepth(0.);
-        vb.setHeight(dh);
+	@Override
+	public Box createBox(TeXEnvironment env) {
+		final Box dot = Symbols.LDOTP.createBox(env);
+		final VerticalBox vb = new VerticalBox(dot, 0, TeXConstants.Align.BOTTOM);
+		final Box b = new SpaceAtom(TeXLength.Unit.MU, 0., 4., 0.).createBox(env);
+		vb.add(b);
+		vb.add(dot);
+		vb.add(b);
+		vb.add(dot);
+		final double dh = vb.getDepth() + vb.getHeight();
+		vb.setDepth(0.);
+		vb.setHeight(dh);
 
-        return vb;
-    }
+		return vb;
+	}
 }

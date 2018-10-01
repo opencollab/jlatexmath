@@ -47,31 +47,33 @@ package org.scilab.forge.jlatexmath;
 
 public class AlignAtAtom extends AlignAtom {
 
-    /**
-     * Creates an empty matrix
-     *
-     */
-    public AlignAtAtom(ArrayOfAtoms array, boolean aligned) {
-        super(array, aligned);
-    }
+	/**
+	 * Creates an empty matrix
+	 *
+	 */
+	public AlignAtAtom(ArrayOfAtoms array, boolean aligned) {
+		super(array, aligned);
+	}
 
-    public double[] getColumnSep(TeXEnvironment env, double width) {
-        final int row = matrix.row;
-        final int col = matrix.col;
-        final double[] seps = new double[col + 1];
-        final double w = aligned ? Double.POSITIVE_INFINITY : TeXLength.getTextwidth(env);
+	@Override
+	public double[] getColumnSep(TeXEnvironment env, double width) {
+		final int row = matrix.row;
+		final int col = matrix.col;
+		final double[] seps = new double[col + 1];
+		final double w = aligned ? Double.POSITIVE_INFINITY : TeXLength.getTextwidth(env);
 
-        //Alignat env. : hsep=(textwidth-matWidth)/2 and hsep elem ... elem hsep
-        final double alignW = align.createBox(env).getWidth();
-        seps[0] = seps[col] = w != Double.POSITIVE_INFINITY ? Math.max((w - width) / 2., 0.) : 0.;
-        for (int i = 1; i < col; ++i) {
-            seps[i] = (i % 2 == 0) ? 0. : alignW;
-        }
+		// Alignat env. : hsep=(textwidth-matWidth)/2 and hsep elem ... elem
+		// hsep
+		final double alignW = align.createBox(env).getWidth();
+		seps[0] = seps[col] = w != Double.POSITIVE_INFINITY ? Math.max((w - width) / 2., 0.) : 0.;
+		for (int i = 1; i < col; ++i) {
+			seps[i] = (i % 2 == 0) ? 0. : alignW;
+		}
 
-        if (w == Double.POSITIVE_INFINITY) {
-            seps[0] = seps[col] = 0.;
-        }
+		if (w == Double.POSITIVE_INFINITY) {
+			seps[0] = seps[col] = 0.;
+		}
 
-        return seps;
-    }
+		return seps;
+	}
 }

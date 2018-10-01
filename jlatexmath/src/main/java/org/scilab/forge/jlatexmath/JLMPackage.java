@@ -50,81 +50,82 @@ import java.util.Map;
 
 public abstract class JLMPackage {
 
-    private static Map<String, PackagedCommand> commands;
-    private static Map<String, JLMPackage> packages;
+	private static Map<String, PackagedCommand> commands;
+	private static Map<String, JLMPackage> packages;
 
-    /**
-     * Init the package
-     */
-    public abstract void init();
+	/**
+	 * Init the package
+	 */
+	public abstract void init();
 
-    /**
-     * @return the package name
-     */
-    public abstract String getName();
+	/**
+	 * @return the package name
+	 */
+	public abstract String getName();
 
-    /**
-     * @return the map between command names and command
-     */
-    public abstract Map<String, Command> getCommands();
+	/**
+	 * @return the map between command names and command
+	 */
+	public abstract Map<String, Command> getCommands();
 
-    public static void addPackage(final JLMPackage pack) {
-        if (packages == null) {
-            packages = new HashMap<String, JLMPackage>();
-        }
-        packages.put(pack.getName(), pack);
-    }
+	public static void addPackage(final JLMPackage pack) {
+		if (packages == null) {
+			packages = new HashMap<String, JLMPackage>();
+		}
+		packages.put(pack.getName(), pack);
+	}
 
-    public static void usePackage(final String name) throws JLMPackageException {
-        if (packages == null) {
-            throw new JLMPackageException("Error when loading package " + name + ": it doesn't exist");
-        }
-        final JLMPackage pack = packages.get(name);
-        if (pack == null) {
-            throw new JLMPackageException("Error when loading package " + name + ": it doesn't exist");
-        }
-        JLMPackage.register(pack);
-    }
+	public static void usePackage(final String name) throws JLMPackageException {
+		if (packages == null) {
+			throw new JLMPackageException("Error when loading package " + name + ": it doesn't exist");
+		}
+		final JLMPackage pack = packages.get(name);
+		if (pack == null) {
+			throw new JLMPackageException("Error when loading package " + name + ": it doesn't exist");
+		}
+		JLMPackage.register(pack);
+	}
 
-    public static void register(final JLMPackage pack) throws JLMPackageException {
-        if (commands == null) {
-            commands = new HashMap<String, PackagedCommand>();
-        }
-        pack.init();
-        final Map<String, Command> map = pack.getCommands();
-        if (map != null) {
-            for (final Map.Entry<String, Command> entry : map.entrySet()) {
-                final String com = entry.getKey();
-                if (commands.containsKey(com)) {
-                    throw new JLMPackageException("Error when loading package " + pack.getName() +": command \\" + com + " already exists in package " + commands.get(com).getPackage().getName());
-                }
-                commands.put(com, new PackagedCommand(entry.getValue(), pack));
-            }
-        }
-    }
+	public static void register(final JLMPackage pack) throws JLMPackageException {
+		if (commands == null) {
+			commands = new HashMap<String, PackagedCommand>();
+		}
+		pack.init();
+		final Map<String, Command> map = pack.getCommands();
+		if (map != null) {
+			for (final Map.Entry<String, Command> entry : map.entrySet()) {
+				final String com = entry.getKey();
+				if (commands.containsKey(com)) {
+					throw new JLMPackageException("Error when loading package " + pack.getName() + ": command \\" + com
+							+ " already exists in package " + commands.get(com).getPackage().getName());
+				}
+				commands.put(com, new PackagedCommand(entry.getValue(), pack));
+			}
+		}
+	}
 
-    public static AtomConsumer get(final String name) {
-        if (commands != null) {
-            final PackagedCommand com = commands.get(name);
-            if (com != null) {
-                return (AtomConsumer)com.clone();
-            }
-        }
-        return null;
-    }
+	public static AtomConsumer get(final String name) {
+		if (commands != null) {
+			final PackagedCommand com = commands.get(name);
+			if (com != null) {
+				return (AtomConsumer) com.clone();
+			}
+		}
+		return null;
+	}
 
-    public static boolean exec(final TeXParser tp, final String name) {
-        if (commands != null) {
-            final PackagedCommand com = commands.get(name);
-            if (com != null) {
-                final AtomConsumer cons = (AtomConsumer)com.clone();
-                if (cons.init(tp)) {
-                    tp.addConsumer(cons);
-                }
-                tp.cancelPrevPos();
-                return true;
-            }
-        }
-        return false;
-    }
+	public static boolean exec(final TeXParser tp, final String name) {
+		if (commands != null) {
+			final PackagedCommand com = commands.get(name);
+			if (com != null) {
+				final AtomConsumer cons = (AtomConsumer) com.clone();
+				if (cons.init(tp)) {
+					tp.addConsumer(cons);
+				}
+				tp.cancelPrevPos();
+				return true;
+			}
+		}
+		return false;
+	}
 }

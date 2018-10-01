@@ -51,126 +51,128 @@ package org.scilab.forge.jlatexmath;
 /**
  * An abstract superclass for all logical mathematical constructions that can be
  * a part of a TeXFormula. All subclasses must implement the abstract
- * {@link #createBox(TeXEnvironment)} method that transforms this logical unit into
- * a concrete box (that can be painted). They also must define their type, used for
- * determining what glue to use between adjacent atoms in a "row construction". That can
- * be one single type by asigning one of the type constants to the {@link #type} field.
- * But they can also be defined as having two types: a "left type" and a "right type".
- * This can be done by implementing the methods {@link #getLeftType()} and
- * {@link #getRightType()}.
- * The left type will then be used for determining the glue between this atom and the
- * previous one (in a row, if any) and the right type for the glue between this atom and
+ * {@link #createBox(TeXEnvironment)} method that transforms this logical unit
+ * into a concrete box (that can be painted). They also must define their type,
+ * used for determining what glue to use between adjacent atoms in a
+ * "row construction". That can be one single type by asigning one of the type
+ * constants to the {@link #type} field. But they can also be defined as having
+ * two types: a "left type" and a "right type". This can be done by implementing
+ * the methods {@link #getLeftType()} and {@link #getRightType()}. The left type
+ * will then be used for determining the glue between this atom and the previous
+ * one (in a row, if any) and the right type for the glue between this atom and
  * the following one (in a row, if any).
  *
  * @author Kurt Vermeulen
  */
 public abstract class Atom implements Cloneable {
 
-    /**
-     * The type of the atom (default value: ordinary atom)
-     */
-    protected int type = TeXConstants.TYPE_ORDINARY;
-    protected boolean mathMode = true;
-    public int type_limits = TeXConstants.SCRIPT_NOLIMITS;
+	/**
+	 * The type of the atom (default value: ordinary atom)
+	 */
+	protected int type = TeXConstants.TYPE_ORDINARY;
+	protected boolean mathMode = true;
+	public int type_limits = TeXConstants.SCRIPT_NOLIMITS;
 
-    public Atom() {
+	public Atom() {
 
-    }
+	}
 
-    protected void setType(final int type) {
-        this.type = type;
-    }
+	protected void setType(final int type) {
+		this.type = type;
+	}
 
-    protected int getType() {
-        return type;
-    }
+	protected int getType() {
+		return type;
+	}
 
-    /**
-     * Convert this atom into a {@link Box}, using properties set by "parent"
-     * atoms, like the TeX style, the last used font, color settings, ...
-     *
-     * @param env the current environment settings
-     * @return the resulting box.
-     */
-    public abstract Box createBox(TeXEnvironment env);
+	/**
+	 * Convert this atom into a {@link Box}, using properties set by "parent"
+	 * atoms, like the TeX style, the last used font, color settings, ...
+	 *
+	 * @param env
+	 *            the current environment settings
+	 * @return the resulting box.
+	 */
+	public abstract Box createBox(TeXEnvironment env);
 
-    /**
-     * Get the type of the leftermost child atom. Most atoms have no child atoms,
-     * so the "left type" and the "right type" are the same: the atom's type. This
-     * also is the default implementation.
-     * But Some atoms are composed of child atoms put one after another in a
-     * horizontal row. These atoms must override this method.
-     *
-     * @return the type of the leftermost child atom
-     */
-    public int getLeftType() {
-        return type;
-    }
+	/**
+	 * Get the type of the leftermost child atom. Most atoms have no child
+	 * atoms, so the "left type" and the "right type" are the same: the atom's
+	 * type. This also is the default implementation. But Some atoms are
+	 * composed of child atoms put one after another in a horizontal row. These
+	 * atoms must override this method.
+	 *
+	 * @return the type of the leftermost child atom
+	 */
+	public int getLeftType() {
+		return type;
+	}
 
-    /**
-     * Get the type of the rightermost child atom. Most atoms have no child atoms,
-     * so the "left type" and the "right type" are the same: the atom's type. This
-     * also is the default igmplementation.
-     * But Some atoms are composed of child atoms put one after another in a
-     * horizontal row. These atoms must override this method.
-     *
-     * @return the type of the rightermost child atom
-     */
-    public int getRightType() {
-        return type;
-    }
+	/**
+	 * Get the type of the rightermost child atom. Most atoms have no child
+	 * atoms, so the "left type" and the "right type" are the same: the atom's
+	 * type. This also is the default igmplementation. But Some atoms are
+	 * composed of child atoms put one after another in a horizontal row. These
+	 * atoms must override this method.
+	 *
+	 * @return the type of the rightermost child atom
+	 */
+	public int getRightType() {
+		return type;
+	}
 
-    public Atom clone() {
-        try {
-            return (Atom)super.clone();
-        } catch (Exception e) {
-            return null;
-        }
-    }
+	@Override
+	public Atom clone() {
+		try {
+			return (Atom) super.clone();
+		} catch (Exception e) {
+			return null;
+		}
+	}
 
-    public int getLimits() {
-        return type_limits;
-    }
+	public int getLimits() {
+		return type_limits;
+	}
 
-    public Atom changeLimits(final int lim) {
-        this.type_limits = lim;
-        return this;
-    }
+	public Atom changeLimits(final int lim) {
+		this.type_limits = lim;
+		return this;
+	}
 
-    public Atom changeType(final int type) {
-        this.type = type;
-        return this;
-    }
+	public Atom changeType(final int type) {
+		this.type = type;
+		return this;
+	}
 
-    public TeXConstants.Align getAlignment() {
-        return TeXConstants.Align.NONE;
-    }
+	public TeXConstants.Align getAlignment() {
+		return TeXConstants.Align.NONE;
+	}
 
-    public double getItalic(TeXEnvironment env) {
-        return 0.;
-    }
+	public double getItalic(TeXEnvironment env) {
+		return 0.;
+	}
 
-    public double getXHeight(TeXEnvironment env) {
-        return env.getTeXFont().getDefaultXHeight(env.getStyle());
-    }
+	public double getXHeight(TeXEnvironment env) {
+		return env.getTeXFont().getDefaultXHeight(env.getStyle());
+	}
 
-    public boolean isMathMode() {
-        return mathMode;
-    }
+	public boolean isMathMode() {
+		return mathMode;
+	}
 
-    public void setMathMode(final boolean mathMode) {
-        this.mathMode = mathMode;
-    }
+	public void setMathMode(final boolean mathMode) {
+		this.mathMode = mathMode;
+	}
 
-    public boolean mustAddItalicCorrection() {
-        return false;
-    }
+	public boolean mustAddItalicCorrection() {
+		return false;
+	}
 
-    public boolean setAddItalicCorrection(boolean b) {
-        return false;
-    }
+	public boolean setAddItalicCorrection(boolean b) {
+		return false;
+	}
 
-    public Atom getBase() {
-        return this;
-    }
+	public Atom getBase() {
+		return this;
+	}
 }

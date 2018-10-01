@@ -49,152 +49,156 @@ import java.awt.Color;
 
 public class EnvArray {
 
-    public static final class ColSep extends EmptyAtom {
-        private static ColSep instance = new ColSep();
+	public static final class ColSep extends EmptyAtom {
+		private static ColSep instance = new ColSep();
 
-        private ColSep() { }
+		private ColSep() {
+		}
 
-        public static ColSep get() {
-            return instance;
-        }
-    }
+		public static ColSep get() {
+			return instance;
+		}
+	}
 
-    public static final class RowSep extends EmptyAtom {
-        private static RowSep instance = new RowSep();
+	public static final class RowSep extends EmptyAtom {
+		private static RowSep instance = new RowSep();
 
-        private RowSep() { }
+		private RowSep() {
+		}
 
-        public static RowSep get() {
-            return instance;
-        }
-    }
+		public static RowSep get() {
+			return instance;
+		}
+	}
 
-    public static final class CellColor extends EmptyAtom {
-        final Color c;
+	public static final class CellColor extends EmptyAtom {
+		final Color c;
 
-        public CellColor(final Color c) {
-            this.c = c;
-        }
+		public CellColor(final Color c) {
+			this.c = c;
+		}
 
-        public Color getColor() {
-            return c;
-        }
-    }
+		public Color getColor() {
+			return c;
+		}
+	}
 
-    public static final class RowColor extends EmptyAtom {
-        final Color c;
+	public static final class RowColor extends EmptyAtom {
+		final Color c;
 
-        public RowColor (final Color c) {
-            this.c = c;
-        }
+		public RowColor(final Color c) {
+			this.c = c;
+		}
 
-        public Color getColor() {
-            return c;
-        }
-    }
+		public Color getColor() {
+			return c;
+		}
+	}
 
-    public static class Begin extends Command {
+	public static class Begin extends Command {
 
-        final String name;
-        final int type;
-        ArrayOptions opt;
-        ArrayOfAtoms aoa;
-        int n;
+		final String name;
+		final int type;
+		ArrayOptions opt;
+		ArrayOfAtoms aoa;
+		int n;
 
-        public Begin(String name, int type) {
-            this.name = name;
-            this.type = type;
-            this.opt = null;
-        }
+		public Begin(String name, int type) {
+			this.name = name;
+			this.type = type;
+			this.opt = null;
+		}
 
-        public Begin(String name, int type, ArrayOptions opt) {
-            this.name = name;
-            this.type = type;
-            this.opt = opt;
-        }
+		public Begin(String name, int type, ArrayOptions opt) {
+			this.name = name;
+			this.type = type;
+			this.opt = opt;
+		}
 
-        public boolean init(TeXParser tp) {
-            if (opt == null) {
-                opt = tp.getArrayOptions();
-            }
-            aoa = new ArrayOfAtoms(type);
-            tp.addConsumer(this);
-            tp.addConsumer(aoa);
-            return false;
-        }
+		@Override
+		public boolean init(TeXParser tp) {
+			if (opt == null) {
+				opt = tp.getArrayOptions();
+			}
+			aoa = new ArrayOfAtoms(type);
+			tp.addConsumer(this);
+			tp.addConsumer(aoa);
+			return false;
+		}
 
-        public final String getName() {
-            return name;
-        }
+		public final String getName() {
+			return name;
+		}
 
-        public ArrayOptions getOptions() {
-            return opt;
-        }
+		public ArrayOptions getOptions() {
+			return opt;
+		}
 
-        public ArrayOfAtoms getAOA() {
-            return aoa;
-        }
-    }
+		public ArrayOfAtoms getAOA() {
+			return aoa;
+		}
+	}
 
-    public static class End extends Command {
+	public static class End extends Command {
 
-        final String name;
-        final String op;
-        final String cl;
+		final String name;
+		final String op;
+		final String cl;
 
-        public End(String name) {
-            this.name = name;
-            this.op = null;
-            this.cl = null;
-        }
+		public End(String name) {
+			this.name = name;
+			this.op = null;
+			this.cl = null;
+		}
 
-        public End(String name, String op, String cl) {
-            this.name = name;
-            this.op = op;
-            this.cl = cl;
-        }
+		public End(String name, String op, String cl) {
+			this.name = name;
+			this.op = op;
+			this.cl = cl;
+		}
 
-        public End(String name, String op) {
-            this.name = name;
-            this.op = op;
-            this.cl = null;
-        }
+		public End(String name, String op) {
+			this.name = name;
+			this.op = op;
+			this.cl = null;
+		}
 
-        public boolean init(TeXParser tp) {
-            tp.close();
-            final AtomConsumer ac = tp.pop();
-            if (ac instanceof ArrayOfAtoms) {
-                final AtomConsumer c = tp.pop();
-                if (c instanceof Begin) {
-                    final Begin beg = (Begin)c;
-                    if (!name.equals(beg.getName())) {
-                        throw new ParseException(tp, "Close a " + beg.getName() + " with a " + name);
-                    }
-                    beg.aoa.checkDimensions();
-                    if (op == null) {
-                        tp.addToConsumer(newI(tp, beg));
-                    } else {
-                        tp.addToConsumer(newFenced(tp, beg));
-                    }
-                } else {
-                    throw new ParseException(tp, "Close something which is not a " + name);
-                }
-            } else {
-                throw new ParseException(tp, "Close something which is not a " + name);
-            }
+		@Override
+		public boolean init(TeXParser tp) {
+			tp.close();
+			final AtomConsumer ac = tp.pop();
+			if (ac instanceof ArrayOfAtoms) {
+				final AtomConsumer c = tp.pop();
+				if (c instanceof Begin) {
+					final Begin beg = (Begin) c;
+					if (!name.equals(beg.getName())) {
+						throw new ParseException(tp, "Close a " + beg.getName() + " with a " + name);
+					}
+					beg.aoa.checkDimensions();
+					if (op == null) {
+						tp.addToConsumer(newI(tp, beg));
+					} else {
+						tp.addToConsumer(newFenced(tp, beg));
+					}
+				} else {
+					throw new ParseException(tp, "Close something which is not a " + name);
+				}
+			} else {
+				throw new ParseException(tp, "Close something which is not a " + name);
+			}
 
-            return false;
-        }
+			return false;
+		}
 
-        public Atom newFenced(TeXParser tp, Begin beg) {
-            final SymbolAtom op = SymbolAtom.get(this.op);
-            final SymbolAtom cl = this.cl == null ? op : SymbolAtom.get(this.cl);
-            final Atom mat = new SMatrixAtom(beg.aoa, false);
-            return new FencedAtom(mat, op, cl);
-        }
+		public Atom newFenced(TeXParser tp, Begin beg) {
+			final SymbolAtom op = SymbolAtom.get(this.op);
+			final SymbolAtom cl = this.cl == null ? op : SymbolAtom.get(this.cl);
+			final Atom mat = new SMatrixAtom(beg.aoa, false);
+			return new FencedAtom(mat, op, cl);
+		}
 
-        public Atom newI(TeXParser tp, Begin beg) {
-            return new ArrayAtom(beg.aoa, beg.opt, true);
-        }
-    }
+		public Atom newI(TeXParser tp, Begin beg) {
+			return new ArrayAtom(beg.aoa, beg.opt, true);
+		}
+	}
 }

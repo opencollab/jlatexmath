@@ -53,32 +53,34 @@ import java.awt.geom.Rectangle2D;
  */
 public class VlineBox extends Box {
 
-    private final int n;
-    private final double th;
+	private final int n;
+	private final double th;
 
-    public VlineBox(final int n, final double th) {
-        this.n = n;
-        this.th = th;
-        this.width = th * (double)(3 * n - 2);
-        this.depth = 0.;
-    }
+	public VlineBox(final int n, final double th) {
+		this.n = n;
+		this.th = th;
+		this.width = th * (3 * n - 2);
+		this.depth = 0.;
+	}
 
-    public Box setHS(final double height, final double shift) {
-        final Box b = new VlineBox(n, th);
-        b.setHeight(height);
-        b.setShift(shift);
-        return b;
-    }
+	public Box setHS(final double height, final double shift) {
+		final Box b = new VlineBox(n, th);
+		b.setHeight(height);
+		b.setShift(shift);
+		return b;
+	}
 
-    public void draw(Graphics2D g2, double x, double y) {
-        double t = 0.;
-        for (int i = 0; i < n; ++i) {
-            g2.fill(new Rectangle2D.Double(x + t, y  - height, th, height));
-            t += 2 * th;
-        }
-    }
+	@Override
+	public void draw(Graphics2D g2, double x, double y) {
+		double t = 0.;
+		for (int i = 0; i < n; ++i) {
+			g2.fill(new Rectangle2D.Double(x + t, y - height, th, height));
+			t += 2 * th;
+		}
+	}
 
-    public FontInfo getLastFont() {
-        return null;
-    }
+	@Override
+	public FontInfo getLastFont() {
+		return null;
+	}
 }

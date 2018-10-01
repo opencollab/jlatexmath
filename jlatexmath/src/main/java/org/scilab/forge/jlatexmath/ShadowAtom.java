@@ -45,19 +45,18 @@
 
 package org.scilab.forge.jlatexmath;
 
-import java.awt.Color;
-
 /**
  * An atom representing a boxed base atom.
  */
 public class ShadowAtom extends FBoxAtom {
 
-    public ShadowAtom(Atom base) {
-        super(base);
-    }
+	public ShadowAtom(Atom base) {
+		super(base);
+	}
 
-    public Box createBox(TeXEnvironment env) {
-        final double shadowsize = TeXLength.getLength("shadowsize", env);
-        return new ShadowBox((FramedBox) super.createBox(env), shadowsize);
-    }
+	@Override
+	public Box createBox(TeXEnvironment env) {
+		final double shadowsize = TeXLength.getLength("shadowsize", env);
+		return new ShadowBox((FramedBox) super.createBox(env), shadowsize);
+	}
 }

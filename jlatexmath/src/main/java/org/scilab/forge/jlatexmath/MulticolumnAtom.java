@@ -50,54 +50,55 @@ package org.scilab.forge.jlatexmath;
  */
 public class MulticolumnAtom extends Atom {
 
-    protected int n;
-    protected ArrayOptions options;
-    protected double w = 0;
-    protected Atom cols;
-    protected int row, col;
+	protected int n;
+	protected ArrayOptions options;
+	protected double w = 0;
+	protected Atom cols;
+	protected int row, col;
 
-    public MulticolumnAtom(int n, ArrayOptions options, Atom cols) {
-        this.n = n >= 1 ? n : 1;
-        this.cols = cols;
-        this.options = options;
-    }
+	public MulticolumnAtom(int n, ArrayOptions options, Atom cols) {
+		this.n = n >= 1 ? n : 1;
+		this.cols = cols;
+		this.options = options;
+	}
 
-    public void setWidth(double w) {
-        this.w = w;
-    }
+	public void setWidth(double w) {
+		this.w = w;
+	}
 
-    public double getWidth() {
-        return w;
-    }
+	public double getWidth() {
+		return w;
+	}
 
-    public int getSkipped() {
-        return n;
-    }
+	public int getSkipped() {
+		return n;
+	}
 
-    public void setRowColumn(int i, int j) {
-        this.row = i;
-        this.col = j;
-    }
+	public void setRowColumn(int i, int j) {
+		this.row = i;
+		this.col = j;
+	}
 
-    public int getRow() {
-        return row;
-    }
+	public int getRow() {
+		return row;
+	}
 
-    public int getCol() {
-        return col;
-    }
+	public int getCol() {
+		return col;
+	}
 
-    public ArrayOptions getOptions() {
-        return options;
-    }
+	public ArrayOptions getOptions() {
+		return options;
+	}
 
-    public boolean mustBeRecreated() {
-        return false;
-    }
+	public boolean mustBeRecreated() {
+		return false;
+	}
 
-    public Box createBox(TeXEnvironment env) {
-        Box b = cols.createBox(env);
-        b.type = TeXConstants.TYPE_MULTICOLUMN;
-        return b;
-    }
+	@Override
+	public Box createBox(TeXEnvironment env) {
+		Box b = cols.createBox(env);
+		b.type = TeXConstants.TYPE_MULTICOLUMN;
+		return b;
+	}
 }

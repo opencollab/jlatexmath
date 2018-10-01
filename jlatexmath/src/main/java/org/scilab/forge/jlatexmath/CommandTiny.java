@@ -47,32 +47,37 @@ package org.scilab.forge.jlatexmath;
 
 public abstract class CommandTiny extends Command {
 
-    private RowAtom tiny;
+	private RowAtom tiny;
 
-    public boolean init(TeXParser tp) {
-        tiny = new RowAtom();
-        return true;
-    }
+	@Override
+	public boolean init(TeXParser tp) {
+		tiny = new RowAtom();
+		return true;
+	}
 
-    public void add(TeXParser tp, Atom a) {
-        tiny.add(a);
-    }
+	@Override
+	public void add(TeXParser tp, Atom a) {
+		tiny.add(a);
+	}
 
-    public RowAtom steal(TeXParser tp) {
-        final RowAtom ra = tiny;
-        tiny = new RowAtom();
-        return ra;
-    }
+	@Override
+	public RowAtom steal(TeXParser tp) {
+		final RowAtom ra = tiny;
+		tiny = new RowAtom();
+		return ra;
+	}
 
-    public Atom getLastAtom() {
-        return tiny.getLastAtom();
-    }
+	@Override
+	public Atom getLastAtom() {
+		return tiny.getLastAtom();
+	}
 
-    public boolean close(TeXParser tp) {
-        final Atom at = newI(tp, tiny.simplify());
-        tp.closeConsumer(at);
-        return true;
-    }
+	@Override
+	public boolean close(TeXParser tp) {
+		final Atom at = newI(tp, tiny.simplify());
+		tp.closeConsumer(at);
+		return true;
+	}
 
-    public abstract Atom newI(TeXParser tp, Atom a);
+	public abstract Atom newI(TeXParser tp, Atom a);
 }

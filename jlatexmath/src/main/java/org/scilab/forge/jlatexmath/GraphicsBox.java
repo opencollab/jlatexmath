@@ -55,53 +55,56 @@ import java.awt.RenderingHints;
  */
 public class GraphicsBox extends Box {
 
-    public final static int BILINEAR = 0;
-    public final static int NEAREST_NEIGHBOR = 1;
-    public final static int BICUBIC = 2;
+	public final static int BILINEAR = 0;
+	public final static int NEAREST_NEIGHBOR = 1;
+	public final static int BICUBIC = 2;
 
-    private final BufferedImage image;
-    private final double scl;
-    private final Object interp;
+	private final BufferedImage image;
+	private final double scl;
+	private final Object interp;
 
-    public GraphicsBox(final BufferedImage image, final double width, final double height, final double size, final int interpolation) {
-        this.image = image;
-        this.width = width;
-        this.height = height;
-        this.scl = 1. / size;
-        depth = 0;
-        shift = 0;
-        switch (interpolation) {
-        case BILINEAR :
-            interp = RenderingHints.VALUE_INTERPOLATION_BILINEAR;
-            break;
-        case NEAREST_NEIGHBOR :
-            interp = RenderingHints.VALUE_INTERPOLATION_NEAREST_NEIGHBOR;
-            break;
-        case BICUBIC :
-            interp = RenderingHints.VALUE_INTERPOLATION_BICUBIC;
-            break;
-        default :
-            interp = null;
-        }
-    }
+	public GraphicsBox(final BufferedImage image, final double width, final double height, final double size,
+			final int interpolation) {
+		this.image = image;
+		this.width = width;
+		this.height = height;
+		this.scl = 1. / size;
+		depth = 0;
+		shift = 0;
+		switch (interpolation) {
+		case BILINEAR:
+			interp = RenderingHints.VALUE_INTERPOLATION_BILINEAR;
+			break;
+		case NEAREST_NEIGHBOR:
+			interp = RenderingHints.VALUE_INTERPOLATION_NEAREST_NEIGHBOR;
+			break;
+		case BICUBIC:
+			interp = RenderingHints.VALUE_INTERPOLATION_BICUBIC;
+			break;
+		default:
+			interp = null;
+		}
+	}
 
-    public void draw(Graphics2D g2, double x, double y) {
-        final AffineTransform oldAt = g2.getTransform();
-        Object oldKey = null;
-        if (interp != null) {
-            oldKey = g2.getRenderingHint(RenderingHints.KEY_INTERPOLATION);
-            g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, interp);
-        }
-        g2.translate(x, y - height);
-        g2.scale(scl, scl);
-        g2.drawImage(image, 0, 0, null);
-        g2.setTransform(oldAt);
-        if (oldKey != null) {
-            g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, oldKey);
-        }
-    }
+	@Override
+	public void draw(Graphics2D g2, double x, double y) {
+		final AffineTransform oldAt = g2.getTransform();
+		Object oldKey = null;
+		if (interp != null) {
+			oldKey = g2.getRenderingHint(RenderingHints.KEY_INTERPOLATION);
+			g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, interp);
+		}
+		g2.translate(x, y - height);
+		g2.scale(scl, scl);
+		g2.drawImage(image, 0, 0, null);
+		g2.setTransform(oldAt);
+		if (oldKey != null) {
+			g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, oldKey);
+		}
+	}
 
-    public FontInfo getLastFont() {
-        return null;
-    }
+	@Override
+	public FontInfo getLastFont() {
+		return null;
+	}
 }

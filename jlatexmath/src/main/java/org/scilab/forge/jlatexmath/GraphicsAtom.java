@@ -45,7 +45,6 @@
 
 package org.scilab.forge.jlatexmath;
 
-import java.awt.image.ImageObserver;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -59,113 +58,116 @@ import javax.imageio.ImageIO;
  */
 public class GraphicsAtom extends Atom {
 
-    private BufferedImage bimage;
-    private Thread thread;
-    private Atom base;
-    private boolean first = true;
-    private int interp = -1;
+	private BufferedImage bimage;
+	private Thread thread;
+	private Atom base;
+	private boolean first = true;
+	private int interp = -1;
 
-    public GraphicsAtom(final String path, final Map<String, String> option) {
-        final File f = new File(path);
-        if (!f.exists()) {
-            try {
-                final URL url = new URL(path);
-                thread = new Thread(new Runnable() {
-                    public void run() {
-                        try {
-                            bimage = ImageIO.read(url);
-                        } catch (IOException e) {
-                            bimage = null;
-                            thread = null;
-                        }
-                    }
-                });
-            } catch (MalformedURLException e) {
-                bimage = null;
-            }
-        } else {
-            thread = new Thread(new Runnable() {
-                public void run() {
-                    try {
-                        bimage = ImageIO.read(f);
-                    } catch (IOException e) {
-                        bimage = null;
-                        thread = null;
-                    }
-                }
-            });
-        }
-        if (thread != null) {
-            thread.start();
-        }
-        buildAtom(option);
-    }
+	public GraphicsAtom(final String path, final Map<String, String> option) {
+		final File f = new File(path);
+		if (!f.exists()) {
+			try {
+				final URL url = new URL(path);
+				thread = new Thread(new Runnable() {
+					@Override
+					public void run() {
+						try {
+							bimage = ImageIO.read(url);
+						} catch (IOException e) {
+							bimage = null;
+							thread = null;
+						}
+					}
+				});
+			} catch (MalformedURLException e) {
+				bimage = null;
+			}
+		} else {
+			thread = new Thread(new Runnable() {
+				@Override
+				public void run() {
+					try {
+						bimage = ImageIO.read(f);
+					} catch (IOException e) {
+						bimage = null;
+						thread = null;
+					}
+				}
+			});
+		}
+		if (thread != null) {
+			thread.start();
+		}
+		buildAtom(option);
+	}
 
-    protected void buildAtom(final Map<String, String> options) {
-        base = this;
-        final boolean hasWidth = options.containsKey("width");
-        final boolean hasHeight = options.containsKey("height");
-        if (hasWidth || hasHeight) {
-            TeXLength width = null;
-            TeXLength height = null;
-            final TeXParser tp = new TeXParser();
-            if (hasWidth) {
-                tp.setParseString(options.get("width"));
-                width = tp.getLength();
-            }
-            if (hasHeight) {
-                tp.setParseString(options.get("height"));
-                height = tp.getLength();
-            }
+	protected void buildAtom(final Map<String, String> options) {
+		base = this;
+		final boolean hasWidth = options.containsKey("width");
+		final boolean hasHeight = options.containsKey("height");
+		if (hasWidth || hasHeight) {
+			TeXLength width = null;
+			TeXLength height = null;
+			final TeXParser tp = new TeXParser();
+			if (hasWidth) {
+				tp.setParseString(options.get("width"));
+				width = tp.getLength();
+			}
+			if (hasHeight) {
+				tp.setParseString(options.get("height"));
+				height = tp.getLength();
+			}
 
-            base = new ResizeAtom(base, width, height, options.containsKey("keepaspectratio"));
-        }
-        if (options.containsKey("scale")) {
-            final double scl = TeXParser.parseDouble(options.get("scale"));
-            if (!Double.isNaN(scl)) {
-                base = new ScaleAtom(base, scl, scl);
-            }
-        }
-        if (options.containsKey("angle")) {
-            final double angle = TeXParser.parseDouble(options.get("angle"));
-            if (!Double.isNaN(angle)) {
-                base = new RotateAtom(base, angle, options);
-            }
-        }
-        if (options.containsKey("interpolation")) {
-            final String meth = options.get("interpolation");
-            if (meth.equalsIgnoreCase("bilinear")) {
-                interp = GraphicsBox.BILINEAR;
-            } else if (meth.equalsIgnoreCase("bicubic")) {
-                interp = GraphicsBox.BICUBIC;
-            } else if (meth.equalsIgnoreCase("nearest_neighbor")) {
-                interp = GraphicsBox.NEAREST_NEIGHBOR;
-            }
-        }
-    }
+			base = new ResizeAtom(base, width, height, options.containsKey("keepaspectratio"));
+		}
+		if (options.containsKey("scale")) {
+			final double scl = TeXParser.parseDouble(options.get("scale"));
+			if (!Double.isNaN(scl)) {
+				base = new ScaleAtom(base, scl, scl);
+			}
+		}
+		if (options.containsKey("angle")) {
+			final double angle = TeXParser.parseDouble(options.get("angle"));
+			if (!Double.isNaN(angle)) {
+				base = new RotateAtom(base, angle, options);
+			}
+		}
+		if (options.containsKey("interpolation")) {
+			final String meth = options.get("interpolation");
+			if (meth.equalsIgnoreCase("bilinear")) {
+				interp = GraphicsBox.BILINEAR;
+			} else if (meth.equalsIgnoreCase("bicubic")) {
+				interp = GraphicsBox.BICUBIC;
+			} else if (meth.equalsIgnoreCase("nearest_neighbor")) {
+				interp = GraphicsBox.NEAREST_NEIGHBOR;
+			}
+		}
+	}
 
-    public Box createBox(TeXEnvironment env) {
-        if (thread != null) {
-            try {
-                thread.join();
-            } catch (InterruptedException e) {
-                bimage = null;
-            } finally {
-                thread = null;
-            }
-        }
-        if (bimage != null) {
-            if (first) {
-                first = false;
-                return base.createBox(env);
-            } else {
-                env.isColored = true;
-                final double width = (double)bimage.getWidth() * TeXLength.getFactor(TeXLength.Unit.PIXEL, env);
-                final double height = (double)bimage.getHeight() * TeXLength.getFactor(TeXLength.Unit.PIXEL, env);
-                return new GraphicsBox(bimage, width, height, env.getSize(), interp);
-            }
-        }
+	@Override
+	public Box createBox(TeXEnvironment env) {
+		if (thread != null) {
+			try {
+				thread.join();
+			} catch (InterruptedException e) {
+				bimage = null;
+			} finally {
+				thread = null;
+			}
+		}
+		if (bimage != null) {
+			if (first) {
+				first = false;
+				return base.createBox(env);
+			} else {
+				env.isColored = true;
+				final double width = bimage.getWidth() * TeXLength.getFactor(TeXLength.Unit.PIXEL, env);
+				final double height = bimage.getHeight() * TeXLength.getFactor(TeXLength.Unit.PIXEL, env);
+				return new GraphicsBox(bimage, width, height, env.getSize(), interp);
+			}
+		}
 
-        return TeXParser.getAtomForLatinStr("No such image file", false).createBox(env);
-    }
+		return TeXParser.getAtomForLatinStr("No such image file", false).createBox(env);
+	}
 }

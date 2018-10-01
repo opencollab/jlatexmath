@@ -46,34 +46,30 @@
 
 package org.scilab.forge.jlatexmath;
 
-import java.awt.Font;
-import java.awt.Graphics2D;
-import java.awt.geom.AffineTransform;
-import java.awt.geom.Rectangle2D;
-
 /**
  * A box representing a single character.
  */
 public class ScaledCharBox extends CharBox {
 
-    protected final double factor;
+	protected final double factor;
 
-    /**
-     * Create a new CharBox that will represent the character defined by the given
-     * Char-object.
-     *
-     * @param c a Char-object containing the character's font information.
-     */
-    public ScaledCharBox(Char c, final double factor) {
-        cf = c.getCharFont();
-        size = c.getMetrics().getSize() * factor;
-        width = c.getWidth() * factor;
-        height = c.getHeight() * factor;
-        depth = c.getDepth() * factor;
-        this.factor = factor;
-    }
+	/**
+	 * Create a new CharBox that will represent the character defined by the
+	 * given Char-object.
+	 *
+	 * @param c
+	 *            a Char-object containing the character's font information.
+	 */
+	public ScaledCharBox(Char c, final double factor) {
+		cf = c.getCharFont();
+		size = c.getMetrics().getSize() * factor;
+		width = c.getWidth() * factor;
+		height = c.getHeight() * factor;
+		depth = c.getDepth() * factor;
+		this.factor = factor;
+	}
 
-    public void addToWitdh(final double x) {
-        width += x * factor;
-    }
+	public void addToWitdh(final double x) {
+		width += x * factor;
+	}
 }

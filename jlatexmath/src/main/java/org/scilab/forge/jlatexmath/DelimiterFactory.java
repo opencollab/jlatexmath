@@ -49,100 +49,103 @@
 package org.scilab.forge.jlatexmath; // NOPMD
 
 /**
- * Responsible for creating a box containing a delimiter symbol that exists
- * in different sizes.
+ * Responsible for creating a box containing a delimiter symbol that exists in
+ * different sizes.
  */
 public class DelimiterFactory {
 
-    public static Box create(SymbolAtom symbol, TeXEnvironment env, int size) {
-        if (size > 4) {
-            return symbol.createBox(env);
-        }
+	public static Box create(SymbolAtom symbol, TeXEnvironment env, int size) {
+		if (size > 4) {
+			return symbol.createBox(env);
+		}
 
-        TeXFont tf = env.getTeXFont();
-        int style = env.getStyle();
-        Char c = tf.getChar(symbol.getCf(), style);
-        int i;
+		TeXFont tf = env.getTeXFont();
+		int style = env.getStyle();
+		Char c = tf.getChar(symbol.getCf(), style);
+		int i;
 
-        for (i = 1; i <= size && tf.hasNextLarger(c); i++) {
-            c = tf.getNextLarger(c, style);
-        }
+		for (i = 1; i <= size && tf.hasNextLarger(c); i++) {
+			c = tf.getNextLarger(c, style);
+		}
 
-        if (i <= size && !tf.hasNextLarger(c)) {
-            final CharBox A = new CharBox(tf.getChar('A', TextStyle.MATHNORMAL, style));
-            final Box b = create(symbol.getCf(), env, size * (A.getHeight() + A.getDepth()));
-            return b;
-        }
+		if (i <= size && !tf.hasNextLarger(c)) {
+			final CharBox A = new CharBox(tf.getChar('A', TextStyle.MATHNORMAL, style));
+			final Box b = create(symbol.getCf(), env, size * (A.getHeight() + A.getDepth()));
+			return b;
+		}
 
-        return new CharBox(c);
-    }
+		return new CharBox(c);
+	}
 
-    /**
-     *
-     * @param symbol the name of the delimiter symbol
-     * @param env the TeXEnvironment in which to create the delimiter box
-     * @param minHeight the minimum required total height of the box (height + depth).
-     * @return the box representing the delimiter variant that fits best according to
-     *          the required minimum size.
-     */
-    public static Box create(CharFont cf, TeXEnvironment env, double minHeight) {
-        TeXFont tf = env.getTeXFont();
-        int style = env.getStyle();
-        Char c = tf.getChar(cf, style);
+	/**
+	 *
+	 * @param symbol
+	 *            the name of the delimiter symbol
+	 * @param env
+	 *            the TeXEnvironment in which to create the delimiter box
+	 * @param minHeight
+	 *            the minimum required total height of the box (height + depth).
+	 * @return the box representing the delimiter variant that fits best
+	 *         according to the required minimum size.
+	 */
+	public static Box create(CharFont cf, TeXEnvironment env, double minHeight) {
+		TeXFont tf = env.getTeXFont();
+		int style = env.getStyle();
+		Char c = tf.getChar(cf, style);
 
-        // start with smallest character
-        Metrics m = c.getMetrics();
-        double total = m.getHeight() + m.getDepth();
+		// start with smallest character
+		Metrics m = c.getMetrics();
+		double total = m.getHeight() + m.getDepth();
 
-        // try larger versions of the same character until minHeight has been
-        // reached
-        while (total < minHeight && tf.hasNextLarger(c)) {
-            c = tf.getNextLarger(c, style);
-            m = c.getMetrics();
-            total = m.getHeight() + m.getDepth();
-        }
-        if (total >= minHeight) { // tall enough character found
-            return new CharBox(c);
-        } else if (tf.isExtensionChar(c)) {
-            // construct tall enough vertical box
-            VerticalBox vBox = new VerticalBox();
-            Extension ext = tf.getExtension(c, style); // extension info
+		// try larger versions of the same character until minHeight has been
+		// reached
+		while (total < minHeight && tf.hasNextLarger(c)) {
+			c = tf.getNextLarger(c, style);
+			m = c.getMetrics();
+			total = m.getHeight() + m.getDepth();
+		}
+		if (total >= minHeight) { // tall enough character found
+			return new CharBox(c);
+		} else if (tf.isExtensionChar(c)) {
+			// construct tall enough vertical box
+			VerticalBox vBox = new VerticalBox();
+			Extension ext = tf.getExtension(c, style); // extension info
 
-            if (ext.hasTop()) { // insert top part
-                c = ext.getTop();
-                vBox.add(new CharBox(c));
-            }
+			if (ext.hasTop()) { // insert top part
+				c = ext.getTop();
+				vBox.add(new CharBox(c));
+			}
 
-            boolean middle = ext.hasMiddle();
-            if (middle) { // insert middle part
-                c = ext.getMiddle();
-                vBox.add(new CharBox(c));
-            }
+			boolean middle = ext.hasMiddle();
+			if (middle) { // insert middle part
+				c = ext.getMiddle();
+				vBox.add(new CharBox(c));
+			}
 
-            if (ext.hasBottom()) { // insert bottom part
-                c = ext.getBottom();
-                vBox.add(new CharBox(c));
-            }
+			if (ext.hasBottom()) { // insert bottom part
+				c = ext.getBottom();
+				vBox.add(new CharBox(c));
+			}
 
-            // insert repeatable part until tall enough
-            c = ext.getRepeat();
-            CharBox rep = new CharBox(c);
-            while (vBox.getHeight() + vBox.getDepth() <= minHeight) {
-                if (ext.hasTop() && ext.hasBottom()) {
-                    vBox.add(1, rep);
-                    if (middle) {
-                        vBox.add(vBox.getSize() - 1, rep);
-                    }
-                } else if (ext.hasBottom()) {
-                    vBox.add(0, rep);
-                } else {
-                    vBox.add(rep);
-                }
-            }
+			// insert repeatable part until tall enough
+			c = ext.getRepeat();
+			CharBox rep = new CharBox(c);
+			while (vBox.getHeight() + vBox.getDepth() <= minHeight) {
+				if (ext.hasTop() && ext.hasBottom()) {
+					vBox.add(1, rep);
+					if (middle) {
+						vBox.add(vBox.getSize() - 1, rep);
+					}
+				} else if (ext.hasBottom()) {
+					vBox.add(0, rep);
+				} else {
+					vBox.add(rep);
+				}
+			}
 
-            return ShapeBox.create(vBox);
-        } else
-            // no extensions, so return tallest possible character
-            return new CharBox(c);
-    }
+			return ShapeBox.create(vBox);
+		} else
+			// no extensions, so return tallest possible character
+			return new CharBox(c);
+	}
 }

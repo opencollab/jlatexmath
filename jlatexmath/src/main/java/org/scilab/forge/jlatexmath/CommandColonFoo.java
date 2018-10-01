@@ -47,77 +47,82 @@ package org.scilab.forge.jlatexmath;
 
 public class CommandColonFoo {
 
-    private final static Atom CENTERED_COLON = new VCenteredAtom(Symbols.COLON.changeType(TeXConstants.TYPE_ORDINARY), false);
+	private final static Atom CENTERED_COLON = new VCenteredAtom(Symbols.COLON.changeType(TeXConstants.TYPE_ORDINARY),
+			false);
 
-    public static class ColonFoo extends Command {
+	public static class ColonFoo extends Command {
 
-        final String sym;
+		final String sym;
 
-        public ColonFoo(String sym) {
-            this.sym = sym;
-        }
+		public ColonFoo(String sym) {
+			this.sym = sym;
+		}
 
-        public boolean init(TeXParser tp) {
-            final RowAtom at = new RowAtom(CENTERED_COLON);
-            at.add(SymbolAtom.get(sym));
-            tp.addToConsumer(at.changeType(TeXConstants.TYPE_RELATION));
+		@Override
+		public boolean init(TeXParser tp) {
+			final RowAtom at = new RowAtom(CENTERED_COLON);
+			at.add(SymbolAtom.get(sym));
+			tp.addToConsumer(at.changeType(TeXConstants.TYPE_RELATION));
 
-            return false;
-        }
-    }
+			return false;
+		}
+	}
 
-    public static class FooColon extends Command {
+	public static class FooColon extends Command {
 
-        final String sym;
+		final String sym;
 
-        public FooColon(String sym) {
-            this.sym = sym;
-        }
+		public FooColon(String sym) {
+			this.sym = sym;
+		}
 
-        public boolean init(TeXParser tp) {
-            final RowAtom at = new RowAtom(SymbolAtom.get(sym), CENTERED_COLON);
-            tp.addToConsumer(at.changeType(TeXConstants.TYPE_RELATION));
+		@Override
+		public boolean init(TeXParser tp) {
+			final RowAtom at = new RowAtom(SymbolAtom.get(sym), CENTERED_COLON);
+			tp.addToConsumer(at.changeType(TeXConstants.TYPE_RELATION));
 
-            return false;
-        }
-    }
+			return false;
+		}
+	}
 
-    public static class ColonColonFoo extends Command {
+	public static class ColonColonFoo extends Command {
 
-        final String sym;
+		final String sym;
 
-        public ColonColonFoo(String sym) {
-            this.sym = sym;
-        }
+		public ColonColonFoo(String sym) {
+			this.sym = sym;
+		}
 
-        public ColonColonFoo() {
-            this(null);
-        }
+		public ColonColonFoo() {
+			this(null);
+		}
 
-        public boolean init(TeXParser tp) {
-            final RowAtom at = new RowAtom(CENTERED_COLON, CENTERED_COLON);
-            if (sym != null) {
-                at.add(SymbolAtom.get(sym));
-            }
-            tp.addToConsumer(at.changeType(TeXConstants.TYPE_RELATION));
+		@Override
+		public boolean init(TeXParser tp) {
+			final RowAtom at = new RowAtom(CENTERED_COLON, CENTERED_COLON);
+			if (sym != null) {
+				at.add(SymbolAtom.get(sym));
+			}
+			tp.addToConsumer(at.changeType(TeXConstants.TYPE_RELATION));
 
-            return false;
-        }
-    }
+			return false;
+		}
+	}
 
-    public static class FooColonColon extends Command {
+	public static class FooColonColon extends Command {
 
-        final String sym;
+		final String sym;
 
-        public FooColonColon(String sym) {
-            this.sym = sym;
-        }
+		public FooColonColon(String sym) {
+			this.sym = sym;
+		}
 
-        public boolean init(TeXParser tp) {
-            final RowAtom at = new RowAtom(SymbolAtom.get(sym), CENTERED_COLON, CENTERED_COLON);
-            tp.addToConsumer(at.changeType(TeXConstants.TYPE_RELATION));
+		@Override
+		public boolean init(TeXParser tp) {
+			final RowAtom at = new RowAtom(SymbolAtom.get(sym), CENTERED_COLON, CENTERED_COLON);
+			tp.addToConsumer(at.changeType(TeXConstants.TYPE_RELATION));
 
-            return false;
-        }
-    }
+			return false;
+		}
+	}
 }

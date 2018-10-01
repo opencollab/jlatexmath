@@ -53,7 +53,7 @@ package org.scilab.forge.jlatexmath;
  */
 public class InvalidMatrixException extends JMathTeXException {
 
-    protected InvalidMatrixException(String msg) {
-        super(msg);
-    }
+	protected InvalidMatrixException(String msg) {
+		super(msg);
+	}
 }

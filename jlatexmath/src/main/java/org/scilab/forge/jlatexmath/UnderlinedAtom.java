@@ -51,42 +51,46 @@ package org.scilab.forge.jlatexmath;
  */
 class UnderlinedAtom extends Atom {
 
-    // the base to be underlined
-    private final Atom base;
+	// the base to be underlined
+	private final Atom base;
 
-    public UnderlinedAtom(Atom base) {
-        this.base = base;
-    }
+	public UnderlinedAtom(Atom base) {
+		this.base = base;
+	}
 
-    public Box createBox(TeXEnvironment env) {
-        double drt = env.getTeXFont().getDefaultRuleThickness(env.getStyle());
+	@Override
+	public Box createBox(TeXEnvironment env) {
+		double drt = env.getTeXFont().getDefaultRuleThickness(env.getStyle());
 
-        // create formula box in same style
-        Box b = base.createBox(env);
+		// create formula box in same style
+		Box b = base.createBox(env);
 
-        // create vertical box
-        VerticalBox vBox = new VerticalBox();
-        vBox.add(b);
-        vBox.add(new StrutBox(0., 3. * drt, 0., 0.));
-        vBox.add(new HorizontalRule(drt, b.getWidth(), 0.));
+		// create vertical box
+		VerticalBox vBox = new VerticalBox();
+		vBox.add(b);
+		vBox.add(new StrutBox(0., 3. * drt, 0., 0.));
+		vBox.add(new HorizontalRule(drt, b.getWidth(), 0.));
 
-        // baseline vertical box = baseline box b
-        // there's also an invisible strut of height drt under the rule
-        vBox.setDepth(b.getDepth() + 5. * drt);
-        vBox.setHeight(b.getHeight());
+		// baseline vertical box = baseline box b
+		// there's also an invisible strut of height drt under the rule
+		vBox.setDepth(b.getDepth() + 5. * drt);
+		vBox.setHeight(b.getHeight());
 
-        return vBox;
-    }
+		return vBox;
+	}
 
-    public int getLeftType() {
-        return base.getLeftType();
-    }
+	@Override
+	public int getLeftType() {
+		return base.getLeftType();
+	}
 
-    public int getRightType() {
-        return base.getRightType();
-    }
+	@Override
+	public int getRightType() {
+		return base.getRightType();
+	}
 
-    public int getLimits() {
-        return base.getLimits();
-    }
+	@Override
+	public int getLimits() {
+		return base.getLimits();
+	}
 }

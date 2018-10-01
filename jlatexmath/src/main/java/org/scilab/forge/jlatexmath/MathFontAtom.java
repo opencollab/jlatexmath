@@ -50,20 +50,21 @@ package org.scilab.forge.jlatexmath;
  */
 public class MathFontAtom extends Atom {
 
-    protected final Atom base;
+	protected final Atom base;
 
-    public MathFontAtom(Atom base) {
-        this.base = base;
-    }
+	public MathFontAtom(Atom base) {
+		this.base = base;
+	}
 
-    public Box createBox(TeXEnvironment env) {
-        final TeXFont tf = env.getTeXFont();
-        final boolean sroman = tf.getRoman();
+	@Override
+	public Box createBox(TeXEnvironment env) {
+		final TeXFont tf = env.getTeXFont();
+		final boolean sroman = tf.getRoman();
 
-        tf.setRoman(false);
-        final Box box = base.createBox(env);
-        tf.setRoman(sroman);
+		tf.setRoman(false);
+		final Box box = base.createBox(env);
+		tf.setRoman(sroman);
 
-        return box;
-    }
+		return box;
+	}
 }

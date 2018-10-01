@@ -56,38 +56,40 @@ import org.scilab.forge.jlatexmath.FontInfo;
  */
 public class MhchemBondBox extends Box {
 
-    private final int n;
-    private final int pos;
-    private final double thickness;
-    private final double space;
+	private final int n;
+	private final int pos;
+	private final double thickness;
+	private final double space;
 
-    public MhchemBondBox(int n, int pos, double axis, double th, double space, double width) {
-        this.n = n;
-        this.pos = pos;
-        this.thickness = th;
-        this.space = space;
-        this.depth = 0.;
-        this.height = axis + (n * (th + space) - space) / 2.;
-        this.width = width;
-    }
+	public MhchemBondBox(int n, int pos, double axis, double th, double space, double width) {
+		this.n = n;
+		this.pos = pos;
+		this.thickness = th;
+		this.space = space;
+		this.depth = 0.;
+		this.height = axis + (n * (th + space) - space) / 2.;
+		this.width = width;
+	}
 
-    public void draw(Graphics2D g2, double x, double y) {
-        y -= height;
-        for (int i = 0; i < n; ++i) {
-            if (i == pos) {
-                final double w = width / 4.; // 3 dashes: w w/2 w w/2 w
-                //           -     -     -
-                g2.fill(new Rectangle2D.Double(x, y, w, thickness));
-                g2.fill(new Rectangle2D.Double(x + 1.5 * w, y, w, thickness));
-                g2.fill(new Rectangle2D.Double(x + 3. * w, y, w, thickness));
-            } else {
-                g2.fill(new Rectangle2D.Double(x, y, width, thickness));
-            }
-            y += space + thickness;
-        }
-    }
+	@Override
+	public void draw(Graphics2D g2, double x, double y) {
+		y -= height;
+		for (int i = 0; i < n; ++i) {
+			if (i == pos) {
+				final double w = width / 4.; // 3 dashes: w w/2 w w/2 w
+				// - - -
+				g2.fill(new Rectangle2D.Double(x, y, w, thickness));
+				g2.fill(new Rectangle2D.Double(x + 1.5 * w, y, w, thickness));
+				g2.fill(new Rectangle2D.Double(x + 3. * w, y, w, thickness));
+			} else {
+				g2.fill(new Rectangle2D.Double(x, y, width, thickness));
+			}
+			y += space + thickness;
+		}
+	}
 
-    public FontInfo getLastFont() {
-        return null;
-    }
+	@Override
+	public FontInfo getLastFont() {
+		return null;
+	}
 }

@@ -47,16 +47,18 @@ package org.scilab.forge.jlatexmath;
 
 public abstract class CommandText extends Command1A {
 
-    private boolean mode;
+	private boolean mode;
 
-    public boolean init(TeXParser tp) {
-        mode = tp.setTextMode();
-        return true;
-    }
+	@Override
+	public boolean init(TeXParser tp) {
+		mode = tp.setTextMode();
+		return true;
+	}
 
-    public void add(TeXParser tp, Atom a) {
-        tp.setMathMode(mode);
-        a = new TextStyleAtom(a, TextStyle.MATHNORMAL);
-        tp.closeConsumer(newI(tp, new RomanAtom(a)));
-    }
+	@Override
+	public void add(TeXParser tp, Atom a) {
+		tp.setMathMode(mode);
+		a = new TextStyleAtom(a, TextStyle.MATHNORMAL);
+		tp.closeConsumer(newI(tp, new RomanAtom(a)));
+	}
 }

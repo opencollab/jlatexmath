@@ -51,90 +51,87 @@ package org.scilab.forge.jlatexmath;
  */
 public class ParseException extends JMathTeXException {
 
-    private static final int N = 30;
+	private static final int N = 30;
 
-    private ParseException(String str, Throwable cause) {
-        super(str, cause);
-    }
+	private ParseException(String str, Throwable cause) {
+		super(str, cause);
+	}
 
-    public ParseException(String str) {
-        super(str);
-    }
+	public ParseException(String str) {
+		super(str);
+	}
 
-    public ParseException(TeXParser tp, String str, Throwable cause) {
-        this(getErr(str, tp), cause);
-    }
+	public ParseException(TeXParser tp, String str, Throwable cause) {
+		this(getErr(str, tp), cause);
+	}
 
-    public ParseException(TeXParser tp, String str) {
-        this(getErr(str, tp));
-    }
+	public ParseException(TeXParser tp, String str) {
+		this(getErr(str, tp));
+	}
 
-    public ParseException(TeXParser tp, String str, String latexErr) {
-        this(!tp.isPartial() ? getErr(str, tp) : setLatexErr(tp, latexErr));
-    }
+	public ParseException(TeXParser tp, String str, String latexErr) {
+		this(!tp.isPartial() ? getErr(str, tp) : setLatexErr(tp, latexErr));
+	}
 
-    private static String setLatexErr(TeXParser tp, String err) {
-        tp.addString("\\textcolor{red}{" + err + "}", true);
-        tp.parse();
-        return "";
-    }
+	private static String setLatexErr(TeXParser tp, String err) {
+		tp.addString("\\textcolor{red}{" + err + "}", true);
+		tp.parse();
+		return "";
+	}
 
-    private static String getWhites(final int n) {
-        final char[] w = new char[n];
-        for (int i = 0; i < n; ++i) {
-            w[i] = ' ';
-        }
-        return new String(w);
-    }
+	private static String getWhites(final int n) {
+		final char[] w = new char[n];
+		for (int i = 0; i < n; ++i) {
+			w[i] = ' ';
+		}
+		return new String(w);
+	}
 
-    private static String getErr(String msg, TeXParser tp) {
-        final String parseString = tp.getParsedString();
-        final int ppos = tp.getPrevPos();
-        final int pos = ppos == -1 ? tp.getPos() : ppos;
-        final int line = tp.getLine();
-        final int col = ppos == -1 ? tp.getCol() : tp.getPrevCol();
-        tp.cancelPrevPos();
-        final String[] lines = parseString.substring(0, Math.min(pos + N + 2, parseString.length())).split("\n");
-        final String current = lines[line - 1];
-        final String lineBefore = line >= 2 ? (lines[line - 2] + "\n") : "";
-        String arrow = "~~~^";
-        String pre;
-        int start = col - 1 - N;
-        if (start <= 0) {
-            start = 0;
-            pre = "";
-            if (col < 4 /* arrow.length */) {
-                switch (col) {
-                case 1:
-                    arrow = "^";
-                    break;
-                case 2:
-                    arrow = "~^";
-                    break;
-                case 3:
-                    arrow = "~~^";
-                    break;
-                }
-            }
-        } else {
-            pre = "...";
-        }
-        String post;
-        int end = col - 1 + N + 1;
-        if (end >= current.length()) {
-            end = current.length();
-            post = "";
-        } else {
-            post = "...";
-        }
+	private static String getErr(String msg, TeXParser tp) {
+		final String parseString = tp.getParsedString();
+		final int ppos = tp.getPrevPos();
+		final int pos = ppos == -1 ? tp.getPos() : ppos;
+		final int line = tp.getLine();
+		final int col = ppos == -1 ? tp.getCol() : tp.getPrevCol();
+		tp.cancelPrevPos();
+		final String[] lines = parseString.substring(0, Math.min(pos + N + 2, parseString.length())).split("\n");
+		final String current = lines[line - 1];
+		final String lineBefore = line >= 2 ? (lines[line - 2] + "\n") : "";
+		String arrow = "~~~^";
+		String pre;
+		int start = col - 1 - N;
+		if (start <= 0) {
+			start = 0;
+			pre = "";
+			if (col < 4 /* arrow.length */) {
+				switch (col) {
+				case 1:
+					arrow = "^";
+					break;
+				case 2:
+					arrow = "~^";
+					break;
+				case 3:
+					arrow = "~~^";
+					break;
+				}
+			}
+		} else {
+			pre = "...";
+		}
+		String post;
+		int end = col - 1 + N + 1;
+		if (end >= current.length()) {
+			end = current.length();
+			post = "";
+		} else {
+			post = "...";
+		}
 
-        final String extract = current.substring(start, end);
-        final String whites = getWhites(pre.length() + col - start - arrow.length());
+		final String extract = current.substring(start, end);
+		final String whites = getWhites(pre.length() + col - start - arrow.length());
 
-        return msg + "\n"
-               + "at line " + line + " and column " + col + ":\n"
-               + lineBefore
-               + pre + extract + post + "\n"
-               + whites + arrow;
-    }
+		return msg + "\n" + "at line " + line + " and column " + col + ":\n" + lineBefore + pre + extract + post + "\n"
+				+ whites + arrow;
+	}
 }

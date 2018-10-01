@@ -47,34 +47,36 @@ package org.scilab.forge.jlatexmath;
 
 public class FlalignAtom extends AlignAtom {
 
-    /**
-     * Creates an empty matrix
-     *
-     */
-    public FlalignAtom(ArrayOfAtoms array) {
-        super(array, false);
-    }
+	/**
+	 * Creates an empty matrix
+	 *
+	 */
+	public FlalignAtom(ArrayOfAtoms array) {
+		super(array, false);
+	}
 
-    public double[] getColumnSep(TeXEnvironment env, double width) {
-        final int row = matrix.row;
-        final int col = matrix.col;
-        final double[] seps = new double[col + 1];
-        final double w = TeXLength.getTextwidth(env);
+	@Override
+	public double[] getColumnSep(TeXEnvironment env, double width) {
+		final int row = matrix.row;
+		final int col = matrix.col;
+		final double[] seps = new double[col + 1];
+		final double w = TeXLength.getTextwidth(env);
 
-        //flalign env. : hsep=(textwidth-matWidth)/(2n+1) and hsep eq_lft \medskip el_rgt hsep ... hsep elem hsep
-        final double alignW = align.createBox(env).getWidth();
-        double alignSep;
-        if (w != Double.POSITIVE_INFINITY) {
-            alignSep = Math.max((w - width - (col / 2) * alignW) / (double) Math.floor((col - 1)/ 2), 0);
-        } else {
-            alignSep = hsep.createBox(env).getWidth();
-        }
+		// flalign env. : hsep=(textwidth-matWidth)/(2n+1) and hsep eq_lft
+		// \medskip el_rgt hsep ... hsep elem hsep
+		final double alignW = align.createBox(env).getWidth();
+		double alignSep;
+		if (w != Double.POSITIVE_INFINITY) {
+			alignSep = Math.max((w - width - (col / 2) * alignW) / Math.floor((col - 1) / 2), 0);
+		} else {
+			alignSep = hsep.createBox(env).getWidth();
+		}
 
-        seps[0] = seps[col] = 0.;
-        for (int i = 1; i < col; i++) {
-            seps[i] = (i % 2 == 0) ? alignSep : alignW;
-        }
+		seps[0] = seps[col] = 0.;
+		for (int i = 1; i < col; i++) {
+			seps[i] = (i % 2 == 0) ? alignSep : alignW;
+		}
 
-        return seps;
-    }
+		return seps;
+	}
 }

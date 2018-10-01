@@ -50,90 +50,91 @@ import java.util.ArrayList;
 
 public class Macro {
 
-    private final int nargs;
-    private final String code;
-    private ArrayList<String> chunks = null;
-    private ArrayList<Integer> posArgs = null;
-    private int totalLength = 0;
+	private final int nargs;
+	private final String code;
+	private ArrayList<String> chunks = null;
+	private ArrayList<Integer> posArgs = null;
+	private int totalLength = 0;
 
-    public Macro(final String code, final int nargs) {
-        this.code = code;
-        this.nargs = nargs;
-    }
+	public Macro(final String code, final int nargs) {
+		this.code = code;
+		this.nargs = nargs;
+	}
 
-    public int getNArgs() {
-        return nargs;
-    }
+	public int getNArgs() {
+		return nargs;
+	}
 
-    public String get(final TeXParser tp, final ArrayList<String> args) {
-        if (chunks == null) {
-            split(tp);
-        }
-        int len = totalLength;
-        for (String arg : args) {
-            len += arg.length();
-        }
-        final StringBuffer buf = new StringBuffer(len);
-        final int s = posArgs.size();
-        for (int i = 0; i < s; ++i) {
-            buf.append(chunks.get(i));
-            buf.append(args.get(posArgs.get(i)));
-        }
-        buf.append(chunks.get(s));
+	public String get(final TeXParser tp, final ArrayList<String> args) {
+		if (chunks == null) {
+			split(tp);
+		}
+		int len = totalLength;
+		for (String arg : args) {
+			len += arg.length();
+		}
+		final StringBuffer buf = new StringBuffer(len);
+		final int s = posArgs.size();
+		for (int i = 0; i < s; ++i) {
+			buf.append(chunks.get(i));
+			buf.append(args.get(posArgs.get(i)));
+		}
+		buf.append(chunks.get(s));
 
-        return buf.toString();
-    }
+		return buf.toString();
+	}
 
-    public void split(final TeXParser tp) {
-        final int len = code.length();
-        int pos = 0;
-        int fpos = 0;
-        chunks = new ArrayList<String>();
-        posArgs = new ArrayList<Integer>();
-        while (pos < len) {
-            char c = code.charAt(pos);
-            if (c == '#') {
-                ++pos;
-                if (pos < len) {
-                    char n = code.charAt(pos++);
-                    if (n >= '1' && n <= '9') {
-                        totalLength += (pos - 2) - fpos;
-                        chunks.add(code.substring(fpos, pos - 2));
-                        int x = (int)(n - '0');
-                        while (pos < len) {
-                            n = code.charAt(pos);
-                            if (n >= '0' && n <= '9') {
-                                x = 10 * x + (int)(n - '0');
-                                ++pos;
-                            } else {
-                                break;
-                            }
-                        }
-                        if (x > nargs) {
-                            // TODO: se referer a la string definissant la macro, plutot
-                            // qu'a tp pr localiser l'erreur
-                            throw new ParseException(tp, "Argument number greater than the number of arguments");
-                        }
-                        --x;
-                        posArgs.add(x);
-                        fpos = pos;
-                    }
-                }
-            } else if (c == '\\') {
-                pos += 2;
-            } else if (c == '%') {
-                while (++pos < len) {
-                    c = code.charAt(pos);
-                    if (c == '\n') {
-                        ++pos;
-                        break;
-                    }
-                }
-            } else {
-                ++pos;
-            }
-        }
-        totalLength += len - fpos;
-        chunks.add(code.substring(fpos, len));
-    }
+	public void split(final TeXParser tp) {
+		final int len = code.length();
+		int pos = 0;
+		int fpos = 0;
+		chunks = new ArrayList<String>();
+		posArgs = new ArrayList<Integer>();
+		while (pos < len) {
+			char c = code.charAt(pos);
+			if (c == '#') {
+				++pos;
+				if (pos < len) {
+					char n = code.charAt(pos++);
+					if (n >= '1' && n <= '9') {
+						totalLength += (pos - 2) - fpos;
+						chunks.add(code.substring(fpos, pos - 2));
+						int x = n - '0';
+						while (pos < len) {
+							n = code.charAt(pos);
+							if (n >= '0' && n <= '9') {
+								x = 10 * x + n - '0';
+								++pos;
+							} else {
+								break;
+							}
+						}
+						if (x > nargs) {
+							// TODO: se referer a la string definissant la
+							// macro, plutot
+							// qu'a tp pr localiser l'erreur
+							throw new ParseException(tp, "Argument number greater than the number of arguments");
+						}
+						--x;
+						posArgs.add(x);
+						fpos = pos;
+					}
+				}
+			} else if (c == '\\') {
+				pos += 2;
+			} else if (c == '%') {
+				while (++pos < len) {
+					c = code.charAt(pos);
+					if (c == '\n') {
+						++pos;
+						break;
+					}
+				}
+			} else {
+				++pos;
+			}
+		}
+		totalLength += len - fpos;
+		chunks.add(code.substring(fpos, len));
+	}
 }

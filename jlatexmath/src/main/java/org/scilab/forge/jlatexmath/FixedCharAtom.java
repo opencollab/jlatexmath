@@ -51,23 +51,26 @@ package org.scilab.forge.jlatexmath;
  */
 public class FixedCharAtom extends CharSymbol {
 
-    private final CharFont cf;
+	private final CharFont cf;
 
-    public FixedCharAtom(CharFont c) {
-        cf = c;
-    }
+	public FixedCharAtom(CharFont c) {
+		cf = c;
+	}
 
-    public CharFont getCharFont(TeXFont tf) {
-        return cf;
-    }
+	@Override
+	public CharFont getCharFont(TeXFont tf) {
+		return cf;
+	}
 
-    public Box createBox(TeXEnvironment env) {
-        TeXFont tf = env.getTeXFont();
-        Char c = tf.getChar(cf, env.getStyle());
-        return new CharBox(c);
-    }
+	@Override
+	public Box createBox(TeXEnvironment env) {
+		TeXFont tf = env.getTeXFont();
+		Char c = tf.getChar(cf, env.getStyle());
+		return new CharBox(c);
+	}
 
-    public Char getChar(TeXEnvironment env) {
-        return env.getTeXFont().getChar(cf, env.getStyle());
-    }
+	@Override
+	public Char getChar(TeXEnvironment env) {
+		return env.getTeXFont().getChar(cf, env.getStyle());
+	}
 }

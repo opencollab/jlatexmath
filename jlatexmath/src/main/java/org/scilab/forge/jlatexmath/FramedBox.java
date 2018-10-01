@@ -56,68 +56,72 @@ import java.awt.Color;
  */
 public class FramedBox extends Box {
 
-    protected Box box;
-    protected double thickness;
-    protected double space;
-    protected double dashlength;
-    protected double dashdash;
-    private Color line;
-    private Color bg;
+	protected Box box;
+	protected double thickness;
+	protected double space;
+	protected double dashlength;
+	protected double dashdash;
+	private Color line;
+	private Color bg;
 
-    public FramedBox(Box box, double thickness, double space, Color line, Color bg, double dashlength, double dashdash) {
-        this.box = box;
-        this.width = box.width + 2 * thickness + 2 * space;
-        this.height = box.height + thickness + space;
-        this.depth = box.depth + thickness + space;
-        this.shift = box.shift;
-        this.thickness = thickness;
-        this.space = space;
-        this.line = line;
-        this.bg = bg;
-        this.dashlength = dashlength;
-        this.dashdash = dashdash;
-    }
+	public FramedBox(Box box, double thickness, double space, Color line, Color bg, double dashlength,
+			double dashdash) {
+		this.box = box;
+		this.width = box.width + 2 * thickness + 2 * space;
+		this.height = box.height + thickness + space;
+		this.depth = box.depth + thickness + space;
+		this.shift = box.shift;
+		this.thickness = thickness;
+		this.space = space;
+		this.line = line;
+		this.bg = bg;
+		this.dashlength = dashlength;
+		this.dashdash = dashdash;
+	}
 
-    public FramedBox(Box box, double thickness, double space) {
-        this(box, thickness, space, null, null, Double.NaN, Double.NaN);
-    }
+	public FramedBox(Box box, double thickness, double space) {
+		this(box, thickness, space, null, null, Double.NaN, Double.NaN);
+	}
 
-    public FramedBox(Box box, double thickness, double space, double dashlength, double dashdash) {
-        this(box, thickness, space, null, null, dashlength, dashdash);
-    }
+	public FramedBox(Box box, double thickness, double space, double dashlength, double dashdash) {
+		this(box, thickness, space, null, null, dashlength, dashdash);
+	}
 
-    public FramedBox(Box box, double thickness, double space, Color line, Color bg) {
-        this(box, thickness, space, line, bg, Double.NaN, Double.NaN);
-    }
+	public FramedBox(Box box, double thickness, double space, Color line, Color bg) {
+		this(box, thickness, space, line, bg, Double.NaN, Double.NaN);
+	}
 
-    public void draw(Graphics2D g2, double x, double y) {
-        final Stroke st = g2.getStroke();
-        if (Double.isNaN(dashlength) || Double.isNaN(dashdash)) {
-            g2.setStroke(new BasicStroke((float)thickness, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER));
-        } else {
-            float[] dashes = new float[] {(float)dashdash, (float)(dashlength - dashdash)};
-            g2.setStroke(new BasicStroke((float)thickness, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER, 10f, dashes, 0f));
-        }
-        final double th = thickness / 2.;
-        if (bg != null) {
-            final Color prev = g2.getColor();
-            g2.setColor(bg);
-            g2.fill(new Rectangle2D.Double(x + th, y - height + th, width - thickness, height + depth - thickness));
-            g2.setColor(prev);
-        }
-        if (line != null) {
-            final Color prev = g2.getColor();
-            g2.setColor(line);
-            g2.draw(new Rectangle2D.Double(x + th, y - height + th, width - thickness, height + depth - thickness));
-            g2.setColor(prev);
-        } else {
-            g2.draw(new Rectangle2D.Double(x + th, y - height + th, width - thickness, height + depth - thickness));
-        }
-        g2.setStroke(st);
-        box.draw(g2, x + space + thickness, y);
-    }
+	@Override
+	public void draw(Graphics2D g2, double x, double y) {
+		final Stroke st = g2.getStroke();
+		if (Double.isNaN(dashlength) || Double.isNaN(dashdash)) {
+			g2.setStroke(new BasicStroke((float) thickness, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER));
+		} else {
+			float[] dashes = new float[] { (float) dashdash, (float) (dashlength - dashdash) };
+			g2.setStroke(
+					new BasicStroke((float) thickness, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER, 10f, dashes, 0f));
+		}
+		final double th = thickness / 2.;
+		if (bg != null) {
+			final Color prev = g2.getColor();
+			g2.setColor(bg);
+			g2.fill(new Rectangle2D.Double(x + th, y - height + th, width - thickness, height + depth - thickness));
+			g2.setColor(prev);
+		}
+		if (line != null) {
+			final Color prev = g2.getColor();
+			g2.setColor(line);
+			g2.draw(new Rectangle2D.Double(x + th, y - height + th, width - thickness, height + depth - thickness));
+			g2.setColor(prev);
+		} else {
+			g2.draw(new Rectangle2D.Double(x + th, y - height + th, width - thickness, height + depth - thickness));
+		}
+		g2.setStroke(st);
+		box.draw(g2, x + space + thickness, y);
+	}
 
-    public FontInfo getLastFont() {
-        return box.getLastFont();
-    }
+	@Override
+	public FontInfo getLastFont() {
+		return box.getLastFont();
+	}
 }

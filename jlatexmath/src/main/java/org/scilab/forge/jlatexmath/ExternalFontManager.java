@@ -45,11 +45,8 @@
 
 package org.scilab.forge.jlatexmath;
 
-import java.lang.Character.UnicodeBlock;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
 /*
 TODO: pas terrible cette classe: on ne peut pas faire du multithread a cause de cette classe: si un thread fait une association LATIN->fontFoo et un autre thread fait LATIN->fontBar alors ca aura mauvais effet...
@@ -57,96 +54,96 @@ TODO: pas terrible cette classe: on ne peut pas faire du multithread a cause de 
 
 public class ExternalFontManager {
 
-    public static final class FontSSSF {
+	public static final class FontSSSF {
 
-        private final String sansserif;
-        private final String serif;
+		private final String sansserif;
+		private final String serif;
 
-        public FontSSSF(final String sansserif, final String serif) {
-            this.sansserif = sansserif;
-            this.serif = serif;
-        }
+		public FontSSSF(final String sansserif, final String serif) {
+			this.sansserif = sansserif;
+			this.serif = serif;
+		}
 
-        public String getSS() {
-            return sansserif;
-        }
+		public String getSS() {
+			return sansserif;
+		}
 
-        public String getSF() {
-            return serif;
-        }
-    }
+		public String getSF() {
+			return serif;
+		}
+	}
 
-    private final Map<Character.UnicodeBlock, FontSSSF> map = new HashMap<>();
-    private FontSSSF latin = null;
+	private final Map<Character.UnicodeBlock, FontSSSF> map = new HashMap<>();
+	private FontSSSF latin = null;
 
-    private static final ExternalFontManager instance = new ExternalFontManager();
+	private static final ExternalFontManager instance = new ExternalFontManager();
 
-    private ExternalFontManager() {
-    }
+	private ExternalFontManager() {
+	}
 
-    public static ExternalFontManager get() {
-        return instance;
-    }
+	public static ExternalFontManager get() {
+		return instance;
+	}
 
-    public boolean isRegisteredBlock(final Character.UnicodeBlock block) {
-        if (block.equals(Character.UnicodeBlock.BASIC_LATIN)) {
-            return latin != null;
-        }
-        return map.containsKey(block);
-    }
+	public boolean isRegisteredBlock(final Character.UnicodeBlock block) {
+		if (block.equals(Character.UnicodeBlock.BASIC_LATIN)) {
+			return latin != null;
+		}
+		return map.containsKey(block);
+	}
 
-    public FontSSSF getExternalFont(final Character.UnicodeBlock block) {
-        if (block.equals(Character.UnicodeBlock.BASIC_LATIN)) {
-            return latin;
-        }
-        FontSSSF info = map.get(block);
-        if (info == null) {
-            info = new FontSSSF("SansSerif", "Serif");
-            map.put(block, info);
-        }
+	public FontSSSF getExternalFont(final Character.UnicodeBlock block) {
+		if (block.equals(Character.UnicodeBlock.BASIC_LATIN)) {
+			return latin;
+		}
+		FontSSSF info = map.get(block);
+		if (info == null) {
+			info = new FontSSSF("SansSerif", "Serif");
+			map.put(block, info);
+		}
 
-        return info;
-    }
+		return info;
+	}
 
-    // TODO: pas terrible cette fonction... (pareil pr le nom FontSSSF)
-    public FontSSSF getFont(final Character.UnicodeBlock block) {
-        if (block.equals(Character.UnicodeBlock.BASIC_LATIN)) {
-            return latin;
-        }
-        return map.get(block);
-    }
+	// TODO: pas terrible cette fonction... (pareil pr le nom FontSSSF)
+	public FontSSSF getFont(final Character.UnicodeBlock block) {
+		if (block.equals(Character.UnicodeBlock.BASIC_LATIN)) {
+			return latin;
+		}
+		return map.get(block);
+	}
 
-    public FontSSSF getBasicLatinFont() {
-        return latin;
-    }
+	public FontSSSF getBasicLatinFont() {
+		return latin;
+	}
 
-    public void registerExternalFont(final Character.UnicodeBlock block, final String sansserif, final String serif) {
-        if (sansserif == null && serif == null) {
-            if (block.equals(Character.UnicodeBlock.BASIC_LATIN)) {
-                latin = null;
-            } else {
-                map.remove(block);
-            }
-        } else {
-            FontSSSF f = new FontSSSF(sansserif, serif);
-            if (block.equals(Character.UnicodeBlock.BASIC_LATIN)) {
-                latin = f;
-            } else {
-                map.put(block, f);
-            }
-        }
-    }
+	public void registerExternalFont(final Character.UnicodeBlock block, final String sansserif, final String serif) {
+		if (sansserif == null && serif == null) {
+			if (block.equals(Character.UnicodeBlock.BASIC_LATIN)) {
+				latin = null;
+			} else {
+				map.remove(block);
+			}
+		} else {
+			FontSSSF f = new FontSSSF(sansserif, serif);
+			if (block.equals(Character.UnicodeBlock.BASIC_LATIN)) {
+				latin = f;
+			} else {
+				map.put(block, f);
+			}
+		}
+	}
 
-    public void put(final Character.UnicodeBlock block, final FontSSSF f) {
-        if (block.equals(Character.UnicodeBlock.BASIC_LATIN)) {
-            latin = f;
-        } else {
-            map.put(block, f);
-        }
-    }
+	public void put(final Character.UnicodeBlock block, final FontSSSF f) {
+		if (block.equals(Character.UnicodeBlock.BASIC_LATIN)) {
+			latin = f;
+		} else {
+			map.put(block, f);
+		}
+	}
 
-    public void registerExternalFont(Character.UnicodeBlock block, String fontName) {
-        registerExternalFont(block, fontName, fontName);
-    }
+	public void registerExternalFont(Character.UnicodeBlock block, String fontName) {
+		registerExternalFont(block, fontName, fontName);
+	}
 
 }

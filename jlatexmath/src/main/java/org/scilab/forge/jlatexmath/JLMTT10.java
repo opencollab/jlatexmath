@@ -47,52 +47,59 @@ package org.scilab.forge.jlatexmath;
 
 final class JLMTT10 extends FontInfo {
 
-    JLMTT10(final String ttfPath) {
-        super(0, ttfPath, 0, 0.333334, 1.000003, '\u0000');
-    }
+	JLMTT10(final String ttfPath) {
+		super(0, ttfPath, 0, 0.333334, 1.000003, '\u0000');
+	}
 
-    protected final void initMetrics() {
-        setInfo('\u0021', // char code: 33
-                new double[] {0.516, 0.441, 0., 0.}, // metrics: width, height, depth, italic
-                null, // ligatures
-                null, // kern codes
-                null, // kern values
-                null, '\0', // next larger
-                null); // extension: top, mid, rep, bot
-        setInfo('\u0024', // char code: 36
-                new double[] {0.516, 0.441, 0., 0.}, // metrics: width, height, depth, italic
-                null, // ligatures
-                null, // kern codes
-                null, // kern values
-                null, '\0', // next larger
-                null); // extension: top, mid, rep, bot
-        setInfo('\"', // char code: 34
-                new double[] {0.516, 0.441, 0., 0.}, // metrics: width, height, depth, italic
-                null, // ligatures
-                null, // kern codes
-                null, // kern values
-                null, '\0', // next larger
-                null); // extension: top, mid, rep, bot
-        setInfo('\u0023', // char code: 35
-                new double[] {0.516, 0.441, 0., 0.}, // metrics: width, height, depth, italic
-                null, // ligatures
-                null, // kern codes
-                null, // kern values
-                null, '\0', // next larger
-                null); // extension: top, mid, rep, bot
-        setInfo('\u0025', // char code: 37
-                new double[] {0.516, 0.695, 0., 0.}, // metrics: width, height, depth, italic
-                null, // ligatures
-                null, // kern codes
-                null, // kern values
-                null, '\0', // next larger
-                null); // extension: top, mid, rep, bot
-        setInfo('\u0026', // char code: 38
-                new double[] {0.516, 0.695, 0., 0.}, // metrics: width, height, depth, italic
-                null, // ligatures
-                null, // kern codes
-                null, // kern values
-                null, '\0', // next larger
-                null); // extension: top, mid, rep, bot
-    }
+	@Override
+	protected final void initMetrics() {
+		setInfo('\u0021', // char code: 33
+				new double[] { 0.516, 0.441, 0., 0. }, // metrics: width,
+														// height, depth, italic
+				null, // ligatures
+				null, // kern codes
+				null, // kern values
+				null, '\0', // next larger
+				null); // extension: top, mid, rep, bot
+		setInfo('\u0024', // char code: 36
+				new double[] { 0.516, 0.441, 0., 0. }, // metrics: width,
+														// height, depth, italic
+				null, // ligatures
+				null, // kern codes
+				null, // kern values
+				null, '\0', // next larger
+				null); // extension: top, mid, rep, bot
+		setInfo('\"', // char code: 34
+				new double[] { 0.516, 0.441, 0., 0. }, // metrics: width,
+														// height, depth, italic
+				null, // ligatures
+				null, // kern codes
+				null, // kern values
+				null, '\0', // next larger
+				null); // extension: top, mid, rep, bot
+		setInfo('\u0023', // char code: 35
+				new double[] { 0.516, 0.441, 0., 0. }, // metrics: width,
+														// height, depth, italic
+				null, // ligatures
+				null, // kern codes
+				null, // kern values
+				null, '\0', // next larger
+				null); // extension: top, mid, rep, bot
+		setInfo('\u0025', // char code: 37
+				new double[] { 0.516, 0.695, 0., 0. }, // metrics: width,
+														// height, depth, italic
+				null, // ligatures
+				null, // kern codes
+				null, // kern values
+				null, '\0', // next larger
+				null); // extension: top, mid, rep, bot
+		setInfo('\u0026', // char code: 38
+				new double[] { 0.516, 0.695, 0., 0. }, // metrics: width,
+														// height, depth, italic
+				null, // ligatures
+				null, // kern codes
+				null, // kern values
+				null, '\0', // next larger
+				null); // extension: top, mid, rep, bot
+	}
 }

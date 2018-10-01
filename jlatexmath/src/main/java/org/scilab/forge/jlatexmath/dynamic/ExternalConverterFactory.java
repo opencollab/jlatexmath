@@ -47,5 +47,5 @@ package org.scilab.forge.jlatexmath.dynamic;
 
 public interface ExternalConverterFactory {
 
-    public ExternalConverter getExternalConverter();
+	public ExternalConverter getExternalConverter();
 }

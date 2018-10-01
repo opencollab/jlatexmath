@@ -50,17 +50,18 @@ package org.scilab.forge.jlatexmath;
  */
 public class CumulativeScriptsAtom extends Atom {
 
-    private RowAtom base;
+	private RowAtom base;
 
-    public CumulativeScriptsAtom(final RowAtom base) {
-        this.base = base;
-    }
+	public CumulativeScriptsAtom(final RowAtom base) {
+		this.base = base;
+	}
 
-    public RowAtom get() {
-        return base;
-    }
+	public RowAtom get() {
+		return base;
+	}
 
-    public Box createBox(TeXEnvironment env) {
-        return null;
-    }
+	@Override
+	public Box createBox(TeXEnvironment env) {
+		return null;
+	}
 }

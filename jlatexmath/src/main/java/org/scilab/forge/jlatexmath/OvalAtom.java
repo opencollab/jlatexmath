@@ -45,19 +45,18 @@
 
 package org.scilab.forge.jlatexmath;
 
-import java.awt.Color;
-
 /**
  * An atom representing a boxed base atom.
  */
 public class OvalAtom extends FBoxAtom {
 
-    public OvalAtom(Atom base) {
-        super(base);
-    }
+	public OvalAtom(Atom base) {
+		super(base);
+	}
 
-    public Box createBox(TeXEnvironment env) {
-        final double cs = TeXLength.getLength("cornersize", env);
-        return new OvalBox((FramedBox) super.createBox(env), cs);
-    }
+	@Override
+	public Box createBox(TeXEnvironment env) {
+		final double cs = TeXLength.getLength("cornersize", env);
+		return new OvalBox((FramedBox) super.createBox(env), cs);
+	}
 }

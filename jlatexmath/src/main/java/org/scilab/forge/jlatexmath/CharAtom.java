@@ -47,91 +47,98 @@
 package org.scilab.forge.jlatexmath;
 
 /**
- * An atom representing exactly one alphanumeric character and the text style in which
- * it should be drawn.
+ * An atom representing exactly one alphanumeric character and the text style in
+ * which it should be drawn.
  */
 public class CharAtom extends CharSymbol {
 
-    // alphanumeric character
-    protected final char c;
+	// alphanumeric character
+	protected final char c;
 
-    // text style (null means the default text style)
-    private int textStyle = TextStyle.NONE;
+	// text style (null means the default text style)
+	private int textStyle = TextStyle.NONE;
 
-    /**
-     * Creates a CharAtom that will represent the given character in the given text style.
-     * Null for the text style means the default text style.
-     *
-     * @param c the alphanumeric character
-     * @param textStyle the text style in which the character should be drawn
-     */
-    public CharAtom(char c, int textStyle, boolean mathMode) {
-        this.c = c;
-        this.textStyle = textStyle;
-        this.mathMode = mathMode;
-    }
+	/**
+	 * Creates a CharAtom that will represent the given character in the given
+	 * text style. Null for the text style means the default text style.
+	 *
+	 * @param c
+	 *            the alphanumeric character
+	 * @param textStyle
+	 *            the text style in which the character should be drawn
+	 */
+	public CharAtom(char c, int textStyle, boolean mathMode) {
+		this.c = c;
+		this.textStyle = textStyle;
+		this.mathMode = mathMode;
+	}
 
-    public CharAtom(char c, boolean mathMode) {
-        this(c, TextStyle.NONE, mathMode);
-    }
+	public CharAtom(char c, boolean mathMode) {
+		this(c, TextStyle.NONE, mathMode);
+	}
 
-    public CharAtom(char c, int textStyle) {
-        this(c, textStyle, false);
-    }
+	public CharAtom(char c, int textStyle) {
+		this(c, textStyle, false);
+	}
 
-    public CharAtom(char c) {
-        this(c, TextStyle.NONE, false);
-    }
+	public CharAtom(char c) {
+		this(c, TextStyle.NONE, false);
+	}
 
-    public Box createBox(TeXEnvironment env) {
-        if (textStyle == TextStyle.NONE) {
-            textStyle = env.getTextStyle();
-        }
-        final boolean smallCap = env.getSmallCap();
-        final Char ch = getChar(env.getTeXFont(), env.getStyle(), smallCap);
-        CharBox box;
-        if (smallCap && Character.isLowerCase(c)) {
-            // We have a small capital
-            box = new ScaledCharBox(ch, 0.8);
-        } else {
-            box = new CharBox(ch);
-        }
+	@Override
+	public Box createBox(TeXEnvironment env) {
+		if (textStyle == TextStyle.NONE) {
+			textStyle = env.getTextStyle();
+		}
+		final boolean smallCap = env.getSmallCap();
+		final Char ch = getChar(env.getTeXFont(), env.getStyle(), smallCap);
+		CharBox box;
+		if (smallCap && Character.isLowerCase(c)) {
+			// We have a small capital
+			box = new ScaledCharBox(ch, 0.8);
+		} else {
+			box = new CharBox(ch);
+		}
 
-        if (isMathMode() && mustAddItalicCorrection()) {
-            box.addToWidth(ch.getItalic());
-        }
+		if (isMathMode() && mustAddItalicCorrection()) {
+			box.addToWidth(ch.getItalic());
+		}
 
-        return box;
-    }
+		return box;
+	}
 
-    public char getCharacter() {
-        return c;
-    }
+	public char getCharacter() {
+		return c;
+	}
 
-    /*
-     * Get the Char-object representing this character ("c") in the right text style
-     */
-    public Char getChar(TeXFont tf, int style, boolean smallCap) {
-        char chr = c;
-        if (smallCap && Character.isLowerCase(c)) {
-            chr = Character.toUpperCase(c);
-        }
-        if (textStyle == TextStyle.NONE) {
-            return tf.getDefaultChar(chr, style);
-        } else {
-            return tf.getChar(chr, textStyle, style);
-        }
-    }
+	/*
+	 * Get the Char-object representing this character ("c") in the right text
+	 * style
+	 */
+	public Char getChar(TeXFont tf, int style, boolean smallCap) {
+		char chr = c;
+		if (smallCap && Character.isLowerCase(c)) {
+			chr = Character.toUpperCase(c);
+		}
+		if (textStyle == TextStyle.NONE) {
+			return tf.getDefaultChar(chr, style);
+		} else {
+			return tf.getChar(chr, textStyle, style);
+		}
+	}
 
-    public Char getChar(TeXEnvironment env) {
-        return getChar(env.getTeXFont(), env.getStyle(), env.getSmallCap());
-    }
+	@Override
+	public Char getChar(TeXEnvironment env) {
+		return getChar(env.getTeXFont(), env.getStyle(), env.getSmallCap());
+	}
 
-    public CharFont getCharFont(TeXFont tf) {
-        return getChar(tf, TeXConstants.STYLE_DISPLAY, false).getCharFont();
-    }
+	@Override
+	public CharFont getCharFont(TeXFont tf) {
+		return getChar(tf, TeXConstants.STYLE_DISPLAY, false).getCharFont();
+	}
 
-    public String toString() {
-        return "CharAtom: \'" + c + "\'";
-    }
+	@Override
+	public String toString() {
+		return "CharAtom: \'" + c + "\'";
+	}
 }

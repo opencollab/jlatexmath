@@ -52,62 +52,67 @@ import java.util.Map;
  */
 public class RotateAtom extends Atom {
 
-    private final Atom base;
-    private double angle;
-    private int option = -1;
-    private TeXLength.Unit xunit;
-    private TeXLength.Unit yunit;
-    private double x, y;
+	private final Atom base;
+	private double angle;
+	private int option = -1;
+	private TeXLength.Unit xunit;
+	private TeXLength.Unit yunit;
+	private double x, y;
 
-    public RotateAtom(Atom base, double angle, Map<String, String> map) {
-        this.base = base;
-        this.angle = angle;
-        if (map.containsKey("origin")) {
-            this.option = RotateBox.getOrigin(map.get("origin"));
-        } else {
-            TeXParser tp = null;
-            if (map.containsKey("x")) {
-                tp = new TeXParser();
-                tp.setParseString(map.get("x"));
-                final TeXLength lenX = tp.getLength();
-                this.xunit = lenX.getUnit();
-                this.x = lenX.getL();
-            } else {
-                this.xunit = TeXLength.Unit.POINT;
-                this.x = 0.;
-            }
-            if (map.containsKey("y")) {
-                if (tp == null) {
-                    tp = new TeXParser();
-                }
-                tp.setParseString(map.get("y"));
-                final TeXLength lenY = tp.getLength();
-                this.xunit = lenY.getUnit();
-                this.x = lenY.getL();
-            } else {
-                this.yunit = TeXLength.Unit.POINT;
-                this.y = 0.;
-            }
-        }
-    }
+	public RotateAtom(Atom base, double angle, Map<String, String> map) {
+		this.base = base;
+		this.angle = angle;
+		if (map.containsKey("origin")) {
+			this.option = RotateBox.getOrigin(map.get("origin"));
+		} else {
+			TeXParser tp = null;
+			if (map.containsKey("x")) {
+				tp = new TeXParser();
+				tp.setParseString(map.get("x"));
+				final TeXLength lenX = tp.getLength();
+				this.xunit = lenX.getUnit();
+				this.x = lenX.getL();
+			} else {
+				this.xunit = TeXLength.Unit.POINT;
+				this.x = 0.;
+			}
+			if (map.containsKey("y")) {
+				if (tp == null) {
+					tp = new TeXParser();
+				}
+				tp.setParseString(map.get("y"));
+				final TeXLength lenY = tp.getLength();
+				this.xunit = lenY.getUnit();
+				this.x = lenY.getL();
+			} else {
+				this.yunit = TeXLength.Unit.POINT;
+				this.y = 0.;
+			}
+		}
+	}
 
-    public Box createBox(TeXEnvironment env) {
-        if (option != -1) {
-            return new RotateBox(base.createBox(env), angle, option);
-        } else {
-            return new RotateBox(base.createBox(env), angle, x * TeXLength.getFactor(xunit, env), y * TeXLength.getFactor(yunit, env));
-        }
-    }
+	@Override
+	public Box createBox(TeXEnvironment env) {
+		if (option != -1) {
+			return new RotateBox(base.createBox(env), angle, option);
+		} else {
+			return new RotateBox(base.createBox(env), angle, x * TeXLength.getFactor(xunit, env),
+					y * TeXLength.getFactor(yunit, env));
+		}
+	}
 
-    public int getLeftType() {
-        return base.getLeftType();
-    }
+	@Override
+	public int getLeftType() {
+		return base.getLeftType();
+	}
 
-    public int getRightType() {
-        return base.getRightType();
-    }
+	@Override
+	public int getRightType() {
+		return base.getRightType();
+	}
 
-    public int getLimits() {
-        return base.getLimits();
-    }
+	@Override
+	public int getLimits() {
+		return base.getLimits();
+	}
 }

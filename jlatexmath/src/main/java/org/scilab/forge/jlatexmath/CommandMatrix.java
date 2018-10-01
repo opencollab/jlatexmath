@@ -47,49 +47,58 @@ package org.scilab.forge.jlatexmath;
 
 public abstract class CommandMatrix extends Command {
 
-    protected ArrayOfAtoms aoa;
-    protected boolean hasLBrace = false;
+	protected ArrayOfAtoms aoa;
+	protected boolean hasLBrace = false;
 
-    public boolean init(TeXParser tp) {
-        aoa = new ArrayOfAtoms(ArrayAtom.MATRIX);
-        return true;
-    }
+	@Override
+	public boolean init(TeXParser tp) {
+		aoa = new ArrayOfAtoms(ArrayAtom.MATRIX);
+		return true;
+	}
 
-    public void add(TeXParser tp, Atom a) {
-        aoa.add(tp, a);
-        if (!hasLBrace) {
-            rbrace(tp);
-        }
-    }
+	@Override
+	public void add(TeXParser tp, Atom a) {
+		aoa.add(tp, a);
+		if (!hasLBrace) {
+			rbrace(tp);
+		}
+	}
 
-    public RowAtom steal(TeXParser tp) {
-        return aoa.steal(tp);
-    }
+	@Override
+	public RowAtom steal(TeXParser tp) {
+		return aoa.steal(tp);
+	}
 
-    public Atom getLastAtom() {
-        return aoa.getLastAtom();
-    }
+	@Override
+	public Atom getLastAtom() {
+		return aoa.getLastAtom();
+	}
 
-    public boolean isArray() {
-        return true;
-    }
+	@Override
+	public boolean isArray() {
+		return true;
+	}
 
-    public boolean isAmpersandAllowed() {
-        return true;
-    }
+	@Override
+	public boolean isAmpersandAllowed() {
+		return true;
+	}
 
-    public boolean isHandlingArg() {
-        return true;
-    }
+	@Override
+	public boolean isHandlingArg() {
+		return true;
+	}
 
-    public void lbrace(TeXParser tp) {
-        hasLBrace = true;
-    }
+	@Override
+	public void lbrace(TeXParser tp) {
+		hasLBrace = true;
+	}
 
-    public void rbrace(TeXParser tp) {
-        aoa.checkDimensions();
-        tp.closeConsumer(newI(tp));
-    }
+	@Override
+	public void rbrace(TeXParser tp) {
+		aoa.checkDimensions();
+		tp.closeConsumer(newI(tp));
+	}
 
-    public abstract Atom newI(TeXParser tp);
+	public abstract Atom newI(TeXParser tp);
 }

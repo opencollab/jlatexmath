@@ -47,42 +47,48 @@ package org.scilab.forge.jlatexmath;
 
 public class Column extends Command {
 
-    protected ArrayOfAtoms aoa;
+	protected ArrayOfAtoms aoa;
 
-    public boolean init(TeXParser tp) {
-        aoa = new ArrayOfAtoms(ArrayAtom.MATRIX);
-        aoa.setOneColumn(true);
-        return true;
-    }
+	@Override
+	public boolean init(TeXParser tp) {
+		aoa = new ArrayOfAtoms(ArrayAtom.MATRIX);
+		aoa.setOneColumn(true);
+		return true;
+	}
 
-    public void add(TeXParser tp, Atom a) {
-        aoa.add(tp, a);
-    }
+	@Override
+	public void add(TeXParser tp, Atom a) {
+		aoa.add(tp, a);
+	}
 
-    public RowAtom steal(TeXParser tp) {
-        return aoa.steal(tp);
-    }
+	@Override
+	public RowAtom steal(TeXParser tp) {
+		return aoa.steal(tp);
+	}
 
-    public Atom getLastAtom() {
-        return aoa.getLastAtom();
-    }
+	@Override
+	public Atom getLastAtom() {
+		return aoa.getLastAtom();
+	}
 
-    public boolean isArray() {
-        return true;
-    }
+	@Override
+	public boolean isArray() {
+		return true;
+	}
 
-    public boolean close(TeXParser tp) {
-        aoa.checkDimensions();
-        Atom a;
-        if (aoa.col == 0) {
-            a = EmptyAtom.get();
-        } else {
-            VRowAtom vra = new VRowAtom(aoa.getFirstColumn());
-            vra.setAddInterline(true);
-            a = vra;
-        }
-        tp.closeConsumer(a);
+	@Override
+	public boolean close(TeXParser tp) {
+		aoa.checkDimensions();
+		Atom a;
+		if (aoa.col == 0) {
+			a = EmptyAtom.get();
+		} else {
+			VRowAtom vra = new VRowAtom(aoa.getFirstColumn());
+			vra.setAddInterline(true);
+			a = vra;
+		}
+		tp.closeConsumer(a);
 
-        return true;
-    }
+		return true;
+	}
 }

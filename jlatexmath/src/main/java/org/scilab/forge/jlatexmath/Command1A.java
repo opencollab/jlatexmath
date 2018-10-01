@@ -47,9 +47,10 @@ package org.scilab.forge.jlatexmath;
 
 public abstract class Command1A extends Command {
 
-    public void add(TeXParser tp, Atom a) {
-        tp.closeConsumer(newI(tp, a));
-    }
+	@Override
+	public void add(TeXParser tp, Atom a) {
+		tp.closeConsumer(newI(tp, a));
+	}
 
-    public abstract Atom newI(TeXParser tp, Atom a);
+	public abstract Atom newI(TeXParser tp, Atom a);
 }

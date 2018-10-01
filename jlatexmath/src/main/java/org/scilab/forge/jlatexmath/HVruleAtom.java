@@ -50,23 +50,24 @@ package org.scilab.forge.jlatexmath;
  */
 public class HVruleAtom extends Atom {
 
-    private final static TeXLength def = new TeXLength(TeXLength.Unit.PT, 0.4);
-    private final TeXLength width;
-    private final TeXLength height;
-    private final TeXLength depth;
-    private final boolean hor;
+	private final static TeXLength def = new TeXLength(TeXLength.Unit.PT, 0.4);
+	private final TeXLength width;
+	private final TeXLength height;
+	private final TeXLength depth;
+	private final boolean hor;
 
-    public HVruleAtom(TeXLength width, TeXLength height, TeXLength depth, boolean hor) {
-        this.width = (!hor && width == null) ? def : width;
-        this.height = (hor && height == null) ? def : height;
-        this.depth = (hor && depth == null) ? TeXLength.getZero() : depth;
-        this.hor = hor;
-    }
+	public HVruleAtom(TeXLength width, TeXLength height, TeXLength depth, boolean hor) {
+		this.width = (!hor && width == null) ? def : width;
+		this.height = (hor && height == null) ? def : height;
+		this.depth = (hor && depth == null) ? TeXLength.getZero() : depth;
+		this.hor = hor;
+	}
 
-    public Box createBox(TeXEnvironment env) {
-        final double w = width == null ? Double.NaN : width.getValue(env);
-        final double h = height == null ? Double.NaN : height.getValue(env);
-        final double d = depth == null ? Double.NaN : depth.getValue(env);
-        return new HVruleBox(w, h, d, hor);
-    }
+	@Override
+	public Box createBox(TeXEnvironment env) {
+		final double w = width == null ? Double.NaN : width.getValue(env);
+		final double h = height == null ? Double.NaN : height.getValue(env);
+		final double d = depth == null ? Double.NaN : depth.getValue(env);
+		return new HVruleBox(w, h, d, hor);
+	}
 }

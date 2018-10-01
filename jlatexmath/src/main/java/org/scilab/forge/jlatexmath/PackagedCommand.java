@@ -47,63 +47,75 @@ package org.scilab.forge.jlatexmath;
 
 class PackagedCommand extends Command {
 
-    final Command com;
-    final JLMPackage pack;
+	final Command com;
+	final JLMPackage pack;
 
-    PackagedCommand(final Command com, final JLMPackage pack) {
-        this.com = com;
-        this.pack = pack;
-    }
+	PackagedCommand(final Command com, final JLMPackage pack) {
+		this.com = com;
+		this.pack = pack;
+	}
 
-    public JLMPackage getPackage() {
-        return pack;
-    }
+	public JLMPackage getPackage() {
+		return pack;
+	}
 
-    public boolean init(TeXParser tp) {
-        return com.init(tp);
-    }
+	@Override
+	public boolean init(TeXParser tp) {
+		return com.init(tp);
+	}
 
-    public void add(TeXParser tp, Atom a) {
-        com.add(tp, a);
-    }
+	@Override
+	public void add(TeXParser tp, Atom a) {
+		com.add(tp, a);
+	}
 
-    public Object clone() {
-        return new PackagedCommand((Command)com.clone(), pack);
-    }
+	@Override
+	public Object clone() {
+		return new PackagedCommand((Command) com.clone(), pack);
+	}
 
-    public Atom getLastAtom() {
-        return com.getLastAtom();
-    }
+	@Override
+	public Atom getLastAtom() {
+		return com.getLastAtom();
+	}
 
-    public boolean close(TeXParser tp) {
-        return com.close(tp);
-    }
+	@Override
+	public boolean close(TeXParser tp) {
+		return com.close(tp);
+	}
 
-    public boolean isClosable() {
-        return com.isClosable();
-    }
+	@Override
+	public boolean isClosable() {
+		return com.isClosable();
+	}
 
-    public RowAtom steal(TeXParser tp) {
-        return com.steal(tp);
-    }
+	@Override
+	public RowAtom steal(TeXParser tp) {
+		return com.steal(tp);
+	}
 
-    public boolean isArray() {
-        return com.isArray();
-    }
+	@Override
+	public boolean isArray() {
+		return com.isArray();
+	}
 
-    public boolean isAmpersandAllowed() {
-        return com.isAmpersandAllowed();
-    }
+	@Override
+	public boolean isAmpersandAllowed() {
+		return com.isAmpersandAllowed();
+	}
 
-    public boolean isHandlingArg() {
-        return com.isHandlingArg();
-    }
+	@Override
+	public boolean isHandlingArg() {
+		return com.isHandlingArg();
+	}
 
-    public void lbrace(TeXParser tp) {
-        com.lbrace(tp);
-    }
+	@Override
+	public void lbrace(TeXParser tp) {
+		com.lbrace(tp);
+	}
 
-    public void rbrace(TeXParser tp) {
-        com.rbrace(tp);
-    }
+	@Override
+	public void rbrace(TeXParser tp) {
+		com.rbrace(tp);
+	}
 }

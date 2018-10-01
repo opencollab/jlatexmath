@@ -47,64 +47,70 @@ package org.scilab.forge.jlatexmath;
 
 public class CommandMathStyles {
 
-    public static class OpenBracket extends Command {
+	public static class OpenBracket extends Command {
 
-        private final TeXConstants.Opener opener;
-        private RowAtom ra;
+		private final TeXConstants.Opener opener;
+		private RowAtom ra;
 
-        public OpenBracket(final TeXConstants.Opener opener) {
-            this.opener = opener;
-        }
+		public OpenBracket(final TeXConstants.Opener opener) {
+			this.opener = opener;
+		}
 
-        public final boolean init(TeXParser tp) {
-            tp.pushMode(TeXParser.MATH_MODE);
-            ra = new RowAtom();
-            return true;
-        }
+		@Override
+		public final boolean init(TeXParser tp) {
+			tp.pushMode(TeXParser.MATH_MODE);
+			ra = new RowAtom();
+			return true;
+		}
 
-        public void add(TeXParser tp, Atom a) {
-            ra.add(a);
-        }
+		@Override
+		public void add(TeXParser tp, Atom a) {
+			ra.add(a);
+		}
 
-        public RowAtom steal(TeXParser tp) {
-            final RowAtom _ra = ra;
-            ra = new RowAtom();
-            return _ra;
-        }
+		@Override
+		public RowAtom steal(TeXParser tp) {
+			final RowAtom _ra = ra;
+			ra = new RowAtom();
+			return _ra;
+		}
 
-        public Atom getLastAtom() {
-            return ra.getLastAtom();
-        }
-    }
+		@Override
+		public Atom getLastAtom() {
+			return ra.getLastAtom();
+		}
+	}
 
-    public static class CloseBracket extends Command {
+	public static class CloseBracket extends Command {
 
-        private final TeXConstants.Opener opener;
-        private final int style;
-        private final String err;
+		private final TeXConstants.Opener opener;
+		private final int style;
+		private final String err;
 
-        public CloseBracket(final TeXConstants.Opener opener, final int style, final String err) {
-            this.opener = opener;
-            this.style = style;
-            this.err = err;
-        }
+		public CloseBracket(final TeXConstants.Opener opener, final int style, final String err) {
+			this.opener = opener;
+			this.style = style;
+			this.err = err;
+		}
 
-        public final boolean init(TeXParser tp) {
-            tp.close();
-            final AtomConsumer ac = tp.peek();
-            if (ac instanceof OpenBracket) {
-                final OpenBracket ob = (OpenBracket)ac;
-                if (ob.opener == opener) {
-                    tp.popMode();
-                    tp.closeConsumer(new MathAtom(ob.ra.simplify(), style));
-                    return false;
-                }
-            }
-            throw new ParseException(tp, err);
-        }
+		@Override
+		public final boolean init(TeXParser tp) {
+			tp.close();
+			final AtomConsumer ac = tp.peek();
+			if (ac instanceof OpenBracket) {
+				final OpenBracket ob = (OpenBracket) ac;
+				if (ob.opener == opener) {
+					tp.popMode();
+					tp.closeConsumer(new MathAtom(ob.ra.simplify(), style));
+					return false;
+				}
+			}
+			throw new ParseException(tp, err);
+		}
 
-        public Object clone() {
-            return this;
-        }
-    }
+		@Override
+		public Object clone() {
+			return this;
+		}
+	}
 }
