@@ -48,6 +48,8 @@ package org.scilab.forge.jlatexmath;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.scilab.forge.jlatexmath.commands.Command;
+
 public abstract class JLMPackage {
 
 	private static Map<String, PackagedCommand> commands;

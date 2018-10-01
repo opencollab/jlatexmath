@@ -1,8 +1,8 @@
-/* DdotsAtom.java
+/* CommandColonFoo.java
  * =========================================================================
  * This file is part of the JLaTeXMath Library - http://forge.scilab.org/jlatexmath
  *
- * Copyright (C) 2009 DENIZET Calixte
+ * Copyright (C) 2018 DENIZET Calixte
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -43,39 +43,94 @@
  *
  */
 
-package org.scilab.forge.jlatexmath;
+package org.scilab.forge.jlatexmath.commands;
 
-import org.scilab.forge.jlatexmath.commands.Command0A;
+import org.scilab.forge.jlatexmath.Atom;
+import org.scilab.forge.jlatexmath.RowAtom;
+import org.scilab.forge.jlatexmath.SymbolAtom;
+import org.scilab.forge.jlatexmath.Symbols;
+import org.scilab.forge.jlatexmath.TeXConstants;
+import org.scilab.forge.jlatexmath.TeXParser;
+import org.scilab.forge.jlatexmath.VCenteredAtom;
 
-/**
- * An atom representing ddots.
- */
-public class DdotsAtom extends Atom {
+public class CommandColonFoo {
 
-	public DdotsAtom() {
-		this.type = TeXConstants.TYPE_INNER;
+	private final static Atom CENTERED_COLON = new VCenteredAtom(Symbols.COLON.changeType(TeXConstants.TYPE_ORDINARY),
+			false);
+
+	public static class ColonFoo extends Command {
+
+		final String sym;
+
+		public ColonFoo(String sym) {
+			this.sym = sym;
+		}
+
+		@Override
+		public boolean init(TeXParser tp) {
+			final RowAtom at = new RowAtom(CENTERED_COLON);
+			at.add(SymbolAtom.get(sym));
+			tp.addToConsumer(at.changeType(TeXConstants.TYPE_RELATION));
+
+			return false;
+		}
 	}
 
-	@Override
-	public Box createBox(TeXEnvironment env) {
-		final Box ldots = ((Command0A) Commands.getUnsafe("ldots")).newI(null).createBox(env);
-		final double w = ldots.getWidth();
-		final Box dot = Symbols.LDOTP.createBox(env);
-		final HorizontalBox hb1 = new HorizontalBox(dot, w, TeXConstants.Align.LEFT);
-		final HorizontalBox hb2 = new HorizontalBox(dot, w, TeXConstants.Align.CENTER);
-		final HorizontalBox hb3 = new HorizontalBox(dot, w, TeXConstants.Align.RIGHT);
-		final Box pt4 = new SpaceAtom(TeXLength.Unit.MU, 0, 4, 0).createBox(env);
-		final VerticalBox vb = new VerticalBox();
-		vb.add(hb1);
-		vb.add(pt4);
-		vb.add(hb2);
-		vb.add(pt4);
-		vb.add(hb3);
+	public static class FooColon extends Command {
 
-		final double h = vb.getHeight() + vb.getDepth();
-		vb.setHeight(h);
-		vb.setDepth(0);
+		final String sym;
 
-		return vb;
+		public FooColon(String sym) {
+			this.sym = sym;
+		}
+
+		@Override
+		public boolean init(TeXParser tp) {
+			final RowAtom at = new RowAtom(SymbolAtom.get(sym), CENTERED_COLON);
+			tp.addToConsumer(at.changeType(TeXConstants.TYPE_RELATION));
+
+			return false;
+		}
+	}
+
+	public static class ColonColonFoo extends Command {
+
+		final String sym;
+
+		public ColonColonFoo(String sym) {
+			this.sym = sym;
+		}
+
+		public ColonColonFoo() {
+			this(null);
+		}
+
+		@Override
+		public boolean init(TeXParser tp) {
+			final RowAtom at = new RowAtom(CENTERED_COLON, CENTERED_COLON);
+			if (sym != null) {
+				at.add(SymbolAtom.get(sym));
+			}
+			tp.addToConsumer(at.changeType(TeXConstants.TYPE_RELATION));
+
+			return false;
+		}
+	}
+
+	public static class FooColonColon extends Command {
+
+		final String sym;
+
+		public FooColonColon(String sym) {
+			this.sym = sym;
+		}
+
+		@Override
+		public boolean init(TeXParser tp) {
+			final RowAtom at = new RowAtom(SymbolAtom.get(sym), CENTERED_COLON, CENTERED_COLON);
+			tp.addToConsumer(at.changeType(TeXConstants.TYPE_RELATION));
+
+			return false;
+		}
 	}
 }

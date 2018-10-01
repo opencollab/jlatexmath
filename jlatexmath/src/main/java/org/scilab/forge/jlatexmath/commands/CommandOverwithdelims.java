@@ -1,8 +1,8 @@
-/* DdotsAtom.java
+/* CommandOverwithdelims.java
  * =========================================================================
  * This file is part of the JLaTeXMath Library - http://forge.scilab.org/jlatexmath
  *
- * Copyright (C) 2009 DENIZET Calixte
+ * Copyright (C) 2018 DENIZET Calixte
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -43,39 +43,81 @@
  *
  */
 
-package org.scilab.forge.jlatexmath;
+package org.scilab.forge.jlatexmath.commands;
 
-import org.scilab.forge.jlatexmath.commands.Command0A;
+import org.scilab.forge.jlatexmath.Atom;
+import org.scilab.forge.jlatexmath.BigDelimiterAtom;
+import org.scilab.forge.jlatexmath.EmptyAtom;
+import org.scilab.forge.jlatexmath.FencedAtom;
+import org.scilab.forge.jlatexmath.RowAtom;
+import org.scilab.forge.jlatexmath.SymbolAtom;
+import org.scilab.forge.jlatexmath.TeXParser;
 
-/**
- * An atom representing ddots.
- */
-public class DdotsAtom extends Atom {
+public abstract class CommandOverwithdelims extends Command {
 
-	public DdotsAtom() {
-		this.type = TeXConstants.TYPE_INNER;
+	protected Atom num;
+	protected RowAtom den;
+	protected Atom left;
+	protected Atom right;
+
+	public CommandOverwithdelims() {
 	}
 
 	@Override
-	public Box createBox(TeXEnvironment env) {
-		final Box ldots = ((Command0A) Commands.getUnsafe("ldots")).newI(null).createBox(env);
-		final double w = ldots.getWidth();
-		final Box dot = Symbols.LDOTP.createBox(env);
-		final HorizontalBox hb1 = new HorizontalBox(dot, w, TeXConstants.Align.LEFT);
-		final HorizontalBox hb2 = new HorizontalBox(dot, w, TeXConstants.Align.CENTER);
-		final HorizontalBox hb3 = new HorizontalBox(dot, w, TeXConstants.Align.RIGHT);
-		final Box pt4 = new SpaceAtom(TeXLength.Unit.MU, 0, 4, 0).createBox(env);
-		final VerticalBox vb = new VerticalBox();
-		vb.add(hb1);
-		vb.add(pt4);
-		vb.add(hb2);
-		vb.add(pt4);
-		vb.add(hb3);
-
-		final double h = vb.getHeight() + vb.getDepth();
-		vb.setHeight(h);
-		vb.setDepth(0);
-
-		return vb;
+	public boolean init(TeXParser tp) {
+		final RowAtom at = tp.steal();
+		this.num = at != null ? at.simplify() : EmptyAtom.get();
+		den = new RowAtom();
+		return true;
 	}
+
+	@Override
+	public RowAtom steal(TeXParser tp) {
+		final RowAtom ra = den;
+		den = new RowAtom();
+		return ra;
+	}
+
+	@Override
+	public Atom getLastAtom() {
+		return den.getLastAtom();
+	}
+
+	@Override
+	public void add(TeXParser tp, Atom a) {
+		if (left == null) {
+			left = a;
+		} else if (right == null) {
+			right = a;
+		} else {
+			den.add(a);
+		}
+	}
+
+	@Override
+	public boolean close(TeXParser tp) {
+		Atom r;
+		if (left instanceof BigDelimiterAtom) {
+			left = ((BigDelimiterAtom) left).delim;
+		}
+		if (right instanceof BigDelimiterAtom) {
+			right = ((BigDelimiterAtom) right).delim;
+		}
+		final Atom a = newI(tp, num, den);
+		if (left instanceof SymbolAtom && right instanceof SymbolAtom) {
+			r = new FencedAtom(a, (SymbolAtom) left, (SymbolAtom) right);
+		} else {
+			r = new RowAtom(left, a, right);
+		}
+		tp.closeConsumer(r);
+
+		return true;
+	}
+
+	@Override
+	public boolean isClosable() {
+		return true;
+	}
+
+	public abstract Atom newI(TeXParser tp, Atom num, Atom den);
 }

@@ -1,8 +1,8 @@
-/* DdotsAtom.java
+/* CommandBE.java
  * =========================================================================
  * This file is part of the JLaTeXMath Library - http://forge.scilab.org/jlatexmath
  *
- * Copyright (C) 2009 DENIZET Calixte
+ * Copyright (C) 2018 DENIZET Calixte
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -43,39 +43,67 @@
  *
  */
 
-package org.scilab.forge.jlatexmath;
+package org.scilab.forge.jlatexmath.commands;
 
-import org.scilab.forge.jlatexmath.commands.Command0A;
+import java.util.ArrayList;
 
-/**
- * An atom representing ddots.
- */
-public class DdotsAtom extends Atom {
+import org.scilab.forge.jlatexmath.Commands;
+import org.scilab.forge.jlatexmath.Env;
+import org.scilab.forge.jlatexmath.NewEnvironmentMacro;
+import org.scilab.forge.jlatexmath.ParseException;
+import org.scilab.forge.jlatexmath.TeXParser;
+import org.scilab.forge.jlatexmath.Env.Begin;
 
-	public DdotsAtom() {
-		this.type = TeXConstants.TYPE_INNER;
+public class CommandBE {
+
+	public static class Begin extends Command {
+
+		@Override
+		public boolean init(TeXParser tp) {
+			final String name = tp.getArgAsString();
+			final Command com = (Command) Commands.get("begin@" + name);
+			if (com == null) {
+				final ArrayList<String> args = NewEnvironmentMacro.executeBeginEnv(tp, name);
+				if (args != null) {
+					final Env.Begin beg = new Env.Begin(name, args);
+					tp.addConsumer(beg);
+					return false;
+				}
+				throw new ParseException(tp, "Environment " + name + " doesn't exist");
+			}
+			if (com.init(tp)) {
+				tp.addConsumer(com);
+			}
+
+			return false;
+		}
 	}
 
-	@Override
-	public Box createBox(TeXEnvironment env) {
-		final Box ldots = ((Command0A) Commands.getUnsafe("ldots")).newI(null).createBox(env);
-		final double w = ldots.getWidth();
-		final Box dot = Symbols.LDOTP.createBox(env);
-		final HorizontalBox hb1 = new HorizontalBox(dot, w, TeXConstants.Align.LEFT);
-		final HorizontalBox hb2 = new HorizontalBox(dot, w, TeXConstants.Align.CENTER);
-		final HorizontalBox hb3 = new HorizontalBox(dot, w, TeXConstants.Align.RIGHT);
-		final Box pt4 = new SpaceAtom(TeXLength.Unit.MU, 0, 4, 0).createBox(env);
-		final VerticalBox vb = new VerticalBox();
-		vb.add(hb1);
-		vb.add(pt4);
-		vb.add(hb2);
-		vb.add(pt4);
-		vb.add(hb3);
+	public static class End extends Command {
 
-		final double h = vb.getHeight() + vb.getDepth();
-		vb.setHeight(h);
-		vb.setDepth(0);
+		@Override
+		public boolean init(TeXParser tp) {
+			tp.close();
+			final String name = tp.getArgAsString();
+			final Command com = (Command) Commands.get("end@" + name);
+			if (com == null) {
+				// don't pop here since we must add the end stuff
+				final Env.Begin beg = tp.getBegin();
+				if (beg != null) {
+					if (name.equals(beg.getName())) {
+						NewEnvironmentMacro.executeEndEnv(tp, name, beg.getArgs());
+						tp.closeConsumer(beg.getBase());
+						return false;
+					}
+					tp.pop();
+					throw new ParseException(tp,
+							"Mismatching environments: \\begin{" + beg.getName() + "} and \\end{" + name + "}");
+				}
 
-		return vb;
+				throw new ParseException(tp, "No matching \\begin{" + name + "}");
+			}
+			com.init(tp);
+			return false;
+		}
 	}
 }

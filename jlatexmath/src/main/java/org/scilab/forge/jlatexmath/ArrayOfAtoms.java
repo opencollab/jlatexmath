@@ -56,7 +56,8 @@ public class ArrayOfAtoms implements AtomConsumer {
 	protected ArrayList<Color> rowcolors;
 	protected ArrayList<Atom> currentRow;
 	protected int type;
-	protected int col, row;
+	public int col;
+	protected int row;
 	protected boolean oneColumn = false;
 
 	public ArrayOfAtoms(final int type) {

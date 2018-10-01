@@ -47,6 +47,8 @@ package org.scilab.forge.jlatexmath;
 
 import java.awt.Color;
 
+import org.scilab.forge.jlatexmath.commands.Command;
+
 public class EnvArray {
 
 	public static final class ColSep extends EmptyAtom {

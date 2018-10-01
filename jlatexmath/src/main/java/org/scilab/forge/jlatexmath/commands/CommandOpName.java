@@ -1,8 +1,8 @@
-/* DdotsAtom.java
+/* CommandOpName.java
  * =========================================================================
  * This file is part of the JLaTeXMath Library - http://forge.scilab.org/jlatexmath
  *
- * Copyright (C) 2009 DENIZET Calixte
+ * Copyright (C) 2018 DENIZET Calixte
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -43,39 +43,46 @@
  *
  */
 
-package org.scilab.forge.jlatexmath;
+package org.scilab.forge.jlatexmath.commands;
 
-import org.scilab.forge.jlatexmath.commands.Command0A;
+import org.scilab.forge.jlatexmath.Atom;
+import org.scilab.forge.jlatexmath.RomanAtom;
+import org.scilab.forge.jlatexmath.RowAtom;
+import org.scilab.forge.jlatexmath.SpaceAtom;
+import org.scilab.forge.jlatexmath.TeXConstants;
+import org.scilab.forge.jlatexmath.TeXParser;
+import org.scilab.forge.jlatexmath.TeXConstants.Muskip;
 
-/**
- * An atom representing ddots.
- */
-public class DdotsAtom extends Atom {
+public class CommandOpName extends Command {
 
-	public DdotsAtom() {
-		this.type = TeXConstants.TYPE_INNER;
+	private final String name;
+	private final String post;
+	private final int limits;
+
+	public CommandOpName(final String name, final String post, final boolean limits) {
+		this.name = name;
+		this.post = post;
+		this.limits = limits ? TeXConstants.SCRIPT_LIMITS : TeXConstants.SCRIPT_NOLIMITS;
+	}
+
+	public CommandOpName(final String name, final boolean limits) {
+		this(name, null, limits);
 	}
 
 	@Override
-	public Box createBox(TeXEnvironment env) {
-		final Box ldots = ((Command0A) Commands.getUnsafe("ldots")).newI(null).createBox(env);
-		final double w = ldots.getWidth();
-		final Box dot = Symbols.LDOTP.createBox(env);
-		final HorizontalBox hb1 = new HorizontalBox(dot, w, TeXConstants.Align.LEFT);
-		final HorizontalBox hb2 = new HorizontalBox(dot, w, TeXConstants.Align.CENTER);
-		final HorizontalBox hb3 = new HorizontalBox(dot, w, TeXConstants.Align.RIGHT);
-		final Box pt4 = new SpaceAtom(TeXLength.Unit.MU, 0, 4, 0).createBox(env);
-		final VerticalBox vb = new VerticalBox();
-		vb.add(hb1);
-		vb.add(pt4);
-		vb.add(hb2);
-		vb.add(pt4);
-		vb.add(hb3);
+	public boolean init(TeXParser tp) {
+		Atom a;
+		if (post == null) {
+			a = new RomanAtom(TeXParser.getAtomForLatinStr(name, true));
+		} else {
+			final RowAtom ra = TeXParser.getAtomForLatinStr(name, new RowAtom(name.length() + 1 + post.length()), true);
+			ra.add(new SpaceAtom(TeXConstants.Muskip.THIN));
+			a = new RomanAtom(TeXParser.getAtomForLatinStr(post, ra, true));
+		}
+		a = a.changeType(TeXConstants.TYPE_BIG_OPERATOR);
+		a.type_limits = limits;
+		tp.addToConsumer(a);
 
-		final double h = vb.getHeight() + vb.getDepth();
-		vb.setHeight(h);
-		vb.setDepth(0);
-
-		return vb;
+		return false;
 	}
 }

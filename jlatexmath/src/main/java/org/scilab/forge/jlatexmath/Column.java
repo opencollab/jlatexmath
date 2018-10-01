@@ -45,6 +45,8 @@
 
 package org.scilab.forge.jlatexmath;
 
+import org.scilab.forge.jlatexmath.commands.Command;
+
 public class Column extends Command {
 
 	protected ArrayOfAtoms aoa;

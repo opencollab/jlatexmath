@@ -1,8 +1,8 @@
-/* DdotsAtom.java
+/* CommandGenfrac.java
  * =========================================================================
  * This file is part of the JLaTeXMath Library - http://forge.scilab.org/jlatexmath
  *
- * Copyright (C) 2009 DENIZET Calixte
+ * Copyright (C) 2018 DENIZET Calixte
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -43,39 +43,58 @@
  *
  */
 
-package org.scilab.forge.jlatexmath;
+package org.scilab.forge.jlatexmath.commands;
 
-import org.scilab.forge.jlatexmath.commands.Command0A;
+import org.scilab.forge.jlatexmath.Atom;
+import org.scilab.forge.jlatexmath.BigDelimiterAtom;
+import org.scilab.forge.jlatexmath.FencedAtom;
+import org.scilab.forge.jlatexmath.FractionAtom;
+import org.scilab.forge.jlatexmath.StyleAtom;
+import org.scilab.forge.jlatexmath.SymbolAtom;
+import org.scilab.forge.jlatexmath.TeXLength;
+import org.scilab.forge.jlatexmath.TeXParser;
 
-/**
- * An atom representing ddots.
- */
-public class DdotsAtom extends Atom {
+public class CommandGenfrac extends Command {
 
-	public DdotsAtom() {
-		this.type = TeXConstants.TYPE_INNER;
-	}
+	private Atom left;
+	private Atom right;
+	private TeXLength l;
+	private int style;
+	private Atom num;
 
 	@Override
-	public Box createBox(TeXEnvironment env) {
-		final Box ldots = ((Command0A) Commands.getUnsafe("ldots")).newI(null).createBox(env);
-		final double w = ldots.getWidth();
-		final Box dot = Symbols.LDOTP.createBox(env);
-		final HorizontalBox hb1 = new HorizontalBox(dot, w, TeXConstants.Align.LEFT);
-		final HorizontalBox hb2 = new HorizontalBox(dot, w, TeXConstants.Align.CENTER);
-		final HorizontalBox hb3 = new HorizontalBox(dot, w, TeXConstants.Align.RIGHT);
-		final Box pt4 = new SpaceAtom(TeXLength.Unit.MU, 0, 4, 0).createBox(env);
-		final VerticalBox vb = new VerticalBox();
-		vb.add(hb1);
-		vb.add(pt4);
-		vb.add(hb2);
-		vb.add(pt4);
-		vb.add(hb3);
+	public void add(TeXParser tp, Atom a) {
+		if (left == null) {
+			left = a;
+		} else if (right == null) {
+			right = a;
+			l = tp.getArgAsLength();
+			style = Math.max(0, tp.getArgAsPositiveInteger());
+		} else if (num == null) {
+			num = a;
+		} else {
+			SymbolAtom L, R;
+			if (left instanceof SymbolAtom) {
+				L = (SymbolAtom) left;
+			} else if (left instanceof BigDelimiterAtom) {
+				L = ((BigDelimiterAtom) left).delim;
+			} else {
+				L = null;
+			}
 
-		final double h = vb.getHeight() + vb.getDepth();
-		vb.setHeight(h);
-		vb.setDepth(0);
+			if (right instanceof SymbolAtom) {
+				R = (SymbolAtom) right;
+			} else if (right instanceof BigDelimiterAtom) {
+				R = ((BigDelimiterAtom) right).delim;
+			} else {
+				R = null;
+			}
+			tp.closeConsumer(CommandGenfrac.get(L, num, a, R, l, style));
+		}
+	}
 
-		return vb;
+	public static Atom get(SymbolAtom left, Atom num, Atom den, SymbolAtom right, TeXLength l, int style) {
+		final Atom a = new FractionAtom(num, den, l);
+		return new StyleAtom(style * 2, new FencedAtom(a, left, right));
 	}
 }

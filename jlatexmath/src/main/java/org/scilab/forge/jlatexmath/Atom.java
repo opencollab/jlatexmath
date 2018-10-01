@@ -77,7 +77,7 @@ public abstract class Atom implements Cloneable {
 
 	}
 
-	protected void setType(final int type) {
+	public void setType(final int type) {
 		this.type = type;
 	}
 

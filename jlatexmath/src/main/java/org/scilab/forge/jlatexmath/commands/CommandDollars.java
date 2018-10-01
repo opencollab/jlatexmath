@@ -1,8 +1,8 @@
-/* DdotsAtom.java
+/* CommandDollars.java
  * =========================================================================
  * This file is part of the JLaTeXMath Library - http://forge.scilab.org/jlatexmath
  *
- * Copyright (C) 2009 DENIZET Calixte
+ * Copyright (C) 2018 DENIZET Calixte
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -43,39 +43,58 @@
  *
  */
 
-package org.scilab.forge.jlatexmath;
+package org.scilab.forge.jlatexmath.commands;
 
-import org.scilab.forge.jlatexmath.commands.Command0A;
+import org.scilab.forge.jlatexmath.Atom;
+import org.scilab.forge.jlatexmath.AtomConsumer;
+import org.scilab.forge.jlatexmath.MathAtom;
+import org.scilab.forge.jlatexmath.RowAtom;
+import org.scilab.forge.jlatexmath.TeXParser;
 
-/**
- * An atom representing ddots.
- */
-public class DdotsAtom extends Atom {
+public class CommandDollars {
 
-	public DdotsAtom() {
-		this.type = TeXConstants.TYPE_INNER;
-	}
+	public static class Dollar extends Command {
 
-	@Override
-	public Box createBox(TeXEnvironment env) {
-		final Box ldots = ((Command0A) Commands.getUnsafe("ldots")).newI(null).createBox(env);
-		final double w = ldots.getWidth();
-		final Box dot = Symbols.LDOTP.createBox(env);
-		final HorizontalBox hb1 = new HorizontalBox(dot, w, TeXConstants.Align.LEFT);
-		final HorizontalBox hb2 = new HorizontalBox(dot, w, TeXConstants.Align.CENTER);
-		final HorizontalBox hb3 = new HorizontalBox(dot, w, TeXConstants.Align.RIGHT);
-		final Box pt4 = new SpaceAtom(TeXLength.Unit.MU, 0, 4, 0).createBox(env);
-		final VerticalBox vb = new VerticalBox();
-		vb.add(hb1);
-		vb.add(pt4);
-		vb.add(hb2);
-		vb.add(pt4);
-		vb.add(hb3);
+		private final boolean dollar;
+		private final int style;
+		private RowAtom ra;
 
-		final double h = vb.getHeight() + vb.getDepth();
-		vb.setHeight(h);
-		vb.setDepth(0);
+		public Dollar(final boolean dollar, final int style) {
+			this.dollar = dollar;
+			this.style = style;
+		}
 
-		return vb;
+		@Override
+		public boolean init(TeXParser tp) {
+			tp.close();
+			final AtomConsumer ac = tp.peek();
+			if ((ac instanceof Dollar) && ((Dollar) ac).dollar == dollar) {
+				// we're closing
+				tp.popMode();
+				tp.closeConsumer(new MathAtom(ra.simplify(), style));
+				return false;
+			}
+			// we're opening
+			tp.pushMode(TeXParser.MATH_MODE);
+			ra = new RowAtom();
+			return true;
+		}
+
+		@Override
+		public void add(TeXParser tp, Atom a) {
+			ra.add(a);
+		}
+
+		@Override
+		public Atom getLastAtom() {
+			return ra.getLastAtom();
+		}
+
+		@Override
+		public RowAtom steal(TeXParser tp) {
+			final RowAtom _ra = ra;
+			ra = new RowAtom();
+			return _ra;
+		}
 	}
 }

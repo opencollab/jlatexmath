@@ -45,6 +45,8 @@
 
 package org.scilab.forge.jlatexmath;
 
+import org.scilab.forge.jlatexmath.commands.Command;
+
 public final class Replacement extends Command {
 
 	private final String code;

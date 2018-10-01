@@ -195,7 +195,7 @@ public class TeXParser {
 		return this.isPartial;
 	}
 
-	void setParseString(final String parseString) {
+	public void setParseString(final String parseString) {
 		this.parseString = parseString;
 		this.len = parseString.length();
 		this.line = 1;

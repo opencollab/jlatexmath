@@ -101,7 +101,7 @@ public class RowAtom extends Atom implements Row {
 		this.elements = elements;
 	}
 
-	protected RowAtom(final int size) {
+	public RowAtom(final int size) {
 		this.elements = new ArrayList<Atom>(size);
 	}
 

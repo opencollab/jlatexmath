@@ -1,8 +1,8 @@
-/* DdotsAtom.java
+/* Command4A.java
  * =========================================================================
  * This file is part of the JLaTeXMath Library - http://forge.scilab.org/jlatexmath
  *
- * Copyright (C) 2009 DENIZET Calixte
+ * Copyright (C) 2018 DENIZET Calixte
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -43,39 +43,29 @@
  *
  */
 
-package org.scilab.forge.jlatexmath;
+package org.scilab.forge.jlatexmath.commands;
 
-import org.scilab.forge.jlatexmath.commands.Command0A;
+import org.scilab.forge.jlatexmath.Atom;
+import org.scilab.forge.jlatexmath.TeXParser;
 
-/**
- * An atom representing ddots.
- */
-public class DdotsAtom extends Atom {
+public abstract class Command4A extends Command {
 
-	public DdotsAtom() {
-		this.type = TeXConstants.TYPE_INNER;
-	}
+	private Atom atom1;
+	private Atom atom2;
+	private Atom atom3;
 
 	@Override
-	public Box createBox(TeXEnvironment env) {
-		final Box ldots = ((Command0A) Commands.getUnsafe("ldots")).newI(null).createBox(env);
-		final double w = ldots.getWidth();
-		final Box dot = Symbols.LDOTP.createBox(env);
-		final HorizontalBox hb1 = new HorizontalBox(dot, w, TeXConstants.Align.LEFT);
-		final HorizontalBox hb2 = new HorizontalBox(dot, w, TeXConstants.Align.CENTER);
-		final HorizontalBox hb3 = new HorizontalBox(dot, w, TeXConstants.Align.RIGHT);
-		final Box pt4 = new SpaceAtom(TeXLength.Unit.MU, 0, 4, 0).createBox(env);
-		final VerticalBox vb = new VerticalBox();
-		vb.add(hb1);
-		vb.add(pt4);
-		vb.add(hb2);
-		vb.add(pt4);
-		vb.add(hb3);
-
-		final double h = vb.getHeight() + vb.getDepth();
-		vb.setHeight(h);
-		vb.setDepth(0);
-
-		return vb;
+	public void add(TeXParser tp, Atom a) {
+		if (atom1 == null) {
+			atom1 = a;
+		} else if (atom2 == null) {
+			atom2 = a;
+		} else if (atom3 == null) {
+			atom3 = a;
+		} else {
+			tp.closeConsumer(newI(tp, atom1, atom2, atom3, a));
+		}
 	}
+
+	public abstract Atom newI(TeXParser tp, Atom a, Atom b, Atom c, Atom d);
 }

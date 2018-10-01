@@ -1,8 +1,8 @@
-/* DdotsAtom.java
+/* CommandSfrac.java
  * =========================================================================
  * This file is part of the JLaTeXMath Library - http://forge.scilab.org/jlatexmath
  *
- * Copyright (C) 2009 DENIZET Calixte
+ * Copyright (C) 2018 DENIZET Calixte
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -43,39 +43,42 @@
  *
  */
 
-package org.scilab.forge.jlatexmath;
+package org.scilab.forge.jlatexmath.commands;
 
-import org.scilab.forge.jlatexmath.commands.Command0A;
+import org.scilab.forge.jlatexmath.Atom;
+import org.scilab.forge.jlatexmath.RowAtom;
+import org.scilab.forge.jlatexmath.ScaleAtom;
+import org.scilab.forge.jlatexmath.SpaceAtom;
+import org.scilab.forge.jlatexmath.Symbols;
+import org.scilab.forge.jlatexmath.TeXLength;
+import org.scilab.forge.jlatexmath.TeXParser;
+import org.scilab.forge.jlatexmath.VRowAtom;
+import org.scilab.forge.jlatexmath.TeXLength.Unit;
 
-/**
- * An atom representing ddots.
- */
-public class DdotsAtom extends Atom {
-
-	public DdotsAtom() {
-		this.type = TeXConstants.TYPE_INNER;
-	}
+public class CommandSfrac extends Command2A {
 
 	@Override
-	public Box createBox(TeXEnvironment env) {
-		final Box ldots = ((Command0A) Commands.getUnsafe("ldots")).newI(null).createBox(env);
-		final double w = ldots.getWidth();
-		final Box dot = Symbols.LDOTP.createBox(env);
-		final HorizontalBox hb1 = new HorizontalBox(dot, w, TeXConstants.Align.LEFT);
-		final HorizontalBox hb2 = new HorizontalBox(dot, w, TeXConstants.Align.CENTER);
-		final HorizontalBox hb3 = new HorizontalBox(dot, w, TeXConstants.Align.RIGHT);
-		final Box pt4 = new SpaceAtom(TeXLength.Unit.MU, 0, 4, 0).createBox(env);
-		final VerticalBox vb = new VerticalBox();
-		vb.add(hb1);
-		vb.add(pt4);
-		vb.add(hb2);
-		vb.add(pt4);
-		vb.add(hb3);
+	public Atom newI(TeXParser tp, Atom a, Atom b) {
+		double scaleX = 0.75;
+		double scaleY = 0.75;
+		double raise1 = 0.45;
+		double shiftL = -0.13;
+		double shiftR = -0.065;
+		Atom slash = Symbols.SLASH;
 
-		final double h = vb.getHeight() + vb.getDepth();
-		vb.setHeight(h);
-		vb.setDepth(0);
+		if (!tp.isMathMode()) {
+			scaleX = 0.6;
+			scaleY = 0.6;
+			raise1 = 0.75;
+			shiftL = -0.24;
+			shiftR = -0.24;
+			slash = new VRowAtom(new ScaleAtom(Symbols.TEXTFRACTIONSOLIDUS, 1.25, 0.65));
+			((VRowAtom) slash).setRaise(TeXLength.Unit.EX, 0.4);
+		}
 
-		return vb;
+		final VRowAtom snum = new VRowAtom(new ScaleAtom(a, scaleX, scaleY));
+		snum.setRaise(TeXLength.Unit.EX, raise1);
+		return new RowAtom(snum, new SpaceAtom(TeXLength.Unit.EM, shiftL, 0., 0.), slash,
+				new SpaceAtom(TeXLength.Unit.EM, shiftR, 0., 0.), new ScaleAtom(b, scaleX, scaleY));
 	}
 }
