@@ -1,3 +1,6 @@
+jlatexmath (1.0.8)
+        * Fix javadoc so that project builds with Java 11 and 12
+
 jlatexmath (1.0.7)
 	* Fix °C
 
