@@ -81,16 +81,15 @@ public class Dummy {
     }
 
     /**
-     * Changes the type of the atom
-     *
-     * @param t the new type
+     * Returns the type of the atom
+     * 
+     * @return the type of the atom
      */
     public int getType() {
         return type;
     }
 
     /**
-     *
      * @return the changed type, or the old left type if it hasn't been changed
      */
     public int getLeftType() {

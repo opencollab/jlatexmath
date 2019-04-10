@@ -374,7 +374,7 @@ public class TeXFormula {
     }
 
     /**
-     * @param a formula
+     * @param formula a formula
      * @return a partial TeXFormula containing the valid part of formula
      */
     public static TeXFormula getPartialTeXFormula(String formula) {
@@ -867,7 +867,8 @@ public class TeXFormula {
      * @param formula the formula
      * @param style the style
      * @param size the size
-     * @param transparency, if true the background is transparent
+     * @param fg the foreground color
+     * @param bg the background color
      * @return the generated image
      */
     public static Image createBufferedImage(String formula, int style, float size, Color fg, Color bg) throws ParseException {
@@ -891,10 +892,10 @@ public class TeXFormula {
     }
 
     /**
-     * @param formula the formula
      * @param style the style
      * @param size the size
-     * @param transparency, if true the background is transparent
+     * @param fg the foreground color
+     * @param bg the background color
      * @return the generated image
      */
     public Image createBufferedImage(int style, float size, Color fg, Color bg) throws ParseException {
