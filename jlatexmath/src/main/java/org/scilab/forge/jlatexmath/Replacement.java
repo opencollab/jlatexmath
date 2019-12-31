@@ -45,21 +45,26 @@
 
 package org.scilab.forge.jlatexmath;
 
+import org.scilab.forge.jlatexmath.commands.Command;
+
 public final class Replacement extends Command {
 
-    private final String code;
+	private final String code;
 
-    public Replacement(final String code) {
-        this.code = code;
-    }
+	public Replacement(final String code) {
+		this.code = code;
+	}
 
-    public boolean init(TeXParser tp) {
-        tp.addString(code);
-        return false;
-    }
+	@Override
+	public boolean init(TeXParser tp) {
+		tp.addString(code);
+		return false;
+	}
 
-    public Object clone() {
-        // No need to clone it since with a 0 args command we can't have \foo{\foo...
-        return this;
-    }
+	@Override
+	public Command duplicate() {
+		// No need to clone it since with a 0 args command we can't have
+		// \foo{\foo...
+		return this;
+	}
 }

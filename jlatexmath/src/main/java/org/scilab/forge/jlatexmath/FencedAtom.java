@@ -51,118 +51,126 @@ package org.scilab.forge.jlatexmath;
 import java.util.List;
 
 /**
- * An atom representing a base atom surrounded with delimiters that change their size
- * according to the height of the base.
+ * An atom representing a base atom surrounded with delimiters that change their
+ * size according to the height of the base.
  */
 public class FencedAtom extends Atom {
 
-    // base atom
-    private final Atom base;
+	// base atom
+	private final Atom base;
 
-    // delimiters
-    private SymbolAtom left = null;
-    private SymbolAtom right = null;
-    private final List<MiddleAtom> middle;
+	// delimiters
+	private SymbolAtom left = null;
+	private SymbolAtom right = null;
+	private final List<MiddleAtom> middle;
 
-    /**
-     * Creates a new FencedAtom from the given base and delimiters
-     *
-     * @param base the base to be surrounded with delimiters
-     * @param l the left delimiter
-     * @param r the right delimiter
-     */
-    public FencedAtom(Atom base, SymbolAtom l, SymbolAtom r) {
-        this(base, l, null, r);
-    }
+	/**
+	 * Creates a new FencedAtom from the given base and delimiters
+	 *
+	 * @param base
+	 *            the base to be surrounded with delimiters
+	 * @param l
+	 *            the left delimiter
+	 * @param r
+	 *            the right delimiter
+	 */
+	public FencedAtom(Atom base, SymbolAtom l, SymbolAtom r) {
+		this(base, l, null, r);
+	}
 
-    public FencedAtom(Atom base, SymbolAtom l, List m, SymbolAtom r) {
-        this.base = base;
-        left = l == Symbols.NORMALDOT ? null : l;
-        right = r == Symbols.NORMALDOT ? null : r;
-        middle =  m;
-    }
+	public FencedAtom(Atom base, SymbolAtom l, List m, SymbolAtom r) {
+		this.base = base;
+		left = l == Symbols.NORMALDOT ? null : l;
+		right = r == Symbols.NORMALDOT ? null : r;
+		middle = m;
+	}
 
-    /**
-     * Centers the given box with resprect to the given axis, by setting an appropriate
-     * shift value.
-     *
-     * @param box
-     *           box to be vertically centered with respect to the axis
-     */
-    private static Box center(Box box, double axis) {
-        final double h = box.getHeight();
-        final double total = h + box.getDepth();
-        box.setShift(-(total / 2. - h) - axis);
-        return box;
-    }
+	/**
+	 * Centers the given box with resprect to the given axis, by setting an
+	 * appropriate shift value.
+	 *
+	 * @param box
+	 *            box to be vertically centered with respect to the axis
+	 */
+	private static Box center(Box box, double axis) {
+		final double h = box.getHeight();
+		final double total = h + box.getDepth();
+		box.setShift(-(total / 2. - h) - axis);
+		return box;
+	}
 
-    public Box createBox(TeXEnvironment env) {
-        final TeXFont tf = env.getTeXFont();
-        Box content = base.createBox(env);
-        final double axis = tf.getAxisHeight(env.getStyle());
-        final double delta = Math.max(content.getHeight() - axis, content.getDepth() + axis);
-        final double minHeight = Math.max((delta / 500.) * TeXLength.getLength("delimiterfactor", env), 2. * delta - TeXLength.getLength("delimitershortfall", env));
+	@Override
+	public Box createBox(TeXEnvironment env) {
+		final TeXFont tf = env.getTeXFont();
+		Box content = base.createBox(env);
+		final double axis = tf.getAxisHeight(env.getStyle());
+		final double delta = Math.max(content.getHeight() - axis, content.getDepth() + axis);
+		final double minHeight = Math.max((delta / 500.) * TeXLength.getLength("delimiterfactor", env),
+				2. * delta - TeXLength.getLength("delimitershortfall", env));
 
-        // construct box
-        final HorizontalBox hBox = new HorizontalBox();
+		// construct box
+		final HorizontalBox hBox = new HorizontalBox();
 
-        if (middle != null) {
-            for (final MiddleAtom at : middle) {
-                final Atom a = at.getBase();
-                if (a instanceof SymbolAtom) {
-                    final Box b = DelimiterFactory.create(((SymbolAtom) a).getCf(), env, minHeight);
-                    at.setBox(center(b, axis));
-                }
-            }
-            if (middle.size() != 0) {
-                content = base.createBox(env);
-            }
-        }
+		if (middle != null) {
+			for (final MiddleAtom at : middle) {
+				final Atom a = at.getBase();
+				if (a instanceof SymbolAtom) {
+					final Box b = DelimiterFactory.create(((SymbolAtom) a).getCf(), env, minHeight);
+					at.setBox(center(b, axis));
+				}
+			}
+			if (middle.size() != 0) {
+				content = base.createBox(env);
+			}
+		}
 
-        // left delimiter
-        if (left != null) {
-            final Box b = DelimiterFactory.create(left.getCf(), env, minHeight);
-            hBox.add(center(b, axis));
-        }
+		// left delimiter
+		if (left != null) {
+			final Box b = DelimiterFactory.create(left.getCf(), env, minHeight);
+			hBox.add(center(b, axis));
+		}
 
-        // glue between left delimiter and content (if not whitespace)
-        if (!(base instanceof SpaceAtom)) {
-            final Box glue = Glue.get(TeXConstants.TYPE_OPENING, base.getLeftType(), env);
-            if (glue != null) {
-                hBox.add(glue);
-            }
-        }
+		// glue between left delimiter and content (if not whitespace)
+		if (!(base instanceof SpaceAtom)) {
+			final Box glue = Glue.get(TeXConstants.TYPE_OPENING, base.getLeftType(), env);
+			if (glue != null) {
+				hBox.add(glue);
+			}
+		}
 
-        // add content
-        hBox.add(content);
+		// add content
+		hBox.add(content);
 
-        // glue between right delimiter and content (if not whitespace)
-        if (!(base instanceof SpaceAtom)) {
-            final Box glue = Glue.get(base.getRightType(), TeXConstants.TYPE_CLOSING, env);
-            if (glue != null) {
-                hBox.add(glue);
-            }
-        }
+		// glue between right delimiter and content (if not whitespace)
+		if (!(base instanceof SpaceAtom)) {
+			final Box glue = Glue.get(base.getRightType(), TeXConstants.TYPE_CLOSING, env);
+			if (glue != null) {
+				hBox.add(glue);
+			}
+		}
 
-        // right delimiter
-        if (right != null) {
-            final Box b = DelimiterFactory.create(right.getCf(), env, minHeight);
-            hBox.add(center(b, axis));
-        }
+		// right delimiter
+		if (right != null) {
+			final Box b = DelimiterFactory.create(right.getCf(), env, minHeight);
+			hBox.add(center(b, axis));
+		}
 
-        return hBox;
-    }
+		return hBox;
+	}
 
-    public int getLeftType() {
-        return TeXConstants.TYPE_OPENING;
+	@Override
+	public int getLeftType() {
+		return TeXConstants.TYPE_OPENING;
 
-    }
+	}
 
-    public int getRightType() {
-        return TeXConstants.TYPE_CLOSING;
-    }
+	@Override
+	public int getRightType() {
+		return TeXConstants.TYPE_CLOSING;
+	}
 
-    public String toString() {
-        return "FencedAtom: left: " + left + " base: " + base + " right: " + right;
-    }
+	@Override
+	public String toString() {
+		return "FencedAtom: left: " + left + " base: " + base + " right: " + right;
+	}
 }

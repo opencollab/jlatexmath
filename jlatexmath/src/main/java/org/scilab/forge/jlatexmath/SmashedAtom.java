@@ -50,30 +50,31 @@ package org.scilab.forge.jlatexmath;
  */
 public class SmashedAtom extends Atom {
 
-    private Atom at;
-    private boolean h = true, d = true;
+	private Atom at;
+	private boolean h = true, d = true;
 
-    public SmashedAtom(Atom at, char opt) {
-        this.at = at;
-        if (opt == 't') {
-            d = false;
-        } else if (opt == 'b') {
-            h = false;
-        }
-    }
+	public SmashedAtom(Atom at, char opt) {
+		this.at = at;
+		if (opt == 't') {
+			d = false;
+		} else if (opt == 'b') {
+			h = false;
+		}
+	}
 
-    public SmashedAtom(Atom at) {
-        this.at = at;
-    }
+	public SmashedAtom(Atom at) {
+		this.at = at;
+	}
 
-    public Box createBox(TeXEnvironment env) {
-        Box b = at.createBox(env);
-        if (h) {
-            b.setHeight(0.);
-        }
-        if (d) {
-            b.setDepth(0.);
-        }
-        return b;
-    }
+	@Override
+	public Box createBox(TeXEnvironment env) {
+		Box b = at.createBox(env);
+		if (h) {
+			b.setHeight(0.);
+		}
+		if (d) {
+			b.setDepth(0.);
+		}
+		return b;
+	}
 }

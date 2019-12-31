@@ -47,27 +47,29 @@
 package org.scilab.forge.jlatexmath;
 
 /**
- * An atom representing exactly one alphanumeric character and the text style in which
- * it should be drawn.
+ * An atom representing exactly one alphanumeric character and the text style in
+ * which it should be drawn.
  */
 public class MathCharAtom extends CharAtom {
 
-    public MathCharAtom(char c, boolean mathMode) {
-        super(c, mathMode);
-    }
+	public MathCharAtom(char c, boolean mathMode) {
+		super(c, mathMode);
+	}
 
-    public Box createBox(TeXEnvironment env) {
-        final TeXFont tf = env.getTeXFont();
-        final boolean sroman = tf.getRoman();
+	@Override
+	public Box createBox(TeXEnvironment env) {
+		final TeXFont tf = env.getTeXFont();
+		final boolean sroman = tf.getRoman();
 
-        tf.setRoman(false);
-        final Box box = super.createBox(env);
-        tf.setRoman(sroman);
+		tf.setRoman(false);
+		final Box box = super.createBox(env);
+		tf.setRoman(sroman);
 
-        return box;
-    }
+		return box;
+	}
 
-    public String toString() {
-        return "MathCharAtom: \'" + c + "\'";
-    }
+	@Override
+	public String toString() {
+		return "MathCharAtom: \'" + c + "\'";
+	}
 }

@@ -51,38 +51,39 @@ import java.util.Map;
 
 public class NewCommandMacro {
 
-    private static final Map<String, Macro> macros = new HashMap<String, Macro>();
+	private static final Map<String, Macro> macros = new HashMap<String, Macro>();
 
-    public NewCommandMacro() {
-    }
+	public NewCommandMacro() {
+	}
 
-    public static void clear() {
-        macros.clear();
-    }
+	public static void clear() {
+		macros.clear();
+	}
 
-    public static void addNewCommand(TeXParser tp, String name, String code, int nbargs, boolean re) throws ParseException {
-        if (name.equals("CancelColor")) {
-            CancelAtom.handleColor(tp, code);
-            return;
-        }
+	public static void addNewCommand(TeXParser tp, String name, String code, int nbargs, boolean re)
+			throws ParseException {
+		if (name.equals("CancelColor")) {
+			CancelAtom.handleColor(tp, code);
+			return;
+		}
 
-        if (macros.get(name) != null && !re) {
-            throw new ParseException(tp, "Command " + name + " already exists ! Use renewcommand instead ...");
-        }
-        macros.put(name, new Macro(code, nbargs));
-    }
+		if (macros.get(name) != null && !re) {
+			throw new ParseException(tp, "Command " + name + " already exists ! Use renewcommand instead ...");
+		}
+		macros.put(name, new Macro(code, nbargs));
+	}
 
-    public static boolean exec(final TeXParser tp, final String name) {
-        final Macro mac = macros.get(name);
-        if (mac == null) {
-            return false;
-        }
-        final int nargs = mac.getNArgs();
-        final ArrayList<String> args = tp.getArgsAsStrings(nargs);
-        final String code = mac.get(tp, args);
-        tp.addString(code);
-        tp.cancelPrevPos();
+	public static boolean exec(final TeXParser tp, final String name) {
+		final Macro mac = macros.get(name);
+		if (mac == null) {
+			return false;
+		}
+		final int nargs = mac.getNArgs();
+		final ArrayList<String> args = tp.getArgsAsStrings(nargs);
+		final String code = mac.get(tp, args);
+		tp.addString(code);
+		tp.cancelPrevPos();
 
-        return true;
-    }
+		return true;
+	}
 }

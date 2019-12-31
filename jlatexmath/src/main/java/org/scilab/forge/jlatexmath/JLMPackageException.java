@@ -50,7 +50,7 @@ package org.scilab.forge.jlatexmath;
  */
 public class JLMPackageException extends JMathTeXException {
 
-    public JLMPackageException(final String str) {
-        super(str);
-    }
+	public JLMPackageException(final String str) {
+		super(str);
+	}
 }

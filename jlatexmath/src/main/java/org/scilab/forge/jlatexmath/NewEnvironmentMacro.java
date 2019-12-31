@@ -51,38 +51,41 @@ import java.util.Map;
 
 public class NewEnvironmentMacro {
 
-    private static final Map<String, Env> envs = new HashMap<String, Env>();
+	private static final Map<String, Env> envs = new HashMap<String, Env>();
 
-    public NewEnvironmentMacro() { }
+	public NewEnvironmentMacro() {
+	}
 
-    public static void clear() {
-        envs.clear();
-    }
+	public static void clear() {
+		envs.clear();
+	}
 
-    public static void addNewEnvironment(TeXParser tp, String name, String before, String after, int nbargs, boolean re) throws ParseException {
-        if (envs.get(name) != null && !re) {
-            throw new ParseException(tp, "Environment " + name + " already exists ! Use renewenvironment instead ...");
-        }
-        envs.put(name, new Env(before, after, nbargs));
-    }
+	public static void addNewEnvironment(TeXParser tp, String name, String before, String after, int nbargs, boolean re)
+			throws ParseException {
+		if (envs.get(name) != null && !re) {
+			throw new ParseException(tp, "Environment " + name + " already exists ! Use renewenvironment instead ...");
+		}
+		envs.put(name, new Env(before, after, nbargs));
+	}
 
-    public static ArrayList<String> executeBeginEnv(final TeXParser tp, final String name) {
-        final Env env = envs.get(name);
-        if (env == null) {
-            return null;
-        }
-        final int nargs = env.getNArgs();
-        final ArrayList<String> args = tp.getArgsAsStrings(nargs);
-        final String before = env.getBefore(tp, args);
-        tp.addString(before);
+	public static ArrayList<String> executeBeginEnv(final TeXParser tp, final String name) {
+		final Env env = envs.get(name);
+		if (env == null) {
+			return null;
+		}
+		final int nargs = env.getNArgs();
+		final ArrayList<String> args = tp.getArgsAsStrings(nargs);
+		final String before = env.getBefore(tp, args);
+		tp.addString(before);
 
-        return args;
-    }
+		return args;
+	}
 
-    public static void executeEndEnv(final TeXParser tp, final String name, final ArrayList<String> args) {
-        final Env env = envs.get(name);
-        final String after = env.getAfter(tp, args);
-        tp.addString(after, true /* to come back here after the string has been parsed */);
-        tp.parse();
-    }
+	public static void executeEndEnv(final TeXParser tp, final String name, final ArrayList<String> args) {
+		final Env env = envs.get(name);
+		final String after = env.getAfter(tp, args);
+		tp.addString(after,
+				true /* to come back here after the string has been parsed */);
+		tp.parse();
+	}
 }

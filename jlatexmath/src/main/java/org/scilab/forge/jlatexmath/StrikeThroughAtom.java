@@ -50,24 +50,25 @@ package org.scilab.forge.jlatexmath;
  */
 public class StrikeThroughAtom extends Atom {
 
-    private Atom at;
+	private Atom at;
 
-    public StrikeThroughAtom(Atom at) {
-        this.at = at;
-    }
+	public StrikeThroughAtom(Atom at) {
+		this.at = at;
+	}
 
-    public Box createBox(TeXEnvironment env) {
-        TeXFont tf = env.getTeXFont();
-        int style = env.getStyle();
-        double axis = tf.getAxisHeight(style);
-        double drt = tf.getDefaultRuleThickness(style);
-        Box b = at.createBox(env);
-        HorizontalRule rule = new HorizontalRule(drt, b.getWidth(), -axis + drt, false);
-        HorizontalBox hb = new HorizontalBox();
-        hb.add(b);
-        hb.add(new StrutBox(-b.getWidth(), 0., 0., 0.));
-        hb.add(rule);
+	@Override
+	public Box createBox(TeXEnvironment env) {
+		TeXFont tf = env.getTeXFont();
+		int style = env.getStyle();
+		double axis = tf.getAxisHeight(style);
+		double drt = tf.getDefaultRuleThickness(style);
+		Box b = at.createBox(env);
+		HorizontalRule rule = new HorizontalRule(drt, b.getWidth(), -axis + drt, false);
+		HorizontalBox hb = new HorizontalBox();
+		hb.add(b);
+		hb.add(new StrutBox(-b.getWidth(), 0., 0., 0.));
+		hb.add(rule);
 
-        return hb;
-    }
+		return hb;
+	}
 }

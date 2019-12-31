@@ -55,36 +55,39 @@ import java.awt.geom.Rectangle2D;
  */
 public class HorizontalRule extends Box {
 
-    protected double speShift;
+	protected double speShift;
 
-    public HorizontalRule(double thickness, double width, double s) {
-        height = thickness;
-        this.width = width;
-        shift = s;
-        speShift = 0.;
-    }
+	public HorizontalRule(double thickness, double width, double s) {
+		height = thickness;
+		this.width = width;
+		shift = s;
+		speShift = 0.;
+	}
 
-    public HorizontalRule(double thickness, double width, double s, boolean trueShift) {
-        height = thickness;
-        this.width = width;
-        if (trueShift) {
-            shift = s;
-            speShift = 0.;
-        } else {
-            shift = 0.;
-            speShift = s;
-        }
-    }
+	public HorizontalRule(double thickness, double width, double s, boolean trueShift) {
+		height = thickness;
+		this.width = width;
+		if (trueShift) {
+			shift = s;
+			speShift = 0.;
+		} else {
+			shift = 0.;
+			speShift = s;
+		}
+	}
 
-    public void draw(Graphics2D g2, double x, double y) {
-        g2.fill(new Rectangle2D.Double(x, y - height + speShift, width, height));
-    }
+	@Override
+	public void draw(Graphics2D g2, double x, double y) {
+		g2.fill(new Rectangle2D.Double(x, y - height + speShift, width, height));
+	}
 
-    public Area getArea() {
-        return new Area(new Rectangle2D.Double(0., -height + speShift, width, height));
-    }
+	@Override
+	public Area getArea() {
+		return new Area(new Rectangle2D.Double(0., -height + speShift, width, height));
+	}
 
-    public FontInfo getLastFont() {
-        return null;
-    }
+	@Override
+	public FontInfo getLastFont() {
+		return null;
+	}
 }

@@ -50,25 +50,29 @@ package org.scilab.forge.jlatexmath;
  */
 public class EmptyAtom extends Atom {
 
-    public EmptyAtom() { }
+	public EmptyAtom() {
+	}
 
-    public static EmptyAtom get() {
-        return new EmptyAtom();
-    }
+	public static EmptyAtom get() {
+		return new EmptyAtom();
+	}
 
-    public Box createBox(TeXEnvironment env) {
-        return StrutBox.getEmpty();
-    }
+	@Override
+	public Box createBox(TeXEnvironment env) {
+		return StrutBox.getEmpty();
+	}
 
-    public Atom changeLimits(final int lim) {
-        Atom a = this.clone();
-        a.type_limits = lim;
-        return a;
-    }
+	@Override
+	public Atom changeLimits(final int lim) {
+		Atom a = this.duplicate();
+		a.type_limits = lim;
+		return a;
+	}
 
-    public Atom changeType(final int type) {
-        final Atom a = this.clone();
-        a.type = type;
-        return a;
-    }
+	@Override
+	public Atom changeType(final int type) {
+		final Atom a = this.duplicate();
+		a.type = type;
+		return a;
+	}
 }

@@ -50,32 +50,36 @@ package org.scilab.forge.jlatexmath;
  */
 public class ScaleAtom extends Atom {
 
-    protected final Atom base;
-    private final double xscl, yscl;
+	protected final Atom base;
+	private final double xscl, yscl;
 
-    public ScaleAtom(Atom base, double xscl, double yscl) {
-        this.base = base;
-        this.xscl = xscl;
-        this.yscl = yscl;
-    }
+	public ScaleAtom(Atom base, double xscl, double yscl) {
+		this.base = base;
+		this.xscl = xscl;
+		this.yscl = yscl;
+	}
 
-    public ScaleAtom(Atom base, double scl) {
-        this(base, scl, scl);
-    }
+	public ScaleAtom(Atom base, double scl) {
+		this(base, scl, scl);
+	}
 
-    public Box createBox(TeXEnvironment env) {
-        return new ScaleBox(base.createBox(env), xscl, yscl);
-    }
+	@Override
+	public Box createBox(TeXEnvironment env) {
+		return new ScaleBox(base.createBox(env), xscl, yscl);
+	}
 
-    public int getLeftType() {
-        return base.getLeftType();
-    }
+	@Override
+	public int getLeftType() {
+		return base.getLeftType();
+	}
 
-    public int getRightType() {
-        return base.getRightType();
-    }
+	@Override
+	public int getRightType() {
+		return base.getRightType();
+	}
 
-    public int getLimits() {
-        return base.getLimits();
-    }
+	@Override
+	public int getLimits() {
+		return base.getLimits();
+	}
 }

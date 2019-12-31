@@ -50,35 +50,36 @@ package org.scilab.forge.jlatexmath;
  */
 public class OgonekAtom extends Atom {
 
-    private static final SymbolAtom OGONEK = SymbolAtom.get("ogonek");
-    private Atom base;
+	private static final SymbolAtom OGONEK = SymbolAtom.get("ogonek");
+	private Atom base;
 
-    public OgonekAtom(Atom base) {
-        this.base = base;
-    }
+	public OgonekAtom(Atom base) {
+		this.base = base;
+	}
 
-    public Box createBox(TeXEnvironment env) {
-        Box b = base.createBox(env);
-        VerticalBox vb = new VerticalBox();
-        vb.add(b);
-        Char ch = env.getTeXFont().getChar(OGONEK.getCf(), env.getStyle());
-        double italic = ch.getItalic();
-        Box ogonek = new CharBox(ch);
-        Box y;
-        if (Math.abs(italic) > TeXFormula.PREC) {
-            HorizontalBox hb = new HorizontalBox(new StrutBox(-italic, 0, 0, 0));
-            hb.add(ogonek);
-            y = hb;
-        } else {
-            y = ogonek;
-        }
+	@Override
+	public Box createBox(TeXEnvironment env) {
+		Box b = base.createBox(env);
+		VerticalBox vb = new VerticalBox();
+		vb.add(b);
+		Char ch = env.getTeXFont().getChar(OGONEK.getCf(), env.getStyle());
+		double italic = ch.getItalic();
+		Box ogonek = new CharBox(ch);
+		Box y;
+		if (Math.abs(italic) > TeXFormula.PREC) {
+			HorizontalBox hb = new HorizontalBox(new StrutBox(-italic, 0, 0, 0));
+			hb.add(ogonek);
+			y = hb;
+		} else {
+			y = ogonek;
+		}
 
-        Box og = new HorizontalBox(y, b.getWidth(), TeXConstants.Align.RIGHT);
-        vb.add(new StrutBox(0, -ogonek.getHeight(), 0, 0));
-        vb.add(og);
-        double f = vb.getHeight() + vb.getDepth();
-        vb.setHeight(b.getHeight());
-        vb.setDepth(f - b.getHeight());
-        return vb;
-    }
+		Box og = new HorizontalBox(y, b.getWidth(), TeXConstants.Align.RIGHT);
+		vb.add(new StrutBox(0, -ogonek.getHeight(), 0, 0));
+		vb.add(og);
+		double f = vb.getHeight() + vb.getDepth();
+		vb.setHeight(b.getHeight());
+		vb.setDepth(f - b.getHeight());
+		return vb;
+	}
 }

@@ -50,18 +50,19 @@ package org.scilab.forge.jlatexmath;
  */
 public class MonoScaleAtom extends ScaleAtom {
 
-    private final double factor;
+	private final double factor;
 
-    public MonoScaleAtom(Atom base, double factor) {
-        super(base, factor, factor);
-        this.factor = factor;
-    }
+	public MonoScaleAtom(Atom base, double factor) {
+		super(base, factor, factor);
+		this.factor = factor;
+	}
 
-    public Box createBox(TeXEnvironment env) {
-        final double f = env.getScaleFactor();
-        env.setScaleFactor(factor);
-        final Box b = new ScaleBox(base.createBox(env), factor / f);
-        env.setScaleFactor(f);
-        return b;
-    }
+	@Override
+	public Box createBox(TeXEnvironment env) {
+		final double f = env.getScaleFactor();
+		env.setScaleFactor(factor);
+		final Box b = new ScaleBox(base.createBox(env), factor / f);
+		env.setScaleFactor(f);
+		return b;
+	}
 }

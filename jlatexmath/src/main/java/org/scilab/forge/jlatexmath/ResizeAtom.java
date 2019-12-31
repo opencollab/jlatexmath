@@ -50,70 +50,74 @@ package org.scilab.forge.jlatexmath;
  */
 public class ResizeAtom extends Atom {
 
-    private Atom base;
-    private TeXLength.Unit wunit;
-    private TeXLength.Unit hunit;
-    private double w, h;
-    private boolean keepaspectratio;
+	private Atom base;
+	private TeXLength.Unit wunit;
+	private TeXLength.Unit hunit;
+	private double w, h;
+	private boolean keepaspectratio;
 
-    public ResizeAtom(Atom base, TeXLength width, TeXLength height, boolean keepaspectratio) {
-        this.base = base;
-        this.keepaspectratio = keepaspectratio;
-        if (width == null) {
-            this.wunit = TeXLength.Unit.NONE;
-            this.w = 0;
-        } else {
-            this.wunit = width.getUnit();
-            this.w = width.getL();
-        }
-        if (height == null) {
-            this.hunit = TeXLength.Unit.NONE;
-            this.h = 0;
-        } else {
-            this.hunit = height.getUnit();
-            this.h = height.getL();
-        }
-    }
+	public ResizeAtom(Atom base, TeXLength width, TeXLength height, boolean keepaspectratio) {
+		this.base = base;
+		this.keepaspectratio = keepaspectratio;
+		if (width == null) {
+			this.wunit = TeXLength.Unit.NONE;
+			this.w = 0;
+		} else {
+			this.wunit = width.getUnit();
+			this.w = width.getL();
+		}
+		if (height == null) {
+			this.hunit = TeXLength.Unit.NONE;
+			this.h = 0;
+		} else {
+			this.hunit = height.getUnit();
+			this.h = height.getL();
+		}
+	}
 
-    public ResizeAtom(Atom base, TeXLength width, TeXLength height) {
-        this(base, width, height, width == null || height == null);
-    }
+	public ResizeAtom(Atom base, TeXLength width, TeXLength height) {
+		this(base, width, height, width == null || height == null);
+	}
 
-    public Box createBox(TeXEnvironment env) {
-        Box bbox = base.createBox(env);
-        if (wunit == TeXLength.Unit.NONE && hunit == TeXLength.Unit.NONE) {
-            return bbox;
-        } else {
-            double xscl = 1.;
-            double yscl = 1.;
-            if (wunit != TeXLength.Unit.NONE && hunit != TeXLength.Unit.NONE) {
-                xscl = w * TeXLength.getFactor(wunit, env) / bbox.width;
-                yscl = h * TeXLength.getFactor(hunit, env) / bbox.height;
-                if (keepaspectratio) {
-                    xscl = Math.min(xscl, yscl);
-                    yscl = xscl;
-                }
-            } else if (wunit != TeXLength.Unit.NONE && hunit == TeXLength.Unit.NONE) {
-                xscl = w * TeXLength.getFactor(wunit, env) / bbox.width;
-                yscl = xscl;
-            } else {
-                yscl = h * TeXLength.getFactor(hunit, env) / bbox.height;
-                xscl = yscl;
-            }
+	@Override
+	public Box createBox(TeXEnvironment env) {
+		Box bbox = base.createBox(env);
+		if (wunit == TeXLength.Unit.NONE && hunit == TeXLength.Unit.NONE) {
+			return bbox;
+		} else {
+			double xscl = 1.;
+			double yscl = 1.;
+			if (wunit != TeXLength.Unit.NONE && hunit != TeXLength.Unit.NONE) {
+				xscl = w * TeXLength.getFactor(wunit, env) / bbox.width;
+				yscl = h * TeXLength.getFactor(hunit, env) / bbox.height;
+				if (keepaspectratio) {
+					xscl = Math.min(xscl, yscl);
+					yscl = xscl;
+				}
+			} else if (wunit != TeXLength.Unit.NONE && hunit == TeXLength.Unit.NONE) {
+				xscl = w * TeXLength.getFactor(wunit, env) / bbox.width;
+				yscl = xscl;
+			} else {
+				yscl = h * TeXLength.getFactor(hunit, env) / bbox.height;
+				xscl = yscl;
+			}
 
-            return new ScaleBox(bbox, xscl, yscl);
-        }
-    }
+			return new ScaleBox(bbox, xscl, yscl);
+		}
+	}
 
-    public int getLeftType() {
-        return base.getLeftType();
-    }
+	@Override
+	public int getLeftType() {
+		return base.getLeftType();
+	}
 
-    public int getRightType() {
-        return base.getRightType();
-    }
+	@Override
+	public int getRightType() {
+		return base.getRightType();
+	}
 
-    public int getLimits() {
-        return base.getLimits();
-    }
+	@Override
+	public int getLimits() {
+		return base.getLimits();
+	}
 }

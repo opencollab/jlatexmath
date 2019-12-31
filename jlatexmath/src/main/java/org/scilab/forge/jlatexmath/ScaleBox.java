@@ -53,39 +53,41 @@ import java.awt.geom.AffineTransform;
  */
 public class ScaleBox extends Box {
 
-    private Box box;
-    private double xscl, yscl;
-    private double factor = 1.;
+	private Box box;
+	private double xscl, yscl;
+	private double factor = 1.;
 
-    public ScaleBox(Box b, double xscl, double yscl) {
-        this.box = b;
-        this.xscl = (Double.isNaN(xscl) || Double.isInfinite(xscl)) ? 0. : xscl;
-        this.yscl = (Double.isNaN(yscl) || Double.isInfinite(yscl)) ? 0. : yscl;
-        width = b.width * Math.abs(this.xscl);
-        height = this.yscl > 0. ? b.height * this.yscl : -b.depth * this.yscl;
-        depth = this.yscl > 0. ? b.depth * this.yscl : -b.height * this.yscl;
-        shift = b.shift * this.yscl;
-    }
+	public ScaleBox(Box b, double xscl, double yscl) {
+		this.box = b;
+		this.xscl = (Double.isNaN(xscl) || Double.isInfinite(xscl)) ? 0. : xscl;
+		this.yscl = (Double.isNaN(yscl) || Double.isInfinite(yscl)) ? 0. : yscl;
+		width = b.width * Math.abs(this.xscl);
+		height = this.yscl > 0. ? b.height * this.yscl : -b.depth * this.yscl;
+		depth = this.yscl > 0. ? b.depth * this.yscl : -b.height * this.yscl;
+		shift = b.shift * this.yscl;
+	}
 
-    public ScaleBox(Box b, double factor) {
-        this(b, factor, factor);
-        //this.factor = factor;
-    }
+	public ScaleBox(Box b, double factor) {
+		this(b, factor, factor);
+		// this.factor = factor;
+	}
 
-    public void draw(Graphics2D g2, double x, double y) {
-        startDraw(g2, x, y);
-        if (xscl != 0. && yscl != 0.) {
-            final AffineTransform at = g2.getTransform();
-            final double dec = xscl < 0. ? width : 0.;
-            g2.translate(x + dec, y);
-            g2.scale(xscl, yscl);
-            box.draw(g2, 0, 0);
-            g2.setTransform(at);
-        }
-        endDraw(g2);
-    }
+	@Override
+	public void draw(Graphics2D g2, double x, double y) {
+		startDraw(g2, x, y);
+		if (xscl != 0. && yscl != 0.) {
+			final AffineTransform at = g2.getTransform();
+			final double dec = xscl < 0. ? width : 0.;
+			g2.translate(x + dec, y);
+			g2.scale(xscl, yscl);
+			box.draw(g2, 0, 0);
+			g2.setTransform(at);
+		}
+		endDraw(g2);
+	}
 
-    public FontInfo getLastFont() {
-        return box.getLastFont();
-    }
+	@Override
+	public FontInfo getLastFont() {
+		return box.getLastFont();
+	}
 }

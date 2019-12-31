@@ -47,124 +47,130 @@
 package org.scilab.forge.jlatexmath;
 
 /**
- * An atom representing another atom with an atom above it (if not null) seperated
- * by a kern and in a smaller size depending on "overScriptSize" and/or an atom under
- * it (if not null) seperated by a kern and in a smaller size depending on "underScriptSize"
+ * An atom representing another atom with an atom above it (if not null)
+ * seperated by a kern and in a smaller size depending on "overScriptSize"
+ * and/or an atom under it (if not null) seperated by a kern and in a smaller
+ * size depending on "underScriptSize"
  */
 public class UnderOverAtom extends Atom {
 
-    // base, underscript and overscript
-    private final Atom base;
-    private final Atom under;
-    private final Atom over;
+	// base, underscript and overscript
+	private final Atom base;
+	private final Atom under;
+	private final Atom over;
 
-    // kern between base and under- and overscript
-    private final TeXLength underSpace;
-    private final TeXLength overSpace;
+	// kern between base and under- and overscript
+	private final TeXLength underSpace;
+	private final TeXLength overSpace;
 
-    // whether the under- and overscript should be drawn in a smaller size
-    private final boolean underScriptSize;
-    private final boolean overScriptSize;
+	// whether the under- and overscript should be drawn in a smaller size
+	private final boolean underScriptSize;
+	private final boolean overScriptSize;
 
-    public UnderOverAtom(Atom base, Atom underOver, TeXLength underOverSpace, boolean underOverScriptSize, boolean over) {
-        this.base = base;
-        if (over) {
-            this.under = null;
-            this.underSpace = TeXLength.getZero();
-            this.underScriptSize = false;
-            this.over = underOver;
-            this.overSpace = underOverSpace;
-            this.overScriptSize = underOverScriptSize;
-        } else {
-            this.under = underOver;
-            this.underSpace = underOverSpace;
-            this.underScriptSize = underOverScriptSize;
-            this.overSpace = TeXLength.getZero();
-            this.over = null;
-            this.overScriptSize = false;
-        }
-    }
+	public UnderOverAtom(Atom base, Atom underOver, TeXLength underOverSpace, boolean underOverScriptSize,
+			boolean over) {
+		this.base = base;
+		if (over) {
+			this.under = null;
+			this.underSpace = TeXLength.getZero();
+			this.underScriptSize = false;
+			this.over = underOver;
+			this.overSpace = underOverSpace;
+			this.overScriptSize = underOverScriptSize;
+		} else {
+			this.under = underOver;
+			this.underSpace = underOverSpace;
+			this.underScriptSize = underOverScriptSize;
+			this.overSpace = TeXLength.getZero();
+			this.over = null;
+			this.overScriptSize = false;
+		}
+	}
 
-    public UnderOverAtom(Atom base, Atom under, TeXLength underSpace,
-                         boolean underScriptSize, Atom over,
-                         TeXLength overSpace, boolean overScriptSize) {
-        this.base = base;
-        this.under = under;
-        this.underSpace = underSpace;
-        this.underScriptSize = underScriptSize;
-        this.over = over;
-        this.overSpace = overSpace;
-        this.overScriptSize = overScriptSize;
-    }
+	public UnderOverAtom(Atom base, Atom under, TeXLength underSpace, boolean underScriptSize, Atom over,
+			TeXLength overSpace, boolean overScriptSize) {
+		this.base = base;
+		this.under = under;
+		this.underSpace = underSpace;
+		this.underScriptSize = underScriptSize;
+		this.over = over;
+		this.overSpace = overSpace;
+		this.overScriptSize = overScriptSize;
+	}
 
-    public Box createBox(TeXEnvironment env) {
-        // create boxes in right style and calculate maximum width
-        Box b = (base == null ? StrutBox.getEmpty() : base.createBox(env));
-        Box o = null;
-        Box u = null;
-        double max = b.getWidth();
-        if (over != null) {
-            o = over.createBox(overScriptSize ? env.supStyle() : env);
-            max = Math.max(max, o.getWidth());
-        }
-        if (under != null) {
-            u = under.createBox(underScriptSize ? env.subStyle() : env);
-            max = Math.max(max, u.getWidth());
-        }
+	@Override
+	public Box createBox(TeXEnvironment env) {
+		// create boxes in right style and calculate maximum width
+		Box b = (base == null ? StrutBox.getEmpty() : base.createBox(env));
+		Box o = null;
+		Box u = null;
+		double max = b.getWidth();
+		if (over != null) {
+			o = over.createBox(overScriptSize ? env.supStyle() : env);
+			max = Math.max(max, o.getWidth());
+		}
+		if (under != null) {
+			u = under.createBox(underScriptSize ? env.subStyle() : env);
+			max = Math.max(max, u.getWidth());
+		}
 
-        // create vertical box
-        VerticalBox vBox = new VerticalBox();
+		// create vertical box
+		VerticalBox vBox = new VerticalBox();
 
-        // last font used by the base (for Mspace atoms following)
-        env.setLastFont(b.getLastFont());
+		// last font used by the base (for Mspace atoms following)
+		env.setLastFont(b.getLastFont());
 
-        // overscript + space
-        if (over != null) {
-            vBox.add(changeWidth(o, max));
-            vBox.add(new StrutBox(0., overSpace.getValue(env), 0., 0.));
-        }
+		// overscript + space
+		if (over != null) {
+			vBox.add(changeWidth(o, max));
+			vBox.add(new StrutBox(0., overSpace.getValue(env), 0., 0.));
+		}
 
-        // base
-        Box c = changeWidth(b, max);
-        vBox.add(c);
+		// base
+		Box c = changeWidth(b, max);
+		vBox.add(c);
 
-        // calculate future height of the vertical box (to make sure that the base
-        // stays on the baseline!)
-        double h = vBox.getHeight() + vBox.getDepth() - c.getDepth();
+		// calculate future height of the vertical box (to make sure that the
+		// base
+		// stays on the baseline!)
+		double h = vBox.getHeight() + vBox.getDepth() - c.getDepth();
 
-        // underscript + space
-        if (under != null) {
-            vBox.add(new StrutBox(0., underSpace.getValue(env), 0., 0.));
-            vBox.add(changeWidth(u, max));
-        }
+		// underscript + space
+		if (under != null) {
+			vBox.add(new StrutBox(0., underSpace.getValue(env), 0., 0.));
+			vBox.add(changeWidth(u, max));
+		}
 
-        // set height and depth
-        vBox.setDepth(vBox.getHeight() + vBox.getDepth() - h);
-        vBox.setHeight(h);
-        return vBox;
-    }
+		// set height and depth
+		vBox.setDepth(vBox.getHeight() + vBox.getDepth() - h);
+		vBox.setHeight(h);
+		return vBox;
+	}
 
-    private static Box changeWidth(Box b, double maxWidth) {
-        if (b != null) {
-            if (Math.abs(maxWidth - b.getWidth()) > TeXFormula.PREC) {
-                return new HorizontalBox(b, maxWidth, TeXConstants.Align.CENTER);
-            } else {
-                b.setHeight(Math.max(b.getHeight(), 0.));
-                b.setDepth(Math.max(b.getDepth(), 0.));
-            }
-        }
-        return b;
-    }
+	private static Box changeWidth(Box b, double maxWidth) {
+		if (b != null) {
+			if (Math.abs(maxWidth - b.getWidth()) > TeXFormula.PREC) {
+				return new HorizontalBox(b, maxWidth, TeXConstants.Align.CENTER);
+			} else {
+				b.setHeight(Math.max(b.getHeight(), 0.));
+				b.setDepth(Math.max(b.getDepth(), 0.));
+			}
+		}
+		return b;
+	}
 
-    public int getLeftType() {
-        return base.getLeftType();
-    }
+	@Override
+	public int getLeftType() {
+		return base.getLeftType();
+	}
 
-    public int getRightType() {
-        return base.getRightType();
-    }
+	@Override
+	public int getRightType() {
+		return base.getRightType();
+	}
 
-    public int getLimits() {
-        return base.getLimits();
-    }
+	@Override
+	public int getLimits() {
+		return base.getLimits();
+	}
 }

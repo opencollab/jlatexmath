@@ -48,19 +48,20 @@ package org.scilab.forge.jlatexmath.mhchem;
 import org.scilab.forge.jlatexmath.Atom;
 import org.scilab.forge.jlatexmath.Box;
 import org.scilab.forge.jlatexmath.StrutBox;
-import org.scilab.forge.jlatexmath.TeXEnvironment;
 import org.scilab.forge.jlatexmath.TeXConstants;
+import org.scilab.forge.jlatexmath.TeXEnvironment;
 
 /**
  * An empty atom used in mhchem.
  */
 public class CEEmptyAtom extends Atom {
 
-    public CEEmptyAtom() {
-        type = TeXConstants.TYPE_ORDINARY;
-    }
+	public CEEmptyAtom() {
+		type = TeXConstants.TYPE_ORDINARY;
+	}
 
-    public Box createBox(TeXEnvironment env) {
-        return new StrutBox(0., env.getTeXFont().getMHeight(env.getStyle()), 0., 0.);
-    }
+	@Override
+	public Box createBox(TeXEnvironment env) {
+		return new StrutBox(0., env.getTeXFont().getMHeight(env.getStyle()), 0., 0.);
+	}
 }

@@ -51,254 +51,256 @@ import java.awt.Stroke;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.PathIterator;
 import java.nio.ByteBuffer;
-import java.nio.FloatBuffer;
 import java.nio.ByteOrder;
+import java.nio.FloatBuffer;
 import java.util.ArrayList;
 import java.util.Base64;
 
 public class HTMLCanvasContextBinary {
 
-    private final static float QUADRATICCURVETO = 0f;
-    private final static float LINETO = 1f;
-    private final static float MOVETO = 2f;
-    private final static float BEZIERCURVETO = 3f;
-    private final static float ARCTO = 4f;
-    private final static float ARC = 5f;
-    private final static float ELLIPSE = 6f;
-    private final static float TRANSLATE = 7f;
-    private final static float ROTATE = 8f;
-    private final static float SCALE = 9f;
-    private final static float TRANSFORM = 10f;
-    private final static float SETTRANSFORM = 11f;
-    private final static float BEGINPATH = 12f;
-    private final static float CLOSEPATH = 13f;
-    private final static float FILL = 14f;
-    private final static float FILLNO = 15f;
-    private final static float FILLRECT = 16f;
-    private final static float CLEARRECT = 17f;
-    private final static float STROKE = 18f;
-    private final static float CLIP = 19f;
-    private final static float LINEJOIN = 20f;
-    private final static float LINECAP = 21f;
-    private final static float LINEWIDTH = 22f;
-    private final static float MITERLIMIT = 23f;
-    private final static float STROKESTYLE = 24f;
-    private final static float FILLSTYLE = 25f;
-    private final static float IMAGE = 26f;
+	private final static float QUADRATICCURVETO = 0f;
+	private final static float LINETO = 1f;
+	private final static float MOVETO = 2f;
+	private final static float BEZIERCURVETO = 3f;
+	private final static float ARCTO = 4f;
+	private final static float ARC = 5f;
+	private final static float ELLIPSE = 6f;
+	private final static float TRANSLATE = 7f;
+	private final static float ROTATE = 8f;
+	private final static float SCALE = 9f;
+	private final static float TRANSFORM = 10f;
+	private final static float SETTRANSFORM = 11f;
+	private final static float BEGINPATH = 12f;
+	private final static float CLOSEPATH = 13f;
+	private final static float FILL = 14f;
+	private final static float FILLNO = 15f;
+	private final static float FILLRECT = 16f;
+	private final static float CLEARRECT = 17f;
+	private final static float STROKE = 18f;
+	private final static float CLIP = 19f;
+	private final static float LINEJOIN = 20f;
+	private final static float LINECAP = 21f;
+	private final static float LINEWIDTH = 22f;
+	private final static float MITERLIMIT = 23f;
+	private final static float STROKESTYLE = 24f;
+	private final static float FILLSTYLE = 25f;
+	private final static float IMAGE = 26f;
 
-    private final static float RGB = 0f;
-    private final static float RGBA = 1f;
+	private final static float RGB = 0f;
+	private final static float RGBA = 1f;
 
-    private final static float BEVEL = 0f;
-    private final static float ROUND = 1f;
-    private final static float MITER = 2f;
+	private final static float BEVEL = 0f;
+	private final static float ROUND = 1f;
+	private final static float MITER = 2f;
 
-    private final static float BUTT = 0f;
-    private final static float SQUARE = 2f;
+	private final static float BUTT = 0f;
+	private final static float SQUARE = 2f;
 
-    private final static float TRUE = 0f;
-    private final static float FALSE = 1f;
+	private final static float TRUE = 0f;
+	private final static float FALSE = 1f;
 
-    private final static float EVENODD = 0f;
-    private final static float NONZERO = 1f;
+	private final static float EVENODD = 0f;
+	private final static float NONZERO = 1f;
 
-    private final ArrayList<Float> fb;
+	private final ArrayList<Float> fb;
 
-    public HTMLCanvasContextBinary() {
-        this.fb = new ArrayList<>();
-    }
+	public HTMLCanvasContextBinary() {
+		this.fb = new ArrayList<>();
+	}
 
-    public String toString() {
-        final int times = Float.SIZE / Byte.SIZE;
-        final int N = fb.size();
-        final byte[] bytes = new byte[N * times];
-        final ByteBuffer bb = ByteBuffer.wrap(bytes).order(ByteOrder.LITTLE_ENDIAN);
-        for(int i = 0; i < N; ++i) {
-            bb.putFloat(i * times, fb.get(i).floatValue());
-        }
-        return Base64.getEncoder().encodeToString(bytes);
-    }
+	@Override
+	public String toString() {
+		final int times = Float.SIZE / Byte.SIZE;
+		final int N = fb.size();
+		final byte[] bytes = new byte[N * times];
+		final ByteBuffer bb = ByteBuffer.wrap(bytes).order(ByteOrder.LITTLE_ENDIAN);
+		for (int i = 0; i < N; ++i) {
+			bb.putFloat(i * times, fb.get(i).floatValue());
+		}
+		return Base64.getEncoder().encodeToString(bytes);
+	}
 
-    public void setStroke(final Stroke stroke, final AffineTransform T) {
-        if (!(stroke instanceof BasicStroke)) {
-            return;
-        }
-        final BasicStroke bs = (BasicStroke)stroke;
-        add(LINEJOIN);
-        switch (bs.getLineJoin()) {
-        case BasicStroke.JOIN_BEVEL:
-            add(BEVEL);
-            break;
-        case BasicStroke.JOIN_MITER:
-            add(MITER);
-            break;
-        case BasicStroke.JOIN_ROUND:
-            add(ROUND);
-            break;
-        }
-        add(LINECAP);
-        switch (bs.getEndCap()) {
-        case BasicStroke.CAP_BUTT:
-            add(BUTT);
-            break;
-        case BasicStroke.CAP_ROUND:
-            add(ROUND);
-            break;
-        case BasicStroke.CAP_SQUARE:
-            add(SQUARE);
-            break;
-        }
-        add(LINEWIDTH, (float)bs.getLineWidth());
-        add(MITERLIMIT, (float)bs.getMiterLimit());
-    }
+	public void setStroke(final Stroke stroke, final AffineTransform T) {
+		if (!(stroke instanceof BasicStroke)) {
+			return;
+		}
+		final BasicStroke bs = (BasicStroke) stroke;
+		add(LINEJOIN);
+		switch (bs.getLineJoin()) {
+		case BasicStroke.JOIN_BEVEL:
+			add(BEVEL);
+			break;
+		case BasicStroke.JOIN_MITER:
+			add(MITER);
+			break;
+		case BasicStroke.JOIN_ROUND:
+			add(ROUND);
+			break;
+		}
+		add(LINECAP);
+		switch (bs.getEndCap()) {
+		case BasicStroke.CAP_BUTT:
+			add(BUTT);
+			break;
+		case BasicStroke.CAP_ROUND:
+			add(ROUND);
+			break;
+		case BasicStroke.CAP_SQUARE:
+			add(SQUARE);
+			break;
+		}
+		add(LINEWIDTH, bs.getLineWidth());
+		add(MITERLIMIT, bs.getMiterLimit());
+	}
 
-    public void beginPath() {
-        add(BEGINPATH);
-    }
+	public void beginPath() {
+		add(BEGINPATH);
+	}
 
-    public void closePath() {
-        add(CLOSEPATH);
-    }
+	public void closePath() {
+		add(CLOSEPATH);
+	}
 
-    public void stroke() {
-        add(STROKE);
-    }
+	public void stroke() {
+		add(STROKE);
+	}
 
-    public void strokeStyle(final Color c) {
-        add(STROKESTYLE);
-        makeColor(c);
-    }
+	public void strokeStyle(final Color c) {
+		add(STROKESTYLE);
+		makeColor(c);
+	}
 
-    public void clip() {
-        add(CLIP);
-    }
+	public void clip() {
+		add(CLIP);
+	}
 
-    public void fill() {
-        add(FILLNO);
-    }
+	public void fill() {
+		add(FILLNO);
+	}
 
-    public void fillStyle(final Color c) {
-        add(FILLSTYLE);
-        makeColor(c);
-    }
+	public void fillStyle(final Color c) {
+		add(FILLSTYLE);
+		makeColor(c);
+	}
 
-    public void fill(final int rule) {
-        final float r = rule == PathIterator.WIND_EVEN_ODD ? EVENODD : NONZERO;
-        add(FILL, r);
-    }
+	public void fill(final int rule) {
+		final float r = rule == PathIterator.WIND_EVEN_ODD ? EVENODD : NONZERO;
+		add(FILL, r);
+	}
 
-    public void moveTo(float x, float y) {
-        add(MOVETO, x, y);
-    }
+	public void moveTo(float x, float y) {
+		add(MOVETO, x, y);
+	}
 
-    public void moveTo(double[] arr) {
-        moveTo((float)arr[0], (float)arr[1]);
-    }
+	public void moveTo(double[] arr) {
+		moveTo((float) arr[0], (float) arr[1]);
+	}
 
-    public void lineTo(float x, float y) {
-        add(LINETO, x, y);
-    }
+	public void lineTo(float x, float y) {
+		add(LINETO, x, y);
+	}
 
-    public void lineTo(double[] arr) {
-        lineTo((float)arr[0], (float)arr[1]);
-    }
+	public void lineTo(double[] arr) {
+		lineTo((float) arr[0], (float) arr[1]);
+	}
 
-    public void clearRect(float a, float b, float c, float d) {
-        add(CLEARRECT, a, b, c, d);
-    }
+	public void clearRect(float a, float b, float c, float d) {
+		add(CLEARRECT, a, b, c, d);
+	}
 
-    public void fillRect(float a, float b, float c, float d) {
-        add(FILLRECT, a, b, c, d);
-    }
+	public void fillRect(float a, float b, float c, float d) {
+		add(FILLRECT, a, b, c, d);
+	}
 
-    public void arc(float a, float b, float c, float d, float e, float f) {
-        add(ARC, a, b, c, d, e, f);
-    }
+	public void arc(float a, float b, float c, float d, float e, float f) {
+		add(ARC, a, b, c, d, e, f);
+	}
 
-    public void arcTo(float a, float b, float c, float d, float e) {
-        add(ARCTO, a, b, c, d, e);
-    }
+	public void arcTo(float a, float b, float c, float d, float e) {
+		add(ARCTO, a, b, c, d, e);
+	}
 
-    public void bezierCurveTo(float a, float b, float c, float d, float e, float f) {
-        add(BEZIERCURVETO, a, b, c, d, e, f);
-    }
+	public void bezierCurveTo(float a, float b, float c, float d, float e, float f) {
+		add(BEZIERCURVETO, a, b, c, d, e, f);
+	}
 
-    public void bezierCurveTo(double[] arr) {
-        bezierCurveTo((float)arr[0], (float)arr[1], (float)arr[2], (float)arr[3], (float)arr[4], (float)arr[5]);
-    }
+	public void bezierCurveTo(double[] arr) {
+		bezierCurveTo((float) arr[0], (float) arr[1], (float) arr[2], (float) arr[3], (float) arr[4], (float) arr[5]);
+	}
 
-    public void quadraticCurveTo(float a, float b, float c, float d) {
-        add(QUADRATICCURVETO, a, b, c, d);
-    }
+	public void quadraticCurveTo(float a, float b, float c, float d) {
+		add(QUADRATICCURVETO, a, b, c, d);
+	}
 
-    public void quadraticCurveTo(double[] arr) {
-        quadraticCurveTo((float)arr[0], (float)arr[1], (float)arr[2], (float)arr[3]);
-    }
+	public void quadraticCurveTo(double[] arr) {
+		quadraticCurveTo((float) arr[0], (float) arr[1], (float) arr[2], (float) arr[3]);
+	}
 
-    public void ellipse(float a, float b, float c, float d, float e, float f, float g, boolean h) {
-        add(ELLIPSE, a, b, c, d, e, f, g, h ? TRUE : FALSE);
-    }
+	public void ellipse(float a, float b, float c, float d, float e, float f, float g, boolean h) {
+		add(ELLIPSE, a, b, c, d, e, f, g, h ? TRUE : FALSE);
+	}
 
-    public void rotate(float x) {
-        add(ROTATE, x);
-    }
+	public void rotate(float x) {
+		add(ROTATE, x);
+	}
 
-    public void translate(float x, float y) {
-        add(TRANSLATE, x, y);
-    }
+	public void translate(float x, float y) {
+		add(TRANSLATE, x, y);
+	}
 
-    public void scale(float x, float y) {
-        add(SCALE, x, y);
-    }
+	public void scale(float x, float y) {
+		add(SCALE, x, y);
+	}
 
-    public void setTransform(float a, float b, float c, float d, float e, float f) {
-        add(SETTRANSFORM, a, b, c, d, e, f);
-    }
+	public void setTransform(float a, float b, float c, float d, float e, float f) {
+		add(SETTRANSFORM, a, b, c, d, e, f);
+	}
 
-    public void setTransform(final AffineTransform trans) {
-        final double[] flat = new double[6];
-        trans.getMatrix(flat);
-        setTransform((float)flat[0], (float)flat[1], (float)flat[2], (float)flat[3], (float)flat[4], (float)flat[5]);
-    }
+	public void setTransform(final AffineTransform trans) {
+		final double[] flat = new double[6];
+		trans.getMatrix(flat);
+		setTransform((float) flat[0], (float) flat[1], (float) flat[2], (float) flat[3], (float) flat[4],
+				(float) flat[5]);
+	}
 
-    public void transform(float a, float b, float c, float d, float e, float f) {
-        add(TRANSFORM, a, b, c, d, e, f);
-    }
+	public void transform(float a, float b, float c, float d, float e, float f) {
+		add(TRANSFORM, a, b, c, d, e, f);
+	}
 
-    public void transform(final AffineTransform trans) {
-        final double[] flat = new double[6];
-        trans.getMatrix(flat);
-        transform((float)flat[0], (float)flat[1], (float)flat[2], (float)flat[3], (float)flat[4], (float)flat[5]);
-    }
+	public void transform(final AffineTransform trans) {
+		final double[] flat = new double[6];
+		trans.getMatrix(flat);
+		transform((float) flat[0], (float) flat[1], (float) flat[2], (float) flat[3], (float) flat[4], (float) flat[5]);
+	}
 
-    public void image(int w, int h, float x, float y, int[] pixels) {
-        final int N = w * h;
-        final ByteBuffer bb = ByteBuffer.allocate(N * Integer.SIZE / Byte.SIZE);
-        bb.asIntBuffer().put(pixels);
-        final FloatBuffer flb = bb.asFloatBuffer();
-        fb.ensureCapacity(fb.size() + 5 + N);
-        add(IMAGE, (float)w, (float)h, x, y);
-        for (int i = 0; i < N; ++i) {
-            fb.add(flb.get(i));
-        }
-    }
+	public void image(int w, int h, float x, float y, int[] pixels) {
+		final int N = w * h;
+		final ByteBuffer bb = ByteBuffer.allocate(N * Integer.SIZE / Byte.SIZE);
+		bb.asIntBuffer().put(pixels);
+		final FloatBuffer flb = bb.asFloatBuffer();
+		fb.ensureCapacity(fb.size() + 5 + N);
+		add(IMAGE, (float) w, (float) h, x, y);
+		for (int i = 0; i < N; ++i) {
+			fb.add(flb.get(i));
+		}
+	}
 
-    private void makeColor(final Color c) {
-        final int alpha = c.getAlpha();
-        if (alpha == 255) {
-            add(RGB);
-        } else {
-            add(RGBA);
-        }
-        add((float)c.getRed(), (float)c.getGreen(), (float)c.getBlue());
-        if (alpha != 255) {
-            add((float)alpha / 255f);
-        }
-    }
+	private void makeColor(final Color c) {
+		final int alpha = c.getAlpha();
+		if (alpha == 255) {
+			add(RGB);
+		} else {
+			add(RGBA);
+		}
+		add((float) c.getRed(), (float) c.getGreen(), (float) c.getBlue());
+		if (alpha != 255) {
+			add(alpha / 255f);
+		}
+	}
 
-    private void add(Float... floats) {
-        for (final Float f : floats) {
-            fb.add(f);
-        }
-    }
+	private void add(Float... floats) {
+		for (final Float f : floats) {
+			fb.add(f);
+		}
+	}
 }

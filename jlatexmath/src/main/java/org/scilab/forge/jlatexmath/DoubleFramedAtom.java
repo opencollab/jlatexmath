@@ -45,22 +45,21 @@
 
 package org.scilab.forge.jlatexmath;
 
-import java.awt.Color;
-
 /**
  * An atom representing a boxed base atom.
  */
 public class DoubleFramedAtom extends FBoxAtom {
 
-    public DoubleFramedAtom(Atom base) {
-        super(base);
-    }
+	public DoubleFramedAtom(Atom base) {
+		super(base);
+	}
 
-    public Box createBox(TeXEnvironment env) {
-        Box bbase = base.createBox(env);
-        double drt = TeXLength.getLength("fboxrule", env);
-        double space = TeXLength.getLength("fboxsep", env);
-        double sspace = 1.5 * drt + 0.5 * TeXLength.getFactor(TeXLength.Unit.POINT, env);
-        return new FramedBox(new FramedBox(bbase, 0.75 * drt, space), 1.5 * drt, sspace);
-    }
+	@Override
+	public Box createBox(TeXEnvironment env) {
+		Box bbase = base.createBox(env);
+		double drt = TeXLength.getLength("fboxrule", env);
+		double space = TeXLength.getLength("fboxsep", env);
+		double sspace = 1.5 * drt + 0.5 * TeXLength.getFactor(TeXLength.Unit.POINT, env);
+		return new FramedBox(new FramedBox(bbase, 0.75 * drt, space), 1.5 * drt, sspace);
+	}
 }

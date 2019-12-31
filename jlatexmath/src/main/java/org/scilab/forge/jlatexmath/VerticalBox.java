@@ -49,135 +49,140 @@ package org.scilab.forge.jlatexmath;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Area;
-import java.util.ListIterator;
 import java.util.ArrayList;
+import java.util.ListIterator;
 
 /**
  * A box composed of other boxes, put one above the other.
  */
 class VerticalBox extends Box {
 
-    private double leftMostPos = Double.MAX_VALUE;
-    private double rightMostPos = -Double.MAX_VALUE;
-    protected final ArrayList<Box> children = new ArrayList<Box>();
+	private double leftMostPos = Double.MAX_VALUE;
+	private double rightMostPos = -Double.MAX_VALUE;
+	protected final ArrayList<Box> children = new ArrayList<Box>();
 
-    public VerticalBox() { }
+	public VerticalBox() {
+	}
 
-    public VerticalBox(Box b) {
-        add(b);
-    }
+	public VerticalBox(Box b) {
+		add(b);
+	}
 
-    public VerticalBox(Box b, double rest, TeXConstants.Align alignment) {
-        this();
-        add(b);
-        if (alignment == TeXConstants.Align.CENTER) {
-            final StrutBox s = new StrutBox(0., rest / 2., 0., 0.);
-            justAdd(0, s);
-            height += rest / 2.;
-            depth += rest / 2.;
-            justAdd(s);
-        } else if (alignment == TeXConstants.Align.TOP) {
-            depth += rest;
-            justAdd(new StrutBox(0., rest, 0., 0.));
-        } else if (alignment == TeXConstants.Align.BOTTOM) {
-            height += rest;
-            justAdd(0, new StrutBox(0., rest, 0., 0.));
-        }
-    }
+	public VerticalBox(Box b, double rest, TeXConstants.Align alignment) {
+		this();
+		add(b);
+		if (alignment == TeXConstants.Align.CENTER) {
+			final StrutBox s = new StrutBox(0., rest / 2., 0., 0.);
+			justAdd(0, s);
+			height += rest / 2.;
+			depth += rest / 2.;
+			justAdd(s);
+		} else if (alignment == TeXConstants.Align.TOP) {
+			depth += rest;
+			justAdd(new StrutBox(0., rest, 0., 0.));
+		} else if (alignment == TeXConstants.Align.BOTTOM) {
+			height += rest;
+			justAdd(0, new StrutBox(0., rest, 0., 0.));
+		}
+	}
 
-    private final void justAdd(Box b) {
-        children.add(b);
-        b.parent = this;
-        b.elderParent = elderParent;
-    }
+	private final void justAdd(Box b) {
+		children.add(b);
+		b.parent = this;
+		b.elderParent = elderParent;
+	}
 
-    public final void add(Box b) {
-        justAdd(b);
-        if (children.size() == 1) {
-            height = b.height;
-            depth = b.depth;
-        } else {
-            depth += b.height + b.depth;
-        }
-        recalculateWidth(b);
-    }
+	public final void add(Box b) {
+		justAdd(b);
+		if (children.size() == 1) {
+			height = b.height;
+			depth = b.depth;
+		} else {
+			depth += b.height + b.depth;
+		}
+		recalculateWidth(b);
+	}
 
-    public final void add(Box b, double interline) {
-        if (children.size() >= 1) {
-            add(new StrutBox(0., interline, 0., 0.));
-        }
-        add(b);
-    }
+	public final void add(Box b, double interline) {
+		if (children.size() >= 1) {
+			add(new StrutBox(0., interline, 0., 0.));
+		}
+		add(b);
+	}
 
-    private void recalculateWidth(Box b) {
-        leftMostPos = Math.min(leftMostPos, b.shift);
-        rightMostPos = Math.max(rightMostPos, b.shift + (b.width > 0 ? b.width : 0));
-        width = rightMostPos - leftMostPos;
-    }
+	private void recalculateWidth(Box b) {
+		leftMostPos = Math.min(leftMostPos, b.shift);
+		rightMostPos = Math.max(rightMostPos, b.shift + (b.width > 0 ? b.width : 0));
+		width = rightMostPos - leftMostPos;
+	}
 
-    private final void justAdd(int pos, Box b) {
-        children.add(pos, b);
-        b.parent = this;
-        b.elderParent = elderParent;
-    }
+	private final void justAdd(int pos, Box b) {
+		children.add(pos, b);
+		b.parent = this;
+		b.elderParent = elderParent;
+	}
 
-    public void add(int pos, Box b) {
-        justAdd(pos, b);
-        if (pos == 0) {
-            depth += b.depth + height;
-            height = b.height;
-        } else {
-            depth += b.height + b.depth;
-        }
-        recalculateWidth(b);
-    }
+	public void add(int pos, Box b) {
+		justAdd(pos, b);
+		if (pos == 0) {
+			depth += b.depth + height;
+			height = b.height;
+		} else {
+			depth += b.height + b.depth;
+		}
+		recalculateWidth(b);
+	}
 
-    public void draw(Graphics2D g2, double x, double y) {
-        startDraw(g2, x, y);
-        double yPos = y - height;
-        for (final Box box : children) {
-            if (box instanceof HVruleBox) {
-                ((HVruleBox)box).setWHD(width, height, depth);
-            }
-            yPos += box.getHeight();
-            box.draw(g2, x + box.getShift() - leftMostPos, yPos);
-            yPos += box.getDepth();
-        }
-        endDraw(g2);
-    }
+	@Override
+	public void draw(Graphics2D g2, double x, double y) {
+		startDraw(g2, x, y);
+		double yPos = y - height;
+		for (final Box box : children) {
+			if (box instanceof HVruleBox) {
+				((HVruleBox) box).setWHD(width, height, depth);
+			}
+			yPos += box.getHeight();
+			box.draw(g2, x + box.getShift() - leftMostPos, yPos);
+			yPos += box.getDepth();
+		}
+		endDraw(g2);
+	}
 
-    public Area getArea() {
-        final Area area = new Area();
-        final AffineTransform af = AffineTransform.getTranslateInstance(0., -height);
-        for (final Box b : children) {
-            if (b instanceof StrutBox) {
-                af.translate(0., b.getHeight() + b.getDepth());
-            } else {
-                final Area a = b.getArea();
-                if (a == null) {
-                    return null;
-                }
-                af.translate(0., b.getHeight());
-                a.transform(af);
-                area.add(a);
-                af.translate(0., b.getDepth());
-            }
-        }
-        return area;
-    }
+	@Override
+	public Area getArea() {
+		final Area area = new Area();
+		final AffineTransform af = AffineTransform.getTranslateInstance(0., -height);
+		for (final Box b : children) {
+			if (b instanceof StrutBox) {
+				af.translate(0., b.getHeight() + b.getDepth());
+			} else {
+				final Area a = b.getArea();
+				if (a == null) {
+					return null;
+				}
+				af.translate(0., b.getHeight());
+				a.transform(af);
+				area.add(a);
+				af.translate(0., b.getDepth());
+			}
+		}
+		return area;
+	}
 
-    public int getSize() {
-        return children.size();
-    }
+	public int getSize() {
+		return children.size();
+	}
 
-    public FontInfo getLastFont() {
-        // iterate from the last child box (the lowest) to the first (the highest)
-        // untill a font id is found that's not equal to NO_FONT
-        FontInfo font = null;
-        for (ListIterator it = children.listIterator(children.size()); font == null && it.hasPrevious();) {
-            font = ((Box) it.previous()).getLastFont();
-        }
+	@Override
+	public FontInfo getLastFont() {
+		// iterate from the last child box (the lowest) to the first (the
+		// highest)
+		// untill a font id is found that's not equal to NO_FONT
+		FontInfo font = null;
+		for (ListIterator it = children.listIterator(children.size()); font == null && it.hasPrevious();) {
+			font = ((Box) it.previous()).getLastFont();
+		}
 
-        return font;
-    }
+		return font;
+	}
 }

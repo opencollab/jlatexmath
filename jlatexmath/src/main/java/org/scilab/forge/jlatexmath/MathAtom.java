@@ -50,25 +50,26 @@ package org.scilab.forge.jlatexmath;
  */
 public class MathAtom extends Atom {
 
-    private final int style;
-    protected final Atom base;
+	private final int style;
+	protected final Atom base;
 
-    public MathAtom(Atom base, int style) {
-        this.base = base;
-        this.style = style;
-    }
+	public MathAtom(Atom base, int style) {
+		this.base = base;
+		this.style = style;
+	}
 
-    public Box createBox(TeXEnvironment env) {
-        final TeXFont tf = env.getTeXFont();
-        final int sstyle = env.getStyle();
-        final boolean sroman = tf.getRoman();
+	@Override
+	public Box createBox(TeXEnvironment env) {
+		final TeXFont tf = env.getTeXFont();
+		final int sstyle = env.getStyle();
+		final boolean sroman = tf.getRoman();
 
-        tf.setRoman(false);
-        env.setStyle(style);
-        final Box box = base.createBox(env);
-        env.setStyle(sstyle);
-        tf.setRoman(sroman);
+		tf.setRoman(false);
+		env.setStyle(style);
+		final Box box = base.createBox(env);
+		env.setStyle(sstyle);
+		tf.setRoman(sroman);
 
-        return box;
-    }
+		return box;
+	}
 }

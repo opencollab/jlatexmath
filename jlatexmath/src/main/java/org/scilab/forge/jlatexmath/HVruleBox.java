@@ -54,46 +54,49 @@ import java.awt.geom.Rectangle2D;
  */
 public class HVruleBox extends Box {
 
-    private double w;
-    private double h;
-    private double d;
+	private double w;
+	private double h;
+	private double d;
 
-    public HVruleBox(double w, double h, double d, final boolean hor) {
-        this.w = w;
-        this.h = h;
-        this.d = d;
-        if (hor) {
-            width = Double.isNaN(w) ? 0. : w;
-            height = h;
-            depth = d;
-        } else {
-            width = w;
-            height = Double.isNaN(h) ? 0. : h;
-            depth = Double.isNaN(d) ? 0. : d;
-        }
-    }
+	public HVruleBox(double w, double h, double d, final boolean hor) {
+		this.w = w;
+		this.h = h;
+		this.d = d;
+		if (hor) {
+			width = Double.isNaN(w) ? 0. : w;
+			height = h;
+			depth = d;
+		} else {
+			width = w;
+			height = Double.isNaN(h) ? 0. : h;
+			depth = Double.isNaN(d) ? 0. : d;
+		}
+	}
 
-    public void setWHD(final double w, final double h, final double d) {
-        if (Double.isNaN(this.w)) {
-            this.w = w;
-        }
-        if (Double.isNaN(this.h)) {
-            this.h = h;
-        }
-        if (Double.isNaN(this.d)) {
-            this.d = d;
-        }
-    }
+	public void setWHD(final double w, final double h, final double d) {
+		if (Double.isNaN(this.w)) {
+			this.w = w;
+		}
+		if (Double.isNaN(this.h)) {
+			this.h = h;
+		}
+		if (Double.isNaN(this.d)) {
+			this.d = d;
+		}
+	}
 
-    public void draw(Graphics2D g2, double x, double y) {
-        g2.fill(new Rectangle2D.Double(x, y - h, w, h + d));
-    }
+	@Override
+	public void draw(Graphics2D g2, double x, double y) {
+		g2.fill(new Rectangle2D.Double(x, y - h, w, h + d));
+	}
 
-    public Area getArea() {
-        return new Area(new Rectangle2D.Double(0., -h, w, h + d));
-    }
+	@Override
+	public Area getArea() {
+		return new Area(new Rectangle2D.Double(0., -h, w, h + d));
+	}
 
-    public FontInfo getLastFont() {
-        return null;
-    }
+	@Override
+	public FontInfo getLastFont() {
+		return null;
+	}
 }

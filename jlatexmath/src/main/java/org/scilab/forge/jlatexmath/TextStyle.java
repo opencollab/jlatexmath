@@ -50,94 +50,94 @@ import java.util.Map;
 
 public final class TextStyle {
 
-    public final static int NONE = -1;
-    public final static int MATHNORMAL = 0;
-    public final static int MATHFRAK = 1;
-    public final static int MATHCAL = 2;
-    public final static int MATHBB = 3;
-    public final static int MATHSCR = 4;
-    public final static int MATHDS = 5;
-    public final static int OLDSTYLENUMS = 6;
+	public final static int NONE = -1;
+	public final static int MATHNORMAL = 0;
+	public final static int MATHFRAK = 1;
+	public final static int MATHCAL = 2;
+	public final static int MATHBB = 3;
+	public final static int MATHSCR = 4;
+	public final static int MATHDS = 5;
+	public final static int OLDSTYLENUMS = 6;
 
-    public final static int NUMBERS = 0;
-    public final static int CAPITALS = 1;
-    public final static int SMALL = 2;
-    public final static int UNICODE = 3;
+	public final static int NUMBERS = 0;
+	public final static int CAPITALS = 1;
+	public final static int SMALL = 2;
+	public final static int UNICODE = 3;
 
-    private final static TextStyle[][] styles = new TextStyle[7][4];
+	private final static TextStyle[][] styles = new TextStyle[7][4];
 
-    static {
-        add(MATHNORMAL, NUMBERS, Configuration.getFonts().cmr10, (char)48);
-        add(MATHNORMAL, CAPITALS, Configuration.getFonts().cmmi10, (char)65);
-        add(MATHNORMAL, SMALL, Configuration.getFonts().cmmi10, (char)97);
-        add(MATHNORMAL, UNICODE, Configuration.getFonts().cmmi10, (char)0);
-        add(MATHFRAK, NUMBERS, Configuration.getFonts().eufm10, (char)48);
-        add(MATHFRAK, CAPITALS, Configuration.getFonts().eufm10, (char)65);
-        add(MATHFRAK, SMALL, Configuration.getFonts().eufm10, (char)97);
-        add(MATHCAL, CAPITALS, Configuration.getFonts().cmsy10, (char)65);
-        add(MATHBB, CAPITALS, Configuration.getFonts().msbm10, (char)65);
-        add(MATHSCR, CAPITALS, Configuration.getFonts().rsfs10, (char)65);
-        add(MATHDS, CAPITALS, Configuration.getFonts().dsrom10, (char)65);
-        add(OLDSTYLENUMS, CAPITALS, Configuration.getFonts().cmmi10, (char)48);
-    }
+	static {
+		add(MATHNORMAL, NUMBERS, Configuration.getFonts().cmr10, (char) 48);
+		add(MATHNORMAL, CAPITALS, Configuration.getFonts().cmmi10, (char) 65);
+		add(MATHNORMAL, SMALL, Configuration.getFonts().cmmi10, (char) 97);
+		add(MATHNORMAL, UNICODE, Configuration.getFonts().cmmi10, (char) 0);
+		add(MATHFRAK, NUMBERS, Configuration.getFonts().eufm10, (char) 48);
+		add(MATHFRAK, CAPITALS, Configuration.getFonts().eufm10, (char) 65);
+		add(MATHFRAK, SMALL, Configuration.getFonts().eufm10, (char) 97);
+		add(MATHCAL, CAPITALS, Configuration.getFonts().cmsy10, (char) 65);
+		add(MATHBB, CAPITALS, Configuration.getFonts().msbm10, (char) 65);
+		add(MATHSCR, CAPITALS, Configuration.getFonts().rsfs10, (char) 65);
+		add(MATHDS, CAPITALS, Configuration.getFonts().dsrom10, (char) 65);
+		add(OLDSTYLENUMS, CAPITALS, Configuration.getFonts().cmmi10, (char) 48);
+	}
 
-    private static Map<String, Integer> names = new HashMap<String, Integer>() {
-        {
-            put("mathnormal", MATHNORMAL);
-            put("mathfrak", MATHFRAK);
-            put("mathcal", MATHCAL);
-            put("mathbb", MATHBB);
-            put("mathscr", MATHSCR);
-            put("mathds", MATHDS);
-            put("oldstylenums", OLDSTYLENUMS);
-        }
-    };
+	private static Map<String, Integer> names = new HashMap<String, Integer>() {
+		{
+			put("mathnormal", MATHNORMAL);
+			put("mathfrak", MATHFRAK);
+			put("mathcal", MATHCAL);
+			put("mathbb", MATHBB);
+			put("mathscr", MATHSCR);
+			put("mathds", MATHDS);
+			put("oldstylenums", OLDSTYLENUMS);
+		}
+	};
 
-    private final FontInfo font;
-    private final char start;
+	private final FontInfo font;
+	private final char start;
 
-    private TextStyle(final FontInfo font, final char start) {
-        this.font = font;
-        this.start = start;
-    }
+	private TextStyle(final FontInfo font, final char start) {
+		this.font = font;
+		this.start = start;
+	}
 
-    public FontInfo getFont() {
-        return font;
-    }
+	public FontInfo getFont() {
+		return font;
+	}
 
-    public char getStart() {
-        return start;
-    }
+	public char getStart() {
+		return start;
+	}
 
-    public static TextStyle[] get(final String style) {
-        return styles[TextStyle.getStyle(style)];
-    }
+	public static TextStyle[] get(final String style) {
+		return styles[TextStyle.getStyle(style)];
+	}
 
-    public static int getStyle(final String style) {
-        final Integer i = names.get(style);
-        if (i != null) {
-            return i.intValue();
-        }
-        return MATHNORMAL;
-    }
+	public static int getStyle(final String style) {
+		final Integer i = names.get(style);
+		if (i != null) {
+			return i.intValue();
+		}
+		return MATHNORMAL;
+	}
 
-    public static TextStyle[] get(final int style) {
-        return styles[style];
-    }
+	public static TextStyle[] get(final int style) {
+		return styles[style];
+	}
 
-    public static TextStyle getDefault(final int kind) {
-        return styles[MATHNORMAL][kind];
-    }
+	public static TextStyle getDefault(final int kind) {
+		return styles[MATHNORMAL][kind];
+	}
 
-    public static TextStyle[] getDefault() {
-        return styles[MATHNORMAL];
-    }
+	public static TextStyle[] getDefault() {
+		return styles[MATHNORMAL];
+	}
 
-    public static TextStyle get(final int style, final int type) {
-        return styles[style][type];
-    }
+	public static TextStyle get(final int style, final int type) {
+		return styles[style][type];
+	}
 
-    private static void add(final int style, final int type, final FontInfo font, final char start) {
-        styles[style][type] = new TextStyle(font, start);
-    }
+	private static void add(final int style, final int type, final FontInfo font, final char start) {
+		styles[style][type] = new TextStyle(font, start);
+	}
 }

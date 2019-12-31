@@ -47,54 +47,56 @@ package org.scilab.forge.jlatexmath;
 
 public class AlignAtom extends ArrayAtom {
 
-    protected static SpaceAtom align = new SpaceAtom(TeXConstants.Muskip.MED);
-    protected boolean aligned;
+	protected static SpaceAtom align = new SpaceAtom(TeXConstants.Muskip.MED);
+	protected boolean aligned;
 
-    /**
-     * Creates an empty matrix
-     *
-     */
-    public AlignAtom(ArrayOfAtoms array, boolean aligned) {
-        super(array, getOptions(array.col), false);
-        this.aligned = aligned;
-    }
+	/**
+	 * Creates an empty matrix
+	 *
+	 */
+	public AlignAtom(ArrayOfAtoms array, boolean aligned) {
+		super(array, getOptions(array.col), false);
+		this.aligned = aligned;
+	}
 
-    private static ArrayOptions getOptions(int cols) {
-        final ArrayOptions options = new ArrayOptions(cols);
-        for (int i = 0; i < cols / 2; ++i) {
-            options.addAlignment(TeXConstants.Align.RIGHT);
-            options.addAlignment(TeXConstants.Align.LEFT);
-        }
-        if (cols % 2 == 1) {
-            options.addAlignment(TeXConstants.Align.RIGHT);
-        }
-        return options;
-    }
+	private static ArrayOptions getOptions(int cols) {
+		final ArrayOptions options = new ArrayOptions(cols);
+		for (int i = 0; i < cols / 2; ++i) {
+			options.addAlignment(TeXConstants.Align.RIGHT);
+			options.addAlignment(TeXConstants.Align.LEFT);
+		}
+		if (cols % 2 == 1) {
+			options.addAlignment(TeXConstants.Align.RIGHT);
+		}
+		return options;
+	}
 
-    public double[] getColumnSep(TeXEnvironment env, double width) {
-        final int row = matrix.row;
-        final int col = matrix.col;
-        final double[] seps = new double[col + 1];
-        final double w = aligned ? Double.POSITIVE_INFINITY : TeXLength.getTextwidth(env);
+	@Override
+	public double[] getColumnSep(TeXEnvironment env, double width) {
+		final int row = matrix.row;
+		final int col = matrix.col;
+		final double[] seps = new double[col + 1];
+		final double w = aligned ? Double.POSITIVE_INFINITY : TeXLength.getTextwidth(env);
 
-        //Align env. : hsep=(textwidth-matWidth)/(2n+1) and hsep eq_lft \medskip el_rgt hsep ... hsep elem hsep
-        final double alignW = align.createBox(env).getWidth();
-        double alignSep;
-        if (w != Double.POSITIVE_INFINITY) {
-            alignSep = Math.max((w - width - (col / 2) * alignW) / Math.floor((col + 3) / 2), 0.);
-        } else {
-            alignSep = hsep.createBox(env).getWidth();
-        }
+		// Align env. : hsep=(textwidth-matWidth)/(2n+1) and hsep eq_lft
+		// \medskip el_rgt hsep ... hsep elem hsep
+		final double alignW = align.createBox(env).getWidth();
+		double alignSep;
+		if (w != Double.POSITIVE_INFINITY) {
+			alignSep = Math.max((w - width - (col / 2) * alignW) / Math.floor((col + 3) / 2), 0.);
+		} else {
+			alignSep = hsep.createBox(env).getWidth();
+		}
 
-        seps[col] = alignSep;
-        for (int i = 0; i < col; i++) {
-            seps[i] = (i % 2 == 0) ? alignSep : alignW;
-        }
+		seps[col] = alignSep;
+		for (int i = 0; i < col; i++) {
+			seps[i] = (i % 2 == 0) ? alignSep : alignW;
+		}
 
-        if (w == Double.POSITIVE_INFINITY) {
-            seps[0] = seps[col] = 0.;
-        }
+		if (w == Double.POSITIVE_INFINITY) {
+			seps[0] = seps[col] = 0.;
+		}
 
-        return seps;
-    }
+		return seps;
+	}
 }

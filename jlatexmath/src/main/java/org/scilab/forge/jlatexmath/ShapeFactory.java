@@ -45,22 +45,20 @@
 
 package org.scilab.forge.jlatexmath;
 
-import java.awt.Shape;
-import java.awt.geom.AffineTransform;
 import java.awt.geom.Area;
 
 public class ShapeFactory {
 
-    public static ShapeBox create(final VerticalBox vb) {
-        final Area a = vb.getArea();
-        if (a != null) {
-            final ShapeBox sb = new ShapeBox(a);
-            sb.setDepth(vb.getDepth());
-            sb.setHeight(vb.getHeight());
-            sb.setWidth(vb.getWidth());
-            return sb;
-        }
-        return null;
-    }
+	public static ShapeBox create(final VerticalBox vb) {
+		final Area a = vb.getArea();
+		if (a != null) {
+			final ShapeBox sb = new ShapeBox(a);
+			sb.setDepth(vb.getDepth());
+			sb.setHeight(vb.getHeight());
+			sb.setWidth(vb.getWidth());
+			return sb;
+		}
+		return null;
+	}
 
 }

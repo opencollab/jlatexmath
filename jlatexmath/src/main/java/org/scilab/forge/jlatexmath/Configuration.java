@@ -49,29 +49,29 @@ import java.util.Map;
 
 public final class Configuration {
 
-    private final TeXFonts fonts;
-    private final TeXSymbols symbols;
+	private final TeXFonts fonts;
+	private final TeXSymbols symbols;
 
-    private static final Configuration instance = new Configuration();
+	private static final Configuration instance = new Configuration();
 
-    private Configuration() {
-        fonts = new TeXFonts();
-        symbols = new TeXSymbols(fonts);
-    }
+	private Configuration() {
+		fonts = new TeXFonts();
+		symbols = new TeXSymbols(fonts);
+	}
 
-    public static Configuration get() {
-        return instance;
-    }
+	public static Configuration get() {
+		return instance;
+	}
 
-    public static TeXFonts getFonts() {
-        return instance.fonts;
-    }
+	public static TeXFonts getFonts() {
+		return instance.fonts;
+	}
 
-    public static SymbolAtom getSym(final String name) {
-        return instance.symbols.get(name);
-    }
+	public static SymbolAtom getSym(final String name) {
+		return instance.symbols.get(name);
+	}
 
-    public static Map<String, SymbolAtom> getAllSym() {
-        return instance.symbols.getAll();
-    }
+	public static Map<String, SymbolAtom> getAllSym() {
+		return instance.symbols.getAll();
+	}
 }

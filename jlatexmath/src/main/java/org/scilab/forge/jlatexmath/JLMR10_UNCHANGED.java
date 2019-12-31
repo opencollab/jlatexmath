@@ -47,24 +47,27 @@ package org.scilab.forge.jlatexmath;
 
 final class JLMR10_UNCHANGED extends FontInfo {
 
-    JLMR10_UNCHANGED(final String ttfPath) {
-        super(0, ttfPath, 0.430555, 0.333334, 1.000003, '\u0000');
-    }
+	JLMR10_UNCHANGED(final String ttfPath) {
+		super(0, ttfPath, 0.430555, 0.333334, 1.000003, '\u0000');
+	}
 
-    protected final void initMetrics() {
-        setInfo('\u007E', // char code: 126
-                new double[] {1.389, 1.900, 0., 0.}, // metrics: width, height, depth, italic
-                null, // ligatures
-                null, // kern codes
-                null, // kern values
-                null, '\0', // next larger
-                null); // extension: top, mid, rep, bot
-        setInfo('\u007F', // char code: 127
-                new double[] {1.389, 0.800, 0., 0.}, // metrics: width, height, depth, italic
-                null, // ligatures
-                null, // kern codes
-                null, // kern values
-                null, '\0', // next larger
-                null); // extension: top, mid, rep, bot
-    }
+	@Override
+	protected final void initMetrics() {
+		setInfo('\u007E', // char code: 126
+				new double[] { 1.389, 1.900, 0., 0. }, // metrics: width,
+														// height, depth, italic
+				null, // ligatures
+				null, // kern codes
+				null, // kern values
+				null, '\0', // next larger
+				null); // extension: top, mid, rep, bot
+		setInfo('\u007F', // char code: 127
+				new double[] { 1.389, 0.800, 0., 0. }, // metrics: width,
+														// height, depth, italic
+				null, // ligatures
+				null, // kern codes
+				null, // kern values
+				null, '\0', // next larger
+				null); // extension: top, mid, rep, bot
+	}
 }

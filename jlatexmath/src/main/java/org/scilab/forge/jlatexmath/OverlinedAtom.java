@@ -51,36 +51,41 @@ package org.scilab.forge.jlatexmath;
  */
 public class OverlinedAtom extends Atom {
 
-    // base atom to be overlined
-    private final Atom base;
+	// base atom to be overlined
+	private final Atom base;
 
-    public OverlinedAtom(Atom base) {
-        this.base = base;
-    }
+	public OverlinedAtom(Atom base) {
+		this.base = base;
+	}
 
-    public Box createBox(TeXEnvironment env) {
-        final double drt = env.getTeXFont().getDefaultRuleThickness(env.getStyle());
+	@Override
+	public Box createBox(TeXEnvironment env) {
+		final double drt = env.getTeXFont().getDefaultRuleThickness(env.getStyle());
 
-        // cramp the style of the formula to be overlined and create vertical box
-        final Box b = base == null ? StrutBox.getEmpty() : base.createBox(env.crampStyle());
-        final OverBar ob = new OverBar(b, 3. * drt, drt);
+		// cramp the style of the formula to be overlined and create vertical
+		// box
+		final Box b = base == null ? StrutBox.getEmpty() : base.createBox(env.crampStyle());
+		final OverBar ob = new OverBar(b, 3. * drt, drt);
 
-        // baseline vertical box = baseline box b
-        ob.setDepth(b.getDepth());
-        ob.setHeight(b.getHeight() + 5. * drt);
+		// baseline vertical box = baseline box b
+		ob.setDepth(b.getDepth());
+		ob.setHeight(b.getHeight() + 5. * drt);
 
-        return ob;
-    }
+		return ob;
+	}
 
-    public int getLeftType() {
-        return base.getLeftType();
-    }
+	@Override
+	public int getLeftType() {
+		return base.getLeftType();
+	}
 
-    public int getRightType() {
-        return base.getRightType();
-    }
+	@Override
+	public int getRightType() {
+		return base.getRightType();
+	}
 
-    public int getLimits() {
-        return base.getLimits();
-    }
+	@Override
+	public int getLimits() {
+		return base.getLimits();
+	}
 }

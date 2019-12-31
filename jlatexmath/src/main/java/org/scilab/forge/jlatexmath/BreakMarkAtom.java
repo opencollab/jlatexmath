@@ -50,16 +50,18 @@ package org.scilab.forge.jlatexmath;
  */
 public class BreakMarkAtom extends Atom {
 
-    private final static BreakMarkAtom instance = new BreakMarkAtom();
-    private final static Box instanceBox = new StrutBox();
+	private final static BreakMarkAtom instance = new BreakMarkAtom();
+	private final static Box instanceBox = new StrutBox();
 
-    private BreakMarkAtom() { }
+	private BreakMarkAtom() {
+	}
 
-    public static BreakMarkAtom get() {
-        return instance;
-    }
+	public static BreakMarkAtom get() {
+		return instance;
+	}
 
-    public Box createBox(TeXEnvironment env) {
-        return instanceBox;
-    }
+	@Override
+	public Box createBox(TeXEnvironment env) {
+		return instanceBox;
+	}
 }

@@ -53,28 +53,29 @@ import java.util.List;
  */
 public class OoalignAtom extends Atom {
 
-    private final List<Atom> column;
+	private final List<Atom> column;
 
-    public OoalignAtom(ArrayOfAtoms column) {
-        this.column = column.getFirstColumn();
-    }
+	public OoalignAtom(ArrayOfAtoms column) {
+		this.column = column.getFirstColumn();
+	}
 
-    public OoalignAtom(Atom... atoms) {
-        this.column = new ArrayList<Atom>(atoms.length);
-        for (final Atom a : atoms) {
-            this.column.add(a);
-        }
-    }
+	public OoalignAtom(Atom... atoms) {
+		this.column = new ArrayList<Atom>(atoms.length);
+		for (final Atom a : atoms) {
+			this.column.add(a);
+		}
+	}
 
-    public Box createBox(TeXEnvironment env) {
-        final int N = column.size();
-        if (N == 0) {
-            return StrutBox.getEmpty();
-        }
-        final List<Box> l = new ArrayList<Box>(N);
-        for (final Atom a : column) {
-            l.add(a.createBox(env));
-        }
-        return new OoalignBox(l);
-    }
+	@Override
+	public Box createBox(TeXEnvironment env) {
+		final int N = column.size();
+		if (N == 0) {
+			return StrutBox.getEmpty();
+		}
+		final List<Box> l = new ArrayList<Box>(N);
+		for (final Atom a : column) {
+			l.add(a.createBox(env));
+		}
+		return new OoalignBox(l);
+	}
 }

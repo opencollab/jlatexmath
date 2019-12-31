@@ -50,35 +50,37 @@ package org.scilab.forge.jlatexmath;
  */
 public class SubarrayAtom extends Atom {
 
-    private static final SpaceAtom vsep_in = new SpaceAtom(TeXLength.Unit.EX, 0., 0.5, 0.);
-    private ArrayOfAtoms column;
-    private ArrayOptions options;
+	private static final SpaceAtom vsep_in = new SpaceAtom(TeXLength.Unit.EX, 0., 0.5, 0.);
+	private ArrayOfAtoms column;
+	private ArrayOptions options;
 
-    public SubarrayAtom(ArrayOfAtoms column, ArrayOptions options) {
-        this.column = column;
-        this.options = options;
-    }
+	public SubarrayAtom(ArrayOfAtoms column, ArrayOptions options) {
+		this.column = column;
+		this.options = options;
+	}
 
-    public Box createBox(TeXEnvironment env) {
-        final TeXConstants.Align alignment = options.hasAlignment() ? options.getAlignment(0) : TeXConstants.Align.CENTER;
-        final Box[] boxes = new Box[column.row];
-        final Box Vsep = vsep_in.createBox(env);
-        final VerticalBox vb = new VerticalBox();
-        double maxW = Double.NEGATIVE_INFINITY;
-        for (int i = 0; i < column.row; ++i) {
-            boxes[i] = column.get(i, 0).createBox(env);
-            maxW = Math.max(maxW, boxes[i].getWidth());
-        }
+	@Override
+	public Box createBox(TeXEnvironment env) {
+		final TeXConstants.Align alignment = options.hasAlignment() ? options.getAlignment(0)
+				: TeXConstants.Align.CENTER;
+		final Box[] boxes = new Box[column.row];
+		final Box Vsep = vsep_in.createBox(env);
+		final VerticalBox vb = new VerticalBox();
+		double maxW = Double.NEGATIVE_INFINITY;
+		for (int i = 0; i < column.row; ++i) {
+			boxes[i] = column.get(i, 0).createBox(env);
+			maxW = Math.max(maxW, boxes[i].getWidth());
+		}
 
-        for (int i = 0; i < column.row - 1; ++i) {
-            vb.add(new HorizontalBox(boxes[i], maxW, alignment));
-            vb.add(Vsep);
-        }
-        vb.add(new HorizontalBox(boxes[column.row - 1], maxW, alignment));
-        final double height = vb.getHeight() + vb.getDepth();
-        vb.setHeight(height / 2.);
-        vb.setDepth(height / 2.);
+		for (int i = 0; i < column.row - 1; ++i) {
+			vb.add(new HorizontalBox(boxes[i], maxW, alignment));
+			vb.add(Vsep);
+		}
+		vb.add(new HorizontalBox(boxes[column.row - 1], maxW, alignment));
+		final double height = vb.getHeight() + vb.getDepth();
+		vb.setHeight(height / 2.);
+		vb.setDepth(height / 2.);
 
-        return vb;
-    }
+		return vb;
+	}
 }

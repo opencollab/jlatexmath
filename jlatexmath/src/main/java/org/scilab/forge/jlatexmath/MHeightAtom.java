@@ -50,17 +50,18 @@ package org.scilab.forge.jlatexmath;
  */
 public class MHeightAtom extends Atom {
 
-    private static final MHeightAtom instance = new MHeightAtom();
+	private static final MHeightAtom instance = new MHeightAtom();
 
-    private MHeightAtom() {
-        type = TeXConstants.TYPE_ORDINARY;
-    }
+	private MHeightAtom() {
+		type = TeXConstants.TYPE_ORDINARY;
+	}
 
-    public static MHeightAtom get() {
-        return instance;
-    }
+	public static MHeightAtom get() {
+		return instance;
+	}
 
-    public Box createBox(TeXEnvironment env) {
-        return new StrutBox(0., env.getTeXFont().getMHeight(env.getStyle()), 0., 0.);
-    }
+	@Override
+	public Box createBox(TeXEnvironment env) {
+		return new StrutBox(0., env.getTeXFont().getMHeight(env.getStyle()), 0., 0.);
+	}
 }

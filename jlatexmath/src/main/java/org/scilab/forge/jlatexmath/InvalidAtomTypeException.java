@@ -53,7 +53,7 @@ package org.scilab.forge.jlatexmath;
  */
 public class InvalidAtomTypeException extends JMathTeXException {
 
-    protected InvalidAtomTypeException(String msg) {
-        super(msg);
-    }
+	protected InvalidAtomTypeException(String msg) {
+		super(msg);
+	}
 }

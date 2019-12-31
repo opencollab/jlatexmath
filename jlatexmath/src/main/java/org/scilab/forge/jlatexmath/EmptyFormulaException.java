@@ -48,7 +48,7 @@ package org.scilab.forge.jlatexmath;
 
 public class EmptyFormulaException extends Exception {
 
-    public EmptyFormulaException() {
-        super("Illegal operation with an empty Formula!");
-    }
+	public EmptyFormulaException() {
+		super("Illegal operation with an empty Formula!");
+	}
 }

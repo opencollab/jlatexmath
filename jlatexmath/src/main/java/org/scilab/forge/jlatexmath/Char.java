@@ -49,53 +49,54 @@ package org.scilab.forge.jlatexmath;
 import java.awt.Font;
 
 /**
- * Represents a character together with its font, font ID and metric information.
+ * Represents a character together with its font, font ID and metric
+ * information.
  */
 public class Char {
 
-    private final char c;
-    private final Metrics m;
-    private final FontInfo info;
+	private final char c;
+	private final Metrics m;
+	private final FontInfo info;
 
-    public Char(char c, FontInfo info, Metrics m) {
-        this.info = info;
-        this.c = c;
-        this.m = m;
-    }
+	public Char(char c, FontInfo info, Metrics m) {
+		this.info = info;
+		this.c = c;
+		this.m = m;
+	}
 
-    public CharFont getCharFont() {
-        return new CharFont(c, info);
-    }
+	public CharFont getCharFont() {
+		return new CharFont(c, info);
+	}
 
-    public char getChar() {
-        return c;
-    }
+	public char getChar() {
+		return c;
+	}
 
-    public Font getFont() {
-        return info.getFont();
-    }
+	public Font getFont() {
+		return info.getFont();
+	}
 
-    public FontInfo getFontInfo() {
-        return info;
-    }
+	public FontInfo getFontInfo() {
+		return info;
+	}
 
-    public double getWidth() {
-        return m.getWidth();
-    }
+	public double getWidth() {
+		return m.getWidth();
+	}
 
-    public double getItalic() {
-        return m.getItalic();
-    }
+	public double getItalic() {
+		return m.getItalic();
+	}
 
-    public double getHeight() {
-        return m.getHeight();
-    }
+	public double getHeight() {
+		return m.getHeight();
+	}
 
-    public double getDepth() {
-        return m.getDepth();
-    }
+	public double getDepth() {
+		return m.getDepth();
+	}
 
-    public Metrics getMetrics() {
-        return m;
-    }
+	public Metrics getMetrics() {
+		return m;
+	}
 }

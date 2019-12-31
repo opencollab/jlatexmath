@@ -53,66 +53,63 @@ import java.util.List;
  */
 public class LongdivAtom extends VRowAtom {
 
-    public LongdivAtom(long divisor, long dividend, TeXParser tp) {
-        setHalign(TeXConstants.Align.RIGHT);
-        setVtop(true);
-        String[] res = makeResults(divisor, dividend);
-        Atom rule = new RuleAtom(new TeXLength(TeXLength.Unit.EX, 0.),
-                                 new TeXLength(TeXLength.Unit.EX, 2.6),
-                                 new TeXLength(TeXLength.Unit.EX, 0.5));
-        for (int i = 0; i < res.length; ++i) {
-            if (i % 2 == 0) {
-                final RowAtom ra = TeXParser.getAtomForLatinStr(res[i], new RowAtom(), tp.isMathMode());
-                ra.add(rule);
-                if (i == 0) {
-                    append(ra);
-                } else {
-                    append(new UnderlinedAtom(ra));
-                }
-            } else if (i == 1) {
-                String div = Long.toString(divisor);
-                SymbolAtom rparen = Symbols.RBRACK;
-                Atom big = new BigDelimiterAtom(rparen, 1);
-                Atom ph = new PhantomAtom(big, false, true, true);
-                RowAtom ra = new RowAtom(ph);
-                Atom raised = new RaiseAtom(big,
-                                            new TeXLength(TeXLength.Unit.X8, 3.5),
-                                            TeXLength.getZero(),
-                                            TeXLength.getZero());
-                ra.add(new SmashedAtom(raised));
-                ra.add(TeXParser.getAtomForLatinStr(res[i], tp.isMathMode()));
-                Atom a = new OverlinedAtom(ra);
-                RowAtom ra1 = TeXParser.getAtomForLatinStr(div, new RowAtom(), tp.isMathMode());
-                ra1.add(new SpaceAtom(TeXConstants.Muskip.THIN));
-                ra1.add(a);
-                append(ra1);
-            } else {
-                final RowAtom ra = TeXParser.getAtomForLatinStr(res[i], new RowAtom(), tp.isMathMode());
-                ra.add(rule);
-                append(ra);
-            }
-        }
-    }
+	public LongdivAtom(long divisor, long dividend, TeXParser tp) {
+		setHalign(TeXConstants.Align.RIGHT);
+		setVtop(true);
+		String[] res = makeResults(divisor, dividend);
+		Atom rule = new RuleAtom(new TeXLength(TeXLength.Unit.EX, 0.), new TeXLength(TeXLength.Unit.EX, 2.6),
+				new TeXLength(TeXLength.Unit.EX, 0.5));
+		for (int i = 0; i < res.length; ++i) {
+			if (i % 2 == 0) {
+				final RowAtom ra = TeXParser.getAtomForLatinStr(res[i], new RowAtom(), tp.isMathMode());
+				ra.add(rule);
+				if (i == 0) {
+					append(ra);
+				} else {
+					append(new UnderlinedAtom(ra));
+				}
+			} else if (i == 1) {
+				String div = Long.toString(divisor);
+				SymbolAtom rparen = Symbols.RBRACK;
+				Atom big = new BigDelimiterAtom(rparen, 1);
+				Atom ph = new PhantomAtom(big, false, true, true);
+				RowAtom ra = new RowAtom(ph);
+				Atom raised = new RaiseAtom(big, new TeXLength(TeXLength.Unit.X8, 3.5), TeXLength.getZero(),
+						TeXLength.getZero());
+				ra.add(new SmashedAtom(raised));
+				ra.add(TeXParser.getAtomForLatinStr(res[i], tp.isMathMode()));
+				Atom a = new OverlinedAtom(ra);
+				RowAtom ra1 = TeXParser.getAtomForLatinStr(div, new RowAtom(), tp.isMathMode());
+				ra1.add(new SpaceAtom(TeXConstants.Muskip.THIN));
+				ra1.add(a);
+				append(ra1);
+			} else {
+				final RowAtom ra = TeXParser.getAtomForLatinStr(res[i], new RowAtom(), tp.isMathMode());
+				ra.add(rule);
+				append(ra);
+			}
+		}
+	}
 
-    private String[] makeResults(long divisor, long dividend) {
-        List<String> vec = new ArrayList<>();
-        long q = dividend / divisor;
-        final long r = dividend % divisor;
-        vec.add(Long.toString(q));
-        vec.add(Long.toString(dividend));
+	private String[] makeResults(long divisor, long dividend) {
+		List<String> vec = new ArrayList<>();
+		long q = dividend / divisor;
+		final long r = dividend % divisor;
+		vec.add(Long.toString(q));
+		vec.add(Long.toString(dividend));
 
-        while (q != 0) {
-            final double p = Math.floor(Math.log10((double)q));
-            final double p10 = Math.pow(10., p);
-            final long d = (long) (Math.floor(((double)q) / p10) * p10);
-            final long dd = d * divisor;
-            vec.add(Long.toString(dd));
-            dividend -= dd;
-            vec.add(Long.toString(dividend));
-            q -= d;
-        }
+		while (q != 0) {
+			final double p = Math.floor(Math.log10(q));
+			final double p10 = Math.pow(10., p);
+			final long d = (long) (Math.floor((q) / p10) * p10);
+			final long dd = d * divisor;
+			vec.add(Long.toString(dd));
+			dividend -= dd;
+			vec.add(Long.toString(dividend));
+			q -= d;
+		}
 
-        String[] res = new String[vec.size()];
-        return vec.toArray(res);
-    }
+		String[] res = new String[vec.size()];
+		return vec.toArray(res);
+	}
 }

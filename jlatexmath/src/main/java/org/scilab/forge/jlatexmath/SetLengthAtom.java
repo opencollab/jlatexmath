@@ -50,16 +50,17 @@ package org.scilab.forge.jlatexmath;
  */
 public class SetLengthAtom extends Atom {
 
-    protected final TeXLength l;
-    protected final String name;
+	protected final TeXLength l;
+	protected final String name;
 
-    public SetLengthAtom(TeXLength l, String name) {
-        this.l = l;
-        this.name = name;
-    }
+	public SetLengthAtom(TeXLength l, String name) {
+		this.l = l;
+		this.name = name;
+	}
 
-    public Box createBox(TeXEnvironment env) {
-        TeXLength.setLength(name, l);
-        return StrutBox.getEmpty();
-    }
+	@Override
+	public Box createBox(TeXEnvironment env) {
+		TeXLength.setLength(name, l);
+		return StrutBox.getEmpty();
+	}
 }

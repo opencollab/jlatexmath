@@ -46,73 +46,74 @@
 package org.scilab.forge.jlatexmath;
 
 /**
- * An atom representing another atom with an atom above it (if not null) seperated
- * by a kern and in a smaller size depending on "overScriptSize" and/or an atom under
- * it (if not null) seperated by a kern and in a smaller size depending on "underScriptSize"
+ * An atom representing another atom with an atom above it (if not null)
+ * seperated by a kern and in a smaller size depending on "overScriptSize"
+ * and/or an atom under it (if not null) seperated by a kern and in a smaller
+ * size depending on "underScriptSize"
  */
 public class BuildrelAtom extends Atom {
 
-    // base, underscript and overscript
-    private final Atom base;
-    private final Atom over;
-    private final boolean scriptSize;
+	// base, underscript and overscript
+	private final Atom base;
+	private final Atom over;
+	private final boolean scriptSize;
 
-    public BuildrelAtom(Atom base, Atom over, boolean scriptSize) {
-        this.base = base;
-        this.over = over;
-        this.scriptSize = scriptSize;
-        this.type = TeXConstants.TYPE_RELATION;
-    }
+	public BuildrelAtom(Atom base, Atom over, boolean scriptSize) {
+		this.base = base;
+		this.over = over;
+		this.scriptSize = scriptSize;
+		this.type = TeXConstants.TYPE_RELATION;
+	}
 
-    public BuildrelAtom(Atom base, Atom over) {
-        this(base, over, true);
-    }
+	public BuildrelAtom(Atom base, Atom over) {
+		this(base, over, true);
+	}
 
-    public Box createBox(TeXEnvironment env) {
-        // create boxes in right style and calculate maximum width
-        Box b = base.createBox(env);
-        Box o = over.createBox(scriptSize ? env.supStyle() : env);
-        final double max = Math.max(o.getWidth(), b.getWidth());
-        final Atom trueBase = base.getBase();
-        final double delta = trueBase.getItalic(env);
-        final TeXFont tf = env.getTeXFont();
-        final int style = env.getStyle();
-        final double bigop5 = tf.getBigOpSpacing5(style);
-        final double kern = Math.max(tf.getBigOpSpacing1(style),
-                                     tf.getBigOpSpacing3(style) - o.getDepth());
+	@Override
+	public Box createBox(TeXEnvironment env) {
+		// create boxes in right style and calculate maximum width
+		Box b = base.createBox(env);
+		Box o = over.createBox(scriptSize ? env.supStyle() : env);
+		final double max = Math.max(o.getWidth(), b.getWidth());
+		final Atom trueBase = base.getBase();
+		final double delta = trueBase.getItalic(env);
+		final TeXFont tf = env.getTeXFont();
+		final int style = env.getStyle();
+		final double bigop5 = tf.getBigOpSpacing5(style);
+		final double kern = Math.max(tf.getBigOpSpacing1(style), tf.getBigOpSpacing3(style) - o.getDepth());
 
-        // create vertical box
-        VerticalBox vBox = new VerticalBox();
+		// create vertical box
+		VerticalBox vBox = new VerticalBox();
 
-        // last font used by the base (for Mspace atoms following)
-        env.setLastFont(b.getLastFont());
+		// last font used by the base (for Mspace atoms following)
+		env.setLastFont(b.getLastFont());
 
-        o = changeWidth(o, max);
-        b = changeWidth(b, max);
+		o = changeWidth(o, max);
+		b = changeWidth(b, max);
 
-        vBox.add(new StrutBox(0., bigop5, 0., 0.));
-        o.setShift(delta / 2.);
-        vBox.add(o);
-        vBox.add(new StrutBox(0., kern, 0., 0.));
-        vBox.add(b);
+		vBox.add(new StrutBox(0., bigop5, 0., 0.));
+		o.setShift(delta / 2.);
+		vBox.add(o);
+		vBox.add(new StrutBox(0., kern, 0., 0.));
+		vBox.add(b);
 
-        final double h = b.getHeight() + bigop5 + kern + o.getHeight() + o.getDepth();
-        final double total = vBox.getHeight() + vBox.getDepth();
-        vBox.setHeight(h);
-        vBox.setDepth(total - h);
+		final double h = b.getHeight() + bigop5 + kern + o.getHeight() + o.getDepth();
+		final double total = vBox.getHeight() + vBox.getDepth();
+		vBox.setHeight(h);
+		vBox.setDepth(total - h);
 
-        return vBox;
-    }
+		return vBox;
+	}
 
-    private static Box changeWidth(Box b, double maxWidth) {
-        if (b != null) {
-            if (Math.abs(maxWidth - b.getWidth()) > TeXFormula.PREC) {
-                return new HorizontalBox(b, maxWidth, TeXConstants.Align.CENTER);
-            } else {
-                b.setHeight(Math.max(b.getHeight(), 0.));
-                b.setDepth(Math.max(b.getDepth(), 0.));
-            }
-        }
-        return b;
-    }
+	private static Box changeWidth(Box b, double maxWidth) {
+		if (b != null) {
+			if (Math.abs(maxWidth - b.getWidth()) > TeXFormula.PREC) {
+				return new HorizontalBox(b, maxWidth, TeXConstants.Align.CENTER);
+			} else {
+				b.setHeight(Math.max(b.getHeight(), 0.));
+				b.setDepth(Math.max(b.getDepth(), 0.));
+			}
+		}
+		return b;
+	}
 }

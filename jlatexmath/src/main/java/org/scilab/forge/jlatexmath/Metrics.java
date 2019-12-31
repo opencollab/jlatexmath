@@ -47,41 +47,42 @@
 package org.scilab.forge.jlatexmath;
 
 /**
- * Contains the metrics for 1 character: width, height, depth and italic correction.
+ * Contains the metrics for 1 character: width, height, depth and italic
+ * correction.
  */
 public class Metrics {
 
-    private final double w;
-    private final double h;
-    private final double d;
-    private final double i;
-    private final double s;
+	private final double w;
+	private final double h;
+	private final double d;
+	private final double i;
+	private final double s;
 
-    public Metrics(double w, double h, double d, double i, double factor, double size) {
-        this.w = w * factor;
-        this.h = h * factor;
-        this.d = d * factor;
-        this.i = i * factor;
-        this.s = size;
-    }
+	public Metrics(double w, double h, double d, double i, double factor, double size) {
+		this.w = w * factor;
+		this.h = h * factor;
+		this.d = d * factor;
+		this.i = i * factor;
+		this.s = size;
+	}
 
-    public double getWidth() {
-        return w;
-    }
+	public double getWidth() {
+		return w;
+	}
 
-    public double getHeight() {
-        return h;
-    }
+	public double getHeight() {
+		return h;
+	}
 
-    public double getDepth() {
-        return d;
-    }
+	public double getDepth() {
+		return d;
+	}
 
-    public double getItalic() {
-        return i;
-    }
+	public double getItalic() {
+		return i;
+	}
 
-    public double getSize() {
-        return s;
-    }
+	public double getSize() {
+		return s;
+	}
 }

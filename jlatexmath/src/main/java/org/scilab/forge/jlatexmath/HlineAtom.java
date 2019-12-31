@@ -50,22 +50,23 @@ package org.scilab.forge.jlatexmath;
  */
 public class HlineAtom extends Atom {
 
-    private double width;
-    private double shift;
+	private double width;
+	private double shift;
 
-    public HlineAtom() {
-    }
+	public HlineAtom() {
+	}
 
-    public void setWidth(double width) {
-        this.width = width;
-    }
+	public void setWidth(double width) {
+		this.width = width;
+	}
 
-    public void setShift(double shift) {
-        this.shift = shift;
-    }
+	public void setShift(double shift) {
+		this.shift = shift;
+	}
 
-    public Box createBox(TeXEnvironment env) {
-        final double drt = env.getTeXFont().getDefaultRuleThickness(env.getStyle());
-        return new HlineBox(drt);
-    }
+	@Override
+	public Box createBox(TeXEnvironment env) {
+		final double drt = env.getTeXFont().getDefaultRuleThickness(env.getStyle());
+		return new HlineBox(drt);
+	}
 }

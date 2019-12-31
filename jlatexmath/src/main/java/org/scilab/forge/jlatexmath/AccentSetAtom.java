@@ -51,73 +51,74 @@ package org.scilab.forge.jlatexmath;
  */
 public class AccentSetAtom extends Atom {
 
-    // accent symbol
-    private final Atom accent;
+	// accent symbol
+	private final Atom accent;
 
-    // base atom
-    protected Atom base = null;
-    protected Atom underbase = null;
+	// base atom
+	protected Atom base = null;
+	protected Atom underbase = null;
 
-    public AccentSetAtom(Atom base, Atom accent) {
-        this.base = base;
-        if (base instanceof AccentedAtom) {
-            underbase = ((AccentSetAtom)base).underbase;
-        } else {
-            underbase = base;
-        }
+	public AccentSetAtom(Atom base, Atom accent) {
+		this.base = base;
+		if (base instanceof AccentedAtom) {
+			underbase = ((AccentSetAtom) base).underbase;
+		} else {
+			underbase = base;
+		}
 
-        this.accent = accent;
-    }
+		this.accent = accent;
+	}
 
-    public Box createBox(TeXEnvironment env) {
-        final TeXFont tf = env.getTeXFont();
-        final int style = env.getStyle();
+	@Override
+	public Box createBox(TeXEnvironment env) {
+		final TeXFont tf = env.getTeXFont();
+		final int style = env.getStyle();
 
-        // set base in cramped style
-        Box b = base == null ? StrutBox.getEmpty() : base.createBox(env.crampStyle());
-        final double u = b.getWidth();
-        double s = 0.;
-        if (underbase instanceof CharSymbol) {
-            s = tf.getSkew(((CharSymbol) underbase).getCharFont(tf), style);
-        }
+		// set base in cramped style
+		Box b = base == null ? StrutBox.getEmpty() : base.createBox(env.crampStyle());
+		final double u = b.getWidth();
+		double s = 0.;
+		if (underbase instanceof CharSymbol) {
+			s = tf.getSkew(((CharSymbol) underbase).getCharFont(tf), style);
+		}
 
-        // calculate delta
-        final double delta = -2. * TeXLength.getFactor(TeXLength.Unit.MU, env);
+		// calculate delta
+		final double delta = -2. * TeXLength.getFactor(TeXLength.Unit.MU, env);
 
-        // create vertical box
-        VerticalBox vBox = new VerticalBox();
+		// create vertical box
+		VerticalBox vBox = new VerticalBox();
 
-        // accent
-        env.setStyle(TeXConstants.STYLE_SCRIPT_SCRIPT);
-        Box y = accent.createBox(env);
-        env.setStyle(style);
+		// accent
+		env.setStyle(TeXConstants.STYLE_SCRIPT_SCRIPT);
+		Box y = accent.createBox(env);
+		env.setStyle(style);
 
-        // if diff > 0, center accent, otherwise center base
-        double diff = (u - y.getWidth()) / 2.;
-        y.setShift(s + (diff > 0. ? diff : 0.));
-        if (diff < 0) {
-            b = new HorizontalBox(b, y.getWidth(), TeXConstants.Align.CENTER);
-        }
-        vBox.add(y);
+		// if diff > 0, center accent, otherwise center base
+		double diff = (u - y.getWidth()) / 2.;
+		y.setShift(s + (diff > 0. ? diff : 0.));
+		if (diff < 0) {
+			b = new HorizontalBox(b, y.getWidth(), TeXConstants.Align.CENTER);
+		}
+		vBox.add(y);
 
-        // kern
-        vBox.add(new StrutBox(0., -delta, 0., 0.));
-        // base
-        vBox.add(b);
+		// kern
+		vBox.add(new StrutBox(0., -delta, 0., 0.));
+		// base
+		vBox.add(b);
 
-        // set height and depth vertical box
-        final double total = vBox.getHeight() + vBox.getDepth();
-        final double d = b.getDepth();
-        vBox.setDepth(d);
-        vBox.setHeight(total - d);
+		// set height and depth vertical box
+		final double total = vBox.getHeight() + vBox.getDepth();
+		final double d = b.getDepth();
+		vBox.setDepth(d);
+		vBox.setHeight(total - d);
 
-        if (diff < 0) {
-            HorizontalBox hb = new HorizontalBox(new StrutBox(diff, 0., 0., 0.));
-            hb.add(vBox);
-            hb.setWidth(u);
-            return hb;
-        }
+		if (diff < 0) {
+			HorizontalBox hb = new HorizontalBox(new StrutBox(diff, 0., 0., 0.));
+			hb.add(vBox);
+			hb.setWidth(u);
+			return hb;
+		}
 
-        return vBox;
-    }
+		return vBox;
+	}
 }

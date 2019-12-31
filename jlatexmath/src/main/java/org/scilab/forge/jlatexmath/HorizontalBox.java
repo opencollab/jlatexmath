@@ -59,168 +59,172 @@ import java.util.ListIterator;
  */
 public class HorizontalBox extends Box {
 
-    private double curPos = 0; // NOPMD
-    protected List<Integer> breakPositions;
-    protected ArrayList<Box> children = new ArrayList<Box>();
+	private double curPos = 0; // NOPMD
+	protected List<Integer> breakPositions;
+	protected ArrayList<Box> children = new ArrayList<Box>();
 
-    public HorizontalBox(Box b, double w, TeXConstants.Align alignment) {
-        children = new ArrayList<Box>();
-        if (w != Double.POSITIVE_INFINITY) {
-            double rest = w - b.getWidth();
-            if (rest > 0) {
-                if (alignment == TeXConstants.Align.CENTER || alignment == TeXConstants.Align.NONE) {
-                    StrutBox s = new StrutBox(rest / 2, 0., 0., 0.);
-                    add(s);
-                    add(b);
-                    add(s);
-                } else if (alignment == TeXConstants.Align.LEFT) {
-                    add(b);
-                    add(new StrutBox(rest, 0., 0., 0.));
-                } else if (alignment == TeXConstants.Align.RIGHT) {
-                    add(new StrutBox(rest, 0., 0., 0.));
-                    add(b);
-                } else {
-                    add(b);
-                }
-            } else {
-                add(b);
-            }
-        } else {
-            add(b);
-        }
-    }
+	public HorizontalBox(Box b, double w, TeXConstants.Align alignment) {
+		children = new ArrayList<Box>();
+		if (w != Double.POSITIVE_INFINITY) {
+			double rest = w - b.getWidth();
+			if (rest > 0) {
+				if (alignment == TeXConstants.Align.CENTER || alignment == TeXConstants.Align.NONE) {
+					StrutBox s = new StrutBox(rest / 2, 0., 0., 0.);
+					add(s);
+					add(b);
+					add(s);
+				} else if (alignment == TeXConstants.Align.LEFT) {
+					add(b);
+					add(new StrutBox(rest, 0., 0., 0.));
+				} else if (alignment == TeXConstants.Align.RIGHT) {
+					add(new StrutBox(rest, 0., 0., 0.));
+					add(b);
+				} else {
+					add(b);
+				}
+			} else {
+				add(b);
+			}
+		} else {
+			add(b);
+		}
+	}
 
-    public HorizontalBox(Box b) {
-        add(b);
-    }
+	public HorizontalBox(Box b) {
+		add(b);
+	}
 
-    public HorizontalBox(int n) {
-        children = new ArrayList<Box>(n);
-    }
+	public HorizontalBox(int n) {
+		children = new ArrayList<Box>(n);
+	}
 
-    public HorizontalBox() {
-        // basic horizontal box
-    }
+	public HorizontalBox() {
+		// basic horizontal box
+	}
 
-    public HorizontalBox(Color fg, Color bg) {
-        super(fg, bg);
-    }
+	public HorizontalBox(Color fg, Color bg) {
+		super(fg, bg);
+	}
 
-    private HorizontalBox cloneBox() {
-        HorizontalBox b = new HorizontalBox(foreground, background);
-        b.shift = shift;
+	private HorizontalBox cloneBox() {
+		HorizontalBox b = new HorizontalBox(foreground, background);
+		b.shift = shift;
 
-        return b;
-    }
+		return b;
+	}
 
-    public void draw(Graphics2D g2, double x, double y) {
-        startDraw(g2, x, y);
-        double xPos = x;
-        for (Box box : children) {
-            /*int i = children.indexOf(box);
-              if (breakPositions != null && breakPositions.indexOf(i) != -1) {
-              box.markForDEBUG = java.awt.Color.BLUE;
-              }*/
-            if (box instanceof HVruleBox) {
-                ((HVruleBox)box).setWHD(width, height, depth);
-            }
-            box.draw(g2, xPos, y + box.shift);
-            xPos += box.getWidth();
-        }
-        endDraw(g2);
-    }
+	@Override
+	public void draw(Graphics2D g2, double x, double y) {
+		startDraw(g2, x, y);
+		double xPos = x;
+		for (Box box : children) {
+			/*
+			 * int i = children.indexOf(box); if (breakPositions != null &&
+			 * breakPositions.indexOf(i) != -1) { box.markForDEBUG =
+			 * java.awt.Color.BLUE; }
+			 */
+			if (box instanceof HVruleBox) {
+				((HVruleBox) box).setWHD(width, height, depth);
+			}
+			box.draw(g2, xPos, y + box.shift);
+			xPos += box.getWidth();
+		}
+		endDraw(g2);
+	}
 
-    public Area getArea() {
-        final Area area = new Area();
-        final AffineTransform af = new AffineTransform();
-        for (final Box b : children) {
-            if (b instanceof StrutBox) {
-                af.translate(b.getWidth(), 0.);
-            } else {
-                final Area a = b.getArea();
-                if (a == null) {
-                    return null;
-                }
-                a.transform(af);
-                area.add(a);
-                af.translate(b.getWidth(), 0.);//0.05);
-            }
-        }
-        return area;
-    }
+	@Override
+	public Area getArea() {
+		final Area area = new Area();
+		final AffineTransform af = new AffineTransform();
+		for (final Box b : children) {
+			if (b instanceof StrutBox) {
+				af.translate(b.getWidth(), 0.);
+			} else {
+				final Area a = b.getArea();
+				if (a == null) {
+					return null;
+				}
+				a.transform(af);
+				area.add(a);
+				af.translate(b.getWidth(), 0.);// 0.05);
+			}
+		}
+		return area;
+	}
 
-    public final void add(Box b) {
-        recalculate(b);
-        children.add(b);
-        b.parent = this;
-        b.elderParent = elderParent;
-    }
+	public final void add(Box b) {
+		recalculate(b);
+		children.add(b);
+		b.parent = this;
+		b.elderParent = elderParent;
+	}
 
-    public final void add(int pos, Box b) {
-        recalculate(b);
-        children.add(pos, b);
-        b.parent = this;
-        b.elderParent = elderParent;
-    }
+	public final void add(int pos, Box b) {
+		recalculate(b);
+		children.add(pos, b);
+		b.parent = this;
+		b.elderParent = elderParent;
+	}
 
-    private void recalculate(Box b) {
-        // Commented for ticket 764
-        // \left(\!\!\!\begin{array}{c}n\\\\r\end{array}\!\!\!\right)+123
-        //curPos += b.getWidth();
-        //width = Math.max(width, curPos);
-        width += b.getWidth();
-        height = Math.max((children.isEmpty() ? Double.NEGATIVE_INFINITY : height), b.height - b.shift);
-        depth = Math.max((children.isEmpty() ? Double.NEGATIVE_INFINITY : depth), b.depth + b.shift);
-    }
+	private void recalculate(Box b) {
+		// Commented for ticket 764
+		// \left(\!\!\!\begin{array}{c}n\\\\r\end{array}\!\!\!\right)+123
+		// curPos += b.getWidth();
+		// width = Math.max(width, curPos);
+		width += b.getWidth();
+		height = Math.max((children.isEmpty() ? Double.NEGATIVE_INFINITY : height), b.height - b.shift);
+		depth = Math.max((children.isEmpty() ? Double.NEGATIVE_INFINITY : depth), b.depth + b.shift);
+	}
 
-    public FontInfo getLastFont() {
-        // iterate from the last child box to the first until a font id is found
-        // that's not equal to NO_FONT
-        FontInfo font = null;
-        for (ListIterator it = children.listIterator(children.size()); font == null && it.hasPrevious();)
-            font = ((Box) it.previous()).getLastFont();
+	@Override
+	public FontInfo getLastFont() {
+		// iterate from the last child box to the first until a font id is found
+		// that's not equal to NO_FONT
+		FontInfo font = null;
+		for (ListIterator it = children.listIterator(children.size()); font == null && it.hasPrevious();)
+			font = ((Box) it.previous()).getLastFont();
 
-        return font;
-    }
+		return font;
+	}
 
-    public void addBreakPosition(int pos) {
-        if (breakPositions == null) {
-            breakPositions = new ArrayList<Integer>();
-        }
-        breakPositions.add(pos);
-    }
+	public void addBreakPosition(int pos) {
+		if (breakPositions == null) {
+			breakPositions = new ArrayList<Integer>();
+		}
+		breakPositions.add(pos);
+	}
 
-    protected HorizontalBox[] split(int position) {
-        return split(position, 1);
-    }
+	protected HorizontalBox[] split(int position) {
+		return split(position, 1);
+	}
 
-    protected HorizontalBox[] splitRemove(int position) {
-        return split(position, 2);
-    }
+	protected HorizontalBox[] splitRemove(int position) {
+		return split(position, 2);
+	}
 
-    private HorizontalBox[] split(int position, int shift) {
-        final HorizontalBox hb1 = cloneBox();
-        final HorizontalBox hb2 = cloneBox();
-        for (int i = 0; i <= position; i++) {
-            hb1.add(children.get(i));
-        }
+	private HorizontalBox[] split(int position, int shift) {
+		final HorizontalBox hb1 = cloneBox();
+		final HorizontalBox hb2 = cloneBox();
+		for (int i = 0; i <= position; i++) {
+			hb1.add(children.get(i));
+		}
 
-        for (int i = position + shift; i < children.size(); i++) {
-            hb2.add(children.get(i));
-        }
+		for (int i = position + shift; i < children.size(); i++) {
+			hb2.add(children.get(i));
+		}
 
-        if (breakPositions != null) {
-            for (int i = 0; i < breakPositions.size(); i++) {
-                if (breakPositions.get(i) > position + 1) {
-                    hb2.addBreakPosition(breakPositions.get(i) - position - 1);
-                }
-            }
-        }
+		if (breakPositions != null) {
+			for (int i = 0; i < breakPositions.size(); i++) {
+				if (breakPositions.get(i) > position + 1) {
+					hb2.addBreakPosition(breakPositions.get(i) - position - 1);
+				}
+			}
+		}
 
-        return new HorizontalBox[] {hb1, hb2};
-    }
+		return new HorizontalBox[] { hb1, hb2 };
+	}
 
-    ArrayList<Box> getChildren() {
-        return children;
-    }
+	ArrayList<Box> getChildren() {
+		return children;
+	}
 }

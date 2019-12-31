@@ -49,92 +49,103 @@ import java.util.ArrayList;
 
 public class Env {
 
-    private final Macro before;
-    private final Macro after;
+	private final Macro before;
+	private final Macro after;
 
-    public static class Begin implements AtomConsumer {
+	public static class Begin implements AtomConsumer {
 
-        private final String name;
-        private RowAtom base;
-        private final ArrayList<String> args;
+		private final String name;
+		private RowAtom base;
+		private final ArrayList<String> args;
 
-        public Begin(final String name, final ArrayList<String> args) {
-            this.name = name;
-            base = new RowAtom();
-            this.args = args;
-        }
+		public Begin(final String name, final ArrayList<String> args) {
+			this.name = name;
+			base = new RowAtom();
+			this.args = args;
+		}
 
-        public Atom getLastAtom() {
-            return base.getLastAtom();
-        }
+		@Override
+		public Atom getLastAtom() {
+			return base.getLastAtom();
+		}
 
-        public boolean init(TeXParser tp) {
-            return false;
-        }
+		@Override
+		public boolean init(TeXParser tp) {
+			return false;
+		}
 
-        public void add(TeXParser tp, Atom a) {
-            base.add(a);
-        }
+		@Override
+		public void add(TeXParser tp, Atom a) {
+			base.add(a);
+		}
 
-        public boolean close(TeXParser tp) {
-            return false;
-        }
+		@Override
+		public boolean close(TeXParser tp) {
+			return false;
+		}
 
-        public boolean isClosable() {
-            return false;
-        }
+		@Override
+		public boolean isClosable() {
+			return false;
+		}
 
-        public ArrayList<String> getArgs() {
-            return args;
-        }
+		public ArrayList<String> getArgs() {
+			return args;
+		}
 
-        public String getName() {
-            return name;
-        }
+		public String getName() {
+			return name;
+		}
 
-        public RowAtom steal(TeXParser tp) {
-            final RowAtom ra = base;
-            base = new RowAtom();
-            return ra;
-        }
+		@Override
+		public RowAtom steal(TeXParser tp) {
+			final RowAtom ra = base;
+			base = new RowAtom();
+			return ra;
+		}
 
-        public Atom getBase() {
-            return base.simplify();
-        }
+		public Atom getBase() {
+			return base.simplify();
+		}
 
-        public boolean isArray() {
-            return false;
-        }
+		@Override
+		public boolean isArray() {
+			return false;
+		}
 
-        public boolean isAmpersandAllowed() {
-            return false;
-        }
+		@Override
+		public boolean isAmpersandAllowed() {
+			return false;
+		}
 
-        public boolean isHandlingArg() {
-            return false;
-        }
+		@Override
+		public boolean isHandlingArg() {
+			return false;
+		}
 
-        public void lbrace(TeXParser tp) {
-        }
+		@Override
+		public void lbrace(TeXParser tp) {
+		}
 
-        public void rbrace(TeXParser tp) {
-        }
-    }
+		@Override
+		public void rbrace(TeXParser tp) {
+		}
+	}
 
-    public Env(final String before, final String after, final int nargs) {
-        this.before = new Macro(before, nargs);
-        this.after = new Macro(after, nargs);
-    }
+	public Env(final String before, final String after, final int nargs) {
+		this.before = new Macro(before, nargs);
+		this.after = new Macro(after, nargs);
+	}
 
-    public int getNArgs() {
-        return before.getNArgs();
-    }
+	public int getNArgs() {
+		return before.getNArgs();
+	}
 
-    public String getBefore(final TeXParser tp, final ArrayList<String> args) {
-        return before.get(tp, args);
-    }
+	public String getBefore(final TeXParser tp, final ArrayList<String> args) {
+		return before.get(tp, args);
+	}
 
-    public String getAfter(final TeXParser tp, final ArrayList<String> args) {
-        return after.get(tp, args);
-    }
+	public String getAfter(final TeXParser tp, final ArrayList<String> args) {
+		return after.get(tp, args);
+	}
 }

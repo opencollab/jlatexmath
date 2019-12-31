@@ -48,308 +48,327 @@
 
 package org.scilab.forge.jlatexmath;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Stroke;
-import java.awt.BasicStroke;
 import java.awt.geom.Area;
 import java.awt.geom.Rectangle2D;
 
 /**
- * An abstract graphical representation of a formula, that can be painted. All characters, font
- * sizes, positions are fixed. Only special Glue boxes could possibly stretch or shrink.
- * A box has 3 dimensions (width, height and depth), can be composed of other child boxes
- * that can possibly be shifted (up, down, left or right). Child boxes can also be positioned
- * outside their parent's box (defined by it's dimensions).
+ * An abstract graphical representation of a formula, that can be painted. All
+ * characters, font sizes, positions are fixed. Only special Glue boxes could
+ * possibly stretch or shrink. A box has 3 dimensions (width, height and depth),
+ * can be composed of other child boxes that can possibly be shifted (up, down,
+ * left or right). Child boxes can also be positioned outside their parent's box
+ * (defined by it's dimensions).
  * <p>
- * Subclasses must implement the abstract {@link #draw(Graphics2D, double, double)} method
- * (that paints the box). <b> This implementation must start with calling the method
- * {@link #startDraw(Graphics2D, double, double)} and end with calling the method
- * {@link #endDraw(Graphics2D)} to set and restore the color's that must be used for
- * painting the box and to draw the background!</b> They must also implement the abstract
- * {@link #getLastFont()} method (the last font
- * that will be used when this box will be painted).
+ * Subclasses must implement the abstract
+ * {@link #draw(Graphics2D, double, double)} method (that paints the box).
+ * <b> This implementation must start with calling the method
+ * {@link #startDraw(Graphics2D, double, double)} and end with calling the
+ * method {@link #endDraw(Graphics2D)} to set and restore the color's that must
+ * be used for painting the box and to draw the background!</b> They must also
+ * implement the abstract {@link #getLastFont()} method (the last font that will
+ * be used when this box will be painted).
  */
 public abstract class Box {
 
-    public static boolean DEBUG = false;
+	public static boolean DEBUG = false;
 
-    /**
-     * The foreground color of the whole box. Child boxes can override this color.
-     * If it's null and it has a parent box, the foreground color of the parent will
-     * be used. If it has no parent, the foreground color of the component on which it
-     * will be painted, will be used.
-     */
-    protected Color foreground;
+	/**
+	 * The foreground color of the whole box. Child boxes can override this
+	 * color. If it's null and it has a parent box, the foreground color of the
+	 * parent will be used. If it has no parent, the foreground color of the
+	 * component on which it will be painted, will be used.
+	 */
+	protected Color foreground;
 
-    /**
-     * The background color of the whole box. Child boxes can paint a background on top of
-     * this background. If it's null, no background will be painted.
-     */
-    protected Color background;
+	/**
+	 * The background color of the whole box. Child boxes can paint a background
+	 * on top of this background. If it's null, no background will be painted.
+	 */
+	protected Color background;
 
-    // used temporarily in startDraw and endDraw
-    private Color prevColor;
+	// used temporarily in startDraw and endDraw
+	private Color prevColor;
 
-    /**
-     * The width of this box, i.e. the value that will be used for further
-     * calculations.
-     */
-    protected double width = 0;
+	/**
+	 * The width of this box, i.e. the value that will be used for further
+	 * calculations.
+	 */
+	protected double width = 0;
 
-    /**
-     * The height of this box, i.e. the value that will be used for further
-     * calculations.
-     */
-    protected double height = 0;
+	/**
+	 * The height of this box, i.e. the value that will be used for further
+	 * calculations.
+	 */
+	protected double height = 0;
 
-    /**
-     * The depth of this box, i.e. the value that will be used for further
-     * calculations.
-     */
-    protected double depth = 0;
+	/**
+	 * The depth of this box, i.e. the value that will be used for further
+	 * calculations.
+	 */
+	protected double depth = 0;
 
-    /**
-     * The shift amount: the meaning depends on the particular kind of box
-     * (up, down, left, right)
-     */
-    protected double shift = 0;
+	/**
+	 * The shift amount: the meaning depends on the particular kind of box (up,
+	 * down, left, right)
+	 */
+	protected double shift = 0;
 
-    protected int type = -1;
+	protected int type = -1;
 
-    protected Box parent;
-    protected Box elderParent;
-    protected Color markForDEBUG;
-    protected Atom atom;
+	protected Box parent;
+	protected Box elderParent;
+	protected Color markForDEBUG;
+	protected Atom atom;
 
-    /**
-     * Creates an empty box (no children) with all dimensions set to 0 and no
-     * foreground and background color set (default values will be used: null)
-     */
-    protected Box() {
-        this(null, null);
-    }
+	/**
+	 * Creates an empty box (no children) with all dimensions set to 0 and no
+	 * foreground and background color set (default values will be used: null)
+	 */
+	protected Box() {
+		this(null, null);
+	}
 
-    /**
-     * Creates an empty box (no children) with all dimensions set to 0 and sets
-     * the foreground and background color of the box.
-     *
-     * @param fg the foreground color
-     * @param bg the background color
-     */
-    protected Box(Color fg, Color bg) {
-        foreground = fg;
-        background = bg;
-    }
+	/**
+	 * Creates an empty box (no children) with all dimensions set to 0 and sets
+	 * the foreground and background color of the box.
+	 *
+	 * @param fg
+	 *            the foreground color
+	 * @param bg
+	 *            the background color
+	 */
+	protected Box(Color fg, Color bg) {
+		foreground = fg;
+		background = bg;
+	}
 
-    public Area getArea() {
-        return null;
-    }
+	public Area getArea() {
+		return null;
+	}
 
-    public void setParent(Box parent) {
-        this.parent = parent;
-    }
+	public void setParent(Box parent) {
+		this.parent = parent;
+	}
 
-    public Box getParent() {
-        return parent;
-    }
+	public Box getParent() {
+		return parent;
+	}
 
-    public Box setBg(Color bg) {
-        background = bg;
-        return this;
-    }
+	public Box setBg(Color bg) {
+		background = bg;
+		return this;
+	}
 
-    public Box setFg(Color fg) {
-        foreground = fg;
-        return this;
-    }
+	public Box setFg(Color fg) {
+		foreground = fg;
+		return this;
+	}
 
-    public void setElderParent(Box elderParent) {
-        this.elderParent = elderParent;
-    }
+	public void setElderParent(Box elderParent) {
+		this.elderParent = elderParent;
+	}
 
-    public Box getElderParent() {
-        return elderParent;
-    }
+	public Box getElderParent() {
+		return elderParent;
+	}
 
-    /**
-     * Get the width of this box.
-     *
-     * @return the width of this box
-     */
-    public double getWidth() {
-        return width;
-    }
+	/**
+	 * Get the width of this box.
+	 *
+	 * @return the width of this box
+	 */
+	public double getWidth() {
+		return width;
+	}
 
-    public void negWidth() {
-        width = -width;
-    }
+	public void negWidth() {
+		width = -width;
+	}
 
-    /**
-     * Get the height of this box.
-     *
-     * @return the height of this box
-     */
-    public double getHeight() {
-        return height;
-    }
+	/**
+	 * Get the height of this box.
+	 *
+	 * @return the height of this box
+	 */
+	public double getHeight() {
+		return height;
+	}
 
-    public void addToWidth(double w) {
-        width += w;
-    }
+	public void addToWidth(double w) {
+		width += w;
+	}
 
-    /**
-     * Get the depth of this box.
-     *
-     * @return the depth of this box
-     */
-    public double getDepth() {
-        return depth;
-    }
+	/**
+	 * Get the depth of this box.
+	 *
+	 * @return the depth of this box
+	 */
+	public double getDepth() {
+		return depth;
+	}
 
-    /**
-     * Get the shift amount for this box.
-     *
-     * @return the shift amount
-     */
-    public double getShift() {
-        return shift;
-    }
+	/**
+	 * Get the shift amount for this box.
+	 *
+	 * @return the shift amount
+	 */
+	public double getShift() {
+		return shift;
+	}
 
-    /**
-     * Set the width for this box.
-     *
-     * @param w the width
-     */
-    public void setWidth(double w) {
-        width = w;
-    }
+	/**
+	 * Set the width for this box.
+	 *
+	 * @param w
+	 *            the width
+	 */
+	public void setWidth(double w) {
+		width = w;
+	}
 
-    /**
-     * Set the depth for this box.
-     *
-     * @param d the depth
-     */
-    public void setDepth(double d) {
-        depth = d;
-    }
+	/**
+	 * Set the depth for this box.
+	 *
+	 * @param d
+	 *            the depth
+	 */
+	public void setDepth(double d) {
+		depth = d;
+	}
 
-    /**
-     * Set the height for this box.
-     *
-     * @param h the height
-     */
-    public void setHeight(double h) {
-        height = h;
-    }
+	/**
+	 * Set the height for this box.
+	 *
+	 * @param h
+	 *            the height
+	 */
+	public void setHeight(double h) {
+		height = h;
+	}
 
-    /**
-     * Set the shift amount for this box.
-     *
-     * @param s the shift amount
-     */
-    public void setShift(double s) {
-        shift = s;
-    }
+	/**
+	 * Set the shift amount for this box.
+	 *
+	 * @param s
+	 *            the shift amount
+	 */
+	public void setShift(double s) {
+		shift = s;
+	}
 
-    /**
-     * Paints this box at the given coordinates using the given graphics context.
-     *
-     * @param g2 the graphics (2D) context to use for painting
-     * @param x the x-coordinate
-     * @param y the y-coordinate
-     */
-    public abstract void draw(Graphics2D g2, double x, double y);
+	/**
+	 * Paints this box at the given coordinates using the given graphics
+	 * context.
+	 *
+	 * @param g2
+	 *            the graphics (2D) context to use for painting
+	 * @param x
+	 *            the x-coordinate
+	 * @param y
+	 *            the y-coordinate
+	 */
+	public abstract void draw(Graphics2D g2, double x, double y);
 
-    /**
-     * Get the id of the font that will be used the last when this box will be painted.
-     *
-     * @return the id of the last font that will be used.
-     */
-    public abstract FontInfo getLastFont();
+	/**
+	 * Get the id of the font that will be used the last when this box will be
+	 * painted.
+	 *
+	 * @return the id of the last font that will be used.
+	 */
+	public abstract FontInfo getLastFont();
 
-    /**
-     * Stores the old color setting, draws the background of the box (if not null)
-     * and sets the foreground color (if not null).
-     *
-     * @param g2 the graphics (2D) context
-     * @param x the x-coordinate
-     * @param y the y-coordinate
-     */
-    protected void startDraw(Graphics2D g2, double x, double y) {
-        // old color
-        prevColor = g2.getColor();
-        if (background != null) { // draw background
-            g2.setColor(background);
-            g2.fill(new Rectangle2D.Double(x, y - height, width, height + depth));
-        }
-        if (foreground == null) {
-            g2.setColor(prevColor); // old foreground color
-        } else {
-            g2.setColor(foreground); // overriding foreground color
-        }
-        drawDebug(g2, x, y);
-    }
+	/**
+	 * Stores the old color setting, draws the background of the box (if not
+	 * null) and sets the foreground color (if not null).
+	 *
+	 * @param g2
+	 *            the graphics (2D) context
+	 * @param x
+	 *            the x-coordinate
+	 * @param y
+	 *            the y-coordinate
+	 */
+	protected void startDraw(Graphics2D g2, double x, double y) {
+		// old color
+		prevColor = g2.getColor();
+		if (background != null) { // draw background
+			g2.setColor(background);
+			g2.fill(new Rectangle2D.Double(x, y - height, width, height + depth));
+		}
+		if (foreground == null) {
+			g2.setColor(prevColor); // old foreground color
+		} else {
+			g2.setColor(foreground); // overriding foreground color
+		}
+		drawDebug(g2, x, y);
+	}
 
-    protected void drawDebug(Graphics2D g2, double x, double y, boolean showDepth) {
-        if (DEBUG) {
-            Stroke st = g2.getStroke();
-            if (markForDEBUG != null) {
-                Color c = g2.getColor();
-                g2.setColor(markForDEBUG);
-                g2.fill(new Rectangle2D.Double(x, y - height, width, height + depth));
-                g2.setColor(c);
-            }
-            g2.setStroke(new BasicStroke((float) (Math.abs(1. / g2.getTransform().getScaleX())), BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER));
-            double w = width;
-            if (width < 0) {
-                x += width;
-                w = -width;
-            }
-            g2.draw(new Rectangle2D.Double(x, y - height, w, height + depth));
-            if (showDepth) {
-                Color c = g2.getColor();
-                g2.setColor(Color.RED);
-                if (depth > 0) {
-                    g2.fill(new Rectangle2D.Double(x, y, w, depth));
-                    g2.setColor(c);
-                    g2.draw(new Rectangle2D.Double(x, y, w, depth));
-                } else if (depth < 0) {
-                    g2.fill(new Rectangle2D.Double(x, y + depth, w, -depth));
-                    g2.setColor(c);
-                    g2.draw(new Rectangle2D.Double(x, y + depth, w, -depth));
-                } else {
-                    g2.setColor(c);
-                }
-            }
-            g2.setStroke(st);
-        }
-    }
+	protected void drawDebug(Graphics2D g2, double x, double y, boolean showDepth) {
+		if (DEBUG) {
+			Stroke st = g2.getStroke();
+			if (markForDEBUG != null) {
+				Color c = g2.getColor();
+				g2.setColor(markForDEBUG);
+				g2.fill(new Rectangle2D.Double(x, y - height, width, height + depth));
+				g2.setColor(c);
+			}
+			g2.setStroke(new BasicStroke((float) (Math.abs(1. / g2.getTransform().getScaleX())), BasicStroke.CAP_BUTT,
+					BasicStroke.JOIN_MITER));
+			double w = width;
+			if (width < 0) {
+				x += width;
+				w = -width;
+			}
+			g2.draw(new Rectangle2D.Double(x, y - height, w, height + depth));
+			if (showDepth) {
+				Color c = g2.getColor();
+				g2.setColor(Color.RED);
+				if (depth > 0) {
+					g2.fill(new Rectangle2D.Double(x, y, w, depth));
+					g2.setColor(c);
+					g2.draw(new Rectangle2D.Double(x, y, w, depth));
+				} else if (depth < 0) {
+					g2.fill(new Rectangle2D.Double(x, y + depth, w, -depth));
+					g2.setColor(c);
+					g2.draw(new Rectangle2D.Double(x, y + depth, w, -depth));
+				} else {
+					g2.setColor(c);
+				}
+			}
+			g2.setStroke(st);
+		}
+	}
 
-    protected void drawDebug(Graphics2D g2, double x, double y) {
-        if (DEBUG) {
-            drawDebug(g2, x, y, true);
-        }
-    }
+	protected void drawDebug(Graphics2D g2, double x, double y) {
+		if (DEBUG) {
+			drawDebug(g2, x, y, true);
+		}
+	}
 
-    /**
-     * Restores the previous color setting.
-     *
-     * @param g2 the graphics (2D) context
-     */
-    protected void endDraw(Graphics2D g2) {
-        g2.setColor(prevColor);
-    }
+	/**
+	 * Restores the previous color setting.
+	 *
+	 * @param g2
+	 *            the graphics (2D) context
+	 */
+	protected void endDraw(Graphics2D g2) {
+		g2.setColor(prevColor);
+	}
 
-    public String toString() {
-        return super.toString() + ": w=" + width + ";h=" + height + ";d=" + depth + ";s=" + shift;
-    }
+	@Override
+	public String toString() {
+		return super.toString() + ": w=" + width + ";h=" + height + ";d=" + depth + ";s=" + shift;
+	}
 
-    public void setAtom(final Atom atom) {
-        this.atom = atom;
-    }
+	public void setAtom(final Atom atom) {
+		this.atom = atom;
+	}
 
-    public Atom getAtom() {
-        return this.atom;
-    }
+	public Atom getAtom() {
+		return this.atom;
+	}
 }

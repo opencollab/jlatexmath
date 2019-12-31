@@ -47,54 +47,65 @@ package org.scilab.forge.jlatexmath;
 
 public final class SingleAtomConsumer implements AtomConsumer {
 
-    private Atom a;
+	private Atom a;
 
-    public boolean init(TeXParser tp) {
-        return true;
-    }
+	@Override
+	public boolean init(TeXParser tp) {
+		return true;
+	}
 
-    public void add(TeXParser tp, Atom a) {
-        this.a = a;
-    }
+	@Override
+	public void add(TeXParser tp, Atom a) {
+		this.a = a;
+	}
 
-    public Atom get() {
-        if (a instanceof RowAtom) {
-            return ((RowAtom)a).simplify();
-        }
-        return a;
-    }
+	public Atom get() {
+		if (a instanceof RowAtom) {
+			return ((RowAtom) a).simplify();
+		}
+		return a;
+	}
 
-    public Atom getLastAtom() {
-        return null;
-    }
+	@Override
+	public Atom getLastAtom() {
+		return null;
+	}
 
-    public boolean close(TeXParser tp) {
-        return false;
-    }
+	@Override
+	public boolean close(TeXParser tp) {
+		return false;
+	}
 
-    public boolean isClosable() {
-        return false;
-    }
+	@Override
+	public boolean isClosable() {
+		return false;
+	}
 
-    public RowAtom steal(TeXParser tp) {
-        return null;
-    }
+	@Override
+	public RowAtom steal(TeXParser tp) {
+		return null;
+	}
 
-    public boolean isArray() {
-        return false;
-    }
+	@Override
+	public boolean isArray() {
+		return false;
+	}
 
-    public boolean isAmpersandAllowed() {
-        return false;
-    }
+	@Override
+	public boolean isAmpersandAllowed() {
+		return false;
+	}
 
-    public boolean isHandlingArg() {
-        return false;
-    }
+	@Override
+	public boolean isHandlingArg() {
+		return false;
+	}
 
-    public void lbrace(TeXParser tp) {
-    }
+	@Override
+	public void lbrace(TeXParser tp) {
+	}
 
-    public void rbrace(TeXParser tp) {
-    }
+	@Override
+	public void rbrace(TeXParser tp) {
+	}
 }

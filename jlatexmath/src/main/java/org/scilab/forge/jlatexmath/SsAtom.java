@@ -50,28 +50,29 @@ package org.scilab.forge.jlatexmath;
  */
 public class SsAtom extends Atom {
 
-    private Atom base;
+	private Atom base;
 
-    public SsAtom(Atom base) {
-        this.base = base;
-    }
+	public SsAtom(Atom base) {
+		this.base = base;
+	}
 
-    public Box createBox(TeXEnvironment env) {
-        Box box;
-        if (base != null) {
-            final TeXFont tf = env.getTeXFont();
-            final boolean ss = tf.getSs();
-            if (ss) {
-                box = base.createBox(env);
-            } else {
-                tf.setSs(true);
-                box = base.createBox(env);
-                tf.setSs(false);
-            }
-        } else {
-            box = StrutBox.getEmpty();
-        }
-        return box;
-    }
+	@Override
+	public Box createBox(TeXEnvironment env) {
+		Box box;
+		if (base != null) {
+			final TeXFont tf = env.getTeXFont();
+			final boolean ss = tf.getSs();
+			if (ss) {
+				box = base.createBox(env);
+			} else {
+				tf.setSs(true);
+				box = base.createBox(env);
+				tf.setSs(false);
+			}
+		} else {
+			box = StrutBox.getEmpty();
+		}
+		return box;
+	}
 
 }

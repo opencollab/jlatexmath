@@ -46,20 +46,20 @@
 package org.scilab.forge.jlatexmath;
 
 /**
- * An atom representing a fraction build with over.
- * This atom has been added to handle \buildrel ... \over ... stuff
+ * An atom representing a fraction build with over. This atom has been added to
+ * handle \buildrel ... \over ... stuff
  */
 public class OverAtom extends FractionAtom {
 
-    public OverAtom(Atom num, Atom den) {
-        super(num, den);
-    }
+	public OverAtom(Atom num, Atom den) {
+		super(num, den);
+	}
 
-    public Atom getNum() {
-        return numerator;
-    }
+	public Atom getNum() {
+		return numerator;
+	}
 
-    public Atom getDen() {
-        return denominator;
-    }
+	public Atom getDen() {
+		return denominator;
+	}
 }

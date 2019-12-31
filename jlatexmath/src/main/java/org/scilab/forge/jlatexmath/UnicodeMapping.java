@@ -45,22 +45,20 @@
 
 package org.scilab.forge.jlatexmath;
 
-import java.lang.Character.UnicodeBlock;
-
 public final class UnicodeMapping {
 
-    private static final Character.UnicodeBlock[] map = new Character.UnicodeBlock[65536];
+	private static final Character.UnicodeBlock[] map = new Character.UnicodeBlock[65536];
 
-    public static Character.UnicodeBlock get(final char c) {
-        Character.UnicodeBlock u = map[c];
-        if (u == null) {
-            u = Character.UnicodeBlock.of(c);
-            map[c] = u;
-        }
-        return u;
-    }
+	public static Character.UnicodeBlock get(final char c) {
+		Character.UnicodeBlock u = map[c];
+		if (u == null) {
+			u = Character.UnicodeBlock.of(c);
+			map[c] = u;
+		}
+		return u;
+	}
 
-    public static Character.UnicodeBlock get(final int c) {
-        return Character.UnicodeBlock.of(c);
-    }
+	public static Character.UnicodeBlock get(final int c) {
+		return Character.UnicodeBlock.of(c);
+	}
 }

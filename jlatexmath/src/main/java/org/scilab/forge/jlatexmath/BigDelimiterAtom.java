@@ -50,22 +50,23 @@ package org.scilab.forge.jlatexmath;
  */
 public class BigDelimiterAtom extends Atom {
 
-    public final SymbolAtom delim;
-    private final int size;
+	public final SymbolAtom delim;
+	private final int size;
 
-    public BigDelimiterAtom(final SymbolAtom delim, final int size) {
-        this.delim = delim;
-        this.size = size;
-    }
+	public BigDelimiterAtom(final SymbolAtom delim, final int size) {
+		this.delim = delim;
+		this.size = size;
+	}
 
-    public Box createBox(TeXEnvironment env) {
-        final Box b = DelimiterFactory.create(delim, env, size);
-        final HorizontalBox hbox = new HorizontalBox();
-        final double h = b.getHeight();
-        final double total = h + b.getDepth();
-        final double axis = env.getTeXFont().getAxisHeight(env.getStyle());
-        b.setShift(-total / 2 + h - axis);
-        hbox.add(b);
-        return hbox;
-    }
+	@Override
+	public Box createBox(TeXEnvironment env) {
+		final Box b = DelimiterFactory.create(delim, env, size);
+		final HorizontalBox hbox = new HorizontalBox();
+		final double h = b.getHeight();
+		final double total = h + b.getDepth();
+		final double axis = env.getTeXFont().getAxisHeight(env.getStyle());
+		b.setShift(-total / 2 + h - axis);
+		hbox.add(b);
+		return hbox;
+	}
 }

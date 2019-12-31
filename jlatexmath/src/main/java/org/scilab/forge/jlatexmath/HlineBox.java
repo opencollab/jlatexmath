@@ -50,13 +50,13 @@ package org.scilab.forge.jlatexmath;
  */
 public class HlineBox extends HorizontalRule {
 
-    public HlineBox(final double thickness) {
-        super(thickness, 0., 0., false);
-        type = TeXConstants.TYPE_HLINE;
-    }
+	public HlineBox(final double thickness) {
+		super(thickness, 0., 0., false);
+		type = TeXConstants.TYPE_HLINE;
+	}
 
-    public void setDims(final double width, final double shift) {
-        this.width = width;
-        this.speShift = shift;
-    }
+	public void setDims(final double width, final double shift) {
+		this.width = width;
+		this.speShift = shift;
+	}
 }
