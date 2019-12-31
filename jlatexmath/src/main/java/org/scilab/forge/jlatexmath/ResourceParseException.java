@@ -52,7 +52,7 @@ package org.scilab.forge.jlatexmath;
  */
 public class ResourceParseException extends JMathTeXException {
 
-	protected ResourceParseException(String msg) {
+	public ResourceParseException(String msg) {
 		super(msg);
 	}
 
