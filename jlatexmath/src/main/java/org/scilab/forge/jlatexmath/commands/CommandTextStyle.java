@@ -46,14 +46,12 @@
 package org.scilab.forge.jlatexmath.commands;
 
 import org.scilab.forge.jlatexmath.Atom;
-import org.scilab.forge.jlatexmath.ExternalFontManager;
 import org.scilab.forge.jlatexmath.TeXParser;
 import org.scilab.forge.jlatexmath.TextStyleAtom;
 
 public class CommandTextStyle extends Command {
 
-	final int style;
-	ExternalFontManager.FontSSSF f;
+	private final int style;
 
 	public CommandTextStyle(final int style) {
 		this.style = style;
@@ -61,30 +59,11 @@ public class CommandTextStyle extends Command {
 
 	@Override
 	public boolean init(TeXParser tp) {
-		f = ExternalFontManager.get().getFont(Character.UnicodeBlock.BASIC_LATIN);
-		if (f != null) {
-			ExternalFontManager.get().put(Character.UnicodeBlock.BASIC_LATIN, null);
-		}
 		return true;
 	}
 
 	@Override
 	public void add(TeXParser tp, Atom a) {
-		if (f != null) {
-			ExternalFontManager.get().put(Character.UnicodeBlock.BASIC_LATIN, f);
-		}
-
 		tp.closeConsumer(new TextStyleAtom(a, style));
 	}
-
-	@Override
-	public Command duplicate() {
-		CommandTextStyleTeX ret = new CommandTextStyleTeX(style);
-
-		ret.f = f;
-
-		return ret;
-
-	}
-
 }

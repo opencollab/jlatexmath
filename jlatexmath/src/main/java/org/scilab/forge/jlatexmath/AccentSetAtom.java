@@ -60,7 +60,7 @@ public class AccentSetAtom extends Atom {
 
 	public AccentSetAtom(Atom base, Atom accent) {
 		this.base = base;
-		if (base instanceof AccentedAtom) {
+		if (base instanceof AccentSetAtom) {
 			underbase = ((AccentSetAtom) base).underbase;
 		} else {
 			underbase = base;
@@ -75,7 +75,8 @@ public class AccentSetAtom extends Atom {
 		final int style = env.getStyle();
 
 		// set base in cramped style
-		Box b = base == null ? StrutBox.getEmpty() : base.createBox(env.crampStyle());
+		Box b = base == null ? StrutBox.getEmpty()
+				: base.createBox(env.crampStyle());
 		final double u = b.getWidth();
 		double s = 0.;
 		if (underbase instanceof CharSymbol) {
@@ -83,7 +84,7 @@ public class AccentSetAtom extends Atom {
 		}
 
 		// calculate delta
-		final double delta = -2. * TeXLength.getFactor(TeXLength.Unit.MU, env);
+		final double delta = -2. * Unit.MU.getFactor(env);
 
 		// create vertical box
 		VerticalBox vBox = new VerticalBox();
@@ -113,7 +114,8 @@ public class AccentSetAtom extends Atom {
 		vBox.setHeight(total - d);
 
 		if (diff < 0) {
-			HorizontalBox hb = new HorizontalBox(new StrutBox(diff, 0., 0., 0.));
+			HorizontalBox hb = new HorizontalBox(
+					new StrutBox(diff, 0., 0., 0.));
 			hb.add(vBox);
 			hb.setWidth(u);
 			return hb;
@@ -121,4 +123,5 @@ public class AccentSetAtom extends Atom {
 
 		return vBox;
 	}
+
 }

@@ -73,10 +73,6 @@ public class AccentedAtom extends Atom {
 	 *            base atom
 	 * @param accentName
 	 *            name of the accent symbol to be put over the base atom
-	 * @throws InvalidSymbolTypeException
-	 *             if the symbol is not defined as an accent ('acc')
-	 * @throws SymbolNotFoundException
-	 *             if there's no symbol defined with the given name
 	 */
 	public AccentedAtom(Atom base, String accentName) {
 		this(base, SymbolAtom.get(accentName));
@@ -108,7 +104,7 @@ public class AccentedAtom extends Atom {
 		}
 
 		if (!Double.isNaN(skew)) {
-			s = skew * TeXLength.getFactor(TeXLength.Unit.MU, env) - s;
+			s = skew * Unit.MU.getFactor(env) - s;
 		}
 
 		// TODO: maybe we've a bug here
@@ -170,4 +166,12 @@ public class AccentedAtom extends Atom {
 	public boolean setAddItalicCorrection(boolean b) {
 		return base.setAddItalicCorrection(b);
 	}
+
+	/**
+	 * @return accent
+	 */
+	public SymbolAtom getAccent() {
+		return this.accent;
+	}
+
 }

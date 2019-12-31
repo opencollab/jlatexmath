@@ -45,11 +45,11 @@
 
 package org.scilab.forge.jlatexmath;
 
-import java.awt.BasicStroke;
-import java.awt.Color;
-import java.awt.Graphics2D;
-import java.awt.Stroke;
-import java.awt.geom.Line2D;
+import org.scilab.forge.jlatexmath.platform.geom.Line2D;
+import org.scilab.forge.jlatexmath.platform.graphics.BasicStroke;
+import org.scilab.forge.jlatexmath.platform.graphics.Color;
+import org.scilab.forge.jlatexmath.platform.graphics.Graphics2DInterface;
+import org.scilab.forge.jlatexmath.platform.graphics.Stroke;
 
 /**
  * A box representing a rotated box.
@@ -62,8 +62,8 @@ public class CancelBox extends Box {
 	private final double extra;
 	private final Color color;
 
-	public CancelBox(final Box b, final CancelAtom.Type ctype, final double thickness, final double extra,
-			Color color) {
+	public CancelBox(final Box b, final CancelAtom.Type ctype,
+			final double thickness, final double extra, Color color) {
 		this.b = b;
 		this.ctype = ctype;
 		this.thickness = thickness;
@@ -76,11 +76,12 @@ public class CancelBox extends Box {
 	}
 
 	@Override
-	public void draw(Graphics2D g2, double x, double y) {
+	public void draw(Graphics2DInterface g2, double x, double y) {
 		b.draw(g2, x, y);
 		startDraw(g2, x, y);
 		final Stroke oldStroke = g2.getStroke();
-		g2.setStroke(new BasicStroke((float) thickness, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER));
+		g2.setStroke(graphics.createBasicStroke(thickness, BasicStroke.CAP_BUTT,
+				BasicStroke.JOIN_MITER));
 		final double th = thickness / 2.;
 		final double hyp = Math.hypot(width, height + depth);
 		final double a = extra * width / hyp;
@@ -91,16 +92,26 @@ public class CancelBox extends Box {
 			g2.setColor(color);
 		}
 
+		Line2D line = geom.createLine2D();
+
 		switch (ctype) {
 		case SLASH:
-			g2.draw(new Line2D.Double(x + th - a, y + depth - th + b, x + width - th + a, y - height + th - b));
+			line.setLine(x + th - a, y + depth - th + b, x + width - th + a,
+					y - height + th - b);
+			g2.draw(line);
 			break;
 		case BACKSLASH:
-			g2.draw(new Line2D.Double(x + th - a, y - height + th - b, x + width - th + a, y + depth - th + b));
+			line.setLine(x + th - a, y - height + th - b, x + width - th + a,
+					y + depth - th + b);
+			g2.draw(line);
 			break;
 		case X:
-			g2.draw(new Line2D.Double(x + th - a, y - height + th - b, x + width - th + a, y + depth - th + b));
-			g2.draw(new Line2D.Double(x + th - a, y + depth - th + b, x + width - th + a, y - height + th - b));
+			line.setLine(x + th - a, y - height + th - b, x + width - th + a,
+					y + depth - th + b);
+			g2.draw(line);
+			line.setLine(x + th - a, y + depth - th + b, x + width - th + a,
+					y - height + th - b);
+			g2.draw(line);
 			break;
 		}
 		g2.setStroke(oldStroke);

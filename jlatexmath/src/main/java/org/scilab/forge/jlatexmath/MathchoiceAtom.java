@@ -52,7 +52,8 @@ public class MathchoiceAtom extends Atom {
 	private final Atom s;
 	private final Atom ss;
 
-	public MathchoiceAtom(final Atom d, final Atom t, final Atom s, final Atom ss) {
+	public MathchoiceAtom(final Atom d, final Atom t, final Atom s,
+			final Atom ss) {
 		this.d = d;
 		this.t = t;
 		this.s = s;

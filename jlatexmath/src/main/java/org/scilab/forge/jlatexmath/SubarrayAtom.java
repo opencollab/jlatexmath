@@ -50,7 +50,8 @@ package org.scilab.forge.jlatexmath;
  */
 public class SubarrayAtom extends Atom {
 
-	private static final SpaceAtom vsep_in = new SpaceAtom(TeXLength.Unit.EX, 0., 0.5, 0.);
+	private static final SpaceAtom vsep_in = new SpaceAtom(Unit.EX,
+			0., 0.5, 0.);
 	private ArrayOfAtoms column;
 	private ArrayOptions options;
 
@@ -61,8 +62,8 @@ public class SubarrayAtom extends Atom {
 
 	@Override
 	public Box createBox(TeXEnvironment env) {
-		final TeXConstants.Align alignment = options.hasAlignment() ? options.getAlignment(0)
-				: TeXConstants.Align.CENTER;
+		final TeXConstants.Align alignment = options.hasAlignment()
+				? options.getAlignment(0) : TeXConstants.Align.CENTER;
 		final Box[] boxes = new Box[column.row];
 		final Box Vsep = vsep_in.createBox(env);
 		final VerticalBox vb = new VerticalBox();
@@ -83,4 +84,5 @@ public class SubarrayAtom extends Atom {
 
 		return vb;
 	}
+
 }

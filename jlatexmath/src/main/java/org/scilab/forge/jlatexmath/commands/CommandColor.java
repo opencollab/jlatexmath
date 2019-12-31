@@ -1,11 +1,10 @@
 package org.scilab.forge.jlatexmath.commands;
 
-import java.awt.Color;
-
 import org.scilab.forge.jlatexmath.Atom;
 import org.scilab.forge.jlatexmath.ColorAtom;
 import org.scilab.forge.jlatexmath.RowAtom;
 import org.scilab.forge.jlatexmath.TeXParser;
+import org.scilab.forge.jlatexmath.platform.graphics.Color;
 
 public class CommandColor extends CommandStyle {
 
@@ -29,11 +28,6 @@ public class CommandColor extends CommandStyle {
 	@Override
 	public Atom newI(TeXParser tp, Atom a) {
 		return new ColorAtom(a, null, fg);
-	}
-
-	@Override
-	public Command duplicate() {
-		return new CommandColor(size, fg);
 	}
 
 }

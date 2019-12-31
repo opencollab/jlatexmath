@@ -45,7 +45,7 @@
 
 package org.scilab.forge.jlatexmath;
 
-import java.awt.Graphics2D;
+import org.scilab.forge.jlatexmath.platform.graphics.Graphics2DInterface;
 
 /**
  * A box representing a rotated box.
@@ -55,8 +55,8 @@ public class CellBox extends Box {
 	private Box box;
 	private double left;
 
-	public CellBox(Box box, double height, double depth, double left, double right, double colW,
-			TeXConstants.Align alignment) {
+	public CellBox(Box box, double height, double depth, double left,
+			double right, double colW, TeXConstants.Align alignment) {
 		this.width = left + colW + right;
 		this.height = height;
 		this.depth = depth;
@@ -77,7 +77,7 @@ public class CellBox extends Box {
 	}
 
 	@Override
-	public void draw(Graphics2D g2, double x, double y) {
+	public void draw(Graphics2DInterface g2, double x, double y) {
 		startDraw(g2, x, y);
 		box.draw(g2, x + left, y);
 		endDraw(g2);

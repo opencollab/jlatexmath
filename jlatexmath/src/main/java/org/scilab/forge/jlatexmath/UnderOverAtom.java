@@ -67,8 +67,8 @@ public class UnderOverAtom extends Atom {
 	private final boolean underScriptSize;
 	private final boolean overScriptSize;
 
-	public UnderOverAtom(Atom base, Atom underOver, TeXLength underOverSpace, boolean underOverScriptSize,
-			boolean over) {
+	public UnderOverAtom(Atom base, Atom underOver, TeXLength underOverSpace,
+			boolean underOverScriptSize, boolean over) {
 		this.base = base;
 		if (over) {
 			this.under = null;
@@ -87,8 +87,9 @@ public class UnderOverAtom extends Atom {
 		}
 	}
 
-	public UnderOverAtom(Atom base, Atom under, TeXLength underSpace, boolean underScriptSize, Atom over,
-			TeXLength overSpace, boolean overScriptSize) {
+	public UnderOverAtom(Atom base, Atom under, TeXLength underSpace,
+			boolean underScriptSize, Atom over, TeXLength overSpace,
+			boolean overScriptSize) {
 		this.base = base;
 		this.under = under;
 		this.underSpace = underSpace;
@@ -150,7 +151,8 @@ public class UnderOverAtom extends Atom {
 	private static Box changeWidth(Box b, double maxWidth) {
 		if (b != null) {
 			if (Math.abs(maxWidth - b.getWidth()) > TeXFormula.PREC) {
-				return new HorizontalBox(b, maxWidth, TeXConstants.Align.CENTER);
+				return new HorizontalBox(b, maxWidth,
+						TeXConstants.Align.CENTER);
 			} else {
 				b.setHeight(Math.max(b.getHeight(), 0.));
 				b.setDepth(Math.max(b.getDepth(), 0.));

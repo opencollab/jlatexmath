@@ -46,13 +46,13 @@
 
 package org.scilab.forge.jlatexmath;
 
-import java.awt.Color;
-import java.awt.Graphics2D;
-import java.awt.geom.AffineTransform;
-import java.awt.geom.Area;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
+
+import org.scilab.forge.jlatexmath.platform.geom.Area;
+import org.scilab.forge.jlatexmath.platform.graphics.Color;
+import org.scilab.forge.jlatexmath.platform.graphics.Graphics2DInterface;
 
 /**
  * A box composed of a horizontal row of child boxes.
@@ -68,7 +68,8 @@ public class HorizontalBox extends Box {
 		if (w != Double.POSITIVE_INFINITY) {
 			double rest = w - b.getWidth();
 			if (rest > 0) {
-				if (alignment == TeXConstants.Align.CENTER || alignment == TeXConstants.Align.NONE) {
+				if (alignment == TeXConstants.Align.CENTER
+						|| alignment == TeXConstants.Align.NONE) {
 					StrutBox s = new StrutBox(rest / 2, 0., 0., 0.);
 					add(s);
 					add(b);
@@ -91,6 +92,9 @@ public class HorizontalBox extends Box {
 	}
 
 	public HorizontalBox(Box b) {
+		if (b == null) {
+			return;
+		}
 		add(b);
 	}
 
@@ -114,7 +118,7 @@ public class HorizontalBox extends Box {
 	}
 
 	@Override
-	public void draw(Graphics2D g2, double x, double y) {
+	public void draw(Graphics2DInterface g2, double x, double y) {
 		startDraw(g2, x, y);
 		double xPos = x;
 		for (Box box : children) {
@@ -134,19 +138,22 @@ public class HorizontalBox extends Box {
 
 	@Override
 	public Area getArea() {
-		final Area area = new Area();
-		final AffineTransform af = new AffineTransform();
+		final Area area = geom.createArea();
+
+		double afX = 0;
+		final double afY = 0;
+
 		for (final Box b : children) {
 			if (b instanceof StrutBox) {
-				af.translate(b.getWidth(), 0.);
+				afX += b.getWidth();
 			} else {
 				final Area a = b.getArea();
 				if (a == null) {
 					return null;
 				}
-				a.transform(af);
+				a.translate(afX, afY);
 				area.add(a);
-				af.translate(b.getWidth(), 0.);// 0.05);
+				afX += b.getWidth();
 			}
 		}
 		return area;
@@ -155,15 +162,11 @@ public class HorizontalBox extends Box {
 	public final void add(Box b) {
 		recalculate(b);
 		children.add(b);
-		b.parent = this;
-		b.elderParent = elderParent;
 	}
 
 	public final void add(int pos, Box b) {
 		recalculate(b);
 		children.add(pos, b);
-		b.parent = this;
-		b.elderParent = elderParent;
 	}
 
 	private void recalculate(Box b) {
@@ -172,19 +175,25 @@ public class HorizontalBox extends Box {
 		// curPos += b.getWidth();
 		// width = Math.max(width, curPos);
 		width += b.getWidth();
-		height = Math.max((children.isEmpty() ? Double.NEGATIVE_INFINITY : height), b.height - b.shift);
-		depth = Math.max((children.isEmpty() ? Double.NEGATIVE_INFINITY : depth), b.depth + b.shift);
+		height = Math.max(
+				(children.isEmpty() ? Double.NEGATIVE_INFINITY : height),
+				b.height - b.shift);
+		depth = Math.max(
+				(children.isEmpty() ? Double.NEGATIVE_INFINITY : depth),
+				b.depth + b.shift);
 	}
 
 	@Override
 	public FontInfo getLastFont() {
 		// iterate from the last child box to the first until a font id is found
 		// that's not equal to NO_FONT
-		FontInfo font = null;
-		for (ListIterator it = children.listIterator(children.size()); font == null && it.hasPrevious();)
-			font = ((Box) it.previous()).getLastFont();
+		FontInfo fontId = null;
+		for (ListIterator it = children
+				.listIterator(children.size()); fontId == null
+						&& it.hasPrevious();)
+			fontId = ((Box) it.previous()).getLastFont();
 
-		return font;
+		return fontId;
 	}
 
 	public void addBreakPosition(int pos) {

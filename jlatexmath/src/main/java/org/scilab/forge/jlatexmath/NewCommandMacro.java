@@ -49,6 +49,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.scilab.forge.jlatexmath.exception.ParseException;
+
 public class NewCommandMacro {
 
 	private static final Map<String, Macro> macros = new HashMap<String, Macro>();
@@ -60,15 +62,16 @@ public class NewCommandMacro {
 		macros.clear();
 	}
 
-	public static void addNewCommand(TeXParser tp, String name, String code, int nbargs, boolean re)
-			throws ParseException {
+	public static void addNewCommand(TeXParser tp, String name, String code,
+			int nbargs, boolean re) throws ParseException {
 		if (name.equals("CancelColor")) {
 			CancelAtom.handleColor(tp, code);
 			return;
 		}
 
 		if (macros.get(name) != null && !re) {
-			throw new ParseException(tp, "Command " + name + " already exists ! Use renewcommand instead ...");
+			throw new ParseException(tp, "Command " + name
+					+ " already exists ! Use renewcommand instead ...");
 		}
 		macros.put(name, new Macro(code, nbargs));
 	}

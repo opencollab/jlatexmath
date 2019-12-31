@@ -46,11 +46,11 @@
 package org.scilab.forge.jlatexmath.mhchem;
 
 import org.scilab.forge.jlatexmath.Atom;
-import org.scilab.forge.jlatexmath.ParseException;
 import org.scilab.forge.jlatexmath.RomanAtom;
 import org.scilab.forge.jlatexmath.RowAtom;
 import org.scilab.forge.jlatexmath.Symbols;
 import org.scilab.forge.jlatexmath.TeXConstants;
+import org.scilab.forge.jlatexmath.exception.ParseException;
 
 public class MhchemBondParser {
 
@@ -104,8 +104,10 @@ public class MhchemBondParser {
 			} else if (c1 == '-' && c2 == '~' && c3 == '-') {
 				return new MhchemBondAtom(3, 1);
 			} else if (c1 == '.' && c2 == '.' && c3 == '.') {
-				final Atom d = Symbols.CDOTP.changeType(TeXConstants.TYPE_ORDINARY);
-				return new RowAtom(d, d, d).changeType(TeXConstants.TYPE_RELATION);
+				final Atom d = Symbols.CDOTP
+						.changeType(TeXConstants.TYPE_ORDINARY);
+				return new RowAtom(d, d, d)
+						.changeType(TeXConstants.TYPE_RELATION);
 			}
 			break;
 		}
@@ -115,8 +117,10 @@ public class MhchemBondParser {
 			final char c3 = parseString.charAt(2);
 			final char c4 = parseString.charAt(3);
 			if (c1 == '.' && c2 == '.' && c3 == '.' && c4 == '.') {
-				final Atom d = Symbols.CDOTP.changeType(TeXConstants.TYPE_ORDINARY);
-				return new RowAtom(d, d, d, d).changeType(TeXConstants.TYPE_RELATION);
+				final Atom d = Symbols.CDOTP
+						.changeType(TeXConstants.TYPE_ORDINARY);
+				return new RowAtom(d, d, d, d)
+						.changeType(TeXConstants.TYPE_RELATION);
 			}
 			break;
 		}

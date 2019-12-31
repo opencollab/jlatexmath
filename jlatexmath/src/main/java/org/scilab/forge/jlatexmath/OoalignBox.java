@@ -45,8 +45,9 @@
 
 package org.scilab.forge.jlatexmath;
 
-import java.awt.Graphics2D;
 import java.util.List;
+
+import org.scilab.forge.jlatexmath.platform.graphics.Graphics2DInterface;
 
 /**
  * A box representing a rotated box.
@@ -68,7 +69,7 @@ public class OoalignBox extends Box {
 	}
 
 	@Override
-	public void draw(Graphics2D g2, double x, double y) {
+	public void draw(Graphics2DInterface g2, double x, double y) {
 		startDraw(g2, x, y);
 		for (final Box b : boxes) {
 			b.draw(g2, x + b.getShift(), y);

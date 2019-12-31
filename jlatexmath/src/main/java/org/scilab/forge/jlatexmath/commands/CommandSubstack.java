@@ -66,18 +66,8 @@ public class CommandSubstack extends CommandMatrix {
 		if (aoa.col == 0) {
 			return EmptyAtom.get();
 		}
-		return new SubarrayAtom(aoa, new ArrayOptions(1).addAlignment(TeXConstants.Align.CENTER));
-	}
-
-	@Override
-	public Command duplicate() {
-		CommandSubstack ret = new CommandSubstack();
-
-		ret.hasLBrace = hasLBrace;
-		ret.aoa = aoa;
-
-		return ret;
-
+		return new SubarrayAtom(aoa,
+				new ArrayOptions(1).addAlignment(TeXConstants.Align.CENTER));
 	}
 
 }

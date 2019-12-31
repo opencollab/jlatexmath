@@ -45,6 +45,7 @@
 
 package org.scilab.forge.jlatexmath;
 
+import org.scilab.forge.jlatexmath.platform.FactoryProvider;
 import org.scilab.forge.jlatexmath.xarrows.XLeftArrow;
 import org.scilab.forge.jlatexmath.xarrows.XLeftHarpoonDown;
 import org.scilab.forge.jlatexmath.xarrows.XLeftHarpoonUp;
@@ -61,14 +62,9 @@ public class XArrowAtom extends XAtom {
 
 	public static enum Kind {
 		Left, Right, LR, LeftAndRight, RightAndLeft, LeftHarpoonUp, LeftHarpoonDown, RightHarpoonUp, RightHarpoonDown, LeftRightHarpoons, RightLeftHarpoons, RightSmallLeftHarpoons, SmallRightLeftHarpoons,
-	};
+	}
 
 	private Kind kind;
-
-	// @Override
-	// public Atom duplicate() {
-	// return setFields(new XArrowAtom(over, under, minW, kind));
-	// }
 
 	public XArrowAtom(Atom over, Atom under, TeXLength minW, Kind kind) {
 		super(over, under, minW);
@@ -118,7 +114,9 @@ public class XArrowAtom extends XAtom {
 			final Box right = new XRightHarpoonDown(width);
 			final Box left = new XLeftHarpoonUp(width);
 			final VerticalBox vb = new VerticalBox(left);
-			vb.add(new StrutBox(0., new TeXLength(TeXLength.Unit.MU, -2.).getValue(env), 0., 0.));
+			vb.add(new StrutBox(0.,
+					new TeXLength(Unit.MU, -2.).getValue(env), 0.,
+					0.));
 			vb.add(right);
 			return vb;
 		}
@@ -130,7 +128,9 @@ public class XArrowAtom extends XAtom {
 			final Box right = new XRightHarpoonUp(width);
 			final Box left = new XLeftHarpoonDown(width);
 			final VerticalBox vb = new VerticalBox(right);
-			vb.add(new StrutBox(0., new TeXLength(TeXLength.Unit.MU, -2.).getValue(env), 0., 0.));
+			vb.add(new StrutBox(0.,
+					new TeXLength(Unit.MU, -2.).getValue(env), 0.,
+					0.));
 			vb.add(left);
 			return vb;
 		}
@@ -138,21 +138,26 @@ public class XArrowAtom extends XAtom {
 			final Box right = new XRightHarpoonUp(width);
 			final Box left = SymbolAtom.get("leftharpoondown").createBox(env);
 			final VerticalBox vb = new VerticalBox(right);
-			vb.add(new StrutBox(0., new TeXLength(TeXLength.Unit.MU, -2.).getValue(env), 0., 0.));
-			vb.add(new HorizontalBox(left, right.getWidth(), TeXConstants.Align.CENTER));
+			vb.add(new StrutBox(0.,
+					new TeXLength(Unit.MU, -2.).getValue(env), 0.,
+					0.));
+			vb.add(new HorizontalBox(left, right.getWidth(),
+					TeXConstants.Align.CENTER));
 			return vb;
 		}
 		case SmallRightLeftHarpoons: {
 			final Box right = SymbolAtom.get("rightharpoonup").createBox(env);
 			final Box left = new XLeftHarpoonDown(width);
-			final VerticalBox vb = new VerticalBox(
-					new HorizontalBox(right, left.getWidth(), TeXConstants.Align.CENTER));
-			vb.add(new StrutBox(0., new TeXLength(TeXLength.Unit.MU, -2.).getValue(env), 0., 0.));
+			final VerticalBox vb = new VerticalBox(new HorizontalBox(right,
+					left.getWidth(), TeXConstants.Align.CENTER));
+			vb.add(new StrutBox(0.,
+					new TeXLength(Unit.MU, -2.).getValue(env), 0.,
+					0.));
 			vb.add(left);
 			return vb;
 		}
 		default:
-			System.err.print(kind + " not implemented");
+			FactoryProvider.debugS(kind + " not implemented");
 			return StrutBox.getEmpty();
 		}
 	}

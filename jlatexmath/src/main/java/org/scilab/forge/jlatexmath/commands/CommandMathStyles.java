@@ -48,10 +48,10 @@ package org.scilab.forge.jlatexmath.commands;
 import org.scilab.forge.jlatexmath.Atom;
 import org.scilab.forge.jlatexmath.AtomConsumer;
 import org.scilab.forge.jlatexmath.MathAtom;
-import org.scilab.forge.jlatexmath.ParseException;
 import org.scilab.forge.jlatexmath.RowAtom;
 import org.scilab.forge.jlatexmath.TeXConstants;
 import org.scilab.forge.jlatexmath.TeXParser;
+import org.scilab.forge.jlatexmath.exception.ParseException;
 
 public class CommandMathStyles {
 
@@ -88,16 +88,6 @@ public class CommandMathStyles {
 			return ra.getLastAtom();
 		}
 
-		@Override
-		public Command duplicate() {
-			OpenBracket ret = new OpenBracket(opener);
-
-			ret.ra = ra;
-
-			return ret;
-
-		}
-
 	}
 
 	public static class CloseBracket extends Command {
@@ -106,7 +96,8 @@ public class CommandMathStyles {
 		private final int style;
 		private final String err;
 
-		public CloseBracket(final TeXConstants.Opener opener, final int style, final String err) {
+		public CloseBracket(final TeXConstants.Opener opener, final int style,
+				final String err) {
 			this.opener = opener;
 			this.style = style;
 			this.err = err;
@@ -125,14 +116,6 @@ public class CommandMathStyles {
 				}
 			}
 			throw new ParseException(tp, err);
-		}
-
-		@Override
-		public Command duplicate() {
-			CloseBracket ret = new CloseBracket(opener, style, err);
-
-			return ret;
-
 		}
 	}
 }

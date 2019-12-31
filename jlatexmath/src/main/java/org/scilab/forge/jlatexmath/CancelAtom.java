@@ -45,7 +45,7 @@
 
 package org.scilab.forge.jlatexmath;
 
-import java.awt.Color;
+import org.scilab.forge.jlatexmath.platform.graphics.Color;
 
 /**
  * An atom representing a vertical row of other atoms.
@@ -54,7 +54,7 @@ public class CancelAtom extends Atom {
 
 	public static enum Type {
 		SLASH, BACKSLASH, X
-	};
+	}
 
 	private static Color cancelColor = null;
 
@@ -77,8 +77,10 @@ public class CancelAtom extends Atom {
 	@Override
 	public Box createBox(TeXEnvironment env) {
 		final Box b = base.createBox(env);
-		final double drt = env.getTeXFont().getDefaultRuleThickness(env.getStyle());
-		final double extra = new TeXLength(TeXLength.Unit.EX, 0.5).getValue(env);
+		final double drt = env.getTeXFont()
+				.getDefaultRuleThickness(env.getStyle());
+		final double extra = new TeXLength(Unit.EX, 0.5)
+				.getValue(env);
 		return new CancelBox(b, ctype, drt, extra, color);
 	}
 
@@ -150,4 +152,5 @@ public class CancelAtom extends Atom {
 	public Atom getBase() {
 		return base.getBase();
 	}
+
 }

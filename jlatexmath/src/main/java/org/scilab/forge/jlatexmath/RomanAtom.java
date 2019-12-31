@@ -45,10 +45,12 @@
 
 package org.scilab.forge.jlatexmath;
 
+import org.scilab.forge.jlatexmath.serialize.HasTrueBase;
+
 /**
  * An atom representing a roman atom.
  */
-public class RomanAtom extends Atom {
+public class RomanAtom extends Atom implements HasTrueBase {
 
 	protected Atom base;
 
@@ -56,6 +58,7 @@ public class RomanAtom extends Atom {
 		this.base = base;
 	}
 
+	@Override
 	public Atom getTrueBase() {
 		return base;
 	}
@@ -79,4 +82,5 @@ public class RomanAtom extends Atom {
 
 		return box;
 	}
+
 }

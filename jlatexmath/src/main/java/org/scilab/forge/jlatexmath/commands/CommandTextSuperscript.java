@@ -24,15 +24,8 @@ public class CommandTextSuperscript extends Command {
 	public void add(TeXParser tp, Atom a) {
 		tp.setMathMode(mode);
 		a = new TextStyleAtom(a, TextStyle.MATHNORMAL);
-		tp.closeConsumer(
-				SubSupCom.get(MHeightAtom.get(), null, new StyleAtom(TeXConstants.STYLE_TEXT, new RomanAtom(a))));
-	}
-
-	@Override
-	public Command duplicate() {
-		CommandTextSuperscript ret = new CommandTextSuperscript();
-		ret.mode = mode;
-		return ret;
+		tp.closeConsumer(SubSupCom.get(MHeightAtom.get(), null,
+				new StyleAtom(TeXConstants.STYLE_TEXT, new RomanAtom(a))));
 	}
 
 }

@@ -45,12 +45,14 @@
 
 package org.scilab.forge.jlatexmath;
 
-import java.awt.Color;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+
+import org.scilab.forge.jlatexmath.exception.ParseException;
+import org.scilab.forge.jlatexmath.platform.FactoryProvider;
+import org.scilab.forge.jlatexmath.platform.graphics.Color;
 
 /**
  * This class implements a parser for LaTeX formulas.
@@ -58,41 +60,42 @@ import java.util.Map;
 public class TeXParser {
 
 	protected ArrayDeque<AtomConsumer> stack;
-	protected ArrayDeque<ParsedString> stringStack;
-	protected ArrayDeque<Boolean> modeStack;
+	private ArrayDeque<ParsedString> stringStack;
+	private ArrayDeque<Boolean> modeStack;
 	protected String parseString;
-	protected int cpos = -1;
 	protected int pos;
 	protected int prevpos;
 	protected int line;
 	protected int col;
 	protected int len;
-	protected int stopPos = -1;
-	protected boolean ignoreWhiteSpace = true;
-	protected CharMapping charMapping;
+	private int stopPos = -1;
+	private boolean ignoreWhiteSpace = true;
+	protected CharMapping charMapping = CharMapping.getDefault();
 	private Map<String, String> xmlMap;
 
 	// TODO: handle correctly partial stuff
 	protected boolean isPartial;
 
-	// 00 01 02 03 04 05 06 07 08 09
-	private static final int[] HEX_ARRAY = { 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, // 00
+	private static final int[] HEX_ARRAY = {
+		// 	00 	01 	02 	03 	04 	05 	06 	07 	08 	09
+			16, 16, 16, 16, 16, 16, 16, 16, 16, 16, // 00
 			16, 16, 16, 16, 16, 16, 16, 16, 16, 16, // 10
 			16, 16, 16, 16, 16, 16, 16, 16, 16, 16, // 20
 			16, 16, 16, 16, 16, 16, 16, 16, 16, 16, // 30
-			16, 16, 16, 16, 16, 16, 16, 16, 0, 1, // 40
-			2, 3, 4, 5, 6, 7, 8, 9, 16, 16, // 50
+			16, 16, 16, 16, 16, 16, 16, 16,  0,  1, // 40
+			 2,  3,  4,  5,  6,  7,  8,  9, 16, 16, // 50
 			16, 16, 16, 16, 16, 10, 11, 12, 13, 14, // 60
 			15, 16, 16, 16, 16, 16, 16, 16, 16, 16, // 70
 			16, 16, 16, 16, 16, 16, 16, 16, 16, 16, // 80
 			16, 16, 16, 16, 16, 16, 16, 10, 11, 12, // 90
-			13, 14, 15 }; // 100
+			13, 14, 15 								// 100
+	};
 
 	public static final int MAX_DEC = 6;
 	public static final boolean MATH_MODE = true;
-	public static final boolean TEXT_MODE = false;
 
-	private static final double[] POWTEN = { 1e0, 1e1, 1e2, 1e3, 1e4, 1e5, 1e6, 1e7 };
+	private static final double[] POWTEN = { 1e0, 1e1, 1e2, 1e3, 1e4, 1e5, 1e6,
+			1e7 };
 
 	private static final class DoubleOrInt {
 
@@ -116,10 +119,6 @@ public class TeXParser {
 			return isdouble ? f : (double) i;
 		}
 
-		public int getInt() {
-			return isdouble ? (int) f : i;
-		}
-
 		@Override
 		public String toString() {
 			return "number: " + (isdouble ? f : i);
@@ -128,7 +127,6 @@ public class TeXParser {
 
 	public TeXParser(boolean isPartial, String parseString) {
 		initStack();
-		this.charMapping = CharMapping.getDefault();
 		this.stringStack = new ArrayDeque<>();
 		this.isPartial = isPartial;
 		if (parseString != null) {
@@ -152,7 +150,6 @@ public class TeXParser {
 			initStack();
 			this.stringStack = new ArrayDeque<>();
 		}
-		this.charMapping = CharMapping.getDefault();
 		this.line = 1;
 		this.pos = 0;
 		this.col = -1;
@@ -160,7 +157,6 @@ public class TeXParser {
 
 	public TeXParser(String parseString, int pos, int line, int col) {
 		stack = new ArrayDeque<>();
-		this.charMapping = CharMapping.getDefault();
 		this.stringStack = new ArrayDeque<>();
 		this.parseString = parseString;
 		this.len = parseString.length();
@@ -173,12 +169,7 @@ public class TeXParser {
 		this(false);
 	}
 
-	public static double parseDouble(final String s) {
-		final TeXParser tp = new TeXParser(s);
-		return tp.getDecimal();
-	}
-
-	private final void initStack() {
+	private void initStack() {
 		stack = new ArrayDeque<>();
 		addConsumer(new GroupConsumer(TeXConstants.Opener.NONE));
 	}
@@ -206,7 +197,6 @@ public class TeXParser {
 	public void reset(final String parseString) {
 		this.stack.clear();
 		this.stringStack.clear();
-		this.isPartial = isPartial;
 		if (parseString != null) {
 			this.parseString = parseString;
 			this.len = parseString.length();
@@ -217,10 +207,6 @@ public class TeXParser {
 		this.line = 1;
 		this.pos = 0;
 		this.col = -1;
-	}
-
-	public void setLine(final int line) {
-		this.line = line;
 	}
 
 	/**
@@ -287,7 +273,8 @@ public class TeXParser {
 		if (stringStack.size() >= 4096) {
 			throw new ParseException(this, "Recursion level too high");
 		}
-		stringStack.push(new ParsedString(parseString, len, pos, line, col, stop));
+		stringStack
+				.push(new ParsedString(parseString, len, pos, line, col, stop));
 		parseString = s;
 		len = s.length();
 		pos = 0;
@@ -343,12 +330,6 @@ public class TeXParser {
 		return stack.peek().isArray();
 	}
 
-	public boolean setMathMode() {
-		final boolean b = ignoreWhiteSpace;
-		ignoreWhiteSpace = true;
-		return b;
-	}
-
 	public boolean setTextMode() {
 		final boolean b = ignoreWhiteSpace;
 		ignoreWhiteSpace = false;
@@ -369,10 +350,6 @@ public class TeXParser {
 
 	public boolean isAmpersandAllowed() {
 		return stack.peek().isAmpersandAllowed();
-	}
-
-	public char getChar() {
-		return pos < len ? parseString.charAt(pos) : '\0';
 	}
 
 	public void closeConsumer(Atom a) throws ParseException {
@@ -439,7 +416,9 @@ public class TeXParser {
 				break;
 			case '\n':
 				newLine();
-				skipWhites();
+				// removed to make double spaces after a newline work inside
+				// \text{} like in jlm1
+				//skipWhites();
 				break;
 			case '\u000B':
 			case '\u000C':
@@ -473,31 +452,19 @@ public class TeXParser {
 					} else {
 						addToConsumer(new SpaceAtom());
 					}
-					skipPureWhites();
+					// removed to make double spaces etc work inside \text{}
+					// like in jlm1
+					// skipPureWhites();
 				}
-				break;
-			case '!':
-				++pos;
-				charMapping.replaceUnsafe('!', this);
-				break;
-			case '\"':
-				++pos;
-				if (isTextMode()) {
-					charMapping.replaceUnsafe('\'', this);
-					charMapping.replaceUnsafe('\'', this);
-				} else {
-					cumSupSymbols(Symbols.PRIME, Symbols.PRIME);
-				}
-				break;
-			case '#':
-				++pos;
-				charMapping.replaceUnsafe('#', this);
 				break;
 			case '$':
 				++pos;
 				processDollar();
 				break;
 			case '%':
+				++line;
+				col = pos++;
+
 				// We've a comment
 				++pos;
 				skipUntilCr();
@@ -508,18 +475,11 @@ public class TeXParser {
 					++pos;
 					addToConsumer(EnvArray.ColSep.get());
 				} else {
-					throw new ParseException(this, "Character '&' is only available in array mode !");
+					throw new ParseException(this,
+							"Character '&' is only available in array mode !");
 				}
 				break;
-			case '\'':
-				++pos;
-				if (isTextMode()) {
-					charMapping.replaceUnsafe('\'', this);
-				} else {
-					// For this kind of syms, need to modify SubSupCom
-					cumSupSymbols(Symbols.PRIME);
-				}
-				break;
+			case '!':
 			case '(':
 			case ')':
 			case '*':
@@ -528,9 +488,82 @@ public class TeXParser {
 			case '-':
 			case '.':
 			case '/':
+			case ':':
+			case ';':
+			case '<':
+			case '=':
+			case '>':
+			case '?':
+			case '`':
+			case '#':
+			case '@':
 				++pos;
 				charMapping.replaceUnsafe(c, this);
 				break;
+			case '\'':
+				++pos;
+				if (isTextMode()) {
+					charMapping.replaceUnsafe('\'', this);
+				} else {
+					cumSupSymbols(Symbols.PRIME);
+				}
+				break;
+			case '\"':
+				++pos;
+				charMapping.replaceUnsafe('\'', this);
+				charMapping.replaceUnsafe('\'', this);
+				break;
+			case '[':
+				++pos;
+				charMapping.replaceUnsafe('[', this);
+				break;
+			case '\\':
+				prevpos = pos;
+				final String command = getCommand();
+				if (!command.isEmpty()) {
+					processCommand(command);
+				}
+				break;
+			case ']':
+				++pos;
+				if (!processRSqBracket()) {
+					charMapping.replaceUnsafe(']', this);
+				}
+				break;
+			case '^':
+				++pos;
+				processSubSup('^');
+				break;
+			case '_':
+				++pos;
+				processSubSup('_');
+				break;
+			case 'a':
+			case 'b':
+			case 'c':
+			case 'd':
+			case 'e':
+			case 'f':
+			case 'g':
+			case 'h':
+			case 'i':
+			case 'j':
+			case 'k':
+			case 'l':
+			case 'm':
+			case 'n':
+			case 'o':
+			case 'p':
+			case 'q':
+			case 'r':
+			case 's':
+			case 't':
+			case 'u':
+			case 'v':
+			case 'w':
+			case 'x':
+			case 'y':
+			case 'z':
 			case '0':
 			case '1':
 			case '2':
@@ -541,19 +574,6 @@ public class TeXParser {
 			case '7':
 			case '8':
 			case '9':
-				++pos;
-				convertASCIIChar(c, false);
-				break;
-			case ':':
-			case ';':
-			case '<':
-			case '=':
-			case '>':
-			case '?':
-			case '@':
-				++pos;
-				charMapping.replaceUnsafe(c, this);
-				break;
 			case 'A':
 			case 'B':
 			case 'C':
@@ -583,66 +603,6 @@ public class TeXParser {
 				++pos;
 				convertASCIIChar(c, false);
 				break;
-			case '[':
-				++pos;
-				charMapping.replaceUnsafe('[', this);
-				break;
-			case '\\':
-				cpos = pos;
-				prevpos = pos;
-				final String command = getCommand();
-				if (!command.isEmpty()) {
-					processCommand(command);
-				}
-				cpos = -1;
-				break;
-			case ']':
-				++pos;
-				if (!processRSqBracket()) {
-					charMapping.replaceUnsafe(']', this);
-				}
-				break;
-			case '^':
-				++pos;
-				processSubSup('^');
-				break;
-			case '_':
-				++pos;
-				processSubSup('_');
-				break;
-			case '`':
-				++pos;
-				charMapping.replaceUnsafe('`', this);
-				break;
-			case 'a':
-			case 'b':
-			case 'c':
-			case 'd':
-			case 'e':
-			case 'f':
-			case 'g':
-			case 'h':
-			case 'i':
-			case 'j':
-			case 'k':
-			case 'l':
-			case 'm':
-			case 'n':
-			case 'o':
-			case 'p':
-			case 'q':
-			case 'r':
-			case 's':
-			case 't':
-			case 'u':
-			case 'v':
-			case 'w':
-			case 'x':
-			case 'y':
-			case 'z':
-				++pos;
-				convertASCIIChar(c, false);
-				break;
 			case '{':
 				++pos;
 				processLBrace();
@@ -667,12 +627,8 @@ public class TeXParser {
 		}
 	}
 
-	public static Atom getAtomForLatinStr(final String s, final boolean mathMode) {
-		final ExternalFontManager.FontSSSF f = ExternalFontManager.get().getFont(Character.UnicodeBlock.BASIC_LATIN);
-		if (f != null) {
-			return new JavaFontRenderingAtom(s, f);
-		}
-
+	public static Atom getAtomForLatinStr(final String s,
+			final boolean mathMode) {
 		final int N = s.length();
 		final RowAtom ra = new RowAtom(N);
 		for (int i = 0; i < N; ++i) {
@@ -683,38 +639,8 @@ public class TeXParser {
 		return ra.simplify();
 	}
 
-	public static RowAtom getAtomForLatinStr(final String s, final RowAtom ra, final boolean mathMode) {
-		final ExternalFontManager.FontSSSF f = ExternalFontManager.get().getFont(Character.UnicodeBlock.BASIC_LATIN);
-		if (f != null) {
-			ra.add(new JavaFontRenderingAtom(s, f));
-			return ra;
-		}
-
-		for (int i = 0; i < s.length(); ++i) {
-			final char c = s.charAt(i);
-			ra.add(new CharAtom(c, mathMode));
-		}
-
-		return ra;
-	}
-
-	public static Atom getAtomForLatinStr(final String s, final int textStyle, final boolean math) {
-		final RowAtom ra = new RowAtom(s.length());
-		for (int i = 0; i < s.length(); ++i) {
-			final char c = s.charAt(i);
-			ra.add(new CharAtom(c, textStyle, math));
-		}
-
-		return ra.simplify();
-	}
-
-	public static RowAtom getAtomForNumber(int n, final RowAtom ra, final boolean mathMode) {
-		final ExternalFontManager.FontSSSF f = ExternalFontManager.get().getFont(Character.UnicodeBlock.BASIC_LATIN);
-		if (f != null) {
-			ra.add(new JavaFontRenderingAtom(Integer.toString(n), f));
-			return ra;
-		}
-
+	public static RowAtom getAtomForNumber(int n, final RowAtom ra,
+			final boolean mathMode) {
 		final int zero = '0';
 		if (n <= 99) {
 			final int unit = n % 10;
@@ -723,10 +649,10 @@ public class TeXParser {
 				return ra;
 			}
 			final int ten = n / 10;
-			ra.add(new CharAtom((char) (zero + ten), mathMode), new CharAtom((char) (zero + unit), mathMode));
+			ra.add(new CharAtom((char) (zero + ten), mathMode),
+					new CharAtom((char) (zero + unit), mathMode));
 			return ra;
 		}
-
 		char[] digits = new char[(int) Math.ceil(Math.log10(n))];
 		for (int i = digits.length - 1; i >= 0; --i) {
 			digits[i] = (char) (zero + (n % 10));
@@ -734,6 +660,15 @@ public class TeXParser {
 		}
 		for (int i = 0; i < digits.length; ++i) {
 			ra.add(new CharAtom(digits[i], mathMode));
+		}
+		return ra;
+	}
+
+	public static RowAtom getAtomForLatinStr(final String s, final RowAtom ra,
+			final boolean mathMode) {
+		for (int i = 0; i < s.length(); ++i) {
+			final char c = s.charAt(i);
+			ra.add(new CharAtom(c, mathMode));
 		}
 
 		return ra;
@@ -747,20 +682,6 @@ public class TeXParser {
 				return n;
 			}
 			++n;
-		}
-		return n;
-	}
-
-	public int getNumberOfPrimes(int n) {
-		while (++pos < len) {
-			final char cc = parseString.charAt(pos);
-			if (cc == '\'') {
-				++n;
-			} else if (cc == '\"') {
-				n += 2;
-			} else {
-				return n;
-			}
 		}
 		return n;
 	}
@@ -780,7 +701,8 @@ public class TeXParser {
 						++pos;
 						return r;
 					} else {
-						throw new ParseException(this, "A closing '}' expected");
+						throw new ParseException(this,
+								"A closing '}' expected");
 					}
 				}
 				return r;
@@ -831,7 +753,8 @@ public class TeXParser {
 			} else {
 				acc = getHex(c);
 				if (acc == 16) {
-					throw new ParseException(this, "An hexadecimal number expected");
+					throw new ParseException(this,
+							"An hexadecimal number expected");
 				}
 				ncomp = 1;
 				++pos;
@@ -850,7 +773,7 @@ public class TeXParser {
 					}
 					++pos;
 					cancelPrevPos();
-					return acc = (acc << 4) | n;
+					return (acc << 4) | n;
 				}
 				++pos;
 				acc = (acc << 4) | n;
@@ -872,19 +795,26 @@ public class TeXParser {
 		skipPureWhites();
 		while (pos + 4 < len && (w == null || h == null || d == null)) {
 			final char c = parseString.charAt(pos);
-			if (c == 'w' && parseString.charAt(pos + 1) == 'i' && parseString.charAt(pos + 2) == 'd'
-					&& parseString.charAt(pos + 3) == 't' && parseString.charAt(pos + 4) == 'h') {
+			if (c == 'w' && parseString.charAt(pos + 1) == 'i'
+					&& parseString.charAt(pos + 2) == 'd'
+					&& parseString.charAt(pos + 3) == 't'
+					&& parseString.charAt(pos + 4) == 'h') {
 				pos += 5;
 				skipPureWhites();
 				w = getLength();
-			} else if (c == 'h' && pos + 5 < len && parseString.charAt(pos + 1) == 'e'
-					&& parseString.charAt(pos + 2) == 'i' && parseString.charAt(pos + 3) == 'g'
-					&& parseString.charAt(pos + 4) == 'h' && parseString.charAt(pos + 5) == 't') {
+			} else if (c == 'h' && pos + 5 < len
+					&& parseString.charAt(pos + 1) == 'e'
+					&& parseString.charAt(pos + 2) == 'i'
+					&& parseString.charAt(pos + 3) == 'g'
+					&& parseString.charAt(pos + 4) == 'h'
+					&& parseString.charAt(pos + 5) == 't') {
 				pos += 6;
 				skipPureWhites();
 				h = getLength();
-			} else if (c == 'd' && parseString.charAt(pos + 1) == 'e' && parseString.charAt(pos + 2) == 'p'
-					&& parseString.charAt(pos + 3) == 't' && parseString.charAt(pos + 4) == 'h') {
+			} else if (c == 'd' && parseString.charAt(pos + 1) == 'e'
+					&& parseString.charAt(pos + 2) == 'p'
+					&& parseString.charAt(pos + 3) == 't'
+					&& parseString.charAt(pos + 4) == 'h') {
 				pos += 5;
 				skipPureWhites();
 				d = getLength();
@@ -1003,7 +933,7 @@ public class TeXParser {
 			}
 		}
 		processSubSup('^');
-		addToConsumer(new CumulativeScriptsAtom(ra));
+		addToConsumer(ra);
 	}
 
 	public void cumSubSymbols(Atom... syms) {
@@ -1017,23 +947,13 @@ public class TeXParser {
 			}
 		}
 		processSubSup('_');
-		addToConsumer(new CumulativeScriptsAtom(ra));
+		addToConsumer(ra);
 	}
 
 	private boolean convSup(final char c, final RowAtom ra) {
 		switch (c) {
-		case '\"':
+		case CharMapping.APOSTROPHE:
 			ra.add(Symbols.PRIME);
-			ra.add(Symbols.PRIME);
-			break;
-		case CharMapping.PRIME:
-			ra.add(Symbols.PRIME);
-			break;
-		case CharMapping.BACKPRIME:
-			ra.add(Symbols.BACKPRIME);
-			break;
-		case CharMapping.DEGREE:
-			ra.add(Symbols.CIRC);
 			break;
 		case CharMapping.SUPZERO:
 			ra.add(new CharAtom('0', isMathMode()));
@@ -1147,7 +1067,7 @@ public class TeXParser {
 	}
 
 	public void eatWhite() {
-		if (parseString.charAt(pos) == ' ') {
+		if (pos < parseString.length() && parseString.charAt(pos) == ' ') {
 			++pos;
 		}
 	}
@@ -1238,19 +1158,6 @@ public class TeXParser {
 		return c == ' ' || c == '\t' || c == '\r';
 	}
 
-	public void skipSeparator(final char ch) {
-		skipPureWhites();
-		if (pos < len) {
-			final char c = parseString.charAt(pos);
-			if (c == ch) {
-				++pos;
-				skipPureWhites();
-				return;
-			}
-		}
-		throw new ParseException(this, "Expect a '" + ch + "'");
-	}
-
 	public void skipSeparators(final String seps) {
 		skipPureWhites();
 		if (pos < len) {
@@ -1321,7 +1228,8 @@ public class TeXParser {
 					switch (c) {
 					case '=':
 						if (key != null) {
-							throw new ParseException(this, "Invalid '=' in options");
+							throw new ParseException(this,
+									"Invalid '=' in options");
 						}
 						key = getStringForKV(spos, epos);
 						++pos;
@@ -1396,34 +1304,8 @@ public class TeXParser {
 				return getString('}');
 			}
 		}
-		throw new ParseException(this, "An argument expected between curly braces");
-	}
-
-	public String getArgAsCommandName() {
-		skipPureWhites();
-		if (pos < len) {
-			char c = parseString.charAt(pos);
-			if (c == '{') {
-				++pos;
-				skipPureWhites();
-				final int spos = pos;
-				c = parseString.charAt(pos);
-				if (isRomanLetter(c)) {
-					while (pos < len) {
-						c = parseString.charAt(pos);
-						if (!isRomanLetter(c)) {
-							if (c == '}') {
-								return parseString.substring(spos, pos++);
-							}
-							throw new ParseException(this, "A closing '}' expected");
-						}
-						++pos;
-					}
-					return parseString.substring(spos);
-				}
-			}
-		}
-		throw new ParseException(this, "A name expected between curly braces");
+		throw new ParseException(this,
+				"An argument expected between curly braces");
 	}
 
 	public int getPositiveInteger(final char stop) {
@@ -1445,7 +1327,8 @@ public class TeXParser {
 						++pos;
 						skipPureWhites();
 					} else {
-						throw new ParseException(this, "A positive integer expected");
+						throw new ParseException(this,
+								"A positive integer expected");
 					}
 				}
 
@@ -1508,7 +1391,8 @@ public class TeXParser {
 				return c - '0';
 			}
 		}
-		throw new ParseException(this, "A positive integer expected as argument");
+		throw new ParseException(this,
+				"A positive integer expected as argument");
 	}
 
 	public String getArgAsCommand() {
@@ -1532,17 +1416,20 @@ public class TeXParser {
 								++pos;
 								return command;
 							}
-							throw new ParseException(this, "A closing '}' expected");
+							throw new ParseException(this,
+									"A closing '}' expected");
 						}
 						return command;
 					}
 				}
-				throw new ParseException(this, "Not a " + (isLength ? "length" : "command") + "name");
+				throw new ParseException(this,
+						"Not a " + (isLength ? "length" : "command") + "name");
 			} else if (c == '\\') {
 				return getCommand();
 			}
 		}
-		throw new ParseException(this, "Not a " + (isLength ? "length" : "command") + "name");
+		throw new ParseException(this,
+				"Not a " + (isLength ? "length" : "command") + "name");
 	}
 
 	public Color getColor(final char stop) {
@@ -1551,14 +1438,15 @@ public class TeXParser {
 			char c = parseString.charAt(pos);
 			if (c == stop) {
 				++pos;
-				return Color.BLACK;
+				return Colors.BLACK;
 			}
 			prevpos = pos;
 			if (c == '#') {
 				++pos;
 				cancelPrevPos();
 				return getHexColor(stop);
-			} else if ((c >= '0' && c <= '9') || (c == '.') || (c == '-') || (c == '+')) {
+			} else if ((c >= '0' && c <= '9') || (c == '.') || (c == '-')
+					|| (c == '+')) {
 				ArrayList<DoubleOrInt> arr = new ArrayList<>(4);
 				arr.add(getDoubleOrInteger());
 				skipPureWhites();
@@ -1573,15 +1461,19 @@ public class TeXParser {
 						case 1:
 							final DoubleOrInt n = arr.get(0);
 							if (n.isdouble) {
-								final int g = (int) (255. * Colors.clamp(n.f) + 0.5) * 0x010101;
+								final int g = (int) (255. * Colors.clamp(n.f)
+										+ 0.5) * 0x010101;
 								cancelPrevPos();
-								return new Color(g);
+								return FactoryProvider.getInstance()
+										.getGraphicsFactory().createColor(g);
 							}
 
 							cancelPrevPos();
 							// we've 123456 which could be #123456
 							// 123 => 3 + 2 * 16 + 1 * 16^2
-							return new Color(convertIntToHex(n.i));
+							return FactoryProvider.getInstance()
+									.getGraphicsFactory()
+									.createColor(convertIntToHex(n.i));
 						case 3:
 							final DoubleOrInt R = arr.get(0);
 							final DoubleOrInt G = arr.get(1);
@@ -1592,25 +1484,37 @@ public class TeXParser {
 								final int Bi = Colors.clamp(B.i);
 
 								cancelPrevPos();
-								return new Color((Ri << 16) | (Gi << 8) | Bi);
+								return FactoryProvider.getInstance()
+										.getGraphicsFactory().createColor(
+												(Ri << 16) | (Gi << 8) | Bi);
 							}
 
-							final int Rf = (int) (255. * Colors.clamp(R.getDouble()) + 0.5);
-							final int Gf = (int) (255. * Colors.clamp(G.getDouble()) + 0.5);
-							final int Bf = (int) (255. * Colors.clamp(B.getDouble()) + 0.5);
+							final int Rf = (int) (255.
+									* Colors.clamp(R.getDouble()) + 0.5);
+							final int Gf = (int) (255.
+									* Colors.clamp(G.getDouble()) + 0.5);
+							final int Bf = (int) (255.
+									* Colors.clamp(B.getDouble()) + 0.5);
 
 							cancelPrevPos();
-							return new Color((Rf << 16) | (Gf << 8) | Bf);
+							return FactoryProvider.getInstance()
+									.getGraphicsFactory()
+									.createColor((Rf << 16) | (Gf << 8) | Bf);
 						case 4:
-							final double C = Colors.clamp(arr.get(0).getDouble());
-							final double M = Colors.clamp(arr.get(1).getDouble());
-							final double Y = Colors.clamp(arr.get(2).getDouble());
-							final double K = Colors.clamp(arr.get(3).getDouble());
+							final double C = Colors
+									.clamp(arr.get(0).getDouble());
+							final double M = Colors
+									.clamp(arr.get(1).getDouble());
+							final double Y = Colors
+									.clamp(arr.get(2).getDouble());
+							final double K = Colors
+									.clamp(arr.get(3).getDouble());
 
 							cancelPrevPos();
 							return Colors.conv(C, M, Y, K);
 						default:
-							throw new ParseException(this, "Invalid color definition");
+							throw new ParseException(this,
+									"Invalid color definition");
 						}
 					} else {
 						// We have a number followed by a character (not a stop)
@@ -1618,12 +1522,16 @@ public class TeXParser {
 						// a-f then we have an hex number
 						final DoubleOrInt n = arr.get(0);
 						if (n.isdouble) {
-							throw new ParseException(this, "Invalid character in color definition: " + c);
+							throw new ParseException(this,
+									"Invalid character in color definition: "
+											+ c);
 						}
 
 						int h = getHex(c);
 						if (h == 16) {
-							throw new ParseException(this, "Invalid character in color definition: " + c);
+							throw new ParseException(this,
+									"Invalid character in color definition: "
+											+ c);
 						}
 						int x = convertIntToHex(n.i) * 16 + h;
 						while (pos < len) {
@@ -1633,15 +1541,20 @@ public class TeXParser {
 								if (c == stop) {
 									++pos;
 									cancelPrevPos();
-									return new Color(x);
+									return FactoryProvider.getInstance()
+											.getGraphicsFactory()
+											.createColor(x);
 								}
-								throw new ParseException(this, "Invalid character in color definition: " + c);
+								throw new ParseException(this,
+										"Invalid character in color definition: "
+												+ c);
 							}
 							x = (x << 4) | h;
 							++pos;
 						}
 						cancelPrevPos();
-						return new Color(x);
+						return FactoryProvider.getInstance()
+								.getGraphicsFactory().createColor(x);
 					}
 				}
 			}
@@ -1667,13 +1580,12 @@ public class TeXParser {
 			}
 
 			// We don't have a number or a dot
-			// So we probaly have a color name
-			final int spos = pos;
+			// So we probably have a color name
 			final String name = getString(stop).trim();
 			final Color color = Colors.getFromName(name);
 			if (color == null) {
 				try {
-					final Color ret = Color.decode("#" + name);
+					final Color ret = Colors.decode("#" + name);
 					cancelPrevPos();
 					return ret;
 				} catch (NumberFormatException e) {
@@ -1692,7 +1604,8 @@ public class TeXParser {
 			char c = parseString.charAt(pos);
 			int acc = getHex(c);
 			if (acc == 16) {
-				throw new ParseException(this, "An hexadecimal number expected");
+				throw new ParseException(this,
+						"An hexadecimal number expected");
 			}
 			int ncomp = 1;
 			++pos;
@@ -1709,7 +1622,9 @@ public class TeXParser {
 							final int G = acc & 0x0F0;
 							final int B = acc & 0x00F;
 							final int R0G0B = (R << 8) | (G << 4) | B;
-							return new Color((R0G0B << 4) | R0G0B);
+							return FactoryProvider.getInstance()
+									.getGraphicsFactory()
+									.createColor((R0G0B << 4) | R0G0B);
 						} else if (ncomp == 4) {
 							++pos;
 							// we've #RGBA and we want #RRGGBBAA
@@ -1718,12 +1633,17 @@ public class TeXParser {
 							final int G = acc & 0x0F00;
 							final int B = acc & 0x00F0;
 							final int A = acc & 0x000F;
-							final int OAOROGOB = (A << 24) | (R << 4) | G | (B >> 4);
-							return new Color((OAOROGOB << 4) | OAOROGOB, true);
+							final int OAOROGOB = (A << 24) | (R << 4) | G
+									| (B >> 4);
+							return FactoryProvider.getInstance()
+									.getGraphicsFactory().createColor(
+											(OAOROGOB << 4) | OAOROGOB, true);
 						}
-						throw new ParseException(this, "An hexadecimal number #RGB or #RRGGBB expected");
+						throw new ParseException(this,
+								"An hexadecimal number #RGB or #RRGGBB expected");
 					}
-					throw new ParseException(this, "An hexadecimal number expected");
+					throw new ParseException(this,
+							"An hexadecimal number expected");
 				}
 				acc = (acc << 4) | n;
 				if (ncomp == 5) {
@@ -1733,7 +1653,8 @@ public class TeXParser {
 						c = parseString.charAt(pos);
 						if (c == stop) {
 							++pos;
-							return new Color(acc);
+							return FactoryProvider.getInstance()
+									.getGraphicsFactory().createColor(acc);
 						} else {
 							// check for 8 digits and return color with alpha
 							if (pos + 2 < len) {
@@ -1747,23 +1668,28 @@ public class TeXParser {
 										if (c == stop) {
 											++pos;
 											acc = acc | (m << 28) | (p << 24);
-											return new Color(acc, true);
+											return FactoryProvider.getInstance()
+													.getGraphicsFactory()
+													.createColor(acc, true);
 										}
 									}
 								}
 							}
 						}
 					}
-					throw new ParseException(this, "An hexadecimal number #RGB or #RRGGBB expected");
+					throw new ParseException(this,
+							"An hexadecimal number #RGB or #RRGGBB expected");
 				}
 				++ncomp;
 				++pos;
 			}
 		}
-		throw new ParseException(this, "An hexadecimal number #RGB or #RRGGBB expected");
+		throw new ParseException(this,
+				"An hexadecimal number #RGB or #RRGGBB expected");
 	}
 
-	private ArrayList<DoubleOrInt> getComponentsAsNum(final int min, final int max, final char stop) {
+	private ArrayList<DoubleOrInt> getComponentsAsNum(final int min,
+			final int max, final char stop) {
 		skipPureWhites();
 		final ArrayList<DoubleOrInt> arr = new ArrayList<>(max);
 		int ncomp = 0;
@@ -1778,7 +1704,8 @@ public class TeXParser {
 					skipPureWhites();
 				} else if (c == ')') {
 					if (ncomp < min) {
-						throw new ParseException(this, "Invalid number of components");
+						throw new ParseException(this,
+								"Invalid number of components");
 					} else {
 						++pos;
 						skipPureWhites();
@@ -1788,10 +1715,12 @@ public class TeXParser {
 								++pos;
 								break;
 							} else {
-								throw new ParseException(this, "Invalid char " + c);
+								throw new ParseException(this,
+										"Invalid char " + c);
 							}
 						}
-						throw new ParseException(this, "A '" + stop + "' expected");
+						throw new ParseException(this,
+								"A '" + stop + "' expected");
 					}
 				}
 			}
@@ -1805,7 +1734,8 @@ public class TeXParser {
 	private Color getRGB(final char stop) {
 		// gb(0,0,0).length = 9
 		if (pos + 9 < len) {
-			if (parseString.charAt(pos + 1) == 'g' && parseString.charAt(pos + 2) == 'b') {
+			if (parseString.charAt(pos + 1) == 'g'
+					&& parseString.charAt(pos + 2) == 'b') {
 				final boolean rgba = parseString.charAt(pos + 3) == 'a';
 				final int ncomp = rgba ? 4 : 3;
 				pos += ncomp;
@@ -1814,7 +1744,8 @@ public class TeXParser {
 					final char c = parseString.charAt(pos);
 					if (c == '(') {
 						++pos;
-						final ArrayList<DoubleOrInt> arr = getComponentsAsNum(ncomp, ncomp, stop);
+						final ArrayList<DoubleOrInt> arr = getComponentsAsNum(
+								ncomp, ncomp, stop);
 						final DoubleOrInt R = arr.get(0);
 						final DoubleOrInt G = arr.get(1);
 						final DoubleOrInt B = arr.get(2);
@@ -1825,17 +1756,25 @@ public class TeXParser {
 							final int Bi = Colors.clamp(B.i);
 							RGB = (Ri << 16) | (Gi << 8) | Bi;
 						} else {
-							final int Rf = (int) (255. * Colors.clamp(R.getDouble()) + 0.5);
-							final int Gf = (int) (255. * Colors.clamp(G.getDouble()) + 0.5);
-							final int Bf = (int) (255. * Colors.clamp(B.getDouble()) + 0.5);
+							final int Rf = (int) (255.
+									* Colors.clamp(R.getDouble()) + 0.5);
+							final int Gf = (int) (255.
+									* Colors.clamp(G.getDouble()) + 0.5);
+							final int Bf = (int) (255.
+									* Colors.clamp(B.getDouble()) + 0.5);
 							RGB = (Rf << 16) | (Gf << 8) | Bf;
 						}
 
 						if (rgba) {
-							final int A = (int) (255. * Colors.clamp(arr.get(3).getDouble()) + 0.5);
-							return new Color((A << 24) | RGB, true);
+							final int A = (int) (255.
+									* Colors.clamp(arr.get(3).getDouble())
+									+ 0.5);
+							return FactoryProvider.getInstance()
+									.getGraphicsFactory()
+									.createColor((A << 24) | RGB, true);
 						} else {
-							return new Color(RGB);
+							return FactoryProvider.getInstance()
+									.getGraphicsFactory().createColor(RGB);
 						}
 					}
 				}
@@ -1847,7 +1786,8 @@ public class TeXParser {
 	private Color getHSL(final char stop) {
 		// sl(0,0,0).length = 9
 		if (pos + 9 < len) {
-			if (parseString.charAt(pos + 1) == 's' && parseString.charAt(pos + 2) == 'l') {
+			if (parseString.charAt(pos + 1) == 's'
+					&& parseString.charAt(pos + 2) == 'l') {
 				final boolean hsla = parseString.charAt(pos + 3) == 'a';
 				final int ncomp = hsla ? 4 : 3;
 				pos += ncomp;
@@ -1856,7 +1796,8 @@ public class TeXParser {
 					final char c = parseString.charAt(pos);
 					if (c == '(') {
 						++pos;
-						final ArrayList<DoubleOrInt> arr = getComponentsAsNum(ncomp, ncomp, stop);
+						final ArrayList<DoubleOrInt> arr = getComponentsAsNum(
+								ncomp, ncomp, stop);
 						final double H = arr.get(0).getDouble();
 						final double S = Colors.clamp(arr.get(1).getDouble());
 						final double L = Colors.clamp(arr.get(2).getDouble());
@@ -1864,7 +1805,8 @@ public class TeXParser {
 						if (ncomp == 3) {
 							return Colors.convHSL(H, S, L);
 						} else {
-							final double A = Colors.clamp(arr.get(3).getDouble());
+							final double A = Colors
+									.clamp(arr.get(3).getDouble());
 							return Colors.convHSL(H, S, L, A);
 						}
 					}
@@ -1886,18 +1828,6 @@ public class TeXParser {
 		throw new ParseException(this, "A color expected as argument");
 	}
 
-	public Color getOptionAsColor() {
-		skipPureWhites();
-		if (pos < len) {
-			final char c = parseString.charAt(pos);
-			if (c == '[') {
-				++pos;
-				return getColor(']');
-			}
-		}
-		return null;
-	}
-
 	/**
 	 * Convert an integer like 1234 into 0x1234 0x1234 = 4 + 3*16 + 2 * 16^2 + 1
 	 * * 16^3
@@ -1916,27 +1846,6 @@ public class TeXParser {
 
 	private static int getHex(final char c) {
 		return (c <= 'f') ? HEX_ARRAY[c] : 16;
-	}
-
-	private int getMacroArgNumber() {
-		if (pos < len) {
-			char c = parseString.charAt(pos);
-			if (c >= '1' && c <= '9') {
-				++pos;
-				int acc = c - '0';
-				while (pos < len) {
-					c = parseString.charAt(pos);
-					if (c >= '0' && c <= '9') {
-						++pos;
-						acc = 10 * acc + c - '0';
-					} else {
-						break;
-					}
-				}
-				return acc;
-			}
-		}
-		return 0;
 	}
 
 	public void processDollar() {
@@ -1960,27 +1869,17 @@ public class TeXParser {
 	public void processCommand(final String command) throws ParseException {
 		// We must begin with Commands because some commands overwrite
 		// a symbol (e.g. \int overwrites int symbol)
-		if (!Commands.exec(this, command) && !SymbolAtom.put(this, command) && !NewCommandMacro.exec(this, command)
-				&& !JLMPackage.exec(this, command)) {
+		if (!Commands.exec(this, command) && !SymbolAtom.put(this, command)
+				&& !NewCommandMacro.exec(this, command)) {
 			if (command.length() == 1) {
-				UnicodeMapping.get(command.charAt(0));
 				if (SymbolAtom.put(this, command)) {
 					return;
 				}
-			} else if (setLength(command)) {
-				return;
 			}
 
-			throw new ParseException(this, "Unknown command: " + command, "\\backslash{" + command + "}");
+			throw new ParseException(this, "Unknown command: " + command,
+					"\\backslash{" + command + "}");
 		}
-	}
-
-	public static List<String> getAllCommands() {
-		final List<String> all = new ArrayList<String>();
-		Commands.getAll(all);
-		SymbolAtom.getAll(all);
-
-		return all;
 	}
 
 	public void processSubSup(final char f) throws ParseException {
@@ -1994,27 +1893,6 @@ public class TeXParser {
 		final SubSupCom ssc = new SubSupCom(f);
 		ssc.init(this);
 		addConsumer(ssc);
-	}
-
-	public boolean isWaitingForSup() {
-		if (!stack.isEmpty()) {
-			final AtomConsumer ac = stack.peek();
-			if (ac instanceof SubSupCom) {
-				final SubSupCom ssc = (SubSupCom) ac;
-				return ssc.isWaitingForSup();
-			} else if (ac instanceof GroupConsumer) {
-				stack.pop();
-				final AtomConsumer ac1 = stack.peek();
-				boolean r = false;
-				if (ac1 instanceof SubSupCom) {
-					final SubSupCom ssc = (SubSupCom) ac1;
-					r = ssc.isWaitingForSup();
-				}
-				stack.push(ac);
-				return r;
-			}
-		}
-		return false;
 	}
 
 	public void processLBrace() {
@@ -2033,15 +1911,19 @@ public class TeXParser {
 	public void processRBrace() {
 		close();
 		if (stack.isEmpty()) {
-			throw new ParseException(this, "Closing '}' doesn't match any opening '{'");
+			throw new ParseException(this,
+					"Closing '}' doesn't match any opening '{'");
 		} else if (isHandlingArg()) {
 			stack.peek().rbrace(this);
 		} else {
 			final AtomConsumer ac = stack.peek();
 			if (!(ac instanceof GroupConsumer)) {
-				throw new ParseException(this, "Closing '}' doesn't match any opening '{'");
-			} else if (!((GroupConsumer) ac).close(this, TeXConstants.Opener.LBRACE)) {
-				throw new ParseException(this, "Closing '}' is not matching an opening '{'");
+				throw new ParseException(this,
+						"Closing '}' doesn't match any opening '{'");
+			} else if (!((GroupConsumer) ac).close(this,
+					TeXConstants.Opener.LBRACE)) {
+				throw new ParseException(this,
+						"Closing '}' is not matching an opening '{'");
 			}
 		}
 	}
@@ -2157,7 +2039,7 @@ public class TeXParser {
 
 	/**
 	 * Get the contents between two delimiters
-	 * 
+	 *
 	 * @param open
 	 *            the opening character
 	 * @param close
@@ -2191,34 +2073,6 @@ public class TeXParser {
 		throw new ParseException(this, "missing '" + close + "'!");
 	}
 
-	/**
-	 * Get the contents between double quotes
-	 * 
-	 * @param open
-	 *            the opening character
-	 * @param close
-	 *            the closing character
-	 * @return the enclosed contents
-	 * @throws ParseException
-	 *             if the contents are badly enclosed
-	 */
-	public String getPureString() {
-		final int spos = pos;
-
-		while (pos < len) {
-			final char c = parseString.charAt(pos);
-			if (c == '\"') {
-				return parseString.substring(spos, pos++);
-			} else if (c == '\\') {
-				pos += 2;
-			} else {
-				++pos;
-			}
-		}
-
-		throw new ParseException(this, "missing \" !");
-	}
-
 	public String getGroupAsArgument() {
 		skipPureWhites();
 		if (pos < len) {
@@ -2231,20 +2085,6 @@ public class TeXParser {
 			}
 		}
 		throw new ParseException(this, "Expect a '{'");
-	}
-
-	public String getOptionAsCode() {
-		skipPureWhites();
-		if (pos < len) {
-			final char c = parseString.charAt(pos);
-			if (c == '[') {
-				++pos;
-				final String s = getGroup('[', ']');
-				++pos;
-				return s;
-			}
-		}
-		throw new ParseException(this, "Expect a '['");
 	}
 
 	public ArrayList<String> getArgsAsStrings(final int nargs) {
@@ -2266,7 +2106,8 @@ public class TeXParser {
 			}
 		}
 		if (args.size() != nargs) {
-			throw new ParseException(this, "Invalid number of arguments: " + nargs + " expected");
+			throw new ParseException(this,
+					"Invalid number of arguments: " + nargs + " expected");
 		}
 		return args;
 	}
@@ -2286,7 +2127,8 @@ public class TeXParser {
 					}
 					throw new ParseException(this, "A closing '}' expected");
 				}
-			} else if ((c >= '0' && c <= '9') || (c == '.') || (c == '-') || (c == '+')) {
+			} else if ((c >= '0' && c <= '9') || (c == '.') || (c == '-')
+					|| (c == '+')) {
 				return getLength();
 			}
 		}
@@ -2307,24 +2149,28 @@ public class TeXParser {
 						if (pos < len) {
 							c = parseString.charAt(pos);
 							if (c != '}') {
-								throw new ParseException(this, "A closing '}' expected");
+								throw new ParseException(this,
+										"A closing '}' expected");
 							}
 							++pos;
 							return null;
 						}
-						throw new ParseException(this, "A closing '}' expected");
+						throw new ParseException(this,
+								"A closing '}' expected");
 					} else {
 						l = getLength();
 						if (pos < len) {
 							c = parseString.charAt(pos);
 							if (c != '}') {
-								throw new ParseException(this, "A closing '}' expected");
+								throw new ParseException(this,
+										"A closing '}' expected");
 							}
 							++pos;
 						}
 					}
 				}
-			} else if ((c >= '0' && c <= '9') || (c == '.') || (c == '-') || (c == '+')) {
+			} else if ((c >= '0' && c <= '9') || (c == '.') || (c == '-')
+					|| (c == '+')) {
 				l = getLength();
 			}
 			if (l != null) {
@@ -2368,10 +2214,6 @@ public class TeXParser {
 		return getAsChar('[', ']');
 	}
 
-	public char getArgAsChar() {
-		return getAsChar('{', '}');
-	}
-
 	public char getAsChar(final char open, final char close) {
 		skipPureWhites();
 		if (pos < len) {
@@ -2386,38 +2228,22 @@ public class TeXParser {
 							++pos;
 							return r;
 						}
-						throw new ParseException(this, "A closing '" + close + "' expected");
+						throw new ParseException(this,
+								"A closing '" + close + "' expected");
 					}
 				}
-				throw new ParseException(this, "A closing '" + close + "' expected");
+				throw new ParseException(this,
+						"A closing '" + close + "' expected");
 			}
 		}
 		return '\0';
 	}
 
-	public boolean setLength(final String com) {
-		if (TeXLength.isLengthName(com)) {
-			skipPureWhites();
-			if (pos < len) {
-				final char c = parseString.charAt(pos);
-				if (c == '=') {
-					++pos;
-					skipPureWhites();
-					final TeXLength l = getLength(TeXLength.Unit.NONE);
-					TeXLength.setLength(com, l);
-					cancelPrevPos();
-					return true;
-				}
-			}
-		}
-		return false;
-	}
-
 	public TeXLength getLength() {
-		return getLength(TeXLength.Unit.PT);
+		return getLength(Unit.PT);
 	}
 
-	public TeXLength getLength(final TeXLength.Unit def) {
+	public TeXLength getLength(final Unit def) {
 		// TODO: handle case where length is \foo (ie no number before)
 		final double x = getDecimal();
 		skipPureWhites();
@@ -2428,7 +2254,7 @@ public class TeXParser {
 			case '\\':
 				final int spos = pos;
 				final String name = getCommand();
-				final TeXLength l = TeXLength.getLength(name, x);
+				final TeXLength l = TeXLengthSettings.getDefaultLength(name, x);
 				if (l != null) {
 					return l;
 				}
@@ -2436,74 +2262,75 @@ public class TeXParser {
 				return new TeXLength(def, x);
 			case 'b':
 				if (cn == 'p') { // bp
-					return new TeXLength(TeXLength.Unit.POINT, x);
+					return new TeXLength(Unit.POINT, x);
 				}
 				break;
 			case 'c':
 				if (cn == 'c') { // cc
-					return new TeXLength(TeXLength.Unit.CC, x);
+					return new TeXLength(Unit.CC, x);
 				}
 				if (cn == 'm') { // cm
-					return new TeXLength(TeXLength.Unit.CM, x);
+					return new TeXLength(Unit.CM, x);
 				}
 				break;
 			case 'd':
 				if (cn == 'd') { // dd
-					return new TeXLength(TeXLength.Unit.DD, x);
+					return new TeXLength(Unit.DD, x);
 				}
 				break;
 			case 'e':
 				if (cn == 'm') { // em
-					return new TeXLength(TeXLength.Unit.EM, x);
+					return new TeXLength(Unit.EM, x);
 				}
 				if (cn == 'x') { // ex
-					return new TeXLength(TeXLength.Unit.EX, x);
+					return new TeXLength(Unit.EX, x);
 				}
 				break;
 			case 'i':
 				if (cn == 'n') { // in
-					return new TeXLength(TeXLength.Unit.IN, x);
+					return new TeXLength(Unit.IN, x);
 				}
 				break;
 			case 'm':
 				if (cn == 'u') { // mu
-					return new TeXLength(TeXLength.Unit.MU, x);
+					return new TeXLength(Unit.MU, x);
 				}
 				if (cn == 'm') { // mm
-					return new TeXLength(TeXLength.Unit.MM, x);
+					return new TeXLength(Unit.MM, x);
 				}
 				break;
 			case 'p':
 				if (cn == 'c') { // pc
-					return new TeXLength(TeXLength.Unit.PICA, x);
+					return new TeXLength(Unit.PICA, x);
 				}
 				if (cn == 't') { // pt
-					return new TeXLength(TeXLength.Unit.PT, x);
+					return new TeXLength(Unit.PT, x);
 				}
 				if (cn == 'x') { // px
-					return new TeXLength(TeXLength.Unit.PIXEL, x);
+					return new TeXLength(Unit.PIXEL, x);
 				}
 				if (cn == 'i') {
 					if (pos + 1 < len) {
 						cn = parseString.charAt(pos);
 						if (cn == 'c' && parseString.charAt(pos + 1) == 'a') { // pica
 							pos += 2;
-							return new TeXLength(TeXLength.Unit.PICA, x);
+							return new TeXLength(Unit.PICA, x);
 						} else if (cn == 'x') { // pixel
-							if (pos + 2 < len && parseString.charAt(pos + 1) == 'e'
+							if (pos + 2 < len
+									&& parseString.charAt(pos + 1) == 'e'
 									&& parseString.charAt(pos + 2) == 'l') {
 								pos += 3;
-								return new TeXLength(TeXLength.Unit.PIXEL, x);
+								return new TeXLength(Unit.PIXEL, x);
 							}
 							++pos;
-							return new TeXLength(TeXLength.Unit.PIXEL, x);
+							return new TeXLength(Unit.PIXEL, x);
 						}
 					}
 				}
 				break;
 			case 's':
 				if (cn == 'p') { // sp
-					return new TeXLength(TeXLength.Unit.SP, x);
+					return new TeXLength(Unit.SP, x);
 				}
 				break;
 			}
@@ -2545,7 +2372,8 @@ public class TeXParser {
 							final double x = (intPart) / 100.;
 							return new DoubleOrInt(negative ? -x : x);
 						} else {
-							return new DoubleOrInt(negative ? -intPart : intPart);
+							return new DoubleOrInt(
+									negative ? -intPart : intPart);
 						}
 					}
 					++pos;
@@ -2568,10 +2396,6 @@ public class TeXParser {
 		throw new ParseException(this, "Not a valid number");
 	}
 
-	public double getOptionAsDecimal() {
-		return getOptionAsDecimal(Double.NaN);
-	}
-
 	public double getOptionAsDecimal(final double def) {
 		skipPureWhites();
 		if (pos < len) {
@@ -2588,7 +2412,8 @@ public class TeXParser {
 						if (pos < len) {
 							c = parseString.charAt(pos);
 						} else {
-							throw new ParseException(this, "A closing ']' expected");
+							throw new ParseException(this,
+									"A closing ']' expected");
 						}
 					}
 					if (isWhite(c)) {
@@ -2597,7 +2422,8 @@ public class TeXParser {
 						c = parseString.charAt(pos);
 					}
 					if (c != ']') {
-						throw new ParseException(this, "A closing ']' expected");
+						throw new ParseException(this,
+								"A closing ']' expected");
 					}
 					++pos;
 					return x;
@@ -2624,7 +2450,8 @@ public class TeXParser {
 						if (pos < len) {
 							c = parseString.charAt(pos);
 						} else {
-							throw new ParseException(this, "A closing '}' expected");
+							throw new ParseException(this,
+									"A closing '}' expected");
 						}
 					}
 					if (isWhite(c)) {
@@ -2633,13 +2460,15 @@ public class TeXParser {
 						c = parseString.charAt(pos);
 					}
 					if (c != '}') {
-						throw new ParseException(this, "A closing '}' expected");
+						throw new ParseException(this,
+								"A closing '}' expected");
 					}
 					++pos;
 					return x;
 				}
 				throw new ParseException(this, "A closing '}' expected");
-			} else if ((c >= '0' && c <= '9') || (c == '.') || (c == '-') || (c == '+')) {
+			} else if ((c >= '0' && c <= '9') || (c == '.') || (c == '-')
+					|| (c == '+')) {
 				return getDecimal();
 			}
 		}
@@ -2669,12 +2498,14 @@ public class TeXParser {
 						if (c == '}') {
 							++pos;
 							if (i != resLen - 1) {
-								throw new ParseException(this, "Expect " + res.length + " numbers");
+								throw new ParseException(this,
+										"Expect " + res.length + " numbers");
 							}
 							return;
 						} else if (c != ',' && c != ';') {
 							throw new ParseException(this,
-									"Invalid character \'" + c + "\' in list of numbers: expect a \',\' or \';\'");
+									"Invalid character \'" + c
+											+ "\' in list of numbers: expect a \',\' or \';\'");
 						}
 					}
 				}
@@ -2699,12 +2530,14 @@ public class TeXParser {
 						if (c == '}') {
 							++pos;
 							if (i != resLen - 1) {
-								throw new ParseException(this, "Expect " + res.length + " numbers");
+								throw new ParseException(this,
+										"Expect " + res.length + " numbers");
 							}
 							return;
 						} else if (c != ',' && c != ';') {
 							throw new ParseException(this,
-									"Invalid character \'" + c + "\' in list of numbers: expect a \',\' or \';\'");
+									"Invalid character \'" + c
+											+ "\' in list of numbers: expect a \',\' or \';\'");
 						}
 					}
 					throw new ParseException(this, "Expect a \'}\'");
@@ -2726,7 +2559,8 @@ public class TeXParser {
 					c = parseString.charAt(pos);
 					int acc = getHex(c);
 					if (acc == 16) {
-						throw new ParseException(this, "An hexadecimal number expected");
+						throw new ParseException(this,
+								"An hexadecimal number expected");
 					}
 					for (int i = 1; i < numLen; ++i) {
 						++pos;
@@ -2734,7 +2568,8 @@ public class TeXParser {
 							c = parseString.charAt(pos);
 							final int n = getHex(c);
 							if (n == 16) {
-								throw new ParseException(this, "An hexadecimal number expected");
+								throw new ParseException(this,
+										"An hexadecimal number expected");
 							}
 							acc = (acc << 4) | n;
 						}
@@ -2805,7 +2640,6 @@ public class TeXParser {
 			}
 			++pos;
 		}
-		return;
 	}
 
 	private double getDecimalPart() {
@@ -2839,41 +2673,21 @@ public class TeXParser {
 	}
 
 	public Atom convertASCIICharToAtom(final char c, final boolean oneChar) {
-		final ExternalFontManager.FontSSSF f = ExternalFontManager.get().getBasicLatinFont();
-		if (f == null) {
-			return new CharAtom(c, isMathMode());
-		} else {
-			String r;
-			if (oneChar) {
-				r = Character.toString(c);
-			} else {
-				final int start = pos - 1;
-				while (pos < len) {
-					final char cc = parseString.charAt(pos);
-					if ((cc < '0' || cc > '9') && !isRomanLetter(cc)) {
-						break;
-					}
-					++pos;
-				}
-				r = parseString.substring(start, pos);
-			}
-			return new JavaFontRenderingAtom(r, f);
-		}
+		return new CharAtom(c, isMathMode());
 	}
 
 	/**
 	 * Convert a character in the corresponding atom in using the file
 	 * TeXFormulaSettings.xml for non-alphanumeric characters
-	 * 
+	 *
 	 * @param c
 	 *            the character to be converted
-	 * @return the corresponding atom
 	 * @throws ParseException
 	 *             if the character is unknown
 	 */
-	public void convertCharacter(char c, final boolean oneChar) throws ParseException {
+	public void convertCharacter(char c, final boolean oneChar)
+			throws ParseException {
 		if (!charMapping.replace(c, this)) {
-			final Character.UnicodeBlock block = UnicodeMapping.get(c);
 			String r;
 			if (oneChar) {
 				r = Character.toString(c);
@@ -2881,7 +2695,7 @@ public class TeXParser {
 				final int start = pos - 1;
 				while (pos < len) {
 					c = parseString.charAt(pos);
-					if ((c != ' ' && !UnicodeMapping.get(c).equals(block)) || charMapping.hasMapping(c)) {
+					if (c < 0xFF || charMapping.hasMapping(c)) {
 						break;
 					}
 					++pos;
@@ -2889,27 +2703,24 @@ public class TeXParser {
 				r = parseString.substring(start, pos);
 			}
 
-			final ExternalFontManager.FontSSSF f = ExternalFontManager.get().getExternalFont(block);
-			addToConsumer(new JavaFontRenderingAtom(r, f));
+			addToConsumer(new JavaFontRenderingAtom(r));
 		}
 	}
 
 	public void convertCharacter(int c) throws ParseException {
 		if (!charMapping.replace(c, this)) {
-			final Character.UnicodeBlock block = UnicodeMapping.get(c);
-			final ExternalFontManager.FontSSSF f = ExternalFontManager.get().getExternalFont(block);
 			final String r = new String(new int[] { c }, 0, 1);
-			addToConsumer(new JavaFontRenderingAtom(r, f));
+			addToConsumer(new JavaFontRenderingAtom(r));
 		}
 	}
 
 	public Atom getAtomFromUnicode(char c, final boolean oneChar) {
-		if ((c >= '0' && c <= '9') || (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z')) {
+		if ((c >= '0' && c <= '9') || (c >= 'a' && c <= 'z')
+				|| (c >= 'A' && c <= 'Z')) {
 			return convertASCIICharToAtom(c, oneChar);
 		}
 		Atom a = charMapping.getAtom(c, isMathMode());
 		if (a == null) {
-			final Character.UnicodeBlock block = UnicodeMapping.get(c);
 			a = charMapping.getAtom(c, isMathMode());
 			if (a == null) {
 				String r;
@@ -2919,7 +2730,7 @@ public class TeXParser {
 					final int start = pos - 1;
 					while (pos < len) {
 						c = parseString.charAt(pos);
-						if ((c != ' ' && !UnicodeMapping.get(c).equals(block)) || charMapping.hasMapping(c)) {
+						if (charMapping.hasMapping(c)) {
 							break;
 						}
 						++pos;
@@ -2927,8 +2738,7 @@ public class TeXParser {
 					r = parseString.substring(start, pos);
 				}
 
-				final ExternalFontManager.FontSSSF f = ExternalFontManager.get().getExternalFont(block);
-				a = new JavaFontRenderingAtom(r, f);
+				a = new JavaFontRenderingAtom(r);
 			}
 		}
 		return a;
@@ -2970,7 +2780,6 @@ public class TeXParser {
 				options.addVline(getNumberOf('|'));
 				break;
 			case '@':
-				// TODO: handle that in ArrayAtom
 				// @{\pi} \pi is the column separator
 				++pos;
 				final String code = getGroupAsArgument();
@@ -2991,7 +2800,7 @@ public class TeXParser {
 				++pos;
 				final int num = getArgAsPositiveInteger();
 				final String str = getGroupAsArgument();
-				final StringBuffer buf = new StringBuffer(str.length() * num);
+				final StringBuilder buf = new StringBuilder(str.length() * num);
 				for (int i = 0; i < num; ++i) {
 					buf.append(str);
 				}

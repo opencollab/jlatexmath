@@ -45,10 +45,10 @@
 
 package org.scilab.forge.jlatexmath;
 
-import java.awt.Graphics2D;
-import java.awt.Shape;
-import java.awt.geom.Area;
-import java.awt.geom.Rectangle2D;
+import org.scilab.forge.jlatexmath.platform.geom.Area;
+import org.scilab.forge.jlatexmath.platform.geom.Rectangle2D;
+import org.scilab.forge.jlatexmath.platform.geom.Shape;
+import org.scilab.forge.jlatexmath.platform.graphics.Graphics2DInterface;
 
 /**
  * Responsible for creating a box containing a delimiter symbol that exists in
@@ -60,14 +60,14 @@ public class ShapeBox extends Box {
 
 	public ShapeBox(final Shape shape) {
 		this.shape = shape;
-		final Rectangle2D rect = shape.getBounds2D();
+		final Rectangle2D rect = shape.getBounds2DX();
 		this.height = rect.getHeight();
 		this.depth = 0.;
 		this.width = rect.getWidth();
 	}
 
 	@Override
-	public void draw(Graphics2D g2, double x, double y) {
+	public void draw(Graphics2DInterface g2, double x, double y) {
 		startDraw(g2, x, y);
 		g2.translate(x, y);
 		g2.fill(shape);

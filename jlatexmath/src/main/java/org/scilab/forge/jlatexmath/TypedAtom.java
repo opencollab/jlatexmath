@@ -46,7 +46,7 @@
 package org.scilab.forge.jlatexmath;
 
 /**
- * An atom representing another atom with an overrided lefttype and righttype.
+ * An atom representing another atom with an overridden lefttype and righttype.
  * This affects the glue inserted before and after this atom.
  */
 public class TypedAtom extends Atom {

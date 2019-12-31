@@ -6,14 +6,10 @@ import org.scilab.forge.jlatexmath.TeXParser;
 import org.scilab.forge.jlatexmath.TypedAtom;
 
 public class CommandMathOrd extends Command1A {
+
 	@Override
 	public Atom newI(TeXParser tp, Atom a) {
 		return new TypedAtom(TeXConstants.TYPE_ORDINARY, a);
-	}
-
-	@Override
-	public Command duplicate() {
-		return new CommandMathOrd();
 	}
 
 }

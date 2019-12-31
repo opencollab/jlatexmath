@@ -77,4 +77,5 @@ public class SmashedAtom extends Atom {
 		}
 		return b;
 	}
+
 }

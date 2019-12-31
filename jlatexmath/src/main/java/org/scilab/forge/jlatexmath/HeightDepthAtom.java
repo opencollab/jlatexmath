@@ -51,7 +51,8 @@ public class HeightDepthAtom extends Atom {
 	final TeXLength depth;
 	final Atom base;
 
-	public HeightDepthAtom(final TeXLength height, final TeXLength depth, final Atom base) {
+	public HeightDepthAtom(final TeXLength height, final TeXLength depth,
+			final Atom base) {
 		this.height = height;
 		this.depth = depth;
 		this.base = base;

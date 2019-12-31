@@ -56,7 +56,7 @@ public class CharAtom extends CharSymbol {
 	protected final char c;
 
 	// text style (null means the default text style)
-	private int textStyle = TextStyle.NONE;
+	protected int textStyle = TextStyle.NONE;
 
 	/**
 	 * Creates a CharAtom that will represent the given character in the given
@@ -121,7 +121,7 @@ public class CharAtom extends CharSymbol {
 			chr = Character.toUpperCase(c);
 		}
 		if (textStyle == TextStyle.NONE) {
-			return tf.getDefaultChar(chr, style);
+			return tf.getChar(chr, TextStyle.MATHNORMAL, style);
 		} else {
 			return tf.getChar(chr, textStyle, style);
 		}

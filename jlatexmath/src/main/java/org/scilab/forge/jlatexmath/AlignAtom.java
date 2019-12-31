@@ -47,7 +47,8 @@ package org.scilab.forge.jlatexmath;
 
 public class AlignAtom extends ArrayAtom {
 
-	protected static SpaceAtom align = new SpaceAtom(TeXConstants.Muskip.MED);
+	protected static final SpaceAtom align = new SpaceAtom(
+			TeXConstants.Muskip.MED);
 	protected boolean aligned;
 
 	/**
@@ -76,14 +77,16 @@ public class AlignAtom extends ArrayAtom {
 		final int row = matrix.row;
 		final int col = matrix.col;
 		final double[] seps = new double[col + 1];
-		final double w = aligned ? Double.POSITIVE_INFINITY : TeXLength.getTextwidth(env);
+		final double w = aligned ? Double.POSITIVE_INFINITY
+				: env.lengthSettings().getTextwidth(env);
 
 		// Align env. : hsep=(textwidth-matWidth)/(2n+1) and hsep eq_lft
 		// \medskip el_rgt hsep ... hsep elem hsep
 		final double alignW = align.createBox(env).getWidth();
 		double alignSep;
 		if (w != Double.POSITIVE_INFINITY) {
-			alignSep = Math.max((w - width - (col / 2) * alignW) / Math.floor((col + 3) / 2), 0.);
+			alignSep = Math.max((w - width - (col / 2) * alignW)
+					/ Math.floor((col + 3) / 2), 0.);
 		} else {
 			alignSep = hsep.createBox(env).getWidth();
 		}

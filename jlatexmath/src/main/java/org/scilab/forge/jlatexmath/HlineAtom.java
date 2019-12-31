@@ -56,6 +56,11 @@ public class HlineAtom extends Atom {
 	public HlineAtom() {
 	}
 
+	public HlineAtom(double width, double shift) {
+		this.width = width;
+		this.shift = shift;
+	}
+
 	public void setWidth(double width) {
 		this.width = width;
 	}
@@ -66,7 +71,9 @@ public class HlineAtom extends Atom {
 
 	@Override
 	public Box createBox(TeXEnvironment env) {
-		final double drt = env.getTeXFont().getDefaultRuleThickness(env.getStyle());
+		final double drt = env.getTeXFont()
+				.getDefaultRuleThickness(env.getStyle());
 		return new HlineBox(drt);
 	}
+
 }

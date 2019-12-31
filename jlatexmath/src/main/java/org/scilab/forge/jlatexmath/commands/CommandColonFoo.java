@@ -55,8 +55,8 @@ import org.scilab.forge.jlatexmath.VCenteredAtom;
 
 public class CommandColonFoo {
 
-	private final static Atom CENTERED_COLON = new VCenteredAtom(Symbols.COLON.changeType(TeXConstants.TYPE_ORDINARY),
-			false);
+	private final static Atom CENTERED_COLON = new VCenteredAtom(
+			Symbols.COLON.changeType(TeXConstants.TYPE_ORDINARY), false);
 
 	public static class ColonFoo extends Command {
 
@@ -75,11 +75,6 @@ public class CommandColonFoo {
 			return false;
 		}
 
-		@Override
-		public Command duplicate() {
-			return new ColonFoo(sym);
-
-		}
 	}
 
 	public static class FooColon extends Command {
@@ -96,12 +91,6 @@ public class CommandColonFoo {
 			tp.addToConsumer(at.changeType(TeXConstants.TYPE_RELATION));
 
 			return false;
-		}
-
-		@Override
-		public Command duplicate() {
-			return new FooColon(sym);
-
 		}
 
 	}
@@ -129,12 +118,6 @@ public class CommandColonFoo {
 			return false;
 		}
 
-		@Override
-		public Command duplicate() {
-			return new ColonColonFoo(sym);
-
-		}
-
 	}
 
 	public static class FooColonColon extends Command {
@@ -147,16 +130,11 @@ public class CommandColonFoo {
 
 		@Override
 		public boolean init(TeXParser tp) {
-			final RowAtom at = new RowAtom(SymbolAtom.get(sym), CENTERED_COLON, CENTERED_COLON);
+			final RowAtom at = new RowAtom(SymbolAtom.get(sym), CENTERED_COLON,
+					CENTERED_COLON);
 			tp.addToConsumer(at.changeType(TeXConstants.TYPE_RELATION));
 
 			return false;
-		}
-
-		@Override
-		public Command duplicate() {
-			return new FooColonColon(sym);
-
 		}
 
 	}

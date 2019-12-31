@@ -45,12 +45,13 @@
 
 package org.scilab.forge.jlatexmath;
 
-import java.awt.Color;
+import org.scilab.forge.jlatexmath.platform.graphics.Color;
+import org.scilab.forge.jlatexmath.serialize.HasTrueBase;
 
 /**
  * An atom representing a boxed base atom.
  */
-public class FBoxAtom extends Atom {
+public class FBoxAtom extends Atom implements HasTrueBase {
 
 	protected final Atom base;
 	protected final Color bg;
@@ -69,13 +70,17 @@ public class FBoxAtom extends Atom {
 	@Override
 	public Box createBox(TeXEnvironment env) {
 		final Box bbase = base.createBox(env);
-		final double drt = TeXLength.getLength("fboxrule", env);
-		final double space = TeXLength.getLength("fboxsep", env);
+		final double drt = env.lengthSettings().getLength("fboxrule", env);
+		final double space = env.lengthSettings().getLength("fboxsep", env);
 		if (bg == null) {
 			return new FramedBox(bbase, drt, space);
 		}
 
 		env.isColored = true;
 		return new FramedBox(bbase, drt, space, line, bg);
+	}
+
+	public Atom getTrueBase() {
+		return base;
 	}
 }

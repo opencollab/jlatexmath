@@ -52,6 +52,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
 
+import org.scilab.forge.jlatexmath.TeXConstants.Align;
+
 /**
  * An atom representing a vertical row of other atoms.
  */
@@ -59,10 +61,19 @@ public class VRowAtom extends Atom {
 
 	// atoms to be displayed horizontally next to eachother
 	protected List<Atom> elements;
-	private SpaceAtom raise = new SpaceAtom(TeXLength.Unit.EX, 0, 0, 0);
+	private SpaceAtom raise = new SpaceAtom(Unit.EX, 0, 0, 0);
 	protected boolean addInterline = false;
 	protected boolean vtop = false;
 	protected TeXConstants.Align halign = TeXConstants.Align.NONE;
+
+	private VRowAtom(List<Atom> elements, SpaceAtom raise, boolean addInterline,
+			boolean vtop, Align halign) {
+		this.elements = elements;
+		this.raise = raise;
+		this.addInterline = addInterline;
+		this.vtop = vtop;
+		this.halign = halign;
+	}
 
 	public VRowAtom() {
 		this.elements = new ArrayList<Atom>();
@@ -73,7 +84,8 @@ public class VRowAtom extends Atom {
 			this.elements = new ArrayList<Atom>();
 		} else {
 			if (el instanceof VRowAtom) {
-				this.elements = new ArrayList<Atom>(((VRowAtom) el).elements.size());
+				this.elements = new ArrayList<Atom>(
+						((VRowAtom) el).elements.size());
 				// no need to make an mrow the only element of an mrow
 				elements.addAll(((VRowAtom) el).elements);
 			} else {
@@ -118,7 +130,7 @@ public class VRowAtom extends Atom {
 		return vtop;
 	}
 
-	public void setRaise(TeXLength.Unit unit, double r) {
+	public void setRaise(Unit unit, double r) {
 		raise = new SpaceAtom(unit, r, 0, 0);
 	}
 
@@ -146,7 +158,8 @@ public class VRowAtom extends Atom {
 	@Override
 	public Box createBox(TeXEnvironment env) {
 		VerticalBox vb = new VerticalBox();
-		Box interline = new StrutBox(0., TeXLength.getLength("baselineskip", env), 0., 0.);
+		Box interline = new StrutBox(0.,
+				env.lengthSettings().getLength("baselineskip", env), 0., 0.);
 		if (halign != TeXConstants.Align.NONE) {
 			double maxWidth = -Double.POSITIVE_INFINITY;
 			ArrayList<Box> boxes = new ArrayList<>();
@@ -178,16 +191,22 @@ public class VRowAtom extends Atom {
 
 		vb.setShift(-raise.createBox(env).getWidth());
 		if (vtop) {
-			final double t = vb.getSize() == 0 ? 0 : vb.children.get(0).getHeight();
+			final double t = vb.getSize() == 0 ? 0
+					: vb.children.get(0).getHeight();
 			vb.setHeight(t);
 			vb.setDepth(vb.getDepth() + vb.getHeight() - t);
 		} else {
 			final int s = vb.children.size();
-			final double t = vb.getSize() == 0 ? 0 : vb.children.get(s - 1).getDepth();
+			final double t = vb.getSize() == 0 ? 0
+					: vb.children.get(s - 1).getDepth();
 			vb.setHeight(vb.getDepth() + vb.getHeight() - t);
 			vb.setDepth(t);
 		}
 
 		return vb;
+	}
+
+	public Atom getElement(int i) {
+		return i < elements.size() ? elements.get(i) : null;
 	}
 }

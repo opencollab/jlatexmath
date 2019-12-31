@@ -47,14 +47,22 @@ package org.scilab.forge.jlatexmath;
 
 public final class Symbols {
 
-	public static final SymbolAtom LBRACK = new SymbolAtom("lbrack", TeXConstants.TYPE_OPENING);
-	public static final SymbolAtom RBRACK = new SymbolAtom("rbrack", TeXConstants.TYPE_CLOSING);
-	public static final SymbolAtom LBRACE = new SymbolAtom("lbrace", TeXConstants.TYPE_OPENING);
-	public static final SymbolAtom RBRACE = new SymbolAtom("rbrace", TeXConstants.TYPE_CLOSING);
-	public static final SymbolAtom LSQBRACK = new SymbolAtom("lsqbrack", TeXConstants.TYPE_OPENING);
-	public static final SymbolAtom RSQBRACK = new SymbolAtom("rsqbrack", TeXConstants.TYPE_CLOSING);
-	public static final SymbolAtom LANGLE = new SymbolAtom("langle", TeXConstants.TYPE_OPENING);
-	public static final SymbolAtom RANGLE = new SymbolAtom("rangle", TeXConstants.TYPE_CLOSING);
+	public static final SymbolAtom LBRACK = new SymbolAtom("lbrack",
+			TeXConstants.TYPE_OPENING, '(');
+	public static final SymbolAtom RBRACK = new SymbolAtom("rbrack",
+			TeXConstants.TYPE_CLOSING, ')');
+	public static final SymbolAtom LBRACE = new SymbolAtom("lbrace",
+			TeXConstants.TYPE_OPENING, '{');
+	public static final SymbolAtom RBRACE = new SymbolAtom("rbrace",
+			TeXConstants.TYPE_CLOSING, '}');
+	public static final SymbolAtom LSQBRACK = new SymbolAtom("lsqbrack",
+			TeXConstants.TYPE_OPENING, '[');
+	public static final SymbolAtom RSQBRACK = new SymbolAtom("rsqbrack",
+			TeXConstants.TYPE_CLOSING, ']');
+	public static final SymbolAtom LANGLE = new SymbolAtom("langle",
+			TeXConstants.TYPE_OPENING, '\u3008');
+	public static final SymbolAtom RANGLE = new SymbolAtom("rangle",
+			TeXConstants.TYPE_CLOSING, '\u3009');
 	public static final SymbolAtom INT = (SymbolAtom) SymbolAtom.get("intop")
 			.changeLimits(TeXConstants.SCRIPT_NOLIMITS);
 	public static final SymbolAtom INTOP = SymbolAtom.get("intop");
@@ -63,7 +71,8 @@ public final class Symbols {
 	public static final SymbolAtom EQUALS = SymbolAtom.get("equals");
 	public static final SymbolAtom CIRC = SymbolAtom.get("circ");
 	public static final SymbolAtom NORMALDOT = SymbolAtom.get("normaldot");
-	public static final SymbolAtom TEXTNORMALDOT = SymbolAtom.get("textnormaldot");
+	public static final SymbolAtom TEXTNORMALDOT = SymbolAtom
+			.get("textnormaldot");
 	public static final SymbolAtom CDOT = SymbolAtom.get("cdot");
 	public static final SymbolAtom CDOTP = SymbolAtom.get("cdotp");
 	public static final SymbolAtom LDOTP = SymbolAtom.get("ldotp");
@@ -94,13 +103,16 @@ public final class Symbols {
 	public static final SymbolAtom GRAVE = SymbolAtom.get("grave");
 	public static final SymbolAtom CHECK = SymbolAtom.get("check");
 	public static final SymbolAtom MATHRING = SymbolAtom.get("mathring");
+	public static final SymbolAtom APOSTROPHE = SymbolAtom.get("textapos");
 	public static final SymbolAtom PRIME = SymbolAtom.get("prime");
 	public static final SymbolAtom BACKPRIME = SymbolAtom.get("backprime");
 	public static final SymbolAtom SLASH = SymbolAtom.get("slash");
-	public static final SymbolAtom TEXTFRACTIONSOLIDUS = SymbolAtom.get("textfractionsolidus");
+	public static final SymbolAtom TEXTFRACTIONSOLIDUS = SymbolAtom
+			.get("textfractionsolidus");
 	public static final SymbolAtom SQRT = SymbolAtom.get("surdsign");
 	public static final SymbolAtom BIG_RELBAR = SymbolAtom.get("Relbar");
-	public static final SymbolAtom BIG_RIGHTARROW = SymbolAtom.get("Rightarrow");
+	public static final SymbolAtom BIG_RIGHTARROW = SymbolAtom
+			.get("Rightarrow");
 	public static final SymbolAtom BIG_LEFTARROW = SymbolAtom.get("Leftarrow");
 	public static final SymbolAtom LHOOK = SymbolAtom.get("lhook");
 	public static final SymbolAtom RHOOK = SymbolAtom.get("rhook");

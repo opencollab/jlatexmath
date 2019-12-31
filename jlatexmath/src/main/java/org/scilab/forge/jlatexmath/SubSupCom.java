@@ -45,11 +45,17 @@
 
 package org.scilab.forge.jlatexmath;
 
+import org.scilab.forge.jlatexmath.exception.ParseException;
+
 public class SubSupCom implements AtomConsumer {
 
-	private static enum State {
-		SUB_WAIT, SUB_OK, SUP_WAIT, SUP_OK
-	};
+	private enum State {
+		SUB_WAIT,
+
+		SUP_WAIT,
+
+		OK
+	}
 
 	private Atom base;
 	private Atom sub;
@@ -66,49 +72,17 @@ public class SubSupCom implements AtomConsumer {
 
 	public void setBase(Atom base) {
 		this.base = base;
-		;
-	}
-
-	private static void addSSC(final TeXParser tp, final char c) {
-		final SubSupCom ssc = new SubSupCom(c);
-		ssc.init(tp);
-		tp.addConsumer(ssc);
-	}
-
-	public boolean isWaitingForSup() {
-		return state == State.SUP_WAIT;
 	}
 
 	public void setState(TeXParser tp, final char c) {
-		if (c == '^') {
-			switch (state) {
-			case SUB_WAIT:
-				throw new ParseException(tp, "Invalid ^");
-			case SUB_OK:
+		switch (state) {
+		case SUB_WAIT:
+		case SUP_WAIT:
+			throw new ParseException(tp, "Invalid " + c);
+		case OK:
+			if (c == '^') {
 				state = State.SUP_WAIT;
-				break;
-			case SUP_WAIT:
-				throw new ParseException(tp, "Invalid ^");
-			case SUP_OK:
-				if (!(sup instanceof CumulativeScriptsAtom)) {
-					tp.closeConsumer(get());
-					addSSC(tp, '^');
-				}
-				break;
-			}
-		} else {
-			switch (state) {
-			case SUB_WAIT:
-				throw new ParseException(tp, "Invalid _");
-			case SUB_OK:
-				if (!(sub instanceof CumulativeScriptsAtom)) {
-					tp.closeConsumer(get());
-					addSSC(tp, '_');
-				}
-				break;
-			case SUP_WAIT:
-				throw new ParseException(tp, "Invalid _");
-			case SUP_OK:
+			} else {
 				state = State.SUB_WAIT;
 			}
 		}
@@ -124,25 +98,21 @@ public class SubSupCom implements AtomConsumer {
 	public void add(TeXParser tp, Atom a) {
 		switch (state) {
 		case SUB_WAIT:
-			sub = a;
-			state = State.SUB_OK;
-			break;
-		case SUB_OK:
-			tp.closeConsumer(get());
-			tp.addToConsumer(a);
+			addToSub(a);
+			state = State.OK;
 			break;
 		case SUP_WAIT:
-			sup = a;
-			state = State.SUP_OK;
+			addToSup(a);
+			state = State.OK;
 			break;
-		case SUP_OK:
+		case OK:
 			tp.closeConsumer(get());
 			tp.addToConsumer(a);
 			break;
 		}
 	}
 
-	public void addToSup(Atom a) {
+	private void addToSup(Atom a) {
 		if (sup != null) {
 			if (sup instanceof RowAtom) {
 				((RowAtom) sup).add(a);
@@ -154,16 +124,16 @@ public class SubSupCom implements AtomConsumer {
 		}
 	}
 
-	public boolean addToSub(Atom a) {
+	private void addToSub(Atom a) {
 		if (sub != null) {
 			if (sub instanceof RowAtom) {
 				((RowAtom) sub).add(a);
 			} else {
 				sub = new RowAtom(sub, a);
 			}
-			return true;
+		} else {
+			sub = a;
 		}
-		return false;
 	}
 
 	@Override
@@ -212,12 +182,6 @@ public class SubSupCom implements AtomConsumer {
 	}
 
 	public static Atom get(Atom base, Atom sub, Atom sup) {
-		if (sup instanceof CumulativeScriptsAtom) {
-			sup = ((CumulativeScriptsAtom) sup).get();
-		}
-		if (sub instanceof CumulativeScriptsAtom) {
-			sub = ((CumulativeScriptsAtom) sub).get();
-		}
 		if (base.getRightType() == TeXConstants.TYPE_BIG_OPERATOR) {
 			return new BigOperatorAtom(base, sub, sup);
 		} else if (base instanceof OverUnderDelimiter) {

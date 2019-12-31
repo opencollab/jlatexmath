@@ -53,6 +53,7 @@ import org.scilab.forge.jlatexmath.RowAtom;
 import org.scilab.forge.jlatexmath.TeXConstants;
 import org.scilab.forge.jlatexmath.TeXLength;
 import org.scilab.forge.jlatexmath.TeXParser;
+import org.scilab.forge.jlatexmath.Unit;
 import org.scilab.forge.jlatexmath.XArrowAtom;
 
 public class MhchemArrowConsumer implements AtomConsumer {
@@ -81,7 +82,8 @@ public class MhchemArrowConsumer implements AtomConsumer {
 		if (sup == null) {
 			sup = a;
 			if (tp.hasOptionNoWhites()) {
-				tp.addConsumer(new GroupConsumer(TeXConstants.Opener.LSQBRACKET));
+				tp.addConsumer(
+						new GroupConsumer(TeXConstants.Opener.LSQBRACKET));
 				return;
 			}
 		} else {
@@ -93,7 +95,7 @@ public class MhchemArrowConsumer implements AtomConsumer {
 	public Atom get() {
 		final Atom top = sup == null ? EmptyAtom.get() : sup;
 		final Atom bot = sub == null ? EmptyAtom.get() : sub;
-		final TeXLength minW = new TeXLength(TeXLength.Unit.EM, 2.);
+		final TeXLength minW = new TeXLength(Unit.EM, 2.);
 
 		switch (arrow) {
 		case left: // <-
@@ -105,11 +107,14 @@ public class MhchemArrowConsumer implements AtomConsumer {
 		case LeftRight: // <-->
 			return new XArrowAtom(top, bot, minW, XArrowAtom.Kind.RightAndLeft);
 		case leftrightHarpoon: // <=>
-			return new XArrowAtom(top, bot, minW, XArrowAtom.Kind.RightLeftHarpoons);
+			return new XArrowAtom(top, bot, minW,
+					XArrowAtom.Kind.RightLeftHarpoons);
 		case leftrightSmallHarpoon: // <=>>
-			return new XArrowAtom(top, bot, minW, XArrowAtom.Kind.RightSmallLeftHarpoons);
+			return new XArrowAtom(top, bot, minW,
+					XArrowAtom.Kind.RightSmallLeftHarpoons);
 		case leftSmallHarpoonRight: // <<=>
-			return new XArrowAtom(top, bot, minW, XArrowAtom.Kind.SmallRightLeftHarpoons);
+			return new XArrowAtom(top, bot, minW,
+					XArrowAtom.Kind.SmallRightLeftHarpoons);
 		}
 
 		return null;

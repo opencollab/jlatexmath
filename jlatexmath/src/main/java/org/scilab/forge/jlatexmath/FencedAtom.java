@@ -50,11 +50,13 @@ package org.scilab.forge.jlatexmath;
 
 import java.util.List;
 
+import org.scilab.forge.jlatexmath.serialize.HasTrueBase;
+
 /**
  * An atom representing a base atom surrounded with delimiters that change their
  * size according to the height of the base.
  */
-public class FencedAtom extends Atom {
+public class FencedAtom extends Atom implements HasTrueBase {
 
 	// base atom
 	private final Atom base;
@@ -83,6 +85,7 @@ public class FencedAtom extends Atom {
 		left = l == Symbols.NORMALDOT ? null : l;
 		right = r == Symbols.NORMALDOT ? null : r;
 		middle = m;
+		// FactoryProvider.debugS("creating FencedAtom");
 	}
 
 	/**
@@ -104,9 +107,11 @@ public class FencedAtom extends Atom {
 		final TeXFont tf = env.getTeXFont();
 		Box content = base.createBox(env);
 		final double axis = tf.getAxisHeight(env.getStyle());
-		final double delta = Math.max(content.getHeight() - axis, content.getDepth() + axis);
-		final double minHeight = Math.max((delta / 500.) * TeXLength.getLength("delimiterfactor", env),
-				2. * delta - TeXLength.getLength("delimitershortfall", env));
+		final double delta = Math.max(content.getHeight() - axis,
+				content.getDepth() + axis);
+		final double minHeight = Math.max(
+				(delta / 500.) * env.lengthSettings().getFactor("delimiterfactor"),
+				2. * delta - env.lengthSettings().getLength("delimitershortfall", env));
 
 		// construct box
 		final HorizontalBox hBox = new HorizontalBox();
@@ -115,7 +120,8 @@ public class FencedAtom extends Atom {
 			for (final MiddleAtom at : middle) {
 				final Atom a = at.getBase();
 				if (a instanceof SymbolAtom) {
-					final Box b = DelimiterFactory.create(((SymbolAtom) a).getCf(), env, minHeight);
+					final Box b = DelimiterFactory
+							.create(((SymbolAtom) a).getCf(), env, minHeight);
 					at.setBox(center(b, axis));
 				}
 			}
@@ -132,7 +138,8 @@ public class FencedAtom extends Atom {
 
 		// glue between left delimiter and content (if not whitespace)
 		if (!(base instanceof SpaceAtom)) {
-			final Box glue = Glue.get(TeXConstants.TYPE_OPENING, base.getLeftType(), env);
+			final Box glue = Glue.get(TeXConstants.TYPE_OPENING,
+					base.getLeftType(), env);
 			if (glue != null) {
 				hBox.add(glue);
 			}
@@ -143,7 +150,8 @@ public class FencedAtom extends Atom {
 
 		// glue between right delimiter and content (if not whitespace)
 		if (!(base instanceof SpaceAtom)) {
-			final Box glue = Glue.get(base.getRightType(), TeXConstants.TYPE_CLOSING, env);
+			final Box glue = Glue.get(base.getRightType(),
+					TeXConstants.TYPE_CLOSING, env);
 			if (glue != null) {
 				hBox.add(glue);
 			}
@@ -151,7 +159,8 @@ public class FencedAtom extends Atom {
 
 		// right delimiter
 		if (right != null) {
-			final Box b = DelimiterFactory.create(right.getCf(), env, minHeight);
+			final Box b = DelimiterFactory.create(right.getCf(), env,
+					minHeight);
 			hBox.add(center(b, axis));
 		}
 
@@ -171,6 +180,21 @@ public class FencedAtom extends Atom {
 
 	@Override
 	public String toString() {
-		return "FencedAtom: left: " + left + " base: " + base + " right: " + right;
+		return "FencedAtom: left: " + left + " base: " + base + " right: "
+				+ right;
 	}
+
+	public Atom getLeft() {
+		return left;
+	}
+
+	public Atom getRight() {
+		return right;
+	}
+
+	@Override
+	public Atom getTrueBase() {
+		return base;
+	}
+
 }

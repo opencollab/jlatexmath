@@ -47,9 +47,9 @@ package org.scilab.forge.jlatexmath.commands;
 
 import org.scilab.forge.jlatexmath.Column;
 import org.scilab.forge.jlatexmath.EnvArray;
-import org.scilab.forge.jlatexmath.ParseException;
 import org.scilab.forge.jlatexmath.RowAtom;
 import org.scilab.forge.jlatexmath.TeXParser;
+import org.scilab.forge.jlatexmath.exception.ParseException;
 
 public class CommandCr extends Command {
 
@@ -72,7 +72,8 @@ public class CommandCr extends Command {
 		} else {
 			final RowAtom ra = tp.steal();
 			if (ra == null) {
-				throw new ParseException(tp, "The macro \\" + cmd + " must be used in an array");
+				throw new ParseException(tp,
+						"The macro \\" + cmd + " must be used in an array");
 			}
 			final Column col = new Column();
 			col.init(tp);
@@ -82,11 +83,5 @@ public class CommandCr extends Command {
 		}
 
 		return false;
-	}
-
-	@Override
-	public Command duplicate() {
-		return new CommandCr(cmd);
-
 	}
 }

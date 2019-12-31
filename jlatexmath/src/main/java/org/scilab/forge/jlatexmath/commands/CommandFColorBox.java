@@ -1,10 +1,9 @@
 package org.scilab.forge.jlatexmath.commands;
 
-import java.awt.Color;
-
 import org.scilab.forge.jlatexmath.Atom;
 import org.scilab.forge.jlatexmath.FBoxAtom;
 import org.scilab.forge.jlatexmath.TeXParser;
+import org.scilab.forge.jlatexmath.platform.graphics.Color;
 
 public class CommandFColorBox extends Command1A {
 
@@ -30,11 +29,6 @@ public class CommandFColorBox extends Command1A {
 	@Override
 	public Atom newI(TeXParser tp, Atom a) {
 		return new FBoxAtom(a, bg, frame);
-	}
-
-	@Override
-	public Command duplicate() {
-		return new CommandFColorBox(frame, bg);
 	}
 
 }

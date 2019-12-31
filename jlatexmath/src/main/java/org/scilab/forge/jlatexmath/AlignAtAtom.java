@@ -60,12 +60,14 @@ public class AlignAtAtom extends AlignAtom {
 		final int row = matrix.row;
 		final int col = matrix.col;
 		final double[] seps = new double[col + 1];
-		final double w = aligned ? Double.POSITIVE_INFINITY : TeXLength.getTextwidth(env);
+		final double w = aligned ? Double.POSITIVE_INFINITY
+				: env.lengthSettings().getTextwidth(env);
 
 		// Alignat env. : hsep=(textwidth-matWidth)/2 and hsep elem ... elem
 		// hsep
 		final double alignW = align.createBox(env).getWidth();
-		seps[0] = seps[col] = w != Double.POSITIVE_INFINITY ? Math.max((w - width) / 2., 0.) : 0.;
+		seps[0] = seps[col] = w != Double.POSITIVE_INFINITY
+				? Math.max((w - width) / 2., 0.) : 0.;
 		for (int i = 1; i < col; ++i) {
 			seps[i] = (i % 2 == 0) ? 0. : alignW;
 		}
@@ -76,4 +78,5 @@ public class AlignAtAtom extends AlignAtom {
 
 		return seps;
 	}
+
 }

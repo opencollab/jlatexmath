@@ -67,6 +67,8 @@ public class Dummy {
 	 *            an atom
 	 */
 	public Dummy(Atom a) {
+		// FactoryProvider.getInstance()
+		// .debug("creating dummy, a = " + a.getClass());
 		el = a;
 	}
 

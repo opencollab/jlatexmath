@@ -45,15 +45,18 @@
 
 package org.scilab.forge.jlatexmath;
 
-import java.awt.BasicStroke;
-import java.awt.Graphics2D;
-import java.awt.Stroke;
-import java.awt.geom.RoundRectangle2D;
+import org.scilab.forge.jlatexmath.platform.geom.RoundRectangle2D;
+import org.scilab.forge.jlatexmath.platform.graphics.BasicStroke;
+import org.scilab.forge.jlatexmath.platform.graphics.Graphics2DInterface;
+import org.scilab.forge.jlatexmath.platform.graphics.Stroke;
 
 /**
  * A box representing a rotated box.
  */
 public class OvalBox extends FramedBox {
+
+	private RoundRectangle2D roundRectangle = geom.createRoundRectangle2D(0, 0,
+			0, 0, 0, 0);
 
 	final double cornersize;
 
@@ -63,17 +66,19 @@ public class OvalBox extends FramedBox {
 	}
 
 	@Override
-	public void draw(Graphics2D g2, double x, double y) {
-		startDraw(g2, x, y);
+	public void draw(Graphics2DInterface g2, double x, double y) {
 		box.draw(g2, x + space + thickness, y);
 		Stroke st = g2.getStroke();
-		g2.setStroke(new BasicStroke((float) thickness, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER));
-		double th = thickness / 2.;
-		double r = cornersize * Math.min(width - 2 * thickness, height + depth - 2 * thickness);
-		g2.draw(new RoundRectangle2D.Double(x + th, y - height + th, width - thickness, height + depth - thickness, r,
-				r));
+		g2.setStroke(graphics.createBasicStroke(thickness, BasicStroke.CAP_BUTT,
+				BasicStroke.JOIN_MITER));
+		double th = thickness / 2;
+		double r = cornersize * Math.min(width - 2 * thickness,
+				height + depth - 2 * thickness);
+		roundRectangle.setRoundRectangle(x + th, y - height + th,
+				width - thickness, height + depth - thickness, r, r);
+		g2.draw(roundRectangle);
+		drawDebug(g2, x, y);
 		g2.setStroke(st);
-		endDraw(g2);
 	}
 
 	@Override

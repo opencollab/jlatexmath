@@ -52,12 +52,10 @@ import org.scilab.forge.jlatexmath.Atom;
 import org.scilab.forge.jlatexmath.CharAtom;
 import org.scilab.forge.jlatexmath.CharMapping;
 import org.scilab.forge.jlatexmath.EnvArray;
-import org.scilab.forge.jlatexmath.ExternalFontManager;
 import org.scilab.forge.jlatexmath.FractionAtom;
 import org.scilab.forge.jlatexmath.GroupConsumer;
 import org.scilab.forge.jlatexmath.MHeightAtom;
 import org.scilab.forge.jlatexmath.MathCharAtom;
-import org.scilab.forge.jlatexmath.ParseException;
 import org.scilab.forge.jlatexmath.RowAtom;
 import org.scilab.forge.jlatexmath.ScriptsAtom;
 import org.scilab.forge.jlatexmath.SpaceAtom;
@@ -68,6 +66,7 @@ import org.scilab.forge.jlatexmath.TeXConstants;
 import org.scilab.forge.jlatexmath.TeXParser;
 import org.scilab.forge.jlatexmath.TextStyle;
 import org.scilab.forge.jlatexmath.TextStyleAtom;
+import org.scilab.forge.jlatexmath.exception.ParseException;
 
 public class MhchemParser extends TeXParser {
 
@@ -79,11 +78,11 @@ public class MhchemParser extends TeXParser {
 		leftrightHarpoon, // <=>
 		leftrightSmallHarpoon, // <=>>
 		leftSmallHarpoonRight, // <<=>
-	};
+	}
 
 	private static enum ElementType {
 		none, greek, roman,
-	};
+	}
 
 	private final static class StopGroupConsumer extends GroupConsumer {
 
@@ -123,12 +122,10 @@ public class MhchemParser extends TeXParser {
 		}
 
 		@Override
-		public Atom convertASCIICharToAtom(final char c, final boolean oneChar) {
+		public Atom convertASCIICharToAtom(final char c,
+				final boolean oneChar) {
 			if (!hasNormalGroupConsumer() && c >= 'a' && c <= 'z') {
-				final ExternalFontManager.FontSSSF f = ExternalFontManager.get().getBasicLatinFont();
-				if (f == null) {
-					return new MathCharAtom(c, isMathMode());
-				}
+				return new MathCharAtom(c, isMathMode());
 			}
 			return super.convertASCIICharToAtom(c, oneChar);
 		}
@@ -138,7 +135,8 @@ public class MhchemParser extends TeXParser {
 			String com = command;
 			if (!hasNormalGroupConsumer()) {
 				if (isUpperGreek(command)) {
-					com = "Up" + Character.toLowerCase(com.charAt(0)) + com.substring(1);
+					com = "Up" + Character.toLowerCase(com.charAt(0))
+							+ com.substring(1);
 				}
 			}
 			super.processCommand(com);
@@ -179,7 +177,7 @@ public class MhchemParser extends TeXParser {
 	public MhchemParser(final String parseString) {
 		super(parseString);
 		addConsumer(new GroupConsumer(TeXConstants.Opener.NONE));
-		addToConsumer(new CEEmptyAtom());
+		addToConsumer(CEEmptyAtom.get());
 	}
 
 	private CharMapping getExponentCM() {
@@ -245,7 +243,12 @@ public class MhchemParser extends TeXParser {
 	}
 
 	public Atom getGreek(final String com) {
-		return SymbolAtom.get(com);
+		final Atom a = SymbolAtom.get(com);
+		// if (a == null) {
+		// AlphabetManager.get().addBlock(Character.UnicodeBlock.GREEK);
+		// return SymbolAtom.get(com);
+		// }
+		return a;
 	}
 
 	public Atom handleGreek(char c, boolean upLower) {
@@ -258,7 +261,8 @@ public class MhchemParser extends TeXParser {
 				}
 				return SymbolAtom.get(com);
 			} else if (isUpperGreek(com)) {
-				final String up = "Up" + Character.toLowerCase(com.charAt(0)) + com.substring(1);
+				final String up = "Up" + Character.toLowerCase(com.charAt(0))
+						+ com.substring(1);
 				return getGreek(up);
 			}
 			pos = spos;
@@ -325,7 +329,7 @@ public class MhchemParser extends TeXParser {
 					charMapping.replaceUnsafe('\'', this);
 					charMapping.replaceUnsafe('\'', this);
 				} else {
-					cumSupSymbols(Symbols.PRIME, Symbols.PRIME);
+					cumSupSymbols(Symbols.APOSTROPHE, Symbols.APOSTROPHE);
 				}
 				break;
 			case '#':
@@ -346,7 +350,8 @@ public class MhchemParser extends TeXParser {
 					++pos;
 					addToConsumer(EnvArray.ColSep.get());
 				} else {
-					throw new ParseException(this, "Character '&' is only available in array mode !");
+					throw new ParseException(this,
+							"Character '&' is only available in array mode !");
 				}
 				break;
 			case '\'':
@@ -501,13 +506,11 @@ public class MhchemParser extends TeXParser {
 					etype = ElementType.greek;
 					handleElement();
 				} else {
-					cpos = pos;
 					prevpos = pos;
 					final String command = getCommand();
 					if (!command.isEmpty()) {
 						processCommand(command);
 					}
-					cpos = -1;
 				}
 				break;
 			}
@@ -599,7 +602,7 @@ public class MhchemParser extends TeXParser {
 			if (cc == ' ') {
 				++pos;
 				addToConsumer(new MathCharAtom(c, true));
-				addToConsumer(new CEEmptyAtom());
+				addToConsumer(CEEmptyAtom.get());
 				return;
 			}
 		}
@@ -657,7 +660,8 @@ public class MhchemParser extends TeXParser {
 					break;
 				}
 			}
-			addToConsumer(new ScriptsAtom(MHeightAtom.get(), sub.simplify(), null));
+			addToConsumer(
+					new ScriptsAtom(MHeightAtom.get(), sub.simplify(), null));
 			return true;
 		}
 		return false;
@@ -887,7 +891,8 @@ public class MhchemParser extends TeXParser {
 				c = parseString.charAt(pos);
 				if (c == ' ') {
 					++pos;
-					addToConsumer(new ScriptsAtom(MHeightAtom.get(), null, Symbols.MINUS));
+					addToConsumer(new ScriptsAtom(MHeightAtom.get(), null,
+							Symbols.MINUS));
 				} else if (c == '>') {
 					++pos;
 					handleArrow(Arrow.right);
@@ -899,14 +904,17 @@ public class MhchemParser extends TeXParser {
 					}
 					return true;
 				} else {
-					addToConsumer(new ScriptsAtom(MHeightAtom.get(), null, Symbols.MINUS));
+					addToConsumer(new ScriptsAtom(MHeightAtom.get(), null,
+							Symbols.MINUS));
 				}
 			} else {
-				addToConsumer(new ScriptsAtom(MHeightAtom.get(), null, Symbols.MINUS));
+				addToConsumer(new ScriptsAtom(MHeightAtom.get(), null,
+						Symbols.MINUS));
 			}
 		} else if (c == '+') {
 			++pos;
-			addToConsumer(new ScriptsAtom(MHeightAtom.get(), null, Symbols.PLUS));
+			addToConsumer(
+					new ScriptsAtom(MHeightAtom.get(), null, Symbols.PLUS));
 		}
 		return false;
 	}
@@ -964,7 +972,7 @@ public class MhchemParser extends TeXParser {
 						pos += 2;
 						skipPureWhites();
 						addToConsumer(SymbolAtom.get("downarrow"));
-						addToConsumer(new CEEmptyAtom());
+						addToConsumer(CEEmptyAtom.get());
 						return;
 					}
 				} else {
@@ -980,7 +988,7 @@ public class MhchemParser extends TeXParser {
 						pos += 2;
 						skipPureWhites();
 						addToConsumer(SymbolAtom.get("uparrow"));
-						addToConsumer(new CEEmptyAtom());
+						addToConsumer(CEEmptyAtom.get());
 						return;
 					}
 				} else {
@@ -1000,7 +1008,7 @@ public class MhchemParser extends TeXParser {
 						pos += 2;
 						skipPureWhites();
 						addToConsumer(Symbols.MINUS);
-						addToConsumer(new CEEmptyAtom());
+						addToConsumer(CEEmptyAtom.get());
 					} else if (cc == '>') {
 						pos += 2;
 						handleArrow(Arrow.right);
@@ -1016,7 +1024,8 @@ public class MhchemParser extends TeXParser {
 				++pos;
 				addToConsumer(Symbols.EQUALS);
 				return;
-			} else if (c == '(' && pos + 2 < len && parseString.charAt(pos + 2) == ')') {
+			} else if (c == '(' && pos + 2 < len
+					&& parseString.charAt(pos + 2) == ')') {
 				final char cc = parseString.charAt(pos + 1);
 				if (cc == 'v') {
 					pos += 3;
@@ -1029,7 +1038,7 @@ public class MhchemParser extends TeXParser {
 				}
 			}
 		}
-		addToConsumer(new CEEmptyAtom());
+		addToConsumer(CEEmptyAtom.get());
 	}
 
 	public boolean handleArrow(final char c) {
@@ -1043,7 +1052,8 @@ public class MhchemParser extends TeXParser {
 							pos += 3;
 							handleArrow(Arrow.leftright);
 							return true;
-						} else if (cc == '-' && pos + 3 < len && parseString.charAt(pos + 3) == '>') {
+						} else if (cc == '-' && pos + 3 < len
+								&& parseString.charAt(pos + 3) == '>') {
 							// <-->
 							pos += 4;
 							handleArrow(Arrow.LeftRight);
@@ -1055,7 +1065,8 @@ public class MhchemParser extends TeXParser {
 					return true;
 				} else if (cc == '=') {
 					if (pos + 2 < len && parseString.charAt(pos + 2) == '>') {
-						if (pos + 3 < len && parseString.charAt(pos + 3) == '>') {
+						if (pos + 3 < len
+								&& parseString.charAt(pos + 3) == '>') {
 							// <=>>
 							pos += 4;
 							handleArrow(Arrow.leftrightSmallHarpoon);
@@ -1065,14 +1076,16 @@ public class MhchemParser extends TeXParser {
 						handleArrow(Arrow.leftrightHarpoon);
 						return true;
 					}
-				} else if (c == '<' && pos + 3 < len && parseString.charAt(pos + 2) == '='
+				} else if (c == '<' && pos + 3 < len
+						&& parseString.charAt(pos + 2) == '='
 						&& parseString.charAt(pos + 3) == '>') {
 					// <<=>
 					pos += 4;
 					handleArrow(Arrow.leftSmallHarpoonRight);
 					return true;
 				}
-			} else if (c == '-' && pos + 1 < len && parseString.charAt(pos + 1) == '>') {
+			} else if (c == '-' && pos + 1 < len
+					&& parseString.charAt(pos + 1) == '>') {
 				// ->
 				pos += 2;
 				handleArrow(Arrow.right);

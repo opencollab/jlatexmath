@@ -66,7 +66,7 @@ public class SpaceAtom extends Atom {
 	private double depth;
 
 	// units for the dimensions
-	private TeXLength.Unit unit;
+	private Unit unit;
 
 	public SpaceAtom() {
 		blankSpace = true;
@@ -77,14 +77,15 @@ public class SpaceAtom extends Atom {
 		blankType = type;
 	}
 
-	public SpaceAtom(TeXLength.Unit unit, double width, double height, double depth) {
+	public SpaceAtom(Unit unit, double width, double height,
+			double depth) {
 		this.unit = unit;
 		this.width = width;
 		this.height = height;
 		this.depth = depth;
 	}
 
-	public SpaceAtom(TeXLength.Unit unit, double width) {
+	public SpaceAtom(Unit unit, double width) {
 		this.unit = unit;
 		this.width = width;
 		this.height = 0.;
@@ -99,7 +100,8 @@ public class SpaceAtom extends Atom {
 	}
 
 	public static boolean isNegative(TeXConstants.Muskip skip) {
-		return skip == TeXConstants.Muskip.NEGTHIN || skip == TeXConstants.Muskip.NEGMED
+		return skip == TeXConstants.Muskip.NEGTHIN
+				|| skip == TeXConstants.Muskip.NEGMED
 				|| skip == TeXConstants.Muskip.NEGTHICK;
 	}
 
@@ -110,12 +112,17 @@ public class SpaceAtom extends Atom {
 				return new StrutBox(env.getSpace(), 0., 0., 0.);
 			} else {
 				Box b;
-				if (blankType == TeXConstants.Muskip.THIN || blankType == TeXConstants.Muskip.NEGTHIN) {
-					b = Glue.get(TeXConstants.TYPE_INNER, TeXConstants.TYPE_BIG_OPERATOR, env);
-				} else if (blankType == TeXConstants.Muskip.MED || blankType == TeXConstants.Muskip.NEGMED) {
-					b = Glue.get(TeXConstants.TYPE_BINARY_OPERATOR, TeXConstants.TYPE_BIG_OPERATOR, env);
+				if (blankType == TeXConstants.Muskip.THIN
+						|| blankType == TeXConstants.Muskip.NEGTHIN) {
+					b = Glue.get(TeXConstants.TYPE_INNER,
+							TeXConstants.TYPE_BIG_OPERATOR, env);
+				} else if (blankType == TeXConstants.Muskip.MED
+						|| blankType == TeXConstants.Muskip.NEGMED) {
+					b = Glue.get(TeXConstants.TYPE_BINARY_OPERATOR,
+							TeXConstants.TYPE_BIG_OPERATOR, env);
 				} else {
-					b = Glue.get(TeXConstants.TYPE_RELATION, TeXConstants.TYPE_BIG_OPERATOR, env);
+					b = Glue.get(TeXConstants.TYPE_RELATION,
+							TeXConstants.TYPE_BIG_OPERATOR, env);
 				}
 				if (b == null) {
 					b = StrutBox.getEmpty();
@@ -126,11 +133,22 @@ public class SpaceAtom extends Atom {
 				return b;
 			}
 		} else {
-			return new StrutBox(conv(width, unit, env), conv(height, unit, env), conv(depth, unit, env), 0.);
+			return new StrutBox(conv(width, unit, env), conv(height, unit, env),
+					conv(depth, unit, env), 0.);
 		}
 	}
 
-	private final double conv(final double x, final TeXLength.Unit unit, final TeXEnvironment env) {
-		return x == 0. ? 0. : x * TeXLength.getFactor(unit, env);
+	private final double conv(final double x, final Unit unit,
+			final TeXEnvironment env) {
+		return x == 0. ? 0. : x * unit.getFactor(env);
 	}
+
+	public double getHeight() {
+		return height;
+	}
+
+	public Unit getUnit() {
+		return unit;
+	}
+
 }

@@ -61,11 +61,13 @@ public class TStrokeAtom extends Atom {
 	public Box createBox(TeXEnvironment env) {
 		Char ch = env.getTeXFont().getChar(BAR.getCf(), env.getStyle());
 		double italic = ch.getItalic();
-		CharBox T = new CharBox(env.getTeXFont().getChar(upper ? 'T' : 't', "mathnormal", env.getStyle()));
+		CharBox T = new CharBox(
+				env.getTeXFont().getChar(upper ? 'T' : 't', env.getStyle()));
 		CharBox B = new CharBox(ch);
 		Box y;
 		if (Math.abs(italic) > TeXFormula.PREC) {
-			HorizontalBox hb = new HorizontalBox(new StrutBox(-italic, 0, 0, 0));
+			HorizontalBox hb = new HorizontalBox(
+					new StrutBox(-italic, 0, 0, 0));
 			hb.add(B);
 			y = hb;
 		} else {

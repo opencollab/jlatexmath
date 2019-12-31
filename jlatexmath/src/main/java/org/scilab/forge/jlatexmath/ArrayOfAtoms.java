@@ -45,8 +45,9 @@
 
 package org.scilab.forge.jlatexmath;
 
-import java.awt.Color;
 import java.util.ArrayList;
+
+import org.scilab.forge.jlatexmath.platform.graphics.Color;
 
 public class ArrayOfAtoms implements AtomConsumer {
 
@@ -55,13 +56,11 @@ public class ArrayOfAtoms implements AtomConsumer {
 	protected ArrayList<ArrayList<Color>> colors;
 	protected ArrayList<Color> rowcolors;
 	protected ArrayList<Atom> currentRow;
-	protected int type;
 	public int col;
 	protected int row;
 	protected boolean oneColumn = false;
 
-	public ArrayOfAtoms(final int type) {
-		this.type = type;
+	public ArrayOfAtoms() {
 		ra = new RowAtom();
 		array = new ArrayList<ArrayList<Atom>>();
 		currentRow = new ArrayList<Atom>();
@@ -134,10 +133,6 @@ public class ArrayOfAtoms implements AtomConsumer {
 		this.oneColumn = oneColumn;
 	}
 
-	public int getType() {
-		return type;
-	}
-
 	@Override
 	public void add(TeXParser tp, Atom a) {
 		if (a instanceof EnvArray.ColSep) {
@@ -157,7 +152,8 @@ public class ArrayOfAtoms implements AtomConsumer {
 			ra.add(a);
 			if (a instanceof HlineAtom) {
 				addRow();
-			} else if (a instanceof HdotsforAtom || a instanceof MulticolumnAtom) {
+			} else if (a instanceof HdotsforAtom
+					|| a instanceof MulticolumnAtom) {
 				final MulticolumnAtom ma = (MulticolumnAtom) a;
 				addCol(ma.getSkipped());
 			}

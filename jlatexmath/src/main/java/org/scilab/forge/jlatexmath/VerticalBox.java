@@ -46,11 +46,11 @@
 
 package org.scilab.forge.jlatexmath;
 
-import java.awt.Graphics2D;
-import java.awt.geom.AffineTransform;
-import java.awt.geom.Area;
 import java.util.ArrayList;
 import java.util.ListIterator;
+
+import org.scilab.forge.jlatexmath.platform.geom.Area;
+import org.scilab.forge.jlatexmath.platform.graphics.Graphics2DInterface;
 
 /**
  * A box composed of other boxes, put one above the other.
@@ -88,8 +88,6 @@ class VerticalBox extends Box {
 
 	private final void justAdd(Box b) {
 		children.add(b);
-		b.parent = this;
-		b.elderParent = elderParent;
 	}
 
 	public final void add(Box b) {
@@ -112,14 +110,13 @@ class VerticalBox extends Box {
 
 	private void recalculateWidth(Box b) {
 		leftMostPos = Math.min(leftMostPos, b.shift);
-		rightMostPos = Math.max(rightMostPos, b.shift + (b.width > 0 ? b.width : 0));
+		rightMostPos = Math.max(rightMostPos,
+				b.shift + (b.width > 0 ? b.width : 0));
 		width = rightMostPos - leftMostPos;
 	}
 
 	private final void justAdd(int pos, Box b) {
 		children.add(pos, b);
-		b.parent = this;
-		b.elderParent = elderParent;
 	}
 
 	public void add(int pos, Box b) {
@@ -134,7 +131,7 @@ class VerticalBox extends Box {
 	}
 
 	@Override
-	public void draw(Graphics2D g2, double x, double y) {
+	public void draw(Graphics2DInterface g2, double x, double y) {
 		startDraw(g2, x, y);
 		double yPos = y - height;
 		for (final Box box : children) {
@@ -150,20 +147,29 @@ class VerticalBox extends Box {
 
 	@Override
 	public Area getArea() {
-		final Area area = new Area();
-		final AffineTransform af = AffineTransform.getTranslateInstance(0., -height);
+		// final Area area = new Area();
+		final Area area = geom.createArea();
+		// final AffineTransform af = AffineTransform.getTranslateInstance(0.,
+		// -height);
+		final double afX = 0;
+		double afY = -height;
+
 		for (final Box b : children) {
 			if (b instanceof StrutBox) {
-				af.translate(0., b.getHeight() + b.getDepth());
+				// af.translate(0., b.getHeight() + b.getDepth());
+				afY += b.getHeight() + b.getDepth();
 			} else {
 				final Area a = b.getArea();
 				if (a == null) {
 					return null;
 				}
-				af.translate(0., b.getHeight());
-				a.transform(af);
+				// af.translate(0., b.getHeight());
+				afY += b.getHeight();
+				// a.transform(af);
+				a.translate(afX, afY);
 				area.add(a);
-				af.translate(0., b.getDepth());
+				// af.translate(0., b.getDepth());
+				afY += b.getDepth();
 			}
 		}
 		return area;
@@ -178,11 +184,13 @@ class VerticalBox extends Box {
 		// iterate from the last child box (the lowest) to the first (the
 		// highest)
 		// untill a font id is found that's not equal to NO_FONT
-		FontInfo font = null;
-		for (ListIterator it = children.listIterator(children.size()); font == null && it.hasPrevious();) {
-			font = ((Box) it.previous()).getLastFont();
+		FontInfo fontId = null;
+		for (ListIterator it = children
+				.listIterator(children.size()); fontId == null
+						&& it.hasPrevious();) {
+			fontId = ((Box) it.previous()).getLastFont();
 		}
 
-		return font;
+		return fontId;
 	}
 }
