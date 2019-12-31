@@ -1,0 +1,2 @@
+# Module jlatexmath
+# RPC service class, partial path of RPC policy file
