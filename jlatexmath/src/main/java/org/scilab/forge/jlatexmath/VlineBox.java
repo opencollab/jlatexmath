@@ -45,8 +45,7 @@
 
 package org.scilab.forge.jlatexmath;
 
-import java.awt.Graphics2D;
-import java.awt.geom.Rectangle2D;
+import org.scilab.forge.jlatexmath.platform.graphics.Graphics2DInterface;
 
 /**
  * An atom representing a hline in array environment
@@ -56,26 +55,21 @@ public class VlineBox extends Box {
 	private final int n;
 	private final double th;
 
-	public VlineBox(final int n, final double th) {
+	public VlineBox(int n, double th, double height, double shift) {
 		this.n = n;
 		this.th = th;
 		this.width = th * (3 * n - 2);
 		this.depth = 0.;
-	}
-
-	public Box setHS(final double height, final double shift) {
-		final Box b = new VlineBox(n, th);
-		b.setHeight(height);
-		b.setShift(shift);
-		return b;
+		this.height = height;
+		this.shift = shift;
 	}
 
 	@Override
-	public void draw(Graphics2D g2, double x, double y) {
+	public void draw(Graphics2DInterface g2, double x, double y) {
 		double t = 0.;
 		for (int i = 0; i < n; ++i) {
-			g2.fill(new Rectangle2D.Double(x + t, y - height, th, height));
-			t += 2 * th;
+			g2.fill(geom.createRectangle2D(x + t, y - height, th, height));
+			t += 3 * th;
 		}
 	}
 

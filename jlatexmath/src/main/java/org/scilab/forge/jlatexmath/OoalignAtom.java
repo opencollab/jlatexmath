@@ -66,6 +66,10 @@ public class OoalignAtom extends Atom {
 		}
 	}
 
+	public OoalignAtom(List<Atom> column) {
+		this.column = column;
+	}
+
 	@Override
 	public Box createBox(TeXEnvironment env) {
 		final int N = column.size();
@@ -78,4 +82,5 @@ public class OoalignAtom extends Atom {
 		}
 		return new OoalignBox(l);
 	}
+
 }

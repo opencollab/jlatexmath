@@ -22,14 +22,8 @@ public class CommandMBox extends Command {
 	public void add(TeXParser tp, Atom a) {
 		tp.setMathMode(mode);
 		a = new TextStyleAtom(a, TextStyle.MATHNORMAL);
-		tp.closeConsumer(new StyleAtom(TeXConstants.STYLE_TEXT, new RomanAtom(a)));
-	}
-
-	@Override
-	public Command duplicate() {
-		CommandMBox ret = new CommandMBox();
-		ret.mode = mode;
-		return ret;
+		tp.closeConsumer(
+				new StyleAtom(TeXConstants.STYLE_TEXT, new RomanAtom(a)));
 	}
 
 }

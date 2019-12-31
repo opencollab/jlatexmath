@@ -45,11 +45,10 @@
 
 package org.scilab.forge.jlatexmath.mhchem;
 
-import java.awt.Graphics2D;
-import java.awt.geom.Rectangle2D;
-
 import org.scilab.forge.jlatexmath.Box;
+import org.scilab.forge.jlatexmath.Configuration;
 import org.scilab.forge.jlatexmath.FontInfo;
+import org.scilab.forge.jlatexmath.platform.graphics.Graphics2DInterface;
 
 /**
  * An atom to represent a bond (used in mhchem)
@@ -61,7 +60,8 @@ public class MhchemBondBox extends Box {
 	private final double thickness;
 	private final double space;
 
-	public MhchemBondBox(int n, int pos, double axis, double th, double space, double width) {
+	public MhchemBondBox(int n, int pos, double axis, double th, double space,
+			double width) {
 		this.n = n;
 		this.pos = pos;
 		this.thickness = th;
@@ -72,17 +72,17 @@ public class MhchemBondBox extends Box {
 	}
 
 	@Override
-	public void draw(Graphics2D g2, double x, double y) {
+	public void draw(Graphics2DInterface g2, double x, double y) {
 		y -= height;
 		for (int i = 0; i < n; ++i) {
 			if (i == pos) {
 				final double w = width / 4.; // 3 dashes: w w/2 w w/2 w
 				// - - -
-				g2.fill(new Rectangle2D.Double(x, y, w, thickness));
-				g2.fill(new Rectangle2D.Double(x + 1.5 * w, y, w, thickness));
-				g2.fill(new Rectangle2D.Double(x + 3. * w, y, w, thickness));
+				g2.fill(geom.createRectangle2D(x, y, w, thickness));
+				g2.fill(geom.createRectangle2D(x + 1.5 * w, y, w, thickness));
+				g2.fill(geom.createRectangle2D(x + 3. * w, y, w, thickness));
 			} else {
-				g2.fill(new Rectangle2D.Double(x, y, width, thickness));
+				g2.fill(geom.createRectangle2D(x, y, width, thickness));
 			}
 			y += space + thickness;
 		}
@@ -90,6 +90,6 @@ public class MhchemBondBox extends Box {
 
 	@Override
 	public FontInfo getLastFont() {
-		return null;
+		return Configuration.getFonts().msbm10;
 	}
 }

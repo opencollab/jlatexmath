@@ -47,17 +47,23 @@ package org.scilab.forge.jlatexmath;
 
 import java.util.Map;
 
+import org.scilab.forge.jlatexmath.serialize.HasTrueBase;
+
 /**
  * An atom representing a rotated Atom.
  */
-public class RotateAtom extends Atom {
+public class RotateAtom extends Atom implements HasTrueBase {
 
-	private final Atom base;
+	private Atom base;
 	private double angle;
 	private int option = -1;
-	private TeXLength.Unit xunit;
-	private TeXLength.Unit yunit;
+	private Unit xunit;
+	private Unit yunit;
 	private double x, y;
+
+	public RotateAtom() {
+		//
+	}
 
 	public RotateAtom(Atom base, double angle, Map<String, String> map) {
 		this.base = base;
@@ -73,7 +79,7 @@ public class RotateAtom extends Atom {
 				this.xunit = lenX.getUnit();
 				this.x = lenX.getL();
 			} else {
-				this.xunit = TeXLength.Unit.POINT;
+				this.xunit = Unit.POINT;
 				this.x = 0.;
 			}
 			if (map.containsKey("y")) {
@@ -85,7 +91,7 @@ public class RotateAtom extends Atom {
 				this.xunit = lenY.getUnit();
 				this.x = lenY.getL();
 			} else {
-				this.yunit = TeXLength.Unit.POINT;
+				this.yunit = Unit.POINT;
 				this.y = 0.;
 			}
 		}
@@ -95,10 +101,10 @@ public class RotateAtom extends Atom {
 	public Box createBox(TeXEnvironment env) {
 		if (option != -1) {
 			return new RotateBox(base.createBox(env), angle, option);
-		} else {
-			return new RotateBox(base.createBox(env), angle, x * TeXLength.getFactor(xunit, env),
-					y * TeXLength.getFactor(yunit, env));
 		}
+		return new RotateBox(base.createBox(env), angle,
+				x * xunit.getFactor(env),
+				y * yunit.getFactor(env));
 	}
 
 	@Override
@@ -114,5 +120,10 @@ public class RotateAtom extends Atom {
 	@Override
 	public int getLimits() {
 		return base.getLimits();
+	}
+
+	@Override
+	public Atom getTrueBase() {
+		return base;
 	}
 }

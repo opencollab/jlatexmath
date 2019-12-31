@@ -69,7 +69,7 @@ public class RaiseAtom extends Atom {
 
 		final HorizontalBox hbox = new HorizontalBox(bbox);
 		if (h == null) {
-			// TODO: in jlm1 it returned bbox
+			// TODO: in jlm1 it returned bbox not hbox
 			return hbox;
 		}
 

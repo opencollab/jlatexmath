@@ -46,7 +46,8 @@
 
 package org.scilab.forge.jlatexmath;
 
-import java.awt.Font;
+import org.scilab.forge.jlatexmath.platform.FontAdapter;
+import org.scilab.forge.jlatexmath.platform.font.Font;
 
 /**
  * Contains all the font information for 1 font.
@@ -85,7 +86,8 @@ public class FontInfo {
 	protected CharFont[] nextLarger;
 	protected char[][] extensions;
 
-	public FontInfo(int size, String path, double xHeight, double space, double quad, char skewChar) {
+	public FontInfo(int size, String path, double xHeight, double space,
+			double quad, char skewChar) {
 		this.path = path;
 		this.xHeight = xHeight;
 		this.space = space;
@@ -95,7 +97,8 @@ public class FontInfo {
 		this.metrics = new double[this.size][];
 	}
 
-	public void setDependencies(FontInfo bold, FontInfo roman, FontInfo ss, FontInfo tt, FontInfo it) {
+	public void setDependencies(FontInfo bold, FontInfo roman, FontInfo ss,
+			FontInfo tt, FontInfo it) {
 		this.bold = bold == null ? this : bold;
 		this.roman = roman == null ? this : roman;
 		this.ss = ss == null ? this : ss;
@@ -130,7 +133,8 @@ public class FontInfo {
 	 * @param ligChar
 	 *            ligature to replace left and right character
 	 */
-	public void addLigature(final char left, final char right, final char ligChar) {
+	public void addLigature(final char left, final char right,
+			final char ligChar) {
 		if (lig == null) {
 			lig = new CharFont[size][];
 		}
@@ -148,7 +152,8 @@ public class FontInfo {
 		return extensions[c];
 	}
 
-	public double getKern(final char left, final char right, final double factor) {
+	public double getKern(final char left, final char right,
+			final double factor) {
 		init();
 		if (kern == null || kern[left] == null) {
 			return 0.;
@@ -221,15 +226,17 @@ public class FontInfo {
 		metrics[c] = arr;
 	}
 
-	public void setNextLarger(final char c, final char larger, final FontInfo fontLarger) {
+	public void setNextLarger(final char c, final char larger,
+			final FontInfo fontLarger) {
 		if (nextLarger == null) {
 			nextLarger = new CharFont[size];
 		}
 		nextLarger[c] = new CharFont(larger, fontLarger);
 	}
 
-	public void setInfo(char c, double[] metrics, char[] ligatures, char[] kernCode, double[] kernValue,
-			FontInfo nextLarger, char nextLargerChar, char[] extension) {
+	public void setInfo(char c, double[] metrics, char[] ligatures,
+			char[] kernCode, double[] kernValue, FontInfo nextLarger,
+			char nextLargerChar, char[] extension) {
 		setMetrics(c, metrics);
 		if (ligatures != null) {
 			for (int i = 0; i < ligatures.length; i += 2) {
@@ -301,7 +308,7 @@ public class FontInfo {
 
 	public final Font getFont() {
 		if (font == null) {
-			font = FontLoader.createFont(this, path);
+			font = new FontAdapter().loadFont(path + ".ttf");
 		}
 		return font;
 	}

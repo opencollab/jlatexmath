@@ -46,21 +46,22 @@
 package org.scilab.forge.jlatexmath;
 
 /**
- * An atom representing a hline in array environment
+ * An atom representing a vline in array environment
  */
 public class VlineAtom extends Atom {
 
-	private final static VlineAtom empty = new VlineAtom(0);
 	private double height;
 	private double shift;
 	private int n;
 
-	public VlineAtom(int n) {
+	public VlineAtom(double height, double shift, int n) {
+		this.height = height;
+		this.shift = shift;
 		this.n = n;
 	}
 
-	public static VlineAtom getEmpty() {
-		return empty;
+	public VlineAtom(int n) {
+		this.n = n;
 	}
 
 	public void setHeight(double height) {
@@ -71,6 +72,10 @@ public class VlineAtom extends Atom {
 		this.shift = shift;
 	}
 
+	public static VlineAtom getEmpty() {
+		return new VlineAtom(0);
+	}
+
 	public void add(final int n) {
 		this.n += n;
 	}
@@ -79,31 +84,13 @@ public class VlineAtom extends Atom {
 		return n;
 	}
 
-	public double getWidth(TeXEnvironment env) {
-		if (n != 0) {
-			final double drt = env.getTeXFont().getDefaultRuleThickness(env.getStyle());
-			return drt * (3 * n - 2);
-		}
-		return 0.;
-	}
-
-	public boolean isEmpty() {
-		return n == 0;
-	}
-
 	@Override
 	public Box createBox(TeXEnvironment env) {
 		if (n != 0) {
-			double drt = env.getTeXFont().getDefaultRuleThickness(env.getStyle());
-			/*
-			 * Box b = new HorizontalRule(height, drt, shift); Box sep = new
-			 * StrutBox(2 * drt, 0, 0, 0); HorizontalBox hb = new
-			 * HorizontalBox(); for (int i = 0; i < n - 1; i++) { hb.add(b);
-			 * hb.add(sep); } hb.add(b);
-			 * 
-			 * return hb;
-			 */
-			return new VlineBox(n, drt);
+			double drt = env.getTeXFont()
+					.getDefaultRuleThickness(env.getStyle());
+
+			return new VlineBox(n, drt, height, shift);
 		}
 
 		return StrutBox.getEmpty();

@@ -7,18 +7,16 @@ import org.scilab.forge.jlatexmath.Symbols;
 import org.scilab.forge.jlatexmath.TeXLength;
 import org.scilab.forge.jlatexmath.TeXParser;
 import org.scilab.forge.jlatexmath.UnderOverAtom;
+import org.scilab.forge.jlatexmath.Unit;
 
 public class CommandUnderTilde extends Command1A {
 
 	@Override
 	public Atom newI(TeXParser tp, Atom a) {
-		return new UnderOverAtom(a, new AccentedAtom(new PhantomAtom(a, true, false, false), Symbols.WIDETILDE),
-				new TeXLength(TeXLength.Unit.MU, 0.3), true, false);
-	}
-
-	@Override
-	public Command duplicate() {
-		return new CommandUnderTilde();
+		return new UnderOverAtom(a,
+				new AccentedAtom(new PhantomAtom(a, true, false, false),
+						Symbols.WIDETILDE),
+				new TeXLength(Unit.MU, 0.3), true, false);
 	}
 
 }

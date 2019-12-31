@@ -52,10 +52,10 @@ import org.scilab.forge.jlatexmath.AtomConsumer;
 import org.scilab.forge.jlatexmath.BigDelimiterAtom;
 import org.scilab.forge.jlatexmath.FencedAtom;
 import org.scilab.forge.jlatexmath.MiddleAtom;
-import org.scilab.forge.jlatexmath.ParseException;
 import org.scilab.forge.jlatexmath.RowAtom;
 import org.scilab.forge.jlatexmath.SymbolAtom;
 import org.scilab.forge.jlatexmath.TeXParser;
+import org.scilab.forge.jlatexmath.exception.ParseException;
 
 public class CommandLMR {
 
@@ -103,25 +103,14 @@ public class CommandLMR {
 
 			Atom a;
 			if ((left instanceof SymbolAtom) && (right instanceof SymbolAtom)) {
-				a = new FencedAtom(base.simplify(), (SymbolAtom) left, middles, (SymbolAtom) right);
+				a = new FencedAtom(base.simplify(), (SymbolAtom) left, middles,
+						(SymbolAtom) right);
 			} else {
 				a = new RowAtom(left, base.simplify(), right);
 			}
 
 			tp.closeConsumer(a);
 		}
-
-		@Override
-		public Command duplicate() {
-			CommandLeft ret = new CommandLeft();
-			ret.left = left;
-			ret.middles = middles;
-			ret.base = base;
-
-			return ret;
-
-		}
-
 	}
 
 	public static class CommandMiddle extends Command {
@@ -141,15 +130,6 @@ public class CommandLMR {
 			}
 			ac.add(tp, new MiddleAtom(middle));
 		}
-
-		@Override
-		public Command duplicate() {
-			CommandMiddle ret = new CommandMiddle();
-
-			return ret;
-
-		}
-
 	}
 
 	public static class CommandRight extends Command {
@@ -168,14 +148,6 @@ public class CommandLMR {
 				throw new ParseException(tp, "\\right doesn't match \\left");
 			}
 			((CommandLeft) ac).close(tp, close);
-		}
-
-		@Override
-		public Command duplicate() {
-			CommandRight ret = new CommandRight();
-
-			return ret;
-
 		}
 	}
 }

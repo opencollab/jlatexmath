@@ -10,12 +10,8 @@ public class CommandDDDot extends Command1A {
 
 	@Override
 	public Atom newI(TeXParser tp, Atom a) {
-		return new BuildrelAtom(a, new RowAtom(Symbols.TEXTNORMALDOT, Symbols.TEXTNORMALDOT, Symbols.TEXTNORMALDOT));
-	}
-
-	@Override
-	public Command duplicate() {
-		return new CommandDDDot();
+		return new BuildrelAtom(a, new RowAtom(Symbols.TEXTNORMALDOT,
+				Symbols.TEXTNORMALDOT, Symbols.TEXTNORMALDOT));
 	}
 
 }

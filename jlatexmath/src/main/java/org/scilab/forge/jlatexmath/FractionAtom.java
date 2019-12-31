@@ -52,8 +52,8 @@ package org.scilab.forge.jlatexmath;
 public class FractionAtom extends Atom {
 
 	// alignment settings for the numerator and denominator
-	private TeXConstants.Align numAlign = TeXConstants.Align.CENTER;
-	private TeXConstants.Align denomAlign = TeXConstants.Align.CENTER;
+	protected TeXConstants.Align numAlign = TeXConstants.Align.CENTER;
+	protected TeXConstants.Align denomAlign = TeXConstants.Align.CENTER;
 
 	// the atoms representing the numerator and denominator
 	protected Atom numerator;
@@ -61,7 +61,7 @@ public class FractionAtom extends Atom {
 
 	// thickness of the fraction line
 	// unit used for the thickness of the fraction line
-	private TeXLength thickness;
+	protected TeXLength thickness;
 
 	/**
 	 * The thickness of the fraction line is determined by the given value "t"
@@ -80,7 +80,8 @@ public class FractionAtom extends Atom {
 	 * @param denomAlign
 	 *            alignment of the denominator
 	 */
-	public FractionAtom(Atom num, Atom den, TeXLength t, TeXConstants.Align numAlign, TeXConstants.Align denomAlign) {
+	public FractionAtom(Atom num, Atom den, TeXLength t,
+			TeXConstants.Align numAlign, TeXConstants.Align denomAlign) {
 		numerator = num;
 		denominator = den;
 		thickness = t;
@@ -98,7 +99,8 @@ public class FractionAtom extends Atom {
 	 *            the denominator
 	 */
 	public FractionAtom(Atom num, Atom den) {
-		this(num, den, null, TeXConstants.Align.CENTER, TeXConstants.Align.CENTER);
+		this(num, den, null, TeXConstants.Align.CENTER,
+				TeXConstants.Align.CENTER);
 	}
 
 	/**
@@ -112,7 +114,8 @@ public class FractionAtom extends Atom {
 	 *            whether the fraction line should be drawn
 	 */
 	public FractionAtom(Atom num, Atom den, boolean rule) {
-		this(num, den, rule ? null : TeXLength.getZero(), TeXConstants.Align.CENTER, TeXConstants.Align.CENTER);
+		this(num, den, rule ? null : TeXLength.getZero(),
+				TeXConstants.Align.CENTER, TeXConstants.Align.CENTER);
 	}
 
 	public FractionAtom(Atom num, Atom den, TeXLength l) {
@@ -133,7 +136,8 @@ public class FractionAtom extends Atom {
 	 * @param denomAlign
 	 *            alignment of the denominator
 	 */
-	public FractionAtom(Atom num, Atom den, boolean rule, TeXConstants.Align numAlign, TeXConstants.Align denomAlign) {
+	public FractionAtom(Atom num, Atom den, boolean rule,
+			TeXConstants.Align numAlign, TeXConstants.Align denomAlign) {
 		this(num, den, rule ? null : TeXLength.getZero(), numAlign, denomAlign);
 	}
 
@@ -152,8 +156,10 @@ public class FractionAtom extends Atom {
 		}
 
 		// create equal width boxes (in appropriate styles)
-		Box num = numerator == null ? StrutBox.getEmpty() : numerator.createBox(env.numStyle());
-		Box denom = denominator == null ? StrutBox.getEmpty() : denominator.createBox(env.denomStyle());
+		Box num = numerator == null ? StrutBox.getEmpty()
+				: numerator.createBox(env.numStyle());
+		Box denom = denominator == null ? StrutBox.getEmpty()
+				: denominator.createBox(env.denomStyle());
 
 		if (num.getWidth() < denom.getWidth()) {
 			num = new HorizontalBox(num, denom.getWidth(), numAlign);
@@ -213,7 +219,8 @@ public class FractionAtom extends Atom {
 			clr = (style < TeXConstants.STYLE_TEXT ? 7. : 3.) * drt;
 
 			// adjust shift amounts
-			double kern = shiftUp - num.getDepth() - (denom.getHeight() - shiftDown);
+			double kern = shiftUp - num.getDepth()
+					- (denom.getHeight() - shiftDown);
 			delta = (clr - kern) / 2.;
 			if (delta > 0) {
 				shiftUp += delta;
@@ -230,8 +237,22 @@ public class FractionAtom extends Atom {
 		vBox.setHeight(shiftUp + num.getHeight());
 		vBox.setDepth(shiftDown + denom.getDepth());
 
-		final double f = TeXLength.getLength("nulldelimiterspace", env);
+		final double f = env.lengthSettings().getLength("nulldelimiterspace", env);
 
-		return new HorizontalBox(vBox, vBox.getWidth() + 2 * f, TeXConstants.Align.CENTER);
+		return new HorizontalBox(vBox, vBox.getWidth() + 2 * f,
+				TeXConstants.Align.CENTER);
 	}
+
+	public Atom getNumerator() {
+		return numerator;
+	}
+
+	public Atom getDenominator() {
+		return denominator;
+	}
+
+	public double getRuleThickness() {
+		return thickness == null ? 0 : thickness.getL();
+	}
+
 }

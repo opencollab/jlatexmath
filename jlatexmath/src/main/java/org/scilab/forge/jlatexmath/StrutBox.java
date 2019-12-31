@@ -46,7 +46,7 @@
 
 package org.scilab.forge.jlatexmath;
 
-import java.awt.Graphics2D;
+import org.scilab.forge.jlatexmath.platform.graphics.Graphics2DInterface;
 
 /**
  * A box representing whitespace.
@@ -57,7 +57,8 @@ public class StrutBox extends Box {
 		this(0., 0., 0., 0.);
 	}
 
-	public StrutBox(final double w, final double h, final double d, final double s) {
+	public StrutBox(final double w, final double h, final double d,
+			final double s) {
 		width = w;
 		height = h;
 		depth = d;
@@ -69,7 +70,7 @@ public class StrutBox extends Box {
 	}
 
 	@Override
-	public void draw(Graphics2D g2, double x, double y) {
+	public void draw(Graphics2DInterface g2, double x, double y) {
 		// no visual effect
 	}
 

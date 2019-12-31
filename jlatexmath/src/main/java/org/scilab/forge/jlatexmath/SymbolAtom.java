@@ -50,6 +50,8 @@ package org.scilab.forge.jlatexmath;
 
 import java.util.List;
 
+import org.scilab.forge.jlatexmath.platform.FactoryProvider;
+
 /**
  * A box representing a symbol (a non-alphanumeric character).
  */
@@ -57,6 +59,14 @@ public class SymbolAtom extends CharSymbol {
 
 	private final CharFont cf;
 	private char unicode;
+
+	final public Atom duplicate() {
+		SymbolAtom ret = new SymbolAtom(cf, type, unicode);
+
+		ret.unicode = unicode;
+
+		return setFields(ret);
+	}
 
 	/**
 	 * Constructs a new symbol.
@@ -66,24 +76,30 @@ public class SymbolAtom extends CharSymbol {
 	 * @param type
 	 *            symbol type constant
 	 */
-	public SymbolAtom(final CharFont cf, final int type) {
+	public SymbolAtom(final CharFont cf, final int type, char unicode) {
 		this.cf = cf;
 		this.type = type;
 		if (type == TeXConstants.TYPE_BIG_OPERATOR) {
 			this.type_limits = TeXConstants.SCRIPT_NORMAL;
 		}
-	}
-
-	public SymbolAtom(final char c, final FontInfo font, final int type) {
-		this(new CharFont(c, font), type);
+		this.unicode = unicode;
 	}
 
 	public SymbolAtom(final SymbolAtom s, final int type) {
-		this(s.cf, type);
+		this(s.cf, type, s.unicode);
 	}
 
-	public SymbolAtom(final String name, final int type) {
-		this(SymbolAtom.get(name), type);
+	public SymbolAtom(String name, int type, char unicode) {
+		this.cf = Configuration.getFontMapping().get(name);
+		if (cf == null) {
+			FactoryProvider.debugS("missing " + name);
+		}
+
+		this.type = type;
+		if (type == TeXConstants.TYPE_BIG_OPERATOR) {
+			this.type_limits = TeXConstants.SCRIPT_NORMAL;
+		}
+		this.unicode = unicode;
 	}
 
 	public SymbolAtom setUnicode(final char c) {
@@ -98,11 +114,9 @@ public class SymbolAtom extends CharSymbol {
 	 * @param name
 	 *            the name of the symbol
 	 * @return a SymbolAtom representing the found symbol
-	 * @throws SymbolNotFoundException
-	 *             if no symbol with the given name was found
 	 */
 	public static SymbolAtom get(final String name, final boolean mathMode) {
-		SymbolAtom sa = Configuration.getSym(name);
+		SymbolAtom sa = Configuration.getSymbolAtoms().get(name);
 		if (!mathMode && sa != null) {
 			sa = (SymbolAtom) sa.duplicate();
 			sa.mathMode = false;
@@ -112,7 +126,7 @@ public class SymbolAtom extends CharSymbol {
 	}
 
 	public static boolean put(final TeXParser tp, final String name) {
-		SymbolAtom sa = Configuration.getSym(name);
+		SymbolAtom sa = Configuration.getSymbolAtoms().get(name);
 		if (sa == null) {
 			return false;
 		}
@@ -140,7 +154,8 @@ public class SymbolAtom extends CharSymbol {
 		final TeXFont tf = env.getTeXFont();
 		final int style = env.getStyle();
 		Char c = tf.getChar(getCf(), style);
-		if (getType() == TeXConstants.TYPE_BIG_OPERATOR && style < TeXConstants.STYLE_TEXT && tf.hasNextLarger(c)) {
+		if (getType() == TeXConstants.TYPE_BIG_OPERATOR
+				&& style < TeXConstants.STYLE_TEXT && tf.hasNextLarger(c)) {
 			c = tf.getNextLarger(c, style);
 		}
 		return c;
@@ -220,8 +235,17 @@ public class SymbolAtom extends CharSymbol {
 	}
 
 	public static void getAll(final List<String> l) {
-		for (final String k : Configuration.getAllSym().keySet()) {
+		for (final String k : Configuration.getSymbolAtoms().keySet()) {
 			l.add(k);
 		}
 	}
+
+	public String getName() {
+		return cf.toString();
+	}
+
+	public char getUnicode() {
+		return unicode;
+	}
+
 }

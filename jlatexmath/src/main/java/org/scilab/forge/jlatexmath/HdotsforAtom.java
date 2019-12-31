@@ -54,7 +54,8 @@ public class HdotsforAtom extends MulticolumnAtom {
 	private double coeff;
 
 	public HdotsforAtom(int n, double coeff) {
-		super(n, new ArrayOptions(1).addAlignment(TeXConstants.Align.CENTER), Symbols.LDOTP);
+		super(n, new ArrayOptions(1).addAlignment(TeXConstants.Align.CENTER),
+				Symbols.LDOTP);
 		this.coeff = coeff;
 	}
 

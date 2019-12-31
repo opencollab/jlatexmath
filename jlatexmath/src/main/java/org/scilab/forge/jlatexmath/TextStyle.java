@@ -137,7 +137,8 @@ public final class TextStyle {
 		return styles[style][type];
 	}
 
-	private static void add(final int style, final int type, final FontInfo font, final char start) {
-		styles[style][type] = new TextStyle(font, start);
+	private static void add(final int style, final int type,
+			final FontInfo fontId, final char start) {
+		styles[style][type] = new TextStyle(fontId, start);
 	}
 }

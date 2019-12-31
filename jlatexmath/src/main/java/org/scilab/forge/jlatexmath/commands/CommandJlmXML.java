@@ -16,7 +16,8 @@ public class CommandJlmXML extends Command {
 		while ((pos = str.indexOf("$")) != -1) {
 			if (pos < str.length() - 1) {
 				start = pos;
-				while (++start < str.length() && Character.isLetter(str.charAt(start)))
+				while (++start < str.length()
+						&& Character.isLetter(str.charAt(start)))
 					;
 				String key = str.substring(pos + 1, start);
 				String value = map.get(key);
@@ -38,11 +39,6 @@ public class CommandJlmXML extends Command {
 		tp.addString(str);
 
 		return false;
-	}
-
-	@Override
-	public Command duplicate() {
-		return new CommandJlmXML();
 	}
 
 }

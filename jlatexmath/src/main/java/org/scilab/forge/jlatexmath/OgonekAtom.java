@@ -67,7 +67,8 @@ public class OgonekAtom extends Atom {
 		Box ogonek = new CharBox(ch);
 		Box y;
 		if (Math.abs(italic) > TeXFormula.PREC) {
-			HorizontalBox hb = new HorizontalBox(new StrutBox(-italic, 0, 0, 0));
+			HorizontalBox hb = new HorizontalBox(
+					new StrutBox(-italic, 0, 0, 0));
 			hb.add(ogonek);
 			y = hb;
 		} else {

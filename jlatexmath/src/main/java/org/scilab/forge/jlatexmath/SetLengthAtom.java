@@ -2,7 +2,7 @@
  * =========================================================================
  * This file is part of the JLaTeXMath Library - http://forge.scilab.org/jlatexmath
  *
- * Copyright (C) 2018 DENIZET Calixte
+ * Copyright (C) 2009 DENIZET Calixte
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -42,7 +42,6 @@
  * version.
  *
  */
-
 package org.scilab.forge.jlatexmath;
 
 /**
@@ -50,17 +49,33 @@ package org.scilab.forge.jlatexmath;
  */
 public class SetLengthAtom extends Atom {
 
-	protected final TeXLength l;
 	protected final String name;
+	protected final TeXLength l;
+	protected final double f;
+	protected final boolean factor;
 
-	public SetLengthAtom(TeXLength l, String name) {
-		this.l = l;
+	public SetLengthAtom(String name, TeXLength l) {
 		this.name = name;
+		this.l = l;
+		this.f = 0;
+		factor = false;
+	}
+
+	public SetLengthAtom(String name, double f) {
+		this.name = name;
+		this.l = null;
+		this.f = f;
+		factor = true;
 	}
 
 	@Override
 	public Box createBox(TeXEnvironment env) {
-		TeXLength.setLength(name, l);
+		if (factor) {
+			env.lengthSettings().setFactor(name, f);
+		} else {
+			env.lengthSettings().setLength(name, l);
+		}
+
 		return StrutBox.getEmpty();
 	}
 }

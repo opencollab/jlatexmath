@@ -48,12 +48,15 @@
 
 package org.scilab.forge.jlatexmath;
 
-import java.awt.BasicStroke;
-import java.awt.Color;
-import java.awt.Graphics2D;
-import java.awt.Stroke;
-import java.awt.geom.Area;
-import java.awt.geom.Rectangle2D;
+import java.util.ArrayList;
+
+import org.scilab.forge.jlatexmath.platform.Geom;
+import org.scilab.forge.jlatexmath.platform.Graphics;
+import org.scilab.forge.jlatexmath.platform.geom.Area;
+import org.scilab.forge.jlatexmath.platform.graphics.BasicStroke;
+import org.scilab.forge.jlatexmath.platform.graphics.Color;
+import org.scilab.forge.jlatexmath.platform.graphics.Graphics2DInterface;
+import org.scilab.forge.jlatexmath.platform.graphics.Stroke;
 
 /**
  * An abstract graphical representation of a formula, that can be painted. All
@@ -64,17 +67,29 @@ import java.awt.geom.Rectangle2D;
  * (defined by it's dimensions).
  * <p>
  * Subclasses must implement the abstract
- * {@link #draw(Graphics2D, double, double)} method (that paints the box).
- * <b> This implementation must start with calling the method
- * {@link #startDraw(Graphics2D, double, double)} and end with calling the
- * method {@link #endDraw(Graphics2D)} to set and restore the color's that must
- * be used for painting the box and to draw the background!</b> They must also
- * implement the abstract {@link #getLastFont()} method (the last font that will
- * be used when this box will be painted).
+ * {@link #draw(Graphics2DInterface, double, double)} method (that paints the
+ * box). <b> This implementation must start with calling the method
+ * {@link #startDraw(Graphics2DInterface, double, double)} and end with calling
+ * the method {@link #endDraw(Graphics2DInterface)} to set and restore the
+ * color's that must be used for painting the box and to draw the
+ * background!</b> They must also implement the abstract {@link #getLastFont()}
+ * method (the last font that will be used when this box will be painted).
  */
 public abstract class Box {
 
-	public static boolean DEBUG = false;
+	final public static boolean DEBUG = false;
+
+	/**
+	 * Factory providing platform independent implementations of forms used for
+	 * drawing.
+	 */
+	protected final Geom geom;
+
+	/**
+	 * Factory providing platform independent implementations of graphics
+	 * related objects.
+	 */
+	protected final Graphics graphics;
 
 	/**
 	 * The foreground color of the whole box. Child boxes can override this
@@ -119,8 +134,6 @@ public abstract class Box {
 
 	protected int type = -1;
 
-	protected Box parent;
-	protected Box elderParent;
 	protected Color markForDEBUG;
 	protected Atom atom;
 
@@ -144,18 +157,12 @@ public abstract class Box {
 	protected Box(Color fg, Color bg) {
 		foreground = fg;
 		background = bg;
+		geom = new Geom();
+		graphics = new Graphics();
 	}
 
 	public Area getArea() {
 		return null;
-	}
-
-	public void setParent(Box parent) {
-		this.parent = parent;
-	}
-
-	public Box getParent() {
-		return parent;
 	}
 
 	public Box setBg(Color bg) {
@@ -166,14 +173,6 @@ public abstract class Box {
 	public Box setFg(Color fg) {
 		foreground = fg;
 		return this;
-	}
-
-	public void setElderParent(Box elderParent) {
-		this.elderParent = elderParent;
-	}
-
-	public Box getElderParent() {
-		return elderParent;
 	}
 
 	/**
@@ -271,7 +270,7 @@ public abstract class Box {
 	 * @param y
 	 *            the y-coordinate
 	 */
-	public abstract void draw(Graphics2D g2, double x, double y);
+	public abstract void draw(Graphics2DInterface g2, double x, double y);
 
 	/**
 	 * Get the id of the font that will be used the last when this box will be
@@ -292,12 +291,13 @@ public abstract class Box {
 	 * @param y
 	 *            the y-coordinate
 	 */
-	protected void startDraw(Graphics2D g2, double x, double y) {
+	protected void startDraw(Graphics2DInterface g2, double x, double y) {
 		// old color
 		prevColor = g2.getColor();
 		if (background != null) { // draw background
 			g2.setColor(background);
-			g2.fill(new Rectangle2D.Double(x, y - height, width, height + depth));
+			g2.fill(geom.createRectangle2D(x, y - height, width,
+					height + depth));
 		}
 		if (foreground == null) {
 			g2.setColor(prevColor); // old foreground color
@@ -307,34 +307,40 @@ public abstract class Box {
 		drawDebug(g2, x, y);
 	}
 
-	protected void drawDebug(Graphics2D g2, double x, double y, boolean showDepth) {
+	protected void drawDebug(Graphics2DInterface g2, double x, double y,
+			boolean showDepth) {
 		if (DEBUG) {
+			double x1 = x;
 			Stroke st = g2.getStroke();
 			if (markForDEBUG != null) {
 				Color c = g2.getColor();
 				g2.setColor(markForDEBUG);
-				g2.fill(new Rectangle2D.Double(x, y - height, width, height + depth));
+				g2.fill(geom.createRectangle2D(x1, y - height, width,
+						height + depth));
 				g2.setColor(c);
 			}
-			g2.setStroke(new BasicStroke((float) (Math.abs(1. / g2.getTransform().getScaleX())), BasicStroke.CAP_BUTT,
-					BasicStroke.JOIN_MITER));
-			double w = width;
+			g2.setStroke(graphics.createBasicStroke(
+					(Math.abs(1 / g2.getTransform().getScaleX())),
+					BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER));
 			if (width < 0) {
-				x += width;
-				w = -width;
+				x1 += width;
+				width = -width;
 			}
-			g2.draw(new Rectangle2D.Double(x, y - height, w, height + depth));
+			g2.draw(geom.createRectangle2D(x1, y - height, width,
+					height + depth));
 			if (showDepth) {
 				Color c = g2.getColor();
-				g2.setColor(Color.RED);
+				g2.setColor(Colors.RED);
 				if (depth > 0) {
-					g2.fill(new Rectangle2D.Double(x, y, w, depth));
+					g2.fill(geom.createRectangle2D(x1, y, width, depth));
 					g2.setColor(c);
-					g2.draw(new Rectangle2D.Double(x, y, w, depth));
+					g2.draw(geom.createRectangle2D(x1, y, width, depth));
 				} else if (depth < 0) {
-					g2.fill(new Rectangle2D.Double(x, y + depth, w, -depth));
+					g2.fill(geom.createRectangle2D(x1, y + depth, width,
+							-depth));
 					g2.setColor(c);
-					g2.draw(new Rectangle2D.Double(x, y + depth, w, -depth));
+					g2.draw(geom.createRectangle2D(x1, y + depth, width,
+							-depth));
 				} else {
 					g2.setColor(c);
 				}
@@ -343,7 +349,7 @@ public abstract class Box {
 		}
 	}
 
-	protected void drawDebug(Graphics2D g2, double x, double y) {
+	protected void drawDebug(Graphics2DInterface g2, double x, double y) {
 		if (DEBUG) {
 			drawDebug(g2, x, y, true);
 		}
@@ -355,13 +361,14 @@ public abstract class Box {
 	 * @param g2
 	 *            the graphics (2D) context
 	 */
-	protected void endDraw(Graphics2D g2) {
+	protected void endDraw(Graphics2DInterface g2) {
 		g2.setColor(prevColor);
 	}
 
 	@Override
 	public String toString() {
-		return super.toString() + ": w=" + width + ";h=" + height + ";d=" + depth + ";s=" + shift;
+		return super.toString() + ": w=" + width + ";h=" + height + ";d="
+				+ depth + ";s=" + shift;
 	}
 
 	public void setAtom(final Atom atom) {
@@ -371,4 +378,23 @@ public abstract class Box {
 	public Atom getAtom() {
 		return this.atom;
 	}
+
+	public void getPath(double x, double y, ArrayList<Integer> list) {
+		// unimplemented, needed for experimental branch of the editor
+	}
+
+	public Box getChild(int i) {
+		// unimplemented, needed for experimental branch of the editor
+		return null;
+	}
+
+	public int getCount() {
+		// unimplemented, needed for experimental branch of the editor
+		return 0;
+	}
+
+	public void getSelectedPath(ArrayList<Integer> list, int i) {
+		// unimplemented, needed for experimental branch of the editor
+	}
+
 }

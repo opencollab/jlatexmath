@@ -46,24 +46,29 @@
 
 package org.scilab.forge.jlatexmath;
 
-import java.awt.Font;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
-import java.awt.Shape;
-import java.awt.font.FontRenderContext;
-import java.awt.geom.AffineTransform;
-import java.awt.geom.Area;
+import org.scilab.forge.jlatexmath.platform.FactoryProvider;
+import org.scilab.forge.jlatexmath.platform.Graphics;
+import org.scilab.forge.jlatexmath.platform.font.Font;
+import org.scilab.forge.jlatexmath.platform.font.FontRenderContext;
+import org.scilab.forge.jlatexmath.platform.geom.Area;
+import org.scilab.forge.jlatexmath.platform.geom.Shape;
+import org.scilab.forge.jlatexmath.platform.graphics.Graphics2DInterface;
 
 /**
  * A box representing a single character.
  */
 public class CharBox extends Box {
 
-	private static final FontRenderContext FRC = new FontRenderContext(new AffineTransform(),
-			RenderingHints.VALUE_TEXT_ANTIALIAS_ON, RenderingHints.VALUE_FRACTIONALMETRICS_DEFAULT);
+	private static final FontRenderContext FRC;
+	static {
+		FRC = new Graphics().createImage(1, 1).createGraphics2D()
+				.getFontRenderContext();
+	}
 
 	protected CharFont cf;
 	protected double size;
+
+	private final char[] arr = new char[1];
 
 	protected CharBox() {
 	}
@@ -89,38 +94,64 @@ public class CharBox extends Box {
 	}
 
 	@Override
-	public void draw(Graphics2D g2, double x, double y) {
-		startDraw(g2, x, y);
-		final AffineTransform oldT = g2.getTransform();
+	public void draw(Graphics2DInterface g2, double x, double y) {
+		drawDebug(g2, x, y);
+		g2.saveTransformation();
 		g2.translate(x, y);
-		final Font font = cf.getFont().getFont();
+		Font font = cf.fontInfo.getFont();
 
-		if (Math.abs(size - TeXFormula.FONT_SCALE_FACTOR) > TeXFormula.PREC) {
-			g2.scale(size / TeXFormula.FONT_SCALE_FACTOR, size / TeXFormula.FONT_SCALE_FACTOR);
+		// https://github.com/opencollab/jlatexmath/issues/32
+		int fontScale = font.getScale();
+
+		if (fontScale != 1) {
+
+			if (Math.abs(size - fontScale) > TeXFormula.PREC) {
+				g2.scale(size / fontScale, size / fontScale);
+			}
+
+		} else {
+
+			if (size != 1) {
+				g2.scale(size, size);
+			}
+
 		}
-
-		if (g2.getFont() != font) {
+		Font oldFont = g2.getFont();
+		if (!oldFont.isEqual(font)) {
 			g2.setFont(font);
 		}
 
-		g2.drawString(String.valueOf(cf.c), 0, 0);
-		g2.setTransform(oldT);
-		endDraw(g2);
+		arr[0] = cf.c;
+
+		g2.drawChars(arr, 0, 1, 0, 0);
+
+		if (!oldFont.isEqual(font)) {
+			g2.setFont(oldFont);
+		}
+		g2.restoreTransformation();
 	}
 
 	@Override
 	public Area getArea() {
-		final Font font = cf.getFont().getFont();
-		final Shape s = font.createGlyphVector(FRC, String.valueOf(cf.c)).getGlyphOutline(0);
-		final Area a = new Area(s);
-		final double x = size / TeXFormula.FONT_SCALE_FACTOR;
-		a.transform(AffineTransform.getScaleInstance(x, x));
+		// final Font font = Configuration.get().getFont(cf.fontId);
+		FontInfo info = cf.fontInfo;
+		Font font = info.getFont();
+
+		// can be null (if font not loaded - HTML5)
+		final Shape s = font.getGlyphOutline(FRC, cf);
+
+		final Area a = geom.createArea(s);
+		final double x = size / FactoryProvider.getInstance().getFontFactory()
+				.getFontScaleFactor();
+		if (x != 1) {
+			a.scale(x);
+		}
 		return a;
 	}
 
 	@Override
 	public FontInfo getLastFont() {
-		return cf.getFont();
+		return cf.fontInfo;
 	}
 
 	@Override

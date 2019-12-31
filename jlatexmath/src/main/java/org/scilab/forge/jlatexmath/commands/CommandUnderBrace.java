@@ -3,19 +3,15 @@ package org.scilab.forge.jlatexmath.commands;
 import org.scilab.forge.jlatexmath.Atom;
 import org.scilab.forge.jlatexmath.OverUnderDelimiter;
 import org.scilab.forge.jlatexmath.Symbols;
-import org.scilab.forge.jlatexmath.TeXLength;
 import org.scilab.forge.jlatexmath.TeXParser;
+import org.scilab.forge.jlatexmath.Unit;
 
 public class CommandUnderBrace extends Command1A {
 
 	@Override
 	public Atom newI(TeXParser tp, Atom a) {
-		return new OverUnderDelimiter(a, null, Symbols.RBRACE, TeXLength.Unit.EX, 0, false);
-	}
-
-	@Override
-	public Command duplicate() {
-		return new CommandUnderBrace();
+		return new OverUnderDelimiter(a, null, Symbols.RBRACE,
+				Unit.EX, 0, false);
 	}
 
 }

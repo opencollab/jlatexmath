@@ -18,7 +18,8 @@ public class CommandSideSet extends Command3A {
 		if (a instanceof ScriptsAtom) {
 			((ScriptsAtom) a).setBase(new PhantomAtom(c, false, true, true));
 		} else if (a instanceof BigOperatorAtom) {
-			((BigOperatorAtom) a).setBase(new PhantomAtom(c, false, true, true));
+			((BigOperatorAtom) a)
+					.setBase(new PhantomAtom(c, false, true, true));
 		}
 		ra.add(new TypedAtom(TeXConstants.TYPE_ORDINARY, a));
 
@@ -33,13 +34,4 @@ public class CommandSideSet extends Command3A {
 
 		return ra;
 	}
-
-	@Override
-	public Command duplicate() {
-		CommandSideSet ret = new CommandSideSet();
-		ret.atom1 = atom1;
-		ret.atom2 = atom2;
-		return ret;
-	}
-
 }

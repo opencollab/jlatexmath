@@ -45,13 +45,14 @@
 
 package org.scilab.forge.jlatexmath.commands;
 
-import java.awt.Color;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.scilab.forge.jlatexmath.Colors;
-import org.scilab.forge.jlatexmath.ParseException;
 import org.scilab.forge.jlatexmath.TeXParser;
+import org.scilab.forge.jlatexmath.exception.ParseException;
+import org.scilab.forge.jlatexmath.platform.FactoryProvider;
+import org.scilab.forge.jlatexmath.platform.graphics.Color;
 
 public class CommandDefinecolor extends Command {
 
@@ -74,56 +75,72 @@ public class CommandDefinecolor extends Command {
 		}
 	}
 
-	private static Map<String, Converter> converters = new HashMap<String, Converter>(11) {
+	private static Map<String, Converter> converters = new HashMap<String, Converter>(
+			11) {
 		{
 			put("gray", new Converter() {
+				@Override
 				public Color to(TeXParser tp) {
-					final float gray = (float) Colors.clamp(tp.getArgAsDecimal());
-					return new Color(gray, gray, gray);
+					final double gray = Colors.clamp(tp.getArgAsDecimal());
+					return FactoryProvider.getInstance().getGraphicsFactory()
+							.createColor(gray, gray, gray);
 				}
 			});
 			put("wave", new Converter() {
+				@Override
 				public Color to(TeXParser tp) {
 					final double waveLen = tp.getArgAsDecimal();
 					return Colors.convWave(waveLen);
 				}
 			});
 			put("rgb", new Converter() {
+				@Override
 				public Color to(TeXParser tp) {
 					tp.getArgAsDecimals(doubles, 3);
 					clampf(3);
-					return new Color((float) doubles[0], (float) doubles[1], (float) doubles[2]);
+					return FactoryProvider.getInstance().getGraphicsFactory()
+							.createColor(doubles[0], doubles[1], doubles[2]);
 				}
 			});
 			put("RGB", new Converter() {
+				@Override
 				public Color to(TeXParser tp) {
 					tp.getArgAsPositiveIntegers(ints, 3);
 					clampi(3);
-					return new Color(ints[0], ints[1], ints[2]);
+					return FactoryProvider.getInstance().getGraphicsFactory()
+							.createColor(ints[0], ints[1], ints[2]);
 				}
 			});
 			put("rgba", new Converter() {
+				@Override
 				public Color to(TeXParser tp) {
 					tp.getArgAsDecimals(doubles, 4);
 					clampf(4);
-					return new Color((float) doubles[0], (float) doubles[1], (float) doubles[2], (float) doubles[3]);
+					return FactoryProvider.getInstance().getGraphicsFactory()
+							.createColor(doubles[0], doubles[1], doubles[2],
+									doubles[3]);
 				}
 			});
 			put("RGBA", new Converter() {
+				@Override
 				public Color to(TeXParser tp) {
 					tp.getArgAsPositiveIntegers(ints, 4);
 					clampi(4);
-					return new Color(ints[0], ints[1], ints[2], ints[3]);
+					return FactoryProvider.getInstance().getGraphicsFactory()
+							.createColor(ints[0], ints[1], ints[2], ints[3]);
 				}
 			});
 			put("cmyk", new Converter() {
+				@Override
 				public Color to(TeXParser tp) {
 					tp.getArgAsDecimals(doubles, 4);
 					clampf(4);
-					return Colors.conv(doubles[0], doubles[1], doubles[2], doubles[3]);
+					return Colors.conv(doubles[0], doubles[1], doubles[2],
+							doubles[3]);
 				}
 			});
 			put("hsl", new Converter() {
+				@Override
 				public Color to(TeXParser tp) {
 					tp.getArgAsDecimals(doubles, 3);
 					doubles[1] = Colors.clamp(doubles[1]);
@@ -132,15 +149,18 @@ public class CommandDefinecolor extends Command {
 				}
 			});
 			put("hsla", new Converter() {
+				@Override
 				public Color to(TeXParser tp) {
 					tp.getArgAsDecimals(doubles, 3);
 					doubles[1] = Colors.clamp(doubles[1]);
 					doubles[2] = Colors.clamp(doubles[2]);
 					doubles[3] = Colors.clamp(doubles[3]);
-					return Colors.convHSL(doubles[0], doubles[1], doubles[2], doubles[3]);
+					return Colors.convHSL(doubles[0], doubles[1], doubles[2],
+							doubles[3]);
 				}
 			});
 			put("hsb", new Converter() {
+				@Override
 				public Color to(TeXParser tp) {
 					tp.getArgAsDecimals(doubles, 3);
 					doubles[1] = Colors.clamp(doubles[1]);
@@ -149,9 +169,11 @@ public class CommandDefinecolor extends Command {
 				}
 			});
 			put("HTML", new Converter() {
+				@Override
 				public Color to(TeXParser tp) {
 					final int c = tp.getArgAsHexNumber(6);
-					return new Color(c);
+					return FactoryProvider.getInstance().getGraphicsFactory()
+							.createColor(c);
 				}
 			});
 		}
@@ -186,11 +208,5 @@ public class CommandDefinecolor extends Command {
 		}
 
 		return false;
-	}
-
-	@Override
-	public Command duplicate() {
-		return new CommandDefinecolor();
-
 	}
 }

@@ -45,10 +45,12 @@
 
 package org.scilab.forge.jlatexmath;
 
-import java.awt.Graphics2D;
-import java.awt.geom.Point2D;
 import java.util.HashMap;
 import java.util.Map;
+
+import org.scilab.forge.jlatexmath.platform.Geom;
+import org.scilab.forge.jlatexmath.platform.geom.Point2D;
+import org.scilab.forge.jlatexmath.platform.graphics.Graphics2DInterface;
 
 /**
  * A box representing a rotated box.
@@ -115,19 +117,25 @@ public class RotateBox extends Box {
 		final double c = Math.cos(this.angle);
 		shiftX = x * (1 - c) + y * s;
 		shiftY = y * (1 - c) - x * s;
-		xmax = Math.max(-height * s, Math.max(depth * s, Math.max(width * c + depth * s, width * c - height * s)))
+		xmax = Math
+				.max(-height * s, Math.max(depth * s, Math
+						.max(width * c + depth * s, width * c - height * s)))
 				+ shiftX;
-		xmin = Math.min(-height * s, Math.min(depth * s, Math.min(width * c + depth * s, width * c - height * s)))
+		xmin = Math
+				.min(-height * s, Math.min(depth * s, Math
+						.min(width * c + depth * s, width * c - height * s)))
 				+ shiftX;
-		ymax = Math.max(height * c, Math.max(-depth * c, Math.max(width * s - depth * c, width * s + height * c)));
-		ymin = Math.min(height * c, Math.min(-depth * c, Math.min(width * s - depth * c, width * s + height * c)));
+		ymax = Math.max(height * c, Math.max(-depth * c,
+				Math.max(width * s - depth * c, width * s + height * c)));
+		ymin = Math.min(height * c, Math.min(-depth * c,
+				Math.min(width * s - depth * c, width * s + height * c)));
 		width = xmax - xmin;
 		height = ymax + shiftY;
 		depth = -ymin - shiftY;
 	}
 
-	public RotateBox(Box b, double angle, Point2D.Double origin) {
-		this(b, angle, origin.x, origin.y);
+	public RotateBox(Box b, double angle, Point2D origin) {
+		this(b, angle, origin.getX(), origin.getY());
 	}
 
 	public RotateBox(Box b, double angle, int option) {
@@ -165,56 +173,57 @@ public class RotateBox extends Box {
 		return BBL;
 	}
 
-	private static Point2D.Double calculateShift(Box b, int option) {
-		Point2D.Double p = new Point2D.Double(0, -b.depth);
+	private static Point2D calculateShift(Box b, int option) {
+		Point2D p = new Geom().createPoint2D(0, -b.depth);
+
 		switch (option) {
 		case BL:
-			p.x = 0.;
-			p.y = -b.depth;
+			p.setX(0.);
+			p.setY(-b.depth);
 			break;
 		case BR:
-			p.x = b.width;
-			p.y = -b.depth;
+			p.setX(b.width);
+			p.setY(-b.depth);
 			break;
 		case BC:
-			p.x = b.width / 2.;
-			p.y = -b.depth;
+			p.setX(b.width / 2.);
+			p.setY(-b.depth);
 			break;
 		case TL:
-			p.x = 0.;
-			p.y = b.height;
+			p.setX(0.);
+			p.setY(b.height);
 			break;
 		case TR:
-			p.x = b.width;
-			p.y = b.height;
+			p.setX(b.width);
+			p.setY(b.height);
 			break;
 		case TC:
-			p.x = b.width / 2.;
-			p.y = b.height;
+			p.setX(b.width / 2.);
+			p.setY(b.height);
 			break;
 		case BBL:
-			p.x = 0.;
-			p.y = 0.;
+			p.setX(0.);
+			p.setY(0.);
 			break;
 		case BBR:
-			p.x = b.width;
-			p.y = 0.;
+			p.setX(b.width);
+			p.setY(0.);
 			break;
 		case BBC:
-			p.x = b.width / 2.;
-			p.y = 0.;
+			p.setX(b.width / 2.);
+			p.setY(0.);
 			break;
 		case CL:
-			p.x = 0.;
-			p.y = (b.height - b.depth) / 2.;
+			p.setX(0.);
+			p.setY((b.height - b.depth) / 2.);
 			break;
 		case CR:
-			p.x = b.width;
-			p.y = (b.height - b.depth) / 2.;
+			p.setX(b.width);
+			p.setY((b.height - b.depth) / 2.);
 			break;
 		case CC:
-			p.x = b.width / 2.;
-			p.y = (b.height - b.depth) / 2.;
+			p.setX(b.width / 2.);
+			p.setY((b.height - b.depth) / 2.);
 			break;
 		default:
 		}
@@ -222,8 +231,7 @@ public class RotateBox extends Box {
 		return p;
 	}
 
-	@Override
-	public void draw(Graphics2D g2, double x, double y) {
+	public void draw(Graphics2DInterface g2, double x, double y) {
 		startDraw(g2, x, y);
 		box.drawDebug(g2, x, y, true);
 		y -= shiftY;
@@ -235,7 +243,6 @@ public class RotateBox extends Box {
 		endDraw(g2);
 	}
 
-	@Override
 	public FontInfo getLastFont() {
 		return box.getLastFont();
 	}

@@ -110,7 +110,7 @@ public abstract class CharSymbol extends Atom {
 	@Override
 	public double getXHeight(TeXEnvironment env) {
 		final TeXFont tf = env.getTeXFont();
-		return tf.getXHeight(env.getStyle(), getCharFont(tf).getFont());
+		return tf.getXHeight(env.getStyle(), getCharFont(tf).getFontInfo());
 	}
 
 	public boolean isCharSymbol() {

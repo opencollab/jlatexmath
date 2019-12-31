@@ -45,14 +45,15 @@
 
 package org.scilab.forge.jlatexmath.commands;
 
-import java.awt.Font;
-
 import org.scilab.forge.jlatexmath.Atom;
 import org.scilab.forge.jlatexmath.HeightDepthAtom;
 import org.scilab.forge.jlatexmath.JavaFontRenderingAtom;
-import org.scilab.forge.jlatexmath.ParseException;
 import org.scilab.forge.jlatexmath.TeXLength;
 import org.scilab.forge.jlatexmath.TeXParser;
+import org.scilab.forge.jlatexmath.Unit;
+import org.scilab.forge.jlatexmath.exception.ParseException;
+import org.scilab.forge.jlatexmath.platform.FactoryProvider;
+import org.scilab.forge.jlatexmath.platform.font.Font;
 
 public class CommandUnicode extends Command {
 
@@ -85,10 +86,12 @@ public class CommandUnicode extends Command {
 		}
 
 		if (fontName != null && !fontName.isEmpty()) {
-			font = new Font(fontName, Font.PLAIN, 10);
+			font = FactoryProvider.getInstance().getFontFactory()
+					.createFont(fontName, Font.PLAIN, 10);
 			if (!font.canDisplay(c)) {
 				final String s = new String(new int[] { c }, 0, 1);
-				throw new ParseException(tp, "The font " + fontName + " can't display char " + s + " (code " + c + ")");
+				throw new ParseException(tp, "The font " + fontName
+						+ " can't display char " + s + " (code " + c + ")");
 			}
 		}
 
@@ -96,7 +99,8 @@ public class CommandUnicode extends Command {
 			if (hd == null) {
 				if (c <= 0xFFFF) {
 					final char ch = (char) c;
-					if ((ch >= '0' && ch <= '9') || (ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z')) {
+					if ((ch >= '0' && ch <= '9') || (ch >= 'a' && ch <= 'z')
+							|| (ch >= 'A' && ch <= 'Z')) {
 						tp.convertASCIIChar(ch, true);
 					} else {
 						tp.convertCharacter(ch, true);
@@ -108,18 +112,21 @@ public class CommandUnicode extends Command {
 				Atom atom;
 				if (c <= 0xFFFF) {
 					final char ch = (char) c;
-					if ((ch >= '0' && ch <= '9') || (ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z')) {
+					if ((ch >= '0' && ch <= '9') || (ch >= 'a' && ch <= 'z')
+							|| (ch >= 'A' && ch <= 'Z')) {
 						atom = tp.convertASCIICharToAtom(ch, true);
 					} else {
 						atom = tp.getCharMapping().getAtom(ch, tp.isMathMode());
 						if (atom == null) {
-							atom = new JavaFontRenderingAtom(String.valueOf(ch));
+							atom = new JavaFontRenderingAtom(
+									String.valueOf(ch));
 						}
 					}
 				} else {
 					atom = tp.getCharMapping().getAtom(c, tp.isMathMode());
 					if (atom == null) {
-						atom = new JavaFontRenderingAtom(new String(new int[] { c }, 0, 1));
+						atom = new JavaFontRenderingAtom(
+								new String(new int[] { c }, 0, 1));
 					}
 				}
 				tp.addToConsumer(new HeightDepthAtom(hd[0], hd[1], atom));
@@ -160,18 +167,10 @@ public class CommandUnicode extends Command {
 		tp.setParseString(s);
 		tp.skipPureWhites();
 		final TeXLength[] hd = new TeXLength[2];
-		hd[0] = tp.getLength(TeXLength.Unit.EM);
+		hd[0] = tp.getLength(Unit.EM);
 		tp.skipSeparators(",;");
-		hd[1] = tp.getLength(TeXLength.Unit.EM);
+		hd[1] = tp.getLength(Unit.EM);
 
 		return hd;
-	}
-
-	@Override
-	public Command duplicate() {
-		CommandUnicode ret = new CommandUnicode();
-
-		return ret;
-
 	}
 }

@@ -58,6 +58,11 @@ public class MiddleAtom extends Atom {
 		base = at;
 	}
 
+	public MiddleAtom(Atom at, Box box0) {
+		base = at;
+		box = box0;
+	}
+
 	@Override
 	public Atom getBase() {
 		return base;

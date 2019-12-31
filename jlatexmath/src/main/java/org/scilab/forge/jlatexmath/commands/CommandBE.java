@@ -50,8 +50,8 @@ import java.util.ArrayList;
 import org.scilab.forge.jlatexmath.Commands;
 import org.scilab.forge.jlatexmath.Env;
 import org.scilab.forge.jlatexmath.NewEnvironmentMacro;
-import org.scilab.forge.jlatexmath.ParseException;
 import org.scilab.forge.jlatexmath.TeXParser;
+import org.scilab.forge.jlatexmath.exception.ParseException;
 
 public class CommandBE {
 
@@ -62,24 +62,21 @@ public class CommandBE {
 			final String name = tp.getArgAsString();
 			final Command com = (Command) Commands.get("begin@" + name);
 			if (com == null) {
-				final ArrayList<String> args = NewEnvironmentMacro.executeBeginEnv(tp, name);
+				final ArrayList<String> args = NewEnvironmentMacro
+						.executeBeginEnv(tp, name);
 				if (args != null) {
 					final Env.Begin beg = new Env.Begin(name, args);
 					tp.addConsumer(beg);
 					return false;
 				}
-				throw new ParseException(tp, "Environment " + name + " doesn't exist");
+				throw new ParseException(tp,
+						"Environment " + name + " doesn't exist");
 			}
 			if (com.init(tp)) {
 				tp.addConsumer(com);
 			}
 
 			return false;
-		}
-
-		@Override
-		public Command duplicate() {
-			return new Begin();
 		}
 
 	}
@@ -96,24 +93,22 @@ public class CommandBE {
 				final Env.Begin beg = tp.getBegin();
 				if (beg != null) {
 					if (name.equals(beg.getName())) {
-						NewEnvironmentMacro.executeEndEnv(tp, name, beg.getArgs());
+						NewEnvironmentMacro.executeEndEnv(tp, name,
+								beg.getArgs());
 						tp.closeConsumer(beg.getBase());
 						return false;
 					}
 					tp.pop();
 					throw new ParseException(tp,
-							"Mismatching environments: \\begin{" + beg.getName() + "} and \\end{" + name + "}");
+							"Mismatching environments: \\begin{" + beg.getName()
+									+ "} and \\end{" + name + "}");
 				}
 
-				throw new ParseException(tp, "No matching \\begin{" + name + "}");
+				throw new ParseException(tp,
+						"No matching \\begin{" + name + "}");
 			}
 			com.init(tp);
 			return false;
-		}
-
-		@Override
-		public Command duplicate() {
-			return new End();
 		}
 
 	}

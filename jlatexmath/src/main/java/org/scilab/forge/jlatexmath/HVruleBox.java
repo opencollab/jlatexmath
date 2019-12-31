@@ -45,9 +45,8 @@
 
 package org.scilab.forge.jlatexmath;
 
-import java.awt.Graphics2D;
-import java.awt.geom.Area;
-import java.awt.geom.Rectangle2D;
+import org.scilab.forge.jlatexmath.platform.geom.Area;
+import org.scilab.forge.jlatexmath.platform.graphics.Graphics2DInterface;
 
 /**
  * A box representing a horizontal line.
@@ -86,13 +85,13 @@ public class HVruleBox extends Box {
 	}
 
 	@Override
-	public void draw(Graphics2D g2, double x, double y) {
-		g2.fill(new Rectangle2D.Double(x, y - h, w, h + d));
+	public void draw(Graphics2DInterface g2, double x, double y) {
+		g2.fill(geom.createRectangle2D(x, y - h, w, h + d));
 	}
 
 	@Override
 	public Area getArea() {
-		return new Area(new Rectangle2D.Double(0., -h, w, h + d));
+		return geom.createArea(geom.createRectangle2D(0., -h, w, h + d));
 	}
 
 	@Override

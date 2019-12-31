@@ -46,9 +46,8 @@
 
 package org.scilab.forge.jlatexmath;
 
-import java.awt.Graphics2D;
-import java.awt.geom.Area;
-import java.awt.geom.Rectangle2D;
+import org.scilab.forge.jlatexmath.platform.geom.Area;
+import org.scilab.forge.jlatexmath.platform.graphics.Graphics2DInterface;
 
 /**
  * A box representing a horizontal line.
@@ -64,7 +63,8 @@ public class HorizontalRule extends Box {
 		speShift = 0.;
 	}
 
-	public HorizontalRule(double thickness, double width, double s, boolean trueShift) {
+	public HorizontalRule(double thickness, double width, double s,
+			boolean trueShift) {
 		height = thickness;
 		this.width = width;
 		if (trueShift) {
@@ -77,13 +77,15 @@ public class HorizontalRule extends Box {
 	}
 
 	@Override
-	public void draw(Graphics2D g2, double x, double y) {
-		g2.fill(new Rectangle2D.Double(x, y - height + speShift, width, height));
+	public void draw(Graphics2DInterface g2, double x, double y) {
+		g2.fill(geom.createRectangle2D(x, y - height + speShift, width,
+				height));
 	}
 
 	@Override
 	public Area getArea() {
-		return new Area(new Rectangle2D.Double(0., -height + speShift, width, height));
+		return geom.createArea(
+				geom.createRectangle2D(0., -height + speShift, width, height));
 	}
 
 	@Override

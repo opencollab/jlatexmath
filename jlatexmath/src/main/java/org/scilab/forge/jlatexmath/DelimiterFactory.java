@@ -48,6 +48,8 @@
 
 package org.scilab.forge.jlatexmath; // NOPMD
 
+import org.scilab.forge.jlatexmath.platform.FactoryProvider;
+
 /**
  * Responsible for creating a box containing a delimiter symbol that exists in
  * different sizes.
@@ -69,8 +71,10 @@ public class DelimiterFactory {
 		}
 
 		if (i <= size && !tf.hasNextLarger(c)) {
-			final CharBox A = new CharBox(tf.getChar('A', TextStyle.MATHNORMAL, style));
-			final Box b = create(symbol.getCf(), env, size * (A.getHeight() + A.getDepth()));
+			final CharBox A = new CharBox(
+					tf.getChar('A', TextStyle.MATHNORMAL, style));
+			final Box b = create(symbol.getCf(), env,
+					size * (A.getHeight() + A.getDepth()));
 			return b;
 		}
 
@@ -79,8 +83,7 @@ public class DelimiterFactory {
 
 	/**
 	 *
-	 * @param symbol
-	 *            the name of the delimiter symbol
+	 * @param cf
 	 * @param env
 	 *            the TeXEnvironment in which to create the delimiter box
 	 * @param minHeight
@@ -88,7 +91,8 @@ public class DelimiterFactory {
 	 * @return the box representing the delimiter variant that fits best
 	 *         according to the required minimum size.
 	 */
-	public static Box create(CharFont cf, TeXEnvironment env, double minHeight) {
+	public static Box create(CharFont cf, TeXEnvironment env,
+			double minHeight) {
 		TeXFont tf = env.getTeXFont();
 		int style = env.getStyle();
 		Char c = tf.getChar(cf, style);
@@ -143,9 +147,11 @@ public class DelimiterFactory {
 				}
 			}
 
-			return ShapeBox.create(vBox);
-		} else
+			return FactoryProvider.getInstance().getBoxDecorator().decorate(vBox);
+
+		} else {
 			// no extensions, so return tallest possible character
 			return new CharBox(c);
+		}
 	}
 }

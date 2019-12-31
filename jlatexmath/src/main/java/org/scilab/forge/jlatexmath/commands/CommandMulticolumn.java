@@ -3,8 +3,8 @@ package org.scilab.forge.jlatexmath.commands;
 import org.scilab.forge.jlatexmath.ArrayOptions;
 import org.scilab.forge.jlatexmath.Atom;
 import org.scilab.forge.jlatexmath.MulticolumnAtom;
-import org.scilab.forge.jlatexmath.ParseException;
 import org.scilab.forge.jlatexmath.TeXParser;
+import org.scilab.forge.jlatexmath.exception.ParseException;
 
 public class CommandMulticolumn extends Command1A {
 	int n;
@@ -22,11 +22,13 @@ public class CommandMulticolumn extends Command1A {
 	@Override
 	public boolean init(TeXParser tp) {
 		if (!tp.isArrayMode()) {
-			throw new ParseException(tp, "The macro \\multicolumn is only available in array mode !");
+			throw new ParseException(tp,
+					"The macro \\multicolumn is only available in array mode !");
 		}
 		n = tp.getArgAsPositiveInteger();
 		if (n == -1) {
-			throw new ParseException(tp, "The macro \\multicolumn requires a positive integer");
+			throw new ParseException(tp,
+					"The macro \\multicolumn requires a positive integer");
 		}
 		options = tp.getArrayOptions();
 		return true;
@@ -35,11 +37,6 @@ public class CommandMulticolumn extends Command1A {
 	@Override
 	public Atom newI(TeXParser tp, Atom a) {
 		return new MulticolumnAtom(n, options, a);
-	}
-
-	@Override
-	public Command duplicate() {
-		return new CommandMulticolumn(n, options);
 	}
 
 }

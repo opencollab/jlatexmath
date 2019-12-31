@@ -60,8 +60,13 @@ public class CEEmptyAtom extends Atom {
 		type = TeXConstants.TYPE_ORDINARY;
 	}
 
+	public static CEEmptyAtom get() {
+		return new CEEmptyAtom();
+	}
+
 	@Override
 	public Box createBox(TeXEnvironment env) {
-		return new StrutBox(0., env.getTeXFont().getMHeight(env.getStyle()), 0., 0.);
+		return new StrutBox(0., env.getTeXFont().getMHeight(env.getStyle()), 0.,
+				0.);
 	}
 }

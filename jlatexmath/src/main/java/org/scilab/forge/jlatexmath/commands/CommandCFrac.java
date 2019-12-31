@@ -2,11 +2,11 @@ package org.scilab.forge.jlatexmath.commands;
 
 import org.scilab.forge.jlatexmath.Atom;
 import org.scilab.forge.jlatexmath.FractionAtom;
-import org.scilab.forge.jlatexmath.ParseException;
 import org.scilab.forge.jlatexmath.RowAtom;
 import org.scilab.forge.jlatexmath.StyleAtom;
 import org.scilab.forge.jlatexmath.TeXConstants;
 import org.scilab.forge.jlatexmath.TeXParser;
+import org.scilab.forge.jlatexmath.exception.ParseException;
 
 public class CommandCFrac extends Command2A {
 
@@ -34,14 +34,6 @@ public class CommandCFrac extends Command2A {
 
 		a = new FractionAtom(a, b, true, align, TeXConstants.Align.CENTER);
 		return new RowAtom(new StyleAtom(TeXConstants.STYLE_DISPLAY, a));
-	}
-
-	@Override
-	public Command duplicate() {
-		CommandCFrac ret = new CommandCFrac();
-		ret.atom = atom;
-		ret.opt = opt;
-		return ret;
 	}
 
 }

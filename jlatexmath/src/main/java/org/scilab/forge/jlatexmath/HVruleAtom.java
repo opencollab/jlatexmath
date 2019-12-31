@@ -50,13 +50,14 @@ package org.scilab.forge.jlatexmath;
  */
 public class HVruleAtom extends Atom {
 
-	private final static TeXLength def = new TeXLength(TeXLength.Unit.PT, 0.4);
+	private final static TeXLength def = new TeXLength(Unit.PT, 0.4);
 	private final TeXLength width;
 	private final TeXLength height;
 	private final TeXLength depth;
 	private final boolean hor;
 
-	public HVruleAtom(TeXLength width, TeXLength height, TeXLength depth, boolean hor) {
+	public HVruleAtom(TeXLength width, TeXLength height, TeXLength depth,
+			boolean hor) {
 		this.width = (!hor && width == null) ? def : width;
 		this.height = (hor && height == null) ? def : height;
 		this.depth = (hor && depth == null) ? TeXLength.getZero() : depth;

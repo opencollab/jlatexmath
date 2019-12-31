@@ -51,11 +51,12 @@ package org.scilab.forge.jlatexmath;
 import java.util.ArrayList;
 
 import org.scilab.forge.jlatexmath.mhchem.CEEmptyAtom;
+import org.scilab.forge.jlatexmath.serialize.HasTrueBase;
 
 /**
  * An atom representing scripts to be attached to another atom.
  */
-public class ScriptsAtom extends Atom {
+public class ScriptsAtom extends Atom implements HasTrueBase {
 
 	// base atom
 	private Atom base;
@@ -65,7 +66,8 @@ public class ScriptsAtom extends Atom {
 	private Atom superscript;
 	private TeXConstants.Align align;
 
-	public ScriptsAtom(Atom base, Atom sub, Atom sup, TeXConstants.Align align) {
+	public ScriptsAtom(Atom base, Atom sub, Atom sup,
+			TeXConstants.Align align) {
 		this.base = base;
 		subscript = sub;
 		superscript = sup;
@@ -73,13 +75,15 @@ public class ScriptsAtom extends Atom {
 	}
 
 	public ScriptsAtom(Atom base, Atom sub, Atom sup, boolean left) {
-		this(base, sub, sup, left ? TeXConstants.Align.LEFT : TeXConstants.Align.RIGHT);
+		this(base, sub, sup,
+				left ? TeXConstants.Align.LEFT : TeXConstants.Align.RIGHT);
 	}
 
 	public ScriptsAtom(Atom base, Atom sub, Atom sup) {
 		this(base, sub, sup, !(base instanceof CEEmptyAtom));
 	}
 
+	@Override
 	public Atom getTrueBase() {
 		return base;
 	}
@@ -146,30 +150,34 @@ public class ScriptsAtom extends Atom {
 			return base.createBox(env);
 		} else {
 			final Atom trueBase = base.getBase();
-			if (trueBase instanceof RowAtom && ((RowAtom) trueBase).lookAtLast()) {
+			if (trueBase instanceof RowAtom
+					&& ((RowAtom) trueBase).lookAtLast()) {
 				return createBoxForRowAtom(env);
 			}
 
 			int style = env.getStyle();
 
 			if (base.type_limits == TeXConstants.SCRIPT_LIMITS
-					|| (base.type_limits == TeXConstants.SCRIPT_NORMAL && style == TeXConstants.STYLE_DISPLAY)) {
-				return new BigOperatorAtom(base, subscript, superscript).createBox(env);
+					|| (base.type_limits == TeXConstants.SCRIPT_NORMAL
+							&& style == TeXConstants.STYLE_DISPLAY)) {
+				return new BigOperatorAtom(base, subscript, superscript)
+						.createBox(env);
 			}
 
 			final boolean it = base.setAddItalicCorrection(subscript == null);
 			Box b = base.createBox(env);
 			base.setAddItalicCorrection(it);
 
-			Box scriptspace = new StrutBox(TeXLength.getLength("scriptspace", env), 0., 0., 0.);
+			Box scriptspace = new StrutBox(
+					env.lengthSettings().getLength("scriptspace", env), 0., 0., 0.);
 			TeXFont tf = env.getTeXFont();
 
 			HorizontalBox hor = new HorizontalBox(b);
 
-			FontInfo lastFont = b.getLastFont();
+			FontInfo lastFontId = b.getLastFont();
 			// if no last font found (whitespace box), use default "mu font"
-			if (lastFont == null) {
-				lastFont = tf.getMuFont();
+			if (lastFontId == null) {
+				lastFontId = TeXFont.MUFONT;
 			}
 
 			TeXEnvironment subStyle = env.subStyle();
@@ -184,12 +192,15 @@ public class ScriptsAtom extends Atom {
 				final CharAtom ca = (CharAtom) trueBase;
 				shiftUp = shiftDown = 0.;
 				CharFont cf = ca.getCharFont(tf);
-				if ((!ca.isMarkedAsTextSymbol() || !tf.hasSpace(cf.getFont())) && subscript != null) {
+				if ((!ca.isMarkedAsTextSymbol() || !tf.hasSpace(cf.fontInfo))
+						&& subscript != null) {
 					delta = tf.getChar(cf, style).getItalic();
 				}
 			} else {
-				if (trueBase instanceof SymbolAtom && trueBase.getType() == TeXConstants.TYPE_BIG_OPERATOR) {
-					if (trueBase.isMathMode() && trueBase.mustAddItalicCorrection()) {
+				if (trueBase instanceof SymbolAtom && trueBase
+						.getType() == TeXConstants.TYPE_BIG_OPERATOR) {
+					if (trueBase.isMathMode()
+							&& trueBase.mustAddItalicCorrection()) {
 						delta = trueBase.getItalic(env);
 					}
 				}
@@ -200,8 +211,11 @@ public class ScriptsAtom extends Atom {
 			if (superscript == null) { // only subscript
 				Box x = subscript.createBox(subStyle);
 				// calculate and set shift amount
-				x.setShift(Math.max(Math.max(shiftDown, tf.getSub1(style)),
-						x.getHeight() - 4. * Math.abs(tf.getXHeight(style, lastFont)) / 5.));
+				x.setShift(
+						Math.max(Math.max(shiftDown, tf.getSub1(style)),
+								x.getHeight() - 4. * Math
+										.abs(tf.getXHeight(style, lastFontId))
+										/ 5.));
 				hor.add(x);
 
 				return hor;
@@ -209,7 +223,8 @@ public class ScriptsAtom extends Atom {
 				Box x = superscript.createBox(supStyle);
 				double msiz = x.getWidth();
 				if (subscript != null && align == TeXConstants.Align.RIGHT) {
-					msiz = Math.max(msiz, subscript.createBox(subStyle).getWidth());
+					msiz = Math.max(msiz,
+							subscript.createBox(subStyle).getWidth());
 				}
 
 				HorizontalBox sup = new HorizontalBox(x, msiz, align);
@@ -224,7 +239,8 @@ public class ScriptsAtom extends Atom {
 				} else {
 					p = tf.getSup2(style);
 				}
-				shiftUp = Math.max(Math.max(shiftUp, p), x.getDepth() + Math.abs(tf.getXHeight(style, lastFont)) / 4.);
+				shiftUp = Math.max(Math.max(shiftUp, p), x.getDepth()
+						+ Math.abs(tf.getXHeight(style, lastFontId)) / 4.);
 
 				if (subscript == null) { // only superscript
 					sup.setShift(-shiftUp);
@@ -239,14 +255,17 @@ public class ScriptsAtom extends Atom {
 					// position both sub- and superscript
 					double drt = tf.getDefaultRuleThickness(style);
 					// space between sub- en
-					double interSpace = shiftUp - x.getDepth() + shiftDown - y.getHeight();
+					double interSpace = shiftUp - x.getDepth() + shiftDown
+							- y.getHeight();
 					// superscript
 					if (interSpace < 4. * drt) { // too small
 						shiftUp += 4. * drt - interSpace;
 						// set bottom superscript at least 4/5 of X-height
 						// above
 						// baseline
-						double psi = 4. * Math.abs(tf.getXHeight(style, lastFont)) / 5. - (shiftUp - x.getDepth());
+						double psi = 4.
+								* Math.abs(tf.getXHeight(style, lastFontId))
+								/ 5. - (shiftUp - x.getDepth());
 
 						if (psi > 0.) {
 							shiftUp += psi;
@@ -259,7 +278,8 @@ public class ScriptsAtom extends Atom {
 					sup.setShift(delta);
 					vBox.add(sup);
 					// recalculate interspace
-					interSpace = shiftUp - x.getDepth() + shiftDown - y.getHeight();
+					interSpace = shiftUp - x.getDepth() + shiftDown
+							- y.getHeight();
 					vBox.add(new StrutBox(0., interSpace, 0., 0.));
 					vBox.add(sub);
 					vBox.setHeight(shiftUp + x.getHeight());
@@ -276,7 +296,8 @@ public class ScriptsAtom extends Atom {
 		final Atom trueBase = base.getBase();
 		final RowAtom ra = (RowAtom) trueBase;
 		final Atom last = ra.last();
-		final Box b = new ScriptsAtom(last, subscript, superscript, align).createBox(env);
+		final Box b = new ScriptsAtom(last, subscript, superscript, align)
+				.createBox(env);
 		final HorizontalBox hb = new HorizontalBox(base.createBox(env));
 		if (subscript != null) {
 			final double italic = last.getItalic(env);
@@ -303,4 +324,5 @@ public class ScriptsAtom extends Atom {
 	public int getLimits() {
 		return base.getLimits();
 	}
+
 }

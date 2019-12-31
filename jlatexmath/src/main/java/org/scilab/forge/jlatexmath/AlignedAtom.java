@@ -67,4 +67,5 @@ public class AlignedAtom extends Atom {
 	public Box createBox(TeXEnvironment env) {
 		return base.createBox(env);
 	}
+
 }

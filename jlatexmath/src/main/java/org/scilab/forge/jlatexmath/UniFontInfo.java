@@ -55,9 +55,10 @@ public class UniFontInfo extends FontInfo {
 
 	private final Map<Character, Character> unicode;
 
-	public UniFontInfo(int size, String path, double xHeight, double space, double quad, char skewChar) {
+	public UniFontInfo(int size, String path, double xHeight, double space,
+			double quad, char skewChar) {
 		super(size, path, xHeight, space, quad, skewChar);
-		this.unicode = new HashMap<Character, Character>(size);
+		this.unicode = new HashMap<>(size);
 	}
 
 	@Override
@@ -66,7 +67,8 @@ public class UniFontInfo extends FontInfo {
 	}
 
 	@Override
-	public double getKern(final char left, final char right, final double factor) {
+	public double getKern(final char left, final char right,
+			final double factor) {
 		init();
 		if (kern == null) {
 			return 0.;
@@ -79,7 +81,8 @@ public class UniFontInfo extends FontInfo {
 	}
 
 	@Override
-	public void addLigature(final char left, final char right, final char ligChar) {
+	public void addLigature(final char left, final char right,
+			final char ligChar) {
 		super.addLigature(get(left), get(right), ligChar);
 	}
 
@@ -155,7 +158,8 @@ public class UniFontInfo extends FontInfo {
 	}
 
 	@Override
-	public void setNextLarger(final char c, final char larger, final FontInfo fontLarger) {
+	public void setNextLarger(final char c, final char larger,
+			final FontInfo fontLarger) {
 		super.setNextLarger(get(c), larger, fontLarger);
 	}
 

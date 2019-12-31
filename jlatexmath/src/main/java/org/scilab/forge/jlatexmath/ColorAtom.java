@@ -2,7 +2,8 @@
  * =========================================================================
  * This file is originally part of the JMathTeX Library - http://jmathtex.sourceforge.net
  *
- * Copyright (C) 2018 DENIZET Calixte
+ * Copyright (C) 2004-2007 Universiteit Gent
+ * Copyright (C) 2009 DENIZET Calixte
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -45,21 +46,21 @@
 
 package org.scilab.forge.jlatexmath;
 
-import java.awt.Color;
+import org.scilab.forge.jlatexmath.platform.graphics.Color;
 
 /**
  * An atom representing the foreground and background color of an other atom.
  */
-public class ColorAtom extends Atom {
+public class ColorAtom extends Atom implements Row {
 
 	// background color
-	private final Color bg;
+	private final Color background;
 
 	// foreground color
-	private final Color fg;
+	private final Color color;
 
-	// Atom for which the colorsettings apply
-	private final Atom base;
+	// RowAtom for which the colorsettings apply
+	protected final RowAtom elements;
 
 	/**
 	 * Creates a new ColorAtom that sets the given colors for the given atom.
@@ -72,77 +73,59 @@ public class ColorAtom extends Atom {
 	 * @param c
 	 *            the foreground color
 	 */
-	public ColorAtom(Atom base, Color bg, Color fg) {
-		this.base = base;
-		this.bg = bg;
-		this.fg = fg;
+	public ColorAtom(Atom atom, Color bg, Color c) {
+		elements = new RowAtom(atom);
+		background = bg;
+		color = c;
 	}
 
 	@Override
 	public Box createBox(TeXEnvironment env) {
 		env.isColored = true;
-		final Box b = base.createBox(env);
-		b.setBg(bg);
-		b.setFg(fg);
-
-		return b;
-	}
-
-	public Color getFg() {
-		return fg;
-	}
-
-	public Color getBg() {
-		return bg;
+		TeXEnvironment copy = env.copy();
+		if (background != null)
+			copy.setBackground(background);
+		if (color != null)
+			copy.setColor(color);
+		return elements.createBox(copy);
 	}
 
 	@Override
 	public int getLeftType() {
-		return base.getLeftType();
+		return elements.getLeftType();
 	}
 
 	@Override
 	public int getRightType() {
-		return base.getRightType();
+		return elements.getRightType();
 	}
 
 	@Override
-	public int getLimits() {
-		return base.getLimits();
+	public void setPreviousAtom(Dummy prev) {
+		elements.setPreviousAtom(prev);
 	}
 
-	@Override
-	public double getItalic(TeXEnvironment env) {
-		return base.getItalic(env);
+	protected Color getColor() {
+		return color;
 	}
 
-	@Override
-	public double getXHeight(TeXEnvironment env) {
-		return base.getXHeight(env);
+	protected Color getBackground() {
+		return background;
 	}
 
-	@Override
-	public boolean isMathMode() {
-		return base.isMathMode();
+	protected Color getFg() {
+		return color;
 	}
 
-	@Override
-	public void setMathMode(final boolean mathMode) {
-		base.setMathMode(mathMode);
+	protected Color getBg() {
+		return background;
 	}
 
-	@Override
-	public boolean mustAddItalicCorrection() {
-		return base.mustAddItalicCorrection();
+	public RowAtom getElements() {
+		return elements;
 	}
 
-	@Override
-	public boolean setAddItalicCorrection(boolean b) {
-		return base.setAddItalicCorrection(b);
-	}
-
-	@Override
-	public Atom getBase() {
-		return base.getBase();
+	public Atom getElement(int i) {
+		return elements.getElement(i);
 	}
 }

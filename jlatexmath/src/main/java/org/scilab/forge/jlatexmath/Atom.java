@@ -64,7 +64,7 @@ package org.scilab.forge.jlatexmath;
  *
  * @author Kurt Vermeulen
  */
-public abstract class Atom implements Cloneable {
+public abstract class Atom {
 
 	/**
 	 * The type of the atom (default value: ordinary atom)
@@ -121,14 +121,6 @@ public abstract class Atom implements Cloneable {
 		return type;
 	}
 
-	public Atom duplicate() {
-		try {
-			return (Atom) super.clone();
-		} catch (Exception e) {
-			return null;
-		}
-	}
-
 	public int getLimits() {
 		return type_limits;
 	}
@@ -174,4 +166,16 @@ public abstract class Atom implements Cloneable {
 	public Atom getBase() {
 		return this;
 	}
+
+	/**
+	 * used by duplicate()
+	 */
+	final protected Atom setFields(Atom atom) {
+		atom.type = type;
+		atom.type_limits = type_limits;
+		atom.mathMode = mathMode;
+
+		return atom;
+	}
+
 }

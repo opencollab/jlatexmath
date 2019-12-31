@@ -50,7 +50,8 @@ import java.util.Stack;
 
 public final class BreakFormula {
 
-	public static Box split(Box box, double width, double interline, TeXConstants.Align align) {
+	public static Box split(Box box, double width, double interline,
+			TeXConstants.Align align) {
 		if (box instanceof HorizontalBox) {
 			return split((HorizontalBox) box, width, interline, align);
 		} else if (box instanceof VerticalBox) {
@@ -60,13 +61,15 @@ public final class BreakFormula {
 		}
 	}
 
-	public static Box split(HorizontalBox hbox, double width, double interline, TeXConstants.Align align) {
+	public static Box split(HorizontalBox hbox, double width, double interline,
+			TeXConstants.Align align) {
 		VerticalBox vbox = new VerticalBox();
 		HorizontalBox first;
 		HorizontalBox second = null;
 		Stack<Position> positions = new Stack<Position>();
 		double w = -1;
-		while (hbox.width > width && (w = canBreak(positions, hbox, width)) != hbox.width) {
+		while (hbox.width > width
+				&& (w = canBreak(positions, hbox, width)) != hbox.width) {
 			Position pos = positions.pop();
 			HorizontalBox[] hboxes = pos.hbox.split(pos.index - 1);
 			first = hboxes[0];
@@ -99,7 +102,8 @@ public final class BreakFormula {
 		return hbox;
 	}
 
-	private static Box split(VerticalBox vbox, double width, double interline, TeXConstants.Align align) {
+	private static Box split(VerticalBox vbox, double width, double interline,
+			TeXConstants.Align align) {
 		VerticalBox newBox = new VerticalBox();
 		for (Box box : vbox.children) {
 			newBox.add(split(box, width, interline, align));
@@ -108,7 +112,8 @@ public final class BreakFormula {
 		return newBox;
 	}
 
-	private static double canBreak(Stack<Position> stack, HorizontalBox hbox, double width) {
+	private static double canBreak(Stack<Position> stack, HorizontalBox hbox,
+			double width) {
 		List<Box> children = hbox.children;
 		double[] cumWidth = new double[children.size() + 1];
 		cumWidth[0] = 0;
@@ -119,8 +124,10 @@ public final class BreakFormula {
 				int pos = getBreakPosition(hbox, i);
 				if (box instanceof HorizontalBox) {
 					Stack<Position> newStack = new Stack<Position>();
-					double w = canBreak(newStack, (HorizontalBox) box, width - cumWidth[i]);
-					if (w != box.width && (cumWidth[i] + w <= width || pos == -1)) {
+					double w = canBreak(newStack, (HorizontalBox) box,
+							width - cumWidth[i]);
+					if (w != box.width
+							&& (cumWidth[i] + w <= width || pos == -1)) {
 						stack.push(new Position(i - 1, hbox));
 						stack.addAll(newStack);
 						return cumWidth[i] + w;
