@@ -1,0 +1,24 @@
+package org.scilab.forge.jlatexmath.share.commands;
+
+import org.scilab.forge.jlatexmath.share.Atom;
+import org.scilab.forge.jlatexmath.share.BoldAtom;
+import org.scilab.forge.jlatexmath.share.RomanAtom;
+import org.scilab.forge.jlatexmath.share.RowAtom;
+import org.scilab.forge.jlatexmath.share.TeXParser;
+
+public class CommandBf extends CommandStyle {
+
+	public CommandBf() {
+		//
+	}
+
+	public CommandBf(RowAtom size) {
+		this.size = size;
+	}
+
+	@Override
+	public Atom newI(TeXParser tp, Atom a) {
+		return new BoldAtom(new RomanAtom(a));
+	}
+
+}
