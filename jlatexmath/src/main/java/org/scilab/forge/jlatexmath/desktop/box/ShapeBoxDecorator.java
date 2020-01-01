@@ -1,8 +1,8 @@
 package org.scilab.forge.jlatexmath.desktop.box;
 
-import org.scilab.forge.jlatexmath.Box;
-import org.scilab.forge.jlatexmath.ShapeBox;
-import org.scilab.forge.jlatexmath.platform.box.BoxDecorator;
+import org.scilab.forge.jlatexmath.share.Box;
+import org.scilab.forge.jlatexmath.share.ShapeBox;
+import org.scilab.forge.jlatexmath.share.platform.box.BoxDecorator;
 
 /**
  * Creates a ShapeBox.

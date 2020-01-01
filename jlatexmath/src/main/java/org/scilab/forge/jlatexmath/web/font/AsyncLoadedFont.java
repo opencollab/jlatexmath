@@ -43,7 +43,7 @@
  */
 package org.scilab.forge.jlatexmath.web.font;
 
-import org.scilab.forge.jlatexmath.platform.font.Font;
+import org.scilab.forge.jlatexmath.share.platform.font.Font;
 
 public interface AsyncLoadedFont extends Font {
 

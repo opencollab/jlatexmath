@@ -46,7 +46,7 @@ package org.scilab.forge.jlatexmath.desktop.graphics;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.NoninvertibleTransformException;
 
-import org.scilab.forge.jlatexmath.platform.graphics.Transform;
+import org.scilab.forge.jlatexmath.share.platform.graphics.Transform;
 
 public class TransformD extends AffineTransform implements Transform {
 

@@ -1,9 +1,9 @@
 package org.scilab.forge.jlatexmath.desktop.font;
 
 import org.scilab.forge.jlatexmath.desktop.geom.GeneralPathD;
-import org.scilab.forge.jlatexmath.platform.FactoryProvider;
-import org.scilab.forge.jlatexmath.platform.font.GlyphVector;
-import org.scilab.forge.jlatexmath.platform.geom.Shape;
+import org.scilab.forge.jlatexmath.share.platform.FactoryProvider;
+import org.scilab.forge.jlatexmath.share.platform.font.GlyphVector;
+import org.scilab.forge.jlatexmath.share.platform.geom.Shape;
 
 public class GlyphVectorD extends GlyphVector {
 

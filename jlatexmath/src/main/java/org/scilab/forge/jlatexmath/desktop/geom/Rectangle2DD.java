@@ -46,7 +46,7 @@ package org.scilab.forge.jlatexmath.desktop.geom;
 import java.awt.geom.Rectangle2D;
 
 public class Rectangle2DD extends Rectangle2D.Double
-		implements org.scilab.forge.jlatexmath.platform.geom.Rectangle2D {
+		implements org.scilab.forge.jlatexmath.share.platform.geom.Rectangle2D {
 
 	private static final long serialVersionUID = 1L;
 
@@ -68,7 +68,7 @@ public class Rectangle2DD extends Rectangle2D.Double
 	}
 
 	@Override
-	public org.scilab.forge.jlatexmath.platform.geom.Rectangle2D getBounds2DX() {
+	public org.scilab.forge.jlatexmath.share.platform.geom.Rectangle2D getBounds2DX() {
 		return this;
 	}
 

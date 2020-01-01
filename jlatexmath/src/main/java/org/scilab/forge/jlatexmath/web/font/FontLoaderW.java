@@ -43,9 +43,9 @@
  */
 package org.scilab.forge.jlatexmath.web.font;
 
-import org.scilab.forge.jlatexmath.exception.ResourceParseException;
-import org.scilab.forge.jlatexmath.platform.font.Font;
-import org.scilab.forge.jlatexmath.platform.font.FontLoader;
+import org.scilab.forge.jlatexmath.share.exception.ResourceParseException;
+import org.scilab.forge.jlatexmath.share.platform.font.Font;
+import org.scilab.forge.jlatexmath.share.platform.font.FontLoader;
 
 public class FontLoaderW implements FontLoader {
 

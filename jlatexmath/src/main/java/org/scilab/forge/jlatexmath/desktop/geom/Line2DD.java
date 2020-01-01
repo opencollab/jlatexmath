@@ -46,7 +46,7 @@ package org.scilab.forge.jlatexmath.desktop.geom;
 import java.awt.geom.Line2D;
 
 public class Line2DD extends Line2D.Double
-		implements org.scilab.forge.jlatexmath.platform.geom.Line2D {
+		implements org.scilab.forge.jlatexmath.share.platform.geom.Line2D {
 
 	private static final long serialVersionUID = 1L;
 

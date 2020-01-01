@@ -50,12 +50,12 @@ import java.net.URL;
 
 import javax.imageio.ImageIO;
 
-import org.scilab.forge.jlatexmath.platform.graphics.BasicStroke;
-import org.scilab.forge.jlatexmath.platform.graphics.Color;
-import org.scilab.forge.jlatexmath.platform.graphics.GraphicsFactory;
-import org.scilab.forge.jlatexmath.platform.graphics.Image;
-import org.scilab.forge.jlatexmath.platform.graphics.Stroke;
-import org.scilab.forge.jlatexmath.platform.graphics.Transform;
+import org.scilab.forge.jlatexmath.share.platform.graphics.BasicStroke;
+import org.scilab.forge.jlatexmath.share.platform.graphics.Color;
+import org.scilab.forge.jlatexmath.share.platform.graphics.GraphicsFactory;
+import org.scilab.forge.jlatexmath.share.platform.graphics.Image;
+import org.scilab.forge.jlatexmath.share.platform.graphics.Stroke;
+import org.scilab.forge.jlatexmath.share.platform.graphics.Transform;
 
 public class GraphicsFactoryDesktop extends GraphicsFactory {
 

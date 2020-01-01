@@ -43,7 +43,7 @@
  */
 package org.scilab.forge.jlatexmath.web.geom;
 
-import org.scilab.forge.jlatexmath.platform.geom.Rectangle2D;
+import org.scilab.forge.jlatexmath.share.platform.geom.Rectangle2D;
 
 public class Rectangle2DW implements Rectangle2D {
 
@@ -101,7 +101,7 @@ public class Rectangle2DW implements Rectangle2D {
 	}
 
 	@Override
-	public org.scilab.forge.jlatexmath.platform.geom.Rectangle2D getBounds2DX() {
+	public org.scilab.forge.jlatexmath.share.platform.geom.Rectangle2D getBounds2DX() {
 		return this;
 	}
 

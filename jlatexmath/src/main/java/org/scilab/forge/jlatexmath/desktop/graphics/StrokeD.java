@@ -45,7 +45,7 @@ package org.scilab.forge.jlatexmath.desktop.graphics;
 
 import java.awt.Shape;
 
-import org.scilab.forge.jlatexmath.platform.graphics.Stroke;
+import org.scilab.forge.jlatexmath.share.platform.graphics.Stroke;
 
 public class StrokeD implements Stroke, java.awt.Stroke {
 

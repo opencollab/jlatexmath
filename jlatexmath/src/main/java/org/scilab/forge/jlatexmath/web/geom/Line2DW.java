@@ -43,7 +43,7 @@
  */
 package org.scilab.forge.jlatexmath.web.geom;
 
-import org.scilab.forge.jlatexmath.platform.geom.Line2D;
+import org.scilab.forge.jlatexmath.share.platform.geom.Line2D;
 
 public class Line2DW implements Line2D {
 

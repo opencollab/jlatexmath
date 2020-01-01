@@ -46,10 +46,10 @@ package org.scilab.forge.jlatexmath.desktop.geom;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Area;
 
-import org.scilab.forge.jlatexmath.platform.geom.Rectangle2D;
+import org.scilab.forge.jlatexmath.share.platform.geom.Rectangle2D;
 
 public class AreaD extends java.awt.geom.Area
-		implements org.scilab.forge.jlatexmath.platform.geom.Area {
+		implements org.scilab.forge.jlatexmath.share.platform.geom.Area {
 
 	private static final long serialVersionUID = 1L;
 
@@ -72,14 +72,14 @@ public class AreaD extends java.awt.geom.Area
 	}
 
 	@Override
-	public org.scilab.forge.jlatexmath.platform.geom.Area duplicate() {
+	public org.scilab.forge.jlatexmath.share.platform.geom.Area duplicate() {
 		java.awt.geom.Area clone = (Area) super.clone();
 		java.awt.Shape s = clone;
 		return new AreaD(s);
 	}
 
 	@Override
-	public void add(org.scilab.forge.jlatexmath.platform.geom.Area a) {
+	public void add(org.scilab.forge.jlatexmath.share.platform.geom.Area a) {
 		super.add((Area) a);
 
 	}

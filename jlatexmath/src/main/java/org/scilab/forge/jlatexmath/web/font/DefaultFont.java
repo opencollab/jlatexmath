@@ -44,10 +44,11 @@ package org.scilab.forge.jlatexmath.web.font;
 
 import com.google.gwt.canvas.dom.client.Context2d;
 import com.google.gwt.core.client.JavaScriptObject;
-import org.scilab.forge.jlatexmath.CharFont;
-import org.scilab.forge.jlatexmath.platform.font.Font;
-import org.scilab.forge.jlatexmath.platform.font.FontRenderContext;
-import org.scilab.forge.jlatexmath.platform.geom.Shape;
+
+import org.scilab.forge.jlatexmath.share.CharFont;
+import org.scilab.forge.jlatexmath.share.platform.font.Font;
+import org.scilab.forge.jlatexmath.share.platform.font.FontRenderContext;
+import org.scilab.forge.jlatexmath.share.platform.geom.Shape;
 import org.scilab.forge.jlatexmath.web.geom.Rectangle2DW;
 
 public class DefaultFont extends FontW implements FontWrapper {

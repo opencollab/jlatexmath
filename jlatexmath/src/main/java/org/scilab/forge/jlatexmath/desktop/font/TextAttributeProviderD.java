@@ -43,8 +43,8 @@
  */
 package org.scilab.forge.jlatexmath.desktop.font;
 
-import org.scilab.forge.jlatexmath.platform.font.TextAttribute;
-import org.scilab.forge.jlatexmath.platform.font.TextAttributeProvider;
+import org.scilab.forge.jlatexmath.share.platform.font.TextAttribute;
+import org.scilab.forge.jlatexmath.share.platform.font.TextAttributeProvider;
 
 public class TextAttributeProviderD implements TextAttributeProvider {
 

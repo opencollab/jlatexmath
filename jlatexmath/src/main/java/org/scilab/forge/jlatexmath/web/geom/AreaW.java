@@ -2,10 +2,10 @@ package org.scilab.forge.jlatexmath.web.geom;
 
 import java.util.ArrayList;
 
-import org.scilab.forge.jlatexmath.platform.FactoryProvider;
-import org.scilab.forge.jlatexmath.platform.geom.Area;
-import org.scilab.forge.jlatexmath.platform.geom.Rectangle2D;
-import org.scilab.forge.jlatexmath.platform.geom.Shape;
+import org.scilab.forge.jlatexmath.share.platform.FactoryProvider;
+import org.scilab.forge.jlatexmath.share.platform.geom.Area;
+import org.scilab.forge.jlatexmath.share.platform.geom.Rectangle2D;
+import org.scilab.forge.jlatexmath.share.platform.geom.Shape;
 import org.scilab.forge.jlatexmath.web.graphics.JLMContext2d;
 
 /**
@@ -15,7 +15,7 @@ import org.scilab.forge.jlatexmath.web.graphics.JLMContext2d;
  *
  */
 public class AreaW
-		implements org.scilab.forge.jlatexmath.platform.geom.Area {
+		implements org.scilab.forge.jlatexmath.share.platform.geom.Area {
 
 	private ArrayList<Shape> shapes = new ArrayList<>();
 

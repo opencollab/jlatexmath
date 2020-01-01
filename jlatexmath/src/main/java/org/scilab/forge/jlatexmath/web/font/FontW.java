@@ -45,8 +45,8 @@ package org.scilab.forge.jlatexmath.web.font;
 
 import java.util.Map;
 
-import org.scilab.forge.jlatexmath.platform.font.Font;
-import org.scilab.forge.jlatexmath.platform.font.TextAttribute;
+import org.scilab.forge.jlatexmath.share.platform.font.Font;
+import org.scilab.forge.jlatexmath.share.platform.font.TextAttribute;
 
 public abstract class FontW implements AsyncLoadedFont {
 

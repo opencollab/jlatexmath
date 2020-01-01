@@ -43,8 +43,9 @@
  */
 package org.scilab.forge.jlatexmath.web.graphics;
 
+import org.scilab.forge.jlatexmath.share.platform.graphics.Color;
+
 import com.google.gwt.canvas.dom.client.CssColor;
-import org.scilab.forge.jlatexmath.platform.graphics.Color;
 
 public class ColorW implements Color {
 

@@ -43,13 +43,13 @@
  */
 package org.scilab.forge.jlatexmath.web.geom;
 
-import org.scilab.forge.jlatexmath.platform.geom.Area;
-import org.scilab.forge.jlatexmath.platform.geom.GeomFactory;
-import org.scilab.forge.jlatexmath.platform.geom.Line2D;
-import org.scilab.forge.jlatexmath.platform.geom.Point2D;
-import org.scilab.forge.jlatexmath.platform.geom.Rectangle2D;
-import org.scilab.forge.jlatexmath.platform.geom.RoundRectangle2D;
-import org.scilab.forge.jlatexmath.platform.geom.Shape;
+import org.scilab.forge.jlatexmath.share.platform.geom.Area;
+import org.scilab.forge.jlatexmath.share.platform.geom.GeomFactory;
+import org.scilab.forge.jlatexmath.share.platform.geom.Line2D;
+import org.scilab.forge.jlatexmath.share.platform.geom.Point2D;
+import org.scilab.forge.jlatexmath.share.platform.geom.Rectangle2D;
+import org.scilab.forge.jlatexmath.share.platform.geom.RoundRectangle2D;
+import org.scilab.forge.jlatexmath.share.platform.geom.Shape;
 
 public class GeomFactoryGWT extends GeomFactory {
 

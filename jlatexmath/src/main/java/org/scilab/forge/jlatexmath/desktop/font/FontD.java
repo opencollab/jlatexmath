@@ -46,13 +46,13 @@ package org.scilab.forge.jlatexmath.desktop.font;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.scilab.forge.jlatexmath.CharFont;
-import org.scilab.forge.jlatexmath.platform.font.Font;
-import org.scilab.forge.jlatexmath.platform.font.FontLoader;
-import org.scilab.forge.jlatexmath.platform.font.FontRenderContext;
-import org.scilab.forge.jlatexmath.platform.font.GlyphVector;
-import org.scilab.forge.jlatexmath.platform.font.TextAttribute;
-import org.scilab.forge.jlatexmath.platform.geom.Shape;
+import org.scilab.forge.jlatexmath.share.CharFont;
+import org.scilab.forge.jlatexmath.share.platform.font.Font;
+import org.scilab.forge.jlatexmath.share.platform.font.FontLoader;
+import org.scilab.forge.jlatexmath.share.platform.font.FontRenderContext;
+import org.scilab.forge.jlatexmath.share.platform.font.GlyphVector;
+import org.scilab.forge.jlatexmath.share.platform.font.TextAttribute;
+import org.scilab.forge.jlatexmath.share.platform.geom.Shape;
 
 public class FontD implements Font {
 

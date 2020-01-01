@@ -2,9 +2,9 @@ package org.scilab.forge.jlatexmath.desktop.geom;
 
 import java.awt.geom.Path2D;
 
-import org.scilab.forge.jlatexmath.platform.FactoryProvider;
-import org.scilab.forge.jlatexmath.platform.geom.Rectangle2D;
-import org.scilab.forge.jlatexmath.platform.geom.Shape;
+import org.scilab.forge.jlatexmath.share.platform.FactoryProvider;
+import org.scilab.forge.jlatexmath.share.platform.geom.Rectangle2D;
+import org.scilab.forge.jlatexmath.share.platform.geom.Shape;
 
 public class GeneralPathD implements ShapeD {
 

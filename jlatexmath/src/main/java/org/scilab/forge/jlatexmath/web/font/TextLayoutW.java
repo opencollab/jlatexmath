@@ -43,11 +43,11 @@
  */
 package org.scilab.forge.jlatexmath.web.font;
 
-import org.scilab.forge.jlatexmath.platform.font.Font;
-import org.scilab.forge.jlatexmath.platform.font.FontRenderContext;
-import org.scilab.forge.jlatexmath.platform.font.TextLayout;
-import org.scilab.forge.jlatexmath.platform.geom.Rectangle2D;
-import org.scilab.forge.jlatexmath.platform.graphics.Graphics2DInterface;
+import org.scilab.forge.jlatexmath.share.platform.font.Font;
+import org.scilab.forge.jlatexmath.share.platform.font.FontRenderContext;
+import org.scilab.forge.jlatexmath.share.platform.font.TextLayout;
+import org.scilab.forge.jlatexmath.share.platform.geom.Rectangle2D;
+import org.scilab.forge.jlatexmath.share.platform.graphics.Graphics2DInterface;
 import org.scilab.forge.jlatexmath.web.geom.Rectangle2DW;
 import org.scilab.forge.jlatexmath.web.graphics.FontRenderContextW;
 import org.scilab.forge.jlatexmath.web.graphics.Graphics2DW;

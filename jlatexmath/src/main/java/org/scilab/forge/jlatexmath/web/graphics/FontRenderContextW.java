@@ -43,7 +43,7 @@
  */
 package org.scilab.forge.jlatexmath.web.graphics;
 
-import org.scilab.forge.jlatexmath.platform.font.FontRenderContext;
+import org.scilab.forge.jlatexmath.share.platform.font.FontRenderContext;
 import org.scilab.forge.jlatexmath.web.font.FontW;
 
 public class FontRenderContextW implements FontRenderContext {

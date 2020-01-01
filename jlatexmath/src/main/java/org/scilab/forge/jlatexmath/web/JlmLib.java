@@ -47,13 +47,14 @@ import com.google.gwt.canvas.dom.client.Context2d;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.json.client.JSONNumber;
 import com.google.gwt.json.client.JSONObject;
-import org.scilab.forge.jlatexmath.Colors;
-import org.scilab.forge.jlatexmath.TeXConstants;
-import org.scilab.forge.jlatexmath.TeXFormula;
-import org.scilab.forge.jlatexmath.TeXIcon;
-import org.scilab.forge.jlatexmath.platform.graphics.Color;
-import org.scilab.forge.jlatexmath.platform.graphics.HasForegroundColor;
-import org.scilab.forge.jlatexmath.platform.graphics.Insets;
+
+import org.scilab.forge.jlatexmath.share.Colors;
+import org.scilab.forge.jlatexmath.share.TeXConstants;
+import org.scilab.forge.jlatexmath.share.TeXFormula;
+import org.scilab.forge.jlatexmath.share.TeXIcon;
+import org.scilab.forge.jlatexmath.share.platform.graphics.Color;
+import org.scilab.forge.jlatexmath.share.platform.graphics.HasForegroundColor;
+import org.scilab.forge.jlatexmath.share.platform.graphics.Insets;
 import org.scilab.forge.jlatexmath.web.graphics.Graphics2DW;
 import org.scilab.forge.jlatexmath.web.graphics.JLMContext2d;
 

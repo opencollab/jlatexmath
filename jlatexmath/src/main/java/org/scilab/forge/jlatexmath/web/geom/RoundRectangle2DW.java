@@ -43,7 +43,7 @@
  */
 package org.scilab.forge.jlatexmath.web.geom;
 
-import org.scilab.forge.jlatexmath.platform.geom.RoundRectangle2D;
+import org.scilab.forge.jlatexmath.share.platform.geom.RoundRectangle2D;
 
 public class RoundRectangle2DW implements RoundRectangle2D {
 

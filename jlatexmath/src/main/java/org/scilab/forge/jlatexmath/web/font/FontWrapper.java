@@ -43,9 +43,10 @@
  */
 package org.scilab.forge.jlatexmath.web.font;
 
+import org.scilab.forge.jlatexmath.share.platform.geom.Rectangle2D;
+
 import com.google.gwt.canvas.dom.client.Context2d;
 import com.google.gwt.core.client.JavaScriptObject;
-import org.scilab.forge.jlatexmath.platform.geom.Rectangle2D;
 
 public interface FontWrapper {
 

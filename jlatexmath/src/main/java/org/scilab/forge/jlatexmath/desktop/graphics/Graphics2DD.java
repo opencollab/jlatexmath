@@ -57,19 +57,19 @@ import javax.imageio.ImageIO;
 
 import org.scilab.forge.jlatexmath.desktop.font.FontD;
 import org.scilab.forge.jlatexmath.desktop.font.FontRenderContextD;
-import org.scilab.forge.jlatexmath.platform.FactoryProvider;
-import org.scilab.forge.jlatexmath.platform.font.Font;
-import org.scilab.forge.jlatexmath.platform.font.FontRenderContext;
-import org.scilab.forge.jlatexmath.platform.geom.Line2D;
-import org.scilab.forge.jlatexmath.platform.geom.Rectangle2D;
-import org.scilab.forge.jlatexmath.platform.geom.RoundRectangle2D;
-import org.scilab.forge.jlatexmath.platform.graphics.Color;
-import org.scilab.forge.jlatexmath.platform.graphics.Graphics2DInterface;
-import org.scilab.forge.jlatexmath.platform.graphics.Image;
-import org.scilab.forge.jlatexmath.platform.graphics.ImageBase64;
-import org.scilab.forge.jlatexmath.platform.graphics.RenderingHints;
-import org.scilab.forge.jlatexmath.platform.graphics.Stroke;
-import org.scilab.forge.jlatexmath.platform.graphics.Transform;
+import org.scilab.forge.jlatexmath.share.platform.FactoryProvider;
+import org.scilab.forge.jlatexmath.share.platform.font.Font;
+import org.scilab.forge.jlatexmath.share.platform.font.FontRenderContext;
+import org.scilab.forge.jlatexmath.share.platform.geom.Line2D;
+import org.scilab.forge.jlatexmath.share.platform.geom.Rectangle2D;
+import org.scilab.forge.jlatexmath.share.platform.geom.RoundRectangle2D;
+import org.scilab.forge.jlatexmath.share.platform.graphics.Color;
+import org.scilab.forge.jlatexmath.share.platform.graphics.Graphics2DInterface;
+import org.scilab.forge.jlatexmath.share.platform.graphics.Image;
+import org.scilab.forge.jlatexmath.share.platform.graphics.ImageBase64;
+import org.scilab.forge.jlatexmath.share.platform.graphics.RenderingHints;
+import org.scilab.forge.jlatexmath.share.platform.graphics.Stroke;
+import org.scilab.forge.jlatexmath.share.platform.graphics.Transform;
 
 public class Graphics2DD implements Graphics2DInterface {
 
@@ -126,7 +126,7 @@ public class Graphics2DD implements Graphics2DInterface {
 	}
 
 	@Override
-	public void fill(org.scilab.forge.jlatexmath.platform.geom.Shape s) {
+	public void fill(org.scilab.forge.jlatexmath.share.platform.geom.Shape s) {
 		impl.fill((Shape) s);
 	}
 

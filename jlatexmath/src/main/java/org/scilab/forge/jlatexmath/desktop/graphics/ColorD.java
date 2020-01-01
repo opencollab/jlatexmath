@@ -46,7 +46,7 @@ package org.scilab.forge.jlatexmath.desktop.graphics;
 import java.awt.Color;
 
 public class ColorD extends Color
-		implements org.scilab.forge.jlatexmath.platform.graphics.Color {
+		implements org.scilab.forge.jlatexmath.share.platform.graphics.Color {
 
 	private static final long serialVersionUID = 1L;
 
@@ -75,7 +75,7 @@ public class ColorD extends Color
 		return false;
 	}
 
-	public static org.scilab.forge.jlatexmath.platform.graphics.Color get(
+	public static org.scilab.forge.jlatexmath.share.platform.graphics.Color get(
 			Color bgColor) {
 		return bgColor == null ? null : new ColorD(bgColor);
 	}

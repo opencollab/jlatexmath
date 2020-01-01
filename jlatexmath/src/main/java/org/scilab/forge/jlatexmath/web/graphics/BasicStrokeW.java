@@ -43,9 +43,10 @@
  */
 package org.scilab.forge.jlatexmath.web.graphics;
 
+import org.scilab.forge.jlatexmath.share.platform.graphics.BasicStroke;
+
 import com.google.gwt.canvas.dom.client.Context2d.LineCap;
 import com.google.gwt.canvas.dom.client.Context2d.LineJoin;
-import org.scilab.forge.jlatexmath.platform.graphics.BasicStroke;
 
 public class BasicStrokeW implements BasicStroke {
 

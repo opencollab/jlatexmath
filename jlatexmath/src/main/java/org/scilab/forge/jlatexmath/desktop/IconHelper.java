@@ -49,10 +49,10 @@ import java.awt.Graphics2D;
 
 import org.scilab.forge.jlatexmath.desktop.graphics.ColorD;
 import org.scilab.forge.jlatexmath.desktop.graphics.Graphics2DD;
-import org.scilab.forge.jlatexmath.Colors;
-import org.scilab.forge.jlatexmath.platform.graphics.Color;
-import org.scilab.forge.jlatexmath.platform.graphics.HasForegroundColor;
-import org.scilab.forge.jlatexmath.platform.graphics.Icon;
+import org.scilab.forge.jlatexmath.share.Colors;
+import org.scilab.forge.jlatexmath.share.platform.graphics.Color;
+import org.scilab.forge.jlatexmath.share.platform.graphics.HasForegroundColor;
+import org.scilab.forge.jlatexmath.share.platform.graphics.Icon;
 
 public class IconHelper {
 

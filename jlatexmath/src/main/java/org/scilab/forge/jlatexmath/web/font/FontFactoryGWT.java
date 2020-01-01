@@ -43,12 +43,12 @@
  */
 package org.scilab.forge.jlatexmath.web.font;
 
-import org.scilab.forge.jlatexmath.platform.font.Font;
-import org.scilab.forge.jlatexmath.platform.font.FontFactory;
-import org.scilab.forge.jlatexmath.platform.font.FontLoader;
-import org.scilab.forge.jlatexmath.platform.font.FontRenderContext;
-import org.scilab.forge.jlatexmath.platform.font.TextAttributeProvider;
-import org.scilab.forge.jlatexmath.platform.font.TextLayout;
+import org.scilab.forge.jlatexmath.share.platform.font.Font;
+import org.scilab.forge.jlatexmath.share.platform.font.FontFactory;
+import org.scilab.forge.jlatexmath.share.platform.font.FontLoader;
+import org.scilab.forge.jlatexmath.share.platform.font.FontRenderContext;
+import org.scilab.forge.jlatexmath.share.platform.font.TextAttributeProvider;
+import org.scilab.forge.jlatexmath.share.platform.font.TextLayout;
 import org.scilab.forge.jlatexmath.web.font.opentype.Opentype;
 
 public class FontFactoryGWT extends FontFactory {

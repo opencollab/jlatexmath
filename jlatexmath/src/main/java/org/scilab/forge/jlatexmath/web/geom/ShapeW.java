@@ -1,8 +1,9 @@
 package org.scilab.forge.jlatexmath.web.geom;
 
 import com.google.gwt.core.client.JavaScriptObject;
-import org.scilab.forge.jlatexmath.platform.geom.Rectangle2D;
-import org.scilab.forge.jlatexmath.platform.geom.Shape;
+
+import org.scilab.forge.jlatexmath.share.platform.geom.Rectangle2D;
+import org.scilab.forge.jlatexmath.share.platform.geom.Shape;
 import org.scilab.forge.jlatexmath.web.graphics.JLMContext2d;
 
 /**

@@ -45,9 +45,9 @@ package org.scilab.forge.jlatexmath.desktop.font;
 
 import org.scilab.forge.jlatexmath.desktop.geom.Rectangle2DD;
 import org.scilab.forge.jlatexmath.desktop.graphics.Graphics2DD;
-import org.scilab.forge.jlatexmath.platform.font.TextLayout;
-import org.scilab.forge.jlatexmath.platform.geom.Rectangle2D;
-import org.scilab.forge.jlatexmath.platform.graphics.Graphics2DInterface;
+import org.scilab.forge.jlatexmath.share.platform.font.TextLayout;
+import org.scilab.forge.jlatexmath.share.platform.geom.Rectangle2D;
+import org.scilab.forge.jlatexmath.share.platform.graphics.Graphics2DInterface;
 
 public class TextLayoutD implements TextLayout {
 

@@ -7,12 +7,12 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import org.scilab.forge.jlatexmath.desktop.graphics.Graphics2DD;
-import org.scilab.forge.jlatexmath.Colors;
-import org.scilab.forge.jlatexmath.Configuration;
-import org.scilab.forge.jlatexmath.TeXConstants;
-import org.scilab.forge.jlatexmath.TeXFormula;
-import org.scilab.forge.jlatexmath.platform.FactoryProvider;
-import org.scilab.forge.jlatexmath.platform.graphics.Image;
+import org.scilab.forge.jlatexmath.share.Colors;
+import org.scilab.forge.jlatexmath.share.Configuration;
+import org.scilab.forge.jlatexmath.share.TeXConstants;
+import org.scilab.forge.jlatexmath.share.TeXFormula;
+import org.scilab.forge.jlatexmath.share.platform.FactoryProvider;
+import org.scilab.forge.jlatexmath.share.platform.graphics.Image;
 
 public class TestJlmDesktop extends JFrame {
 

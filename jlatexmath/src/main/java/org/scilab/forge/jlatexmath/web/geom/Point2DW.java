@@ -43,7 +43,7 @@
  */
 package org.scilab.forge.jlatexmath.web.geom;
 
-import org.scilab.forge.jlatexmath.platform.geom.Point2D;
+import org.scilab.forge.jlatexmath.share.platform.geom.Point2D;
 
 public class Point2DW implements Point2D {
 

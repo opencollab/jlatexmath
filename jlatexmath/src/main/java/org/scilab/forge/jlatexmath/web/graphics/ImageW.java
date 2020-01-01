@@ -43,9 +43,10 @@
  */
 package org.scilab.forge.jlatexmath.web.graphics;
 
+import org.scilab.forge.jlatexmath.share.platform.graphics.Graphics2DInterface;
+import org.scilab.forge.jlatexmath.share.platform.graphics.Image;
+
 import com.google.gwt.canvas.client.Canvas;
-import org.scilab.forge.jlatexmath.platform.graphics.Graphics2DInterface;
-import org.scilab.forge.jlatexmath.platform.graphics.Image;
 
 public class ImageW implements Image {
 

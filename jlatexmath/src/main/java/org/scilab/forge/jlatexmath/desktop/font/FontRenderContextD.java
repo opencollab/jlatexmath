@@ -45,11 +45,11 @@ package org.scilab.forge.jlatexmath.desktop.font;
 
 import java.awt.font.FontRenderContext;
 
-import org.scilab.forge.jlatexmath.platform.font.Font;
+import org.scilab.forge.jlatexmath.share.platform.font.Font;
 
 public class FontRenderContextD extends java.awt.font.FontRenderContext
 		implements
-		org.scilab.forge.jlatexmath.platform.font.FontRenderContext {
+		org.scilab.forge.jlatexmath.share.platform.font.FontRenderContext {
 
 	public FontRenderContext impl;
 

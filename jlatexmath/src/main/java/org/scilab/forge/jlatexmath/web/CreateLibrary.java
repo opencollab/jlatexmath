@@ -44,7 +44,8 @@
 package org.scilab.forge.jlatexmath.web;
 
 import com.google.gwt.core.client.EntryPoint;
-import org.scilab.forge.jlatexmath.platform.FactoryProvider;
+
+import org.scilab.forge.jlatexmath.share.platform.FactoryProvider;
 import org.scilab.forge.jlatexmath.web.font.opentype.Opentype;
 
 public class CreateLibrary implements EntryPoint {
@@ -74,12 +75,12 @@ public class CreateLibrary implements EntryPoint {
 			library.@org.scilab.forge.jlatexmath.web.JlmLib::initWith(Ljava/lang/String;)(str);
 		});
 
-		api.SERIF = @org.scilab.forge.jlatexmath.TeXFont::SERIF;
-		api.SANSSERIF = @org.scilab.forge.jlatexmath.TeXFont::SANSSERIF;
-		api.BOLD = @org.scilab.forge.jlatexmath.TeXFont::BOLD;
-		api.ITALIC = @org.scilab.forge.jlatexmath.TeXFont::ITALIC;
-		api.ROMAN = @org.scilab.forge.jlatexmath.TeXFont::ROMAN;
-		api.TYPEWRITER = @org.scilab.forge.jlatexmath.TeXFont::TYPEWRITER;
+		api.SERIF = @org.scilab.forge.jlatexmath.share.TeXFont::SERIF;
+		api.SANSSERIF = @org.scilab.forge.jlatexmath.share.TeXFont::SANSSERIF;
+		api.BOLD = @org.scilab.forge.jlatexmath.share.TeXFont::BOLD;
+		api.ITALIC = @org.scilab.forge.jlatexmath.share.TeXFont::ITALIC;
+		api.ROMAN = @org.scilab.forge.jlatexmath.share.TeXFont::ROMAN;
+		api.TYPEWRITER = @org.scilab.forge.jlatexmath.share.TeXFont::TYPEWRITER;
 
 		api.drawLatex = $entry(function(opts) {
 			//ctx, latex, size, style, x, y, fgColor, bgColor, cb

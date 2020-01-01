@@ -47,12 +47,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.google.gwt.core.client.JavaScriptObject;
-import org.scilab.forge.jlatexmath.CharFont;
-import org.scilab.forge.jlatexmath.platform.FactoryProvider;
-import org.scilab.forge.jlatexmath.platform.font.Font;
-import org.scilab.forge.jlatexmath.platform.font.FontRenderContext;
-import org.scilab.forge.jlatexmath.platform.geom.Rectangle2D;
-import org.scilab.forge.jlatexmath.platform.geom.Shape;
+
+import org.scilab.forge.jlatexmath.share.CharFont;
+import org.scilab.forge.jlatexmath.share.platform.FactoryProvider;
+import org.scilab.forge.jlatexmath.share.platform.font.Font;
+import org.scilab.forge.jlatexmath.share.platform.font.FontRenderContext;
+import org.scilab.forge.jlatexmath.share.platform.geom.Rectangle2D;
+import org.scilab.forge.jlatexmath.share.platform.geom.Shape;
 import org.scilab.forge.jlatexmath.web.font.FontW;
 import org.scilab.forge.jlatexmath.web.font.FontWrapper;
 import org.scilab.forge.jlatexmath.web.geom.ShapeW;

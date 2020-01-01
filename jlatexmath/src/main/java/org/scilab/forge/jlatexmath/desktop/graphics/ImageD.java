@@ -45,8 +45,8 @@ package org.scilab.forge.jlatexmath.desktop.graphics;
 
 import java.awt.image.BufferedImage;
 
-import org.scilab.forge.jlatexmath.platform.graphics.Graphics2DInterface;
-import org.scilab.forge.jlatexmath.platform.graphics.Image;
+import org.scilab.forge.jlatexmath.share.platform.graphics.Graphics2DInterface;
+import org.scilab.forge.jlatexmath.share.platform.graphics.Image;
 
 public class ImageD extends BufferedImage implements Image {
 

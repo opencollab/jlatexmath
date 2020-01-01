@@ -46,7 +46,7 @@ package org.scilab.forge.jlatexmath.desktop.graphics;
 import java.awt.BasicStroke;
 
 public class BasicStrokeD extends BasicStroke implements
-		org.scilab.forge.jlatexmath.platform.graphics.BasicStroke {
+		org.scilab.forge.jlatexmath.share.platform.graphics.BasicStroke {
 
 	public BasicStrokeD(BasicStroke basicStroke) {
 		this(basicStroke.getLineWidth(), basicStroke.getEndCap(),

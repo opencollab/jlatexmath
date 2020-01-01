@@ -48,10 +48,10 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import org.scilab.forge.jlatexmath.desktop.FactoryProviderDesktop;
-import org.scilab.forge.jlatexmath.exception.ResourceParseException;
-import org.scilab.forge.jlatexmath.platform.FactoryProvider;
-import org.scilab.forge.jlatexmath.platform.font.Font;
-import org.scilab.forge.jlatexmath.platform.font.FontLoader;
+import org.scilab.forge.jlatexmath.share.exception.ResourceParseException;
+import org.scilab.forge.jlatexmath.share.platform.FactoryProvider;
+import org.scilab.forge.jlatexmath.share.platform.font.Font;
+import org.scilab.forge.jlatexmath.share.platform.font.FontLoader;
 
 public class FontLoaderD implements FontLoader {
 

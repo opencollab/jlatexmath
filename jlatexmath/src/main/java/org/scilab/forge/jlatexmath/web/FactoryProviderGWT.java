@@ -43,10 +43,10 @@
  */
 package org.scilab.forge.jlatexmath.web;
 
-import org.scilab.forge.jlatexmath.platform.FactoryProvider;
-import org.scilab.forge.jlatexmath.platform.font.FontFactory;
-import org.scilab.forge.jlatexmath.platform.geom.GeomFactory;
-import org.scilab.forge.jlatexmath.platform.graphics.GraphicsFactory;
+import org.scilab.forge.jlatexmath.share.platform.FactoryProvider;
+import org.scilab.forge.jlatexmath.share.platform.font.FontFactory;
+import org.scilab.forge.jlatexmath.share.platform.geom.GeomFactory;
+import org.scilab.forge.jlatexmath.share.platform.graphics.GraphicsFactory;
 import org.scilab.forge.jlatexmath.web.font.FontFactoryGWT;
 import org.scilab.forge.jlatexmath.web.geom.GeomFactoryGWT;
 import org.scilab.forge.jlatexmath.web.graphics.GraphicsFactoryGWT;

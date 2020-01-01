@@ -46,7 +46,7 @@ package org.scilab.forge.jlatexmath.desktop.geom;
 import java.awt.geom.RoundRectangle2D;
 
 public class RoundRectangle2DD extends RoundRectangle2D.Double implements
-		org.scilab.forge.jlatexmath.platform.geom.RoundRectangle2D {
+		org.scilab.forge.jlatexmath.share.platform.geom.RoundRectangle2D {
 
 	private static final long serialVersionUID = 1L;
 

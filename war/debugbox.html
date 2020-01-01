@@ -1,0 +1,77 @@
+<!doctype html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>JLaTeXMath with javascript</title>
+    <script type="text/javascript" language="javascript" src="jlatexmath/jlatexmath.nocache.js"></script>
+    <script>
+	
+	var jlmlib;
+	var windowLoaded;
+	
+	function jlmOnInit(api) {
+        	console.log("jlmOnInit() - api available");
+        	jlmlib = api;
+        	
+        	if (windowLoaded) {
+        		drawLatex();
+        	}
+        }
+        
+        window.onload = function() {
+        	windowLoaded = true;
+        	if (jlmlib) {
+        		drawLatex();
+        	}
+        }
+		
+		
+        var drawLatex = function() {
+          var canvas = document.getElementById('latex')
+
+          var ctx = canvas.getContext('2d');                            // Context 2d of canvas
+          
+          
+          var latexString = "\\fbox{\\text{3|1 means 3.1}}"
+          
+          
+          var size = 40;
+          var x = 5;
+          var y = 5;
+          var style = 0;
+          var fgColor = '#FF0000';
+		  
+		  var opts = {
+                    "context": ctx,
+                    "latex": latexString,
+                    "size": size,
+                    "x": x,
+                    "y": y,
+                    "type": style,
+                    "foregroundColor": fgColor,
+                    "backgroundColor": "#ffffff",
+                    "callback" : function() { console.log('callback') },
+                    "insets": {
+                        "top": 0,
+                        "bottom": 0,
+                        "left": 0,
+                        "right": 0
+                    }
+                };
+
+                var size = jlmlib["drawLatex"](opts);
+
+		  
+		  
+        }
+    </script>
+  </head>
+
+ 
+  <!-- Maybe a callback from the library would be good to signal the availability of the library -->
+  <body>
+    <h1>JLaTeXMath test</h1>
+    <!-- Important to set no just the height/width in style, but the height/width property of canvas also. -->
+    <canvas id="latex" style="height: 500px; width: 500px" width="500px" height="500px"></canvas>
+  </body>
+</html>

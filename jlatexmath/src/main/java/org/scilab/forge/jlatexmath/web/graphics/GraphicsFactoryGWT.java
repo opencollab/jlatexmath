@@ -43,13 +43,13 @@
  */
 package org.scilab.forge.jlatexmath.web.graphics;
 
-import org.scilab.forge.jlatexmath.platform.graphics.BasicStroke;
-import org.scilab.forge.jlatexmath.platform.graphics.Color;
-import org.scilab.forge.jlatexmath.platform.graphics.GraphicsFactory;
-import org.scilab.forge.jlatexmath.platform.graphics.Image;
-import org.scilab.forge.jlatexmath.platform.graphics.Stroke;
-import org.scilab.forge.jlatexmath.platform.graphics.Transform;
-import org.scilab.forge.jlatexmath.platform.graphics.stubs.AffineTransform;
+import org.scilab.forge.jlatexmath.share.platform.graphics.BasicStroke;
+import org.scilab.forge.jlatexmath.share.platform.graphics.Color;
+import org.scilab.forge.jlatexmath.share.platform.graphics.GraphicsFactory;
+import org.scilab.forge.jlatexmath.share.platform.graphics.Image;
+import org.scilab.forge.jlatexmath.share.platform.graphics.Stroke;
+import org.scilab.forge.jlatexmath.share.platform.graphics.Transform;
+import org.scilab.forge.jlatexmath.share.platform.graphics.stubs.AffineTransform;
 
 public class GraphicsFactoryGWT extends GraphicsFactory {
 
