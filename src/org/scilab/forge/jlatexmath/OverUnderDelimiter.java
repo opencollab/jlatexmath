@@ -43,11 +43,11 @@
  * version.
  *
  */
-
 package org.scilab.forge.jlatexmath;
 
 /**
- * A box representing another atom with a delimiter and a script above or under it,
+ * A box representing another atom with a delimiter and a script above or under
+ * it,
  * with script and delimiter seperated by a kern.
  */
 public class OverUnderDelimiter extends Atom {
@@ -88,29 +88,25 @@ public class OverUnderDelimiter extends Atom {
         Box del = DelimiterFactory.create(symbol.getName(), env, b.getWidth());
 
         Box scriptBox = null;
-        if (script != null) {
+        if (script != null)
             scriptBox = script.createBox((over ? env.supStyle() : env.subStyle()));
-        }
 
         // create centered horizontal box if smaller than maximum width
         float max = getMaxWidth(b, del, scriptBox);
-        if (max - b.getWidth() > TeXFormula.PREC) {
+        if (max - b.getWidth() > TeXFormula.PREC)
             b = new HorizontalBox(b, max, TeXConstants.ALIGN_CENTER);
-        }
 
         del = new VerticalBox(del, max, TeXConstants.ALIGN_CENTER);
-        if (scriptBox != null && max - scriptBox.getWidth() > TeXFormula.PREC) {
+        if (scriptBox != null && max - scriptBox.getWidth() > TeXFormula.PREC)
             scriptBox = new HorizontalBox(scriptBox, max, TeXConstants.ALIGN_CENTER);
-        }
-
-        return new OverUnderBox(b, del, scriptBox, kern.createBox(env).getHeight(), over);
+        Box delWrap = new VerticalBox(del, max, TeXConstants.ALIGN_CENTER);
+        return new OverUnderBox(b, del, delWrap, scriptBox, kern.createBox(env).getHeight(), over);
     }
 
     private static float getMaxWidth(Box b, Box del, Box script) {
         float max = Math.max(b.getWidth(), del.getHeight() + del.getDepth());
-        if (script != null) {
+        if (script != null)
             max = Math.max(max, script.getWidth());
-        }
 
         return max;
     }
